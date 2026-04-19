@@ -172,7 +172,7 @@ class YoixBodyComponent extends YoixPointerActive
     static final int  VERIFIERLISTENER               = 0x01000000;      // fake
     static final int  INVOCATIONEDITIMPORTLISTENER   = 0x02000000;	// fake
 
-    static final int  NEXTLISTENER                   = 0x04000000;  	// next free flag
+    static final int  NEXTLISTENER                   = 0x04000000;      // next free flag
 
     static {
         eventlisteners.put(N_ACTIONPERFORMED, new Integer(ACTIONLISTENER));
@@ -606,12 +606,12 @@ class YoixBodyComponent extends YoixPointerActive
         // behavior will not be quite right since the needed features are
         // not there prior to 1.6
         //
- 	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH),
- 	"SpringLayout." + YOIX_BASELINE, null,
- 	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.WEST),
- 	"SpringLayout." + YOIX_HORIZONTAL_CENTER, null,
- 	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.NORTH),
- 	"SpringLayout." + YOIX_VERTICAL_CENTER, null,
+	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH),
+	"SpringLayout." + YOIX_BASELINE, null,
+	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.WEST),
+	"SpringLayout." + YOIX_HORIZONTAL_CENTER, null,
+	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.NORTH),
+	"SpringLayout." + YOIX_VERTICAL_CENTER, null,
 
         "SwingHorizontalAlignment.DEFAULT", new Integer(SwingConstants.CENTER),
         "SwingHorizontalAlignment." + YOIX_CENTER, null,
@@ -5889,7 +5889,7 @@ class YoixBodyComponent extends YoixPointerActive
 
         if ((obj = data.getObject(N_UIMKEY)) != null && obj.notNull())
             key = obj.stringValue();
- 	return(key != null ? UIManager.getColor(key + "." + N_FOREGROUND) : null);
+	return(key != null ? UIManager.getColor(key + "." + N_FOREGROUND) : null);
     }
 
 

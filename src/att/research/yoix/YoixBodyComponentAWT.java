@@ -890,7 +890,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         int     listener;
         int     bit;
 
-        comp = peer;     		// snapshot - just to be safe
+        comp = peer;            // snapshot - just to be safe
         missed = 0;
 
         for (bit = 1; mask != 0 && bit != NEXTLISTENER; bit <<= 1) {

@@ -412,7 +412,7 @@ class YoixBodyKey extends YoixPointerActive
         YoixObject  yobj;
         Method      methods[];
         Object      obj;
- 	String      name = null;
+        String      name = null;
         Class       cls;
         byte        bytearray[];
         int         m;

@@ -3211,11 +3211,11 @@ class YoixGraphElement
                 Graphics2D             gr = (Graphics2D)parcel[4];
                 YoixGraphBase          graphdata;
 
-// 		if ((graphdata = elem.getGraphData(obs, this)) != null) {
-// 		    System.err.println("graphdata="+graphdata.x+","+graphdata.y);
-// 		} else {
-// 		    System.err.println("graphdata=null");
-// 		}
+//              if ((graphdata = elem.getGraphData(obs, this)) != null) {
+//                  System.err.println("graphdata="+graphdata.x+","+graphdata.y);
+//              } else {
+//                  System.err.println("graphdata=null");
+//              }
 
             }
             break;

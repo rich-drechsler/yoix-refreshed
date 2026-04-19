@@ -481,23 +481,23 @@ class YoixSwingJTextPane extends JTextPane
                 }
             }
         } else {
- 	    try {
- 		doc.remove(0, doc.getLength());
- 		setHorizontalAlignment(basealign = getLastAlignment());
+            try {
+                doc.remove(0, doc.getLength());
+                setHorizontalAlignment(basealign = getLastAlignment());
                 setForeground(getLastForeground());
                 setBackground(getLastBackground());
                 setFont(getLastFont());
- 		doc.insertString(0, text, null);
- 	    }
- 	    catch(BadLocationException ble) {
+                doc.insertString(0, text, null);
+            }
+            catch(BadLocationException ble) {
                 VM.recordException(ble);
- 		super.setText("");
- 		setHorizontalAlignment(basealign = getLastAlignment());
+                super.setText("");
+                setHorizontalAlignment(basealign = getLastAlignment());
                 setForeground(getLastForeground());
                 setBackground(getLastBackground());
                 setFont(getLastFont());
- 		super.setText(text);
- 	    }
+                super.setText(text);
+            }
         }
     }
 
@@ -603,9 +603,9 @@ class YoixSwingJTextPane extends JTextPane
     private void
     updateHTMLBodyStyle() {
 
- 	StyledEditorKit  kit;
- 	StyledDocument   doc;
- 	StringBuffer     sb;
+        StyledEditorKit  kit;
+        StyledDocument   doc;
+        StringBuffer     sb;
         Enumeration      names;
         StyleSheet       ss;
         Iterator         keys;

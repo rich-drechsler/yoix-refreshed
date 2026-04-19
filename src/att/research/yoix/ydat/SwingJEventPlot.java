@@ -2650,7 +2650,7 @@ class SwingJEventPlot extends SwingDataPlot
             selecting = (sliderdata[0] == low);
             for (n = (int)sliderdata[1]; n < (int)sliderdata[3]; n++) {
                 record = eventrecords[n].datarecord;
-            	if (selecting) {
+                if (selecting) {
                     if (record.notSelected(mask)) {
                         record.setSelected(mask);
                         if (record.isSelected())
@@ -2699,8 +2699,8 @@ class SwingJEventPlot extends SwingDataPlot
 
             for (n = 0; n < length; n++) {
                 record = eventrecords[n].datarecord;
-            	value = record.getValue(index);
-            	if (value < low || value > high) {
+                value = record.getValue(index);
+                if (value < low || value > high) {
                     if (record.isSelected(mask)) {
                         if (record.isSelected())
                             hits.setRecord(count++, record, false);
@@ -4824,7 +4824,7 @@ class SwingJEventPlot extends SwingDataPlot
             if (nonnegative) {
                 if (ends[1] > 0) {
                     point = plotmatrix.transform(new Point2D.Double(0, ends[1]), null);
-        	    height = (int)point.getY();
+                    height = (int)point.getY();
                 } else height = 0;
             } else {
                 if (ends[0] < 0) {
@@ -7560,9 +7560,9 @@ class SwingJEventPlot extends SwingDataPlot
                             }
                         }
                         this.realy = stackrealy;
-            		this.bottomregion = bottomregion;
-            		this.topregion = topregion;
-            		this.nextregion = bottomregion;
+                        this.bottomregion = bottomregion;
+                        this.topregion = topregion;
+                        this.nextregion = bottomregion;
                         built = true;
                     }
                 }

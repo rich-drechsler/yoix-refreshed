@@ -383,7 +383,7 @@ class YoixBodySocket extends YoixPointerActive
                                 if (count == -1)
                                     count = 1;
                                 else count++;
-                 	    } else break;
+                            } else break;
                         }
                     } else count = 0;
                 } else count = socketSendUrgentData(arg[offset].intValue());
@@ -976,7 +976,7 @@ class YoixBodySocket extends YoixPointerActive
             if (remoteaddress != null && remoteaddress.length() > 0) {
                 if (remoteport >= 0 && remoteport <= 0xFFFF) {
                     try {
-                 	if (localaddress != null && localaddress.length() > 0) {
+                        if (localaddress != null && localaddress.length() > 0) {
                             if ((address = YoixMisc.getInterfaceAddress(localaddress)) != null)
                                 localaddress = address;
                             local = new InetSocketAddress(localaddress, localport);

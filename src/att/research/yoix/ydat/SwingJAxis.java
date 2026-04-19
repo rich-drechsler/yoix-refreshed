@@ -1724,8 +1724,8 @@ class SwingJAxis extends YoixSwingJTextComponent
             if (axisends != null && sliderends != null && slider != null) {
                 oldslider = new Rectangle(slider);
                 sliderends[0] = Math.max(Math.min(low, high), axisends[0]);
-            	sliderends[1] = Math.min(Math.max(low, high), axisends[1]);
-            	if (orientation == YOIX_HORIZONTAL) {
+                sliderends[1] = Math.min(Math.max(low, high), axisends[1]);
+                if (orientation == YOIX_HORIZONTAL) {
                     if (inverted) {
                         if (eventplot.getSpread()) {
                             pixelends = eventplot.getSliderPixelEnds(sliderends[0], sliderends[1]);

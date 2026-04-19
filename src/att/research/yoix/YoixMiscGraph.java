@@ -158,17 +158,17 @@ class YoixMiscGraph
             buf.append(" -");
             buf.append(attr);
         }
- 	if ((attr = atget(elem, "color")) != null) {
- 	    buf.append(" A 2 color s ");
- 	    buf.append(attr.length());
- 	    buf.append(" -");
- 	    buf.append(attr);
+        if ((attr = atget(elem, "color")) != null) {
+            buf.append(" A 2 color s ");
+            buf.append(attr.length());
+            buf.append(" -");
+            buf.append(attr);
         }
         if ((attr = atget(elem, "fontcolor")) != null) {
             buf.append(" A 2 fontcolor s ");
- 	    buf.append(attr.length());
- 	    buf.append(" -");
- 	    buf.append(attr);
+            buf.append(attr.length());
+            buf.append(" -");
+            buf.append(attr);
         }
         if ((attr = atget(elem, "fontsize")) != null) {
             buf.append(" A 2 fontsize N 1 ");
@@ -222,7 +222,7 @@ class YoixMiscGraph
                         buf.append(" A 1 ");
                         buf.append(underscore(styles[i]));
                     }
- 		}
+                }
             }
         }
     }

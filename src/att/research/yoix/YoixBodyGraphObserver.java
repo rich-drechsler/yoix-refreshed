@@ -169,15 +169,15 @@ class YoixBodyGraphObserver extends YoixPointerActive
         Object  info[];
         int     len = info_packet.size();
 
-// 	System.err.println("update for graph: " + graph.getName());
-// 	for(int i=0; i<len; i++) {
-// 	    info = (Object[])(info_packet.elementAt(i));
-// 	    System.err.print("\t"+((YoixGraphElement)info[0]).getName()+"\t"+((Integer)info[1]).intValue());
-// 	    for(int j=2; j<info.length; j++) {
-// 		System.err.print("\t"+info[j]);
-// 	    }
-// 	    System.err.println();
-// 	}
+//      System.err.println("update for graph: " + graph.getName());
+//      for(int i=0; i<len; i++) {
+//          info = (Object[])(info_packet.elementAt(i));
+//          System.err.print("\t"+((YoixGraphElement)info[0]).getName()+"\t"+((Integer)info[1]).intValue());
+//          for(int j=2; j<info.length; j++) {
+//              System.err.print("\t"+info[j]);
+//          }
+//          System.err.println();
+//      }
     }
 
     ///////////////////////////////////

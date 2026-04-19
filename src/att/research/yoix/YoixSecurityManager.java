@@ -840,7 +840,7 @@ class YoixSecurityManager extends SecurityManager
                     switch (YoixMisc.guessStreamType(path)) {
                         case FILE:
                             if (path != NAME_STDIN && path != NAME_STDOUT && path != NAME_STDERR) {
-            			match = MATCH_SUBDIRETORIES;
+                                match = MATCH_SUBDIRETORIES;
                                 path = (new File(YoixMisc.toYoixPath(path))).getAbsolutePath();
                                 yoixsource = new File(path);
                                 if ((dir = ((File)yoixsource).getParent()) != null && dir.length() > 0) {
@@ -857,7 +857,7 @@ class YoixSecurityManager extends SecurityManager
                             break;
 
                         case URL:
-            		    match = MATCH_DIRECTORY;
+                            match = MATCH_DIRECTORY;
                             path = YoixMisc.toYoixURL(path);
                             yoixsource = new URL(path);
                             url = (URL)yoixsource;

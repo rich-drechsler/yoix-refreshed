@@ -645,7 +645,7 @@ class YoixMakeScreen
                     obj.putDouble(N_THICKNESS, yoixDistance(((LineBorder)border).getThickness()));
                 } else obj = null;
             }
- 	}
+        }
         return(obj);
     }
 

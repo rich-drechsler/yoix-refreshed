@@ -139,8 +139,8 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         activefields.put(N_APPROVEBUTTONMNEMONIC, new Integer(V_APPROVEBUTTONMNEMONIC));
         activefields.put(N_APPROVEBUTTONTEXT, new Integer(V_APPROVEBUTTONTEXT));
         activefields.put(N_APPROVEBUTTONTOOLTIPTEXT, new Integer(V_APPROVEBUTTONTOOLTIPTEXT));
- 	activefields.put(N_ARMED, new Integer(V_ARMED));
- 	activefields.put(N_ATTRIBUTES, new Integer(V_ATTRIBUTES)); // used in YoixSwingJTable
+        activefields.put(N_ARMED, new Integer(V_ARMED));
+        activefields.put(N_ATTRIBUTES, new Integer(V_ATTRIBUTES)); // used in YoixSwingJTable
         activefields.put(N_BACKGROUND, new Integer(V_BACKGROUND));
         activefields.put(N_BACKGROUNDHINTS, new Integer(V_BACKGROUNDHINTS));
         activefields.put(N_BACKGROUNDIMAGE, new Integer(V_BACKGROUNDIMAGE));
@@ -205,7 +205,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         activefields.put(N_GRIDSIZE, new Integer(V_GRIDSIZE));
         activefields.put(N_GRAPHICS, new Integer(V_GRAPHICS));
         activefields.put(N_GROUP, new Integer(V_GROUP));
- 	activefields.put(N_HEADER, new Integer(V_HEADER)); // used in YoixSwingJTable
+        activefields.put(N_HEADER, new Integer(V_HEADER)); // used in YoixSwingJTable
         activefields.put(N_HEADERS, new Integer(V_HEADERS));
         activefields.put(N_HEADERICONS, new Integer(V_HEADERICONS));
         activefields.put(N_HIDDENFILES, new Integer(V_HIDDENFILES));
@@ -1459,13 +1459,13 @@ class YoixBodyComponentSwing extends YoixBodyComponent
             if (popupowner != null && popupowner != owner)
                 popupowner = null;
             if (owner != null) {
- 		if (popupowner != owner) {
- 		    if ((component = owner.getManagedObject()) != null) {
- 			if (component instanceof Component)
-                            popupowner = owner;
- 			else VM.abort(TYPECHECK, N_POPUP);
- 		    }
- 		}
+                if (popupowner != owner) {
+		    if ((component = owner.getManagedObject()) != null) {
+			if (component instanceof Component)
+                           popupowner = owner;
+			else VM.abort(TYPECHECK, N_POPUP);
+		    }
+		}
                 syncMenuProperties(owner);
                 showPopupMenu((JPopupMenu)comp);
             }
@@ -4280,9 +4280,9 @@ class YoixBodyComponentSwing extends YoixBodyComponent
     private YoixObject
     getOutputFilter(Object comp, YoixObject obj) {
  
- 	if (comp instanceof YoixSwingJTable)
- 	    obj = ((YoixSwingJTable)comp).getOutputFilter();
- 	return(obj);
+        if (comp instanceof YoixSwingJTable)
+            obj = ((YoixSwingJTable)comp).getOutputFilter();
+        return(obj);
     }
  
 
@@ -5156,8 +5156,8 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                 break;
 
             case V_OUTPUTFILTER:
- 		obj = getOutputFilter(comp, obj);
- 		break;
+                obj = getOutputFilter(comp, obj);
+                break;
 
             case V_PAGE:
                 obj = getPage(comp, obj);
@@ -9057,7 +9057,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                 //
                 if (comp instanceof YoixSwingJTable)
                     ((YoixSwingJTable)comp).setToolTipText(obj);
- 	    } else if (comp instanceof JComponent)
+            } else if (comp instanceof JComponent)
                 ((JComponent)comp).setToolTipText(obj.notNull() ? obj.stringValue() : null);
             else if (comp instanceof YoixSwingJDialog)
                 ((YoixSwingJDialog)comp).setToolTipText(obj.notNull() ? obj.stringValue() : null);

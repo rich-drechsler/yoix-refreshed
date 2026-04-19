@@ -870,9 +870,9 @@ class YoixSwingJTable extends JTable
                             Component comp = getEditorComponent();
                             MouseEvent event;
                             EventQueue queue;
- 			    if (comp != null) {
- 				changeSelection(ridx, cidx, false, false);
- 				comp.requestFocusInWindow();
+                            if (comp != null) {
+                                changeSelection(ridx, cidx, false, false);
+                                comp.requestFocusInWindow();
                                 event = new MouseEvent(this, MouseEvent.MOUSE_PRESSED, System.currentTimeMillis(), MouseEvent.BUTTON1_MASK, comp.getX()+5, comp.getY()+5, 1, false);
                                 if (event != null && (queue = YoixAWTToolkit.getSystemEventQueue()) != null)
                                     queue.postEvent(event);
@@ -6516,7 +6516,7 @@ class YoixSwingJTable extends JTable
                         if (selected)
                             selected = false;
                         // clear
-                 	lastselection = null;
+                        lastselection = null;
                         for (m = 0; m < rowsz; m++) {
                             for (n = 0; n < colsz; n++) {
                                 cellected[m][n] = false;
@@ -6650,9 +6650,9 @@ class YoixSwingJTable extends JTable
                     // the old code really seemed wrong!!
                     //
                     if (!(value instanceof String && value.equals("") && oldvalue == null)) {
-                	fireTableCellUpdated(row, col);
-                	resizeAndRepaint();
-                	if (!programset && editListenerMode) {
+                        fireTableCellUpdated(row, col);
+                        resizeAndRepaint();
+                        if (!programset && editListenerMode) {
                             obj = YoixMake.yoixType(T_INVOCATIONEVENT);
 
                             obj.putInt(N_ID, V_INVOCATIONEDIT);
@@ -7489,11 +7489,11 @@ class YoixSwingJTable extends JTable
             int vrow;
 
             if (rows != null && rows.length > 0) {
- 		srows = YoixMiscQsort.qsort(rows, 1);
- 		for (int n = rows.length - 1; n >= 0; n--) {
- 		    vrow = rows[n];
- 		    deleteRows(vrow, vrow, false);
- 		}
+                srows = YoixMiscQsort.qsort(rows, 1);
+                for (int n = rows.length - 1; n >= 0; n--) {
+                    vrow = rows[n];
+                    deleteRows(vrow, vrow, false);
+                }
                 if (sync)
                     syncRowViews(false, false);
                 //if (!resortTable()) // not really needed in this case
@@ -8126,25 +8126,25 @@ class YoixSwingJTable extends JTable
         }
 
 
-//         final Icon[]
-//         getHeaderIcons(int col) {
+//      final Icon[]
+//      getHeaderIcons(int col) {
 
-// 	    Icon[][]  snapshot = headerIcons;
-//             Icon[]    hicon;
+//          Icon[][]  snapshot = headerIcons;
+//          Icon[]    hicon;
 
-// 	    if (col < 0)
-// 		col = 0;
+//          if (col < 0)
+//              col = 0;
 
-//             if (snapshot == null || snapshot.length == 0)
-//                 hicon = null;
-//             else if (snapshot.length == 1)
-// 		hicon = snapshot[0];
-// 	    else if (snapshot.length <= col)
-//                 hicon = null;
-// 	    else hicon = snapshot[col];
+//          if (snapshot == null || snapshot.length == 0)
+//              hicon = null;
+//          else if (snapshot.length == 1)
+//              hicon = snapshot[0];
+//          else if (snapshot.length <= col)
+//              hicon = null;
+//          else hicon = snapshot[col];
 
-//             return(hicon);
-//         }
+//          return(hicon);
+//      }
 
 
         final String

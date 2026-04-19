@@ -963,7 +963,7 @@ class YoixModule
                             obj = YoixObject.newString((String)arg);
                         else if (arg == null)
                             obj = YoixObject.newString(classname);
-                 	else throw(new Exception());
+                        else throw(new Exception());
                         break;
 
                     case COLOR:

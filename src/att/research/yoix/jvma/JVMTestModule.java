@@ -362,7 +362,7 @@ class JVMTestModule extends YoixModule
                         if (classfile != null) {
                             index = classfile.storeInnerClass(
                                 arg[0].stringValue(),
-                         	arg[1].stringValue(),
+                                arg[1].stringValue(),
                                 arg[2].stringValue(),
                                 arg[3].intValue()
                             );

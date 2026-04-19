@@ -1035,7 +1035,7 @@ class YoixModuleSystem extends YoixModule
                     info = (Object[])element;
                     if (info.length >= 4) {
                         sbuf.append("[");
-                 	sbuf.append(sdf.format(new Date(((Long)info[0]).longValue())));
+                        sbuf.append(sdf.format(new Date(((Long)info[0]).longValue())));
                         sbuf.append("] ");
                         sbuf.append(((Thread)info[1]).getName());
                         sbuf.append(": ");

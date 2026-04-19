@@ -75,7 +75,7 @@ class YoixAWTCheckboxMenuItem extends CheckboxMenuItem {
     final void
     setState(boolean state, boolean selectedstate) {
 
-    	YoixAWTCheckboxMenuItemGroup  group = this.group;
+        YoixAWTCheckboxMenuItemGroup  group = this.group;
 
         if (group != null) {
             if (state) {

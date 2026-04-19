@@ -1386,7 +1386,7 @@ class YoixMake
         YoixObject  obj;
         int         n;
 
- 	if (flavors != null) {
+        if (flavors != null) {
             obj = YoixObject.newArray(flavors.length);
             for (n = 0; n < flavors.length; n++)
                 obj.putString(n, flavors[n].getMimeType());
@@ -1710,7 +1710,7 @@ class YoixMake
         if (width > 0 || height > 0) {
             if (matrix != null) {
                 coords = matrix.itransform(
-            	    new double[] {
+                    new double[] {
                         x0, y0,
                         x0 + width, y0,
                         x0 + width, y0 + height,

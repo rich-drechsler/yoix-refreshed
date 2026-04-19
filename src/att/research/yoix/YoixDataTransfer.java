@@ -80,8 +80,8 @@ class YoixDataTransfer
         DataFlavor.stringFlavor,
         FLAVOR_PLAIN_TEXT,         // was: DataFlavor.plainTextFlavor,
         FLAVOR_PLAIN_TEXT_UNICODE, // added: 2/22/2007
-        FLAVOR_IMAGE,		   // this might be null
-        FLAVOR_COLOR 		   // omitted from EXPORTFLAVORS
+        FLAVOR_IMAGE,              // this might be null
+        FLAVOR_COLOR               // omitted from EXPORTFLAVORS
     };
 
     //

@@ -714,42 +714,42 @@ class YoixModuleUtil extends YoixModule
     getLocale(YoixObject arg[]) {
 
         YoixObject  obj = null;
- 	Locale      locale = null;
- 	String      language = null;
- 	String      country = null;
- 	String      variant = null;
+        Locale      locale = null;
+        String      language = null;
+        String      country = null;
+        String      variant = null;
 
- 	if (arg.length >= 0 && arg.length <=3) {
- 	    if (arg.length > 0) {
- 		if (arg[0].isNull() || arg[0].isString()) {
- 		    language = arg[0].stringValue();
- 		    if (arg.length > 1) {
- 			if (arg[1].isNull() || arg[1].isString()) {
- 			    country = arg[1].stringValue();
- 			    if (arg.length > 2) {
- 				if (arg[2].isNull() || arg[2].isString()) {
- 				    variant = arg[2].stringValue();
- 				} else VM.badArgument(2);
- 			    }
- 			} else VM.badArgument(1);
- 		    }
- 		} else VM.badArgument(0);
- 		if (variant == null) {
- 		    if (country == null) {
+        if (arg.length >= 0 && arg.length <=3) {
+            if (arg.length > 0) {
+                if (arg[0].isNull() || arg[0].isString()) {
+                    language = arg[0].stringValue();
+                    if (arg.length > 1) {
+                        if (arg[1].isNull() || arg[1].isString()) {
+                            country = arg[1].stringValue();
+                            if (arg.length > 2) {
+                                if (arg[2].isNull() || arg[2].isString()) {
+                                    variant = arg[2].stringValue();
+                                } else VM.badArgument(2);
+                            }
+                        } else VM.badArgument(1);
+                    }
+                } else VM.badArgument(0);
+                if (variant == null) {
+                    if (country == null) {
                         if (language == null)
                             locale = Locale.getDefault();
- 			else locale = new Locale(language);
- 		    } else if (language != null)
- 			locale = new Locale(language, country);
- 		    else VM.badArgumentValue(1);
- 		} else if (country != null) {
- 		    if (language != null)
- 			locale = new Locale(language, country, variant);
- 		    else VM.badArgumentValue(1);
- 		} else VM.badArgumentValue(2);
- 	    } else locale = Locale.getDefault();
+                        else locale = new Locale(language);
+                    } else if (language != null)
+                        locale = new Locale(language, country);
+                    else VM.badArgumentValue(1);
+                } else if (country != null) {
+                    if (language != null)
+                        locale = new Locale(language, country, variant);
+                    else VM.badArgumentValue(1);
+                } else VM.badArgumentValue(2);
+            } else locale = Locale.getDefault();
             obj = YoixObject.newLocale(locale);
- 	} else VM.badCall();
+        } else VM.badCall();
 
         return(obj);
     }

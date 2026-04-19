@@ -22,8 +22,8 @@ class YoixGraphBase
 
 {
 
-    YoixBodyGraphObserver  obs; 	// the observer
-    YoixGraphElement       grf; 	// the observed
+    YoixBodyGraphObserver  obs;        // the observer
+    YoixGraphElement       grf;        // the observed
 
     //
     // Members are also kept in a doubly linked list that's used

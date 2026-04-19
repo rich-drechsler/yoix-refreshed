@@ -311,7 +311,7 @@ class JVMAssembler
         //
         // Builds the instructions[] array from the assembly language stored
         // in lines[] and then uses instructions[] in several passes to build
- 	// the method, which includes generating the bytecode, resolving all
+        // the method, which includes generating the bytecode, resolving all
         // branch labels, and calculating max_stack and max_locals for the
         // method.
         //

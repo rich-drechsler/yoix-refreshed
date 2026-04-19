@@ -5206,7 +5206,7 @@ class SwingJGraphPlot extends SwingDataViewer
                     screen.height -= resolution;
                     scale = Math.min(screen.width/width, screen.height/height);
                     if ((font = smallestfont) == null)
-                	font = getFont();
+                        font = getFont();
                     pointsize = (font != null) ? font.getSize() : 14.0;
                     limit = Math.ceil(ZOOMPOINTSIZE/(pointsize*scale));
                     if (limit > ZOOMLIMIT) {

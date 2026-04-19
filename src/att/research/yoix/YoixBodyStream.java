@@ -1305,9 +1305,9 @@ class YoixBodyStream extends YoixPointerActive
                     break;
             }
             // common elements that should probably be carried over
-    	    data.put(N_ENCODING, oldData.get(N_ENCODING, true), false);
-    	    data.put(N_FLUSHMODE, oldData.get(N_FLUSHMODE, true), false);
-    	    data.put(N_BUFSIZE, oldData.get(N_BUFSIZE, true), false);
+            data.put(N_ENCODING, oldData.get(N_ENCODING, true), false);
+            data.put(N_FLUSHMODE, oldData.get(N_FLUSHMODE, true), false);
+            data.put(N_BUFSIZE, oldData.get(N_BUFSIZE, true), false);
         }
         VM.pushAccess(LRW_);
         data.putString(N_NAME, path);
