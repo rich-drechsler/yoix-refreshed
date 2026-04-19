@@ -21,7 +21,7 @@ public
 interface DataViewer
 
     extends DataColorer,
-	    SweepFilter
+            SweepFilter
 
 {
     ArrayList  collectRecordsAt(Point point, boolean selected);

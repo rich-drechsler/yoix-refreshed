@@ -17,8 +17,8 @@ import java.util.*;
 interface YoixCompilerConstants
 
     extends YoixConstants,
-	    JVMConstants,
-	    JVMOpcodes
+            JVMConstants,
+            JVMOpcodes
 
 {
 

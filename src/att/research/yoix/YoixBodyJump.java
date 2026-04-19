@@ -17,8 +17,8 @@ final
 class YoixBodyJump
 
     implements YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCloneable
+               YoixInterfaceBody,
+               YoixInterfaceCloneable
 
 {
 
@@ -40,16 +40,16 @@ class YoixBodyJump
 
     YoixBodyJump(int type, YoixError error) {
 
-	this.error = error;
-	this.type = type;
+        this.error = error;
+        this.type = type;
     }
 
 
     YoixBodyJump(int type, YoixError error, boolean breakable) {
 
-	this.error = error;
-	this.type = type;
-	this.breakable = breakable;
+        this.error = error;
+        this.type = type;
+        this.breakable = breakable;
     }
 
     ///////////////////////////////////
@@ -61,14 +61,14 @@ class YoixBodyJump
     public synchronized Object
     clone() {
 
-	return(VM.die(INTERNALERROR));
+        return(VM.die(INTERNALERROR));
     }
 
 
     public Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -80,28 +80,28 @@ class YoixBodyJump
     public final String
     dump() {
 
-	return("--" + YoixMisc.tokenImage(type).toLowerCase() + "--" + NL);
+        return("--" + YoixMisc.tokenImage(type).toLowerCase() + "--" + NL);
     }
 
 
     public final int
     length() {
 
-	return(0);
+        return(0);
     }
 
 
     public final String
     toString() {
 
-	return(dump().trim());
+        return(dump().trim());
     }
 
 
     public final int
     type() {
 
-	return(type);
+        return(type);
     }
 
     ///////////////////////////////////
@@ -113,22 +113,22 @@ class YoixBodyJump
     final boolean
     isBreakable() {
 
-	return(breakable);
+        return(breakable);
     }
 
 
     final void
     jump() {
 
-	jump(null);
+        jump(null);
     }
 
 
     final void
     jump(YoixObject details) {
 
-	error.setDetails(details);
-	throw(error);
+        error.setDetails(details);
+        throw(error);
     }
 }
 

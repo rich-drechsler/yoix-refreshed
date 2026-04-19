@@ -34,13 +34,13 @@ class YoixBodyOption extends YoixPointerActive
     private static HashMap  activefields = new HashMap(7);
 
     static {
-	activefields.put(N_GETOPT, new Integer(V_GETOPT));
-	activefields.put(N_OPTARG, new Integer(V_OPTARG));
-	activefields.put(N_OPTCHAR, new Integer(V_OPTCHAR));
-	activefields.put(N_OPTERROR, new Integer(V_OPTERROR));
-	activefields.put(N_OPTIND, new Integer(V_OPTIND));
-	activefields.put(N_OPTSTR, new Integer(V_OPTSTR));
-	activefields.put(N_OPTWORD, new Integer(V_OPTWORD));
+        activefields.put(N_GETOPT, new Integer(V_GETOPT));
+        activefields.put(N_OPTARG, new Integer(V_OPTARG));
+        activefields.put(N_OPTCHAR, new Integer(V_OPTCHAR));
+        activefields.put(N_OPTERROR, new Integer(V_OPTERROR));
+        activefields.put(N_OPTIND, new Integer(V_OPTIND));
+        activefields.put(N_OPTSTR, new Integer(V_OPTSTR));
+        activefields.put(N_OPTWORD, new Integer(V_OPTWORD));
     }
 
     ///////////////////////////////////
@@ -51,9 +51,9 @@ class YoixBodyOption extends YoixPointerActive
 
     YoixBodyOption(YoixObject data) {
 
-	super(data);
-	buildOption();
-	setFixedSize();
+        super(data);
+        buildOption();
+        setFixedSize();
     }
 
     ///////////////////////////////////
@@ -65,7 +65,7 @@ class YoixBodyOption extends YoixPointerActive
     public final int
     type() {
 
-	return(OPTION);
+        return(OPTION);
     }
 
     ///////////////////////////////////
@@ -77,109 +77,109 @@ class YoixBodyOption extends YoixPointerActive
     final YoixObject
     callGetopt(YoixObject arg[], int start) {
 
-	return(builtinGetopt(N_GETOPT, arg, start));
+        return(builtinGetopt(N_GETOPT, arg, start));
     }
 
 
     protected final YoixObject
     executeField(String name, YoixObject argv[]) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	switch (activeField(name, activefields)) {
-	    case V_GETOPT:
-		obj = builtinGetopt(name, argv, 0);
-		break;
+        switch (activeField(name, activefields)) {
+            case V_GETOPT:
+                obj = builtinGetopt(name, argv, 0);
+                break;
 
-	    default:
-		obj = null;
-		break;
-	}
+            default:
+                obj = null;
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final void
     finalize() {
 
-	option = null;
-	super.finalize();
+        option = null;
+        super.finalize();
     }
 
 
     protected final synchronized YoixObject
     getField(String name, YoixObject obj) {
 
-	switch (activeField(name, activefields)) {
-	    case V_OPTARG:
-		obj = YoixMake.yoixObject(option.optarg);
-		break;
+        switch (activeField(name, activefields)) {
+            case V_OPTARG:
+                obj = YoixMake.yoixObject(option.optarg);
+                break;
 
-	    case V_OPTCHAR:
-		obj = YoixObject.newInt(option.optchar);
-		break;
+            case V_OPTCHAR:
+                obj = YoixObject.newInt(option.optchar);
+                break;
 
-	    case V_OPTERROR:
-		obj = YoixObject.newString(option.opterror);
-		break;
+            case V_OPTERROR:
+                obj = YoixObject.newString(option.opterror);
+                break;
 
-	    case V_OPTIND:
-		obj = YoixObject.newInt(option.optind);
-		break;
+            case V_OPTIND:
+                obj = YoixObject.newInt(option.optind);
+                break;
 
-	    case V_OPTSTR:
-		obj = YoixObject.newString(option.optstr);
-		break;
+            case V_OPTSTR:
+                obj = YoixObject.newString(option.optstr);
+                break;
 
-	    case V_OPTWORD:
-		obj = YoixObject.newString(option.optword);
-		break;
-	}
+            case V_OPTWORD:
+                obj = YoixObject.newString(option.optword);
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(option);
+        return(option);
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	if (obj != null) {
-	    switch (activeField(name, activefields)) {
-		case V_OPTARG:
-		    option.optarg = obj.notNull() ? obj.clone() : null;
-		    break;
+        if (obj != null) {
+            switch (activeField(name, activefields)) {
+                case V_OPTARG:
+                    option.optarg = obj.notNull() ? obj.clone() : null;
+                    break;
 
-		case V_OPTCHAR:
-		    option.optchar = (char)obj.intValue();
-		    break;
+                case V_OPTCHAR:
+                    option.optchar = (char)obj.intValue();
+                    break;
 
-		case V_OPTERROR:
-		    option.opterror = obj.notNull() ? obj.stringValue() : null;
-		    break;
+                case V_OPTERROR:
+                    option.opterror = obj.notNull() ? obj.stringValue() : null;
+                    break;
 
-		case V_OPTIND:
-		    option.optind = obj.intValue();
-		    break;
+                case V_OPTIND:
+                    option.optind = obj.intValue();
+                    break;
 
-		case V_OPTSTR:
-		    option.optstr = obj.notNull() ? obj.stringValue() : null;
-		    break;
+                case V_OPTSTR:
+                    option.optstr = obj.notNull() ? obj.stringValue() : null;
+                    break;
 
-		case V_OPTWORD:
-		    option.optword = obj.notNull() ? obj.stringValue() : null;
-		    break;
-	    }
-	}
+                case V_OPTWORD:
+                    option.optword = obj.notNull() ? obj.stringValue() : null;
+                    break;
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -191,57 +191,57 @@ class YoixBodyOption extends YoixPointerActive
     private void
     buildOption() {
 
-	option = new YoixOption();
-	setField(N_OPTIND);
-	setField(N_OPTSTR);
+        option = new YoixOption();
+        setField(N_OPTIND);
+        setField(N_OPTSTR);
     }
 
 
     private YoixObject
     builtinGetopt(String name, YoixObject arg[], int start) {
 
-	YoixObject  obj;
-	Object      argv[];
-	String      letters = null;
-	String      words[] = null;
-	int         argc;
-	int         letter = -1;
-	int         offset;
-	int         n;
+        YoixObject  obj;
+        Object      argv[];
+        String      letters = null;
+        String      words[] = null;
+        int         argc;
+        int         letter = -1;
+        int         offset;
+        int         n;
 
-	argc = arg.length - start;
+        argc = arg.length - start;
 
-	if (argc == 2 || argc == 3) {
-	    if (arg[start].isArray() || arg[start].isNull()) {
-		if (argc == 2) {
-		    if (arg[1+start].isString() || arg[1+start].isArray() || arg[1+start].isNull()) {
-			if (arg[1+start].isString()) {
-			    letters = arg[1+start].notNull() ? arg[1+start].stringValue() : null;
-			    words = null;
-			} else {
-			    letters = null;
-			    words = arg[1+start].notNull() ? YoixMake.javaStringArray(arg[1+start]) : null;
-			}
-		    } else VM.badArgument(1+start);
-		} else {
-		    if (arg[1+start].isString() || arg[1+start].isNull()) {
-			if (arg[2+start].isArray() || arg[2+start].isNull()) {
-			    letters = arg[1+start].notNull() ? arg[1+start].stringValue() : null;
-			    words = arg[2+start].notNull() ? YoixMake.javaStringArray(arg[2+start]) : null;
-			} else VM.badArgument(2+start);
-		    } else VM.badArgument(1+start);
-		}
-		if (letters != null || words != null) {
-		    argv = new Object[arg[start].sizeof()];
-		    offset = arg[start].offset();
-		    for (n = 0; n < argv.length; n++)
-			argv[n] = arg[start].getObject(n + offset);
-		    letter = option.getopt(argv, letters, words);
-		}
-	    } else VM.badArgument(start);
-	} else VM.badCall(name);
+        if (argc == 2 || argc == 3) {
+            if (arg[start].isArray() || arg[start].isNull()) {
+                if (argc == 2) {
+                    if (arg[1+start].isString() || arg[1+start].isArray() || arg[1+start].isNull()) {
+                        if (arg[1+start].isString()) {
+                            letters = arg[1+start].notNull() ? arg[1+start].stringValue() : null;
+                            words = null;
+                        } else {
+                            letters = null;
+                            words = arg[1+start].notNull() ? YoixMake.javaStringArray(arg[1+start]) : null;
+                        }
+                    } else VM.badArgument(1+start);
+                } else {
+                    if (arg[1+start].isString() || arg[1+start].isNull()) {
+                        if (arg[2+start].isArray() || arg[2+start].isNull()) {
+                            letters = arg[1+start].notNull() ? arg[1+start].stringValue() : null;
+                            words = arg[2+start].notNull() ? YoixMake.javaStringArray(arg[2+start]) : null;
+                        } else VM.badArgument(2+start);
+                    } else VM.badArgument(1+start);
+                }
+                if (letters != null || words != null) {
+                    argv = new Object[arg[start].sizeof()];
+                    offset = arg[start].offset();
+                    for (n = 0; n < argv.length; n++)
+                        argv[n] = arg[start].getObject(n + offset);
+                    letter = option.getopt(argv, letters, words);
+                }
+            } else VM.badArgument(start);
+        } else VM.badCall(name);
 
-	return(YoixObject.newInt(letter));
+        return(YoixObject.newInt(letter));
     }
 }
 

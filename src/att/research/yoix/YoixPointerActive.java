@@ -17,10 +17,10 @@ public abstract
 class YoixPointerActive extends YoixPointer
 
     implements YoixAPI,
-	       YoixAPIProtected,
-	       YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCloneable
+               YoixAPIProtected,
+               YoixConstants,
+               YoixInterfaceBody,
+               YoixInterfaceCloneable
 
 {
 
@@ -93,24 +93,24 @@ class YoixPointerActive extends YoixPointer
     protected
     YoixPointerActive(YoixObject data) {
 
-	this(data, false);
+        this(data, false);
     }
 
 
     protected
     YoixPointerActive(YoixObject data, boolean cloneable) {
 
-	this.data = data;
-	this.length = data.length();	// means data can grow but not shrink!!
-	this.cloneable = cloneable;
+        this.data = data;
+        this.length = data.length();	// means data can grow but not shrink!!
+        this.cloneable = cloneable;
 
-	//
-	// Assumes that N_MAJOR and N_MINOR, if they exist, are numbers,
-	// which is sufficent for now. Means user modules that get here
-	// must also obey the rule otherwise the constructor will fail!!
-	//
-	major = data.getInt(N_MAJOR, YOIX_EOF);
-	minor = data.getInt(N_MINOR, YOIX_EOF);
+        //
+        // Assumes that N_MAJOR and N_MINOR, if they exist, are numbers,
+        // which is sufficent for now. Means user modules that get here
+        // must also obey the rule otherwise the constructor will fail!!
+        //
+        major = data.getInt(N_MAJOR, YOIX_EOF);
+        minor = data.getInt(N_MINOR, YOIX_EOF);
     }
 
     ///////////////////////////////////
@@ -122,31 +122,31 @@ class YoixPointerActive extends YoixPointer
     public synchronized Object
     clone() {
 
-	YoixPointerActive  obj;
+        YoixPointerActive  obj;
 
-	if (cloneable) {
-	    try {
-		obj = (YoixPointerActive)super.clone();
-		obj.data = obj.data.duplicate();
-		obj.context = null;
-	    }
-	    catch(CloneNotSupportedException e) {
-		VM.die(INTERNALERROR);
-		obj = null;
-	    }
-	} else {
-	    VM.abort(INVALIDCLONE);
-	    obj = null;
-	}
+        if (cloneable) {
+            try {
+                obj = (YoixPointerActive)super.clone();
+                obj.data = obj.data.duplicate();
+                obj.context = null;
+            }
+            catch(CloneNotSupportedException e) {
+                VM.die(INTERNALERROR);
+                obj = null;
+            }
+        } else {
+            VM.abort(INVALIDCLONE);
+            obj = null;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     public Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -158,21 +158,21 @@ class YoixPointerActive extends YoixPointer
     public final String
     dump() {
 
-	return(dump(0, "", null));
+        return(dump(0, "", null));
     }
 
 
     public final int
     length() {
 
-	return(data.length());
+        return(data.length());
     }
 
 
     public final String
     toString() {
 
-	return(dump());
+        return(dump());
     }
 
     ///////////////////////////////////
@@ -184,262 +184,262 @@ class YoixPointerActive extends YoixPointer
     public final YoixObject
     cast(YoixObject obj, int index, boolean clone) {
 
-	if (canWrite())
-	    obj = data.cast(obj, index, clone);
-	else VM.abort(INVALIDACCESS);
+        if (canWrite())
+            obj = data.cast(obj, index, clone);
+        else VM.abort(INVALIDACCESS);
 
-	return(obj);
+        return(obj);
     }
 
 
     public final YoixObject
     cast(YoixObject obj, String name, boolean clone) {
 
-	int  index;
+        int  index;
 
-	if ((index = hash(name)) != -1)
-	    obj = cast(obj, index, clone);
-	else VM.abort(DICTFULL, name);
+        if ((index = hash(name)) != -1)
+            obj = cast(obj, index, clone);
+        else VM.abort(DICTFULL, name);
 
-	return(obj);
+        return(obj);
     }
 
 
     public final boolean
     compound() {
 
-	return(true);
+        return(true);
     }
 
 
     public final void
     declare(int index, YoixObject obj, int mode) {
 
-	if (canWrite())
-	    data.declare(index, obj, mode);
-	else VM.abort(INVALIDACCESS);
+        if (canWrite())
+            data.declare(index, obj, mode);
+        else VM.abort(INVALIDACCESS);
     }
 
 
     public final void
     declare(String name, YoixObject obj, int mode) {
 
-	int  index;
+        int  index;
 
-	if ((index = reserve(name)) != -1)
-	    declare(index, obj, mode);
-	else VM.abort(DICTFULL, name);
+        if ((index = reserve(name)) != -1)
+            declare(index, obj, mode);
+        else VM.abort(DICTFULL, name);
     }
 
 
     public final boolean
     defined(int index) {
 
-	return(canRead() && data.defined(index));
+        return(canRead() && data.defined(index));
     }
 
 
     public final boolean
     defined(String name) {
 
-	return(defined(hash(name)));
+        return(defined(hash(name)));
     }
 
 
     public final String
     dump(int index, String indent, String typename) {
 
-	String  str;
-	String  name;
-	int     sorted[];
-	int     level;
-	int     limit;
-	int     size;
-	int     n;
-	int     m;
+        String  str;
+        String  name;
+        int     sorted[];
+        int     level;
+        int     limit;
+        int     size;
+        int     n;
+        int     m;
 
-	sorted = ((YoixBodyDictionary)data.body()).sortedOrder();
-	size = sorted.length;
-	level = indent.length()/4;
-	limit = VM.getInt(N_DUMPDEPTH);
-	indent += "   ";
-	str = (typename == null) ? getTypename() : typename;
-	str += "[" + size + ":" + index + "]";
+        sorted = ((YoixBodyDictionary)data.body()).sortedOrder();
+        size = sorted.length;
+        level = indent.length()/4;
+        limit = VM.getInt(N_DUMPDEPTH);
+        indent += "   ";
+        str = (typename == null) ? getTypename() : typename;
+        str += "[" + size + ":" + index + "]";
 
-	if (canRead()) {
-	   if (level < limit) {
-		str += NL;
-		for (n = 0; n < size; n++) {
-		    m = sorted[n];
-		    str += indent + ((m == index) ? ">" : " ");
-		    if ((name = data.name(m)) != null) {
-			str += name + "=";
-			if (data.readable(m)) {
-			    if (sideEffects(name))
-				str += data.get(m, false).dump(indent + " ");
-			    else str += get(m, false).dump(indent + " ");
-			} else if (data.executable(m))
-			    str += "--executeonly--" + NL;
-			else str += "--unreadable--" + NL;
-		    } else str += "--uninitialized--" + NL;
-		}
-	    } else str += NL;
-	} else str += ":--unreadable--" + NL;
+        if (canRead()) {
+           if (level < limit) {
+                str += NL;
+                for (n = 0; n < size; n++) {
+                    m = sorted[n];
+                    str += indent + ((m == index) ? ">" : " ");
+                    if ((name = data.name(m)) != null) {
+                        str += name + "=";
+                        if (data.readable(m)) {
+                            if (sideEffects(name))
+                                str += data.get(m, false).dump(indent + " ");
+                            else str += get(m, false).dump(indent + " ");
+                        } else if (data.executable(m))
+                            str += "--executeonly--" + NL;
+                        else str += "--unreadable--" + NL;
+                    } else str += "--uninitialized--" + NL;
+                }
+            } else str += NL;
+        } else str += ":--unreadable--" + NL;
 
-	return(str);
+        return(str);
     }
 
 
     public final boolean
     executable(int index) {
 
-	return(canExecute() && data.executable(index));
+        return(canExecute() && data.executable(index));
     }
 
 
     public final boolean
     executable(String name) {
 
-	return(executable(hash(name)));
+        return(executable(hash(name)));
     }
 
 
     public final YoixObject
     execute(int index, YoixObject argv[], YoixObject context) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	if (executable(index)) {
-	    if ((obj = executeField(data.name(index), argv)) == null)
-		obj = data.execute(index, argv, context);
-	} else obj = data.execute(index, argv, context);	// only for the error!!
+        if (executable(index)) {
+            if ((obj = executeField(data.name(index), argv)) == null)
+                obj = data.execute(index, argv, context);
+        } else obj = data.execute(index, argv, context);	// only for the error!!
 
-	return(obj);
+        return(obj);
     }
 
 
     public final YoixObject
     execute(String name, YoixObject argv[], YoixObject context) {
 
-	YoixObject  obj = null;
-	int         index;
+        YoixObject  obj = null;
+        int         index;
 
-	if ((index = hash(name)) != -1)
-	    obj = execute(index, argv, context);
-	else VM.abort(UNDEFINED, name);
+        if ((index = hash(name)) != -1)
+            obj = execute(index, argv, context);
+        else VM.abort(UNDEFINED, name);
 
-	return(obj);
+        return(obj);
     }
 
 
     public final YoixObject
     get(int index, boolean clone) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	if (readable(index)) {
-	    if ((obj = getField(data.name(index), null)) == null)
-		obj = data.get(index, clone);
-	} else obj = data.get(index, clone);	// only for the error!!
+        if (readable(index)) {
+            if ((obj = getField(data.name(index), null)) == null)
+                obj = data.get(index, clone);
+        } else obj = data.get(index, clone);	// only for the error!!
 
-	return(obj);
+        return(obj);
     }
 
 
     public final YoixObject
     get(String name, boolean clone) {
 
-	YoixObject  obj = null;
-	int         index;
+        YoixObject  obj = null;
+        int         index;
 
-	if ((index = hash(name)) != -1)
-	    obj = get(index, clone);
-	else VM.abort(UNDEFINED, name);
+        if ((index = hash(name)) != -1)
+            obj = get(index, clone);
+        else VM.abort(UNDEFINED, name);
 
-	return(obj);
+        return(obj);
     }
 
 
     public final int
     hash(String name) {
 
-	return(data.hash(name));
+        return(data.hash(name));
     }
 
 
     public final String
     name(int index) {
 
-	return(data.name(index));
+        return(data.name(index));
     }
 
 
     public final YoixObject
     put(int index, YoixObject obj, boolean clone) {
 
-	YoixObject  tmp;
+        YoixObject  tmp;
 
-	//
-	// A change on 8/22/01 delays the put() until after setField()
-	// returns, mostly so data isn't changed if setField() detects
-	// an error. Implementation obviously introduced some overhead
-	// that we probably can eliminate if necessary. Performance in
-	// all the tests we've run so has not decreased noticeably.
-	//
+        //
+        // A change on 8/22/01 delays the put() until after setField()
+        // returns, mostly so data isn't changed if setField() detects
+        // an error. Implementation obviously introduced some overhead
+        // that we probably can eliminate if necessary. Performance in
+        // all the tests we've run so has not decreased noticeably.
+        //
 
-	if (canWrite()) {
-	    obj = cast(obj, index, clone);
-	    if ((tmp = setField(data.name(index), obj)) != null)
-		obj = tmp;
-	    data.put(index, obj, false);
-	} else VM.abort(INVALIDACCESS);
+        if (canWrite()) {
+            obj = cast(obj, index, clone);
+            if ((tmp = setField(data.name(index), obj)) != null)
+                obj = tmp;
+            data.put(index, obj, false);
+        } else VM.abort(INVALIDACCESS);
 
-	return(obj);
+        return(obj);
     }
 
 
     public final YoixObject
     put(String name, YoixObject obj, boolean clone) {
 
-	int  index;
+        int  index;
 
-	if ((index = reserve(name)) != -1)
-	    obj = put(index, obj, clone);
-	else VM.abort(DICTFULL, name);
+        if ((index = reserve(name)) != -1)
+            obj = put(index, obj, clone);
+        else VM.abort(DICTFULL, name);
 
-	return(obj);
+        return(obj);
     }
 
 
     public final boolean
     readable(int index) {
 
-	return(canRead() && data.readable(index));
+        return(canRead() && data.readable(index));
     }
 
 
     public final boolean
     readable(String name) {
 
-	return(readable(hash(name)));
+        return(readable(hash(name)));
     }
 
 
     public final int
     reserve(String name) {
 
-	int  index;
+        int  index;
 
-	//
-	// Old versions checked to see if hash() was -1, but that seemed
-	// wrong. Changed the test on 12/17/05, but this code is rarely
-	// used (e.g., a named block with growable data or uninitialized
-	// slots) so it's unlikely any applications will be affected!!
-	//
+        //
+        // Old versions checked to see if hash() was -1, but that seemed
+        // wrong. Changed the test on 12/17/05, but this code is rarely
+        // used (e.g., a named block with growable data or uninitialized
+        // slots) so it's unlikely any applications will be affected!!
+        //
 
-	if ((index = hash(name)) != -1 && canWrite())
-	    index = data.reserve(name);
-	return(index);
+        if ((index = hash(name)) != -1 && canWrite())
+            index = data.reserve(name);
+        return(index);
     }
 
     ///////////////////////////////////
@@ -451,125 +451,125 @@ class YoixPointerActive extends YoixPointer
     public final YoixObject
     call(YoixObject args[]) {
 
-	YoixObject  obj = null;
-	YoixObject  function;
-	YoixObject  argv[];
+        YoixObject  obj = null;
+        YoixObject  function;
+        YoixObject  argv[];
 
-	if (args.length > 0) {
-	    function = args[0];
-	    argv = new YoixObject[args.length - 1];
-	    System.arraycopy(args, 1, argv, 0, argv.length);
-	    obj = call(function, argv, getContext());
-	}
+        if (args.length > 0) {
+            function = args[0];
+            argv = new YoixObject[args.length - 1];
+            System.arraycopy(args, 1, argv, 0, argv.length);
+            obj = call(function, argv, getContext());
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     public final YoixObject
     call(String name) {
 
-	return(call(data.getObject(name), new YoixObject[0], getContext()));
+        return(call(data.getObject(name), new YoixObject[0], getContext()));
     }
 
 
     public final YoixObject
     call(String name, YoixObject arg) {
 
-	return(call(data.getObject(name), new YoixObject[] {arg}, getContext()));
+        return(call(data.getObject(name), new YoixObject[] {arg}, getContext()));
     }
 
 
     public final YoixObject
     call(String name, YoixObject argv[]) {
 
-	return(call(data.getObject(name), argv, getContext()));
+        return(call(data.getObject(name), argv, getContext()));
     }
 
 
     public final YoixObject
     call(YoixObject function, YoixObject arg) {
 
-	return(call(function, new YoixObject[] {arg}, getContext()));
+        return(call(function, new YoixObject[] {arg}, getContext()));
     }
 
 
     public final YoixObject
     call(YoixObject function, YoixObject argv[]) {
 
-	return(call(function, argv, getContext()));
+        return(call(function, argv, getContext()));
     }
 
 
     public final Object
     getBody(String name) {
 
-	return(YoixObject.body(data.getObject(name), this));
+        return(YoixObject.body(data.getObject(name), this));
     }
 
 
     public final Object
     getBody(YoixObject obj) {
 
-	return(YoixObject.body(obj, this));
+        return(YoixObject.body(obj, this));
     }
 
 
     public YoixObject
     getContext() {
 
-	if (context == null)
-	    context = YoixObject.newPointer(this);
-	return(context);
+        if (context == null)
+            context = YoixObject.newPointer(this);
+        return(context);
     }
 
 
     public final YoixObject
     getData() {
 
-	return(data);
+        return(data);
     }
 
 
     public final int
     getMajor() {
 
-	return(major);
+        return(major);
     }
 
 
     public final Object
     getManagedObject(String name) {
 
-	return(YoixObject.getManagedObject(data.getObject(name), this));
+        return(YoixObject.getManagedObject(data.getObject(name), this));
     }
 
 
     public final Object
     getManagedObject(YoixObject obj) {
 
-	return(YoixObject.getManagedObject(obj, this));
+        return(YoixObject.getManagedObject(obj, this));
     }
 
 
     public final int
     getMinor() {
 
-	return(minor);
+        return(minor);
     }
 
 
     public final String
     getTypename() {
 
-	return(data.getTypename());
+        return(data.getTypename());
     }
 
 
     public final boolean
     isCloneable() {
 
-	return(cloneable);
+        return(cloneable);
     }
 
     ///////////////////////////////////
@@ -581,9 +581,9 @@ class YoixPointerActive extends YoixPointer
     protected final int
     activeField(String name, Map table) {
 
-	Object  id;
+        Object  id;
 
-	return((id = table.get(name)) != null ? ((Integer)id).intValue() : -1);
+        return((id = table.get(name)) != null ? ((Integer)id).intValue() : -1);
     }
 
 
@@ -595,74 +595,74 @@ class YoixPointerActive extends YoixPointer
     protected YoixObject
     call(YoixObject function, YoixObject argv[], YoixObject context) {
 
-	YoixObject  obj = null;
-	YoixError   interrupt_point = null;
-	YoixError   error_point = null;
+        YoixObject  obj = null;
+        YoixError   interrupt_point = null;
+        YoixError   error_point = null;
 
-	//
-	// Be careful, java.awt.EventDispatchThread.run() can sometimes
-	// generates unwanted noise!!
-	//
+        //
+        // Be careful, java.awt.EventDispatchThread.run() can sometimes
+        // generates unwanted noise!!
+        //
 
-	if (function != null) {
-	    if (function.notNull()) {
-		try {
-		    error_point = VM.pushError();
-		    try {
-			interrupt_point = VM.pushInterrupt();
-			obj = function.call(argv, context).resolve();
-		    }
-		    catch(YoixError e) {
-			if (e != interrupt_point)
-			    throw(e);
-		    }
-		    VM.popError();
-		}
-		catch(YoixError e) {
-		    if (e != error_point)
-			throw(e);
-		    else VM.error(error_point);
-		}
-		catch(SecurityException e) {
-		    VM.error(e);
-		    VM.popError();
-		}
-	    }
-	}
+        if (function != null) {
+            if (function.notNull()) {
+                try {
+                    error_point = VM.pushError();
+                    try {
+                        interrupt_point = VM.pushInterrupt();
+                        obj = function.call(argv, context).resolve();
+                    }
+                    catch(YoixError e) {
+                        if (e != interrupt_point)
+                            throw(e);
+                    }
+                    VM.popError();
+                }
+                catch(YoixError e) {
+                    if (e != error_point)
+                        throw(e);
+                    else VM.error(error_point);
+                }
+                catch(SecurityException e) {
+                    VM.error(e);
+                    VM.popError();
+                }
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected YoixObject
     executeField(String name, YoixObject argv[]) {
 
-	return(null);
+        return(null);
     }
 
 
     protected void
     finalize() {
 
-	context = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        context = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     protected YoixObject
     getField(String name, YoixObject obj) {
 
-	return(obj);
+        return(obj);
     }
 
 
     protected Object
     getManagedObject() {
 
-	return(VM.abort(UNIMPLEMENTED));
+        return(VM.abort(UNIMPLEMENTED));
     }
 
 
@@ -675,119 +675,119 @@ class YoixPointerActive extends YoixPointer
     protected void
     initializer() {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	if ((obj = data.getObject(N_INITIALIZER)) != null) {
-	    if (obj.callable(0))
-		call(obj, new YoixObject[0], getContext());
-	}
+        if ((obj = data.getObject(N_INITIALIZER)) != null) {
+            if (obj.callable(0))
+                call(obj, new YoixObject[0], getContext());
+        }
     }
 
 
     protected final void
     resetPermissions(Object permissions[], int columns) {
 
-	YoixObject  obj;
-	String      name;
-	Integer     perm;
-	int         n;
+        YoixObject  obj;
+        String      name;
+        Integer     perm;
+        int         n;
 
-	if (columns == 5) {
-	    VM.pushAccess(LR__);
-	    for (n = 0; n < permissions.length; n += columns) {
-		if ((name = (String)permissions[n]) != null) {
-		    if (data.defined(name)) {
-			obj = data.get(name, false);
-			if ((perm = (Integer)permissions[n+3]) != null)
-			    obj.setAccess(perm.intValue());
-			if ((perm = (Integer)permissions[n+4]) != null)
-			    obj.setAccessBody(perm.intValue());
-		    }
-		}
-	    }
-	    VM.popAccess();
-	} else VM.die(INTERNALERROR);
+        if (columns == 5) {
+            VM.pushAccess(LR__);
+            for (n = 0; n < permissions.length; n += columns) {
+                if ((name = (String)permissions[n]) != null) {
+                    if (data.defined(name)) {
+                        obj = data.get(name, false);
+                        if ((perm = (Integer)permissions[n+3]) != null)
+                            obj.setAccess(perm.intValue());
+                        if ((perm = (Integer)permissions[n+4]) != null)
+                            obj.setAccessBody(perm.intValue());
+                    }
+                }
+            }
+            VM.popAccess();
+        } else VM.die(INTERNALERROR);
     }
 
 
     protected YoixObject
     setField(String name) {
 
-	return(setField(name, data.getObject(name)));
+        return(setField(name, data.getObject(name)));
     }
 
 
     protected YoixObject
     setField(String name, YoixObject obj) {
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final void
     setFixedSize() {
 
-	data.setGrowable(false);
+        data.setGrowable(false);
     }
 
 
     protected final void
     setPermissions(Object permissions[]) {
 
-	setPermissions(permissions, 3);
+        setPermissions(permissions, 3);
     }
 
 
     protected final void
     setPermissions(Object permissions[], int columns) {
 
-	YoixObject  obj;
-	String      name;
-	Integer     perm;
-	int         n;
+        YoixObject  obj;
+        String      name;
+        Integer     perm;
+        int         n;
 
-	if (columns == 3 || columns == 5) {
-	    VM.pushAccess(LR__);
-	    for (n = 0; n < permissions.length; n += columns) {
-		if ((name = (String)permissions[n]) != null) {
-		    if (data.defined(name)) {
-			obj = data.get(name, false);
-			if ((perm = (Integer)permissions[n+1]) != null) {
-			    if (columns == 5)
-				permissions[n+3] = new Integer(obj.getAccess());
-			    obj.setAccess(perm.intValue());
-			} else if (columns == 5)
-			    permissions[n+3] = null;
-			if ((perm = (Integer)permissions[n+2]) != null) {
-			    if (columns == 5)
-				permissions[n+4] = new Integer(obj.getAccessBody());
-			    obj.setAccessBody(perm.intValue());
-			} else if (columns == 5)
-			    permissions[n+4] = null;
-		    }
-		}
-	    }
-	    VM.popAccess();
-	} else VM.die(INTERNALERROR);
+        if (columns == 3 || columns == 5) {
+            VM.pushAccess(LR__);
+            for (n = 0; n < permissions.length; n += columns) {
+                if ((name = (String)permissions[n]) != null) {
+                    if (data.defined(name)) {
+                        obj = data.get(name, false);
+                        if ((perm = (Integer)permissions[n+1]) != null) {
+                            if (columns == 5)
+                                permissions[n+3] = new Integer(obj.getAccess());
+                            obj.setAccess(perm.intValue());
+                        } else if (columns == 5)
+                            permissions[n+3] = null;
+                        if ((perm = (Integer)permissions[n+2]) != null) {
+                            if (columns == 5)
+                                permissions[n+4] = new Integer(obj.getAccessBody());
+                            obj.setAccessBody(perm.intValue());
+                        } else if (columns == 5)
+                            permissions[n+4] = null;
+                    }
+                }
+            }
+            VM.popAccess();
+        } else VM.die(INTERNALERROR);
     }
 
 
     protected final void
     setToConstant(String name) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	if ((obj = data.get(name)) != null) {
-	    if (obj.canWrite() || obj.canUnlock())
-		obj.setAccess(LR__);
-	}
+        if ((obj = data.get(name)) != null) {
+            if (obj.canWrite() || obj.canUnlock())
+                obj.setAccess(LR__);
+        }
     }
 
 
     protected boolean
     sideEffects(String name) {
 
-	return(false);
+        return(false);
     }
 
     ///////////////////////////////////
@@ -799,18 +799,18 @@ class YoixPointerActive extends YoixPointer
     synchronized void
     changeData(YoixObject data) {
 
-	//
-	// Don't use this unless you really know what you're doing.
-	// Right now reopening streams is the only time its used,
-	// and we suspect there may never be another use.
-	//
+        //
+        // Don't use this unless you really know what you're doing.
+        // Right now reopening streams is the only time its used,
+        // and we suspect there may never be another use.
+        //
 
-	VM.pushAccess(LRW_);
-	this.data = data;
-	this.length = data.length();
-	major = data.getInt(N_MAJOR, YOIX_EOF);
-	minor = data.getInt(N_MINOR, YOIX_EOF);
-	VM.popAccess();
+        VM.pushAccess(LRW_);
+        this.data = data;
+        this.length = data.length();
+        major = data.getInt(N_MAJOR, YOIX_EOF);
+        minor = data.getInt(N_MINOR, YOIX_EOF);
+        VM.popAccess();
     }
 
     ///////////////////////////////////

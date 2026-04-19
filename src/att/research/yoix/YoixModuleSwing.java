@@ -21,8 +21,8 @@ abstract
 class YoixModuleSwing extends YoixModule
 
     implements YoixConstantsJTable,
-	       YoixConstantsSwing,
-	       YoixConstantsImage
+               YoixConstantsSwing,
+               YoixConstantsImage
 
 {
 
@@ -1917,442 +1917,442 @@ class YoixModuleSwing extends YoixModule
     public static YoixObject
     getHighlights(YoixObject arg[]) {
 
-	Highlighter  highlighter;
-	Object       highlights[] = null;
-	Object       comp;
-	int          fields;
-	int          flags;
+        Highlighter  highlighter;
+        Object       highlights[] = null;
+        Object       comp;
+        int          fields;
+        int          flags;
 
-	if (arg.length == 1 || arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isComponent()) {
-		comp = arg[0].getManagedObject();
-		if (comp instanceof JTextComponent) {
-		    if (arg.length < 2 || arg[1].isInteger()) {
-			if (arg.length < 3 || arg[2].isInteger()) {
-			    fields = (arg.length > 1) ? arg[1].intValue() : 2;
-			    flags = (arg.length > 2) ? arg[2].intValue() : 0;
-			    highlighter = ((JTextComponent)comp).getHighlighter();
-			    if (highlighter instanceof YoixSwingHighlighter)
-				highlights = ((YoixSwingHighlighter)highlighter).getHighlights(fields, flags);
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		} else VM.badArgument(0);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2 || arg.length == 3) {
+            if (arg[0].isComponent()) {
+                comp = arg[0].getManagedObject();
+                if (comp instanceof JTextComponent) {
+                    if (arg.length < 2 || arg[1].isInteger()) {
+                        if (arg.length < 3 || arg[2].isInteger()) {
+                            fields = (arg.length > 1) ? arg[1].intValue() : 2;
+                            flags = (arg.length > 2) ? arg[2].intValue() : 0;
+                            highlighter = ((JTextComponent)comp).getHighlighter();
+                            if (highlighter instanceof YoixSwingHighlighter)
+                                highlights = ((YoixSwingHighlighter)highlighter).getHighlights(fields, flags);
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                } else VM.badArgument(0);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixMisc.copyIntoArray(highlights));
+        return(YoixMisc.copyIntoArray(highlights));
     }
 
 
     public static YoixObject
     getScrollerSize(YoixObject arg[]) {
 
-	Dimension  size = null;
-	Object     body;
+        Dimension  size = null;
+        Object     body;
 
-	if (arg[0].isComponent()) {
-	    body = arg[0].body();
-	    if (body instanceof YoixBodyComponentSwing)
-		size = ((YoixBodyComponentSwing)body).getScrollerSize();
-	} else VM.badArgument(0);
+        if (arg[0].isComponent()) {
+            body = arg[0].body();
+            if (body instanceof YoixBodyComponentSwing)
+                size = ((YoixBodyComponentSwing)body).getScrollerSize();
+        } else VM.badArgument(0);
 
-	return(size != null ? YoixMakeScreen.yoixDimension(size) : YoixObject.newDimension());
+        return(size != null ? YoixMakeScreen.yoixDimension(size) : YoixObject.newDimension());
     }
 
 
     public static YoixObject
     getSwingThreadSafe(YoixObject arg[]) {
 
-	return(YoixObject.newInt(YoixBodyComponentSwing.getThreadSafe()));
+        return(YoixObject.newInt(YoixBodyComponentSwing.getThreadSafe()));
     }
 
 
     public static YoixObject
     getViewportSize(YoixObject arg[]) {
 
-	Dimension  size = null;
-	boolean    adjusted;
-	Object     body;
+        Dimension  size = null;
+        boolean    adjusted;
+        Object     body;
 
-	//
-	// Decided not to document the optional adjusted argument because
-	// looks like we get the same answer with or without it using all
-	// allowed versions of Java.
-	//
+        //
+        // Decided not to document the optional adjusted argument because
+        // looks like we get the same answer with or without it using all
+        // allowed versions of Java.
+        //
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isComponent()) {
-		if (arg.length == 1 || arg[1].isInteger()) {
-		    body = arg[0].body();
-		    if (body instanceof YoixBodyComponentSwing) {
-			adjusted = (arg.length == 1) ? false : arg[1].booleanValue();
-			size = ((YoixBodyComponentSwing)body).getViewportSize(adjusted);
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isComponent()) {
+                if (arg.length == 1 || arg[1].isInteger()) {
+                    body = arg[0].body();
+                    if (body instanceof YoixBodyComponentSwing) {
+                        adjusted = (arg.length == 1) ? false : arg[1].booleanValue();
+                        size = ((YoixBodyComponentSwing)body).getViewportSize(adjusted);
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(size != null ? YoixMakeScreen.yoixDimension(size) : YoixObject.newDimension());
+        return(size != null ? YoixMakeScreen.yoixDimension(size) : YoixObject.newDimension());
     }
 
 
     public static YoixObject
     setHighlights(YoixObject arg[]) {
 
-	Highlighter  highlighter;
-	YoixObject   item;
-	YoixObject   obj;
-	ArrayList    list;
-	Object       comp;
-	Object       ends[];
-	Color        color;
-	int          fields;
-	int          start;
-	int          end;
-	int          length;
-	int          limit;
-	int          n;
+        Highlighter  highlighter;
+        YoixObject   item;
+        YoixObject   obj;
+        ArrayList    list;
+        Object       comp;
+        Object       ends[];
+        Color        color;
+        int          fields;
+        int          start;
+        int          end;
+        int          length;
+        int          limit;
+        int          n;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isComponent()) {
-		comp = arg[0].getManagedObject();
-		if (comp instanceof JTextComponent) {
-		    if (arg[1].isArray() || arg[1].isNull()) {
-			if (arg.length == 2 || arg[2].isInteger()) {
-			    fields = (arg.length == 3) ? arg[2].intValue() : 2;
-			    if (fields >= 2 && fields <= 4) {
-				highlighter = ((JTextComponent)comp).getHighlighter();
-				if (highlighter instanceof YoixSwingHighlighter) {
-				    obj = arg[1];
-				    limit = ((JTextComponent)comp).getText().length();
-				    start = 0;
-				    end = limit;
-				    list = new ArrayList(obj.sizeof());
-				    length = obj.length();
-				    for (n = obj.offset(); n < length; n += fields) {
-					//
-					// Existence test is a recent addition that
-					// helps in one application.
-					//
-					if (obj.defined(n) && obj.defined(n+1)) {
-					    start = Math.min(Math.max(obj.getInt(n, 0), 0), limit);
-					    end = Math.min(Math.max(obj.getInt(n+1, 0), start), limit);
-					    if (fields > 2) {
-						if ((item = obj.getObject(n+2)) != null) {
-						    if (item.isNull() || item.isColor())
-							color = YoixMake.javaColor(item);
-						    else color = null;
-						} else color = null;
-					    } else color = null;
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isComponent()) {
+                comp = arg[0].getManagedObject();
+                if (comp instanceof JTextComponent) {
+                    if (arg[1].isArray() || arg[1].isNull()) {
+                        if (arg.length == 2 || arg[2].isInteger()) {
+                            fields = (arg.length == 3) ? arg[2].intValue() : 2;
+                            if (fields >= 2 && fields <= 4) {
+                                highlighter = ((JTextComponent)comp).getHighlighter();
+                                if (highlighter instanceof YoixSwingHighlighter) {
+                                    obj = arg[1];
+                                    limit = ((JTextComponent)comp).getText().length();
+                                    start = 0;
+                                    end = limit;
+                                    list = new ArrayList(obj.sizeof());
+                                    length = obj.length();
+                                    for (n = obj.offset(); n < length; n += fields) {
+                                        //
+                                        // Existence test is a recent addition that
+                                        // helps in one application.
+                                        //
+                                        if (obj.defined(n) && obj.defined(n+1)) {
+                                            start = Math.min(Math.max(obj.getInt(n, 0), 0), limit);
+                                            end = Math.min(Math.max(obj.getInt(n+1, 0), start), limit);
+                                            if (fields > 2) {
+                                                if ((item = obj.getObject(n+2)) != null) {
+                                                    if (item.isNull() || item.isColor())
+                                                        color = YoixMake.javaColor(item);
+                                                    else color = null;
+                                                } else color = null;
+                                            } else color = null;
 
-					    list.add(new Integer(start));
-					    list.add(new Integer(end));
-					    list.add(color);
-					    list.add(new Integer(fields > 3 ? obj.getInt(n+3, 0) : 0));
-					}
-				    }
-				    ends = list.toArray();
-				    ((YoixSwingHighlighter)highlighter).setHighlights(ends, 4);
-				}
-			    } else VM.badArgument(2);
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		} else VM.badArgument(0);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+                                            list.add(new Integer(start));
+                                            list.add(new Integer(end));
+                                            list.add(color);
+                                            list.add(new Integer(fields > 3 ? obj.getInt(n+3, 0) : 0));
+                                        }
+                                    }
+                                    ends = list.toArray();
+                                    ((YoixSwingHighlighter)highlighter).setHighlights(ends, 4);
+                                }
+                            } else VM.badArgument(2);
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                } else VM.badArgument(0);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newEmpty());
+        return(YoixObject.newEmpty());
     }
 
 
     public static YoixObject
     setSwingThreadSafe(YoixObject arg[]) {
 
-	boolean  state = true;
-	boolean  lock = false;
+        boolean  state = true;
+        boolean  lock = false;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isNumber()) {
-		if (arg.length == 1 || arg[1].isNumber()) {
-		    state = YoixBodyComponentSwing.setThreadSafe(
-			arg[0].booleanValue(), 
-			arg.length == 1 ? false : arg[1].booleanValue()
-		    );
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isNumber()) {
+                if (arg.length == 1 || arg[1].isNumber()) {
+                    state = YoixBodyComponentSwing.setThreadSafe(
+                        arg[0].booleanValue(), 
+                        arg.length == 1 ? false : arg[1].booleanValue()
+                    );
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(state));
+        return(YoixObject.newInt(state));
     }
 
 
     public static YoixObject
     showConfirmDialog(YoixObject arg[]) {
 
-	YoixObject  obj;
-	Component   comp = null;
-	String      options[] = null;
-	String      message;
-	String      title = UIManager.getString("OptionPane.titleText");
-	Icon        icon = null;
-	int         optiontype = JOptionPane.YES_NO_CANCEL_OPTION;
-	int         messagetype = JOptionPane.QUESTION_MESSAGE;
-	int         ret_val = -1;
-	int         default_option = -1;
-	int         len;
-	int         n;
+        YoixObject  obj;
+        Component   comp = null;
+        String      options[] = null;
+        String      message;
+        String      title = UIManager.getString("OptionPane.titleText");
+        Icon        icon = null;
+        int         optiontype = JOptionPane.YES_NO_CANCEL_OPTION;
+        int         messagetype = JOptionPane.QUESTION_MESSAGE;
+        int         ret_val = -1;
+        int         default_option = -1;
+        int         len;
+        int         n;
 
-	if (arg.length >= 2 && arg.length <= 5) {
-	    if (arg[0].isNull() || arg[0].isComponent()) {
-		if (arg[0].notNull())
-		    comp = (Component)arg[0].getManagedObject();
-		if (arg[1].notNull() && arg[1].isString()) {
-		    message = arg[1].stringValue();
-		    if (arg.length > 2) {
-			if (arg[2].isNull() || arg[2].isString()) {
-			    if (arg[2].notNull())
-				title = arg[2].stringValue();
-			    if (arg.length > 3) {
-				if (arg[3].isInteger() || arg[3].isArray() || arg[3].isString() || arg[3].isNull()) {
-				    if (arg[3].sizeof() > 0) {
-					if (arg[3].isArray()) {
-					    len = arg[3].length();
-					    options = new String[len];
-					    default_option = arg[3].offset();
-					    for (n = 0; n < len; n++) {
-						obj = arg[3].get(n, false);
-						if (obj.notNull() && obj.isString())
-						    options[n] = obj.stringValue();
-						else VM.badArgumentValue(3, n);
-					    }
-					} else if (arg[3].isString()) {
-					    options = new String[] {arg[3].stringValue()};
-					    default_option = 0;
-					}
-				    } else if (arg[3].isInteger())
-					optiontype = YoixBodyComponent.jfcInt("JOptionPaneOptionType", arg[3].intValue());
-				    if (arg.length == 5) {
-					if (arg[4].isNull() || arg[4].isImage()) {
-					    if (arg[4].notNull())
-						icon = YoixMake.javaIcon(arg[4]);
-					} else if (arg[4].isInteger())
-					    messagetype = YoixBodyComponent.jfcInt("JOptionPaneMessageType", arg[4].intValue());
-					else VM.badArgument(4);
-				    }
-				} else VM.badArgument(3);
-			    }
-			} else VM.badArgument(2);
-		    }
-		    if (options == null) {
-			if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
-			    ret_val = JOptionPane.showInternalConfirmDialog(
-				comp,
-				message,
-				title,
-				optiontype,
-				messagetype,
-				icon
-			    );
-			} else {
-			    ret_val = JOptionPane.showConfirmDialog(
-				comp,
-				message,
-				title,
-				optiontype,
-				messagetype,
-				icon
-			    );
-			}
-		    } else {
-			if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
-			    ret_val = JOptionPane.showInternalOptionDialog(
-				comp,
-				message,
-				title,
-				optiontype,
-				messagetype,
-				icon,
-				options,
-				options[default_option]
-			    );
-			} else {
-			    ret_val = JOptionPane.showOptionDialog(
-				comp,
-				message,
-				title,
-				optiontype,
-				messagetype,
-				icon,
-				options,
-				options[default_option]
-			    );
-			}
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 2 && arg.length <= 5) {
+            if (arg[0].isNull() || arg[0].isComponent()) {
+                if (arg[0].notNull())
+                    comp = (Component)arg[0].getManagedObject();
+                if (arg[1].notNull() && arg[1].isString()) {
+                    message = arg[1].stringValue();
+                    if (arg.length > 2) {
+                        if (arg[2].isNull() || arg[2].isString()) {
+                            if (arg[2].notNull())
+                                title = arg[2].stringValue();
+                            if (arg.length > 3) {
+                                if (arg[3].isInteger() || arg[3].isArray() || arg[3].isString() || arg[3].isNull()) {
+                                    if (arg[3].sizeof() > 0) {
+                                        if (arg[3].isArray()) {
+                                            len = arg[3].length();
+                                            options = new String[len];
+                                            default_option = arg[3].offset();
+                                            for (n = 0; n < len; n++) {
+                                                obj = arg[3].get(n, false);
+                                                if (obj.notNull() && obj.isString())
+                                                    options[n] = obj.stringValue();
+                                                else VM.badArgumentValue(3, n);
+                                            }
+                                        } else if (arg[3].isString()) {
+                                            options = new String[] {arg[3].stringValue()};
+                                            default_option = 0;
+                                        }
+                                    } else if (arg[3].isInteger())
+                                        optiontype = YoixBodyComponent.jfcInt("JOptionPaneOptionType", arg[3].intValue());
+                                    if (arg.length == 5) {
+                                        if (arg[4].isNull() || arg[4].isImage()) {
+                                            if (arg[4].notNull())
+                                                icon = YoixMake.javaIcon(arg[4]);
+                                        } else if (arg[4].isInteger())
+                                            messagetype = YoixBodyComponent.jfcInt("JOptionPaneMessageType", arg[4].intValue());
+                                        else VM.badArgument(4);
+                                    }
+                                } else VM.badArgument(3);
+                            }
+                        } else VM.badArgument(2);
+                    }
+                    if (options == null) {
+                        if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
+                            ret_val = JOptionPane.showInternalConfirmDialog(
+                                comp,
+                                message,
+                                title,
+                                optiontype,
+                                messagetype,
+                                icon
+                            );
+                        } else {
+                            ret_val = JOptionPane.showConfirmDialog(
+                                comp,
+                                message,
+                                title,
+                                optiontype,
+                                messagetype,
+                                icon
+                            );
+                        }
+                    } else {
+                        if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
+                            ret_val = JOptionPane.showInternalOptionDialog(
+                                comp,
+                                message,
+                                title,
+                                optiontype,
+                                messagetype,
+                                icon,
+                                options,
+                                options[default_option]
+                            );
+                        } else {
+                            ret_val = JOptionPane.showOptionDialog(
+                                comp,
+                                message,
+                                title,
+                                optiontype,
+                                messagetype,
+                                icon,
+                                options,
+                                options[default_option]
+                            );
+                        }
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	if (options == null) {
-	    switch (ret_val) {
-		case JOptionPane.CANCEL_OPTION:
-		    ret_val = (optiontype == JOptionPane.OK_CANCEL_OPTION) ? 1 : 2;
-		    break;
+        if (options == null) {
+            switch (ret_val) {
+                case JOptionPane.CANCEL_OPTION:
+                    ret_val = (optiontype == JOptionPane.OK_CANCEL_OPTION) ? 1 : 2;
+                    break;
 
-		case JOptionPane.NO_OPTION:
-		    ret_val = 1;
-		    break;
+                case JOptionPane.NO_OPTION:
+                    ret_val = 1;
+                    break;
 
-		case JOptionPane.YES_OPTION:
-		    ret_val = 0;
-		    break;
+                case JOptionPane.YES_OPTION:
+                    ret_val = 0;
+                    break;
 
-		default:
-		    if (ret_val == JOptionPane.OK_OPTION)	// just in case
-			ret_val = 0;
-		    else ret_val = -1;
-		    break;
-	    }
-	}
+                default:
+                    if (ret_val == JOptionPane.OK_OPTION)	// just in case
+                        ret_val = 0;
+                    else ret_val = -1;
+                    break;
+            }
+        }
 
-	return(YoixObject.newInt(ret_val));
+        return(YoixObject.newInt(ret_val));
     }
 
 
     public static YoixObject
     showInputDialog(YoixObject arg[]) {
 
-	YoixObject  obj;
-	Component   comp = null;
-	String      selections[] = null;
-	String      message;
-	String      title = UIManager.getString( "OptionPane.inputDialogTitle");
-	Object      ret_val = null;
-	Icon        icon = null;
-	int         messagetype = JOptionPane.QUESTION_MESSAGE;
-	int         default_selection = -1;
-	int         len;
-	int         n;
+        YoixObject  obj;
+        Component   comp = null;
+        String      selections[] = null;
+        String      message;
+        String      title = UIManager.getString( "OptionPane.inputDialogTitle");
+        Object      ret_val = null;
+        Icon        icon = null;
+        int         messagetype = JOptionPane.QUESTION_MESSAGE;
+        int         default_selection = -1;
+        int         len;
+        int         n;
 
-	if (arg.length >= 2 && arg.length <= 5) {
-	    if (arg[0].isNull() || arg[0].isComponent()) {
-		if (arg[0].notNull())
-		    comp = (Component)arg[0].getManagedObject();
-		if (arg[1].notNull() && arg[1].isString()) {
-		    message = arg[1].stringValue();
-		    if (arg.length > 2) {
-			if (arg[2].isNull() || arg[2].isString()) {
-			    if (arg[2].notNull())
-				title = arg[2].stringValue();
-			    if (arg.length > 3) {
-				if (arg[3].isArray() || arg[3].isString() || arg[3].isNull()) {
-				    if (arg[3].sizeof() > 0) {
-					if (arg[3].isArray()) {
-					    len = arg[3].length();
-					    selections = new String[len];
-					    default_selection = arg[3].offset();
-					    for (n = 0; n < len; n++) {
-						obj = arg[3].get(n, false);
-						if (obj.notNull() && obj.isString())
-						    selections[n] = obj.stringValue();
-						else VM.badArgumentValue(3, n);
-					    }
-					} else if (arg[3].isString()) {
-					    selections = new String[] {arg[3].stringValue()};
-					    default_selection = 0;
-					}
-				    }
-				    if (arg.length == 5) {
-					if (arg[4].isNull() || arg[4].isImage()) {
-					    if (arg[4].notNull())
-						icon = YoixMake.javaIcon(arg[4]);
-					} else if (arg[4].isInteger())
-					    messagetype = YoixBodyComponent.jfcInt("JOptionPaneMessageType", arg[4].intValue());
-					else VM.badArgument(4);
-				    }
-				} else VM.badArgument(3);
-			    }
-			} else VM.badArgument(2);
-		    }
-		    if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
-			ret_val = JOptionPane.showInternalInputDialog(
-			    comp,
-			    message,
-			    title,
-			    messagetype,
-			    icon,
-			    selections,
-			    selections == null ? null : selections[default_selection]
-			);
-		    } else {
-			ret_val = JOptionPane.showInputDialog(
-			    comp,
-			    message,
-			    title,
-			    messagetype,
-			    icon,
-			    selections,
-			    selections == null ? null : selections[default_selection]
-			);
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 2 && arg.length <= 5) {
+            if (arg[0].isNull() || arg[0].isComponent()) {
+                if (arg[0].notNull())
+                    comp = (Component)arg[0].getManagedObject();
+                if (arg[1].notNull() && arg[1].isString()) {
+                    message = arg[1].stringValue();
+                    if (arg.length > 2) {
+                        if (arg[2].isNull() || arg[2].isString()) {
+                            if (arg[2].notNull())
+                                title = arg[2].stringValue();
+                            if (arg.length > 3) {
+                                if (arg[3].isArray() || arg[3].isString() || arg[3].isNull()) {
+                                    if (arg[3].sizeof() > 0) {
+                                        if (arg[3].isArray()) {
+                                            len = arg[3].length();
+                                            selections = new String[len];
+                                            default_selection = arg[3].offset();
+                                            for (n = 0; n < len; n++) {
+                                                obj = arg[3].get(n, false);
+                                                if (obj.notNull() && obj.isString())
+                                                    selections[n] = obj.stringValue();
+                                                else VM.badArgumentValue(3, n);
+                                            }
+                                        } else if (arg[3].isString()) {
+                                            selections = new String[] {arg[3].stringValue()};
+                                            default_selection = 0;
+                                        }
+                                    }
+                                    if (arg.length == 5) {
+                                        if (arg[4].isNull() || arg[4].isImage()) {
+                                            if (arg[4].notNull())
+                                                icon = YoixMake.javaIcon(arg[4]);
+                                        } else if (arg[4].isInteger())
+                                            messagetype = YoixBodyComponent.jfcInt("JOptionPaneMessageType", arg[4].intValue());
+                                        else VM.badArgument(4);
+                                    }
+                                } else VM.badArgument(3);
+                            }
+                        } else VM.badArgument(2);
+                    }
+                    if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
+                        ret_val = JOptionPane.showInternalInputDialog(
+                            comp,
+                            message,
+                            title,
+                            messagetype,
+                            icon,
+                            selections,
+                            selections == null ? null : selections[default_selection]
+                        );
+                    } else {
+                        ret_val = JOptionPane.showInputDialog(
+                            comp,
+                            message,
+                            title,
+                            messagetype,
+                            icon,
+                            selections,
+                            selections == null ? null : selections[default_selection]
+                        );
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(ret_val == null ? YoixObject.newNull() : YoixObject.newString(ret_val.toString()));
+        return(ret_val == null ? YoixObject.newNull() : YoixObject.newString(ret_val.toString()));
     }
 
 
     public static YoixObject
     showMessageDialog(YoixObject arg[]) {
 
-	Component  comp = null;
-	String     message;
-	String     title = UIManager.getString("OptionPane.messageDialogTitle");
-	Icon       icon = null;
-	int        messagetype = JOptionPane.INFORMATION_MESSAGE;
+        Component  comp = null;
+        String     message;
+        String     title = UIManager.getString("OptionPane.messageDialogTitle");
+        Icon       icon = null;
+        int        messagetype = JOptionPane.INFORMATION_MESSAGE;
 
-	if (arg.length >= 2 && arg.length <= 4) {
-	    if (arg[0].isNull() || arg[0].isComponent()) {
-		if (arg[0].notNull())
-		    comp = (Component)arg[0].getManagedObject();
-		if (arg[1].notNull() && arg[1].isString()) {
-		    message = arg[1].stringValue();
-		    if (arg.length > 2) {
-			if (arg[2].isNull() || arg[2].isString()) {
-			    if (arg[2].notNull())
-				title = arg[2].stringValue();
-			    if (arg.length == 4) {
-				if (arg[3].isNull() || arg[3].isImage()) {
-				    if (arg[3].notNull())
-					icon = YoixMake.javaIcon(arg[3]);
-				} else if (arg[3].isInteger())
-				    messagetype = YoixBodyComponent.jfcInt("JOptionPaneMessageType", arg[3].intValue());
-				else VM.badArgument(3);
-			    }
-			} else VM.badArgument(2);
-		    }
-		    if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
-			JOptionPane.showInternalMessageDialog(
-			    comp,
-			    message,
-			    title,
-			    messagetype,
-			    icon
-			);
-		    } else {
-			JOptionPane.showMessageDialog(
-			    comp,
-			    message,
-			    title,
-			    messagetype,
-			    icon
-			);
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 2 && arg.length <= 4) {
+            if (arg[0].isNull() || arg[0].isComponent()) {
+                if (arg[0].notNull())
+                    comp = (Component)arg[0].getManagedObject();
+                if (arg[1].notNull() && arg[1].isString()) {
+                    message = arg[1].stringValue();
+                    if (arg.length > 2) {
+                        if (arg[2].isNull() || arg[2].isString()) {
+                            if (arg[2].notNull())
+                                title = arg[2].stringValue();
+                            if (arg.length == 4) {
+                                if (arg[3].isNull() || arg[3].isImage()) {
+                                    if (arg[3].notNull())
+                                        icon = YoixMake.javaIcon(arg[3]);
+                                } else if (arg[3].isInteger())
+                                    messagetype = YoixBodyComponent.jfcInt("JOptionPaneMessageType", arg[3].intValue());
+                                else VM.badArgument(3);
+                            }
+                        } else VM.badArgument(2);
+                    }
+                    if (comp instanceof JLayeredPane || comp instanceof JInternalFrame) {
+                        JOptionPane.showInternalMessageDialog(
+                            comp,
+                            message,
+                            title,
+                            messagetype,
+                            icon
+                        );
+                    } else {
+                        JOptionPane.showMessageDialog(
+                            comp,
+                            message,
+                            title,
+                            messagetype,
+                            icon
+                        );
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newEmpty());
+        return(YoixObject.newEmpty());
     }
 }
 

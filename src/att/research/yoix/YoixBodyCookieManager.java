@@ -72,8 +72,8 @@ class YoixBodyCookieManager extends YoixPointerActive
     private static HashMap  activefields = new HashMap(20);
 
     static {
-	activefields.put(N_INSTALLED, new Integer(V_INSTALLED));
-	activefields.put(N_POLICY, new Integer(V_POLICY));
+        activefields.put(N_INSTALLED, new Integer(V_INSTALLED));
+        activefields.put(N_POLICY, new Integer(V_POLICY));
     }
 
     ///////////////////////////////////
@@ -84,10 +84,10 @@ class YoixBodyCookieManager extends YoixPointerActive
 
     YoixBodyCookieManager(YoixObject data) {
 
-	super(data);
-	buildCookieManager();
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        buildCookieManager();
+        setFixedSize();
+        setPermissions(permissions);
     }
 
     ///////////////////////////////////
@@ -99,7 +99,7 @@ class YoixBodyCookieManager extends YoixPointerActive
     public final int
     type() {
 
-	return(COOKIEMANAGER);
+        return(COOKIEMANAGER);
     }
 
     ///////////////////////////////////
@@ -111,144 +111,144 @@ class YoixBodyCookieManager extends YoixPointerActive
     protected final YoixObject
     executeField(String name, YoixObject argv[]) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	switch (activeField(name, activefields)) {
-	    default:
-		obj = null;
-		break;
-	}
-	return(obj);
+        switch (activeField(name, activefields)) {
+            default:
+                obj = null;
+                break;
+        }
+        return(obj);
     }
 
 
     protected final void
     finalize() {
 
-	super.finalize();
+        super.finalize();
     }
 
 
     static synchronized Object
     getDefaultCookieManager() {
 
-	Object  manager;
+        Object  manager;
 
-	//
-	// Initial policy is set to "none", which I think menas the manager
-	// doesn't accept any cookies from servers. The policy can be changed
-	// using the --cookiepolicy command line option.
-	//
+        //
+        // Initial policy is set to "none", which I think menas the manager
+        // doesn't accept any cookies from servers. The policy can be changed
+        // using the --cookiepolicy command line option.
+        //
 
-	if ((manager = cookiemanager_default) == null) {
-	    if ((manager = cookieManagerNew()) != null) {
-		cookieManagerSetCookiePolicy(manager, pickCookiePolicy("none"));
-		cookieManagerSetDefault(manager);
-		cookiemanager_default = manager;
-	    }
-	}
-	return(manager);
+        if ((manager = cookiemanager_default) == null) {
+            if ((manager = cookieManagerNew()) != null) {
+                cookieManagerSetCookiePolicy(manager, pickCookiePolicy("none"));
+                cookieManagerSetDefault(manager);
+                cookiemanager_default = manager;
+            }
+        }
+        return(manager);
     }
 
 
     protected final YoixObject
     getField(String name, YoixObject obj) {
 
-	switch (activeField(name, activefields)) {
-	    case V_INSTALLED:
-		obj = getInstalled();
-		break;
+        switch (activeField(name, activefields)) {
+            case V_INSTALLED:
+                obj = getInstalled();
+                break;
 
-	    case V_POLICY:
-		obj = getPolicy();
-		break;
+            case V_POLICY:
+                obj = getPolicy();
+                break;
 
-	    default:
-		break;
-	}
-	return(obj);
+            default:
+                break;
+        }
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(cookiemanager);
+        return(cookiemanager);
     }
 
 
     static void
     setDefaultCookies(String source) {
 
-	Object  manager;
-	Object  store;
-	Object  cookie;
-	List    cookies;
-	URI     uri;
-	int     index;
+        Object  manager;
+        Object  store;
+        Object  cookie;
+        List    cookies;
+        URI     uri;
+        int     index;
 
-	//
-	// Right now cookies without a domain are silently ignored.
-	// 
+        //
+        // Right now cookies without a domain are silently ignored.
+        // 
 
-	if (source != null) {
-	    if ((cookies = httpCookieParse(source)) != null) {
-		if ((manager = getDefaultCookieManager()) != null) {
-		    //
-		    // This should be a separate method that adds cookies to
-		    // any cookie manager - later.
-		    //
-		    if ((store = cookieManagerGetCookieStore(manager)) != null) {
-			try {
-			    uri = new URI("");		// sufficient when there's a domain
-			    for (index = 0; index < cookies.size(); index++) {
-				if ((cookie = cookies.get(index)) != null) {
-				    if (httpCookieGetDomain(cookie) != null) {
-					if (httpCookieGetPath(cookie) == null)
-					    httpCookieSetPath(cookie, "/");
-					cookieStoreAdd(store, uri, cookie);
-				    }
-				}
-			    }
-			}
-			catch(URISyntaxException e) {}		// won't happen
-		    }
-		}
-	    }
-	}
+        if (source != null) {
+            if ((cookies = httpCookieParse(source)) != null) {
+                if ((manager = getDefaultCookieManager()) != null) {
+                    //
+                    // This should be a separate method that adds cookies to
+                    // any cookie manager - later.
+                    //
+                    if ((store = cookieManagerGetCookieStore(manager)) != null) {
+                        try {
+                            uri = new URI("");		// sufficient when there's a domain
+                            for (index = 0; index < cookies.size(); index++) {
+                                if ((cookie = cookies.get(index)) != null) {
+                                    if (httpCookieGetDomain(cookie) != null) {
+                                        if (httpCookieGetPath(cookie) == null)
+                                            httpCookieSetPath(cookie, "/");
+                                        cookieStoreAdd(store, uri, cookie);
+                                    }
+                                }
+                            }
+                        }
+                        catch(URISyntaxException e) {}		// won't happen
+                    }
+                }
+            }
+        }
     }
 
 
     static void
     setDefaultCookiePolicy(String name) {
 
-	Object  manager;
+        Object  manager;
 
-	if ((manager = getDefaultCookieManager()) != null)
-	    cookieManagerSetCookiePolicy(manager, pickCookiePolicy(name));
+        if ((manager = getDefaultCookieManager()) != null)
+            cookieManagerSetCookiePolicy(manager, pickCookiePolicy(name));
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	int  mode;
+        int  mode;
 
-	if (obj != null) {
-	    switch (activeField(name, activefields)) {
-		case V_INSTALLED:
-		    setInstalled(obj);
-		    break;
+        if (obj != null) {
+            switch (activeField(name, activefields)) {
+                case V_INSTALLED:
+                    setInstalled(obj);
+                    break;
 
-		case V_POLICY:
-		    setPolicy(obj);
-		    break;
+                case V_POLICY:
+                    setPolicy(obj);
+                    break;
 
-		default:
-		    break;
-	    }
-	}
-	return(obj);
+                default:
+                    break;
+            }
+        }
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -260,199 +260,199 @@ class YoixBodyCookieManager extends YoixPointerActive
     private void
     buildCookieManager() {
 
-	//
-	// If we're using Java 1.5 (or lower) cookiemanager will be null!!
-	//
+        //
+        // If we're using Java 1.5 (or lower) cookiemanager will be null!!
+        //
 
-	cookiemanager = cookieManagerNew();
-	setField(N_POLICY);
+        cookiemanager = cookieManagerNew();
+        setField(N_POLICY);
     }
 
 
     private static Object
     cookieManagerGetCookieStore(Object manager) {
 
-	return(YoixReflect.invoke(manager, "getCookieStore"));
+        return(YoixReflect.invoke(manager, "getCookieStore"));
     }
 
 
     private static Object
     cookieManagerGetDefault() {
 
-	return(YoixReflect.invoke("java.net.CookieManager", "getDefault"));
+        return(YoixReflect.invoke("java.net.CookieManager", "getDefault"));
     }
 
 
     private static Object
     cookieManagerNew() {
 
-	return(YoixReflect.newInstance("java.net.CookieManager"));
+        return(YoixReflect.newInstance("java.net.CookieManager"));
     }
 
 
     private static void
     cookieManagerSetCookiePolicy(Object manager, Object policy) {
 
-	YoixReflect.invoke(
-	    manager,
-	    "setCookiePolicy",
-	    new Object[] {policy},
-	    new Class[] {YoixReflect.getClassForName("java.net.CookiePolicy")}
-	);
+        YoixReflect.invoke(
+            manager,
+            "setCookiePolicy",
+            new Object[] {policy},
+            new Class[] {YoixReflect.getClassForName("java.net.CookiePolicy")}
+        );
     }
 
 
     private static void
     cookieManagerSetDefault(Object manager) {
 
-	YoixReflect.invoke(
-	    "java.net.CookieManager",
-	    "setDefault",
-	    new Object[] {manager},
-	    new Class[] {YoixReflect.getClassForName("java.net.CookieHandler")}
-	);
+        YoixReflect.invoke(
+            "java.net.CookieManager",
+            "setDefault",
+            new Object[] {manager},
+            new Class[] {YoixReflect.getClassForName("java.net.CookieHandler")}
+        );
     }
 
 
     private static Object
     cookiePolicyGetPolicy(String name) {
 
-	return(YoixReflect.getDeclaredField(
-	    YoixReflect.getClassForName("java.net.CookiePolicy"),
-	    name
-	));
+        return(YoixReflect.getDeclaredField(
+            YoixReflect.getClassForName("java.net.CookiePolicy"),
+            name
+        ));
     }
 
 
     private static void
     cookieStoreAdd(Object store, URI uri, Object cookie) {
 
-	YoixReflect.invoke(store, "add", new Object[] {uri, cookie});
+        YoixReflect.invoke(store, "add", new Object[] {uri, cookie});
     }
 
 
     private YoixObject
     getInstalled() {
 
-	return(YoixObject.newInt(cookiemanager != null && cookieManagerGetDefault() == cookiemanager));
+        return(YoixObject.newInt(cookiemanager != null && cookieManagerGetDefault() == cookiemanager));
     }
 
 
     private YoixObject
     getPolicy() {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	switch (data.getInt(N_POLICY)) {
-	    case YOIX_ACCEPT_ORIGINAL_SERVER:
-		obj = YoixObject.newInt(YOIX_ACCEPT_ORIGINAL_SERVER);
-		break;
+        switch (data.getInt(N_POLICY)) {
+            case YOIX_ACCEPT_ORIGINAL_SERVER:
+                obj = YoixObject.newInt(YOIX_ACCEPT_ORIGINAL_SERVER);
+                break;
 
-	    case YOIX_ACCEPT_ALL:
-		obj = YoixObject.newInt(YOIX_ACCEPT_ALL);
-		break;
+            case YOIX_ACCEPT_ALL:
+                obj = YoixObject.newInt(YOIX_ACCEPT_ALL);
+                break;
 
-	    default:
-		obj = YoixObject.newInt(YOIX_ACCEPT_NONE);
-		break;
-	}
-	return(obj);
+            default:
+                obj = YoixObject.newInt(YOIX_ACCEPT_NONE);
+                break;
+        }
+        return(obj);
     }
 
 
     private static List
     httpCookieParse(String source) {
 
-	return((List)YoixReflect.invoke("java.net.HttpCookie", "parse", source));
+        return((List)YoixReflect.invoke("java.net.HttpCookie", "parse", source));
     }
 
 
     private static String
     httpCookieGetDomain(Object cookie) {
 
-	return((String)YoixReflect.invoke(cookie, "getDomain"));
+        return((String)YoixReflect.invoke(cookie, "getDomain"));
     }
 
 
     private static String
     httpCookieGetPath(Object cookie) {
 
-	return((String)YoixReflect.invoke(cookie, "getPath"));
+        return((String)YoixReflect.invoke(cookie, "getPath"));
     }
 
 
     private static void
     httpCookieSetPath(Object cookie, String path) {
 
-	YoixReflect.invoke(cookie, "setPath", path);
+        YoixReflect.invoke(cookie, "setPath", path);
     }
 
 
     private static Object
     pickCookiePolicy(int id) {
 
-	Object  policy;
+        Object  policy;
 
-	//
-	// This eventually will use reflection.
-	//
+        //
+        // This eventually will use reflection.
+        //
 
-	switch (id) {
-	    case YOIX_ACCEPT_ORIGINAL_SERVER:
-		policy = cookiePolicyGetPolicy("ACCEPT_ORIGINAL_SERVER");
-		break;
+        switch (id) {
+            case YOIX_ACCEPT_ORIGINAL_SERVER:
+                policy = cookiePolicyGetPolicy("ACCEPT_ORIGINAL_SERVER");
+                break;
 
-	    case YOIX_ACCEPT_ALL:
-		policy = cookiePolicyGetPolicy("ACCEPT_ALL");
-		break;
+            case YOIX_ACCEPT_ALL:
+                policy = cookiePolicyGetPolicy("ACCEPT_ALL");
+                break;
 
-	    default:
-		policy = cookiePolicyGetPolicy("ACCEPT_NONE");
-		break;
-	}
-	return(policy);
+            default:
+                policy = cookiePolicyGetPolicy("ACCEPT_NONE");
+                break;
+        }
+        return(policy);
     }
 
 
     private static Object
     pickCookiePolicy(String name) {
 
-	Object  policy;
+        Object  policy;
 
-	if (name != null) {
-	    name = name.trim();
-	    if (name.equalsIgnoreCase("server") || name.equalsIgnoreCase("original server") || name.equalsIgnoreCase("original_server"))
-		policy = cookiePolicyGetPolicy("ACCEPT_ORIGINAL_SERVER");
-	    else if (name.equalsIgnoreCase("all") || name.equalsIgnoreCase("any"))
-		policy = cookiePolicyGetPolicy("ACCEPT_ALL");
-	    else policy = cookiePolicyGetPolicy("ACCEPT_NONE");
-	} else policy = cookiePolicyGetPolicy("ACCEPT_NONE");
+        if (name != null) {
+            name = name.trim();
+            if (name.equalsIgnoreCase("server") || name.equalsIgnoreCase("original server") || name.equalsIgnoreCase("original_server"))
+                policy = cookiePolicyGetPolicy("ACCEPT_ORIGINAL_SERVER");
+            else if (name.equalsIgnoreCase("all") || name.equalsIgnoreCase("any"))
+                policy = cookiePolicyGetPolicy("ACCEPT_ALL");
+            else policy = cookiePolicyGetPolicy("ACCEPT_NONE");
+        } else policy = cookiePolicyGetPolicy("ACCEPT_NONE");
 
-	return(policy);
+        return(policy);
     }
 
 
     private void
     setInstalled(YoixObject obj) {
 
-	if (cookiemanager != null) {
-	    if (obj.booleanValue() == false) {
-		if (cookieManagerGetDefault() == cookiemanager)
-		    cookieManagerSetDefault(cookiemanager_default);
-	    } else cookieManagerSetDefault(cookiemanager);
-	}
+        if (cookiemanager != null) {
+            if (obj.booleanValue() == false) {
+                if (cookieManagerGetDefault() == cookiemanager)
+                    cookieManagerSetDefault(cookiemanager_default);
+            } else cookieManagerSetDefault(cookiemanager);
+        }
     }
 
 
     private void
     setPolicy(YoixObject obj) {
 
-	Object  policy;
+        Object  policy;
 
-	if (cookiemanager != null) {
-	    if ((policy = pickCookiePolicy(obj.intValue())) != null)
-		cookieManagerSetCookiePolicy(cookiemanager, policy);
-	}
+        if (cookiemanager != null) {
+            if ((policy = pickCookiePolicy(obj.intValue())) != null)
+                cookieManagerSetCookiePolicy(cookiemanager, policy);
+        }
     }
 }
 

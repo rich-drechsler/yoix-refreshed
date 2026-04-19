@@ -42,9 +42,9 @@ class YoixVMThread
     //
 
     static {
-	threaddata = new YoixVMThreadData[INITIAL_CAPACITY];
-	for (int n = 0; n < threaddata.length; n++)
-	    threaddata[n] = new YoixVMThreadData(null);
+        threaddata = new YoixVMThreadData[INITIAL_CAPACITY];
+        for (int n = 0; n < threaddata.length; n++)
+            threaddata[n] = new YoixVMThreadData(null);
     }
 
     ///////////////////////////////////
@@ -56,162 +56,162 @@ class YoixVMThread
     static synchronized int
     activeCount() {
 
-	Thread  thread;
-	int     count;
-	int     n;
+        Thread  thread;
+        int     count;
+        int     n;
 
-	for (n = count = 0; n < threaddata.length; n++) {
-	    if ((thread = threaddata[n].thread) != null && thread.isAlive())
-		count++;
-	}
-	return(count);
+        for (n = count = 0; n < threaddata.length; n++) {
+            if ((thread = threaddata[n].thread) != null && thread.isAlive())
+                count++;
+        }
+        return(count);
     }
 
 
     static synchronized String
     dump(String target) {
 
-	return(dump(target, VM.isBooted() ? VM.getInt(N_TRACE) : 0, true));
+        return(dump(target, VM.isBooted() ? VM.getInt(N_TRACE) : 0, true));
     }
 
 
     static synchronized String
     dump(String target, int model) {
 
-	return(dump(target, model, true));
+        return(dump(target, model, true));
     }
 
 
     static synchronized String
     dump(String target, int model, boolean labeled) {
 
-	String  str = "";
-	String  prefix;
-	String  name;
-	int     n;
+        String  str = "";
+        String  prefix;
+        String  name;
+        int     n;
 
-	if ((prefix = YoixStack.dumpPrefix(model)) != null) {
-	    if (target != null) {
-		for (n = 0; n < threaddata.length; n++) {
-		    if ((name = threaddata[n].name()) != null) {
-			if (target.equals("*") || target.equals(name)) {
-			    if (labeled)
-				str += prefix + " " + threaddata[n].status() + NL;
-			    str += threaddata[n].stack.dump(model);
-			}
-		    }
-		}
-	    } else {
-		str = getThreadStack().dump(model);
-		if (labeled && str != null && str.length() > 0)
-		    str = prefix + NL + str;
-	    }
-	}
+        if ((prefix = YoixStack.dumpPrefix(model)) != null) {
+            if (target != null) {
+                for (n = 0; n < threaddata.length; n++) {
+                    if ((name = threaddata[n].name()) != null) {
+                        if (target.equals("*") || target.equals(name)) {
+                            if (labeled)
+                                str += prefix + " " + threaddata[n].status() + NL;
+                            str += threaddata[n].stack.dump(model);
+                        }
+                    }
+                }
+            } else {
+                str = getThreadStack().dump(model);
+                if (labeled && str != null && str.length() > 0)
+                    str = prefix + NL + str;
+            }
+        }
 
-	return(str);
+        return(str);
     }
 
 
     static YoixBodyBlock
     getCurrentBlock() {
 
-	return(getThreadData(Thread.currentThread()).block);
+        return(getThreadData(Thread.currentThread()).block);
     }
 
 
     static int
     getThreadAccess() {
 
-	return(getThreadData(Thread.currentThread()).access);
+        return(getThreadData(Thread.currentThread()).access);
     }
 
 
     static YoixVMThreadData
     getThreadData() {
 
-	return(getThreadData(Thread.currentThread()));
+        return(getThreadData(Thread.currentThread()));
     }
 
 
     static YoixStack
     getThreadStack() {
 
-	return(getThreadStack(Thread.currentThread()));
+        return(getThreadStack(Thread.currentThread()));
     }
 
 
     static boolean
     isHandlingError() {
 
-	return(getThreadData(Thread.currentThread()).handlingerror);
+        return(getThreadData(Thread.currentThread()).handlingerror);
     }
 
 
     static boolean
     isInterruptable() {
 
-	return(getThreadData(Thread.currentThread()).interruptable);
+        return(getThreadData(Thread.currentThread()).interruptable);
     }
 
 
     static boolean
     isLoadingType() {
 
-	return(getThreadData(Thread.currentThread()).loadingtype);
+        return(getThreadData(Thread.currentThread()).loadingtype);
     }
 
 
     static boolean
     isRunning() {
 
-	return(getThreadStack().getHeight() > 0);
+        return(getThreadStack().getHeight() > 0);
     }
 
 
     static void
     reset() {
 
-	//
-	// Brute force approach that may only be allowed when we're in the
-	// process of shutting down (i.e., thread is a YoixVMShutdownThread).
-	//
+        //
+        // Brute force approach that may only be allowed when we're in the
+        // process of shutting down (i.e., thread is a YoixVMShutdownThread).
+        //
 
-	getThreadData(Thread.currentThread()).reset();
+        getThreadData(Thread.currentThread()).reset();
     }
 
 
     static void
     setCurrentBlock(YoixBodyBlock block) {
 
-	getThreadData(Thread.currentThread()).block = block;
+        getThreadData(Thread.currentThread()).block = block;
     }
 
 
     static void
     setHandlingError(boolean state) {
 
-	getThreadData(Thread.currentThread()).handlingerror = state;
+        getThreadData(Thread.currentThread()).handlingerror = state;
     }
 
 
     static void
     setInterruptable(boolean state) {
 
-	getThreadData(Thread.currentThread()).interruptable = state;
+        getThreadData(Thread.currentThread()).interruptable = state;
     }
 
 
     static void
     setLoadingType(boolean state) {
 
-	getThreadData(Thread.currentThread()).loadingtype = state;
+        getThreadData(Thread.currentThread()).loadingtype = state;
     }
 
 
     static void
     setThreadAccess(int perm) {
 
-	getThreadData(Thread.currentThread()).access = perm;
+        getThreadData(Thread.currentThread()).access = perm;
     }
 
     ///////////////////////////////////
@@ -223,82 +223,82 @@ class YoixVMThread
     private static YoixVMThreadData
     getThreadData(Thread target) {
 
-	YoixVMThreadData  data = threaddata[last];	// snapshot - just to be safe
+        YoixVMThreadData  data = threaddata[last];	// snapshot - just to be safe
 
-	if (data.thread != target)
-	    data = pickThreadData(target);
-	return(data);
+        if (data.thread != target)
+            data = pickThreadData(target);
+        return(data);
     }
 
 
     private static YoixStack
     getThreadStack(Thread target) {
 
-	YoixVMThreadData  data = threaddata[last];	// snapshot - just to be safe
+        YoixVMThreadData  data = threaddata[last];	// snapshot - just to be safe
 
-	if (data.thread != target)
-	    data = pickThreadData(target);
-	return(data.stack);
+        if (data.thread != target)
+            data = pickThreadData(target);
+        return(data.stack);
     }
 
 
     private static synchronized int
     growThreadData() {
 
-	YoixVMThreadData  newdata[];
-	int               length;
-	int               n;
+        YoixVMThreadData  newdata[];
+        int               length;
+        int               n;
 
-	//
-	// We guarantee entries in threaddata[] aren't null, so others don't
-	// have to check. Return value is the old length, which is the next
-	// available slot in the expanded threaddata[] array.
-	//
+        //
+        // We guarantee entries in threaddata[] aren't null, so others don't
+        // have to check. Return value is the old length, which is the next
+        // available slot in the expanded threaddata[] array.
+        //
 
-	length = threaddata.length;
-	newdata = new YoixVMThreadData[length + CAPACITY_INCREMENT];
-	System.arraycopy(threaddata, 0, newdata, 0, length);
-	for (n = length; n < newdata.length; n++)
-	    newdata[n] = new YoixVMThreadData(null);
-	threaddata = newdata;
-	return(length);
+        length = threaddata.length;
+        newdata = new YoixVMThreadData[length + CAPACITY_INCREMENT];
+        System.arraycopy(threaddata, 0, newdata, 0, length);
+        for (n = length; n < newdata.length; n++)
+            newdata[n] = new YoixVMThreadData(null);
+        threaddata = newdata;
+        return(length);
     }
 
 
     private static synchronized YoixVMThreadData
     pickThreadData(Thread target) {
 
-	int  length;
-	int  count;
-	int  next;
-	int  n;
+        int  length;
+        int  count;
+        int  next;
+        int  n;
 
-	//
-	// This shouldn't happen all that much, so we often take time to
-	// look at (and clean up) all entries. Not hard to imagine some
-	// improvements, but properly maintaining the last index should
-	// reduce the number of times this method is called.
-	//
+        //
+        // This shouldn't happen all that much, so we often take time to
+        // look at (and clean up) all entries. Not hard to imagine some
+        // improvements, but properly maintaining the last index should
+        // reduce the number of times this method is called.
+        //
 
-	length = threaddata.length;
-	n = (last + 1)%length;
-	next = -1;
+        length = threaddata.length;
+        n = (last + 1)%length;
+        next = -1;
 
-	for (count = length; count > 0; count--) {
-	    if (threaddata[n].active()) {
-		if (target == threaddata[n].thread)
-		    return(threaddata[last = n]);
-		else if (!threaddata[n].thread.isAlive())
-		    threaddata[next = n].reset(null);
-	    } else next = n;
-	    n = (n + 1)%length;
-	}
+        for (count = length; count > 0; count--) {
+            if (threaddata[n].active()) {
+                if (target == threaddata[n].thread)
+                    return(threaddata[last = n]);
+                else if (!threaddata[n].thread.isAlive())
+                    threaddata[next = n].reset(null);
+            } else next = n;
+            n = (n + 1)%length;
+        }
 
-	if (next < 0)
-	    next = growThreadData();
-	threaddata[next].reset(target);
-	last = next;
-	return(threaddata[next]);
+        if (next < 0)
+            next = growThreadData();
+        threaddata[next].reset(target);
+        last = next;
+        return(threaddata[next]);
     }
 }
 

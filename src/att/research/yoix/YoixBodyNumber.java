@@ -18,9 +18,9 @@ final
 class YoixBodyNumber
 
     implements YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCloneable,
-	       Serializable
+               YoixInterfaceBody,
+               YoixInterfaceCloneable,
+               Serializable
 
 {
 
@@ -41,19 +41,19 @@ class YoixBodyNumber
 
     YoixBodyNumber(int value) {
 
-	this(new Integer(value));
+        this(new Integer(value));
     }
 
 
     YoixBodyNumber(double value) {
 
-	this(new Double(value));
+        this(new Double(value));
     }
 
 
     YoixBodyNumber(Number value) {
 
-	this.data = value;
+        this.data = value;
     }
 
     ///////////////////////////////////
@@ -65,23 +65,23 @@ class YoixBodyNumber
     public final synchronized Object
     clone() {
 
-	Object  obj;
+        Object  obj;
 
-	try {
-	    obj = super.clone();
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
+        try {
+            obj = super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     public final Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -93,28 +93,28 @@ class YoixBodyNumber
     public final String
     dump() {
 
-	return(data + NL);
+        return(data + NL);
     }
 
 
     public final int
     length() {
 
-	return(0);
+        return(0);
     }
 
 
     public final String
     toString() {
 
-	return(dump().trim());
+        return(dump().trim());
     }
 
 
     public final int
     type() {
 
-	return(((data instanceof Double) ? DOUBLE : INTEGER));
+        return(((data instanceof Double) ? DOUBLE : INTEGER));
     }
 
     ///////////////////////////////////
@@ -126,28 +126,28 @@ class YoixBodyNumber
     public final double
     doubleValue() {
 
-	return(data.doubleValue());
+        return(data.doubleValue());
     }
 
 
     public final float
     floatValue() {
 
-	return(data.floatValue());
+        return(data.floatValue());
     }
 
 
     public final int
     intValue() {
 
-	return(data.intValue());
+        return(data.intValue());
     }
 
 
     public final long
     longValue() {
 
-	return(data.longValue());
+        return(data.longValue());
     }
 }
 

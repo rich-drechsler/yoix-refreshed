@@ -17,7 +17,7 @@ class YoixPointer
 
     implements YoixAPI,
                YoixConstants,
-	       YoixInterfacePointer
+               YoixInterfacePointer
 
 {
 
@@ -46,79 +46,79 @@ class YoixPointer
     public final boolean
     canAccess(short perm) {
 
-	return((flags&perm) == (perm&ACCESSMASK) || VM.canAccess(perm));
+        return((flags&perm) == (perm&ACCESSMASK) || VM.canAccess(perm));
     }
 
 
     public final boolean
     canExecute() {
 
-	return(canAccess(__X));
+        return(canAccess(__X));
     }
 
 
     public final boolean
     canGrowTo(int size) {
 
-	return(growable && (growto < 0 || size <= growto) && canWrite());
+        return(growable && (growto < 0 || size <= growto) && canWrite());
     }
 
 
     public final boolean
     canRead() {
 
-	return(canAccess(R__));
+        return(canAccess(R__));
     }
 
 
     public final boolean
     canUnlock() {
 
-	return((flags & L___) == 0 || VM.canAccess(L___));
+        return((flags & L___) == 0 || VM.canAccess(L___));
     }
 
 
     public final boolean
     canWrite() {
 
-	return(canAccess(_W_));
+        return(canAccess(_W_));
     }
 
 
     public final int
     definedAt(String name) {
 
-	int  index;
+        int  index;
 
-	return(((index = hash(name)) >= 0 && defined(index)) ? index : -1);
+        return(((index = hash(name)) >= 0 && defined(index)) ? index : -1);
     }
 
 
     public final int
     getAccess() {
 
-	return(flags & ACCESSMASK);
+        return(flags & ACCESSMASK);
     }
 
 
     public final int
     getCapacity(int limit) {
 
-	if (limit > length) {
-	    if (growable) {
-		if (growto >= 0 && growto < limit)
-		    limit = growto;
-	    } else limit = length;
-	}
+        if (limit > length) {
+            if (growable) {
+                if (growto >= 0 && growto < limit)
+                    limit = growto;
+            } else limit = length;
+        }
 
-	return(limit);
+        return(limit);
     }
 
 
     public final boolean
     inRange(int index) {
 
-	return(index >= 0 && (index < length || ((YoixInterfaceBody)this).length() < length));
+        return(index >= 0 && (index < length || ((YoixInterfaceBody)this).length() < length));
     }
 
     ///////////////////////////////////
@@ -130,46 +130,46 @@ class YoixPointer
     final boolean
     getGrowable() {
 
-	return(growable);
+        return(growable);
     }
 
 
     final int
     getGrowto() {
 
-	return(growto);
+        return(growto);
     }
 
 
     final synchronized Object
     getLock() {
 
-	if (lock == null)
-	    lock = new Object();
-	return(lock);
+        if (lock == null)
+            lock = new Object();
+        return(lock);
     }
 
 
     final synchronized void
     setAccess(int perm) {
 
-	if (canUnlock())
-	    flags = (short)((flags & (~ACCESSMASK)) | (perm & ACCESSMASK));
-	else VM.abort(INVALIDACCESS);
+        if (canUnlock())
+            flags = (short)((flags & (~ACCESSMASK)) | (perm & ACCESSMASK));
+        else VM.abort(INVALIDACCESS);
     }
 
 
     final void
     setGrowable(boolean state) {
 
-	growable = state;
+        growable = state;
     }
 
 
     final void
     setGrowto(int limit) {
 
-	growto = limit;
+        growto = limit;
     }
 }
 

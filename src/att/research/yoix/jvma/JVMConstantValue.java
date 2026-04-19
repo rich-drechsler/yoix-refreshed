@@ -43,42 +43,42 @@ class JVMConstantValue extends JVMAttribute
     public
     JVMConstantValue(JVMClassFile owner, double value, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, constant_pool.storeDouble(value), constant_pool);
+        buildAttribute(owner, constant_pool.storeDouble(value), constant_pool);
     }
 
 
     public
     JVMConstantValue(JVMClassFile owner, float value, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, constant_pool.storeFloat(value), constant_pool);
+        buildAttribute(owner, constant_pool.storeFloat(value), constant_pool);
     }
 
 
     public
     JVMConstantValue(JVMClassFile owner, int value, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, constant_pool.storeInt(value), constant_pool);
+        buildAttribute(owner, constant_pool.storeInt(value), constant_pool);
     }
 
 
     public
     JVMConstantValue(JVMClassFile owner, long value, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, constant_pool.storeLong(value), constant_pool);
+        buildAttribute(owner, constant_pool.storeLong(value), constant_pool);
     }
 
 
     public
     JVMConstantValue(JVMClassFile owner, String value, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, constant_pool.storeString(value), constant_pool);
+        buildAttribute(owner, constant_pool.storeString(value), constant_pool);
     }
 
 
     public
     JVMConstantValue(JVMClassFile owner, byte bytes[], int offset, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, bytes, offset, constant_pool);
+        buildAttribute(owner, bytes, offset, constant_pool);
     }
 
     ///////////////////////////////////
@@ -90,44 +90,44 @@ class JVMConstantValue extends JVMAttribute
     final void
     dumpAttributeInto(String indent, StringBuffer sbuf) {
 
-	String  name;
+        String  name;
 
-	if ((name = constant_pool.getStringFromUTF(name_index)) != null) {
-	    sbuf.append(indent);
-	    sbuf.append(name);
-	    sbuf.append(": ");
-	    constant_pool.dumpConstantInto(constantvalue_index, sbuf);
-	    sbuf.append("\n");
-	}
+        if ((name = constant_pool.getStringFromUTF(name_index)) != null) {
+            sbuf.append(indent);
+            sbuf.append(name);
+            sbuf.append(": ");
+            constant_pool.dumpConstantInto(constantvalue_index, sbuf);
+            sbuf.append("\n");
+        }
     }
 
 
     final byte[]
     getBytes() {
 
-	byte  bytes[];
-	int   nextbyte;
+        byte  bytes[];
+        int   nextbyte;
 
-	bytes = new byte[8];
-	nextbyte = 0;
+        bytes = new byte[8];
+        nextbyte = 0;
 
-	bytes[nextbyte++] = (byte)(name_index >> 8);
-	bytes[nextbyte++] = (byte)name_index;
-	bytes[nextbyte++] = 0;
-	bytes[nextbyte++] = 0;
-	bytes[nextbyte++] = 0;
-	bytes[nextbyte++] = 2;
-	bytes[nextbyte++] = (byte)(constantvalue_index >> 8);
-	bytes[nextbyte++] = (byte)constantvalue_index;
+        bytes[nextbyte++] = (byte)(name_index >> 8);
+        bytes[nextbyte++] = (byte)name_index;
+        bytes[nextbyte++] = 0;
+        bytes[nextbyte++] = 0;
+        bytes[nextbyte++] = 0;
+        bytes[nextbyte++] = 2;
+        bytes[nextbyte++] = (byte)(constantvalue_index >> 8);
+        bytes[nextbyte++] = (byte)constantvalue_index;
 
-	return(bytes);
+        return(bytes);
     }
 
 
     final int
     getSize() {
 
-	return(8);
+        return(8);
     }
 
     ///////////////////////////////////
@@ -139,20 +139,20 @@ class JVMConstantValue extends JVMAttribute
     private void
     buildAttribute(JVMClassFile owner, int constantvalue_index, JVMConstantPool constant_pool) {
 
-	this.owner = owner;
-	this.constant_pool = constant_pool;
-	this.name_index = constant_pool.storeUTF(ATTRIBUTE_CONSTANT_VALUE);
-	this.constantvalue_index = constantvalue_index;
+        this.owner = owner;
+        this.constant_pool = constant_pool;
+        this.name_index = constant_pool.storeUTF(ATTRIBUTE_CONSTANT_VALUE);
+        this.constantvalue_index = constantvalue_index;
     }
 
 
     private void
     buildAttribute(JVMClassFile owner, byte bytes[], int offset, JVMConstantPool constant_pool) {
 
-	this.owner = owner;
-	this.constant_pool = constant_pool;
-	this.name_index = JVMMisc.getUnsignedShort(bytes, offset);
-	this.constantvalue_index = JVMMisc.getUnsignedShort(bytes, offset + 6);
+        this.owner = owner;
+        this.constant_pool = constant_pool;
+        this.name_index = JVMMisc.getUnsignedShort(bytes, offset);
+        this.constantvalue_index = JVMMisc.getUnsignedShort(bytes, offset + 6);
     }
 }
 

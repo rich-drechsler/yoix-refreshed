@@ -48,8 +48,8 @@ class YoixSwingJSplitPane extends JSplitPane
 
     YoixSwingJSplitPane() {
 
-	super();
-	addComponentListener(this);
+        super();
+        addComponentListener(this);
     }
 
     ///////////////////////////////////
@@ -73,14 +73,14 @@ class YoixSwingJSplitPane extends JSplitPane
     public void
     componentResized(ComponentEvent e) {
 
-	if (componentsized == false) {
-	    removeComponentListener(this);
-	    componentsized = true;
-	    if (isfraction)
-	        setDividerLocation(dividerlocation);
-	    else setDividerLocation((int)dividerlocation);
-	    validate();
-	}
+        if (componentsized == false) {
+            removeComponentListener(this);
+            componentsized = true;
+            if (isfraction)
+                setDividerLocation(dividerlocation);
+            else setDividerLocation((int)dividerlocation);
+            validate();
+        }
     }
 
 
@@ -98,92 +98,92 @@ class YoixSwingJSplitPane extends JSplitPane
     final int
     getDividerLocation(boolean ui) {
 
-	return(ui ? getUI().getDividerLocation(this) : getDividerLocation());
+        return(ui ? getUI().getDividerLocation(this) : getDividerLocation());
     }
 
 
     final boolean
     getDividerLocked() {
 
-	return(dividerlocked);
+        return(dividerlocked);
     }
 
 
     public final void
     setDividerLocation(int location) {
 
-	Component  comp;
-	Insets     insets;
-	int        orientation;
+        Component  comp;
+        Insets     insets;
+        int        orientation;
 
-	if (dividerlocked)
-	    location = super.getDividerLocation();
+        if (dividerlocked)
+            location = super.getDividerLocation();
 
-	if (componentsized == false) {
-	    isfraction = false;
-	    dividerlocation = location;
-	} else {
-	    super.setDividerLocation(location);
-	    if (keephidden) {
-		orientation = getOrientation();
-		if ((insets = getInsets()) == null)
-		    insets = new Insets(0, 0, 0, 0);
-		if ((comp = getLeftComponent()) != null) {
-		    if (orientation == HORIZONTAL_SPLIT)
-			comp.setVisible(location < 0 || location > insets.left);
-		    else comp.setVisible(location < 0 || location > insets.top);
-		}
-		if ((comp = getRightComponent()) != null) {
-		    if (orientation == HORIZONTAL_SPLIT)
-			comp.setVisible(location < getWidth() - getDividerSize() - insets.left);
-		    else comp.setVisible(location < getHeight() - getDividerSize() - insets.top);
-		}
-	    }
-	}
+        if (componentsized == false) {
+            isfraction = false;
+            dividerlocation = location;
+        } else {
+            super.setDividerLocation(location);
+            if (keephidden) {
+                orientation = getOrientation();
+                if ((insets = getInsets()) == null)
+                    insets = new Insets(0, 0, 0, 0);
+                if ((comp = getLeftComponent()) != null) {
+                    if (orientation == HORIZONTAL_SPLIT)
+                        comp.setVisible(location < 0 || location > insets.left);
+                    else comp.setVisible(location < 0 || location > insets.top);
+                }
+                if ((comp = getRightComponent()) != null) {
+                    if (orientation == HORIZONTAL_SPLIT)
+                        comp.setVisible(location < getWidth() - getDividerSize() - insets.left);
+                    else comp.setVisible(location < getHeight() - getDividerSize() - insets.top);
+                }
+            }
+        }
     }
 
 
     public final void
     setDividerLocation(double value) {
 
-	if (dividerlocked == false) {
-	    if (componentsized == false) {
-		isfraction = true;
-		dividerlocation = value;
-	    } else super.setDividerLocation(Math.max(0.0, Math.min(1.0, value)));
-	} else {
-	    if (componentsized == false) {
-		isfraction = true;
-		dividerlocation = value;
-	    } else super.setDividerLocation(super.getDividerLocation());
-	}
+        if (dividerlocked == false) {
+            if (componentsized == false) {
+                isfraction = true;
+                dividerlocation = value;
+            } else super.setDividerLocation(Math.max(0.0, Math.min(1.0, value)));
+        } else {
+            if (componentsized == false) {
+                isfraction = true;
+                dividerlocation = value;
+            } else super.setDividerLocation(super.getDividerLocation());
+        }
     }
 
 
     final void
     setDividerLocked(boolean state) {
 
-	dividerlocked = state;
+        dividerlocked = state;
     }
 
 
     final void
     setKeepHidden(boolean state) {
 
-	if (state) {
-	    keephidden = state;
-	    //
-	    // Eventually sync visibility of the components based on the
-	    // divider's current location.
-	    //
-	} else {
-	    keephidden = state;
-	    //
-	    // Eventually both components should be made visible, but if
-	    // possible it should only happen if it looks like they were
-	    // hidden because of the divider code.
-	    //
-	}
+        if (state) {
+            keephidden = state;
+            //
+            // Eventually sync visibility of the components based on the
+            // divider's current location.
+            //
+        } else {
+            keephidden = state;
+            //
+            // Eventually both components should be made visible, but if
+            // possible it should only happen if it looks like they were
+            // hidden because of the divider code.
+            //
+        }
     }
 }
 

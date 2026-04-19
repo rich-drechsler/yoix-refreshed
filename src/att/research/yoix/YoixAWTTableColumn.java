@@ -67,7 +67,7 @@ class YoixAWTTableColumn extends YoixAWTTextComponent
 
     YoixAWTTableColumn(YoixObject data, YoixBodyComponent parent) {
 
-	super(data, parent);
+        super(data, parent);
     }
 
     ///////////////////////////////////
@@ -79,411 +79,411 @@ class YoixAWTTableColumn extends YoixAWTTextComponent
     final void
     actionPerformed(int row) {
 
-	YoixObject  event = null;
+        YoixObject  event = null;
 
-	//
-	// Probably don't want to call the user's event handler while
-	// we're synchronized, but we need a some protection while we
-	// build the  Yoix represention of the event (there are other
-	// solutions). Also, don't be confused by the name - this is
-	// not an AWT event handler.
-	//
+        //
+        // Probably don't want to call the user's event handler while
+        // we're synchronized, but we need a some protection while we
+        // build the  Yoix represention of the event (there are other
+        // solutions). Also, don't be confused by the name - this is
+        // not an AWT event handler.
+        //
 
-	synchronized(this) {
-	    if (lines != null && visited != null) {
-		if (row >= 0 && row < lines.length) {
-		    if (visited[row] == false) {
-			visited[row] = true;
-			paintLine(row);
-		    }
-		    event = YoixMake.yoixType(T_ACTIONEVENT);
-		    event.put(N_ID, YoixObject.newInt(V_ACTIONPERFORMED));
-		    event.put(N_MODIFIERS, YoixObject.newInt(YOIX_BUTTON1_MASK));
-		    event.put(N_COMMAND, YoixObject.newString(lines[row]));
-		}
-	    }
-	}
+        synchronized(this) {
+            if (lines != null && visited != null) {
+                if (row >= 0 && row < lines.length) {
+                    if (visited[row] == false) {
+                        visited[row] = true;
+                        paintLine(row);
+                    }
+                    event = YoixMake.yoixType(T_ACTIONEVENT);
+                    event.put(N_ID, YoixObject.newInt(V_ACTIONPERFORMED));
+                    event.put(N_MODIFIERS, YoixObject.newInt(YOIX_BUTTON1_MASK));
+                    event.put(N_COMMAND, YoixObject.newString(lines[row]));
+                }
+            }
+        }
 
-	if (event != null)
-	    parent.call(N_ACTIONPERFORMED, event);
+        if (event != null)
+            parent.call(N_ACTIONPERFORMED, event);
     }
 
 
     public synchronized void
     addActionListener(ActionListener listener) {
 
-	//
-	// Currently disabled because there's a mechanism that's old
-	// but works well enough for now. We may remove the old code
-	// in favor of the event queue approach, but probably not for
-	// a while.
-	//
+        //
+        // Currently disabled because there's a mechanism that's old
+        // but works well enough for now. We may remove the old code
+        // in favor of the event queue approach, but probably not for
+        // a while.
+        //
     }
 
 
     final void
     addMouseListener(YoixAWTTableManager listener) {
 
-	super.addMouseListener(listener);
+        super.addMouseListener(listener);
     }
 
     final void
     addMouseMotionListener(YoixAWTTableManager listener) {
 
-	super.addMouseMotionListener(listener);
+        super.addMouseMotionListener(listener);
     }
 
 
     final void
     afterLoad() {
 
-	YoixObject  funct = afterload;		// snapshot - just to be safe
-	YoixObject  argv[];
-	int         n;
+        YoixObject  funct = afterload;		// snapshot - just to be safe
+        YoixObject  argv[];
+        int         n;
 
-	if (funct != null) {
-	    synchronized(this) {
-		argv = new YoixObject[funct.callable(2) ? 2 : 1];
-		if (manager != null)
-		    argv[0] = manager.getContext();
-		else argv[0] = YoixObject.newNull();
-		if (argv.length == 2) {
-		    if (lines != null) {
-			argv[1] = YoixObject.newArray(lines.length);
-			for (n = 0; n < lines.length; n++)
-			    argv[1].putString(n, lines[n]);
-		    } else argv[1] = YoixObject.newArray(0);
-		}
-	    }
-	    parent.call(funct, argv);
-	}
+        if (funct != null) {
+            synchronized(this) {
+                argv = new YoixObject[funct.callable(2) ? 2 : 1];
+                if (manager != null)
+                    argv[0] = manager.getContext();
+                else argv[0] = YoixObject.newNull();
+                if (argv.length == 2) {
+                    if (lines != null) {
+                        argv[1] = YoixObject.newArray(lines.length);
+                        for (n = 0; n < lines.length; n++)
+                            argv[1].putString(n, lines[n]);
+                    } else argv[1] = YoixObject.newArray(0);
+                }
+            }
+            parent.call(funct, argv);
+        }
     }
 
 
     final synchronized int
     countColumns() {
 
-	int  count = 0;
-	int  n;
+        int  count = 0;
+        int  n;
 
-	if (lines != null) {
-	    for (n = 0; n < lines.length; n++)
-		count = Math.max(count, lines[n].length());
-	}
+        if (lines != null) {
+            for (n = 0; n < lines.length; n++)
+                count = Math.max(count, lines[n].length());
+        }
 
-	return(count);
+        return(count);
     }
 
 
     final synchronized int
     countRows() {
 
-	return(lines != null ? lines.length : 0);
+        return(lines != null ? lines.length : 0);
     }
 
 
     protected void
     finalize() {
 
-	manager = null;
-	super.finalize();
+        manager = null;
+        super.finalize();
     }
 
 
     final synchronized String
     getCell(int n) {
 
-	return((n >= 0 && lines != null && n < lines.length) ? lines[n] : null);
+        return((n >= 0 && lines != null && n < lines.length) ? lines[n] : null);
     }
 
 
     final synchronized int
     getFirstRow() {
 
-	return(cellsize.height > 0 ? viewport.y/cellsize.height : 0);
+        return(cellsize.height > 0 ? viewport.y/cellsize.height : 0);
     }
 
 
     final synchronized String
     getHighlightedItem() {
 
-	return((highlighted >= 0 && highlighted < lines.length)
-	    ? lines[highlighted]
-	    : null
-	);
+        return((highlighted >= 0 && highlighted < lines.length)
+            ? lines[highlighted]
+            : null
+        );
     }
 
 
     final synchronized int
     getIndexItem() {
 
-	return((selected >= 0 && selected < lines.length) ? selected : -1);
+        return((selected >= 0 && selected < lines.length) ? selected : -1);
     }
 
 
     final synchronized int
     getLastRow() {
 
-	return(cellsize.height > 0 ? (viewport.y + viewport.height)/cellsize.height : -1);
+        return(cellsize.height > 0 ? (viewport.y + viewport.height)/cellsize.height : -1);
     }
 
 
     protected final Dimension
     getLayoutSize(String name, Dimension size) {
 
-	YoixObject  lval;
-	YoixObject  obj;
-	String      str;
-	String      tokens[];
-	int         width;
-	int         n;
+        YoixObject  lval;
+        YoixObject  obj;
+        String      str;
+        String      tokens[];
+        int         width;
+        int         n;
 
-	if (loadFont()) {
-	    synchronized(FONTLOCK) {
-		if ((obj = data.getObject(name)) != null && obj.notNull()) {
-		    size = YoixMakeScreen.javaDimension(obj);
-		    if (size.width <= 0 || size.height <= 0) {
-			tokens = lines;
-			if (size.width <= 0) {
-			    if (columns <= 0) {
-				if (tokens != null) {
-				    for (n = 0; n < tokens.length; n++) {
-					str = tokens[n];
-					if ((width = fm.stringWidth(str)) > size.width)
-					    size.width = width;
-				    }
-				    size.width += insets.left + insets.right;
-				}
-			    } else size.width = columns*cellsize.width + insets.left + insets.right;
-			}
-			if (size.height <= 0) {
-			    if (rows <= 0) {
-				if (tokens != null) {
-				    size.height = tokens.length*cellsize.height;
-				    size.height += insets.top + insets.bottom;
-				}
-			    } else size.height = rows*cellsize.height + insets.top + insets.bottom;
-			}
-			if (size.width > 0 && size.height > 0) {
-			    lval = YoixObject.newLvalue(data, name);
-			    if (lval.canWrite())
-				lval.put(YoixMakeScreen.yoixDimension(size));
-			}
-		    }
-		} else {
-		    if (columns > 0)
-			size.width = columns*cellsize.width + insets.left + insets.right;
-		    if (rows > 0)
-			size.height = rows*cellsize.height + insets.top + insets.bottom;
-		}
-	    }
-	}
+        if (loadFont()) {
+            synchronized(FONTLOCK) {
+                if ((obj = data.getObject(name)) != null && obj.notNull()) {
+                    size = YoixMakeScreen.javaDimension(obj);
+                    if (size.width <= 0 || size.height <= 0) {
+                        tokens = lines;
+                        if (size.width <= 0) {
+                            if (columns <= 0) {
+                                if (tokens != null) {
+                                    for (n = 0; n < tokens.length; n++) {
+                                        str = tokens[n];
+                                        if ((width = fm.stringWidth(str)) > size.width)
+                                            size.width = width;
+                                    }
+                                    size.width += insets.left + insets.right;
+                                }
+                            } else size.width = columns*cellsize.width + insets.left + insets.right;
+                        }
+                        if (size.height <= 0) {
+                            if (rows <= 0) {
+                                if (tokens != null) {
+                                    size.height = tokens.length*cellsize.height;
+                                    size.height += insets.top + insets.bottom;
+                                }
+                            } else size.height = rows*cellsize.height + insets.top + insets.bottom;
+                        }
+                        if (size.width > 0 && size.height > 0) {
+                            lval = YoixObject.newLvalue(data, name);
+                            if (lval.canWrite())
+                                lval.put(YoixMakeScreen.yoixDimension(size));
+                        }
+                    }
+                } else {
+                    if (columns > 0)
+                        size.width = columns*cellsize.width + insets.left + insets.right;
+                    if (rows > 0)
+                        size.height = rows*cellsize.height + insets.top + insets.bottom;
+                }
+            }
+        }
 
-	return(size);
+        return(size);
     }
 
 
     final synchronized int
     getRow(int y) {
 
-	int  num;
+        int  num;
 
-	return(cellsize.height > 0 && (num = (viewport.y - insets.top + y)) >= 0
-	    ? num/cellsize.height
-	    : -1
-	);
+        return(cellsize.height > 0 && (num = (viewport.y - insets.top + y)) >= 0
+            ? num/cellsize.height
+            : -1
+        );
     }
 
 
     final synchronized String
     getSelectedItem() {
 
-	return((selected >= 0 && selected < lines.length) ? lines[selected] : null);
+        return((selected >= 0 && selected < lines.length) ? lines[selected] : null);
     }
 
 
     final synchronized String
     getText() {
 
-	return(getText("\n"));
+        return(getText("\n"));
     }
 
 
     final synchronized String
     getText(String sep) {
 
-	String  str = null;
-	int     n;
+        String  str = null;
+        int     n;
 
-	if (lines != null) {
-	    for (n = 0; n < lines.length; n++) {
-		if (n > 0)
-		    str += sep + lines[n];
-		else str = lines[n];
-	    }
-	}
-	return(str);
+        if (lines != null) {
+            for (n = 0; n < lines.length; n++) {
+                if (n > 0)
+                    str += sep + lines[n];
+                else str = lines[n];
+            }
+        }
+        return(str);
     }
 
 
     final synchronized String
     getTextAt(int n) {
 
-	return((n >= 0 && n < lines.length) ? lines[n] : null);
+        return((n >= 0 && n < lines.length) ? lines[n] : null);
     }
 
 
     final Color
     getVisitColor() {
 
-	return(visitcolor);
+        return(visitcolor);
     }
 
 
     final boolean
     isActive() {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	return(((obj = data.getObject(N_ACTIONPERFORMED)) != null)
-	    ? obj.isFunction() && obj.notNull()
-	    : false
-	);
+        return(((obj = data.getObject(N_ACTIONPERFORMED)) != null)
+            ? obj.isFunction() && obj.notNull()
+            : false
+        );
     }
 
 
     final synchronized void
     loadColumn(ArrayList records, int index) {
 
-	String  row[];
-	int     length;
-	int     n;
+        String  row[];
+        int     length;
+        int     n;
 
-	lines = null;
-	visited = null;
-	selected = -1;
+        lines = null;
+        visited = null;
+        selected = -1;
 
-	if (records != null && index >= 0) {
-	    length = records.size();
-	    lines = new String[length];
-	    visited = new boolean[length];
-	    for (n = 0; n < length; n++) {
-		if ((row = (String[])records.get(n)) != null) {
-		    if (index < row.length && row[index] != null)
-			lines[n] = row[index];
-		    else lines[n] = "";
-		} else lines[n] = "";
-	    }
-	}
+        if (records != null && index >= 0) {
+            length = records.size();
+            lines = new String[length];
+            visited = new boolean[length];
+            for (n = 0; n < length; n++) {
+                if ((row = (String[])records.get(n)) != null) {
+                    if (index < row.length && row[index] != null)
+                        lines[n] = row[index];
+                    else lines[n] = "";
+                } else lines[n] = "";
+            }
+        }
 
-	setExtent();
-	//
-	// Eventually suspect this should be unsynchronized.
-	//
-	if (manager == null && lines != null)
-	    afterLoad();
+        setExtent();
+        //
+        // Eventually suspect this should be unsynchronized.
+        //
+        if (manager == null && lines != null)
+            afterLoad();
     }
 
 
     public final void
     paint(Graphics g) {
 
-	paintBackgroundImage(g);
-	paintBorder(insets, g);
+        paintBackgroundImage(g);
+        paintBorder(insets, g);
 
-	if (lines != null) {
-	    g.translate(insets.left, insets.top);
-	    paintRect(viewport.x, viewport.y, viewport.width, viewport.height, g);
-	    g.translate(-insets.left, -insets.top);
-	}
+        if (lines != null) {
+            g.translate(insets.left, insets.top);
+            paintRect(viewport.x, viewport.y, viewport.width, viewport.height, g);
+            g.translate(-insets.left, -insets.top);
+        }
     }
 
 
     protected final synchronized void
     paintRect(int x, int y, int width, int height, Graphics g) {
 
-	Shape  clip;
-	Font   font;
-	int    last;
-	int    n;
+        Shape  clip;
+        Font   font;
+        int    last;
+        int    n;
 
-	//
-	// Setting clip path turns out to be important in some obscure
-	// cases, so be careful making changes. For example, partially
-	// cover the canvas with another window and then rapidly scroll
-	// (in both directions) using keys and you may notice problems.
-	// I think drawString() probably decides nothing needs to be
-	// done when the text string doesn't look like it intersects
-	// the current clipping path and maybe those calcuations aren't
-	// quite right???
-	//
+        //
+        // Setting clip path turns out to be important in some obscure
+        // cases, so be careful making changes. For example, partially
+        // cover the canvas with another window and then rapidly scroll
+        // (in both directions) using keys and you may notice problems.
+        // I think drawString() probably decides nothing needs to be
+        // done when the text string doesn't look like it intersects
+        // the current clipping path and maybe those calcuations aren't
+        // quite right???
+        //
 
-	if (lines != null) {
-	    clip = g.getClip();
-	    font = g.getFont();
-	    g.translate(-viewport.x, -viewport.y);
-	    g.clipRect(x, y, width, height);		// recent change
-	    g.setFont(getFont());
-	    last = Math.min((y + height)/cellsize.height, lines.length - 1);
-	    for (n = Math.max(y/cellsize.height, 0); n <= last; n++)
-		paintLine(n, g);
-	    g.translate(viewport.x, viewport.y);
-	    g.setFont(font);
-	    g.setClip(clip);
-	}
+        if (lines != null) {
+            clip = g.getClip();
+            font = g.getFont();
+            g.translate(-viewport.x, -viewport.y);
+            g.clipRect(x, y, width, height);		// recent change
+            g.setFont(getFont());
+            last = Math.min((y + height)/cellsize.height, lines.length - 1);
+            for (n = Math.max(y/cellsize.height, 0); n <= last; n++)
+                paintLine(n, g);
+            g.translate(viewport.x, viewport.y);
+            g.setFont(font);
+            g.setClip(clip);
+        }
     }
 
 
     public synchronized void
     removeActionListener(ActionListener listener) {
 
-	//
-	// Currently disabled because there's a mechanism that's old
-	// but works well enough for now. We may remove the old code
-	// in favor of the event queue approach, but probably not for
-	// a while.
-	//
+        //
+        // Currently disabled because there's a mechanism that's old
+        // but works well enough for now. We may remove the old code
+        // in favor of the event queue approach, but probably not for
+        // a while.
+        //
     }
 
 
     final void
     removeMouseListener(YoixAWTTableManager listener) {
 
-	super.removeMouseListener(listener);
+        super.removeMouseListener(listener);
     }
 
     final void
     removeMouseMotionListener(YoixAWTTableManager listener) {
 
-	super.removeMouseMotionListener(listener);
+        super.removeMouseMotionListener(listener);
     }
 
 
     final void
     reset() {
 
-	reset(false);
+        reset(false);
     }
 
 
     final void
     reset(boolean sync) {
 
-	setViewportSize();
-	if (sync && manager != null)
-	    manager.reset();
-	else repaint();
+        setViewportSize();
+        if (sync && manager != null)
+            manager.reset();
+        else repaint();
     }
 
 
     final synchronized void
     setAfterLoad(YoixObject obj) {
 
-	if (obj.notNull()) {
-	    if (obj.callable(1) || obj.callable(2))
-		afterload = obj;
-	    else VM.abort(TYPECHECK, N_AFTERLOAD);
-	} else afterload = null;
+        if (obj.notNull()) {
+            if (obj.callable(1) || obj.callable(2))
+                afterload = obj;
+            else VM.abort(TYPECHECK, N_AFTERLOAD);
+        } else afterload = null;
     }
 
 
@@ -496,181 +496,181 @@ class YoixAWTTableColumn extends YoixAWTTextComponent
     final void
     setBaseline(int baseline) {
 
-	synchronized(FONTLOCK) {
-	    this.baseline = baseline;
-	}
+        synchronized(FONTLOCK) {
+            this.baseline = baseline;
+        }
     }
 
 
     public final synchronized void
     setBounds(int x, int y, int width, int height) {
 
-	if (totalsize.width != width || totalsize.height != height) {
-	    totalsize.width = width;
-	    totalsize.height = height;
-	}
+        if (totalsize.width != width || totalsize.height != height) {
+            totalsize.width = width;
+            totalsize.height = height;
+        }
 
-	super.setBounds(x, y, width, height);
-	setViewportSize();
+        super.setBounds(x, y, width, height);
+        setViewportSize();
     }
 
 
     final void
     setCellHeight(int height) {
 
-	synchronized(FONTLOCK) {
-	    cellsize.height = height;
-	}
+        synchronized(FONTLOCK) {
+            cellsize.height = height;
+        }
     }
 
 
     final void
     setCellWidth(int width) {
 
-	synchronized(FONTLOCK) {
-	    cellsize.width = width;
-	}
+        synchronized(FONTLOCK) {
+            cellsize.width = width;
+        }
     }
 
 
     final synchronized void
     setHighlighted(int next) {
 
-	int  current;
+        int  current;
 
-	if ((current = highlighted) != next) {
-	    highlighted = next;
-	    repaintLine(current);
-	    paintLine(highlighted);
-	}
+        if ((current = highlighted) != next) {
+            highlighted = next;
+            repaintLine(current);
+            paintLine(highlighted);
+        }
     }
 
 
     final synchronized void
     setIndexItem(int idx) {
 
-	if (lines != null && idx >= 0 && idx < lines.length) {
-	    selected = idx;
-	    if (visited != null && visited[idx] == false) {
-		visited[idx] = true;
-		paintLine(idx);
-	    }
-	} else selected = -1;
+        if (lines != null && idx >= 0 && idx < lines.length) {
+            selected = idx;
+            if (visited != null && visited[idx] == false) {
+                visited[idx] = true;
+                paintLine(idx);
+            }
+        } else selected = -1;
     }
 
 
     final synchronized void
     setManager(YoixAWTTableManager manager) {
 
-	//
-	// The disposeSavedGraphics() call should be safe and seems to
-	// be needed in a few obscure test cases.
-	//
+        //
+        // The disposeSavedGraphics() call should be safe and seems to
+        // be needed in a few obscure test cases.
+        //
 
-	this.manager = manager;
-	disposeSavedGraphics();		// required??
+        this.manager = manager;
+        disposeSavedGraphics();		// required??
     }
 
 
     final synchronized void
     setRowProperties(HashMap properties) {
 
-	YoixObject  obj;
-	Object      prop;
+        YoixObject  obj;
+        Object      prop;
 
-	if ((obj = data.getObject(N_ROWPROPERTIES)) == null || obj.isNull()) {
-	    hasrowcolors = false;
-	    rowbackgrounds = null;
-	    rowforegrounds = null;
-	    if (properties != null) {
-		if ((prop = properties.get(N_BACKGROUND)) != null) {
-		    if (prop instanceof Color[]) {
-			hasrowcolors = true;
-			rowbackgrounds = (Color[])prop;
-		    }
-		}
-		if ((prop = properties.get(N_FOREGROUND)) != null) {
-		    if (prop instanceof Color[]) {
-			hasrowcolors = true;
-			rowbackgrounds = (Color[])prop;
-		    }
-		}
-	    }
-	}
+        if ((obj = data.getObject(N_ROWPROPERTIES)) == null || obj.isNull()) {
+            hasrowcolors = false;
+            rowbackgrounds = null;
+            rowforegrounds = null;
+            if (properties != null) {
+                if ((prop = properties.get(N_BACKGROUND)) != null) {
+                    if (prop instanceof Color[]) {
+                        hasrowcolors = true;
+                        rowbackgrounds = (Color[])prop;
+                    }
+                }
+                if ((prop = properties.get(N_FOREGROUND)) != null) {
+                    if (prop instanceof Color[]) {
+                        hasrowcolors = true;
+                        rowbackgrounds = (Color[])prop;
+                    }
+                }
+            }
+        }
     }
 
 
     final synchronized void
     setRowProperties(YoixObject obj) {
 
-	YoixObject  prop;
-	HashMap     javacolors;
-	Color       color;
-	int         length;
-	int         value;
-	int         n;
+        YoixObject  prop;
+        HashMap     javacolors;
+        Color       color;
+        int         length;
+        int         value;
+        int         n;
 
-	hasrowcolors = false;
-	rowbackgrounds = null;
-	rowforegrounds = null;
+        hasrowcolors = false;
+        rowbackgrounds = null;
+        rowforegrounds = null;
 
-	if (obj != null && obj.notNull()) {
-	    javacolors = new HashMap();
-	    if ((prop = obj.getObject(N_BACKGROUND, null)) != null) {
-		if (prop.notNull() && (length = prop.sizeof()) > 0) {
-		    hasrowcolors = true;
-		    rowbackgrounds = new Color[length];
-		    for (n = prop.offset(); n < length; n++) {
-			value = YoixMake.javaColorValue(prop.getObject(n));
-			if ((color = (Color)javacolors.get(value+"")) == null) {
-			    color = new Color(value);
-			    javacolors.put(value+"", color);
-			}
-			rowbackgrounds[n] = color;
-		    }
-		}
-	    }
-	    if ((prop = obj.getObject(N_FOREGROUND, null)) != null) {
-		if (prop.notNull() && (length = prop.sizeof()) > 0) {
-		    hasrowcolors = true;
-		    rowforegrounds = new Color[length];
-		    for (n = prop.offset(); n < length; n++) {
-			value = YoixMake.javaColorValue(prop.getObject(n));
-			if ((color = (Color)javacolors.get(value+"")) == null) {
-			    color = new Color(value);
-			    javacolors.put(value+"", color);
-			}
-			rowforegrounds[n] = color;
-		    }
-		}
-	    }
-	}
-	reset(true);
+        if (obj != null && obj.notNull()) {
+            javacolors = new HashMap();
+            if ((prop = obj.getObject(N_BACKGROUND, null)) != null) {
+                if (prop.notNull() && (length = prop.sizeof()) > 0) {
+                    hasrowcolors = true;
+                    rowbackgrounds = new Color[length];
+                    for (n = prop.offset(); n < length; n++) {
+                        value = YoixMake.javaColorValue(prop.getObject(n));
+                        if ((color = (Color)javacolors.get(value+"")) == null) {
+                            color = new Color(value);
+                            javacolors.put(value+"", color);
+                        }
+                        rowbackgrounds[n] = color;
+                    }
+                }
+            }
+            if ((prop = obj.getObject(N_FOREGROUND, null)) != null) {
+                if (prop.notNull() && (length = prop.sizeof()) > 0) {
+                    hasrowcolors = true;
+                    rowforegrounds = new Color[length];
+                    for (n = prop.offset(); n < length; n++) {
+                        value = YoixMake.javaColorValue(prop.getObject(n));
+                        if ((color = (Color)javacolors.get(value+"")) == null) {
+                            color = new Color(value);
+                            javacolors.put(value+"", color);
+                        }
+                        rowforegrounds[n] = color;
+                    }
+                }
+            }
+        }
+        reset(true);
     }
 
 
     final synchronized void
     setSelected(int row) {
 
-	selected = row;
+        selected = row;
     }
 
 
     final synchronized void
     setSelectedItem(String text) {
 
-	if (selected >= 0 && selected < lines.length) {
-	    lines[selected] = text;
-	    repaintLine(selected);
-	}
+        if (selected >= 0 && selected < lines.length) {
+            lines[selected] = text;
+            repaintLine(selected);
+        }
     }
 
 
     final synchronized void
     setVisitColor(Color color) {
 
-	visitcolor = color;
-	reset(false);
+        visitcolor = color;
+        reset(false);
     }
 
     ///////////////////////////////////
@@ -682,145 +682,145 @@ class YoixAWTTableColumn extends YoixAWTTextComponent
     private Color
     getRowColor(int row, boolean wantbackground) {
 
-	Color  color;
+        Color  color;
 
-	if ((row == highlighted) == wantbackground) {
-	    if (visited[row] == false || visitcolor == null) {
-		if (rowforegrounds != null)
-		    color = rowforegrounds[row%rowforegrounds.length];
-		else color = getForeground();
-	    } else color = visitcolor;
-	} else {
-	    if (rowbackgrounds != null)
-		color = rowbackgrounds[row%rowbackgrounds.length];
-	    else color = getBackground();
-	}
+        if ((row == highlighted) == wantbackground) {
+            if (visited[row] == false || visitcolor == null) {
+                if (rowforegrounds != null)
+                    color = rowforegrounds[row%rowforegrounds.length];
+                else color = getForeground();
+            } else color = visitcolor;
+        } else {
+            if (rowbackgrounds != null)
+                color = rowbackgrounds[row%rowbackgrounds.length];
+            else color = getBackground();
+        }
 
-	return(color);
+        return(color);
     }
 
 
     private synchronized void
     paintLine(int n) {
 
-	Graphics  g;
-	int       tx;
-	int       ty;
+        Graphics  g;
+        int       tx;
+        int       ty;
 
-	if (n >= getFirstRow() && n <= getLastRow()) {
-	    if ((g = getSavedGraphics()) != null) {
-		tx = insets.left - viewport.x;
-		ty = insets.top - viewport.y;
-		g.translate(tx, ty);
-		paintLine(n, g);
-		g.translate(-tx, -ty);
-		disposeSavedGraphics(g);
-	    }
-	}
+        if (n >= getFirstRow() && n <= getLastRow()) {
+            if ((g = getSavedGraphics()) != null) {
+                tx = insets.left - viewport.x;
+                ty = insets.top - viewport.y;
+                g.translate(tx, ty);
+                paintLine(n, g);
+                g.translate(-tx, -ty);
+                disposeSavedGraphics(g);
+            }
+        }
     }
 
 
     private void
     paintLine(int n, Graphics g) {
 
-	String  text;
-	Color   color;
-	Color   background;
-	int     dx;
-	int     x;
-	int     y;
+        String  text;
+        Color   color;
+        Color   background;
+        int     dx;
+        int     x;
+        int     y;
 
-	if (lines != null) {
-	    if (n >= 0 && n < lines.length) {
-		color = g.getColor();
-		y = n*cellsize.height;
-		if (highlighted == n || hasrowcolors) {
-		    background = getRowColor(n, true);
-		    if (highlighted == n || color.equals(background) == false) {
-			g.setColor(background);
-			g.fillRect(0, y, viewport.width, cellsize.height);
-		    }
-		}
-		g.setColor(getRowColor(n, false));
-		if ((text = lines[n]) != null) {
-		    if ((dx = fm.stringWidth(text)) > 0) {
-			switch (alignment) {
-			    case YOIX_LEFT:
-				x = 0;
-				break;
+        if (lines != null) {
+            if (n >= 0 && n < lines.length) {
+                color = g.getColor();
+                y = n*cellsize.height;
+                if (highlighted == n || hasrowcolors) {
+                    background = getRowColor(n, true);
+                    if (highlighted == n || color.equals(background) == false) {
+                        g.setColor(background);
+                        g.fillRect(0, y, viewport.width, cellsize.height);
+                    }
+                }
+                g.setColor(getRowColor(n, false));
+                if ((text = lines[n]) != null) {
+                    if ((dx = fm.stringWidth(text)) > 0) {
+                        switch (alignment) {
+                            case YOIX_LEFT:
+                                x = 0;
+                                break;
 
-			    case YOIX_CENTER:
-				x = (viewport.width - dx)/2;
-				break;
+                            case YOIX_CENTER:
+                                x = (viewport.width - dx)/2;
+                                break;
 
-			    case YOIX_RIGHT:
-				x = viewport.width - dx;
-				break;
+                            case YOIX_RIGHT:
+                                x = viewport.width - dx;
+                                break;
 
-			    default:
-				x = 0;
-				break;
-			}
-			g.drawString(text, x, y + baseline);
-		    }
-		}
-		g.setColor(color);
-	    }
-	}
+                            default:
+                                x = 0;
+                                break;
+                        }
+                        g.drawString(text, x, y + baseline);
+                    }
+                }
+                g.setColor(color);
+            }
+        }
     }
 
 
     private synchronized void
     repaintLine(int n) {
 
-	Graphics  g;
-	int       tx;
-	int       ty;
+        Graphics  g;
+        int       tx;
+        int       ty;
 
-	if (n >= getFirstRow() && n <= getLastRow()) {
-	    if ((g = getSavedGraphics()) != null) {
-		tx = insets.left - viewport.x;
-		ty = insets.top - viewport.y;
-		g.translate(tx, ty);
-		g.clearRect(0, n*cellsize.height, viewport.width, cellsize.height);
-		paintLine(n, g);
-		g.translate(-tx, -ty);
-		disposeSavedGraphics(g);
-	    }
-	}
+        if (n >= getFirstRow() && n <= getLastRow()) {
+            if ((g = getSavedGraphics()) != null) {
+                tx = insets.left - viewport.x;
+                ty = insets.top - viewport.y;
+                g.translate(tx, ty);
+                g.clearRect(0, n*cellsize.height, viewport.width, cellsize.height);
+                paintLine(n, g);
+                g.translate(-tx, -ty);
+                disposeSavedGraphics(g);
+            }
+        }
     }
 
 
     private void
     setExtent() {
 
-	int  width;
-	int  n;
+        int  width;
+        int  n;
 
-	extent.width = 0;
-	extent.height = 0;
+        extent.width = 0;
+        extent.height = 0;
 
-	if (lines != null) {
-	    if (loadFont()) {
-		if (measurelines) {
-		    synchronized(FONTLOCK) {
-			for (n = 0; n < lines.length; n++) {
-			    if ((width = fm.stringWidth(lines[n])) > extent.width)
-				extent.width = width;
-			}
-		    }
-		} else extent.width = totalsize.width;
-		extent.height = cellsize.height*lines.length;
-	    }
-	}
+        if (lines != null) {
+            if (loadFont()) {
+                if (measurelines) {
+                    synchronized(FONTLOCK) {
+                        for (n = 0; n < lines.length; n++) {
+                            if ((width = fm.stringWidth(lines[n])) > extent.width)
+                                extent.width = width;
+                        }
+                    }
+                } else extent.width = totalsize.width;
+                extent.height = cellsize.height*lines.length;
+            }
+        }
     }
 
 
     private void
     setViewportSize() {
 
-	viewport.width = totalsize.width - insets.left - insets.right;
-	viewport.height = totalsize.height - insets.top - insets.bottom;
+        viewport.width = totalsize.width - insets.left - insets.right;
+        viewport.height = totalsize.height - insets.top - insets.bottom;
     }
 }
 

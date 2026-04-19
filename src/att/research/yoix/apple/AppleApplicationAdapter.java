@@ -38,7 +38,7 @@ class AppleApplicationAdapter extends ApplicationAdapter
     public
     AppleApplicationAdapter() {
 
-	super();
+        super();
     }
 
     ///////////////////////////////////
@@ -50,159 +50,159 @@ class AppleApplicationAdapter extends ApplicationAdapter
     public void
     handleAbout(ApplicationEvent event) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	if (aboutHandler != null) {
-	    yev = newEvent(event);
-	    YoixMisc.call(aboutHandler, new YoixObject[] { yev }, null);
-	    event.setHandled(yev.getBoolean(NL_HANDLED));
-	}
-	super.handleAbout(event);
+        if (aboutHandler != null) {
+            yev = newEvent(event);
+            YoixMisc.call(aboutHandler, new YoixObject[] { yev }, null);
+            event.setHandled(yev.getBoolean(NL_HANDLED));
+        }
+        super.handleAbout(event);
     }
 
 
     public void
     handleOpenApplication(ApplicationEvent event) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	if (openApplicationHandler != null) {
-	    yev = newEvent(event);
-	    YoixMisc.call(openApplicationHandler, new YoixObject[] { yev }, null);
-	    event.setHandled(yev.getBoolean(NL_HANDLED));
-	}
-	super.handleOpenApplication(event);
+        if (openApplicationHandler != null) {
+            yev = newEvent(event);
+            YoixMisc.call(openApplicationHandler, new YoixObject[] { yev }, null);
+            event.setHandled(yev.getBoolean(NL_HANDLED));
+        }
+        super.handleOpenApplication(event);
     }
 
 
     public void
     handleOpenFile(ApplicationEvent event) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	if (openFileHandler != null) {
-	    yev = newEvent(event);
-	    YoixMisc.call(openFileHandler, new YoixObject[] { yev }, null);
-	    event.setHandled(yev.getBoolean(NL_HANDLED));
-	}
-	super.handleOpenFile(event);
+        if (openFileHandler != null) {
+            yev = newEvent(event);
+            YoixMisc.call(openFileHandler, new YoixObject[] { yev }, null);
+            event.setHandled(yev.getBoolean(NL_HANDLED));
+        }
+        super.handleOpenFile(event);
     }
 
 
     public void
     handlePreferences(ApplicationEvent event) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	if (preferencesHandler != null) {
-	    yev = newEvent(event);
-	    YoixMisc.call(preferencesHandler, new YoixObject[] { yev }, null);
-	    event.setHandled(yev.getBoolean(NL_HANDLED));
-	}
-	super.handlePreferences(event);
+        if (preferencesHandler != null) {
+            yev = newEvent(event);
+            YoixMisc.call(preferencesHandler, new YoixObject[] { yev }, null);
+            event.setHandled(yev.getBoolean(NL_HANDLED));
+        }
+        super.handlePreferences(event);
     }
 
 
     public void
     handlePrintFile(ApplicationEvent event) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	if (printFileHandler != null) {
-	    yev = newEvent(event);
-	    YoixMisc.call(printFileHandler, new YoixObject[] { yev }, null);
-	    event.setHandled(yev.getBoolean(NL_HANDLED));
-	}
-	super.handlePrintFile(event);
+        if (printFileHandler != null) {
+            yev = newEvent(event);
+            YoixMisc.call(printFileHandler, new YoixObject[] { yev }, null);
+            event.setHandled(yev.getBoolean(NL_HANDLED));
+        }
+        super.handlePrintFile(event);
     }
 
 
     public void
     handleQuit(ApplicationEvent event) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	if (quitHandler != null) {
-	    yev = newEvent(event);
-	    YoixMisc.call(quitHandler, new YoixObject[] { yev }, null);
-	    event.setHandled(yev.getBoolean(NL_HANDLED) == false);
-	}
-	super.handleQuit(event);
+        if (quitHandler != null) {
+            yev = newEvent(event);
+            YoixMisc.call(quitHandler, new YoixObject[] { yev }, null);
+            event.setHandled(yev.getBoolean(NL_HANDLED) == false);
+        }
+        super.handleQuit(event);
     }
 
 
     public void
     handleReOpenApplication(ApplicationEvent event) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	if (reOpenApplicationHandler != null) {
-	    yev = newEvent(event);
-	    YoixMisc.call(reOpenApplicationHandler, new YoixObject[] { yev }, null);
-	    event.setHandled(yev.getBoolean(NL_HANDLED));
-	}
-	super.handleReOpenApplication(event);
+        if (reOpenApplicationHandler != null) {
+            yev = newEvent(event);
+            YoixMisc.call(reOpenApplicationHandler, new YoixObject[] { yev }, null);
+            event.setHandled(yev.getBoolean(NL_HANDLED));
+        }
+        super.handleReOpenApplication(event);
     }
 
 
     YoixObject
     newEvent(ApplicationEvent e) {
 
-	YoixObject  yev;
+        YoixObject  yev;
 
-	yev = YoixMakeEvent.yoixEvent(e, V_INVOCATIONACTION, null);
-	yev.putInt(NL_HANDLED, e.isHandled());
-	yev.putString(NL_FILENAME, e.getFilename());
+        yev = YoixMakeEvent.yoixEvent(e, V_INVOCATIONACTION, null);
+        yev.putInt(NL_HANDLED, e.isHandled());
+        yev.putString(NL_FILENAME, e.getFilename());
 
-	return(yev);
+        return(yev);
     }
 
 
     void
     setAboutHandler(YoixObject handler) {
 
-	aboutHandler = handler;
+        aboutHandler = handler;
     }
 
 
     void
     setOpenApplicationHandler(YoixObject handler) {
 
-	openApplicationHandler = handler;
+        openApplicationHandler = handler;
     }
 
 
     void
     setOpenFileHandler(YoixObject handler) {
 
-	openFileHandler = handler;
+        openFileHandler = handler;
     }
 
 
     void
     setPreferencesHandler(YoixObject handler) {
 
-	preferencesHandler = handler;
+        preferencesHandler = handler;
     }
 
 
     void
     setPrintFileHandler(YoixObject handler) {
 
-	printFileHandler = handler;
+        printFileHandler = handler;
     }
 
 
     void
     setQuitHandler(YoixObject handler) {
 
-	quitHandler = handler;
+        quitHandler = handler;
     }
 
 
     void
     setReOpenApplicationHandler(YoixObject handler) {
 
-	reOpenApplicationHandler = handler;
+        reOpenApplicationHandler = handler;
     }
 }

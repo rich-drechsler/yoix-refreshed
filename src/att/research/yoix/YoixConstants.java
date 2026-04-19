@@ -17,8 +17,8 @@ public
 interface YoixConstants
 
     extends YoixParserConstants,
-	    YoixConstantsError,
-	    YoixConstantsJFC
+            YoixConstantsError,
+            YoixConstantsJFC
 
 {
 
@@ -46,15 +46,15 @@ interface YoixConstants
     static final String  JAVAMAXVERSION = null;
 
     static final String  JAVAVERSIONERROR =
-	"Unsupported Java Version" +
-	"\n" +
-	" Your version of Java is too old to be used with this interpreter.\n" +
-	" We require version " + JAVAMINVERSION + " or newer, which should be available at:\n" +
-	"\n" +
-	"         http://java.sun.com/downloads/\n" +
-	"\n" +
-	" Look under J2SE and probably start by choosing one of the JRE\n" +
-	" packages.\n";
+        "Unsupported Java Version" +
+        "\n" +
+        " Your version of Java is too old to be used with this interpreter.\n" +
+        " We require version " + JAVAMINVERSION + " or newer, which should be available at:\n" +
+        "\n" +
+        "         http://java.sun.com/downloads/\n" +
+        "\n" +
+        " Look under J2SE and probably start by choosing one of the JRE\n" +
+        " packages.\n";
 
     //
     // Some useful system properties - using YoixMisc.getProperty() instead

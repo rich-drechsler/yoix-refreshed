@@ -17,10 +17,10 @@ import java.util.*;
 class SimpleNode
 
     implements YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCloneable,
-	       Node,
-	       Serializable
+               YoixInterfaceBody,
+               YoixInterfaceCloneable,
+               Node,
+               Serializable
 
 {
 
@@ -50,15 +50,15 @@ class SimpleNode
     private static SimpleNode  tagged_template;
 
     static {
-	bound_lvalue_template = new SimpleNode(BOUND_LVALUE, 1);
-	bound_lvalue_template.value[0] = null;
+        bound_lvalue_template = new SimpleNode(BOUND_LVALUE, 1);
+        bound_lvalue_template.value[0] = null;
 
-	name_template = new SimpleNode(NAME, 1);
-	name_template.value[0] = null;
+        name_template = new SimpleNode(NAME, 1);
+        name_template.value[0] = null;
 
-	tagged_template = new SimpleNode(TAGGED, 2);
-	tagged_template.value[0] = null;
-	tagged_template.value[1] = null;
+        tagged_template = new SimpleNode(TAGGED, 2);
+        tagged_template.value[0] = null;
+        tagged_template.value[1] = null;
     }
 
     ///////////////////////////////////
@@ -69,53 +69,53 @@ class SimpleNode
 
     SimpleNode(int type) {
 
-	this.type = (short)type;
-	this.value = new Object[0];	// we guarantee it's never null
+        this.type = (short)type;
+        this.value = new Object[0];	// we guarantee it's never null
     }
 
 
     SimpleNode(int type, int length) {
 
-	this.type = (short)type;
-	this.value = new Object[length];
+        this.type = (short)type;
+        this.value = new Object[length];
     }
 
 
     SimpleNode(int type, Object child) {
 
-	this.type = (short)type;
-	this.value = new Object[] {child};
+        this.type = (short)type;
+        this.value = new Object[] {child};
     }
 
 
     SimpleNode(Object parser, int type) {
 
-	//
-	// JavaCC sometimes generates these calls, so this can't be
-	// eliminated even though we ignore the parser argument.
-	//
+        //
+        // JavaCC sometimes generates these calls, so this can't be
+        // eliminated even though we ignore the parser argument.
+        //
 
-	this.type = (short)type;
-	this.value = new Object[0];	// we guarantee it's never null
+        this.type = (short)type;
+        this.value = new Object[0];	// we guarantee it's never null
     }
 
 
     SimpleNode(YoixPointerActive body) {
 
-	//
-	// Added so custom modules could extend YoixObject. See the
-	// comments in the cooresponding YoixObject constructor.
-	//
+        //
+        // Added so custom modules could extend YoixObject. See the
+        // comments in the cooresponding YoixObject constructor.
+        //
 
-	this.type = (short)POINTER;
-	this.value = new Object[] {body, body.getTypename()};
+        this.type = (short)POINTER;
+        this.value = new Object[] {body, body.getTypename()};
     }
 
 
     SimpleNode(YoixInterfaceBody body, String typename) {
 
-	this.type = (short)POINTER;
-	this.value = new Object[] {body, typename};
+        this.type = (short)POINTER;
+        this.value = new Object[] {body, typename};
     }
 
     ///////////////////////////////////
@@ -127,73 +127,73 @@ class SimpleNode
     private void
     readObject(ObjectInputStream in)
 
-	throws IOException,
-	       ClassNotFoundException
+        throws IOException,
+               ClassNotFoundException
 
     {
 
-	Object  obj;
-	int     length;
-	int     n;
+        Object  obj;
+        int     length;
+        int     n;
 
-	type = in.readShort();
-	length = in.readInt();
-	value = new Object[length];
+        type = in.readShort();
+        length = in.readInt();
+        value = new Object[length];
 
-	//
-	// Need this to read what writeObject() just wrote.
-	//
+        //
+        // Need this to read what writeObject() just wrote.
+        //
 
-	for (n = 0; n < length; n++) {
-	    obj = in.readObject();
-	    if (type == POINTER && obj instanceof String)
-		value[n] = new YoixBodyString((String)obj);
-	    else value[n] = obj;
-	}
+        for (n = 0; n < length; n++) {
+            obj = in.readObject();
+            if (type == POINTER && obj instanceof String)
+                value[n] = new YoixBodyString((String)obj);
+            else value[n] = obj;
+        }
     }
 
 
     private void
     writeObject(java.io.ObjectOutputStream out)
 
-	throws IOException
+        throws IOException
 
     {
 
-	Object  obj;
-	int     length;
-	int     n;
+        Object  obj;
+        int     length;
+        int     n;
 
-	//
-	// For some reason (that probably needs to be investigated) Java's
-	// default serialization turns string literals in the parse tree
-	// into empty strings, which obviously breaks things, but handling
-	// them here seems to work. Default serialization doesn't seem to
-	// have problems with objects like YoixBodyNumber and YoixBodyNull,
-	// which is something that also needs to be investigated!!
-	//
-	// NOTE - we just removed Serializable from YoixBodyString.java, so
-	// without this method many parse trees wouldn't serialize.
-	//
-	// NOTE - we turn all Yoix dictionaries into Yoix integers because
-	// we can't serialize them but we can assume that all dictionaries
-	// in a parse trees are used to support local storage in a compound
-	// statements and were created from a Yoix integer that originally
-	// was in the parse tree (see getLocalNode()).
-	//
+        //
+        // For some reason (that probably needs to be investigated) Java's
+        // default serialization turns string literals in the parse tree
+        // into empty strings, which obviously breaks things, but handling
+        // them here seems to work. Default serialization doesn't seem to
+        // have problems with objects like YoixBodyNumber and YoixBodyNull,
+        // which is something that also needs to be investigated!!
+        //
+        // NOTE - we just removed Serializable from YoixBodyString.java, so
+        // without this method many parse trees wouldn't serialize.
+        //
+        // NOTE - we turn all Yoix dictionaries into Yoix integers because
+        // we can't serialize them but we can assume that all dictionaries
+        // in a parse trees are used to support local storage in a compound
+        // statements and were created from a Yoix integer that originally
+        // was in the parse tree (see getLocalNode()).
+        //
 
-	out.writeShort(type);
-	length = value.length;
-	out.writeInt(length);
+        out.writeShort(type);
+        length = value.length;
+        out.writeInt(length);
 
-	for (n = 0; n < length; n++) {
-	    obj = value[n];
-	    if (type == POINTER && obj instanceof YoixBodyString)
-		out.writeObject(((YoixBodyString)obj).stringValue(0));
-	    else if (obj instanceof YoixObject && ((YoixObject)obj).isDictionary())
-		out.writeObject(YoixObject.newInt(((YoixObject)obj).length()));
-	    else out.writeObject(obj);
-	}
+        for (n = 0; n < length; n++) {
+            obj = value[n];
+            if (type == POINTER && obj instanceof YoixBodyString)
+                out.writeObject(((YoixBodyString)obj).stringValue(0));
+            else if (obj instanceof YoixObject && ((YoixObject)obj).isDictionary())
+                out.writeObject(YoixObject.newInt(((YoixObject)obj).length()));
+            else out.writeObject(obj);
+        }
     }
 
     ///////////////////////////////////
@@ -205,25 +205,25 @@ class SimpleNode
     public synchronized Object
     clone() {
 
-	SimpleNode  node;
+        SimpleNode  node;
 
-	try {
-	    node = (SimpleNode)super.clone();
-	    node.value = new Object[node.value.length];
-	    System.arraycopy(value, 0, node.value, 0, node.value.length);
-	}
-	catch(CloneNotSupportedException e) {
-	    VM.die(INTERNALERROR);
-	    node = null;
-	}
-	return(node);
+        try {
+            node = (SimpleNode)super.clone();
+            node.value = new Object[node.value.length];
+            System.arraycopy(value, 0, node.value, 0, node.value.length);
+        }
+        catch(CloneNotSupportedException e) {
+            VM.die(INTERNALERROR);
+            node = null;
+        }
+        return(node);
     }
 
 
     public Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -235,28 +235,28 @@ class SimpleNode
     public String
     dump() {
 
-	return(dump(PARSER_YOIX));
+        return(dump(PARSER_YOIX));
     }
 
 
     public int
     length() {
 
-	return(value.length);
+        return(value.length);
     }
 
 
     public String
     toString() {
 
-	return(dump());
+        return(dump());
     }
 
 
     public int
     type() {
 
-	return(type);
+        return(type);
     }
 
     ///////////////////////////////////
@@ -268,16 +268,16 @@ class SimpleNode
     public final void
     jjtAddChild(Node node, int index) {
 
-	Object  copy[];
-	int     length;
+        Object  copy[];
+        int     length;
 
-	if ((length = value.length) <= index) {
-	    copy = new Object[index + 1];
-	    System.arraycopy(value, 0, copy, 0, length);
-	    value = copy;
-	}
+        if ((length = value.length) <= index) {
+            copy = new Object[index + 1];
+            System.arraycopy(value, 0, copy, 0, length);
+            value = copy;
+        }
 
-	value[index] = (SimpleNode)node;	// make sure???
+        value[index] = (SimpleNode)node;	// make sure???
     }
 
 
@@ -290,21 +290,21 @@ class SimpleNode
     public final Node
     jjtGetChild(int index) {
 
-	return((index >= 0 && index < value.length) ? (Node)value[index] : null);
+        return((index >= 0 && index < value.length) ? (Node)value[index] : null);
     }
 
 
     public final int
     jjtGetNumChildren() {
 
-	return(value.length);
+        return(value.length);
     }
 
 
     public final Node
     jjtGetParent() {
 
-	return(null);
+        return(null);
     }
 
 
@@ -328,306 +328,306 @@ class SimpleNode
     final SimpleNode
     construct() {
 
-	SimpleNode  node;
+        SimpleNode  node;
 
-	try {
-	    node = (SimpleNode)super.clone();
-	    node.value = new Object[value.length];
-	}
-	catch(CloneNotSupportedException e) {
-	    node = VM.die(INTERNALERROR);
-	}
-	return(node);
+        try {
+            node = (SimpleNode)super.clone();
+            node.value = new Object[value.length];
+        }
+        catch(CloneNotSupportedException e) {
+            node = VM.die(INTERNALERROR);
+        }
+        return(node);
     }
 
 
     final SimpleNode
     construct(String name) {
 
-	SimpleNode  node;
+        SimpleNode  node;
 
-	try {
-	    node = (SimpleNode)super.clone();
-	    node.value = new Object[] {name};
-	}
-	catch(CloneNotSupportedException e) {
-	    node = VM.die(INTERNALERROR);
-	}
-	return(node);
+        try {
+            node = (SimpleNode)super.clone();
+            node.value = new Object[] {name};
+        }
+        catch(CloneNotSupportedException e) {
+            node = VM.die(INTERNALERROR);
+        }
+        return(node);
     }
 
 
     final YoixObject
     construct(YoixInterfaceBody body) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	try {
-	    obj = (YoixObject)super.clone();
-	    obj.value = new Object[] {body};
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
-	return(obj);
+        try {
+            obj = (YoixObject)super.clone();
+            obj.value = new Object[] {body};
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
+        return(obj);
     }
 
 
     final YoixObject
     construct(YoixInterfaceBody body, String typename) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	try {
-	    obj = (YoixObject)super.clone();
-	    obj.value = new Object[] {body, typename};
-	    if (typename == null) {
-		if (body instanceof YoixPointerActive)
-		    obj.value[1] = ((YoixPointerActive)body).getTypename();
-	    }
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
-	return(obj);
+        try {
+            obj = (YoixObject)super.clone();
+            obj.value = new Object[] {body, typename};
+            if (typename == null) {
+                if (body instanceof YoixPointerActive)
+                    obj.value[1] = ((YoixPointerActive)body).getTypename();
+            }
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
+        return(obj);
     }
 
 
     final void
     deleteChildren(int from, int upto) {
 
-	Object  tmparr[];
+        Object  tmparr[];
 
-	if (upto < 0)
-	    upto = 0;
-	if (upto > value.length)
-	    upto = value.length;
-	if (from < 0)
-	    from = 0;
-	if (from < upto) {
-	    tmparr = new Object[value.length - (upto - from)];
-	    if (from > 0)
-		System.arraycopy(value, 0, tmparr, 0, from);
-	    if (upto < value.length)
-		System.arraycopy(value, upto, tmparr, from, value.length - upto);
-	    value = tmparr;
-	}
+        if (upto < 0)
+            upto = 0;
+        if (upto > value.length)
+            upto = value.length;
+        if (from < 0)
+            from = 0;
+        if (from < upto) {
+            tmparr = new Object[value.length - (upto - from)];
+            if (from > 0)
+                System.arraycopy(value, 0, tmparr, 0, from);
+            if (upto < value.length)
+                System.arraycopy(value, upto, tmparr, from, value.length - upto);
+            value = tmparr;
+        }
     }
 
 
     final String
     dump(int parser) {
 
-	return(dumpTree("", new StringBuffer(), parser).toString());
+        return(dumpTree("", new StringBuffer(), parser).toString());
     }
 
 
     final YoixParserBvalue
     getBvalue() {
 
-	return(value[0] instanceof YoixParserBvalue ? (YoixParserBvalue)value[0] : null);
+        return(value[0] instanceof YoixParserBvalue ? (YoixParserBvalue)value[0] : null);
     }
 
 
     final SimpleNode
     getChild(int index) {
 
-	return((index >= 0 && index < value.length) ? (SimpleNode)value[index] : null);
+        return((index >= 0 && index < value.length) ? (SimpleNode)value[index] : null);
     }
 
 
     final SimpleNode
     getChild0() {
 
-	return(value.length > 0 ? (SimpleNode)value[0] : null);
+        return(value.length > 0 ? (SimpleNode)value[0] : null);
     }
 
 
     final SimpleNode
     getChild1() {
 
-	return(value.length > 1 ? (SimpleNode)value[1] : null);
+        return(value.length > 1 ? (SimpleNode)value[1] : null);
     }
 
 
     final SimpleNode
     getChild2() {
 
-	return(value.length > 2 ? (SimpleNode)value[2] : null);
+        return(value.length > 2 ? (SimpleNode)value[2] : null);
     }
 
 
     final SimpleNode
     getChild3() {
 
-	return(value.length > 3 ? (SimpleNode)value[3] : null);
+        return(value.length > 3 ? (SimpleNode)value[3] : null);
     }
 
 
     final SimpleNode
     getChildLast() {
 
-	return(value.length > 0 ? (SimpleNode)value[value.length - 1] : null);
+        return(value.length > 0 ? (SimpleNode)value[value.length - 1] : null);
     }
 
 
     final synchronized YoixObject
     getJumpTable() {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	if (value.length == 3) {
-	    obj = (YoixObject)value[2];
-	    if (obj.isNull()) {
-		obj = YoixInterpreter.getJumpTable((SimpleNode)value[1]);
-		value[2] = obj;
-	    }
-	} else obj = VM.die(INTERNALERROR);
-	return(obj);
+        if (value.length == 3) {
+            obj = (YoixObject)value[2];
+            if (obj.isNull()) {
+                obj = YoixInterpreter.getJumpTable((SimpleNode)value[1]);
+                value[2] = obj;
+            }
+        } else obj = VM.die(INTERNALERROR);
+        return(obj);
     }
 
 
     final synchronized YoixObject
     getLocalDict() {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	if (value.length > 0) {
-	    obj = (YoixObject)value[value.length - 1];
-	    if (obj.isDictionary() == false) {
-		if (obj.isInteger()) {
-		    obj = YoixObject.newDictionary(obj.intValue());
-		    value[value.length - 1] = obj;
-		} else VM.die(INTERNALERROR);
-	    }
-	} else obj = null;
-	return(obj);
+        if (value.length > 0) {
+            obj = (YoixObject)value[value.length - 1];
+            if (obj.isDictionary() == false) {
+                if (obj.isInteger()) {
+                    obj = YoixObject.newDictionary(obj.intValue());
+                    value[value.length - 1] = obj;
+                } else VM.die(INTERNALERROR);
+            }
+        } else obj = null;
+        return(obj);
     }
 
 
     final YoixObject
     getTaggedLocation() {
 
-	return(type == TAGGED ? (YoixObject)value[0] : YoixObject.newEmpty());
+        return(type == TAGGED ? (YoixObject)value[0] : YoixObject.newEmpty());
     }
 
 
     final SimpleNode
     getTaggedNode() {
 
-	return(type == TAGGED ? (SimpleNode)value[1] : this);
+        return(type == TAGGED ? (SimpleNode)value[1] : this);
     }
 
 
     final String
     getTypename() {
 
-	return(value.length > 1 ? (String)value[1] : null);
+        return(value.length > 1 ? (String)value[1] : null);
     }
 
 
     int
     intValue() {
 
-	return(value[0] instanceof Number ? ((Number)value[0]).intValue() : 0);
+        return(value[0] instanceof Number ? ((Number)value[0]).intValue() : 0);
     }
 
 
     final void
     jjtAppendChild(SimpleNode node) {
 
-	jjtAddChild(node, value.length);
+        jjtAddChild(node, value.length);
     }
 
 
     final void
     jjtInsertChild(SimpleNode node, int index) {
 
-	Object  copy[];
-	int     length;
+        Object  copy[];
+        int     length;
 
-	length = value.length;
-	copy = new Object[length + 1];
+        length = value.length;
+        copy = new Object[length + 1];
 
-	// assumes index <= length
+        // assumes index <= length
 
-	if (index > 0)
-	    System.arraycopy(value, 0, copy, 0, index);
-	copy[index] = node;
-	if (index < length)
-	    System.arraycopy(value, index, copy, index + 1, length - index);
-	value = copy;
+        if (index > 0)
+            System.arraycopy(value, 0, copy, 0, index);
+        copy[index] = node;
+        if (index < length)
+            System.arraycopy(value, index, copy, index + 1, length - index);
+        value = copy;
     }
 
 
     static SimpleNode
     newBoundLvalue(String name, int level, int offset) {
 
-	SimpleNode  node;
+        SimpleNode  node;
 
-	node = (SimpleNode)bound_lvalue_template.construct();
-	node.value[0] = new YoixParserBvalue(name, level, offset);
-	return(node);
+        node = (SimpleNode)bound_lvalue_template.construct();
+        node.value[0] = new YoixParserBvalue(name, level, offset);
+        return(node);
     }
 
 
     static SimpleNode
     newName(String image) {
 
-	return(name_template.construct(image));
+        return(name_template.construct(image));
     }
 
 
     static SimpleNode
     newTagged(SimpleNode statement, int line, String source) {
 
-	SimpleNode  node;
+        SimpleNode  node;
 
-	node = (SimpleNode)tagged_template.construct();
-	node.value[0] = YoixObject.newTag(line, -1, source);
-	node.value[1] = statement;
-	return(node);
+        node = (SimpleNode)tagged_template.construct();
+        node.value[0] = YoixObject.newTag(line, -1, source);
+        node.value[1] = statement;
+        return(node);
     }
 
 
     final void
     setType(int type) {
 
-	this.type = (short)type;
+        this.type = (short)type;
     }
 
 
     final void
     setTypename(String name) {
 
-	if (value.length == 1)
-	    jjtAddChild(null, 1);
-	value[1] = name;
+        if (value.length == 1)
+            jjtAddChild(null, 1);
+        value[1] = name;
     }
 
 
     String
     stringValue() {
 
-	return(value[0] instanceof String ? (String)value[0] : null);
+        return(value[0] instanceof String ? (String)value[0] : null);
     }
 
 
     static final String
     typeString(int type) {
 
-	return(YoixMisc.tokenImage(type));
+        return(YoixMisc.tokenImage(type));
     }
 
 
     static final String
     typeString(int type, int parser) {
 
-	String  image;
+        String  image;
 
-	if ((image = YoixMisc.tokenImage(type, parser)) == null)
-	    image = type + "";
-	return(image);
+        if ((image = YoixMisc.tokenImage(type, parser)) == null)
+            image = type + "";
+        return(image);
     }
 
     ///////////////////////////////////
@@ -639,51 +639,51 @@ class SimpleNode
     private StringBuffer
     dumpTree(String indent, StringBuffer buf, int parser) {
 
-	Object  child;
-	int     size;
-	int     n;
+        Object  child;
+        int     size;
+        int     n;
 
-	buf.append(indent);
-	size = value.length;
+        buf.append(indent);
+        size = value.length;
 
-	if (type >= 0 && size > 0) {
-	    child = value[0];
-	    if (child instanceof SimpleNode) {
-		buf.append('<');
-		buf.append(typeString(type, parser));
-		buf.append(" <#");
-		buf.append(size);
-		buf.append(">>");
-		buf.append(NL);
-		for (n = 0; n < size; n++) {
-		    child = value[n];
-		    if (child instanceof SimpleNode) {
-			((SimpleNode)child).dumpTree(indent + " ", buf, parser);
-		    } else {
-			buf.append(indent);
-			buf.append(" value[");
-			buf.append(n);
-			buf.append("]=");
-			buf.append(child.toString());
-			buf.append(NL);
-		    }
-		}
-	    } else {
-		buf.append('<');
-		buf.append(typeString(type, parser));
-		buf.append(' ');
-		buf.append(child.toString());
-		buf.append('>');
-		buf.append(NL);
-	    }
-	} else {
-	    buf.append('<');
-	    buf.append(typeString(type, parser));
-	    buf.append('>');
-	    buf.append(NL);
-	}
+        if (type >= 0 && size > 0) {
+            child = value[0];
+            if (child instanceof SimpleNode) {
+                buf.append('<');
+                buf.append(typeString(type, parser));
+                buf.append(" <#");
+                buf.append(size);
+                buf.append(">>");
+                buf.append(NL);
+                for (n = 0; n < size; n++) {
+                    child = value[n];
+                    if (child instanceof SimpleNode) {
+                        ((SimpleNode)child).dumpTree(indent + " ", buf, parser);
+                    } else {
+                        buf.append(indent);
+                        buf.append(" value[");
+                        buf.append(n);
+                        buf.append("]=");
+                        buf.append(child.toString());
+                        buf.append(NL);
+                    }
+                }
+            } else {
+                buf.append('<');
+                buf.append(typeString(type, parser));
+                buf.append(' ');
+                buf.append(child.toString());
+                buf.append('>');
+                buf.append(NL);
+            }
+        } else {
+            buf.append('<');
+            buf.append(typeString(type, parser));
+            buf.append('>');
+            buf.append(NL);
+        }
 
-	return(buf);
+        return(buf);
     }
 }
 

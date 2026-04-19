@@ -18,8 +18,8 @@ import java.util.*;
 class YoixInterruptable
 
     implements Runnable,
-	       YoixConstants,
-	       YoixInterfaceKillable
+               YoixConstants,
+               YoixInterfaceKillable
 
 {
 
@@ -84,7 +84,7 @@ class YoixInterruptable
 
     YoixInterruptable(Object source) {
 
-	this.source = source;
+        this.source = source;
     }
 
     ///////////////////////////////////
@@ -96,42 +96,42 @@ class YoixInterruptable
     public final void
     run() {
 
-	try {
-	    switch (operation) {
-		case ACCEPT:
-		    if (source instanceof ServerSocket)
-			result = ((ServerSocket)source).accept();
-		    break;
+        try {
+            switch (operation) {
+                case ACCEPT:
+                    if (source instanceof ServerSocket)
+                        result = ((ServerSocket)source).accept();
+                    break;
 
-		case GETINPUTSTREAM:
-		    if (source instanceof URLConnection)
-			result = ((URLConnection)source).getInputStream();
-		    break;
+                case GETINPUTSTREAM:
+                    if (source instanceof URLConnection)
+                        result = ((URLConnection)source).getInputStream();
+                    break;
 
-		case GETOUTPUTSTREAM:
-		    if (source instanceof URLConnection)
-			result = ((URLConnection)source).getOutputStream();
-		    break;
+                case GETOUTPUTSTREAM:
+                    if (source instanceof URLConnection)
+                        result = ((URLConnection)source).getOutputStream();
+                    break;
 
-		case RECEIVE:
-		    if (source instanceof DatagramSocket) {
-			((DatagramSocket)source).receive((DatagramPacket)arg);
-			result = Boolean.TRUE;
-		    }
-		    break;
-	    }
-	}
-	catch(Exception e) {
-	    caught = e;
-	}
-	finally {
-	    try {
-		synchronized(this) {
-		    notifyAll();
-		}
-	    }
-	    catch(Exception e) {}
-	}
+                case RECEIVE:
+                    if (source instanceof DatagramSocket) {
+                        ((DatagramSocket)source).receive((DatagramPacket)arg);
+                        result = Boolean.TRUE;
+                    }
+                    break;
+            }
+        }
+        catch(Exception e) {
+            caught = e;
+        }
+        finally {
+            try {
+                synchronized(this) {
+                    notifyAll();
+                }
+            }
+            catch(Exception e) {}
+        }
     }
 
     ///////////////////////////////////
@@ -154,114 +154,114 @@ class YoixInterruptable
     protected final void
     finalize() {
 
-	thread = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        thread = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     final Socket
     accept()
 
-	throws IOException
+        throws IOException
 
     {
 
-	try {
-	    operation = ACCEPT;
-	    caught = null;
-	    result = null;
-	    startThread();
-	}
-	finally {
-	    if (Thread.currentThread().isInterrupted())
-		throw(new InterruptedIOException());
-	    else if (caught != null)
-		throw(new IOException(caught.getMessage()));
-	    else if (result == null)
-		throw(new IOException());
-	}
+        try {
+            operation = ACCEPT;
+            caught = null;
+            result = null;
+            startThread();
+        }
+        finally {
+            if (Thread.currentThread().isInterrupted())
+                throw(new InterruptedIOException());
+            else if (caught != null)
+                throw(new IOException(caught.getMessage()));
+            else if (result == null)
+                throw(new IOException());
+        }
 
-	return((Socket)result);
+        return((Socket)result);
     }
 
 
     final InputStream
     getInputStream()
 
-	throws IOException
+        throws IOException
 
     {
 
-	try {
-	    operation = GETINPUTSTREAM;
-	    caught = null;
-	    result = null;
-	    startThread();
-	}
-	finally {
-	    if (Thread.currentThread().isInterrupted())
-		throw(new InterruptedIOException());
-	    else if (caught != null)
-		throw(new IOException(caught.getMessage()));
-	    else if (result == null)
-		throw(new IOException());
-	}
+        try {
+            operation = GETINPUTSTREAM;
+            caught = null;
+            result = null;
+            startThread();
+        }
+        finally {
+            if (Thread.currentThread().isInterrupted())
+                throw(new InterruptedIOException());
+            else if (caught != null)
+                throw(new IOException(caught.getMessage()));
+            else if (result == null)
+                throw(new IOException());
+        }
 
-	return((InputStream)result);
+        return((InputStream)result);
     }
 
 
     final OutputStream
     getOutputStream()
 
-	throws IOException
+        throws IOException
 
     {
 
-	try {
-	    operation = GETOUTPUTSTREAM;
-	    caught = null;
-	    result = null;
-	    startThread();
-	}
-	finally {
-	    if (Thread.currentThread().isInterrupted())
-		throw(new InterruptedIOException());
-	    else if (caught != null)
-		throw(new IOException(caught.getMessage()));
-	    else if (result == null)
-		throw(new IOException());
-	}
+        try {
+            operation = GETOUTPUTSTREAM;
+            caught = null;
+            result = null;
+            startThread();
+        }
+        finally {
+            if (Thread.currentThread().isInterrupted())
+                throw(new InterruptedIOException());
+            else if (caught != null)
+                throw(new IOException(caught.getMessage()));
+            else if (result == null)
+                throw(new IOException());
+        }
 
-	return((OutputStream)result);
+        return((OutputStream)result);
     }
 
 
     final void
     receive(DatagramPacket p)
 
-	throws IOException
+        throws IOException
 
     {
 
-	try {
-	    operation = RECEIVE;
-	    caught = null;
-	    arg = p;
-	    result = null;
-	    startThread();
-	}
-	finally {
-	    if (Thread.currentThread().isInterrupted())
-		throw(new InterruptedIOException());
-	    else if (caught != null)
-		throw(new IOException(caught.getMessage()));
-	    else if (result == null)
-		throw(new IOException());
-	}
+        try {
+            operation = RECEIVE;
+            caught = null;
+            arg = p;
+            result = null;
+            startThread();
+        }
+        finally {
+            if (Thread.currentThread().isInterrupted())
+                throw(new InterruptedIOException());
+            else if (caught != null)
+                throw(new IOException(caught.getMessage()));
+            else if (result == null)
+                throw(new IOException());
+        }
     }
 
     ///////////////////////////////////
@@ -273,58 +273,58 @@ class YoixInterruptable
     private synchronized void
     startThread() {
 
-	String  message;
+        String  message;
 
-	//
-	// We realize stop() has been deprecated, but thread was only
-	// started to handle the uninterruptable operation, so stop()
-	// probably is the only way the operation can be interrupted.
-	// In addition, thread is completely isolated from the rest of
-	// Yoix, so stop(), if it works, shouldn't corrupt any of the
-	// interpreter's data structures.
-	//
+        //
+        // We realize stop() has been deprecated, but thread was only
+        // started to handle the uninterruptable operation, so stop()
+        // probably is the only way the operation can be interrupted.
+        // In addition, thread is completely isolated from the rest of
+        // Yoix, so stop(), if it works, shouldn't corrupt any of the
+        // interpreter's data structures.
+        //
 
-	if (thread == null) {
-	    try {
-		thread = new YoixThread(this);
-		running = true;
-		thread.start();
-		try {
-		    wait();
-		}
-		catch(InterruptedException e) {
-		    Thread.currentThread().interrupt();
-		}
-	    }
-	    catch(IllegalThreadStateException e) {}
-	    finally {
-		running = false;
-		if (thread != null) {
-		    if (thread.isAlive()) {
-			if (running && STOPPABLE) {
-			    if (VM.bitCheck(N_DEBUG, DEBUG_STOPTHREAD)) {
-				message = "stop[" + operation + "] " + thread;
-				VM.println(N_STDOUT, "stop[" + operation + "] " + thread);
-				VM.saveException(message);
-			    }
-			    thread.stop();
-			}
-			if (running) {
-			    if (VM.bitCheck(N_DEBUG, DEBUG_STOPTHREAD)) {
-				message = "thread " + thread +
-				    " handling interruptable operation " + operation +
-				    " has" + (STOPPABLE ? " " : " not " + "been stopped");
-				VM.println(N_STDOUT, message);
-				VM.saveException(message);
-			    }
-			    if (STOPPABLE)
-				thread.stop();
-			}
-		    }
-		    thread = null;
-		}
-	    }
-	} else VM.die(INTERNALERROR);	// careless coding - it should not happen!!
+        if (thread == null) {
+            try {
+                thread = new YoixThread(this);
+                running = true;
+                thread.start();
+                try {
+                    wait();
+                }
+                catch(InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            catch(IllegalThreadStateException e) {}
+            finally {
+                running = false;
+                if (thread != null) {
+                    if (thread.isAlive()) {
+                        if (running && STOPPABLE) {
+                            if (VM.bitCheck(N_DEBUG, DEBUG_STOPTHREAD)) {
+                                message = "stop[" + operation + "] " + thread;
+                                VM.println(N_STDOUT, "stop[" + operation + "] " + thread);
+                                VM.saveException(message);
+                            }
+                            thread.stop();
+                        }
+                        if (running) {
+                            if (VM.bitCheck(N_DEBUG, DEBUG_STOPTHREAD)) {
+                                message = "thread " + thread +
+                                    " handling interruptable operation " + operation +
+                                    " has" + (STOPPABLE ? " " : " not " + "been stopped");
+                                VM.println(N_STDOUT, message);
+                                VM.saveException(message);
+                            }
+                            if (STOPPABLE)
+                                thread.stop();
+                        }
+                    }
+                    thread = null;
+                }
+            }
+        } else VM.die(INTERNALERROR);	// careless coding - it should not happen!!
     }
 }
 

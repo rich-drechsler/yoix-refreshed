@@ -38,89 +38,89 @@ class JVMClassLoader extends ClassLoader
     public Class
     defineClass(String source)
 
-	throws ClassFormatError,
-	       IllegalArgumentException,
-	       JVMAssemblerError
+        throws ClassFormatError,
+               IllegalArgumentException,
+               JVMAssemblerError
 
     {
 
-	return(defineClass(source, 1));
+        return(defineClass(source, 1));
     }
 
 
     public Class
     defineClass(String source, int linenumber)
 
-	throws ClassFormatError,
-	       IllegalArgumentException,
-	       JVMAssemblerError
+        throws ClassFormatError,
+               IllegalArgumentException,
+               JVMAssemblerError
 
     {
 
-	JVMClassFile  classfile;
-	Class         defined_class = null;
+        JVMClassFile  classfile;
+        Class         defined_class = null;
 
-	if (source != null) {
-	    if ((classfile = (new JVMAssembler()).assembleClass(source, linenumber)) != null)
-		defined_class = defineClass(classfile);
-	}
+        if (source != null) {
+            if ((classfile = (new JVMAssembler()).assembleClass(source, linenumber)) != null)
+                defined_class = defineClass(classfile);
+        }
 
-	return(defined_class);
+        return(defined_class);
     }
 
 
     public Class
     defineClass(JVMClassFile classfile)
 
-	throws ClassFormatError,
-	       IllegalArgumentException
+        throws ClassFormatError,
+               IllegalArgumentException
 
     {
 
-	String  classname;
-	String  packagename;
-	Class   defined_class = null;
-	byte    bytes[];
-	int     index;
+        String  classname;
+        String  packagename;
+        Class   defined_class = null;
+        byte    bytes[];
+        int     index;
 
-	if (classfile != null) {
-	    if ((bytes = classfile.getBytes()) != null) {
-		classname = classfile.getClassName();
-		if ((index = classname.lastIndexOf('.')) >= 0) {
-		    packagename = classname.substring(0, index);
-		    if (getPackage(packagename) == null)
-			definePackage(packagename, null, null, null, null, null, null, null);
-		}
-		defined_class = defineClass(classname, bytes, 0, bytes.length, null);
-	    }
-	}
+        if (classfile != null) {
+            if ((bytes = classfile.getBytes()) != null) {
+                classname = classfile.getClassName();
+                if ((index = classname.lastIndexOf('.')) >= 0) {
+                    packagename = classname.substring(0, index);
+                    if (getPackage(packagename) == null)
+                        definePackage(packagename, null, null, null, null, null, null, null);
+                }
+                defined_class = defineClass(classname, bytes, 0, bytes.length, null);
+            }
+        }
 
-	return(defined_class);
+        return(defined_class);
     }
 
 
     public Class
     defineClass(byte bytes[], String classname)
 
-	throws ClassFormatError,
-	       IllegalArgumentException
+        throws ClassFormatError,
+               IllegalArgumentException
 
     {
 
-	String  packagename;
-	Class   defined_class = null;
-	int     index;
+        String  packagename;
+        Class   defined_class = null;
+        int     index;
 
-	if (bytes != null && classname != null) {
-	    if ((index = classname.lastIndexOf('.')) >= 0) {
-		packagename = classname.substring(0, index);
-		if (getPackage(packagename) == null)
-		    definePackage(packagename, null, null, null, null, null, null, null);
-	    }
-	    defined_class = defineClass(classname, bytes, 0, bytes.length, null);
-	}
+        if (bytes != null && classname != null) {
+            if ((index = classname.lastIndexOf('.')) >= 0) {
+                packagename = classname.substring(0, index);
+                if (getPackage(packagename) == null)
+                    definePackage(packagename, null, null, null, null, null, null, null);
+            }
+            defined_class = defineClass(classname, bytes, 0, bytes.length, null);
+        }
 
-	return(defined_class);
+        return(defined_class);
     }
 
     ///////////////////////////////////

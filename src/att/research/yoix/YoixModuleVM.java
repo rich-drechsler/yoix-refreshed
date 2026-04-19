@@ -36,26 +36,26 @@ class YoixModuleVM extends YoixModule
     //
 
     static final String RESTRICTED_TYPES[] = {
-	T_ARRAY,
-	T_BUILTIN,
-	T_CALLABLE,
-	T_DICT,
-	T_DOUBLE,
-	T_FUNCTION,
-	T_INT,
-	T_NUMBER,
-	T_OBJECT,
-	T_POINTER,
-	T_STREAM,
-	T_STRING,
+        T_ARRAY,
+        T_BUILTIN,
+        T_CALLABLE,
+        T_DICT,
+        T_DOUBLE,
+        T_FUNCTION,
+        T_INT,
+        T_NUMBER,
+        T_OBJECT,
+        T_POINTER,
+        T_STREAM,
+        T_STRING,
 
-	T_COLOR,
-	T_DIMENSION,
-	T_INSETS,
-	T_MENU,
-	T_POINT,
-	T_RECTANGLE,
-	T_MATRIX,
+        T_COLOR,
+        T_DIMENSION,
+        T_INSETS,
+        T_MENU,
+        T_POINT,
+        T_RECTANGLE,
+        T_MATRIX,
     };
 
     //
@@ -641,200 +641,200 @@ class YoixModuleVM extends YoixModule
     public static YoixObject
     abort(YoixObject arg[]) {
 
-	String  args[];
-	int     n;
+        String  args[];
+        int     n;
 
-	if (arg.length > 0) {
-	    if (arg[0].isString()) {
-		if (arg.length > 1) {
-		    args = new String[arg.length - 1];
-		    for (n = 1; n < arg.length; n++) {
-			if (arg[n].isString())
-			    args[n - 1] = arg[n].stringValue();
-			else VM.badArgument(n);
-		    }
-		} else args = null;
-		VM.abort(arg[0].stringValue(), args, new Throwable());
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length > 0) {
+            if (arg[0].isString()) {
+                if (arg.length > 1) {
+                    args = new String[arg.length - 1];
+                    for (n = 1; n < arg.length; n++) {
+                        if (arg[n].isString())
+                            args[n - 1] = arg[n].stringValue();
+                        else VM.badArgument(n);
+                    }
+                } else args = null;
+                VM.abort(arg[0].stringValue(), args, new Throwable());
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     defined(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	//
-	// NOTE - looks like the two argument version with an integer as
-	// as the first argument forgot to add the target's offset to the
-	// integer. I made the change on 5/13/08, but this really needs
-	// to be carefully tested!!!!
-	//
+        //
+        // NOTE - looks like the two argument version with an integer as
+        // as the first argument forgot to add the target's offset to the
+        // integer. I made the change on 5/13/08, but this really needs
+        // to be carefully tested!!!!
+        //
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].notNull()) {
-		if (arg[0].isString() || arg[0].isInteger()) {
-		    if (arg.length == 2) {
-			if (arg[1].isPointer()) {
-			    if (arg[0].isString())
-				result = arg[1].defined(arg[0].stringValue());
-			    else result = arg[1].defined(arg[1].offset() + arg[0].intValue());		// offset added on 5/13/08
-			} else result = false;
-		    } else {
-			if (arg[0].isString())
-			    result = YoixBodyBlock.isDefined(arg[0].stringValue());
-			else VM.badArgument(0);
-		    }
-		} else if (arg[0].isPointer()) {
-		    if (arg.length == 1)
-			result = arg[0].defined(arg[0].offset());
-		    else VM.badCall();
-		} else VM.badArgument(0);
-	    } else result = false;
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].notNull()) {
+                if (arg[0].isString() || arg[0].isInteger()) {
+                    if (arg.length == 2) {
+                        if (arg[1].isPointer()) {
+                            if (arg[0].isString())
+                                result = arg[1].defined(arg[0].stringValue());
+                            else result = arg[1].defined(arg[1].offset() + arg[0].intValue());		// offset added on 5/13/08
+                        } else result = false;
+                    } else {
+                        if (arg[0].isString())
+                            result = YoixBodyBlock.isDefined(arg[0].stringValue());
+                        else VM.badArgument(0);
+                    }
+                } else if (arg[0].isPointer()) {
+                    if (arg.length == 1)
+                        result = arg[0].defined(arg[0].offset());
+                    else VM.badCall();
+                } else VM.badArgument(0);
+            } else result = false;
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     eval(YoixObject arg[]) {
 
-	DataInputStream  input;
-	YoixBodyStream   stream;
-	YoixObject       value = null;
-	String           name;
+        DataInputStream  input;
+        YoixBodyStream   stream;
+        YoixObject       value = null;
+        String           name;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if ((arg[0].isStream() || arg[0].isString()) && arg[0].notNull()) {
-		if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
-		    if (arg[0].isString() || arg[0].isStringStream())
-			name = (arg.length > 1 && arg[1].notNull()) ? arg[1].stringValue() : "--string--";
-		    else name = arg[0].getString(N_NAME);
-		    if (arg[0].isStream()) {
-			stream = arg[0].streamValue();
-			if ((input = stream.accessDataInputStream()) != null) {
-			    try {
-				value = Yoix.evalStream(YoixMisc.getParserReader(input), name);
-			    }
-			    finally {
-				stream.releaseDataInputStream();
-			    }
-			} else VM.badArgument(0);
-		    } else if (arg[0].isString())
-			value = Yoix.evalString(arg[0].stringValue(), name);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if ((arg[0].isStream() || arg[0].isString()) && arg[0].notNull()) {
+                if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
+                    if (arg[0].isString() || arg[0].isStringStream())
+                        name = (arg.length > 1 && arg[1].notNull()) ? arg[1].stringValue() : "--string--";
+                    else name = arg[0].getString(N_NAME);
+                    if (arg[0].isStream()) {
+                        stream = arg[0].streamValue();
+                        if ((input = stream.accessDataInputStream()) != null) {
+                            try {
+                                value = Yoix.evalStream(YoixMisc.getParserReader(input), name);
+                            }
+                            finally {
+                                stream.releaseDataInputStream();
+                            }
+                        } else VM.badArgument(0);
+                    } else if (arg[0].isString())
+                        value = Yoix.evalString(arg[0].stringValue(), name);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(value);
+        return(value);
     }
 
 
     public static YoixObject
     execute(YoixObject arg[]) {
 
-	YoixBodyStream   stream;
-	InputStream      input;
-	YoixObject       array;
-	YoixObject       value = null;
-	String           name;
+        YoixBodyStream   stream;
+        InputStream      input;
+        YoixObject       array;
+        YoixObject       value = null;
+        String           name;
 
-	if ((arg[0].isStream() || arg[0].isString()) && arg[0].notNull()) {
-	    if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
-		if (arg[0].isString() || arg[0].isStringStream())
-		    name = (arg.length > 1 && arg[1].notNull()) ? arg[1].stringValue() : "--string--";
-		else name = arg[0].getString(N_NAME);
-		if (arg.length > 1) {
-		    if (arg[1].isNull())	// kludge - NULL Object isn't a String
-			arg[1] = YoixObject.newString();
-		    array = YoixMake.yoixArray(arg, 1);
-		    if (arg[1].isNull())
-			array.put(0, YoixObject.newString(name), false);
-		} else {
-		    array = YoixObject.newArray(1);
-		    array.put(0, YoixObject.newString(name), false);
-		}
-		if (arg[0].isStream()) {
-		    stream = arg[0].streamValue();
-		    if ((input = stream.accessDataInputStream()) != null) {
-			try {
-			    if (input.markSupported() == false)
-				input = new BufferedInputStream(input);
-			    value = Yoix.executeStream(input, name, array, null, true);
-			}
-			finally {
-			    stream.releaseDataInputStream();
-			}
-		    } else VM.badArgument(0);
-		} else value = Yoix.executeString(arg[0].stringValue(), name, array, true);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if ((arg[0].isStream() || arg[0].isString()) && arg[0].notNull()) {
+            if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
+                if (arg[0].isString() || arg[0].isStringStream())
+                    name = (arg.length > 1 && arg[1].notNull()) ? arg[1].stringValue() : "--string--";
+                else name = arg[0].getString(N_NAME);
+                if (arg.length > 1) {
+                    if (arg[1].isNull())	// kludge - NULL Object isn't a String
+                        arg[1] = YoixObject.newString();
+                    array = YoixMake.yoixArray(arg, 1);
+                    if (arg[1].isNull())
+                        array.put(0, YoixObject.newString(name), false);
+                } else {
+                    array = YoixObject.newArray(1);
+                    array.put(0, YoixObject.newString(name), false);
+                }
+                if (arg[0].isStream()) {
+                    stream = arg[0].streamValue();
+                    if ((input = stream.accessDataInputStream()) != null) {
+                        try {
+                            if (input.markSupported() == false)
+                                input = new BufferedInputStream(input);
+                            value = Yoix.executeStream(input, name, array, null, true);
+                        }
+                        finally {
+                            stream.releaseDataInputStream();
+                        }
+                    } else VM.badArgument(0);
+                } else value = Yoix.executeString(arg[0].stringValue(), name, array, true);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(value);
+        return(value);
     }
 
 
     public static YoixObject
     toString(YoixObject arg[]) {
 
-	YoixObject  lval;
-	YoixObject  level;
-	String      value = null;
+        YoixObject  lval;
+        YoixObject  level;
+        String      value = null;
 
-	if (arg.length <= 2) {
-	    if (arg.length == 1 || arg[1].isInteger()) {
-		level = YoixObject.newInt(arg.length == 2 ? arg[1].intValue() : 1);
-		if (arg[0].isString() == false) {
-		    if (arg[0].isPointer()) {
-			VM.pushMark();
-			VM.pushRestore(N_DUMPDEPTH, level);
-			value = arg[0].toString().trim();
-			VM.popMark();
-		    } else value = arg[0].toString().trim();
-		} else value = arg[0].stringValue(false);
-	    } else VM.badArgument(1);
-	} else VM.badCall();
+        if (arg.length <= 2) {
+            if (arg.length == 1 || arg[1].isInteger()) {
+                level = YoixObject.newInt(arg.length == 2 ? arg[1].intValue() : 1);
+                if (arg[0].isString() == false) {
+                    if (arg[0].isPointer()) {
+                        VM.pushMark();
+                        VM.pushRestore(N_DUMPDEPTH, level);
+                        value = arg[0].toString().trim();
+                        VM.popMark();
+                    } else value = arg[0].toString().trim();
+                } else value = arg[0].stringValue(false);
+            } else VM.badArgument(1);
+        } else VM.badCall();
 
-	return(YoixObject.newString(value));
+        return(YoixObject.newString(value));
     }
 
 
     public static YoixObject
     unroll(YoixObject arg[]) {
 
-	YoixObject  dest = null;
-	YoixObject  src;
-	int         length;
-	int         n;
-	int         m;
+        YoixObject  dest = null;
+        YoixObject  src;
+        int         length;
+        int         n;
+        int         m;
 
-	if (arg.length <= 2) {
-	    if (arg[0].isPointer()) {
-		src = arg[0];
-		if (arg.length == 1) {
-		    if (src.notNull()) {
-			length = src.length();
-			if (src.compound())
-			    dest = YoixObject.newArray(2*src.sizeof());
-			else dest = YoixObject.newArray(src.sizeof());
-			YoixMisc.unrollInto(src, dest);
-			dest.setUnroll(true);
-		    } else dest = src;
-		} else {
-		    if (arg[1].isPointer()) {
-			dest = arg[1];
-			YoixMisc.unrollInto(src, dest);
-			dest.setUnroll(true);
-		    } else VM.badArgument(1);
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 2) {
+            if (arg[0].isPointer()) {
+                src = arg[0];
+                if (arg.length == 1) {
+                    if (src.notNull()) {
+                        length = src.length();
+                        if (src.compound())
+                            dest = YoixObject.newArray(2*src.sizeof());
+                        else dest = YoixObject.newArray(src.sizeof());
+                        YoixMisc.unrollInto(src, dest);
+                        dest.setUnroll(true);
+                    } else dest = src;
+                } else {
+                    if (arg[1].isPointer()) {
+                        dest = arg[1];
+                        YoixMisc.unrollInto(src, dest);
+                        dest.setUnroll(true);
+                    } else VM.badArgument(1);
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(dest);
+        return(dest);
     }
 }
 

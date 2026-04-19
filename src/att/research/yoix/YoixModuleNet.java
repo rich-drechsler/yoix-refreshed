@@ -214,504 +214,504 @@ class YoixModuleNet extends YoixModule
     public static YoixObject
     accept(YoixObject arg[]) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isServerSocket())
-		obj = ((YoixBodyServerSocket)arg[0].body()).callAccept(arg, 1);
-	    else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isServerSocket())
+                obj = ((YoixBodyServerSocket)arg[0].body()).callAccept(arg, 1);
+            else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj != null ? obj : YoixObject.newSocket());
+        return(obj != null ? obj : YoixObject.newSocket());
     }
 
 
     public static YoixObject
     getAddress(YoixObject arg[]) {
 
-	InetAddress  inet;
-	YoixObject   obj = null;
-	byte         addr[];
-	int          n;
+        InetAddress  inet;
+        YoixObject   obj = null;
+        byte         addr[];
+        int          n;
 
-	if (arg.length <= 1) {
-	    if (arg.length == 0 || arg[0].isString()) {
-		try {
-		    if (arg.length == 1)
-			inet = InetAddress.getByName(arg[0].stringValue());
-		    else inet = InetAddress.getLocalHost();
-		    addr = inet.getAddress();
-		    obj = YoixObject.newArray(addr.length);
-		    for (n = 0; n < addr.length; n++)
-			obj.putInt(n, (int)(addr[n] & 0xFF));
-		}
-		catch(UnknownHostException e) {}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 1) {
+            if (arg.length == 0 || arg[0].isString()) {
+                try {
+                    if (arg.length == 1)
+                        inet = InetAddress.getByName(arg[0].stringValue());
+                    else inet = InetAddress.getLocalHost();
+                    addr = inet.getAddress();
+                    obj = YoixObject.newArray(addr.length);
+                    for (n = 0; n < addr.length; n++)
+                        obj.putInt(n, (int)(addr[n] & 0xFF));
+                }
+                catch(UnknownHostException e) {}
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj != null ? obj : YoixObject.newArray());
+        return(obj != null ? obj : YoixObject.newArray());
     }
 
 
     public static YoixObject
     getAllByName(YoixObject arg[]) {
 
-	InetAddress  addr[];
-	InetAddress  inet;
-	YoixObject   obj = null;
-	YoixObject   obj2;
-	String       name = null;
-	boolean      bytes = false;
-	byte         info[];
-	int          m;
-	int          n;
+        InetAddress  addr[];
+        InetAddress  inet;
+        YoixObject   obj = null;
+        YoixObject   obj2;
+        String       name = null;
+        boolean      bytes = false;
+        byte         info[];
+        int          m;
+        int          n;
 
-	if (arg.length <= 2) {
-	    if (arg.length == 0 || arg[0].isString() || arg[0].isInteger()) {
-		if (arg.length > 0) {
-		    if (arg[0].isString()) {
-			name = arg[0].stringValue();
-			if (arg.length > 1 && arg[1].isInteger())
-			    bytes = arg[1].booleanValue();
-			else if (arg.length == 1)
-			    bytes = false;
-			else VM.badArgument(1);
-		    } else {
-			bytes = arg[0].booleanValue();
-			if (arg.length > 1 && arg[1].isString())
-			    name = arg[1].stringValue();
-			else if (arg.length == 1)
-			    name = null;
-			else VM.badArgument(1);
-		    }
-		} else {
-		    name = null;
-		    bytes = false;
-		}
-		try {
-		    if (name != null) {
-			inet = InetAddress.getByName(name);
-			name = inet.getHostName();
-		    } else name = InetAddress.getLocalHost().getHostName();
-		    addr = InetAddress.getAllByName(name);
-		    obj = YoixObject.newArray(addr.length);
-		    for (n = 0; n < addr.length; n++) {
-			if (bytes) {
-			    info = addr[n].getAddress();
-			    obj2 = YoixObject.newArray(info.length);
-			    for (m = 0; m < info.length; m++)
-				obj2.putInt(m, (int)(info[m] & 0xFF));
-			    obj.putObject(n, obj2);
-			} else obj.putString(n, addr[n].getHostAddress());
-		    }
-		}
-		catch(UnknownHostException e) {}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 2) {
+            if (arg.length == 0 || arg[0].isString() || arg[0].isInteger()) {
+                if (arg.length > 0) {
+                    if (arg[0].isString()) {
+                        name = arg[0].stringValue();
+                        if (arg.length > 1 && arg[1].isInteger())
+                            bytes = arg[1].booleanValue();
+                        else if (arg.length == 1)
+                            bytes = false;
+                        else VM.badArgument(1);
+                    } else {
+                        bytes = arg[0].booleanValue();
+                        if (arg.length > 1 && arg[1].isString())
+                            name = arg[1].stringValue();
+                        else if (arg.length == 1)
+                            name = null;
+                        else VM.badArgument(1);
+                    }
+                } else {
+                    name = null;
+                    bytes = false;
+                }
+                try {
+                    if (name != null) {
+                        inet = InetAddress.getByName(name);
+                        name = inet.getHostName();
+                    } else name = InetAddress.getLocalHost().getHostName();
+                    addr = InetAddress.getAllByName(name);
+                    obj = YoixObject.newArray(addr.length);
+                    for (n = 0; n < addr.length; n++) {
+                        if (bytes) {
+                            info = addr[n].getAddress();
+                            obj2 = YoixObject.newArray(info.length);
+                            for (m = 0; m < info.length; m++)
+                                obj2.putInt(m, (int)(info[m] & 0xFF));
+                            obj.putObject(n, obj2);
+                        } else obj.putString(n, addr[n].getHostAddress());
+                    }
+                }
+                catch(UnknownHostException e) {}
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj != null ? obj : YoixObject.newArray());
+        return(obj != null ? obj : YoixObject.newArray());
     }
 
 
     public static YoixObject
     getHostAddress(YoixObject arg[]) {
 
-	InetAddress  inet;
-	String       value = null;
+        InetAddress  inet;
+        String       value = null;
 
-	if (arg.length <= 1) {
-	    if (arg.length == 0 || arg[0].isString()) {
-		try {
-		    if (arg.length == 1)
-			inet = InetAddress.getByName(arg[0].stringValue());
-		    else inet = InetAddress.getLocalHost();
-		    value = inet.getHostAddress();
-		}
-		catch(UnknownHostException e) {}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 1) {
+            if (arg.length == 0 || arg[0].isString()) {
+                try {
+                    if (arg.length == 1)
+                        inet = InetAddress.getByName(arg[0].stringValue());
+                    else inet = InetAddress.getLocalHost();
+                    value = inet.getHostAddress();
+                }
+                catch(UnknownHostException e) {}
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newString(value));
+        return(YoixObject.newString(value));
     }
 
 
     public static YoixObject
     getHostName(YoixObject arg[]) {
 
-	InetAddress  inet;
-	String       value = null;
+        InetAddress  inet;
+        String       value = null;
 
-	if (arg.length <= 1) {
-	    if (arg.length == 0 || arg[0].isString()) {
-		try {
-		    if (arg.length == 1)
-			inet = InetAddress.getByName(arg[0].stringValue());
-		    else inet = InetAddress.getLocalHost();
-		    value = inet.getCanonicalHostName();
-		}
-		catch(UnknownHostException e) {}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 1) {
+            if (arg.length == 0 || arg[0].isString()) {
+                try {
+                    if (arg.length == 1)
+                        inet = InetAddress.getByName(arg[0].stringValue());
+                    else inet = InetAddress.getLocalHost();
+                    value = inet.getCanonicalHostName();
+                }
+                catch(UnknownHostException e) {}
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newString(value));
+        return(YoixObject.newString(value));
     }
 
 
     public static YoixObject
     getInterfaceAddress(YoixObject arg[]) {
 
-	String  address = null;
-	String  name;
-	int     mask;
+        String  address = null;
+        String  name;
+        int     mask;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isString()) {
-		if (arg.length == 1 || arg[1].isInteger()) {
-		    name = arg[0].stringValue();
-		    mask = (arg.length > 1) ? arg[1].intValue() : IPV4|IPV6;
-		    address = YoixMisc.getInterfaceAddress(name, mask);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isString()) {
+                if (arg.length == 1 || arg[1].isInteger()) {
+                    name = arg[0].stringValue();
+                    mask = (arg.length > 1) ? arg[1].intValue() : IPV4|IPV6;
+                    address = YoixMisc.getInterfaceAddress(name, mask);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newString(address));
+        return(YoixObject.newString(address));
     }
 
 
     public static YoixObject
     getInterfaceAddresses(YoixObject arg[]) {
 
-	HashMap  map = null;
-	int      mask;
+        HashMap  map = null;
+        int      mask;
 
-	if (arg.length == 0 || arg.length == 1) {
-	    if (arg.length == 0 || arg[0].isInteger()) {
-		mask = (arg.length > 0) ? arg[0].intValue() : IPV4|IPV6;
-		map = YoixMisc.getInterfaceAddresses(mask);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 0 || arg.length == 1) {
+            if (arg.length == 0 || arg[0].isInteger()) {
+                mask = (arg.length > 0) ? arg[0].intValue() : IPV4|IPV6;
+                map = YoixMisc.getInterfaceAddresses(mask);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(map != null && map.size() > 0 ? YoixMisc.copyIntoDictionary(map) : YoixObject.newDictionary());
+        return(map != null && map.size() > 0 ? YoixMisc.copyIntoDictionary(map) : YoixObject.newDictionary());
     }
 
 
     public static YoixObject
     isAnyLocalAddress(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isAnyLocalAddress();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isAnyLocalAddress();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isLinkLocalAddress(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isLinkLocalAddress();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isLinkLocalAddress();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isLoopbackAddress(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isLoopbackAddress();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isLoopbackAddress();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isMCGlobal(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isMCGlobal();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isMCGlobal();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isMCLinkLocal(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isMCLinkLocal();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isMCLinkLocal();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isMCNodeLocal(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isMCNodeLocal();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isMCNodeLocal();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isMCOrgLocal(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isMCOrgLocal();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isMCOrgLocal();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isMCSiteLocal(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isMCSiteLocal();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isMCSiteLocal();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isMulticastAddress(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isMulticastAddress();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isMulticastAddress();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isReachable(YoixObject arg[]) {
 
-	InetAddress       inet;
-	NetworkInterface  netif = null;
-	String            netifstr = null;
-	boolean           result = false;
-	int               timeout = -1;
-	int               ttl = 0;
-	int               argc;
+        InetAddress       inet;
+        NetworkInterface  netif = null;
+        String            netifstr = null;
+        boolean           result = false;
+        int               timeout = -1;
+        int               ttl = 0;
+        int               argc;
 
-	if (arg.length <= 4) {
-	    if (arg[0].isString() || arg[0].isNull()) {
-		argc = 1;
-		if (arg[argc].isString() || arg[argc].isNull()) {
-		    netifstr = arg[argc++].stringValue();
-		}
-		if (argc < arg.length) {
-		    if (arg[argc].isNumber()) {
-			timeout = (int)(arg[argc].doubleValue()*1000.0);
-			if (timeout < 0)
-			    VM.badArgumentValue(argc);
-			argc++;
-			if (argc < arg.length) {
-			    if (arg[argc].isInteger()) {
-				ttl = arg[argc].intValue();
-				if (ttl < 0)
-				    VM.badArgumentValue(argc);
-			    } else VM.badArgument(argc);
-			}
-			VM.clearErrordict();
-			try {
-			    inet = InetAddress.getByName(arg[0].stringValue());
-			    if (netifstr != null)
-				netif = NetworkInterface.getByName(netifstr);
-			    result = inet.isReachable(netif, ttl, timeout);
-			}
-			catch(UnknownHostException e) { VM.recordException(e); }
-			catch(IOException e) { VM.recordException(e); }
-			catch(IllegalArgumentException e) {} // cannot happen
-		    } else VM.badArgument(argc);
-		} else VM.badCall();
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 4) {
+            if (arg[0].isString() || arg[0].isNull()) {
+                argc = 1;
+                if (arg[argc].isString() || arg[argc].isNull()) {
+                    netifstr = arg[argc++].stringValue();
+                }
+                if (argc < arg.length) {
+                    if (arg[argc].isNumber()) {
+                        timeout = (int)(arg[argc].doubleValue()*1000.0);
+                        if (timeout < 0)
+                            VM.badArgumentValue(argc);
+                        argc++;
+                        if (argc < arg.length) {
+                            if (arg[argc].isInteger()) {
+                                ttl = arg[argc].intValue();
+                                if (ttl < 0)
+                                    VM.badArgumentValue(argc);
+                            } else VM.badArgument(argc);
+                        }
+                        VM.clearErrordict();
+                        try {
+                            inet = InetAddress.getByName(arg[0].stringValue());
+                            if (netifstr != null)
+                                netif = NetworkInterface.getByName(netifstr);
+                            result = inet.isReachable(netif, ttl, timeout);
+                        }
+                        catch(UnknownHostException e) { VM.recordException(e); }
+                        catch(IOException e) { VM.recordException(e); }
+                        catch(IllegalArgumentException e) {} // cannot happen
+                    } else VM.badArgument(argc);
+                } else VM.badCall();
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isSiteLocalAddress(YoixObject arg[]) {
 
-	InetAddress  inet;
-	boolean      result = false;
+        InetAddress  inet;
+        boolean      result = false;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    try {
-		inet = InetAddress.getByName(arg[0].stringValue());
-		result = inet.isSiteLocalAddress();
-	    }
-	    catch(UnknownHostException e) {}
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            try {
+                inet = InetAddress.getByName(arg[0].stringValue());
+                result = inet.isSiteLocalAddress();
+            }
+            catch(UnknownHostException e) {}
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     parseURL(YoixObject arg[]) {
 
-	YoixObject  dict = null;
-	boolean     valid = true;
-	String      spec = null;
-	URL         context = null;
-	URL         url;
+        YoixObject  dict = null;
+        boolean     valid = true;
+        String      spec = null;
+        URL         context = null;
+        URL         url;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    valid = true;
-	    if (arg.length == 1) {
-		if (arg[0].isString() || arg[0].isNull())
-		    spec = arg[0].stringValue();
-		else VM.badArgument(0);
-	    } else {
-		if (arg[0].isString() || arg[0].isURL() || arg[0].isNull()) {
-		    if (arg[1].isString() || arg[1].isNull()) {
-			spec = arg[1].stringValue();
-			if (arg[0].notNull()) {
-			    if (arg[0].isString()) {
-				try {
-				    context = new URL(arg[0].stringValue());
-				}
-				catch(MalformedURLException e) {
-				    VM.recordException(e);
-				    valid = false;
-				}
-			    } else context = (URL)arg[0].getManagedObject();
-			}
-		    } else VM.badArgument(1);
-		} else VM.badArgument(0);
-	    }
-	    if (valid) {
-		if (spec != null && spec.length() > 0 || context != null) {
-		    try {
-			url = new URL(context, spec);
-			dict = YoixObject.newDictionary(11);
-			dict.putString("authority", url.getAuthority());
-			dict.putInt("defaultport", url.getDefaultPort());
-			dict.putString("file", url.getFile());
-			dict.putString("host", url.getHost());
-			dict.putString("path", url.getPath());
-			dict.putInt("port", url.getPort());
-			dict.putString("protocol", url.getProtocol());
-			dict.putString("query", url.getQuery());
-			dict.putString("reference", url.getRef());
-			dict.putString("userinfo", url.getUserInfo());
-			dict.putString("externalform", url.toExternalForm());
-		    }
-		    catch(MalformedURLException e) {
-			VM.recordException(e);
-		    }
-		}
-	    }
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            valid = true;
+            if (arg.length == 1) {
+                if (arg[0].isString() || arg[0].isNull())
+                    spec = arg[0].stringValue();
+                else VM.badArgument(0);
+            } else {
+                if (arg[0].isString() || arg[0].isURL() || arg[0].isNull()) {
+                    if (arg[1].isString() || arg[1].isNull()) {
+                        spec = arg[1].stringValue();
+                        if (arg[0].notNull()) {
+                            if (arg[0].isString()) {
+                                try {
+                                    context = new URL(arg[0].stringValue());
+                                }
+                                catch(MalformedURLException e) {
+                                    VM.recordException(e);
+                                    valid = false;
+                                }
+                            } else context = (URL)arg[0].getManagedObject();
+                        }
+                    } else VM.badArgument(1);
+                } else VM.badArgument(0);
+            }
+            if (valid) {
+                if (spec != null && spec.length() > 0 || context != null) {
+                    try {
+                        url = new URL(context, spec);
+                        dict = YoixObject.newDictionary(11);
+                        dict.putString("authority", url.getAuthority());
+                        dict.putInt("defaultport", url.getDefaultPort());
+                        dict.putString("file", url.getFile());
+                        dict.putString("host", url.getHost());
+                        dict.putString("path", url.getPath());
+                        dict.putInt("port", url.getPort());
+                        dict.putString("protocol", url.getProtocol());
+                        dict.putString("query", url.getQuery());
+                        dict.putString("reference", url.getRef());
+                        dict.putString("userinfo", url.getUserInfo());
+                        dict.putString("externalform", url.toExternalForm());
+                    }
+                    catch(MalformedURLException e) {
+                        VM.recordException(e);
+                    }
+                }
+            }
+        } else VM.badCall();
 
-	return (dict == null ? YoixObject.newDictionary() : dict);
+        return (dict == null ? YoixObject.newDictionary() : dict);
     }
 
 
     public static YoixObject
     receive(YoixObject arg[]) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if (arg[0].isDatagramSocket())
-	    obj = ((YoixBodyDatagramSocket)arg[0].body()).callReceive(arg, 1);
-	if (arg[0].isMulticastSocket())
-	    obj = ((YoixBodyMulticastSocket)arg[0].body()).callReceive(arg, 1);
-	else VM.badArgument(0);
+        if (arg[0].isDatagramSocket())
+            obj = ((YoixBodyDatagramSocket)arg[0].body()).callReceive(arg, 1);
+        if (arg[0].isMulticastSocket())
+            obj = ((YoixBodyMulticastSocket)arg[0].body()).callReceive(arg, 1);
+        else VM.badArgument(0);
 
-	return(obj != null ? obj : YoixObject.newInt(-1));
+        return(obj != null ? obj : YoixObject.newInt(-1));
     }
 
 
     public static YoixObject
     send(YoixObject arg[]) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if (arg[0].isDatagramSocket())
-	    obj = ((YoixBodyDatagramSocket)arg[0].body()).callSend(arg, 1);
-	else if (arg[0].isMulticastSocket())
-	    obj = ((YoixBodyMulticastSocket)arg[0].body()).callSend(arg, 1);
-	else VM.badArgument(0);
+        if (arg[0].isDatagramSocket())
+            obj = ((YoixBodyDatagramSocket)arg[0].body()).callSend(arg, 1);
+        else if (arg[0].isMulticastSocket())
+            obj = ((YoixBodyMulticastSocket)arg[0].body()).callSend(arg, 1);
+        else VM.badArgument(0);
 
-	return(obj != null ? obj : YoixObject.newInt(-1));
+        return(obj != null ? obj : YoixObject.newInt(-1));
     }
 }
 

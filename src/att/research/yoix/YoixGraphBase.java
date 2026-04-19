@@ -83,9 +83,9 @@ class YoixGraphBase
 
     YoixGraphBase() {
 
-	this.obs = null;
-	this.next = this;
-	this.prev = this;
+        this.obs = null;
+        this.next = this;
+        this.prev = this;
     }
 
     ///////////////////////////////////
@@ -97,30 +97,30 @@ class YoixGraphBase
     public Object
     clone() {
 
-	YoixGraphBase obj = null;
+        YoixGraphBase obj = null;
 
-	try {
-	    obj = (YoixGraphBase)(super.clone());
-	}
-	catch(CloneNotSupportedException e) {
-	    // cannot happen
-	    YoixConstants.VM.abort(YoixConstants.INTERNALERROR);
-	}
+        try {
+            obj = (YoixGraphBase)(super.clone());
+        }
+        catch(CloneNotSupportedException e) {
+            // cannot happen
+            YoixConstants.VM.abort(YoixConstants.INTERNALERROR);
+        }
 
-	if (this.next == this)
-	    obj.next = obj;
+        if (this.next == this)
+            obj.next = obj;
 
-	if (this.prev == this)
-	    obj.prev = obj;
+        if (this.prev == this)
+            obj.prev = obj;
 
-	return(obj);
+        return(obj);
     }
 
 
     public Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -132,8 +132,8 @@ class YoixGraphBase
     protected void
     finalize() {
 
-	obs = null;
-	next = null;
+        obs = null;
+        next = null;
     }
 
 

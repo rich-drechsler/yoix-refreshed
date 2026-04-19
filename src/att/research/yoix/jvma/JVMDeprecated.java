@@ -39,14 +39,14 @@ class JVMDeprecated extends JVMAttribute
     public
     JVMDeprecated(JVMClassFile owner, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, constant_pool);
+        buildAttribute(owner, constant_pool);
     }
 
 
     public
     JVMDeprecated(JVMClassFile owner, byte bytes[], int offset, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, bytes, offset, constant_pool);
+        buildAttribute(owner, bytes, offset, constant_pool);
     }
 
     ///////////////////////////////////
@@ -58,40 +58,40 @@ class JVMDeprecated extends JVMAttribute
     final void
     dumpAttributeInto(String indent, StringBuffer sbuf) {
 
-	String  name;
+        String  name;
 
-	if ((name = constant_pool.getStringFromUTF(name_index)) != null) {
-	    sbuf.append(indent);
-	    sbuf.append(name);
-	    sbuf.append("\n");
-	}
+        if ((name = constant_pool.getStringFromUTF(name_index)) != null) {
+            sbuf.append(indent);
+            sbuf.append(name);
+            sbuf.append("\n");
+        }
     }
 
 
     final byte[]
     getBytes() {
 
-	byte  bytes[];
-	int   nextbyte;
+        byte  bytes[];
+        int   nextbyte;
 
-	bytes = new byte[8];
-	nextbyte = 0;
+        bytes = new byte[8];
+        nextbyte = 0;
 
-	bytes[nextbyte++] = (byte)(name_index >> 8);
-	bytes[nextbyte++] = (byte)name_index;
-	bytes[nextbyte++] = 0;
-	bytes[nextbyte++] = 0;
-	bytes[nextbyte++] = 0;
-	bytes[nextbyte++] = 0;
+        bytes[nextbyte++] = (byte)(name_index >> 8);
+        bytes[nextbyte++] = (byte)name_index;
+        bytes[nextbyte++] = 0;
+        bytes[nextbyte++] = 0;
+        bytes[nextbyte++] = 0;
+        bytes[nextbyte++] = 0;
 
-	return(bytes);
+        return(bytes);
     }
 
 
     final int
     getSize() {
 
-	return(6);
+        return(6);
     }
 
     ///////////////////////////////////
@@ -103,18 +103,18 @@ class JVMDeprecated extends JVMAttribute
     private void
     buildAttribute(JVMClassFile owner, JVMConstantPool constant_pool) {
 
-	this.owner = owner;
-	this.constant_pool = constant_pool;
-	this.name_index = constant_pool.storeUTF(ATTRIBUTE_DEPRECATED);
+        this.owner = owner;
+        this.constant_pool = constant_pool;
+        this.name_index = constant_pool.storeUTF(ATTRIBUTE_DEPRECATED);
     }
 
 
     private void
     buildAttribute(JVMClassFile owner, byte bytes[], int offset, JVMConstantPool constant_pool) {
 
-	this.owner = owner;
-	this.constant_pool = constant_pool;
-	this.name_index = JVMMisc.getUnsignedShort(bytes, offset);
+        this.owner = owner;
+        this.constant_pool = constant_pool;
+        this.name_index = JVMMisc.getUnsignedShort(bytes, offset);
     }
 }
 

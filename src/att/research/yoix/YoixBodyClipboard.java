@@ -32,7 +32,7 @@ class YoixBodyClipboard extends YoixPointerActive
      //
      // FIELD               OBJECT       BODY
      // -----               ------       ----
-	N_NAME,             $LR__,       null,
+        N_NAME,             $LR__,       null,
     };
 
     //
@@ -45,10 +45,10 @@ class YoixBodyClipboard extends YoixPointerActive
     private static HashMap  activefields = new HashMap(5);
 
     static {
-	activefields.put(N_CONTENTS, new Integer(V_CONTENTS));
-	activefields.put(N_NAME, new Integer(V_NAME));
-	activefields.put(N_OWNER, new Integer(V_OWNER));
-	activefields.put(N_SETCONTENTS, new Integer(V_SETCONTENTS));
+        activefields.put(N_CONTENTS, new Integer(V_CONTENTS));
+        activefields.put(N_NAME, new Integer(V_NAME));
+        activefields.put(N_OWNER, new Integer(V_OWNER));
+        activefields.put(N_SETCONTENTS, new Integer(V_SETCONTENTS));
     }
 
     ///////////////////////////////////
@@ -59,19 +59,19 @@ class YoixBodyClipboard extends YoixPointerActive
 
     YoixBodyClipboard(YoixObject data) {
 
-	super(data);
-	buildClipboard();
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        buildClipboard();
+        setFixedSize();
+        setPermissions(permissions);
     }
 
 
     YoixBodyClipboard(YoixObject data, Clipboard clipboard) {
 
-	super(data);
-	this.clipboard = clipboard;
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        this.clipboard = clipboard;
+        setFixedSize();
+        setPermissions(permissions);
     }
 
     ///////////////////////////////////
@@ -83,7 +83,7 @@ class YoixBodyClipboard extends YoixPointerActive
     public final int
     type() {
 
-	return(CLIPBOARD);
+        return(CLIPBOARD);
     }
 
     ///////////////////////////////////
@@ -95,27 +95,27 @@ class YoixBodyClipboard extends YoixPointerActive
     protected final void
     finalize() {
 
-	VM.removeClipboard(clipboard);
-	clipboard = null;
-	super.finalize();
+        VM.removeClipboard(clipboard);
+        clipboard = null;
+        super.finalize();
     }
 
 
     protected final YoixObject
     executeField(String name, YoixObject argv[]) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	switch (activeField(name, activefields)) {
-	    case V_SETCONTENTS:
-		obj = builtinSetContents(name, argv);
-		break;
+        switch (activeField(name, activefields)) {
+            case V_SETCONTENTS:
+                obj = builtinSetContents(name, argv);
+                break;
 
-	    default:
-		obj = null;
-		break;
-	}
-	return(obj);
+            default:
+                obj = null;
+                break;
+        }
+        return(obj);
     }
 
 
@@ -123,40 +123,40 @@ class YoixBodyClipboard extends YoixPointerActive
     protected final synchronized YoixObject
     getField(String name, YoixObject obj) {
 
-	switch (activeField(name, activefields)) {
-	    case V_CONTENTS:
-		obj = getContents();
-		break;
+        switch (activeField(name, activefields)) {
+            case V_CONTENTS:
+                obj = getContents();
+                break;
 
-	    case V_NAME:
-		obj = getName();
-		break;
+            case V_NAME:
+                obj = getName();
+                break;
 
-	    case V_OWNER:
-		obj = getOwner();
-		break;
-	}
-	return(obj);
+            case V_OWNER:
+                obj = getOwner();
+                break;
+        }
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(clipboard);
+        return(clipboard);
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	if (obj != null) {
-	    switch (activeField(name, activefields)) {
-		default:
-		    break;
-	    }
-	}
-	return(obj);
+        if (obj != null) {
+            switch (activeField(name, activefields)) {
+                default:
+                    break;
+            }
+        }
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -168,69 +168,69 @@ class YoixBodyClipboard extends YoixPointerActive
     private void
     buildClipboard() {
 
-	clipboard = new Clipboard(data.getString(N_NAME));
+        clipboard = new Clipboard(data.getString(N_NAME));
     }
 
 
     private synchronized YoixObject
     builtinSetContents(String name, YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg.length == 1 || arg[1].compound() || arg[1].isNull()) {
-		result = VM.setClipboardContents(
-		    clipboard,
-		    arg[0],
-		    arg.length == 2 ? arg[1] : null
-		);
-	    } else VM.badArgument(name, 1);
-	} else VM.badCall(name);
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg.length == 1 || arg[1].compound() || arg[1].isNull()) {
+                result = VM.setClipboardContents(
+                    clipboard,
+                    arg[0],
+                    arg.length == 2 ? arg[1] : null
+                );
+            } else VM.badArgument(name, 1);
+        } else VM.badCall(name);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     private synchronized YoixObject
     getContents() {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if (clipboard != null) {
-	    try {
-		// in the absence of other information, we need to prefer text over
-		// other transferable flavors as Microsoft Word places some kind of
-		// image flavor mixed in with a straight text snarf!
-		obj = YoixDataTransfer.yoixTransferable(clipboard.getContents(this), true);
-	    }
-	    catch(IllegalStateException e) {}
-	}
-	return(obj != null ? obj : YoixObject.newNull());
+        if (clipboard != null) {
+            try {
+                // in the absence of other information, we need to prefer text over
+                // other transferable flavors as Microsoft Word places some kind of
+                // image flavor mixed in with a straight text snarf!
+                obj = YoixDataTransfer.yoixTransferable(clipboard.getContents(this), true);
+            }
+            catch(IllegalStateException e) {}
+        }
+        return(obj != null ? obj : YoixObject.newNull());
     }
 
 
     private synchronized YoixObject
     getName() {
 
-	String  name = null;
+        String  name = null;
 
-	if (clipboard != null) {
-	    try {
-		if ((name = clipboard.getName()) != null) {
-		    if (name.length() == 0)
-			name = null;
-		}
-	    }
-	    catch(IllegalStateException e) {}
-	}
-	return(YoixObject.newString(name));
+        if (clipboard != null) {
+            try {
+                if ((name = clipboard.getName()) != null) {
+                    if (name.length() == 0)
+                        name = null;
+                }
+            }
+            catch(IllegalStateException e) {}
+        }
+        return(YoixObject.newString(name));
     }
 
 
     private synchronized YoixObject
     getOwner() {
 
-	return(VM.getClipboardOwner(clipboard));
+        return(VM.getClipboardOwner(clipboard));
     }
 }
 

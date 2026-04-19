@@ -138,752 +138,752 @@ class YoixModuleMath extends YoixModule
     public static YoixObject
     abs(YoixObject arg[]) {
 
-	Number  value = null;
+        Number  value = null;
 
-	if (arg[0].isNumber()) {
-	    if (arg[0].isInteger()) {
-		value = new Integer(Math.abs(arg[0].intValue()));
-		if (value.intValue() < 0)
-		    value = new Double(Math.abs(arg[0].doubleValue()));
-	    } else value = new Double(Math.abs(arg[0].doubleValue()));
-	} else VM.badArgument(0);
+        if (arg[0].isNumber()) {
+            if (arg[0].isInteger()) {
+                value = new Integer(Math.abs(arg[0].intValue()));
+                if (value.intValue() < 0)
+                    value = new Double(Math.abs(arg[0].doubleValue()));
+            } else value = new Double(Math.abs(arg[0].doubleValue()));
+        } else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     acos(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.acos(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.acos(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     asin(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.asin(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.asin(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     atan(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.atan(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.atan(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     atan2(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber()) {
-	    if (arg[1].isNumber())
-		value = Math.atan2(arg[0].doubleValue(), arg[1].doubleValue());
-	    else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isNumber()) {
+            if (arg[1].isNumber())
+                value = Math.atan2(arg[0].doubleValue(), arg[1].doubleValue());
+            else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     bigAbs(YoixObject arg[]) {
 
-	Number  num = null;
+        Number  num = null;
 
-	if (arg[0].isString()) {
-	    num = bigNumber(arg[0], 0);
-	    if (num instanceof BigDecimal)
-		num = ((BigDecimal)num).abs();
-	    else num = ((BigInteger)num).abs();
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            num = bigNumber(arg[0], 0);
+            if (num instanceof BigDecimal)
+                num = ((BigDecimal)num).abs();
+            else num = ((BigInteger)num).abs();
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigAdd(YoixObject arg[]) {
 
-	Number  left;
-	Number  right;
-	Number  num = null;
+        Number  left;
+        Number  right;
+        Number  num = null;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isString()) {
-		left = bigNumber(arg[0], 0);
-		if (left instanceof BigInteger) {
-		    right = bigNumber(arg[1], 1);
-		    if (right instanceof BigDecimal)
-			num = bigDecimal(arg[0], 0).add((BigDecimal)right);
-		    else num = ((BigInteger)left).add((BigInteger)right);
-		} else num = ((BigDecimal)left).add(bigDecimal(arg[1], 1));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isString()) {
+                left = bigNumber(arg[0], 0);
+                if (left instanceof BigInteger) {
+                    right = bigNumber(arg[1], 1);
+                    if (right instanceof BigDecimal)
+                        num = bigDecimal(arg[0], 0).add((BigDecimal)right);
+                    else num = ((BigInteger)left).add((BigInteger)right);
+                } else num = ((BigDecimal)left).add(bigDecimal(arg[1], 1));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigCompareTo(YoixObject arg[]) {
 
-	Number  left;
-	Number  right;
-	int     value = 0;
+        Number  left;
+        Number  right;
+        int     value = 0;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isString()) {
-		left = bigNumber(arg[0], 0);
-		if (left instanceof BigInteger) {
-		    right = bigNumber(arg[1], 1);
-		    if (right instanceof BigDecimal)
-			value = bigDecimal(arg[0], 0).compareTo((BigDecimal)right);
-		    else value = ((BigInteger)left).compareTo((BigInteger)right);
-		} else value = ((BigDecimal)left).compareTo(bigDecimal(arg[1], 1));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isString()) {
+                left = bigNumber(arg[0], 0);
+                if (left instanceof BigInteger) {
+                    right = bigNumber(arg[1], 1);
+                    if (right instanceof BigDecimal)
+                        value = bigDecimal(arg[0], 0).compareTo((BigDecimal)right);
+                    else value = ((BigInteger)left).compareTo((BigInteger)right);
+                } else value = ((BigDecimal)left).compareTo(bigDecimal(arg[1], 1));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(value));
+        return(YoixObject.newInt(value));
     }
 
 
     public static YoixObject
     bigDivide(YoixObject arg[]) {
 
-	Number  left;
-	Number  right;
-	Number  num = null;
-	int     round;
+        Number  left;
+        Number  right;
+        Number  num = null;
+        int     round;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isString()) {
-		if (arg[1].isString()) {
-		    if (arg.length == 2 || arg[2].isInteger()) {
-			if (arg.length == 3)
-			    round = arg[2].intValue();
-			else round = BigDecimal.ROUND_HALF_UP;
-			left = bigNumber(arg[0], 0);
-			try {
-			    if (left instanceof BigInteger) {
-				right = bigNumber(arg[1], 1);
-				if (right instanceof BigDecimal)
-				    num = bigDecimal(arg[0], 0).divide((BigDecimal)right, round);
-				else num = ((BigInteger)left).divide((BigInteger)right);
-			    } else num = ((BigDecimal)left).divide(bigDecimal(arg[1], 1), round);
-			}
-			catch(ArithmeticException  e) {
-			    VM.badArgument(1);
-			}
-			catch(IllegalArgumentException  e) {
-			    VM.badArgument(2);
-			}
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isString()) {
+                if (arg[1].isString()) {
+                    if (arg.length == 2 || arg[2].isInteger()) {
+                        if (arg.length == 3)
+                            round = arg[2].intValue();
+                        else round = BigDecimal.ROUND_HALF_UP;
+                        left = bigNumber(arg[0], 0);
+                        try {
+                            if (left instanceof BigInteger) {
+                                right = bigNumber(arg[1], 1);
+                                if (right instanceof BigDecimal)
+                                    num = bigDecimal(arg[0], 0).divide((BigDecimal)right, round);
+                                else num = ((BigInteger)left).divide((BigInteger)right);
+                            } else num = ((BigDecimal)left).divide(bigDecimal(arg[1], 1), round);
+                        }
+                        catch(ArithmeticException  e) {
+                            VM.badArgument(1);
+                        }
+                        catch(IllegalArgumentException  e) {
+                            VM.badArgument(2);
+                        }
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigFromRadix(YoixObject arg[]) {
 
-	BigInteger  nbr = null;
-	int         radix;
+        BigInteger  nbr = null;
+        int         radix;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isInteger()) {
-		radix = arg[1].intValue();
-		if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX)
-		    VM.abort(BADVALUE, 1);
-		try {
-		    nbr = new BigInteger(arg[0].stringValue(), radix);
-		}
-		catch(Exception e) {
-		    VM.abort(BADVALUE, 0);
-		}
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isInteger()) {
+                radix = arg[1].intValue();
+                if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX)
+                    VM.abort(BADVALUE, 1);
+                try {
+                    nbr = new BigInteger(arg[0].stringValue(), radix);
+                }
+                catch(Exception e) {
+                    VM.abort(BADVALUE, 0);
+                }
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(nbr.toString()));
+        return(YoixObject.newString(nbr.toString()));
     }
 
 
     public static YoixObject
     bigMax(YoixObject arg[]) {
 
-	Number  left;
-	Number  right;
-	Number  num = null;
+        Number  left;
+        Number  right;
+        Number  num = null;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isString()) {
-		left = bigNumber(arg[0], 0);
-		if (left instanceof BigInteger) {
-		    right = bigNumber(arg[1], 1);
-		    if (right instanceof BigDecimal)
-			num = bigDecimal(arg[0], 0).max((BigDecimal)right);
-		    else num = ((BigInteger)left).max((BigInteger)right);
-		} else num = ((BigDecimal)left).max(bigDecimal(arg[1], 1));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isString()) {
+                left = bigNumber(arg[0], 0);
+                if (left instanceof BigInteger) {
+                    right = bigNumber(arg[1], 1);
+                    if (right instanceof BigDecimal)
+                        num = bigDecimal(arg[0], 0).max((BigDecimal)right);
+                    else num = ((BigInteger)left).max((BigInteger)right);
+                } else num = ((BigDecimal)left).max(bigDecimal(arg[1], 1));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigMin(YoixObject arg[]) {
 
-	Number  left;
-	Number  right;
-	Number  num = null;
+        Number  left;
+        Number  right;
+        Number  num = null;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isString()) {
-		left = bigNumber(arg[0], 0);
-		if (left instanceof BigInteger) {
-		    right = bigNumber(arg[1], 1);
-		    if (right instanceof BigDecimal)
-			num = bigDecimal(arg[0], 0).min((BigDecimal)right);
-		    else num = ((BigInteger)left).min((BigInteger)right);
-		} else num = ((BigDecimal)left).min(bigDecimal(arg[1], 1));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isString()) {
+                left = bigNumber(arg[0], 0);
+                if (left instanceof BigInteger) {
+                    right = bigNumber(arg[1], 1);
+                    if (right instanceof BigDecimal)
+                        num = bigDecimal(arg[0], 0).min((BigDecimal)right);
+                    else num = ((BigInteger)left).min((BigInteger)right);
+                } else num = ((BigDecimal)left).min(bigDecimal(arg[1], 1));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigMultiply(YoixObject arg[]) {
 
-	Number  left;
-	Number  right;
-	Number  num = null;
+        Number  left;
+        Number  right;
+        Number  num = null;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isString()) {
-		left = bigNumber(arg[0], 0);
-		if (left instanceof BigInteger) {
-		    right = bigNumber(arg[1], 1);
-		    if (right instanceof BigDecimal)
-			num = bigDecimal(arg[0], 0).multiply((BigDecimal)right);
-		    else num = ((BigInteger)left).multiply((BigInteger)right);
-		} else num = ((BigDecimal)left).multiply(bigDecimal(arg[1], 1));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isString()) {
+                left = bigNumber(arg[0], 0);
+                if (left instanceof BigInteger) {
+                    right = bigNumber(arg[1], 1);
+                    if (right instanceof BigDecimal)
+                        num = bigDecimal(arg[0], 0).multiply((BigDecimal)right);
+                    else num = ((BigInteger)left).multiply((BigInteger)right);
+                } else num = ((BigDecimal)left).multiply(bigDecimal(arg[1], 1));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigNegate(YoixObject arg[]) {
 
-	Number  num = null;
+        Number  num = null;
 
-	if (arg[0].isString()) {
-	    num = bigNumber(arg[0], 0);
-	    if (num instanceof BigDecimal)
-		num = ((BigDecimal)num).negate();
-	    else num = ((BigInteger)num).negate();
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            num = bigNumber(arg[0], 0);
+            if (num instanceof BigDecimal)
+                num = ((BigDecimal)num).negate();
+            else num = ((BigInteger)num).negate();
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigSubtract(YoixObject arg[]) {
 
-	Number  left;
-	Number  right;
-	Number  num = null;
+        Number  left;
+        Number  right;
+        Number  num = null;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isString()) {
-		left = bigNumber(arg[0], 0);
-		if (left instanceof BigInteger) {
-		    right = bigNumber(arg[1], 1);
-		    if (right instanceof BigDecimal)
-			num = bigDecimal(arg[0], 0).subtract((BigDecimal)right);
-		    else num = ((BigInteger)left).subtract((BigInteger)right);
-		} else num = ((BigDecimal)left).subtract(bigDecimal(arg[1], 1));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isString()) {
+                left = bigNumber(arg[0], 0);
+                if (left instanceof BigInteger) {
+                    right = bigNumber(arg[1], 1);
+                    if (right instanceof BigDecimal)
+                        num = bigDecimal(arg[0], 0).subtract((BigDecimal)right);
+                    else num = ((BigInteger)left).subtract((BigInteger)right);
+                } else num = ((BigDecimal)left).subtract(bigDecimal(arg[1], 1));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(num.toString()));
+        return(YoixObject.newString(num.toString()));
     }
 
 
     public static YoixObject
     bigToRadix(YoixObject arg[]) {
 
-	Number  nbr = null;
-	int     radix = 10;
+        Number  nbr = null;
+        int     radix = 10;
 
-	if (arg[0].isString()) {
-	    if (arg[1].isInteger()) {
-		nbr = bigNumber(arg[0], 0);
-		if (nbr instanceof BigInteger) {
-		    radix = arg[1].intValue();
-		    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX)
-			VM.abort(BADVALUE, 1);
-		} else VM.abort(BADVALUE, 0);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            if (arg[1].isInteger()) {
+                nbr = bigNumber(arg[0], 0);
+                if (nbr instanceof BigInteger) {
+                    radix = arg[1].intValue();
+                    if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX)
+                        VM.abort(BADVALUE, 1);
+                } else VM.abort(BADVALUE, 0);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(((BigInteger)nbr).toString(radix)));
+        return(YoixObject.newString(((BigInteger)nbr).toString(radix)));
     }
 
 
     public static YoixObject
     cbrt(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.cbrt(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.cbrt(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     ceil(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.ceil(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.ceil(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     cos(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.cos(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.cos(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     cosh(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.cosh(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.cosh(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     exp(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.exp(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.exp(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     expm1(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.expm1(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.expm1(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     floor(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.floor(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.floor(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     hypot(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber()) {
-	    if (arg[1].isNumber()) {
-		value = Math.hypot(arg[0].doubleValue(), arg[1].doubleValue());
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isNumber()) {
+            if (arg[1].isNumber()) {
+                value = Math.hypot(arg[0].doubleValue(), arg[1].doubleValue());
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     ieeeRemainder(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber()) {
-	    if (arg[1].isNumber()) {
-		value = Math.IEEEremainder(arg[0].doubleValue(), arg[1].doubleValue());
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isNumber()) {
+            if (arg[1].isNumber()) {
+                value = Math.IEEEremainder(arg[0].doubleValue(), arg[1].doubleValue());
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     iceil(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.ceil(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.ceil(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt((int)(value + 0.5)));
+        return(YoixObject.newInt((int)(value + 0.5)));
     }
 
 
     public static YoixObject
     ifloor(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.floor(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.floor(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt((int)(value + 0.5)));
+        return(YoixObject.newInt((int)(value + 0.5)));
     }
 
 
     public static YoixObject
     irint(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.rint(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.rint(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt((int)(value + 0.5)));
+        return(YoixObject.newInt((int)(value + 0.5)));
     }
 
 
     public static YoixObject
     iround(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.floor(arg[0].doubleValue() + 0.5);
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.floor(arg[0].doubleValue() + 0.5);
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt((int)value));
+        return(YoixObject.newInt((int)value));
     }
 
 
     public static YoixObject
     log(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.log(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.log(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     log10(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.log(arg[0].doubleValue())/LN10;
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.log(arg[0].doubleValue())/LN10;
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     log1p(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.log1p(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.log1p(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     max(YoixObject arg[]) {
 
-	Number  value = null;
+        Number  value = null;
 
-	if (arg[0].isNumber()) {
-	    if (arg[1].isNumber()) {
-		if (arg[0].isDouble() || arg[1].isDouble())
-		    value = new Double(Math.max(arg[0].doubleValue(), arg[1].doubleValue()));
-		else value = new Integer(Math.max(arg[0].intValue(), arg[1].intValue()));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isNumber()) {
+            if (arg[1].isNumber()) {
+                if (arg[0].isDouble() || arg[1].isDouble())
+                    value = new Double(Math.max(arg[0].doubleValue(), arg[1].doubleValue()));
+                else value = new Integer(Math.max(arg[0].intValue(), arg[1].intValue()));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     min(YoixObject arg[]) {
 
-	Number  value = null;
+        Number  value = null;
 
-	if (arg[0].isNumber()) {
-	    if (arg[1].isNumber()) {
-		if (arg[0].isDouble() || arg[1].isDouble())
-		    value = new Double(Math.min(arg[0].doubleValue(), arg[1].doubleValue()));
-		else value = new Integer(Math.min(arg[0].intValue(), arg[1].intValue()));
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isNumber()) {
+            if (arg[1].isNumber()) {
+                if (arg[0].isDouble() || arg[1].isDouble())
+                    value = new Double(Math.min(arg[0].doubleValue(), arg[1].doubleValue()));
+                else value = new Integer(Math.min(arg[0].intValue(), arg[1].intValue()));
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     pow(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	//
-	// Java documentation claims they throw an exception when base
-	// is 0.0 and exponent is less than 0.0, or when base is less
-	// than 0.0 and exponent is not a whole number. I haven't seen
-	// the exceptions on our SGI (version 1.1.6), but we catch them
-	// anyway and try to match the return values we normally get.
-	//
+        //
+        // Java documentation claims they throw an exception when base
+        // is 0.0 and exponent is less than 0.0, or when base is less
+        // than 0.0 and exponent is not a whole number. I haven't seen
+        // the exceptions on our SGI (version 1.1.6), but we catch them
+        // anyway and try to match the return values we normally get.
+        //
 
-	if (arg[0].isNumber()) {
-	    if (arg[1].isNumber()) {
-		try {
-		    value = Math.pow(arg[0].doubleValue(), arg[1].doubleValue());
-		}
+        if (arg[0].isNumber()) {
+            if (arg[1].isNumber()) {
+                try {
+                    value = Math.pow(arg[0].doubleValue(), arg[1].doubleValue());
+                }
 
-		catch(ArithmeticException e) {
-		    if (arg[0].doubleValue() == 0 && arg[1].doubleValue() < 0)
-			value = Double.POSITIVE_INFINITY;
-		    else value = Double.NaN;
-		}
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+                catch(ArithmeticException e) {
+                    if (arg[0].doubleValue() == 0 && arg[1].doubleValue() < 0)
+                        value = Double.POSITIVE_INFINITY;
+                    else value = Double.NaN;
+                }
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     random(YoixObject arg[]) {
 
-	return(YoixObject.newNumber(Math.random()));
+        return(YoixObject.newNumber(Math.random()));
     }
 
 
     public static YoixObject
     rint(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.rint(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.rint(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     round(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.floor(arg[0].doubleValue() + 0.5);
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.floor(arg[0].doubleValue() + 0.5);
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     signum(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.signum(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.signum(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     sin(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.sin(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.sin(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     sinh(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.sinh(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.sinh(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     sqrt(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.sqrt(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.sqrt(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     tan(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.tan(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.tan(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     tanh(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.tanh(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.tanh(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     toDegrees(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.toDegrees(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.toDegrees(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     toRadians(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.toRadians(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.toRadians(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
 
     public static YoixObject
     ulp(YoixObject arg[]) {
 
-	double  value = 0;
+        double  value = 0;
 
-	if (arg[0].isNumber())
-	    value = Math.ulp(arg[0].doubleValue());
-	else VM.badArgument(0);
+        if (arg[0].isNumber())
+            value = Math.ulp(arg[0].doubleValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newNumber(value));
+        return(YoixObject.newNumber(value));
     }
 
     ///////////////////////////////////
@@ -895,100 +895,100 @@ class YoixModuleMath extends YoixModule
     private static BigDecimal
     bigDecimal(YoixObject obj, int argn) {
 
-	BigDecimal  num = null;
-	String      str;
+        BigDecimal  num = null;
+        String      str;
 
-	try {
-	    if (obj.isString())
-		str = obj.stringValue(true);
-	    else str = obj.toString().trim();
-	    num = new BigDecimal(str);
-	}
-	catch(NumberFormatException e) {
-	    VM.badArgument(argn);
-	}
+        try {
+            if (obj.isString())
+                str = obj.stringValue(true);
+            else str = obj.toString().trim();
+            num = new BigDecimal(str);
+        }
+        catch(NumberFormatException e) {
+            VM.badArgument(argn);
+        }
 
-	return(num);
+        return(num);
     }
 
 
     private static BigInteger
     bigInteger(YoixObject obj, int argn) {
 
-	BigInteger  num = null;
-	String      str;
+        BigInteger  num = null;
+        String      str;
 
-	try {
-	    if (obj.isString())
-		str = obj.stringValue(true);
-	    else str = obj.toString().trim();
-	    if (str.indexOf('.') >= 0)
-		num = (new BigDecimal(str)).toBigInteger();
-	    else num = new BigInteger(str);
-	}
-	catch(NumberFormatException e) {
-	    VM.badArgument(argn);
-	}
+        try {
+            if (obj.isString())
+                str = obj.stringValue(true);
+            else str = obj.toString().trim();
+            if (str.indexOf('.') >= 0)
+                num = (new BigDecimal(str)).toBigInteger();
+            else num = new BigInteger(str);
+        }
+        catch(NumberFormatException e) {
+            VM.badArgument(argn);
+        }
 
-	return(num);
+        return(num);
     }
 
 
     private static Number
     bigNumber(YoixObject obj, int argn) {
 
-	Number  num = null;
-	String  str;
+        Number  num = null;
+        String  str;
 
-	try {
-	    if (obj.isString()) {
-		str = obj.stringValue(true);
-		if (str.indexOf('.') >= 0)
-		    num = new BigDecimal(str);
-		else num = new BigInteger(str);
-	    } else if (obj.isInteger())
-		num = new BigInteger(obj.stringValue(true).trim());
-	    else if (obj.isDouble())
-		num = new BigDecimal(obj.doubleValue());
-	    else VM.badArgument(argn);
-	}
-	catch(NumberFormatException e) {
-	    VM.badArgument(argn);
-	}
+        try {
+            if (obj.isString()) {
+                str = obj.stringValue(true);
+                if (str.indexOf('.') >= 0)
+                    num = new BigDecimal(str);
+                else num = new BigInteger(str);
+            } else if (obj.isInteger())
+                num = new BigInteger(obj.stringValue(true).trim());
+            else if (obj.isDouble())
+                num = new BigDecimal(obj.doubleValue());
+            else VM.badArgument(argn);
+        }
+        catch(NumberFormatException e) {
+            VM.badArgument(argn);
+        }
 
-	return(num);
+        return(num);
     }
 
 
     private static BigDecimal
     bigDecimal(String str, int argn) {
 
-	BigDecimal  num = null;
+        BigDecimal  num = null;
 
-	try {
-	    num = new BigDecimal(str);
-	}
-	catch(NumberFormatException e) {
-	    VM.badArgument(argn);
-	}
+        try {
+            num = new BigDecimal(str);
+        }
+        catch(NumberFormatException e) {
+            VM.badArgument(argn);
+        }
 
-	return(num);
+        return(num);
     }
 
 
     private static BigInteger
     bigInteger(String str, int argn) {
 
-	BigInteger  num = null;
+        BigInteger  num = null;
 
-	try {
-	    num = new BigInteger(str);
-	}
-	catch(NumberFormatException e) {
-	    VM.badArgument(argn);
-	}
+        try {
+            num = new BigInteger(str);
+        }
+        catch(NumberFormatException e) {
+            VM.badArgument(argn);
+        }
 
-	return(num);
+        return(num);
     }
 }
 

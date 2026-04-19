@@ -31,7 +31,7 @@ class YoixModuleXColor extends YoixModule
     };
 
     static Object  extracted[] = {
-	$MODULENAME,
+        $MODULENAME,
     };
 
     ///////////////////////////////////
@@ -43,21 +43,21 @@ class YoixModuleXColor extends YoixModule
     static void
     addColor() {
 
-	//
-	// This method was public and named loaded() prior to 3/10/2010,
-	// which meant it was called by the Yoix loader after the module
-	// loading dirty work was finished. Not sure why it was done, but
-	// it meant an expansion of the Color dictionary whenever this
-	// module was loaded, which was behavior that was really hard to
-	// explain. With the change the only way to update Color is for
-	// the script to call the addColor() builtin with no arguments.
-	// 
+        //
+        // This method was public and named loaded() prior to 3/10/2010,
+        // which meant it was called by the Yoix loader after the module
+        // loading dirty work was finished. Not sure why it was done, but
+        // it meant an expansion of the Color dictionary whenever this
+        // module was loaded, which was behavior that was really hard to
+        // explain. With the change the only way to update Color is for
+        // the script to call the addColor() builtin with no arguments.
+        // 
 
-	if (extracted[0] instanceof YoixObject) {
-	    YoixRegistryColor.setRegistry(null); // initializes
-	    YoixRegistryColor.addColor((YoixObject)extracted[0]);
-	    YoixRegistryColor.setXLoaded();
-	}
+        if (extracted[0] instanceof YoixObject) {
+            YoixRegistryColor.setRegistry(null); // initializes
+            YoixRegistryColor.addColor((YoixObject)extracted[0]);
+            YoixRegistryColor.setXLoaded();
+        }
     }
 }
 

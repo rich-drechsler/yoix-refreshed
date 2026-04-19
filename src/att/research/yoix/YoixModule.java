@@ -20,7 +20,7 @@ public abstract
 class YoixModule
 
     implements YoixConstants,
-	       YoixConstantsSwing
+               YoixConstantsSwing
 
 {
 
@@ -377,219 +377,219 @@ class YoixModule
     static synchronized void
     autoload(ArrayList list) {
 
-	String  failed = null;
-	String  classname;
-	Object  array[];
-	int     n;
+        String  failed = null;
+        String  classname;
+        Object  array[];
+        int     n;
 
-	if (list != null) {
-	    array = list.toArray();
-	    for (n = 0; n < array.length; n++) {
-		if (array[n] instanceof String) {
-		    classname = (String)array[n];
-		    invokeLoader(classname, new HashMap(), true);
-		}
-	    }
-	}
+        if (list != null) {
+            array = list.toArray();
+            for (n = 0; n < array.length; n++) {
+                if (array[n] instanceof String) {
+                    classname = (String)array[n];
+                    invokeLoader(classname, new HashMap(), true);
+                }
+            }
+        }
     }
 
 
     static synchronized void
     boot(Map cache) {
 
-	String  classname;
+        String  classname;
 
-	if (booted == false) {
-	    classname = YoixModuleVM.class.getName();
-	    invokeLoader(classname, cache, false);
-	    modulecache.remove(classname);
-	    booted = true;
-	} else VM.die(INTERNALERROR);
+        if (booted == false) {
+            classname = YoixModuleVM.class.getName();
+            invokeLoader(classname, cache, false);
+            modulecache.remove(classname);
+            booted = true;
+        } else VM.die(INTERNALERROR);
     }
 
 
     public static String
     created(String classname) {
 
-	String  value = null;
-	Class   source;
+        String  value = null;
+        Class   source;
 
-	try {
-	    source = Class.forName(classname);
-	    try {
-		value = (String)source.getDeclaredField(MODULECREATED).get(null);
-	    }
-	    catch(NoSuchFieldException e) {
-		if (YoixMisc.inPackage(classname, YOIXPACKAGE))
-		    value = YOIXCREATED;
-	    }
-	    catch(Exception e) {}
-	}
-	catch(ClassNotFoundException e) {}
+        try {
+            source = Class.forName(classname);
+            try {
+                value = (String)source.getDeclaredField(MODULECREATED).get(null);
+            }
+            catch(NoSuchFieldException e) {
+                if (YoixMisc.inPackage(classname, YOIXPACKAGE))
+                    value = YOIXCREATED;
+            }
+            catch(Exception e) {}
+        }
+        catch(ClassNotFoundException e) {}
 
-	return(value);
+        return(value);
     }
 
 
     static synchronized YoixObject
     get(String classname, String fieldname) {
 
-	Map  cache;
+        Map  cache;
 
-	if ((cache = (Map)modulecache.get(classname)) == null) {
-	    cache = new HashMap();
-	    invokeLoader(classname, cache, true);
-	}
-	return((YoixObject)cache.get(fieldname));
+        if ((cache = (Map)modulecache.get(classname)) == null) {
+            cache = new HashMap();
+            invokeLoader(classname, cache, true);
+        }
+        return((YoixObject)cache.get(fieldname));
     }
 
 
     static synchronized String
     load(Class source) {
 
-	return(source != null ? load(source.getName()) : null);
+        return(source != null ? load(source.getName()) : null);
     }
 
 
     static synchronized String
     load(String name) {
 
-	return(load(new String[] {name}));
+        return(load(new String[] {name}));
     }
 
 
     static synchronized String
     load(String list[]) {
 
-	String  loaded = null;
-	String  classname;
-	int     n;
+        String  loaded = null;
+        String  classname;
+        int     n;
 
-	for (n = 0; n < list.length && loaded == null; n++) {
-	    if ((classname = list[n]) != null) {
-		if (modulecache.get(classname) == null) {
-		    invokeLoader(classname, new HashMap(), true);
-		    if (modulecache.get(classname) != null)
-			loaded = classname;
-		} else loaded = classname;
-	    }
-	}
-	return(loaded);
+        for (n = 0; n < list.length && loaded == null; n++) {
+            if ((classname = list[n]) != null) {
+                if (modulecache.get(classname) == null) {
+                    invokeLoader(classname, new HashMap(), true);
+                    if (modulecache.get(classname) != null)
+                        loaded = classname;
+                } else loaded = classname;
+            }
+        }
+        return(loaded);
     }
 
 
     public static Map
     loader(String classname, String modulename, Object init[], Object module[], Object extracted[], Map cache) {
 
-	YoixObject  obj;
-	HashMap     templates;
-	int         n;
+        YoixObject  obj;
+        HashMap     templates;
+        int         n;
 
-	//
-	// This method is public so reflection works easily, but we should
-	// only get here from invokeLoader()!!!
-	//
+        //
+        // This method is public so reflection works easily, but we should
+        // only get here from invokeLoader()!!!
+        //
 
-	if (module != null && module.length > 0) {
-	    templates = new HashMap();
-	    if (cache == null)
-		cache = new HashMap();
-	    if (init != null)
-		readTable(classname, modulename, init, cache, templates);
-	    readTable(classname, modulename, module, cache, templates);
-	    if (extracted != null) {
-		for (n = 0; n < extracted.length; n++)
-		    extracted[n] = cache.get(extracted[n]);
-	    }
-	    if (modulename != null) {
-		if ((obj = (YoixObject)cache.get(modulename)) != null)
-		    obj.setGrowable(false);
-	    }
-	    invokeLoaded(classname);
-	    VM.cleanup(classname);
-	}
-	return(cache);
+        if (module != null && module.length > 0) {
+            templates = new HashMap();
+            if (cache == null)
+                cache = new HashMap();
+            if (init != null)
+                readTable(classname, modulename, init, cache, templates);
+            readTable(classname, modulename, module, cache, templates);
+            if (extracted != null) {
+                for (n = 0; n < extracted.length; n++)
+                    extracted[n] = cache.get(extracted[n]);
+            }
+            if (modulename != null) {
+                if ((obj = (YoixObject)cache.get(modulename)) != null)
+                    obj.setGrowable(false);
+            }
+            invokeLoaded(classname);
+            VM.cleanup(classname);
+        }
+        return(cache);
     }
 
 
     public static String
     notice(String classname) {
 
-	String  value = null;
-	Class   source;
+        String  value = null;
+        Class   source;
 
-	try {
-	    source = Class.forName(classname);
-	    try {
-		value = (String)source.getDeclaredField(MODULENOTICE).get(null);
-	    }
-	    catch(NoSuchFieldException e) {
-		if (YoixMisc.inPackage(classname, YOIXPACKAGE))
-		    value = YOIXNOTICE;
-	    }
-	    catch(Exception e) {}
-	}
-	catch(ClassNotFoundException e) {}
+        try {
+            source = Class.forName(classname);
+            try {
+                value = (String)source.getDeclaredField(MODULENOTICE).get(null);
+            }
+            catch(NoSuchFieldException e) {
+                if (YoixMisc.inPackage(classname, YOIXPACKAGE))
+                    value = YOIXNOTICE;
+            }
+            catch(Exception e) {}
+        }
+        catch(ClassNotFoundException e) {}
 
-	return(value);
+        return(value);
     }
 
 
     static void
     tune(String name, Object value) {
 
-	invokeTuner(YoixModuleVM.class.getName(), name, value);
+        invokeTuner(YoixModuleVM.class.getName(), name, value);
     }
 
 
     public static void
     tuner(Object table[], String name, Object value) {
 
-	int  n;
+        int  n;
 
-	//
-	// This method is public so reflection works easily, but we should
-	// only get here from invokeTuner()!!!
-	//
+        //
+        // This method is public so reflection works easily, but we should
+        // only get here from invokeTuner()!!!
+        //
 
-	if (table != null) {
-	    for (n = 0; n <= table.length - 5; n += 5) {
-		if (name.equals((String)table[n+4])) {
-		    if (table[n+3] != null) {	// null means no changes
-			if (table[n+2] == $NULL) {
-			    if (table[n+1].equals(T_STRING))
-				table[n+2] = $STRING;
-			    else VM.die(INTERNALERROR);
-			}
-			table[n+1] = value;
-		    }
-		    break;
-		}
-	    }
-	}
+        if (table != null) {
+            for (n = 0; n <= table.length - 5; n += 5) {
+                if (name.equals((String)table[n+4])) {
+                    if (table[n+3] != null) {	// null means no changes
+                        if (table[n+2] == $NULL) {
+                            if (table[n+1].equals(T_STRING))
+                                table[n+2] = $STRING;
+                            else VM.die(INTERNALERROR);
+                        }
+                        table[n+1] = value;
+                    }
+                    break;
+                }
+            }
+        }
     }
 
 
     public static String
     version(String classname) {
 
-	String  value = null;
-	Class   source;
+        String  value = null;
+        Class   source;
 
-	try {
-	    source = Class.forName(classname);
-	    try {
-		value = (String)source.getDeclaredField(MODULEVERSION).get(null);
-	    }
-	    catch(NoSuchFieldException e) {
-		if (YoixMisc.inPackage(classname, YOIXPACKAGE))
-		    value = YOIXVERSION;
-	    }
-	    catch(Exception e) {}
-	}
-	catch(ClassNotFoundException e) {}
+        try {
+            source = Class.forName(classname);
+            try {
+                value = (String)source.getDeclaredField(MODULEVERSION).get(null);
+            }
+            catch(NoSuchFieldException e) {
+                if (YoixMisc.inPackage(classname, YOIXPACKAGE))
+                    value = YOIXVERSION;
+            }
+            catch(Exception e) {}
+        }
+        catch(ClassNotFoundException e) {}
 
-	return(value);
+        return(value);
     }
 
     ///////////////////////////////////
@@ -601,698 +601,698 @@ class YoixModule
     private static void
     checkLoad(String classname) {
 
-	SecurityManager  sm;
+        SecurityManager  sm;
 
-	//
-	// Eventually call invokeChecker() for all classes??
-	//
+        //
+        // Eventually call invokeChecker() for all classes??
+        //
 
-	if (YoixMisc.inPackage(classname, YOIXPACKAGE) == false) {
-	    if (VM.getUserModules()) {
-		if ((sm = System.getSecurityManager()) instanceof YoixSecurityManager) {
-		    ((YoixSecurityManager)sm).checkYoixModule(
-			YoixObject.newString(classname)
-		    );
-		}
-		invokeChecker(classname);
-	    } else throw(new SecurityException());
-	}
+        if (YoixMisc.inPackage(classname, YOIXPACKAGE) == false) {
+            if (VM.getUserModules()) {
+                if ((sm = System.getSecurityManager()) instanceof YoixSecurityManager) {
+                    ((YoixSecurityManager)sm).checkYoixModule(
+                        YoixObject.newString(classname)
+                    );
+                }
+                invokeChecker(classname);
+            } else throw(new SecurityException());
+        }
     }
 
 
     private static synchronized void
     invokeChecker(String classname) {
 
-	Method  method;
-	Class   source;
+        Method  method;
+        Class   source;
 
-	try {
-	    source = Class.forName(classname);
-	    method = source.getMethod(MODULECHECKER, new Class[] {OBJECTCLASS});
-	    method.invoke(null, new Object[] {VM.newVM()});
-	}
-	catch(ClassNotFoundException e) {}	// should be impossible
-	catch(NoSuchMethodException e) {}	// it's optional
-	catch(IllegalAccessException e) {}	// not our responsibility
-	catch(InvocationTargetException e) {
-	    throw(new SecurityException());
-	}
+        try {
+            source = Class.forName(classname);
+            method = source.getMethod(MODULECHECKER, new Class[] {OBJECTCLASS});
+            method.invoke(null, new Object[] {VM.newVM()});
+        }
+        catch(ClassNotFoundException e) {}	// should be impossible
+        catch(NoSuchMethodException e) {}	// it's optional
+        catch(IllegalAccessException e) {}	// not our responsibility
+        catch(InvocationTargetException e) {
+            throw(new SecurityException());
+        }
     }
 
 
     private static synchronized void
     invokeLoaded(String classname) {
 
-	Method  method;
-	Class   source;
+        Method  method;
+        Class   source;
 
-	try {
-	    source = Class.forName(classname);
-	    method = source.getMethod(MODULELOADED, new Class[] {});
-	    method.invoke(null, new Object[] {});
-	}
-	catch(ClassNotFoundException e) {}	// should be impossible
-	catch(NoSuchMethodException e) {}	// it's optional
-	catch(IllegalAccessException e) {}	// not our responsibility
-	catch(InvocationTargetException e) {
-	    throw(new SecurityException());
-	}
+        try {
+            source = Class.forName(classname);
+            method = source.getMethod(MODULELOADED, new Class[] {});
+            method.invoke(null, new Object[] {});
+        }
+        catch(ClassNotFoundException e) {}	// should be impossible
+        catch(NoSuchMethodException e) {}	// it's optional
+        catch(IllegalAccessException e) {}	// not our responsibility
+        catch(InvocationTargetException e) {
+            throw(new SecurityException());
+        }
     }
 
 
     private static synchronized void
     invokeLoader(String classname, Map cache, boolean silent) {
 
-	Method  method;
-	Object  init[];
-	Object  module[];
-	Object  extracted;
-	String  badfield;
-	String  modulename;
-	Field   modulefield;
-	Class   source;
+        Method  method;
+        Object  init[];
+        Object  module[];
+        Object  extracted;
+        String  badfield;
+        String  modulename;
+        Field   modulefield;
+        Class   source;
 
-	badfield = null;
+        badfield = null;
 
-	try {
-	    if (booted && VM.bitCheck(N_DEBUG, DEBUG_LOADMODULE))
-		VM.println(N_STDOUT, "load module " + classname);
-	    source = Class.forName(classname);
-	    if (isYoixModule(source)) {
-		checkLoad(classname);
-		module = null;
-		modulename = null;
-		init = null;
-		extracted = null;
-		method = source.getMethod(
-		    MODULELOADER,
-		    new Class[] {
-			STRINGCLASS,
-			STRINGCLASS,
-			TABLECLASS,
-			TABLECLASS,
-			TABLECLASS,
-			MAPCLASS
-		    }
-		);
-		try {
-		    modulefield = source.getDeclaredField(MODULETABLE);
-		    module = (Object [])modulefield.get(null);
-		}
-		catch(Exception e) {
-		    badfield = MODULETABLE;
-		    throw(e);
-		}
-		try {
-		    init = (Object [])source.getDeclaredField(MODULEINIT).get(null);
-		}
-		catch(NoSuchFieldException e) {}
-		catch(Exception e) {
-		    badfield = MODULEINIT;
-		    throw(e);
-		}
-		try {
-		    extracted = (Object)source.getDeclaredField(MODULEEXTRACTED).get(null);
-		}
-		catch(NoSuchFieldException e) {}
-		catch(Exception e) {
-		    badfield = MODULEEXTRACTED;
-		    throw(e);
-		}
-		try {
-		    modulename = (String)source.getDeclaredField(MODULENAME).get(null);
-		}
-		catch(NoSuchFieldException e) {}
-		modulecache.put(classname, cache);	// must preceed invoke()
-		method.invoke(
-		    null,
-		    new Object[] {classname, modulename, init, module, extracted, cache}
-		);
-		modulefield.set(source, null);
-	    } else VM.warn(INVALIDSUPERCLASS, classname);
-	}
-	catch(ClassNotFoundException e) {
-	    if (silent == false || VM.bitCheck(N_DEBUG, DEBUG_LOADMODULE)) {
-		VM.caughtException(e, true);
-		VM.warn(UNDEFINEDCLASS, classname);
-	    }
-	}
-	catch(UnsupportedClassVersionError e) {
-	    if (silent == false || VM.bitCheck(N_DEBUG, DEBUG_LOADMODULE)) {
-		VM.warn(UNDEFINEDCLASS, classname);
-	    }
-	}
-	catch(SecurityException e) {
-	    throw(e);
-	}
-	catch(Exception e) {
-	    VM.caughtException(e, true);
-	    if (badfield != null)
-		VM.warn(INVALIDFIELD, classname + "." + badfield);
-	    else VM.warn(INVALIDCLASS, classname);
-	}
+        try {
+            if (booted && VM.bitCheck(N_DEBUG, DEBUG_LOADMODULE))
+                VM.println(N_STDOUT, "load module " + classname);
+            source = Class.forName(classname);
+            if (isYoixModule(source)) {
+                checkLoad(classname);
+                module = null;
+                modulename = null;
+                init = null;
+                extracted = null;
+                method = source.getMethod(
+                    MODULELOADER,
+                    new Class[] {
+                        STRINGCLASS,
+                        STRINGCLASS,
+                        TABLECLASS,
+                        TABLECLASS,
+                        TABLECLASS,
+                        MAPCLASS
+                    }
+                );
+                try {
+                    modulefield = source.getDeclaredField(MODULETABLE);
+                    module = (Object [])modulefield.get(null);
+                }
+                catch(Exception e) {
+                    badfield = MODULETABLE;
+                    throw(e);
+                }
+                try {
+                    init = (Object [])source.getDeclaredField(MODULEINIT).get(null);
+                }
+                catch(NoSuchFieldException e) {}
+                catch(Exception e) {
+                    badfield = MODULEINIT;
+                    throw(e);
+                }
+                try {
+                    extracted = (Object)source.getDeclaredField(MODULEEXTRACTED).get(null);
+                }
+                catch(NoSuchFieldException e) {}
+                catch(Exception e) {
+                    badfield = MODULEEXTRACTED;
+                    throw(e);
+                }
+                try {
+                    modulename = (String)source.getDeclaredField(MODULENAME).get(null);
+                }
+                catch(NoSuchFieldException e) {}
+                modulecache.put(classname, cache);	// must preceed invoke()
+                method.invoke(
+                    null,
+                    new Object[] {classname, modulename, init, module, extracted, cache}
+                );
+                modulefield.set(source, null);
+            } else VM.warn(INVALIDSUPERCLASS, classname);
+        }
+        catch(ClassNotFoundException e) {
+            if (silent == false || VM.bitCheck(N_DEBUG, DEBUG_LOADMODULE)) {
+                VM.caughtException(e, true);
+                VM.warn(UNDEFINEDCLASS, classname);
+            }
+        }
+        catch(UnsupportedClassVersionError e) {
+            if (silent == false || VM.bitCheck(N_DEBUG, DEBUG_LOADMODULE)) {
+                VM.warn(UNDEFINEDCLASS, classname);
+            }
+        }
+        catch(SecurityException e) {
+            throw(e);
+        }
+        catch(Exception e) {
+            VM.caughtException(e, true);
+            if (badfield != null)
+                VM.warn(INVALIDFIELD, classname + "." + badfield);
+            else VM.warn(INVALIDCLASS, classname);
+        }
     }
 
 
     private static synchronized void
     invokeTuner(String classname, String name, Object value) {
 
-	YoixObject  obj = null;
-	Method      method;
-	Object      table[];
-	Class       source;
+        YoixObject  obj = null;
+        Method      method;
+        Object      table[];
+        Class       source;
 
-	try {
-	    source = Class.forName(classname);
-	    if (source.getSuperclass().equals(YoixModule.class)) {
-		method = source.getMethod(
-		    MODULETUNER,
-		    new Class[] {
-			TABLECLASS,
-			STRINGCLASS,
-			OBJECTCLASS
-		    }
-		);
-		table = (Object [])source.getDeclaredField(MODULEINIT).get(null);
-		method.invoke(
-		    null,
-		    new Object[] {table, name, value}
-		);
-	    } else throw(new Exception());
-	}
-	catch(ClassNotFoundException e) {
-	    VM.caughtException(e);
-	    VM.warn(UNDEFINEDCLASS, classname);
-	}
-	catch(Exception e) {
-	    VM.caughtException(e);
-	    VM.warn(INVALIDCLASS, classname);
-	}
+        try {
+            source = Class.forName(classname);
+            if (source.getSuperclass().equals(YoixModule.class)) {
+                method = source.getMethod(
+                    MODULETUNER,
+                    new Class[] {
+                        TABLECLASS,
+                        STRINGCLASS,
+                        OBJECTCLASS
+                    }
+                );
+                table = (Object [])source.getDeclaredField(MODULEINIT).get(null);
+                method.invoke(
+                    null,
+                    new Object[] {table, name, value}
+                );
+            } else throw(new Exception());
+        }
+        catch(ClassNotFoundException e) {
+            VM.caughtException(e);
+            VM.warn(UNDEFINEDCLASS, classname);
+        }
+        catch(Exception e) {
+            VM.caughtException(e);
+            VM.warn(INVALIDCLASS, classname);
+        }
     }
 
 
     private static boolean
     isYoixModule(Class source) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	while (source != null) {
-	    if (source.equals(YoixModule.class)) {
-		result = true;
-		break;
-	    } else source = source.getSuperclass();
-	}
-	return(result);
+        while (source != null) {
+            if (source.equals(YoixModule.class)) {
+                result = true;
+                break;
+            } else source = source.getSuperclass();
+        }
+        return(result);
     }
 
 
     private static int
     mapMinor(YoixObject obj) {
 
-	int  major;
-	int  minor;
+        int  major;
+        int  minor;
 
-	//
-	// Maps the N_MAJOR numbers defined in obj into numbers that should
-	// be used when creating we create null objects. Confusing, but it's
-	// very important.
-	//
+        //
+        // Maps the N_MAJOR numbers defined in obj into numbers that should
+        // be used when creating we create null objects. Confusing, but it's
+        // very important.
+        //
 
-	switch (major = obj.getInt(N_MAJOR, -1)) {
-	    case JCOMPONENT:
-		minor = COMPONENT;
-		break;
+        switch (major = obj.getInt(N_MAJOR, -1)) {
+            case JCOMPONENT:
+                minor = COMPONENT;
+                break;
 
-	    default:
-		minor = (major == -1) ? obj.minor() : major;
-		break;
-	}
-	return(minor);
+            default:
+                minor = (major == -1) ? obj.minor() : major;
+                break;
+        }
+        return(minor);
     }
 
 
     private static void
     readClass(String classname, YoixObject dest, String prefix, Class type)
 
-	throws Exception
+        throws Exception
 
     {
 
-	YoixObject  current;
-	YoixObject  obj;
-	Object      value;
-	String      name;
-	Class       source;
-	Field       fields[];
-	int         n;
-	int         offset = -1;
+        YoixObject  current;
+        YoixObject  obj;
+        Object      value;
+        String      name;
+        Class       source;
+        Field       fields[];
+        int         n;
+        int         offset = -1;
 
-	if (VM.bitCheck(N_DEBUG, DEBUG_READCLASS))
-	    VM.println(N_STDOUT, "read class " + classname);
+        if (VM.bitCheck(N_DEBUG, DEBUG_READCLASS))
+            VM.println(N_STDOUT, "read class " + classname);
 
-	if (prefix != null && (n = prefix.indexOf('\t')) >= 0) {
-	    offset = prefix.length() - (n + 1);
-	    prefix = prefix.substring(0, n);
-	}
+        if (prefix != null && (n = prefix.indexOf('\t')) >= 0) {
+            offset = prefix.length() - (n + 1);
+            prefix = prefix.substring(0, n);
+        }
 
-	source = Class.forName(classname);
-	try {
-	    //
-	    // Catching SecurityException prevents problems when we're running
-	    // as an untrusted application under javaws, however there's a good
-	    // chance that always using source.getFields() would work. We will
-	    // eventually look into it, but this is a safe approach won't cause
-	    // any new problems.
-	    //
+        source = Class.forName(classname);
+        try {
+            //
+            // Catching SecurityException prevents problems when we're running
+            // as an untrusted application under javaws, however there's a good
+            // chance that always using source.getFields() would work. We will
+            // eventually look into it, but this is a safe approach won't cause
+            // any new problems.
+            //
 
-	    fields = source.getDeclaredFields();
-	}
-	catch(SecurityException e) {
-	    //
-	    // Probably can dispense with source.getDeclaredFields() and just
-	    // use source.getFields(). We eventually will experiment.
-	    //
-	    fields = source.getFields();
-	}
-	for (n = 0; n < fields.length; n++) {
-	    try {
-		name = fields[n].getName();
-		if (name.charAt(0) != '$' && (prefix == null || name.startsWith(prefix))) {
-		    value = fields[n].get(source);
-		    if (type == null || type.isInstance(value)) {
-			if (value instanceof Number)
-			    obj = YoixObject.newNumber((Number)value);
-			else if (value instanceof String)
-			    obj = YoixObject.newString((String)value);
-			else if (value instanceof Color)
-			    obj = YoixObject.newColor((Color)value);
-			else if (value instanceof Locale)
-			    obj = YoixObject.newLocale((Locale)value);
-			else obj = null;
-			if (obj != null) {
-			    if (offset > 0)
-				name = name.substring(offset);
-			    if (dest.defined(name) == false) {
-				//
-				// Eventually do better setting permissions.
-				//
-				obj.setAccessBody(LR__);
-				dest.declare(name, obj, LR__);
-			    } else {
-				current = dest.get(name, false);
-				if (YoixInterpreter.equalsEQ(current, obj) == false)
-				    VM.abort(BADDECLARATION, name);
-			    }
-			}
-		    }
-		}
-	    }
-	    catch(Exception e) {}
-	}
+            fields = source.getDeclaredFields();
+        }
+        catch(SecurityException e) {
+            //
+            // Probably can dispense with source.getDeclaredFields() and just
+            // use source.getFields(). We eventually will experiment.
+            //
+            fields = source.getFields();
+        }
+        for (n = 0; n < fields.length; n++) {
+            try {
+                name = fields[n].getName();
+                if (name.charAt(0) != '$' && (prefix == null || name.startsWith(prefix))) {
+                    value = fields[n].get(source);
+                    if (type == null || type.isInstance(value)) {
+                        if (value instanceof Number)
+                            obj = YoixObject.newNumber((Number)value);
+                        else if (value instanceof String)
+                            obj = YoixObject.newString((String)value);
+                        else if (value instanceof Color)
+                            obj = YoixObject.newColor((Color)value);
+                        else if (value instanceof Locale)
+                            obj = YoixObject.newLocale((Locale)value);
+                        else obj = null;
+                        if (obj != null) {
+                            if (offset > 0)
+                                name = name.substring(offset);
+                            if (dest.defined(name) == false) {
+                                //
+                                // Eventually do better setting permissions.
+                                //
+                                obj.setAccessBody(LR__);
+                                dest.declare(name, obj, LR__);
+                            } else {
+                                current = dest.get(name, false);
+                                if (YoixInterpreter.equalsEQ(current, obj) == false)
+                                    VM.abort(BADDECLARATION, name);
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception e) {}
+        }
     }
 
 
     private static void
     readTable(String classname, String modulename, Object table[], Map cache, Map templates) {
 
-	YoixObject  obj;
-	YoixObject  temp;
-	YoixObject  target = null;
-	String      targetname = null;
-	String      name = null;
-	String      ref = null;
-	String      builtin;
-	Object      arg = null;
-	int         modulesize = -1;
-	int         command;
-	int         mode;
-	int         ival;
-	int         n = 0;
+        YoixObject  obj;
+        YoixObject  temp;
+        YoixObject  target = null;
+        String      targetname = null;
+        String      name = null;
+        String      ref = null;
+        String      builtin;
+        Object      arg = null;
+        int         modulesize = -1;
+        int         command;
+        int         mode;
+        int         ival;
+        int         n = 0;
 
-	VM.pushMark();
-	VM.pushAccess(LRWX);
-	VM.pushError();
+        VM.pushMark();
+        VM.pushAccess(LRWX);
+        VM.pushError();
 
-	try {
-	    for (n = 0; n < table.length; n += 5) {
-		obj = null;
-		name = (String)table[n];
-		arg = table[n+1];
-		command = ((Integer)table[n+2]).intValue();
-		mode = (table[n+3] != null) ? ((Integer)table[n+3]).intValue() : 0;
-		ref = (String)table[n+4];
-		switch (command) {
-		    case ARRAY:
-			if (arg != null)
-			    obj = YoixObject.newArray(YoixMake.javaInt(arg));
-			else obj = YoixObject.newArray();
-			break;
+        try {
+            for (n = 0; n < table.length; n += 5) {
+                obj = null;
+                name = (String)table[n];
+                arg = table[n+1];
+                command = ((Integer)table[n+2]).intValue();
+                mode = (table[n+3] != null) ? ((Integer)table[n+3]).intValue() : 0;
+                ref = (String)table[n+4];
+                switch (command) {
+                    case ARRAY:
+                        if (arg != null)
+                            obj = YoixObject.newArray(YoixMake.javaInt(arg));
+                        else obj = YoixObject.newArray();
+                        break;
 
-		    case BUILTIN:
-			if (name != null || ref != null) {
-			    builtin = classname + "." + (name != null ? name : ref);
-			    if (arg != null && arg.equals("") == false) {
-				ival = YoixMake.javaInt(arg);
-				obj = YoixObject.newBuiltin(builtin, Math.abs(ival), ival < 0);
-			    } else obj = YoixObject.newBuiltin(builtin, 0, true);
-			} else throw(new Exception());
-			break;
+                    case BUILTIN:
+                        if (name != null || ref != null) {
+                            builtin = classname + "." + (name != null ? name : ref);
+                            if (arg != null && arg.equals("") == false) {
+                                ival = YoixMake.javaInt(arg);
+                                obj = YoixObject.newBuiltin(builtin, Math.abs(ival), ival < 0);
+                            } else obj = YoixObject.newBuiltin(builtin, 0, true);
+                        } else throw(new Exception());
+                        break;
 
-		    case CLASS:
-			if (arg instanceof String)
-			    obj = YoixObject.newString((String)arg);
-			else if (arg == null)
-			    obj = YoixObject.newString(classname);
-		 	else throw(new Exception());
-			break;
+                    case CLASS:
+                        if (arg instanceof String)
+                            obj = YoixObject.newString((String)arg);
+                        else if (arg == null)
+                            obj = YoixObject.newString(classname);
+                 	else throw(new Exception());
+                        break;
 
-		    case COLOR:
-			if (arg instanceof Color)
-			    obj = YoixObject.newColor((Color)arg);
-			else if (arg instanceof String)
-			    obj = YoixObject.newColor((String)arg);
-			else if (arg == null)
-			    obj = YoixObject.newColor();
-			else throw(new Exception());
-			break;
+                    case COLOR:
+                        if (arg instanceof Color)
+                            obj = YoixObject.newColor((Color)arg);
+                        else if (arg instanceof String)
+                            obj = YoixObject.newColor((String)arg);
+                        else if (arg == null)
+                            obj = YoixObject.newColor();
+                        else throw(new Exception());
+                        break;
 
-		    case DECLARE:
-			if (arg instanceof String) {
-			    if ((temp = (YoixObject)templates.get(arg)) == null) {
-				temp = YoixMake.yoixType((String)arg);
-				templates.put(arg, temp);
-			    }
-			    obj = temp.duplicate();
-			} else throw(new Exception());
-			break;
+                    case DECLARE:
+                        if (arg instanceof String) {
+                            if ((temp = (YoixObject)templates.get(arg)) == null) {
+                                temp = YoixMake.yoixType((String)arg);
+                                templates.put(arg, temp);
+                            }
+                            obj = temp.duplicate();
+                        } else throw(new Exception());
+                        break;
 
-		    case DICTIONARY:
-			if (arg != null)
-			    obj = YoixObject.newDictionary(YoixMake.javaInt(arg));
-			else obj = YoixObject.newDictionary();
-			break;
+                    case DICTIONARY:
+                        if (arg != null)
+                            obj = YoixObject.newDictionary(YoixMake.javaInt(arg));
+                        else obj = YoixObject.newDictionary();
+                        break;
 
-		    case DIMENSION:
-			if (arg instanceof Dimension)
-			    obj = YoixObject.newDimension((Dimension)arg);
-			else if (arg == null)
-			    obj = YoixObject.newDimension();
-			else throw(new Exception());
-			break;
+                    case DIMENSION:
+                        if (arg instanceof Dimension)
+                            obj = YoixObject.newDimension((Dimension)arg);
+                        else if (arg == null)
+                            obj = YoixObject.newDimension();
+                        else throw(new Exception());
+                        break;
 
-		    case DOUBLE:
-			if (arg instanceof Double)
-			    obj = YoixObject.newDouble((Double)arg);
-			else obj = YoixObject.newDouble(YoixMake.javaDouble(arg));
-			break;
+                    case DOUBLE:
+                        if (arg instanceof Double)
+                            obj = YoixObject.newDouble((Double)arg);
+                        else obj = YoixObject.newDouble(YoixMake.javaDouble(arg));
+                        break;
 
-		    case DUP:
-		    case GET:
-			if (arg != null) {
-			    if ((temp = (YoixObject)cache.get(arg)) != null)
-				obj = (command == DUP) ? temp.duplicate() : temp;
-			    else throw(new Exception());
-			} else throw(new Exception());
-			break;
+                    case DUP:
+                    case GET:
+                        if (arg != null) {
+                            if ((temp = (YoixObject)cache.get(arg)) != null)
+                                obj = (command == DUP) ? temp.duplicate() : temp;
+                            else throw(new Exception());
+                        } else throw(new Exception());
+                        break;
 
-		    case GROWTO:
-			if (target != null) {
-			    if (arg != null) {
-				ival = YoixMake.javaInt(arg);
-				target.setGrowable(true);
-				target.setGrowto(ival != 0 ? ival : target.length());
-			    } else target.setGrowable(false);
-			} else throw(new Exception());
-			break;
+                    case GROWTO:
+                        if (target != null) {
+                            if (arg != null) {
+                                ival = YoixMake.javaInt(arg);
+                                target.setGrowable(true);
+                                target.setGrowto(ival != 0 ? ival : target.length());
+                            } else target.setGrowable(false);
+                        } else throw(new Exception());
+                        break;
 
-		    case INCLUDE:
-			if (name != null)
-			    invokeLoader(name, cache, false);
-			else throw(new Exception());
-			break;
+                    case INCLUDE:
+                        if (name != null)
+                            invokeLoader(name, cache, false);
+                        else throw(new Exception());
+                        break;
 
-		    case INSETS:
-			if (arg instanceof Insets)
-			    obj = YoixObject.newInsets((Insets)arg);
-			else if (arg == null)
-			    obj = YoixObject.newInsets();
-			else throw(new Exception());
-			break;
+                    case INSETS:
+                        if (arg instanceof Insets)
+                            obj = YoixObject.newInsets((Insets)arg);
+                        else if (arg == null)
+                            obj = YoixObject.newInsets();
+                        else throw(new Exception());
+                        break;
 
-		    case INTEGER:
-			if (arg instanceof Integer)
-			    obj = YoixObject.newInt((Integer)arg);
-			else obj = YoixObject.newInt(YoixMake.javaInt(arg));
-			break;
+                    case INTEGER:
+                        if (arg instanceof Integer)
+                            obj = YoixObject.newInt((Integer)arg);
+                        else obj = YoixObject.newInt(YoixMake.javaInt(arg));
+                        break;
 
-		    case LIST:
-			obj = YoixObject.newDictionary(YoixMake.javaInt(arg), -1, false);
-			break;
+                    case LIST:
+                        obj = YoixObject.newDictionary(YoixMake.javaInt(arg), -1, false);
+                        break;
 
-		    case MATRIX:
-			obj = YoixMake.yoixType(T_MATRIX);
-			break;
+                    case MATRIX:
+                        obj = YoixMake.yoixType(T_MATRIX);
+                        break;
 
-		    case MODULE:
-			if (target != null && target.isDictionary()) {
-			    if (name != null && name.length() > 0) {
-				if (arg instanceof String) {
-				    if (((String)arg).length() > 0) {
-					target.reserve(name);
-					((YoixBodyDictionaryObject)target.body()).setModuleClass(
-					    name,
-					    YOIXPACKAGE + "." + arg
-					);
-				    } else throw(new Exception());
-				} else throw(new Exception());
-			    } else throw(new Exception());
-			} else throw(new Exception());
-			break;
+                    case MODULE:
+                        if (target != null && target.isDictionary()) {
+                            if (name != null && name.length() > 0) {
+                                if (arg instanceof String) {
+                                    if (((String)arg).length() > 0) {
+                                        target.reserve(name);
+                                        ((YoixBodyDictionaryObject)target.body()).setModuleClass(
+                                            name,
+                                            YOIXPACKAGE + "." + arg
+                                        );
+                                    } else throw(new Exception());
+                                } else throw(new Exception());
+                            } else throw(new Exception());
+                        } else throw(new Exception());
+                        break;
 
-		    case NULL:
-			if (arg instanceof String) {
-			    if ((temp = (YoixObject)cache.get(arg)) == null) {
-				obj = YoixObject.newNull((String)arg);
-				mode |= (obj.mode() & ANYMASK);
-			    } else obj = YoixObject.newNull(temp.major(), mapMinor(temp), (String)arg);
-			} else throw(new Exception());
-			break;
+                    case NULL:
+                        if (arg instanceof String) {
+                            if ((temp = (YoixObject)cache.get(arg)) == null) {
+                                obj = YoixObject.newNull((String)arg);
+                                mode |= (obj.mode() & ANYMASK);
+                            } else obj = YoixObject.newNull(temp.major(), mapMinor(temp), (String)arg);
+                        } else throw(new Exception());
+                        break;
 
-		    case NUMBER:
-			if (arg instanceof Number)
-			    obj = YoixObject.newNumber((Number)arg);
-			else obj = YoixObject.newDouble(YoixMake.javaDouble(arg));
-			mode |= ANYMINOR;
-			break;
+                    case NUMBER:
+                        if (arg instanceof Number)
+                            obj = YoixObject.newNumber((Number)arg);
+                        else obj = YoixObject.newDouble(YoixMake.javaDouble(arg));
+                        mode |= ANYMINOR;
+                        break;
 
-		    case OBJECT:
-			if (arg instanceof String)
-			    obj = YoixObject.newString((String)arg);
-			else if (arg instanceof Number)
-			    obj = YoixObject.newNumber((Number)arg);
-			else if (arg instanceof Dimension)
-			    obj = YoixObject.newDimension((Dimension)arg);
-			else if (arg instanceof Insets)
-			    obj = YoixObject.newInsets((Insets)arg);
-			else if (arg instanceof Point)
-			    obj = YoixObject.newPoint((Point)arg);
-			else obj = YoixObject.newInt(YoixMake.javaInt(arg));
-			mode |= ANYMAJOR;
-			break;
+                    case OBJECT:
+                        if (arg instanceof String)
+                            obj = YoixObject.newString((String)arg);
+                        else if (arg instanceof Number)
+                            obj = YoixObject.newNumber((Number)arg);
+                        else if (arg instanceof Dimension)
+                            obj = YoixObject.newDimension((Dimension)arg);
+                        else if (arg instanceof Insets)
+                            obj = YoixObject.newInsets((Insets)arg);
+                        else if (arg instanceof Point)
+                            obj = YoixObject.newPoint((Point)arg);
+                        else obj = YoixObject.newInt(YoixMake.javaInt(arg));
+                        mode |= ANYMAJOR;
+                        break;
 
-		    case PACKAGE:
-			if (target != null && target.isDictionary()) {
-			    if (arg instanceof String)
-				((YoixBodyDictionaryObject)target.body()).setModulePackage((String)arg);
-			    else throw(new Exception());
-			} else throw(new Exception());
-			break;
+                    case PACKAGE:
+                        if (target != null && target.isDictionary()) {
+                            if (arg instanceof String)
+                                ((YoixBodyDictionaryObject)target.body()).setModulePackage((String)arg);
+                            else throw(new Exception());
+                        } else throw(new Exception());
+                        break;
 
-		    case POINT:
-			if (arg instanceof Point)
-			    obj = YoixObject.newPoint((Point)arg);
-			else if (arg == null)
-			    obj = YoixObject.newPoint();
-			else throw(new Exception());
-			break;
+                    case POINT:
+                        if (arg instanceof Point)
+                            obj = YoixObject.newPoint((Point)arg);
+                        else if (arg == null)
+                            obj = YoixObject.newPoint();
+                        else throw(new Exception());
+                        break;
 
-		    case PUT:
-			if (name != null || targetname != null) {
-			    if (arg instanceof String) {
-				if (ref == null) {
-				    if (target != null) {
-					if ((temp = (YoixObject)cache.get(arg)) != null) {
-					    if (name == null)
-						name = targetname;
-					    if (temp.defined(name) == false)
-						temp.declare(name, target, target.mode());
-					    else temp.put(name, target, false);
-					} else throw(new Exception());
-				    } else throw(new Exception());
-				} else throw(new Exception());
-			    } else throw(new Exception());
-			} else throw(new Exception());
-			break;
+                    case PUT:
+                        if (name != null || targetname != null) {
+                            if (arg instanceof String) {
+                                if (ref == null) {
+                                    if (target != null) {
+                                        if ((temp = (YoixObject)cache.get(arg)) != null) {
+                                            if (name == null)
+                                                name = targetname;
+                                            if (temp.defined(name) == false)
+                                                temp.declare(name, target, target.mode());
+                                            else temp.put(name, target, false);
+                                        } else throw(new Exception());
+                                    } else throw(new Exception());
+                                } else throw(new Exception());
+                            } else throw(new Exception());
+                        } else throw(new Exception());
+                        break;
 
-		    case READCLASS:
-			if (target != null && name != null) {
-			    if (arg != null) {
-				if (arg instanceof String && ((String)arg).length() > 0)
-				    readClass(name, target, (String)arg, null);
-				else readClass(name, target, null, arg.getClass());
-			    } else readClass(name, target, null, null);
-			} else throw(new Exception());
-			break;
+                    case READCLASS:
+                        if (target != null && name != null) {
+                            if (arg != null) {
+                                if (arg instanceof String && ((String)arg).length() > 0)
+                                    readClass(name, target, (String)arg, null);
+                                else readClass(name, target, null, arg.getClass());
+                            } else readClass(name, target, null, null);
+                        } else throw(new Exception());
+                        break;
 
-		    case REMOVE:
-			if (name != null)
-			    cache.remove(name);
-			else throw(new Exception());
-			break;
+                    case REMOVE:
+                        if (name != null)
+                            cache.remove(name);
+                        else throw(new Exception());
+                        break;
 
-		    case RESTART:
-			if (arg != null && ref == null) {
-			    if ((temp = (YoixObject)cache.get(arg)) != null) {
-				target = temp;
-				targetname = name;
-			    } else throw(new Exception());
-			} else throw(new Exception());
-			break;
+                    case RESTART:
+                        if (arg != null && ref == null) {
+                            if ((temp = (YoixObject)cache.get(arg)) != null) {
+                                target = temp;
+                                targetname = name;
+                            } else throw(new Exception());
+                        } else throw(new Exception());
+                        break;
 
-		    case STRING:
-			if (arg instanceof String)
-			    obj = YoixObject.newString((String)arg);
-			else if (arg instanceof Integer)
-			    obj = YoixObject.newString(YoixMake.javaInt(arg));
-			else if (arg == null)
-			    obj = YoixObject.newString();
-			else throw(new Exception());
-			break;
+                    case STRING:
+                        if (arg instanceof String)
+                            obj = YoixObject.newString((String)arg);
+                        else if (arg instanceof Integer)
+                            obj = YoixObject.newString(YoixMake.javaInt(arg));
+                        else if (arg == null)
+                            obj = YoixObject.newString();
+                        else throw(new Exception());
+                        break;
 
-		    case TYPEDEF:
-			if (name != null || targetname != null) {
-			    if (arg == null || arg instanceof String) {
-				if (ref == null) {
-				    if (target != null) {
-					if (name == null)
-					    name = targetname;
-					if (target.isDictionary())	// more later - maybe
-					    VM.loadTypeDefinition(target, name, (String)arg);
-					else if (target.isBuiltin() && target.callable(2))
-					    VM.loadTypeDefinition(target, name, (String)arg);
-					else throw(new Exception());
-				    } else throw(new Exception());
-				} else throw(new Exception());
-			    } else throw(new Exception());
-			} else throw(new Exception());
-			break;
+                    case TYPEDEF:
+                        if (name != null || targetname != null) {
+                            if (arg == null || arg instanceof String) {
+                                if (ref == null) {
+                                    if (target != null) {
+                                        if (name == null)
+                                            name = targetname;
+                                        if (target.isDictionary())	// more later - maybe
+                                            VM.loadTypeDefinition(target, name, (String)arg);
+                                        else if (target.isBuiltin() && target.callable(2))
+                                            VM.loadTypeDefinition(target, name, (String)arg);
+                                        else throw(new Exception());
+                                    } else throw(new Exception());
+                                } else throw(new Exception());
+                            } else throw(new Exception());
+                        } else throw(new Exception());
+                        break;
 
-		    case TYPENAME:
-			if (target != null) {
-			    if (arg instanceof String)
-				target.setTypename((String)arg);
-			    else throw(new Exception());
-			} else throw(new Exception());
-			break;
+                    case TYPENAME:
+                        if (target != null) {
+                            if (arg instanceof String)
+                                target.setTypename((String)arg);
+                            else throw(new Exception());
+                        } else throw(new Exception());
+                        break;
 
-		    default:
-			throw(new Exception());
-		}
+                    default:
+                        throw(new Exception());
+                }
 
-		if (obj != null) {
-		    if (mode > 0xFF)
-			obj.setAccessBody(mode >>> 8);
-		    if (ref != null) {
-			if (ref != $_THIS) {
-			    if (ref.equals(modulename)) {
-				if (modulesize == -1)
-				    modulesize = obj.sizeof();
-			    }
-			    cache.put(ref, obj);
-			}
-			obj.setMode(mode);
-			target = obj;
-			targetname = name;
-		    }
-		    if (name != null && ref == null) {
-			if (target != null) {
-			    if (target.defined(name)) {
-				target.put(name, obj, false);
-				obj.setAccess(mode);	// added on 8/29/04
-			    } else target.declare(name, obj, mode&MODEMASK);
-			} else throw(new Exception());
-		    }
-		}
-	    }
-	}
-	catch(YoixError e) {
-	    VM.die(
-		LOADERERROR,
-		tableError(classname, modulename, targetname, name, arg, ref, n, e),
-		null
-	    );
-	}
-	catch(Throwable t) {
-	    VM.die(
-		LOADERERROR,
-		tableError(classname, modulename, targetname, name, arg, ref, n, t),
-		t
-	    );
-	}
+                if (obj != null) {
+                    if (mode > 0xFF)
+                        obj.setAccessBody(mode >>> 8);
+                    if (ref != null) {
+                        if (ref != $_THIS) {
+                            if (ref.equals(modulename)) {
+                                if (modulesize == -1)
+                                    modulesize = obj.sizeof();
+                            }
+                            cache.put(ref, obj);
+                        }
+                        obj.setMode(mode);
+                        target = obj;
+                        targetname = name;
+                    }
+                    if (name != null && ref == null) {
+                        if (target != null) {
+                            if (target.defined(name)) {
+                                target.put(name, obj, false);
+                                obj.setAccess(mode);	// added on 8/29/04
+                            } else target.declare(name, obj, mode&MODEMASK);
+                        } else throw(new Exception());
+                    }
+                }
+            }
+        }
+        catch(YoixError e) {
+            VM.die(
+                LOADERERROR,
+                tableError(classname, modulename, targetname, name, arg, ref, n, e),
+                null
+            );
+        }
+        catch(Throwable t) {
+            VM.die(
+                LOADERERROR,
+                tableError(classname, modulename, targetname, name, arg, ref, n, t),
+                t
+            );
+        }
 
-	if (modulename != null && modulesize >= 0) {
-	    if ((obj = (YoixObject)cache.get(modulename)) != null) {
-		if (obj.sizeof() != modulesize) {
-		    VM.warn(
-			MODULESIZEERROR,
-			new String[] {
-			    OFFENDINGCLASS, classname,
-			    "InitialSize", modulesize + "",
-			    "FinalSize", obj.sizeof() + ""
-			}
-		    );
-		}
-	    }
-	}
+        if (modulename != null && modulesize >= 0) {
+            if ((obj = (YoixObject)cache.get(modulename)) != null) {
+                if (obj.sizeof() != modulesize) {
+                    VM.warn(
+                        MODULESIZEERROR,
+                        new String[] {
+                            OFFENDINGCLASS, classname,
+                            "InitialSize", modulesize + "",
+                            "FinalSize", obj.sizeof() + ""
+                        }
+                    );
+                }
+            }
+        }
 
-	VM.popMark();
+        VM.popMark();
     }
 
 
     private static String[]
     tableError(String classname, String modulename, String targetname, String name, Object arg, String ref, int index, Throwable t) {
 
-	String  args[];
-	String  tmp[];
+        String  args[];
+        String  tmp[];
 
-	//
-	// Quick try at providing a little more information when an error
-	// occurs in readTable().
-	//
+        //
+        // Quick try at providing a little more information when an error
+        // occurs in readTable().
+        //
 
-	args = new String[] {
-	    "Class", classname,
-	    "Module", (modulename != null ? modulename : "null"),
-	    "Name", (name != null ? name : "null"),
-	    "Arg", (arg == null ? "null" : ((arg instanceof String) ? (String)arg : "???")),
-	    "Reference", (ref != null ? ref : "null"),
-	    "Index", index + "",
-	    "Target", (targetname != null ? targetname : "null"),
-	};
+        args = new String[] {
+            "Class", classname,
+            "Module", (modulename != null ? modulename : "null"),
+            "Name", (name != null ? name : "null"),
+            "Arg", (arg == null ? "null" : ((arg instanceof String) ? (String)arg : "???")),
+            "Reference", (ref != null ? ref : "null"),
+            "Index", index + "",
+            "Target", (targetname != null ? targetname : "null"),
+        };
 
-	if (t instanceof YoixError) {
-	    tmp = new String[args.length + 1];
-	    System.arraycopy(args, 0, tmp, 0, args.length);
-	    tmp[tmp.length - 1] = ((YoixError)t).getDetails().getString(N_MESSAGE, "");
-	    args = tmp;
-	} else {
-	    tmp = new String[args.length + 2];
-	    System.arraycopy(args, 0, tmp, 0, args.length);
-	    tmp[tmp.length - 2] = "Exception";
-	    tmp[tmp.length - 1] =  t.getClass().getName();
-	    args = tmp;
-	}
-	return(args);
+        if (t instanceof YoixError) {
+            tmp = new String[args.length + 1];
+            System.arraycopy(args, 0, tmp, 0, args.length);
+            tmp[tmp.length - 1] = ((YoixError)t).getDetails().getString(N_MESSAGE, "");
+            args = tmp;
+        } else {
+            tmp = new String[args.length + 2];
+            System.arraycopy(args, 0, tmp, 0, args.length);
+            tmp[tmp.length - 2] = "Exception";
+            tmp[tmp.length - 1] =  t.getClass().getName();
+            args = tmp;
+        }
+        return(args);
     }
 }
 

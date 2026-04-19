@@ -279,1034 +279,1034 @@ class YoixModuleGraphics extends YoixModule
     public static YoixObject
     clearRect(YoixObject arg[]) {
 
-	YoixObject  background;
-	Graphics    g;
+        YoixObject  background;
+        Graphics    g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if ((g = getGraphics(arg[0], true)) != null) {
-				g.fillRect(
-				    arg[1].intValue(),
-				    arg[2].intValue(),
-				    arg[3].intValue(),
-				    arg[4].intValue()
-				);
-				g.dispose();
-			    }
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if ((g = getGraphics(arg[0], true)) != null) {
+                                g.fillRect(
+                                    arg[1].intValue(),
+                                    arg[2].intValue(),
+                                    arg[3].intValue(),
+                                    arg[4].intValue()
+                                );
+                                g.dispose();
+                            }
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     copyArea(YoixObject arg[]) {
 
-	if (arg.length == 7 || arg.length == 8) {
-	    if (arg[0].isDrawable()) {
-		if (arg[1].isNumber()) {
-		    if (arg[2].isNumber()) {
-			if (arg[3].isNumber()) {
-			    if (arg[4].isNumber()) {
-				if (arg[5].isNumber()) {
-				    if (arg[6].isNumber()) {
-					if (arg.length == 7 || arg[7].isNumber()) {
-					    YoixMiscJFC.copyArea(
-						arg[0],
-						arg[1].doubleValue(), 
-						arg[2].doubleValue(), 
-						arg[3].doubleValue(), 
-						arg[4].doubleValue(), 
-						arg[5].doubleValue(), 
-						arg[6].doubleValue(), 
-						arg.length == 7 ? false : arg[7].booleanValue()
-					    );
-					} else VM.badArgument(7);
-				    } else VM.badArgument(6);
-				} else VM.badArgument(5);
-			    } else VM.badArgument(4);
-			} else VM.badArgument(3);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 7 || arg.length == 8) {
+            if (arg[0].isDrawable()) {
+                if (arg[1].isNumber()) {
+                    if (arg[2].isNumber()) {
+                        if (arg[3].isNumber()) {
+                            if (arg[4].isNumber()) {
+                                if (arg[5].isNumber()) {
+                                    if (arg[6].isNumber()) {
+                                        if (arg.length == 7 || arg[7].isNumber()) {
+                                            YoixMiscJFC.copyArea(
+                                                arg[0],
+                                                arg[1].doubleValue(), 
+                                                arg[2].doubleValue(), 
+                                                arg[3].doubleValue(), 
+                                                arg[4].doubleValue(), 
+                                                arg[5].doubleValue(), 
+                                                arg[6].doubleValue(), 
+                                                arg.length == 7 ? false : arg[7].booleanValue()
+                                            );
+                                        } else VM.badArgument(7);
+                                    } else VM.badArgument(6);
+                                } else VM.badArgument(5);
+                            } else VM.badArgument(4);
+                        } else VM.badArgument(3);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawArc(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if (arg[5].isNumber()) {
-				if (arg[6].isNumber()) {
-				    if ((g = getGraphics(arg[0])) != null) {
-					g.drawArc(
-					    arg[1].intValue(),
-					    arg[2].intValue(),
-					    arg[3].intValue(),
-					    arg[4].intValue(),
-					    arg[5].intValue(),
-					    arg[6].intValue()
-					);
-					g.dispose();
-				    }
-				} else VM.badArgument(6);
-			    } else VM.badArgument(5);
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if (arg[5].isNumber()) {
+                                if (arg[6].isNumber()) {
+                                    if ((g = getGraphics(arg[0])) != null) {
+                                        g.drawArc(
+                                            arg[1].intValue(),
+                                            arg[2].intValue(),
+                                            arg[3].intValue(),
+                                            arg[4].intValue(),
+                                            arg[5].intValue(),
+                                            arg[6].intValue()
+                                        );
+                                        g.dispose();
+                                    }
+                                } else VM.badArgument(6);
+                            } else VM.badArgument(5);
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawImage(YoixObject arg[]) {
 
-	AffineTransform  transform;
-	YoixBodyMatrix   matrix;
-	YoixObject       graphics;
-	YoixObject       mtx;
-	YoixObject       ctm;
-	Graphics2D       g;
-	Image            image;
-	Point            p;
+        AffineTransform  transform;
+        YoixBodyMatrix   matrix;
+        YoixObject       graphics;
+        YoixObject       mtx;
+        YoixObject       ctm;
+        Graphics2D       g;
+        Image            image;
+        Point            p;
 
-	//
-	// A bit harder than you might expect, but it all seems to be
-	// required if we want to have drawImage() track the current
-	// graphics state.
-	//
+        //
+        // A bit harder than you might expect, but it all seems to be
+        // required if we want to have drawImage() track the current
+        // graphics state.
+        //
 
-	if (arg.length == 4) {		// maybe more arguments - later
-	    if (arg[0].isDrawable()) {
-		if (arg[1].isImage()) {
-		    if (arg[2].isNumber()) {
-			if (arg[3].isNumber()) {
-			    if ((image = (Image)arg[1].getManagedDrawable(null)) != null) {
-				if ((graphics = arg[0].getObject(N_GRAPHICS)) != null) {
-				    if ((g = (Graphics2D)getGraphics(arg[0])) != null) {
-					if ((ctm = graphics.getObject(N_CTM)) != null) {
-					    p = YoixMake.javaPoint(
-						arg[2].doubleValue(),
-						arg[3].doubleValue(),
-						(YoixBodyMatrix)ctm.body()
-					    );
-					    try {
-						transform = VM.getDefaultTransform().createInverse();
-						transform.preConcatenate(g.getTransform());
-						g.setTransform(transform);
-						g.drawImage(image, p.x, p.y, null);
-					    }
-					    catch(NoninvertibleTransformException e) {}
-					}
-					g.dispose();
-				    }
-				}
-			    }
-			} else VM.badArgument(3);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 4) {		// maybe more arguments - later
+            if (arg[0].isDrawable()) {
+                if (arg[1].isImage()) {
+                    if (arg[2].isNumber()) {
+                        if (arg[3].isNumber()) {
+                            if ((image = (Image)arg[1].getManagedDrawable(null)) != null) {
+                                if ((graphics = arg[0].getObject(N_GRAPHICS)) != null) {
+                                    if ((g = (Graphics2D)getGraphics(arg[0])) != null) {
+                                        if ((ctm = graphics.getObject(N_CTM)) != null) {
+                                            p = YoixMake.javaPoint(
+                                                arg[2].doubleValue(),
+                                                arg[3].doubleValue(),
+                                                (YoixBodyMatrix)ctm.body()
+                                            );
+                                            try {
+                                                transform = VM.getDefaultTransform().createInverse();
+                                                transform.preConcatenate(g.getTransform());
+                                                g.setTransform(transform);
+                                                g.drawImage(image, p.x, p.y, null);
+                                            }
+                                            catch(NoninvertibleTransformException e) {}
+                                        }
+                                        g.dispose();
+                                    }
+                                }
+                            }
+                        } else VM.badArgument(3);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawLine(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if ((g = getGraphics(arg[0])) != null) {
-				g.drawLine(
-				    arg[1].intValue(),
-				    arg[2].intValue(),
-				    arg[3].intValue(),
-				    arg[4].intValue()
-				);
-				g.dispose();
-			    }
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if ((g = getGraphics(arg[0])) != null) {
+                                g.drawLine(
+                                    arg[1].intValue(),
+                                    arg[2].intValue(),
+                                    arg[3].intValue(),
+                                    arg[4].intValue()
+                                );
+                                g.dispose();
+                            }
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawOval(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if ((g = getGraphics(arg[0])) != null) {
-				g.drawOval(
-				    arg[1].intValue(),
-				    arg[2].intValue(),
-				    arg[3].intValue(),
-				    arg[4].intValue()
-				);
-				g.dispose();
-			    }
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if ((g = getGraphics(arg[0])) != null) {
+                                g.drawOval(
+                                    arg[1].intValue(),
+                                    arg[2].intValue(),
+                                    arg[3].intValue(),
+                                    arg[4].intValue()
+                                );
+                                g.dispose();
+                            }
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawPolygon(YoixObject arg[]) {
 
-	YoixObject  obj;
-	Graphics    g;
-	int         xpoints[];
-	int         ypoints[];
-	int         npoints = 0;
-	int         x;
-	int         y;
-	int         n;
+        YoixObject  obj;
+        Graphics    g;
+        int         xpoints[];
+        int         ypoints[];
+        int         npoints = 0;
+        int         x;
+        int         y;
+        int         n;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isArray() && arg[2].isArray()) {
-		if (arg.length == 3 || arg.length == 4) {
-		    if (arg.length == 4) {
-			if (arg[3].isNumber())
-			    npoints = Math.max(0, arg[3].intValue());
-			else VM.badArgument(3);
-		    } else npoints = Math.min(arg[1].length(), arg[2].length());
-		} else VM.badCall();
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 0; n < npoints; n++) {
-		    obj = arg[1].get(n, false);
-		    if (obj.isNumber()) {
-			x = obj.intValue();
-			obj = arg[2].get(n, false);
-			if (obj.isNumber()) {
-			    y = obj.intValue();
-			    xpoints[n] = x;
-			    ypoints[n] = y;
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		}
-	    } else {
-		npoints = (arg.length - 1)/2;
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 1; n < arg.length - 1; n += 2) {
-		    if (arg[n].isNumber()) {
-			if (arg[n+1].isNumber()) {
-			    xpoints[n/2] = arg[n].intValue();
-			    ypoints[n/2] = arg[n+1].intValue();
-			} else VM.badArgument(n+1);
-		    } else VM.badArgument(n);
-		}
-	    }
-	    if ((g = getGraphics(arg[0])) != null) {
-		g.drawPolygon(xpoints, ypoints, npoints);
-		g.dispose();
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isArray() && arg[2].isArray()) {
+                if (arg.length == 3 || arg.length == 4) {
+                    if (arg.length == 4) {
+                        if (arg[3].isNumber())
+                            npoints = Math.max(0, arg[3].intValue());
+                        else VM.badArgument(3);
+                    } else npoints = Math.min(arg[1].length(), arg[2].length());
+                } else VM.badCall();
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 0; n < npoints; n++) {
+                    obj = arg[1].get(n, false);
+                    if (obj.isNumber()) {
+                        x = obj.intValue();
+                        obj = arg[2].get(n, false);
+                        if (obj.isNumber()) {
+                            y = obj.intValue();
+                            xpoints[n] = x;
+                            ypoints[n] = y;
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                }
+            } else {
+                npoints = (arg.length - 1)/2;
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 1; n < arg.length - 1; n += 2) {
+                    if (arg[n].isNumber()) {
+                        if (arg[n+1].isNumber()) {
+                            xpoints[n/2] = arg[n].intValue();
+                            ypoints[n/2] = arg[n+1].intValue();
+                        } else VM.badArgument(n+1);
+                    } else VM.badArgument(n);
+                }
+            }
+            if ((g = getGraphics(arg[0])) != null) {
+                g.drawPolygon(xpoints, ypoints, npoints);
+                g.dispose();
+            }
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawPolyline(YoixObject arg[]) {
 
-	YoixObject  obj;
-	Graphics    g;
-	int         xpoints[];
-	int         ypoints[];
-	int         npoints = 0;
-	int         x;
-	int         y;
-	int         n;
+        YoixObject  obj;
+        Graphics    g;
+        int         xpoints[];
+        int         ypoints[];
+        int         npoints = 0;
+        int         x;
+        int         y;
+        int         n;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isArray() && arg[2].isArray()) {
-		if (arg.length == 3 || arg.length == 4) {
-		    if (arg.length == 4) {
-			if (arg[3].isNumber())
-			    npoints = Math.max(0, arg[3].intValue());
-			else VM.badArgument(3);
-		    } else npoints = Math.min(arg[1].length(), arg[2].length());
-		} else VM.badCall();
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 0; n < npoints; n++) {
-		    obj = arg[1].get(n, false);
-		    if (obj.isNumber()) {
-			x = obj.intValue();
-			obj = arg[2].get(n, false);
-			if (obj.isNumber()) {
-			    y = obj.intValue();
-			    xpoints[n] = x;
-			    ypoints[n] = y;
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		}
-	    } else {
-		npoints = (arg.length - 1)/2;
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 1; n < arg.length - 1; n += 2) {
-		    if (arg[n].isNumber()) {
-			if (arg[n+1].isNumber()) {
-			    xpoints[n/2] = arg[n].intValue();
-			    ypoints[n/2] = arg[n+1].intValue();
-			} else VM.badArgument(n+1);
-		    } else VM.badArgument(n);
-		}
-	    }
-	    if ((g = getGraphics(arg[0])) != null) {
-		g.drawPolyline(xpoints, ypoints, npoints);
-		g.dispose();
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isArray() && arg[2].isArray()) {
+                if (arg.length == 3 || arg.length == 4) {
+                    if (arg.length == 4) {
+                        if (arg[3].isNumber())
+                            npoints = Math.max(0, arg[3].intValue());
+                        else VM.badArgument(3);
+                    } else npoints = Math.min(arg[1].length(), arg[2].length());
+                } else VM.badCall();
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 0; n < npoints; n++) {
+                    obj = arg[1].get(n, false);
+                    if (obj.isNumber()) {
+                        x = obj.intValue();
+                        obj = arg[2].get(n, false);
+                        if (obj.isNumber()) {
+                            y = obj.intValue();
+                            xpoints[n] = x;
+                            ypoints[n] = y;
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                }
+            } else {
+                npoints = (arg.length - 1)/2;
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 1; n < arg.length - 1; n += 2) {
+                    if (arg[n].isNumber()) {
+                        if (arg[n+1].isNumber()) {
+                            xpoints[n/2] = arg[n].intValue();
+                            ypoints[n/2] = arg[n+1].intValue();
+                        } else VM.badArgument(n+1);
+                    } else VM.badArgument(n);
+                }
+            }
+            if ((g = getGraphics(arg[0])) != null) {
+                g.drawPolyline(xpoints, ypoints, npoints);
+                g.dispose();
+            }
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawRect(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if ((g = getGraphics(arg[0])) != null) {
-				g.drawRect(
-				    arg[1].intValue(),
-				    arg[2].intValue(),
-				    arg[3].intValue(),
-				    arg[4].intValue()
-				);
-				g.dispose();
-			    }
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if ((g = getGraphics(arg[0])) != null) {
+                                g.drawRect(
+                                    arg[1].intValue(),
+                                    arg[2].intValue(),
+                                    arg[3].intValue(),
+                                    arg[4].intValue()
+                                );
+                                g.dispose();
+                            }
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawRoundRect(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if (arg[5].isNumber()) {
-				if (arg[6].isNumber()) {
-				    if ((g = getGraphics(arg[0])) != null) {
-					g.drawRoundRect(
-					    arg[1].intValue(),
-					    arg[2].intValue(),
-					    arg[3].intValue(),
-					    arg[4].intValue(),
-					    arg[5].intValue(),
-					    arg[6].intValue()
-					);
-					g.dispose();
-				    }
-				} else VM.badArgument(6);
-			    } else VM.badArgument(5);
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if (arg[5].isNumber()) {
+                                if (arg[6].isNumber()) {
+                                    if ((g = getGraphics(arg[0])) != null) {
+                                        g.drawRoundRect(
+                                            arg[1].intValue(),
+                                            arg[2].intValue(),
+                                            arg[3].intValue(),
+                                            arg[4].intValue(),
+                                            arg[5].intValue(),
+                                            arg[6].intValue()
+                                        );
+                                        g.dispose();
+                                    }
+                                } else VM.badArgument(6);
+                            } else VM.badArgument(5);
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     drawString(YoixObject arg[]) {
 
-	YoixObject  graphics;
-	YoixObject  font;
-	Graphics    g;
-	String      str;
+        YoixObject  graphics;
+        YoixObject  font;
+        Graphics    g;
+        String      str;
 
-	if (arg.length == 4 || arg.length == 5) {
-	    if (arg[0].isDrawable()) {
-		if (arg[1].isString()) {
-		    if (arg[2].isNumber()) {
-			if (arg[3].isNumber()) {
-			    if (arg.length == 4 || arg[4].isNumber()) {
-				if ((str = arg[1].stringValue()) != null && str.length() > 0) {
-				    if ((graphics = arg[0].getObject(N_GRAPHICS)) != null) {
-					if ((font = graphics.getObject(N_FONT)) != null) {
-					    if (font.isFont() && font.notNull()) {
-						((YoixBodyFont)font.body()).drawString(
-						    str,
-						    arg[2].intValue(),
-						    arg[3].intValue(),
-						    arg.length == 5 ? arg[4].doubleValue() : 1.0,
-						    graphics
-						);
-					    }
-					}
-				    }
-				}
-			    } else VM.badArgument(4);
-			} else VM.badArgument(3);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 4 || arg.length == 5) {
+            if (arg[0].isDrawable()) {
+                if (arg[1].isString()) {
+                    if (arg[2].isNumber()) {
+                        if (arg[3].isNumber()) {
+                            if (arg.length == 4 || arg[4].isNumber()) {
+                                if ((str = arg[1].stringValue()) != null && str.length() > 0) {
+                                    if ((graphics = arg[0].getObject(N_GRAPHICS)) != null) {
+                                        if ((font = graphics.getObject(N_FONT)) != null) {
+                                            if (font.isFont() && font.notNull()) {
+                                                ((YoixBodyFont)font.body()).drawString(
+                                                    str,
+                                                    arg[2].intValue(),
+                                                    arg[3].intValue(),
+                                                    arg.length == 5 ? arg[4].doubleValue() : 1.0,
+                                                    graphics
+                                                );
+                                            }
+                                        }
+                                    }
+                                }
+                            } else VM.badArgument(4);
+                        } else VM.badArgument(3);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     fillArc(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if (arg[5].isNumber()) {
-				if (arg[6].isNumber()) {
-				    if ((g = getGraphics(arg[0])) != null) {
-					g.fillArc(
-					    arg[1].intValue(),
-					    arg[2].intValue(),
-					    arg[3].intValue(),
-					    arg[4].intValue(),
-					    arg[5].intValue(),
-					    arg[6].intValue()
-					);
-					g.dispose();
-				    }
-				} else VM.badArgument(6);
-			    } else VM.badArgument(5);
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if (arg[5].isNumber()) {
+                                if (arg[6].isNumber()) {
+                                    if ((g = getGraphics(arg[0])) != null) {
+                                        g.fillArc(
+                                            arg[1].intValue(),
+                                            arg[2].intValue(),
+                                            arg[3].intValue(),
+                                            arg[4].intValue(),
+                                            arg[5].intValue(),
+                                            arg[6].intValue()
+                                        );
+                                        g.dispose();
+                                    }
+                                } else VM.badArgument(6);
+                            } else VM.badArgument(5);
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     fillOval(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if ((g = getGraphics(arg[0])) != null) {
-				g.fillOval(
-				    arg[1].intValue(),
-				    arg[2].intValue(),
-				    arg[3].intValue(),
-				    arg[4].intValue()
-				);
-				g.dispose();
-			    }
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if ((g = getGraphics(arg[0])) != null) {
+                                g.fillOval(
+                                    arg[1].intValue(),
+                                    arg[2].intValue(),
+                                    arg[3].intValue(),
+                                    arg[4].intValue()
+                                );
+                                g.dispose();
+                            }
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     fillPolygon(YoixObject arg[]) {
 
-	YoixObject  obj;
-	Graphics    g;
-	int         xpoints[];
-	int         ypoints[];
-	int         npoints = 0;
-	int         x;
-	int         y;
-	int         n;
+        YoixObject  obj;
+        Graphics    g;
+        int         xpoints[];
+        int         ypoints[];
+        int         npoints = 0;
+        int         x;
+        int         y;
+        int         n;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isArray() && arg[2].isArray()) {
-		if (arg.length == 3 || arg.length == 4) {
-		    if (arg.length == 4) {
-			if (arg[3].isNumber())
-			    npoints = Math.max(0, arg[3].intValue());
-			else VM.badArgument(3);
-		    } else npoints = Math.min(arg[1].length(), arg[2].length());
-		} else VM.badCall();
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 0; n < npoints; n++) {
-		    obj = arg[1].get(n, false);
-		    if (obj.isNumber()) {
-			x = obj.intValue();
-			obj = arg[2].get(n, false);
-			if (obj.isNumber()) {
-			    y = obj.intValue();
-			    xpoints[n] = x;
-			    ypoints[n] = y;
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		}
-	    } else {
-		npoints = (arg.length - 1)/2;
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 1; n < arg.length - 1; n += 2) {
-		    if (arg[n].isNumber()) {
-			if (arg[n+1].isNumber()) {
-			    xpoints[n/2] = arg[n].intValue();
-			    ypoints[n/2] = arg[n+1].intValue();
-			} else VM.badArgument(n+1);
-		    } else VM.badArgument(n);
-		}
-	    }
-	    if ((g = getGraphics(arg[0])) != null) {
-		g.fillPolygon(xpoints, ypoints, npoints);
-		g.dispose();
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isArray() && arg[2].isArray()) {
+                if (arg.length == 3 || arg.length == 4) {
+                    if (arg.length == 4) {
+                        if (arg[3].isNumber())
+                            npoints = Math.max(0, arg[3].intValue());
+                        else VM.badArgument(3);
+                    } else npoints = Math.min(arg[1].length(), arg[2].length());
+                } else VM.badCall();
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 0; n < npoints; n++) {
+                    obj = arg[1].get(n, false);
+                    if (obj.isNumber()) {
+                        x = obj.intValue();
+                        obj = arg[2].get(n, false);
+                        if (obj.isNumber()) {
+                            y = obj.intValue();
+                            xpoints[n] = x;
+                            ypoints[n] = y;
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                }
+            } else {
+                npoints = (arg.length - 1)/2;
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 1; n < arg.length - 1; n += 2) {
+                    if (arg[n].isNumber()) {
+                        if (arg[n+1].isNumber()) {
+                            xpoints[n/2] = arg[n].intValue();
+                            ypoints[n/2] = arg[n+1].intValue();
+                        } else VM.badArgument(n+1);
+                    } else VM.badArgument(n);
+                }
+            }
+            if ((g = getGraphics(arg[0])) != null) {
+                g.fillPolygon(xpoints, ypoints, npoints);
+                g.dispose();
+            }
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     fillRect(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if ((g = getGraphics(arg[0])) != null) {
-				g.fillRect(
-				    arg[1].intValue(),
-				    arg[2].intValue(),
-				    arg[3].intValue(),
-				    arg[4].intValue()
-				);
-				g.dispose();
-			    }
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if ((g = getGraphics(arg[0])) != null) {
+                                g.fillRect(
+                                    arg[1].intValue(),
+                                    arg[2].intValue(),
+                                    arg[3].intValue(),
+                                    arg[4].intValue()
+                                );
+                                g.dispose();
+                            }
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     fillRoundRect(YoixObject arg[]) {
 
-	Graphics  g;
+        Graphics  g;
 
-	if (arg[0].isDrawable()) {
-	    if (arg[1].isNumber()) {
-		if (arg[2].isNumber()) {
-		    if (arg[3].isNumber()) {
-			if (arg[4].isNumber()) {
-			    if (arg[5].isNumber()) {
-				if (arg[6].isNumber()) {
-				    if ((g = getGraphics(arg[0])) != null) {
-					g.fillRoundRect(
-					    arg[1].intValue(),
-					    arg[2].intValue(),
-					    arg[3].intValue(),
-					    arg[4].intValue(),
-					    arg[5].intValue(),
-					    arg[6].intValue()
-					);
-					g.dispose();
-				    }
-				} else VM.badArgument(6);
-			    } else VM.badArgument(5);
-			} else VM.badArgument(4);
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isDrawable()) {
+            if (arg[1].isNumber()) {
+                if (arg[2].isNumber()) {
+                    if (arg[3].isNumber()) {
+                        if (arg[4].isNumber()) {
+                            if (arg[5].isNumber()) {
+                                if (arg[6].isNumber()) {
+                                    if ((g = getGraphics(arg[0])) != null) {
+                                        g.fillRoundRect(
+                                            arg[1].intValue(),
+                                            arg[2].intValue(),
+                                            arg[3].intValue(),
+                                            arg[4].intValue(),
+                                            arg[5].intValue(),
+                                            arg[6].intValue()
+                                        );
+                                        g.dispose();
+                                    }
+                                } else VM.badArgument(6);
+                            } else VM.badArgument(5);
+                        } else VM.badArgument(4);
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     pointInPolygon(YoixObject arg[]) {
 
-	YoixObject  obj;
-	Polygon     poly;
-	boolean     result = false;
-	Point       p;
-	int         xpoints[];
-	int         ypoints[];
-	int         npoints = 0;
-	int         x;
-	int         y;
-	int         n;
+        YoixObject  obj;
+        Polygon     poly;
+        boolean     result = false;
+        Point       p;
+        int         xpoints[];
+        int         ypoints[];
+        int         npoints = 0;
+        int         x;
+        int         y;
+        int         n;
 
-	if (arg[0].isPoint()) {
-	    p = new Point(arg[0].getInt(N_X, 0), arg[0].getInt(N_Y, 0));
-	    if (arg[1].isArray() && arg[2].isArray()) {
-		if (arg.length == 3 || arg.length == 4) {
-		    if (arg.length == 4) {
-			if (arg[3].isNumber())
-			    npoints = Math.max(0, arg[3].intValue());
-			else VM.badArgument(3);
-		    } else npoints = Math.min(arg[1].length(), arg[2].length());
-		} else VM.badCall();
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 0; n < npoints; n++) {
-		    obj = arg[1].get(n, false);
-		    if (obj.isNumber()) {
-			x = obj.intValue();
-			obj = arg[2].get(n, false);
-			if (obj.isNumber()) {
-			    y = obj.intValue();
-			    xpoints[n] = x;
-			    ypoints[n] = y;
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		}
-	    } else {
-		npoints = (arg.length - 1)/2;
-		xpoints = new int[npoints];
-		ypoints = new int[npoints];
-		for (n = 1; n < arg.length - 1; n += 2) {
-		    if (arg[n].isNumber()) {
-			if (arg[n+1].isNumber()) {
-			    xpoints[n/2] = arg[n].intValue();
-			    ypoints[n/2] = arg[n+1].intValue();
-			} else VM.badArgument(n+1);
-		    } else VM.badArgument(n);
-		}
-	    }
-	    poly = new Polygon(xpoints, ypoints, npoints);
-	    result = poly.contains(p);
-	} else VM.badArgument(0);
+        if (arg[0].isPoint()) {
+            p = new Point(arg[0].getInt(N_X, 0), arg[0].getInt(N_Y, 0));
+            if (arg[1].isArray() && arg[2].isArray()) {
+                if (arg.length == 3 || arg.length == 4) {
+                    if (arg.length == 4) {
+                        if (arg[3].isNumber())
+                            npoints = Math.max(0, arg[3].intValue());
+                        else VM.badArgument(3);
+                    } else npoints = Math.min(arg[1].length(), arg[2].length());
+                } else VM.badCall();
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 0; n < npoints; n++) {
+                    obj = arg[1].get(n, false);
+                    if (obj.isNumber()) {
+                        x = obj.intValue();
+                        obj = arg[2].get(n, false);
+                        if (obj.isNumber()) {
+                            y = obj.intValue();
+                            xpoints[n] = x;
+                            ypoints[n] = y;
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                }
+            } else {
+                npoints = (arg.length - 1)/2;
+                xpoints = new int[npoints];
+                ypoints = new int[npoints];
+                for (n = 1; n < arg.length - 1; n += 2) {
+                    if (arg[n].isNumber()) {
+                        if (arg[n+1].isNumber()) {
+                            xpoints[n/2] = arg[n].intValue();
+                            ypoints[n/2] = arg[n+1].intValue();
+                        } else VM.badArgument(n+1);
+                    } else VM.badArgument(n);
+                }
+            }
+            poly = new Polygon(xpoints, ypoints, npoints);
+            result = poly.contains(p);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     pointInRect(YoixObject arg[]) {
 
-	Rectangle2D   rect = null;
-	boolean       result = false;
+        Rectangle2D   rect = null;
+        boolean       result = false;
 
-	if (arg.length == 2 || arg.length == 5) {
-	    if (arg[0].isPoint() || arg[0].isNull()) {
-		if (arg[0].notNull()) {
-		    if (arg.length == 2) {
-			if (arg[1].isRectangle() || arg[1].isNull()) {
-			    if (arg[1].notNull()) {
-				rect = new Rectangle2D.Double(
-				    arg[1].getDouble(N_X, 0),
-				    arg[1].getDouble(N_Y, 0),
-				    arg[1].getDouble(N_WIDTH, 0),
-				    arg[1].getDouble(N_HEIGHT, 0)
-				);
-			    }
-			} else VM.badArgument(1);
-		    } else if (arg.length == 5) {
-			if (arg[1].isNumber()) {
-			    if (arg[2].isNumber()) {
-				if (arg[3].isNumber()) {
-				    if (arg[4].isNumber()) {
-					rect = new Rectangle2D.Double(
-					    arg[1].doubleValue(),
-					    arg[2].doubleValue(),
-					    arg[3].doubleValue(),
-					    arg[4].doubleValue()
-					);
-				    } else VM.badArgument(4);
-				} else VM.badArgument(3);
-			    } else VM.badArgument(2);
-			} else VM.badArgument(1);
-		    }
-		    if (rect != null)
-			result = rect.contains(arg[0].getDouble(N_X, 0), arg[0].getDouble(N_Y, 0));
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 5) {
+            if (arg[0].isPoint() || arg[0].isNull()) {
+                if (arg[0].notNull()) {
+                    if (arg.length == 2) {
+                        if (arg[1].isRectangle() || arg[1].isNull()) {
+                            if (arg[1].notNull()) {
+                                rect = new Rectangle2D.Double(
+                                    arg[1].getDouble(N_X, 0),
+                                    arg[1].getDouble(N_Y, 0),
+                                    arg[1].getDouble(N_WIDTH, 0),
+                                    arg[1].getDouble(N_HEIGHT, 0)
+                                );
+                            }
+                        } else VM.badArgument(1);
+                    } else if (arg.length == 5) {
+                        if (arg[1].isNumber()) {
+                            if (arg[2].isNumber()) {
+                                if (arg[3].isNumber()) {
+                                    if (arg[4].isNumber()) {
+                                        rect = new Rectangle2D.Double(
+                                            arg[1].doubleValue(),
+                                            arg[2].doubleValue(),
+                                            arg[3].doubleValue(),
+                                            arg[4].doubleValue()
+                                        );
+                                    } else VM.badArgument(4);
+                                } else VM.badArgument(3);
+                            } else VM.badArgument(2);
+                        } else VM.badArgument(1);
+                    }
+                    if (rect != null)
+                        result = rect.contains(arg[0].getDouble(N_X, 0), arg[0].getDouble(N_Y, 0));
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     rectContainsRect(YoixObject arg[]) {
 
-	Rectangle2D  rect1;
-	Rectangle2D  rect2 = null;
-	boolean      result = false;
+        Rectangle2D  rect1;
+        Rectangle2D  rect2 = null;
+        boolean      result = false;
 
-	if (arg.length == 2 || arg.length == 5) {
-	    if (arg[0].isRectangle() || arg[0].isNull()) {
-		if (arg[0].notNull()) {
-		    rect1 = new Rectangle2D.Double(
-			arg[0].getDouble(N_X, 0),
-			arg[0].getDouble(N_Y, 0),
-			arg[0].getDouble(N_WIDTH, 0),
-			arg[0].getDouble(N_HEIGHT, 0)
-		    );
-		    if (arg.length == 2) {
-			if (arg[1].isRectangle() || arg[1].isNull()) {
-			    if (arg[1].notNull()) {
-				rect2 = new Rectangle2D.Double(
-				    arg[1].getDouble(N_X, 0),
-				    arg[1].getDouble(N_Y, 0),
-				    arg[1].getDouble(N_WIDTH, 0),
-				    arg[1].getDouble(N_HEIGHT, 0)
-				);
-			    }
-			} else VM.badArgument(1);
-		    } else if (arg.length == 5) {
-			if (arg[1].isNumber()) {
-			    if (arg[2].isNumber()) {
-				if (arg[3].isNumber()) {
-				    if (arg[4].isNumber()) {
-					rect2 = new Rectangle2D.Double(
-					    arg[1].doubleValue(),
-					    arg[2].doubleValue(),
-					    arg[3].doubleValue(),
-					    arg[4].doubleValue()
-					);
-				    } else VM.badArgument(4);
-				} else VM.badArgument(3);
-			    } else VM.badArgument(2);
-			} else VM.badArgument(1);
-		    }
-		    if (rect2 != null) {
-			result = rect1.contains(
-			    rect2.getX(),
-			    rect2.getY(),
-			    rect2.getWidth(),
-			    rect2.getHeight()
-			);
-		    }
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 5) {
+            if (arg[0].isRectangle() || arg[0].isNull()) {
+                if (arg[0].notNull()) {
+                    rect1 = new Rectangle2D.Double(
+                        arg[0].getDouble(N_X, 0),
+                        arg[0].getDouble(N_Y, 0),
+                        arg[0].getDouble(N_WIDTH, 0),
+                        arg[0].getDouble(N_HEIGHT, 0)
+                    );
+                    if (arg.length == 2) {
+                        if (arg[1].isRectangle() || arg[1].isNull()) {
+                            if (arg[1].notNull()) {
+                                rect2 = new Rectangle2D.Double(
+                                    arg[1].getDouble(N_X, 0),
+                                    arg[1].getDouble(N_Y, 0),
+                                    arg[1].getDouble(N_WIDTH, 0),
+                                    arg[1].getDouble(N_HEIGHT, 0)
+                                );
+                            }
+                        } else VM.badArgument(1);
+                    } else if (arg.length == 5) {
+                        if (arg[1].isNumber()) {
+                            if (arg[2].isNumber()) {
+                                if (arg[3].isNumber()) {
+                                    if (arg[4].isNumber()) {
+                                        rect2 = new Rectangle2D.Double(
+                                            arg[1].doubleValue(),
+                                            arg[2].doubleValue(),
+                                            arg[3].doubleValue(),
+                                            arg[4].doubleValue()
+                                        );
+                                    } else VM.badArgument(4);
+                                } else VM.badArgument(3);
+                            } else VM.badArgument(2);
+                        } else VM.badArgument(1);
+                    }
+                    if (rect2 != null) {
+                        result = rect1.contains(
+                            rect2.getX(),
+                            rect2.getY(),
+                            rect2.getWidth(),
+                            rect2.getHeight()
+                        );
+                    }
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     rectIntersectionRect(YoixObject arg[]) {
 
-	Rectangle2D  rect1;
-	Rectangle2D  rect2 = null;
-	Rectangle2D  rect3;
-	Rectangle2D  result = null;
+        Rectangle2D  rect1;
+        Rectangle2D  rect2 = null;
+        Rectangle2D  rect3;
+        Rectangle2D  result = null;
 
-	if (arg.length == 2 || arg.length == 5) {
-	    if (arg[0].isRectangle() || arg[0].isNull()) {
-		if (arg[0].notNull()) {
-		    rect1 = new Rectangle2D.Double(
-			arg[0].getDouble(N_X, 0),
-			arg[0].getDouble(N_Y, 0),
-			arg[0].getDouble(N_WIDTH, 0),
-			arg[0].getDouble(N_HEIGHT, 0)
-		    );
-		    if (arg.length == 2) {
-			if (arg[1].isRectangle() || arg[1].isNull()) {
-			    if (arg[1].notNull()) {
-				rect2 = new Rectangle2D.Double(
-				    arg[1].getDouble(N_X, 0),
-				    arg[1].getDouble(N_Y, 0),
-				    arg[1].getDouble(N_WIDTH, 0),
-				    arg[1].getDouble(N_HEIGHT, 0)
-				);
-			    }
-			} else VM.badArgument(1);
-		    } else if (arg.length == 5) {
-			if (arg[1].isNumber()) {
-			    if (arg[2].isNumber()) {
-				if (arg[3].isNumber()) {
-				    if (arg[4].isNumber()) {
-					rect2 = new Rectangle2D.Double(
-					    arg[1].doubleValue(),
-					    arg[2].doubleValue(),
-					    arg[3].doubleValue(),
-					    arg[4].doubleValue()
-					);
-				    } else VM.badArgument(4);
-				} else VM.badArgument(3);
-			    } else VM.badArgument(2);
-			} else VM.badArgument(1);
-		    }
-		    if (rect2 != null) {
-			rect3 = new Rectangle2D.Double();
-			Rectangle2D.intersect(rect1, rect2, rect3);
-			result = rect3.isEmpty() ? null : rect3;
-		    }
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 5) {
+            if (arg[0].isRectangle() || arg[0].isNull()) {
+                if (arg[0].notNull()) {
+                    rect1 = new Rectangle2D.Double(
+                        arg[0].getDouble(N_X, 0),
+                        arg[0].getDouble(N_Y, 0),
+                        arg[0].getDouble(N_WIDTH, 0),
+                        arg[0].getDouble(N_HEIGHT, 0)
+                    );
+                    if (arg.length == 2) {
+                        if (arg[1].isRectangle() || arg[1].isNull()) {
+                            if (arg[1].notNull()) {
+                                rect2 = new Rectangle2D.Double(
+                                    arg[1].getDouble(N_X, 0),
+                                    arg[1].getDouble(N_Y, 0),
+                                    arg[1].getDouble(N_WIDTH, 0),
+                                    arg[1].getDouble(N_HEIGHT, 0)
+                                );
+                            }
+                        } else VM.badArgument(1);
+                    } else if (arg.length == 5) {
+                        if (arg[1].isNumber()) {
+                            if (arg[2].isNumber()) {
+                                if (arg[3].isNumber()) {
+                                    if (arg[4].isNumber()) {
+                                        rect2 = new Rectangle2D.Double(
+                                            arg[1].doubleValue(),
+                                            arg[2].doubleValue(),
+                                            arg[3].doubleValue(),
+                                            arg[4].doubleValue()
+                                        );
+                                    } else VM.badArgument(4);
+                                } else VM.badArgument(3);
+                            } else VM.badArgument(2);
+                        } else VM.badArgument(1);
+                    }
+                    if (rect2 != null) {
+                        rect3 = new Rectangle2D.Double();
+                        Rectangle2D.intersect(rect1, rect2, rect3);
+                        result = rect3.isEmpty() ? null : rect3;
+                    }
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newRectangle(result));
+        return(YoixObject.newRectangle(result));
     }
 
 
     public static YoixObject
     rectIntersectsRect(YoixObject arg[]) {
 
-	Rectangle2D  rect1;
-	Rectangle2D  rect2 = null;
-	boolean      result = false;
+        Rectangle2D  rect1;
+        Rectangle2D  rect2 = null;
+        boolean      result = false;
 
-	if (arg.length == 2 || arg.length == 5) {
-	    if (arg[0].isRectangle() || arg[0].isNull()) {
-		if (arg[0].notNull()) {
-		    rect1 = new Rectangle2D.Double(
-			arg[0].getDouble(N_X, 0),
-			arg[0].getDouble(N_Y, 0),
-			arg[0].getDouble(N_WIDTH, 0),
-			arg[0].getDouble(N_HEIGHT, 0)
-		    );
-		    if (arg.length == 2) {
-			if (arg[1].isRectangle() || arg[1].isNull()) {
-			    if (arg[1].notNull()) {
-				rect2 = new Rectangle2D.Double(
-				    arg[1].getDouble(N_X, 0),
-				    arg[1].getDouble(N_Y, 0),
-				    arg[1].getDouble(N_WIDTH, 0),
-				    arg[1].getDouble(N_HEIGHT, 0)
-				);
-			    }
-			} else VM.badArgument(1);
-		    } else if (arg.length == 5) {
-			if (arg[1].isNumber()) {
-			    if (arg[2].isNumber()) {
-				if (arg[3].isNumber()) {
-				    if (arg[4].isNumber()) {
-					rect2 = new Rectangle2D.Double(
-					    arg[1].doubleValue(),
-					    arg[2].doubleValue(),
-					    arg[3].doubleValue(),
-					    arg[4].doubleValue()
-					);
-				    } else VM.badArgument(4);
-				} else VM.badArgument(3);
-			    } else VM.badArgument(2);
-			} else VM.badArgument(1);
-		    }
-		    if (rect2 != null) {
-			result = rect1.intersects(
-			    rect2.getX(),
-			    rect2.getY(),
-			    rect2.getWidth(),
-			    rect2.getHeight()
-			);
-		    }
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 5) {
+            if (arg[0].isRectangle() || arg[0].isNull()) {
+                if (arg[0].notNull()) {
+                    rect1 = new Rectangle2D.Double(
+                        arg[0].getDouble(N_X, 0),
+                        arg[0].getDouble(N_Y, 0),
+                        arg[0].getDouble(N_WIDTH, 0),
+                        arg[0].getDouble(N_HEIGHT, 0)
+                    );
+                    if (arg.length == 2) {
+                        if (arg[1].isRectangle() || arg[1].isNull()) {
+                            if (arg[1].notNull()) {
+                                rect2 = new Rectangle2D.Double(
+                                    arg[1].getDouble(N_X, 0),
+                                    arg[1].getDouble(N_Y, 0),
+                                    arg[1].getDouble(N_WIDTH, 0),
+                                    arg[1].getDouble(N_HEIGHT, 0)
+                                );
+                            }
+                        } else VM.badArgument(1);
+                    } else if (arg.length == 5) {
+                        if (arg[1].isNumber()) {
+                            if (arg[2].isNumber()) {
+                                if (arg[3].isNumber()) {
+                                    if (arg[4].isNumber()) {
+                                        rect2 = new Rectangle2D.Double(
+                                            arg[1].doubleValue(),
+                                            arg[2].doubleValue(),
+                                            arg[3].doubleValue(),
+                                            arg[4].doubleValue()
+                                        );
+                                    } else VM.badArgument(4);
+                                } else VM.badArgument(3);
+                            } else VM.badArgument(2);
+                        } else VM.badArgument(1);
+                    }
+                    if (rect2 != null) {
+                        result = rect1.intersects(
+                            rect2.getX(),
+                            rect2.getY(),
+                            rect2.getWidth(),
+                            rect2.getHeight()
+                        );
+                    }
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     rectUnionRect(YoixObject arg[]) {
 
-	Rectangle2D  rect1 = null;
-	Rectangle2D  rect2 = null;
-	Rectangle2D  rect3;
-	Rectangle2D  result = null;
+        Rectangle2D  rect1 = null;
+        Rectangle2D  rect2 = null;
+        Rectangle2D  rect3;
+        Rectangle2D  result = null;
 
-	if (arg.length == 2 || arg.length == 5) {
-	    if (arg[0].isRectangle() || arg[0].isNull()) {
-		if (arg[0].notNull()) {
-		    rect1 = new Rectangle2D.Double(
-			arg[0].getDouble(N_X, 0),
-			arg[0].getDouble(N_Y, 0),
-			arg[0].getDouble(N_WIDTH, 0),
-			arg[0].getDouble(N_HEIGHT, 0)
-		    );
-		}
-		if (arg.length == 2) {
-		    if (arg[1].isRectangle() || arg[1].isNull()) {
-			if (arg[1].notNull()) {
-			    rect2 = new Rectangle2D.Double(
-				arg[1].getDouble(N_X, 0),
-				arg[1].getDouble(N_Y, 0),
-				arg[1].getDouble(N_WIDTH, 0),
-				arg[1].getDouble(N_HEIGHT, 0)
-			    );
-			}
-		    } else VM.badArgument(1);
-		} else if (arg.length == 5) {
-		    if (arg[1].isNumber()) {
-			if (arg[2].isNumber()) {
-			    if (arg[3].isNumber()) {
-				if (arg[4].isNumber()) {
-				    rect2 = new Rectangle2D.Double(
-					arg[1].doubleValue(),
-					arg[2].doubleValue(),
-					arg[3].doubleValue(),
-					arg[4].doubleValue()
-				    );
-				} else VM.badArgument(4);
-			    } else VM.badArgument(3);
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		}
-		if (rect1 != null) {
-		    if (rect2 != null) {
-			rect3 = new Rectangle2D.Double();
-			Rectangle2D.union(rect1, rect2, rect3);
-			result = rect3.isEmpty() ? null : rect3;
-		    } else result = rect1;
-		} else result = rect2;
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 5) {
+            if (arg[0].isRectangle() || arg[0].isNull()) {
+                if (arg[0].notNull()) {
+                    rect1 = new Rectangle2D.Double(
+                        arg[0].getDouble(N_X, 0),
+                        arg[0].getDouble(N_Y, 0),
+                        arg[0].getDouble(N_WIDTH, 0),
+                        arg[0].getDouble(N_HEIGHT, 0)
+                    );
+                }
+                if (arg.length == 2) {
+                    if (arg[1].isRectangle() || arg[1].isNull()) {
+                        if (arg[1].notNull()) {
+                            rect2 = new Rectangle2D.Double(
+                                arg[1].getDouble(N_X, 0),
+                                arg[1].getDouble(N_Y, 0),
+                                arg[1].getDouble(N_WIDTH, 0),
+                                arg[1].getDouble(N_HEIGHT, 0)
+                            );
+                        }
+                    } else VM.badArgument(1);
+                } else if (arg.length == 5) {
+                    if (arg[1].isNumber()) {
+                        if (arg[2].isNumber()) {
+                            if (arg[3].isNumber()) {
+                                if (arg[4].isNumber()) {
+                                    rect2 = new Rectangle2D.Double(
+                                        arg[1].doubleValue(),
+                                        arg[2].doubleValue(),
+                                        arg[3].doubleValue(),
+                                        arg[4].doubleValue()
+                                    );
+                                } else VM.badArgument(4);
+                            } else VM.badArgument(3);
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                }
+                if (rect1 != null) {
+                    if (rect2 != null) {
+                        rect3 = new Rectangle2D.Double();
+                        Rectangle2D.union(rect1, rect2, rect3);
+                        result = rect3.isEmpty() ? null : rect3;
+                    } else result = rect1;
+                } else result = rect2;
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newRectangle(result));
+        return(YoixObject.newRectangle(result));
     }
 
 
     public static YoixObject
     stringBounds(YoixObject arg[]) {
 
-	Rectangle2D  rect;
-	YoixObject   font;
-	YoixObject   dest;
-	YoixObject   bounds = null;
+        Rectangle2D  rect;
+        YoixObject   font;
+        YoixObject   dest;
+        YoixObject   bounds = null;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isFont() || arg[0].isString() || arg[0].isDrawable()) {
-		if (arg[0].notNull()) {
-		    if (arg[0].isString()) {
-			font = YoixMake.yoixFont(YoixMakeScreen.javaFont(arg[0]));
-			dest = null;
-		    } else if (arg[0].isFont()) {
-			font = arg[0];
-			dest = null;
-		    } else {
-			font = arg[0].getObject(N_GRAPHICS).getObject(N_FONT);
-			dest = arg[0];
-		    }
-		    if (font != null) {
-			if (arg[1].isString() || arg[1].isNull()) {
-			    if (arg.length == 2 || arg[2].isNumber()) {
-				rect = ((YoixBodyFont)font.body()).stringBounds(
-				    arg[1].stringValue(),
-				    arg.length == 3 ? arg[2].booleanValue() : false,
-				    dest
-				);
-				bounds = YoixMakeScreen.yoixRectangle(rect);
-			    } else VM.badArgument(2);
-			} else VM.badArgument(1);
-		    } else VM.badArgument(0);
-		} else VM.badArgument(0);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isFont() || arg[0].isString() || arg[0].isDrawable()) {
+                if (arg[0].notNull()) {
+                    if (arg[0].isString()) {
+                        font = YoixMake.yoixFont(YoixMakeScreen.javaFont(arg[0]));
+                        dest = null;
+                    } else if (arg[0].isFont()) {
+                        font = arg[0];
+                        dest = null;
+                    } else {
+                        font = arg[0].getObject(N_GRAPHICS).getObject(N_FONT);
+                        dest = arg[0];
+                    }
+                    if (font != null) {
+                        if (arg[1].isString() || arg[1].isNull()) {
+                            if (arg.length == 2 || arg[2].isNumber()) {
+                                rect = ((YoixBodyFont)font.body()).stringBounds(
+                                    arg[1].stringValue(),
+                                    arg.length == 3 ? arg[2].booleanValue() : false,
+                                    dest
+                                );
+                                bounds = YoixMakeScreen.yoixRectangle(rect);
+                            } else VM.badArgument(2);
+                        } else VM.badArgument(1);
+                    } else VM.badArgument(0);
+                } else VM.badArgument(0);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(bounds != null ? bounds : YoixMake.yoixType(T_RECTANGLE));
+        return(bounds != null ? bounds : YoixMake.yoixType(T_RECTANGLE));
     }
 
 
     public static YoixObject
     stringWidth(YoixObject arg[]) {
 
-	YoixObject  font;
-	YoixObject  dest;
-	double      width = 0;
+        YoixObject  font;
+        YoixObject  dest;
+        double      width = 0;
 
-	if (arg[0].isFont() || arg[0].isString() || arg[0].isDrawable()) {
-	    if (arg[0].notNull()) {
-		if (arg[0].isString()) {
-		    font = YoixMake.yoixFont(YoixMakeScreen.javaFont(arg[0]));
-		    dest = null;
-		} else if (arg[0].isFont()) {
-		    font = arg[0];
-		    dest = null;
-		} else {
-		    font = arg[0].getObject(N_GRAPHICS).getObject(N_FONT);
-		    dest = arg[0];
-		}
-		if (font != null) {
-		    if (arg[1].isString() || arg[1].isNull()) {
-			width = ((YoixBodyFont)font.body()).stringWidth(
-			    arg[1].stringValue(),
-			    dest
-			);
-			width = YoixMakeScreen.yoixDistance(width);
-		    } else VM.badArgument(1);
-		} else VM.badArgument(0);
-	    } else VM.badArgument(0);
-	} else VM.badArgument(0);
+        if (arg[0].isFont() || arg[0].isString() || arg[0].isDrawable()) {
+            if (arg[0].notNull()) {
+                if (arg[0].isString()) {
+                    font = YoixMake.yoixFont(YoixMakeScreen.javaFont(arg[0]));
+                    dest = null;
+                } else if (arg[0].isFont()) {
+                    font = arg[0];
+                    dest = null;
+                } else {
+                    font = arg[0].getObject(N_GRAPHICS).getObject(N_FONT);
+                    dest = arg[0];
+                }
+                if (font != null) {
+                    if (arg[1].isString() || arg[1].isNull()) {
+                        width = ((YoixBodyFont)font.body()).stringWidth(
+                            arg[1].stringValue(),
+                            dest
+                        );
+                        width = YoixMakeScreen.yoixDistance(width);
+                    } else VM.badArgument(1);
+                } else VM.badArgument(0);
+            } else VM.badArgument(0);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newDouble(width));
+        return(YoixObject.newDouble(width));
     }
 
     ///////////////////////////////////
@@ -1318,21 +1318,21 @@ class YoixModuleGraphics extends YoixModule
     private static Graphics
     getGraphics(YoixObject obj) {
 
-	return(getGraphics(obj, false));
+        return(getGraphics(obj, false));
     }
 
 
     private static Graphics
     getGraphics(YoixObject obj, boolean erase) {
 
-	YoixObject  graphics;
-	Graphics    g;
+        YoixObject  graphics;
+        Graphics    g;
 
-	if ((graphics = obj.getObject(N_GRAPHICS)) != null)
-	    g = ((YoixBodyGraphics)graphics.body()).getCompatibleGraphics(erase);
-	else g = null;
+        if ((graphics = obj.getObject(N_GRAPHICS)) != null)
+            g = ((YoixBodyGraphics)graphics.body()).getCompatibleGraphics(erase);
+        else g = null;
 
-	return(g);
+        return(g);
     }
 }
 

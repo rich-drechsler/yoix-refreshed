@@ -46,87 +46,87 @@ class YoixSwingDefaultCaret extends DefaultCaret
     final boolean
     getDragPossible() {
 
-	return(dragpossible);
+        return(dragpossible);
     }
 
     public final void
     mouseDragged(MouseEvent e) {
 
-	if (dragpossible)
-	    e.consume();
-	super.mouseDragged(e);
+        if (dragpossible)
+            e.consume();
+        super.mouseDragged(e);
     }
 
 
     public final void
     mousePressed(MouseEvent e) {
 
-	if (getDragStarted() == false) {
-	    if (isDragPossible(e)) {
-		dragpossible = true;
-		e.consume();
-	    } else dragpossible = false;
-	} else dragpossible = false;
-	super.mousePressed(e);
+        if (getDragStarted() == false) {
+            if (isDragPossible(e)) {
+                dragpossible = true;
+                e.consume();
+            } else dragpossible = false;
+        } else dragpossible = false;
+        super.mousePressed(e);
     }
 
 
     public final void
     mouseReleased(MouseEvent e) {
 
-	if (dragpossible && getDragStarted())
-	    e.consume();
-	dragpossible = false;
-	super.mouseReleased(e);
+        if (dragpossible && getDragStarted())
+            e.consume();
+        dragpossible = false;
+        super.mouseReleased(e);
     }
 
 
     protected void
     positionCaret(MouseEvent e) {
 
-	if (e.isConsumed() == false)
-	    super.positionCaret(e);
+        if (e.isConsumed() == false)
+            super.positionCaret(e);
     }
 
 
     final void
     setCaretModel(int model) {
 
-	caretmodel = model;
+        caretmodel = model;
     }
 
 
     final void
     updateDropTarget(boolean dragging, boolean accepted, Point p) {
 
-	JTextComponent  comp;
+        JTextComponent  comp;
 
-	if (dragging) {
-	    if (caretmodel == 0) {
-		if (dropstarted == false) {
-		    dropstarted = true;
-		    caretvisible = isVisible();
-		    selectedends[0] = getMark();
-		    selectedends[1] = getDot();
-		    super.setVisible(true);
-		}
-		if (p != null) {
-		    if ((comp = getComponent()) != null)
-			comp.setCaretPosition(comp.viewToModel(p));
-		}
-	    }
-	} else {
-	    if (caretmodel == 0) {
-		if (accepted == false) {
-		    setDot(selectedends[0]);
-		    moveDot(selectedends[1]);
-		}
-	    }
-	    if (dropstarted) {
-		dropstarted = false;
-		super.setVisible(caretvisible);
-	    }
-	}
+        if (dragging) {
+            if (caretmodel == 0) {
+                if (dropstarted == false) {
+                    dropstarted = true;
+                    caretvisible = isVisible();
+                    selectedends[0] = getMark();
+                    selectedends[1] = getDot();
+                    super.setVisible(true);
+                }
+                if (p != null) {
+                    if ((comp = getComponent()) != null)
+                        comp.setCaretPosition(comp.viewToModel(p));
+                }
+            }
+        } else {
+            if (caretmodel == 0) {
+                if (accepted == false) {
+                    setDot(selectedends[0]);
+                    moveDot(selectedends[1]);
+                }
+            }
+            if (dropstarted) {
+                dropstarted = false;
+                super.setVisible(caretvisible);
+            }
+        }
     }
 
     ///////////////////////////////////
@@ -138,42 +138,42 @@ class YoixSwingDefaultCaret extends DefaultCaret
     private boolean
     getDragStarted() {
 
-	JTextComponent  comp;
-	boolean         result = false;
+        JTextComponent  comp;
+        boolean         result = false;
 
-	if ((comp = getComponent()) != null) {
-	    if (comp instanceof YoixInterfaceDragable)
-		result = ((YoixInterfaceDragable)comp).getDragStarted();
-	}
-	return(result);
+        if ((comp = getComponent()) != null) {
+            if (comp instanceof YoixInterfaceDragable)
+                result = ((YoixInterfaceDragable)comp).getDragStarted();
+        }
+        return(result);
     }
 
 
     private boolean
     isDragPossible(MouseEvent e) {
 
-	JTextComponent  comp;
-	boolean         result = false;
-	int             position;
-	int             dot;
-	int             mark;
+        JTextComponent  comp;
+        boolean         result = false;
+        int             position;
+        int             dot;
+        int             mark;
 
-	if ((comp = getComponent()) != null) {
-	    if (comp instanceof YoixInterfaceDragable) {
-		if (((YoixInterfaceDragable)comp).isDragPossible()) {
-		    dot = getDot();
-		    mark = getMark();
-		    if (dot != mark) {
-			position = comp.viewToModel(e.getPoint());
-			if (dot <= position && position < mark)
-			    result = true;
-			else if (mark <= position && position < dot)
-			    result = true;
-		    }
-		}
-	    }
-	}
-	return(result);
+        if ((comp = getComponent()) != null) {
+            if (comp instanceof YoixInterfaceDragable) {
+                if (((YoixInterfaceDragable)comp).isDragPossible()) {
+                    dot = getDot();
+                    mark = getMark();
+                    if (dot != mark) {
+                        position = comp.viewToModel(e.getPoint());
+                        if (dot <= position && position < mark)
+                            result = true;
+                        else if (mark <= position && position < dot)
+                            result = true;
+                    }
+                }
+            }
+        }
+        return(result);
     }
 }
 

@@ -98,26 +98,26 @@ class ExampleModule extends YoixModule
     public static YoixObject
     property(YoixObject arg[]) {
 
-	String  value = null;
+        String  value = null;
 
-	if (arg[0].isString())
-	    value = System.getProperty(arg[0].stringValue());
-	else VM.badArgument(0);
+        if (arg[0].isString())
+            value = System.getProperty(arg[0].stringValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newString(value));
+        return(YoixObject.newString(value));
     }
 
 
     public static YoixObject
     version(YoixObject arg[]) {
 
-	String  value = null;
+        String  value = null;
 
-	if (arg.length == 0)
-	    value = System.getProperty("java.version");
-	else VM.badCall();
+        if (arg.length == 0)
+            value = System.getProperty("java.version");
+        else VM.badCall();
 
-	return(YoixObject.newString(value));
+        return(YoixObject.newString(value));
     }
 }
 

@@ -28,22 +28,22 @@ class YoixAWTFileDialog extends FileDialog
 
     YoixAWTFileDialog(Frame parent) {
 
-	super(parent);
-	setFilenameFilter(new YoixFilenameFilter("x"));
+        super(parent);
+        setFilenameFilter(new YoixFilenameFilter("x"));
     }
 
 
     YoixAWTFileDialog(Frame parent, String title) {
 
-	super(parent, title);
-	setFilenameFilter(new YoixFilenameFilter("x"));
+        super(parent, title);
+        setFilenameFilter(new YoixFilenameFilter("x"));
     }
 
 
     YoixAWTFileDialog(Frame parent, String title, int mode) {
 
-	super(parent, title, mode);
-	setFilenameFilter(new YoixFilenameFilter("x"));
+        super(parent, title, mode);
+        setFilenameFilter(new YoixFilenameFilter("x"));
     }
 
     ///////////////////////////////////
@@ -65,30 +65,30 @@ class YoixAWTFileDialog extends FileDialog
 
     class YoixFilenameFilter implements FilenameFilter {
 
-	String  ending;
+        String  ending;
 
-	///////////////////////////////////
-	//
-	// Constructors
-	//
-	///////////////////////////////////
+        ///////////////////////////////////
+        //
+        // Constructors
+        //
+        ///////////////////////////////////
 
-	YoixFilenameFilter(String ending) {
+        YoixFilenameFilter(String ending) {
 
-	    this.ending = ending;
-	}
+            this.ending = ending;
+        }
 
-	///////////////////////////////////
-	//
-	// YoixAWTFileDialog Methods
-	//
-	///////////////////////////////////
+        ///////////////////////////////////
+        //
+        // YoixAWTFileDialog Methods
+        //
+        ///////////////////////////////////
 
-	public boolean
-	accept(File dir, String name) {
+        public boolean
+        accept(File dir, String name) {
 
-	    return(name != null && name.endsWith(ending));
-	}
+            return(name != null && name.endsWith(ending));
+        }
     }
 }
 

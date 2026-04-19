@@ -48,9 +48,9 @@ class YoixSwingTransferHandler extends TransferHandler
 
     YoixSwingTransferHandler(YoixObject data, YoixObject owner) {
 
-	super();
-	this.data = data;
-	this.owner = owner;
+        super();
+        this.data = data;
+        this.owner = owner;
     }
 
     ///////////////////////////////////
@@ -62,216 +62,216 @@ class YoixSwingTransferHandler extends TransferHandler
     public boolean
     canImport(JComponent comp, DataFlavor flavors[]) {
 
-	YoixObject  argv[];
-	YoixObject  funct;
-	YoixObject  obj;
-	YoixError   error_point = null;
-	boolean     result = false;
+        YoixObject  argv[];
+        YoixObject  funct;
+        YoixObject  obj;
+        YoixError   error_point = null;
+        boolean     result = false;
 
-	if (owner.getManagedObject() == comp) {
-	    try {
-		error_point = VM.pushError();
-		if ((funct = data.getObject(N_CANIMPORT)) != null) {
-		    if (funct.notNull()) {
-			argv = new YoixObject[] {
-			    owner,
-			    YoixMake.yoixMimeTypes(flavors)
-			};
-			if ((obj = call(funct, argv, data)) != null) {
-			    if (obj.isNumber())
-				result = obj.booleanValue();
-			}
-		    } else result = canImport(owner, flavors);
-		} else result = canImport(owner, flavors);
-		VM.popError();
-	    }
-	    catch(YoixError e) {
-		if (e != error_point)
-		    throw(e);
-		else VM.error(error_point);
-	    }
-	} else result = super.canImport(comp, flavors);
-	return(result);
+        if (owner.getManagedObject() == comp) {
+            try {
+                error_point = VM.pushError();
+                if ((funct = data.getObject(N_CANIMPORT)) != null) {
+                    if (funct.notNull()) {
+                        argv = new YoixObject[] {
+                            owner,
+                            YoixMake.yoixMimeTypes(flavors)
+                        };
+                        if ((obj = call(funct, argv, data)) != null) {
+                            if (obj.isNumber())
+                                result = obj.booleanValue();
+                        }
+                    } else result = canImport(owner, flavors);
+                } else result = canImport(owner, flavors);
+                VM.popError();
+            }
+            catch(YoixError e) {
+                if (e != error_point)
+                    throw(e);
+                else VM.error(error_point);
+            }
+        } else result = super.canImport(comp, flavors);
+        return(result);
     }
 
 
     protected Transferable
     createTransferable(JComponent comp) {
 
-	Transferable  transferable = null;
-	YoixObject    funct;
-	YoixObject    obj;
-	YoixError     error_point = null;
+        Transferable  transferable = null;
+        YoixObject    funct;
+        YoixObject    obj;
+        YoixError     error_point = null;
 
-	if (owner.getManagedObject() == comp) {
-	    try {
-		error_point = VM.pushError();
-		if ((funct = data.getObject(N_CREATETRANSFERABLE)) != null) {
-		    if (funct.notNull()) {
-			obj = call(funct, new YoixObject[] {owner}, data);
-			if (obj != null && obj.notNull())
-			    transferable = obj;
-			else transferable = null;
-		    } else transferable = createTransferable(owner);
-		} else transferable = createTransferable(owner);
-		VM.popError();
-	    }
-	    catch(YoixError e) {
-		if (e != error_point)
-		    throw(e);
-		else VM.error(error_point);
-	    }
-	} else transferable = super.createTransferable(comp);
-	return(transferable);
+        if (owner.getManagedObject() == comp) {
+            try {
+                error_point = VM.pushError();
+                if ((funct = data.getObject(N_CREATETRANSFERABLE)) != null) {
+                    if (funct.notNull()) {
+                        obj = call(funct, new YoixObject[] {owner}, data);
+                        if (obj != null && obj.notNull())
+                            transferable = obj;
+                        else transferable = null;
+                    } else transferable = createTransferable(owner);
+                } else transferable = createTransferable(owner);
+                VM.popError();
+            }
+            catch(YoixError e) {
+                if (e != error_point)
+                    throw(e);
+                else VM.error(error_point);
+            }
+        } else transferable = super.createTransferable(comp);
+        return(transferable);
     }
 
 
     public void
     exportDone(JComponent comp, Transferable t, int action) {
 
-	YoixObject  argv[];
-	YoixObject  funct;
-	YoixError   error_point = null;
+        YoixObject  argv[];
+        YoixObject  funct;
+        YoixError   error_point = null;
 
-	if (owner.getManagedObject() == comp) {
-	    try {
-		error_point = VM.pushError();
-		if ((funct = data.getObject(N_EXPORTDONE)) != null) {
-		    if (funct.notNull()) {
-			argv = new YoixObject[] {
-			    owner,
-			    YoixDataTransfer.yoixTransferable(t, comp instanceof JTextComponent),
-			    YoixObject.newInt(getYoixAction(action))
-			};
-			call(funct, argv, data);
-		    } else exportDone(owner, action);
-		} else exportDone(owner, action);
-		VM.popError();
-	    }
-	    catch(YoixError e) {
-		if (e != error_point)
-		    throw(e);
-		else VM.error(error_point);
-	    }
-	} else super.exportDone(comp, t, action);
+        if (owner.getManagedObject() == comp) {
+            try {
+                error_point = VM.pushError();
+                if ((funct = data.getObject(N_EXPORTDONE)) != null) {
+                    if (funct.notNull()) {
+                        argv = new YoixObject[] {
+                            owner,
+                            YoixDataTransfer.yoixTransferable(t, comp instanceof JTextComponent),
+                            YoixObject.newInt(getYoixAction(action))
+                        };
+                        call(funct, argv, data);
+                    } else exportDone(owner, action);
+                } else exportDone(owner, action);
+                VM.popError();
+            }
+            catch(YoixError e) {
+                if (e != error_point)
+                    throw(e);
+                else VM.error(error_point);
+            }
+        } else super.exportDone(comp, t, action);
     }
 
 
     protected final void
     finalize() {
 
-	data = null;
-	owner = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        owner = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     public int
     getSourceActions(JComponent comp) {
 
-	YoixObject  argv[];
-	YoixObject  funct;
-	YoixObject  obj;
-	YoixError   error_point = null;
-	int         action = NONE;
+        YoixObject  argv[];
+        YoixObject  funct;
+        YoixObject  obj;
+        YoixError   error_point = null;
+        int         action = NONE;
 
-	if (owner.getManagedObject() == comp) {
-	    try {
-		error_point = VM.pushError();
-		action = getJavaAction(data.getInt(N_ACTION, YOIX_COPY));
-		if ((funct = data.getObject(N_GETSOURCEACTIONS)) != null) {
-		    if (funct.notNull()) {
-			argv = new YoixObject[] {owner}; 
-			if ((obj = call(funct, argv, data)) != null) {
-			    if (obj.isNumber())
-				action = getJavaAction(obj.intValue());
-			}
-		    }
-		}
-		VM.popError();
-	    }
-	    catch(YoixError e) {
-		if (e != error_point)
-		    throw(e);
-		else VM.error(error_point);
-	    }
-	} else action = super.getSourceActions(comp);
+        if (owner.getManagedObject() == comp) {
+            try {
+                error_point = VM.pushError();
+                action = getJavaAction(data.getInt(N_ACTION, YOIX_COPY));
+                if ((funct = data.getObject(N_GETSOURCEACTIONS)) != null) {
+                    if (funct.notNull()) {
+                        argv = new YoixObject[] {owner}; 
+                        if ((obj = call(funct, argv, data)) != null) {
+                            if (obj.isNumber())
+                                action = getJavaAction(obj.intValue());
+                        }
+                    }
+                }
+                VM.popError();
+            }
+            catch(YoixError e) {
+                if (e != error_point)
+                    throw(e);
+                else VM.error(error_point);
+            }
+        } else action = super.getSourceActions(comp);
 
-	return(action);
+        return(action);
     }
 
 
     public Icon
     getVisualRepresentation(Transferable t) {
 
-	YoixObject  argv[];
-	YoixObject  funct;
-	YoixObject  obj;
-	YoixError   error_point = null;
-	Icon        icon = null;
+        YoixObject  argv[];
+        YoixObject  funct;
+        YoixObject  obj;
+        YoixError   error_point = null;
+        Icon        icon = null;
 
-	//
-	// Haven't ever seen this called yet, but most of our testing has
-	// been on Linux.
-	//
+        //
+        // Haven't ever seen this called yet, but most of our testing has
+        // been on Linux.
+        //
 
-	if ((funct = data.getObject(N_GETVISUALREPRESENTATION)) != null) {
-	    try {
-		error_point = VM.pushError();
-		if (funct.notNull()) {
-		    argv = new YoixObject[] {YoixDataTransfer.yoixTransferable(t, false)};
-		    if ((obj = call(funct, argv, data)) != null)
-			icon = YoixMake.javaIcon(obj);
-		}
-		VM.popError();
-	    }
-	    catch(YoixError e) {
-		if (e != error_point)
-		    throw(e);
-		else VM.error(error_point);
-	    }
-	}
-	return(icon);
+        if ((funct = data.getObject(N_GETVISUALREPRESENTATION)) != null) {
+            try {
+                error_point = VM.pushError();
+                if (funct.notNull()) {
+                    argv = new YoixObject[] {YoixDataTransfer.yoixTransferable(t, false)};
+                    if ((obj = call(funct, argv, data)) != null)
+                        icon = YoixMake.javaIcon(obj);
+                }
+                VM.popError();
+            }
+            catch(YoixError e) {
+                if (e != error_point)
+                    throw(e);
+                else VM.error(error_point);
+            }
+        }
+        return(icon);
     }
 
 
     public boolean
     importData(JComponent comp, Transferable t) {
 
-	YoixObject  argv[];
-	YoixObject  funct;
-	YoixObject  obj;
-	YoixError   error_point = null;
-	boolean     result = false;
+        YoixObject  argv[];
+        YoixObject  funct;
+        YoixObject  obj;
+        YoixError   error_point = null;
+        boolean     result = false;
 
-	if (owner.getManagedObject() == comp) {
-	    try {
-		error_point = VM.pushError();
-		if ((funct = data.getObject(N_IMPORTDATA)) != null) {
-		    if (funct.notNull()) {
-			argv = new YoixObject[] {
-			    owner,
-			    YoixDataTransfer.yoixTransferable(t, comp instanceof JTextComponent)
-			};
-			if ((obj = call(funct, argv, data)) != null) {
-			    if (obj.isNumber())
-				result = obj.booleanValue();
-			}
-		    } else result = importData(owner, t);
-		} else result = importData(owner, t);
-		VM.popError();
-	    }
-	    catch(YoixError e) {
-		if (e != error_point)
-		    throw(e);
-		else VM.error(error_point);
-	    }
-	} else result = super.importData(comp, t);
+        if (owner.getManagedObject() == comp) {
+            try {
+                error_point = VM.pushError();
+                if ((funct = data.getObject(N_IMPORTDATA)) != null) {
+                    if (funct.notNull()) {
+                        argv = new YoixObject[] {
+                            owner,
+                            YoixDataTransfer.yoixTransferable(t, comp instanceof JTextComponent)
+                        };
+                        if ((obj = call(funct, argv, data)) != null) {
+                            if (obj.isNumber())
+                                result = obj.booleanValue();
+                        }
+                    } else result = importData(owner, t);
+                } else result = importData(owner, t);
+                VM.popError();
+            }
+            catch(YoixError e) {
+                if (e != error_point)
+                    throw(e);
+                else VM.error(error_point);
+            }
+        } else result = super.importData(comp, t);
 
-	return(result);
+        return(result);
     }
 
     ///////////////////////////////////
@@ -283,134 +283,134 @@ class YoixSwingTransferHandler extends TransferHandler
     private YoixObject
     call(YoixObject funct, YoixObject argv[], YoixObject context) {
 
-	YoixObject  obj = null;
-	YoixError   interrupt_point = null;
+        YoixObject  obj = null;
+        YoixError   interrupt_point = null;
 
-	//
-	// Came from YoixPointerActive.call(), but it's different because
-	// we assume that the caller has done the required null checking
-	// and pushed an error object.
-	//
+        //
+        // Came from YoixPointerActive.call(), but it's different because
+        // we assume that the caller has done the required null checking
+        // and pushed an error object.
+        //
 
-	try {
-	    interrupt_point = VM.pushInterrupt();
-	    obj = funct.call(argv, context).resolve();
-	}
-	catch(YoixError e) {
-	    if (e != interrupt_point)
-		throw(e);
-	}
-	catch(SecurityException e) {
-	    VM.error(e);
-	}
-	return(obj);
+        try {
+            interrupt_point = VM.pushInterrupt();
+            obj = funct.call(argv, context).resolve();
+        }
+        catch(YoixError e) {
+            if (e != interrupt_point)
+                throw(e);
+        }
+        catch(SecurityException e) {
+            VM.error(e);
+        }
+        return(obj);
     }
 
 
     private boolean
     canImport(YoixObject owner, DataFlavor flavors[]) {
 
-	boolean  result = false;
-	int      n;
+        boolean  result = false;
+        int      n;
 
-	if (owner != null && flavors != null) {
-	    for (n = 0; n < flavors.length; n++) {
-		if (owner.isDataFlavorSupported(flavors[n])) {
-		    result = true;
-		    break;
-		}
-	    }
-	}
-	return(result);
+        if (owner != null && flavors != null) {
+            for (n = 0; n < flavors.length; n++) {
+                if (owner.isDataFlavorSupported(flavors[n])) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+        return(result);
     }
 
 
     private Transferable
     createTransferable(YoixObject owner) {
 
-	YoixObject  obj = null;
-	String      property;
+        YoixObject  obj = null;
+        String      property;
 
-	if ((property = data.getString(N_PROPERTY)) != null)
-	    obj = owner.getObject(property);
-	return(obj);
+        if ((property = data.getString(N_PROPERTY)) != null)
+            obj = owner.getObject(property);
+        return(obj);
     }
 
 
     private void
     exportDone(YoixObject owner, int action) {
 
-	String  property;
+        String  property;
 
-	if (action == MOVE) {
-	    if ((property = data.getString(N_PROPERTY)) != null)
-		owner.putObject(property, YoixObject.newNull());
-	}
+        if (action == MOVE) {
+            if ((property = data.getString(N_PROPERTY)) != null)
+                owner.putObject(property, YoixObject.newNull());
+        }
     }
 
 
     private int
     getJavaAction(int action) {
 
-	//
-	// Maps an integer that came from a Yoix script to a constant that's
-	// an official TransferHandler action. We use the mappings provided
-	// by YoixBodyComponent, which currently don't let us go in the other
-	// direction.
-	//
+        //
+        // Maps an integer that came from a Yoix script to a constant that's
+        // an official TransferHandler action. We use the mappings provided
+        // by YoixBodyComponent, which currently don't let us go in the other
+        // direction.
+        //
 
-	return(YoixBodyComponent.jfcInt("TransferHandler", action));
+        return(YoixBodyComponent.jfcInt("TransferHandler", action));
     }
 
 
     private int
     getYoixAction(int action) {
 
-	//
-	// Unfortunately there'e currently no way to use YoixBodyComponent
-	// methods to go in the other direction. We have one custom module
-	// that provides mapping in both directions, but we haven't had the
-	// time to include that support in YoixBodyComponent yet.
-	//
+        //
+        // Unfortunately there'e currently no way to use YoixBodyComponent
+        // methods to go in the other direction. We have one custom module
+        // that provides mapping in both directions, but we haven't had the
+        // time to include that support in YoixBodyComponent yet.
+        //
 
-	switch (action) {
-	    case COPY:
-		action = YOIX_COPY;
-		break;
+        switch (action) {
+            case COPY:
+                action = YOIX_COPY;
+                break;
 
-	    case COPY_OR_MOVE:
-		action = YOIX_COPY_OR_MOVE;
-		break;
+            case COPY_OR_MOVE:
+                action = YOIX_COPY_OR_MOVE;
+                break;
 
-	    case DnDConstants.ACTION_LINK:
-		action = YOIX_LINK;
-		break;
+            case DnDConstants.ACTION_LINK:
+                action = YOIX_LINK;
+                break;
 
-	    case MOVE:
-		action = YOIX_MOVE;
-		break;
+            case MOVE:
+                action = YOIX_MOVE;
+                break;
 
-	    default:
-		action = YOIX_NONE;
-		break;
-	}
-	return(action);
+            default:
+                action = YOIX_NONE;
+                break;
+        }
+        return(action);
     }
 
 
     private boolean
     importData(YoixObject owner, Transferable t) {
 
-	boolean  result = false;
-	String   property;
+        boolean  result = false;
+        String   property;
 
-	if ((property = data.getString(N_PROPERTY)) != null) {
-	    if (owner.defined(property)) {
-		owner.putObject(property, YoixDataTransfer.yoixTransferable(t, true));
-		result = true;
-	    }
-	}
-	return(result);
+        if ((property = data.getString(N_PROPERTY)) != null) {
+            if (owner.defined(property)) {
+                owner.putObject(property, YoixDataTransfer.yoixTransferable(t, true));
+                result = true;
+            }
+        }
+        return(result);
     }
 }
 

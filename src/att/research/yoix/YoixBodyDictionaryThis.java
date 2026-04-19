@@ -48,8 +48,8 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
 
     YoixBodyDictionaryThis(YoixObject names, YoixObject values) {
 
-	this.names = names;
-	this.values = values;
+        this.names = names;
+        this.values = values;
     }
 
     ///////////////////////////////////
@@ -61,22 +61,22 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
     public final synchronized Object
     clone() {
 
-	Object  obj;
+        Object  obj;
 
-	try {
-	    obj = super.clone();
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
-	return(obj);
+        try {
+            obj = super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
+        return(obj);
     }
 
 
     public final Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -88,7 +88,7 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
     public final int
     length() {
 
-	return(values.length());
+        return(values.length());
     }
 
     ///////////////////////////////////
@@ -100,294 +100,294 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
     public final YoixObject
     cast(YoixObject obj, int index, boolean clone) {
 
-	return(values.cast(obj, index, clone));
+        return(values.cast(obj, index, clone));
     }
 
     
     public final YoixObject
     cast(YoixObject obj, String name, boolean clone) {
 
-	int      index;
+        int      index;
 
-	if ((index = names.definedAt(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	    obj = cast(obj, index, clone);
-	} else VM.abort(UNDEFINED, name);
-	return(obj);
+        if ((index = names.definedAt(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+            obj = cast(obj, index, clone);
+        } else VM.abort(UNDEFINED, name);
+        return(obj);
     }
 
 
     public final boolean
     compound() {
 
-	return(true);
+        return(true);
     }
 
 
     public final void
     declare(int index, YoixObject obj, int mode) {
 
-	//
-	// We don't allow declarations in dictionaires that are used to
-	// represent block storage. Seems reasonable so it probably won't
-	// be changed.
-	//
+        //
+        // We don't allow declarations in dictionaires that are used to
+        // represent block storage. Seems reasonable so it probably won't
+        // be changed.
+        //
 
-	VM.abort(DICTFULL, index);
+        VM.abort(DICTFULL, index);
     }
 
 
     public final void
     declare(String name, YoixObject obj, int mode) {
 
-	//
-	// We don't allow declarations in dictionaires that are used to
-	// represent block storage. Seems reasonable so it probably won't
-	// be changed.
-	//
+        //
+        // We don't allow declarations in dictionaires that are used to
+        // represent block storage. Seems reasonable so it probably won't
+        // be changed.
+        //
 
-	VM.abort(DICTFULL, name);
+        VM.abort(DICTFULL, name);
     }
 
 
     public final boolean
     defined(int index) {
 
-	return(values.defined(index));
+        return(values.defined(index));
     }
 
 
     public final boolean
     defined(String name) {
 
-	boolean  result = false;
-	int      index;
+        boolean  result = false;
+        int      index;
 
-	if ((index = names.definedAt(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	    result = defined(index);
-	}
-	return(result);
+        if ((index = names.definedAt(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+            result = defined(index);
+        }
+        return(result);
     }
 
 
     public final String
     dump(int index, String indent, String typename) {
     
-	YoixObject  obj;
-	String      str;
-	String      key;
-	int         sorted[];
-	int         level;
-	int         limit;
-	int         size;
-	int         n;
-	int         m;
+        YoixObject  obj;
+        String      str;
+        String      key;
+        int         sorted[];
+        int         level;
+        int         limit;
+        int         size;
+        int         n;
+        int         m;
 
-	if (values.isArray()) {
-	    sorted = sortedOrder();
-	    size = sorted.length;
-	    level = indent.length()/4;
-	    limit = VM.getInt(N_DUMPDEPTH);
-	    indent += "   ";
-	    str = (typename == null) ? T_DICT : typename;
-	    str += "[" + size + ":" + index + "]";
-	    if (canRead()) {
-		if (level < limit) {
-		    str += NL;
-		    for (n = 0; n < size; n++) {
-			m = sorted[n];
-			str += indent + ((m == index) ? ">" : " ");
-			if ((key = names.name(m)) != null) {
-			    str += key + "=";
-			    if ((obj = values.getObject(names.get(m, false).intValue())) != null) {
-				if (obj.canRead())
-				    str += obj.dump(indent + " ");
-				else if (obj.canExecute())
-				    str += "--executeonly--" + NL;
-				else str += "--unreadable--" + NL;
-			    } else str += "--undefined--" + NL;
-			} else str += "--uninitialized--" + NL;
-		    }
-		    //
-		    // A block associated with the arguments of a varargs
-		    // may have left-over values that haven't been printed
-		    // yet. We dump them like an array (a little confusing)
-		    // assuming they occupy the remaining slots in values.
-		    //
-		    size = values.length();
-		    for (; n < size; n++) {
-			str += indent + ((n == index) ? ">" : " ");
-			if ((obj = values.getObject(n)) != null) {
-			    if (obj.canRead())
-				str += obj.dump(indent + " ");
-			    else if (obj.canExecute())
-				str += "--executeonly--" + NL;
-			    else str += "--unreadable--" + NL;
-			} str += "--uninitialized--" + NL;
-		    }
-		} else str += NL;
-	    } else str += ":--unreadable--" + NL;
-	} else str = values.dump(index, indent, typename);
-	return(str);
+        if (values.isArray()) {
+            sorted = sortedOrder();
+            size = sorted.length;
+            level = indent.length()/4;
+            limit = VM.getInt(N_DUMPDEPTH);
+            indent += "   ";
+            str = (typename == null) ? T_DICT : typename;
+            str += "[" + size + ":" + index + "]";
+            if (canRead()) {
+                if (level < limit) {
+                    str += NL;
+                    for (n = 0; n < size; n++) {
+                        m = sorted[n];
+                        str += indent + ((m == index) ? ">" : " ");
+                        if ((key = names.name(m)) != null) {
+                            str += key + "=";
+                            if ((obj = values.getObject(names.get(m, false).intValue())) != null) {
+                                if (obj.canRead())
+                                    str += obj.dump(indent + " ");
+                                else if (obj.canExecute())
+                                    str += "--executeonly--" + NL;
+                                else str += "--unreadable--" + NL;
+                            } else str += "--undefined--" + NL;
+                        } else str += "--uninitialized--" + NL;
+                    }
+                    //
+                    // A block associated with the arguments of a varargs
+                    // may have left-over values that haven't been printed
+                    // yet. We dump them like an array (a little confusing)
+                    // assuming they occupy the remaining slots in values.
+                    //
+                    size = values.length();
+                    for (; n < size; n++) {
+                        str += indent + ((n == index) ? ">" : " ");
+                        if ((obj = values.getObject(n)) != null) {
+                            if (obj.canRead())
+                                str += obj.dump(indent + " ");
+                            else if (obj.canExecute())
+                                str += "--executeonly--" + NL;
+                            else str += "--unreadable--" + NL;
+                        } str += "--uninitialized--" + NL;
+                    }
+                } else str += NL;
+            } else str += ":--unreadable--" + NL;
+        } else str = values.dump(index, indent, typename);
+        return(str);
     }
 
 
     public final boolean
     executable(int index) {
 
-	return(values.executable(index));
+        return(values.executable(index));
     }
 
 
     public final boolean
     executable(String name) {
 
-	boolean  result = false;
-	int      index;
+        boolean  result = false;
+        int      index;
 
-	if ((index = names.definedAt(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	    result = executable(index);
-	}
-	return(result);
+        if ((index = names.definedAt(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+            result = executable(index);
+        }
+        return(result);
     }
 
 
     public final YoixObject
     execute(int index, YoixObject argv[], YoixObject context) {
 
-	return(values.execute(index, argv, context));
+        return(values.execute(index, argv, context));
     }
 
 
     public final YoixObject
     execute(String name, YoixObject argv[], YoixObject context) {
 
-	YoixObject  obj = null;
-	int         index;
+        YoixObject  obj = null;
+        int         index;
 
-	if ((index = names.definedAt(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	    obj = execute(index, argv, context);
-	} else VM.abort(UNDEFINED, name);
-	return(obj);
+        if ((index = names.definedAt(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+            obj = execute(index, argv, context);
+        } else VM.abort(UNDEFINED, name);
+        return(obj);
     }
 
 
     public final YoixObject
     get(int index, boolean clone) {
 
-	return(values.get(index, clone));
+        return(values.get(index, clone));
     }
 
 
     public final YoixObject
     get(String name, boolean clone) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if ((obj = names.get(name, clone)) != null) {
-	    if (values.isArray())
-		obj = values.get(obj.intValue(), clone);
-	}
-	return(obj);
+        if ((obj = names.get(name, clone)) != null) {
+            if (values.isArray())
+                obj = values.get(obj.intValue(), clone);
+        }
+        return(obj);
     }
 
 
     public final int
     hash(String name) {
 
-	int  index;
+        int  index;
 
-	if ((index = names.hash(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	}
-	return(index);
+        if ((index = names.hash(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+        }
+        return(index);
     }
 
 
     public final String
     name(int index) {
 
-	String  name = null;
-	int     n;
+        String  name = null;
+        int     n;
 
-	if (values.isArray()) {
-	    for (n = 0; n < names.length(); n++) {
-		if (names.defined(n)) {
-		    if (names.get(n, false).intValue() == index) {
-			name = names.name(n);
-			break;
-		    }
-		}
-	    }
-	} else name = values.name(index);
-	return(name);
+        if (values.isArray()) {
+            for (n = 0; n < names.length(); n++) {
+                if (names.defined(n)) {
+                    if (names.get(n, false).intValue() == index) {
+                        name = names.name(n);
+                        break;
+                    }
+                }
+            }
+        } else name = values.name(index);
+        return(name);
     }
 
 
     public final YoixObject
     put(int index, YoixObject obj, boolean clone) {
 
-	if (values.defined(index))
-	    obj = values.put(index, obj, clone);
-	else VM.abort(UNDEFINED, index);
-	return(obj);
+        if (values.defined(index))
+            obj = values.put(index, obj, clone);
+        else VM.abort(UNDEFINED, index);
+        return(obj);
     }
 
 
     public final YoixObject
     put(String name, YoixObject obj, boolean clone) {
 
-	int  index;
+        int  index;
 
-	if ((index = names.definedAt(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	    obj = put(index, obj, clone);
-	} else VM.abort(UNDEFINED, name);
-	return(obj);
+        if ((index = names.definedAt(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+            obj = put(index, obj, clone);
+        } else VM.abort(UNDEFINED, name);
+        return(obj);
     }
 
 
     public final boolean
     readable(int index) {
 
-	return(values.readable(index));
+        return(values.readable(index));
     }
 
 
     public final boolean
     readable(String name) {
 
-	boolean  result = false;
-	int      index;
+        boolean  result = false;
+        int      index;
 
-	if ((index = names.definedAt(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	    result = readable(index);
-	}
-	return(result);
+        if ((index = names.definedAt(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+            result = readable(index);
+        }
+        return(result);
     }
 
 
     public final int
     reserve(String name) {
 
-	int  index;
+        int  index;
 
-	if ((index = names.definedAt(name)) != -1) {
-	    if (values.isArray())
-		index = names.get(index, false).intValue();
-	}
-	return(index);
+        if ((index = names.definedAt(name)) != -1) {
+            if (values.isArray())
+                index = names.get(index, false).intValue();
+        }
+        return(index);
     }
 
     ///////////////////////////////////
@@ -399,7 +399,7 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
     final int[]
     sortedOrder() {
 
-	return(names.sortedOrder());
+        return(names.sortedOrder());
     }
 }
 

@@ -35,21 +35,21 @@ class YoixAWTCheckboxMenuItemGroup {
     final YoixAWTCheckboxMenuItem
     getSelectedBox() {
 
-	return(selected);
+        return(selected);
     }
 
 
     final synchronized void
     setSelectedBox(YoixAWTCheckboxMenuItem box) {
 
-	YoixAWTCheckboxMenuItem  current;
+        YoixAWTCheckboxMenuItem  current;
 
-	if (box == null || box.group == this) {
-	    current = this.selected;
-	    this.selected = box;
-	    if ((current != null) && (current != box))
-		current.setSuperState(false);
-	}
+        if (box == null || box.group == this) {
+            current = this.selected;
+            this.selected = box;
+            if ((current != null) && (current != box))
+                current.setSuperState(false);
+        }
     }
 }
 

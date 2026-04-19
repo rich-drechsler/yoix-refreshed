@@ -169,231 +169,231 @@ class YoixModuleParser extends YoixModule
     public static YoixObject
     tokenAssociativity(YoixObject arg[]) {
 
-	int  value = -1;
+        int  value = -1;
 
-	//
-	// The return value has changed from earlier releases, but we
-	// doubt there were any production programs using this builtin.
-	// The optional extra argruments are also new and probably not
-	// documented.
-	//
+        //
+        // The return value has changed from earlier releases, but we
+        // doubt there were any production programs using this builtin.
+        // The optional extra argruments are also new and probably not
+        // documented.
+        //
 
-	if (arg.length == 1 || arg.length == 4) {
-	    if (arg[0].isInteger()) {
-		if (arg.length < 2 || arg[1].isInteger()) {
-		    if (arg.length < 3 || arg[2].isInteger()) {
-			if (arg.length < 4 || arg[3].isInteger()) {
-			    value = YoixParser.getAssociativity(
-				arg[0].intValue(),
-				arg.length > 1 ? arg[1].intValue() : -1,
-				arg.length > 2 ? arg[2].intValue() : 0,
-				arg.length > 3 ? arg[3].intValue() : 1
-			    );
-			} else VM.badArgument(3);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 4) {
+            if (arg[0].isInteger()) {
+                if (arg.length < 2 || arg[1].isInteger()) {
+                    if (arg.length < 3 || arg[2].isInteger()) {
+                        if (arg.length < 4 || arg[3].isInteger()) {
+                            value = YoixParser.getAssociativity(
+                                arg[0].intValue(),
+                                arg.length > 1 ? arg[1].intValue() : -1,
+                                arg.length > 2 ? arg[2].intValue() : 0,
+                                arg.length > 3 ? arg[3].intValue() : 1
+                            );
+                        } else VM.badArgument(3);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(value));
+        return(YoixObject.newInt(value));
     }
 
 
     public static YoixObject
     tokenImage(YoixObject arg[]) {
 
-	String  value = null;
-	int     parser = PARSER_YOIX;
-	int     p;
+        String  value = null;
+        int     parser = PARSER_YOIX;
+        int     p;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isInteger()) {
-		if (arg.length == 2) {
-		    if (arg[1].isInteger()) {
-			if ((p = arg[1].intValue()) == PARSER_XML || p == PARSER_DTD)
-			    parser = PARSER_XML;
-		    } else VM.badArgument(1);
-		}
-		value = YoixMisc.tokenImage(arg[0].intValue(), parser);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isInteger()) {
+                if (arg.length == 2) {
+                    if (arg[1].isInteger()) {
+                        if ((p = arg[1].intValue()) == PARSER_XML || p == PARSER_DTD)
+                            parser = PARSER_XML;
+                    } else VM.badArgument(1);
+                }
+                value = YoixMisc.tokenImage(arg[0].intValue(), parser);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newString(value));
+        return(YoixObject.newString(value));
     }
 
 
     public static YoixObject
     tokenPrecedence(YoixObject arg[]) {
 
-	int  value = -1;
+        int  value = -1;
 
-	if (arg[0].isInteger())
-	    value = YoixParser.getPrecedence(arg[0].intValue());
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            value = YoixParser.getPrecedence(arg[0].intValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(value));
+        return(YoixObject.newInt(value));
     }
 
 
     public static YoixObject
     tokenValue(YoixObject arg[]) {
 
-	String  tok;
-	int     value = -1;
-	int     parser = PARSER_YOIX;
-	int     p;
+        String  tok;
+        int     value = -1;
+        int     parser = PARSER_YOIX;
+        int     p;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isString()) {
-		if (arg.length == 2) {
-		    if (arg[1].isInteger()) {
-			if ((p = arg[1].intValue()) == PARSER_XML || p == PARSER_DTD)
-			    parser = PARSER_XML;
-		    } else VM.badArgument(1);
-		}
-		value = YoixMisc.tokenValue(arg[0].stringValue(), parser);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isString()) {
+                if (arg.length == 2) {
+                    if (arg[1].isInteger()) {
+                        if ((p = arg[1].intValue()) == PARSER_XML || p == PARSER_DTD)
+                            parser = PARSER_XML;
+                    } else VM.badArgument(1);
+                }
+                value = YoixMisc.tokenValue(arg[0].stringValue(), parser);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(value));
+        return(YoixObject.newInt(value));
     }
 
 
     public static YoixObject
     xmlAdd(YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	boolean     result = false;
-	String      key;
+        YoixObject  obj = null;
+        boolean     result = false;
+        String      key;
 
-	if (arg.length == 3) {
-	    if (arg[0].isString() || arg[0].isNull()) {
-		if (arg[1].isDictionary() || arg[1].isArray() || arg[1].isString() || arg[1].isNull()) {
-		    if (arg[2].isDictionary() || arg[2].isArray() || arg[2].isString() || arg[2].isNull()) {
-			if (arg[0].notNull()) {
-			    if (arg[2].isArray() || arg[2].isNull()) {
-				key = arg[0].stringValue().trim();
-				if (key.length() > 0)
-				    obj = YoixMiscXML.xmlAdd(key, arg[1], arg[2]);
-			    } else VM.abort(UNIMPLEMENTED);	// maybe later...
-			}
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 3) {
+            if (arg[0].isString() || arg[0].isNull()) {
+                if (arg[1].isDictionary() || arg[1].isArray() || arg[1].isString() || arg[1].isNull()) {
+                    if (arg[2].isDictionary() || arg[2].isArray() || arg[2].isString() || arg[2].isNull()) {
+                        if (arg[0].notNull()) {
+                            if (arg[2].isArray() || arg[2].isNull()) {
+                                key = arg[0].stringValue().trim();
+                                if (key.length() > 0)
+                                    obj = YoixMiscXML.xmlAdd(key, arg[1], arg[2]);
+                            } else VM.abort(UNIMPLEMENTED);	// maybe later...
+                        }
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj != null ? obj : YoixObject.newNull());
+        return(obj != null ? obj : YoixObject.newNull());
     }
 
 
     public static YoixObject
     xmlGet(YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	boolean     extract;
-	String      key;
+        YoixObject  obj = null;
+        boolean     extract;
+        String      key;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isString() || arg[0].isNull()) {
-		if (arg[1].isDictionary() || arg[1].isArray() || arg[1].isString() || arg[1].isNull()) {
-		    if (arg.length == 2 || arg[2].isInteger()) {
-			if (arg[0].notNull()) {
-			    if (arg[1].notNull()) {
-				key = arg[0].stringValue();
-				extract = (arg.length > 2) ? arg[2].booleanValue() : true;
-				if (arg[1].isDictionary() || arg[1].isArray())
-				    obj = YoixMiscXML.xmlGet(key, arg[1], extract);
-				else if (arg[1].isString())
-				    VM.abort(UNIMPLEMENTED);
-			    }
-			}
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isString() || arg[0].isNull()) {
+                if (arg[1].isDictionary() || arg[1].isArray() || arg[1].isString() || arg[1].isNull()) {
+                    if (arg.length == 2 || arg[2].isInteger()) {
+                        if (arg[0].notNull()) {
+                            if (arg[1].notNull()) {
+                                key = arg[0].stringValue();
+                                extract = (arg.length > 2) ? arg[2].booleanValue() : true;
+                                if (arg[1].isDictionary() || arg[1].isArray())
+                                    obj = YoixMiscXML.xmlGet(key, arg[1], extract);
+                                else if (arg[1].isString())
+                                    VM.abort(UNIMPLEMENTED);
+                            }
+                        }
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj != null ? obj : YoixObject.newNull());
+        return(obj != null ? obj : YoixObject.newNull());
     }
 
 
     public static YoixObject
     xmlToYoix(YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	YoixObject  parser;
-	int         model;
-	int         flags;
-	int         argn;
+        YoixObject  obj = null;
+        YoixObject  parser;
+        int         model;
+        int         flags;
+        int         argn;
 
-	if (arg.length >= 1 && arg.length <= 4) {
-	    if (arg[0].isString() || arg[0].isNull()) {
-		if (arg.length == 1 || arg[1].isNumber() || arg[1].isParseTree() || arg[1].isNull()) {
-		    if (arg.length != 1) {
-			if (arg[1].notNumber()) {
-			    if (arg[1].isParseTree()) {
-				parser = arg[1];
-				parser.putInt(N_PARSER, PARSER_XML);	// make sure
-			    } else parser = YoixObject.newParseTree(PARSER_XML);
-			    argn = 2;
-			} else {
-			    parser = YoixObject.newParseTree(PARSER_XML);
-			    argn = 1;
-			}
-		    } else {
-			parser = YoixObject.newParseTree(PARSER_XML);
-			argn = 1;
-		    }
-		    if (argn >= arg.length || arg[argn].isNumber()) {
-			model = (argn < arg.length) ? arg[argn].intValue() : DEFAULT_XML_MODEL;
-			argn++;
-			if (argn >= arg.length || arg[argn].isNumber()) {
-			    flags = (argn < arg.length) ? arg[argn].intValue() : DEFAULT_XML_FLAGS;
-			    argn++;
-			    if (arg[0].notNull()) {
-				parser.putInt(N_PARSER, PARSER_XML);	// make sure
-				parser.putObject(N_PARSE, arg[0]);
-				obj = YoixMiscXML.xmlToYoix((SimpleNode)parser.getManagedObject(), model, flags);
-			    }
-			} else VM.badArgument(argn);
-		    } else VM.badArgument(argn);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 1 && arg.length <= 4) {
+            if (arg[0].isString() || arg[0].isNull()) {
+                if (arg.length == 1 || arg[1].isNumber() || arg[1].isParseTree() || arg[1].isNull()) {
+                    if (arg.length != 1) {
+                        if (arg[1].notNumber()) {
+                            if (arg[1].isParseTree()) {
+                                parser = arg[1];
+                                parser.putInt(N_PARSER, PARSER_XML);	// make sure
+                            } else parser = YoixObject.newParseTree(PARSER_XML);
+                            argn = 2;
+                        } else {
+                            parser = YoixObject.newParseTree(PARSER_XML);
+                            argn = 1;
+                        }
+                    } else {
+                        parser = YoixObject.newParseTree(PARSER_XML);
+                        argn = 1;
+                    }
+                    if (argn >= arg.length || arg[argn].isNumber()) {
+                        model = (argn < arg.length) ? arg[argn].intValue() : DEFAULT_XML_MODEL;
+                        argn++;
+                        if (argn >= arg.length || arg[argn].isNumber()) {
+                            flags = (argn < arg.length) ? arg[argn].intValue() : DEFAULT_XML_FLAGS;
+                            argn++;
+                            if (arg[0].notNull()) {
+                                parser.putInt(N_PARSER, PARSER_XML);	// make sure
+                                parser.putObject(N_PARSE, arg[0]);
+                                obj = YoixMiscXML.xmlToYoix((SimpleNode)parser.getManagedObject(), model, flags);
+                            }
+                        } else VM.badArgument(argn);
+                    } else VM.badArgument(argn);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj != null ? obj : YoixObject.newNull());
+        return(obj != null ? obj : YoixObject.newNull());
     }
 
 
     public static YoixObject
     yoixToXML(YoixObject arg[]) {
 
-	String  xml = null;
-	String  indent;
-	int     flags;
+        String  xml = null;
+        String  indent;
+        int     flags;
 
-	//
-	// A missing or NULL second argument means no extra whitespace is
-	// added, while the empty string (i.e., "") as a second argument
-	// means only newlines will be added.
-	// 
+        //
+        // A missing or NULL second argument means no extra whitespace is
+        // added, while the empty string (i.e., "") as a second argument
+        // means only newlines will be added.
+        // 
 
-	if (arg.length >= 1 && arg.length <= 3) {
-	    if (arg[0].compound() || arg[0].isArray() || arg[0].isNull() || arg[0].isString()) {
-		if (arg.length <= 1 || arg[1].isNumber()) {
-		    if (arg.length <= 2 || arg[2].isString() || arg[2].isNull()) {
-			if (arg[0].notNull()) {
-			    flags = (arg.length > 1) ? arg[1].intValue() : 0;
-			    if (arg.length > 2 && arg[2].isString())
-				indent = arg[2].stringValue();
-			    else indent = null;
-			    xml = YoixMiscXML.yoixToXML(arg[0], flags, indent);
-			}
-		    } else VM.badArgument(1);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 1 && arg.length <= 3) {
+            if (arg[0].compound() || arg[0].isArray() || arg[0].isNull() || arg[0].isString()) {
+                if (arg.length <= 1 || arg[1].isNumber()) {
+                    if (arg.length <= 2 || arg[2].isString() || arg[2].isNull()) {
+                        if (arg[0].notNull()) {
+                            flags = (arg.length > 1) ? arg[1].intValue() : 0;
+                            if (arg.length > 2 && arg[2].isString())
+                                indent = arg[2].stringValue();
+                            else indent = null;
+                            xml = YoixMiscXML.yoixToXML(arg[0], flags, indent);
+                        }
+                    } else VM.badArgument(1);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newString(xml));
+        return(YoixObject.newString(xml));
     }
 }
 

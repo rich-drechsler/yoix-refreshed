@@ -18,8 +18,8 @@ public abstract
 class YoixMiscGraphics
 
     implements YoixAPI,
-	       YoixConstants,
-	       YoixConstantsGraphics
+               YoixConstants,
+               YoixConstantsGraphics
 
 {
 
@@ -39,47 +39,47 @@ class YoixMiscGraphics
     public static void
     drawString(YoixObject obj, String str, double x, double y, Graphics2D g) {
 
-	YoixInterfaceFont  font;
-	YoixBodyGraphics   graphics;
+        YoixInterfaceFont  font;
+        YoixBodyGraphics   graphics;
 
-	if (obj != null && obj.isGraphics()) {
-	    graphics = (YoixBodyGraphics)obj.body();
-	    if ((font = graphics.getCurrentInterfaceFont()) != null) {
-		if (g != null)
-		    font.fontDrawString(str, x, y, 1.0, g, graphics);
-		else font.fontDrawString(str, x, y, 1.0, graphics);
-	    }
-	}
+        if (obj != null && obj.isGraphics()) {
+            graphics = (YoixBodyGraphics)obj.body();
+            if ((font = graphics.getCurrentInterfaceFont()) != null) {
+                if (g != null)
+                    font.fontDrawString(str, x, y, 1.0, g, graphics);
+                else font.fontDrawString(str, x, y, 1.0, graphics);
+            }
+        }
     }
 
 
     public static Graphics2D
     getGraphics2D(YoixObject obj) {
 
-	return(obj != null && obj.isGraphics() ? ((YoixBodyGraphics)obj.body()).getGraphics2D() : null);
+        return(obj != null && obj.isGraphics() ? ((YoixBodyGraphics)obj.body()).getGraphics2D() : null);
     }
 
 
     public static Graphics2D
     getGraphics2D(YoixObject obj, boolean erase) {
 
-	return(obj != null && obj.isGraphics() ? ((YoixBodyGraphics)obj.body()).getGraphics2D(erase) : null);
+        return(obj != null && obj.isGraphics() ? ((YoixBodyGraphics)obj.body()).getGraphics2D(erase) : null);
     }
 
 
     public static void
     rectButton(YoixObject obj, double x, double y, double width, double height, double border, int state, Graphics2D g) {
 
-	if (obj != null && obj.isGraphics())
-	    ((YoixBodyGraphics)obj.body()).rectButton(x, y, width, height, border, state, g);
+        if (obj != null && obj.isGraphics())
+            ((YoixBodyGraphics)obj.body()).rectButton(x, y, width, height, border, state, g);
     }
 
 
     public static void
     rectFill(YoixObject obj, double x, double y, double width, double height, Graphics2D g) {
 
-	if (obj != null && obj.isGraphics())
-	    ((YoixBodyGraphics)obj.body()).rectFill(x, y, width, height, g);
+        if (obj != null && obj.isGraphics())
+            ((YoixBodyGraphics)obj.body()).rectFill(x, y, width, height, g);
     }
 
     ///////////////////////////////////

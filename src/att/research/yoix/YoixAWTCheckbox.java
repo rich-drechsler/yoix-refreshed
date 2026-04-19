@@ -38,9 +38,9 @@ class YoixAWTCheckbox extends Checkbox
 
     YoixAWTCheckbox(YoixObject data, YoixBodyComponent parent) {
 
-	super();
-	this.parent = parent;
-	this.data = data;
+        super();
+        this.parent = parent;
+        this.data = data;
     }
 
     ///////////////////////////////////
@@ -52,33 +52,33 @@ class YoixAWTCheckbox extends Checkbox
     protected void
     finalize() {
 
-	data = null;
-	parent = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        parent = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     final String
     getActionCommand() {
 
-	return(command != null ? command : getLabel());
+        return(command != null ? command : getLabel());
     }
 
 
     final YoixBodyComponent
     getBody() {
 
-	return(parent);
+        return(parent);
     }
 
 
     final void
     setActionCommand(String str) {
 
-	command = (str != null && str.length() > 0) ? str : null;
+        command = (str != null && str.length() > 0) ? str : null;
     }
 }
 

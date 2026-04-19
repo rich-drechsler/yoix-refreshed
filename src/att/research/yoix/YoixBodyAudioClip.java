@@ -32,7 +32,7 @@ class YoixBodyAudioClip extends YoixPointerActive
      //
      // FIELD               OBJECT       BODY
      // -----               ------       ----
-	N_DISABLED,         $LR__,       null,
+        N_DISABLED,         $LR__,       null,
     };
 
     //
@@ -45,11 +45,11 @@ class YoixBodyAudioClip extends YoixPointerActive
     private static HashMap  activefields = new HashMap(7);
 
     static {
-	activefields.put(N_DISABLED, new Integer(V_DISABLED));
-	activefields.put(N_LOOP, new Integer(V_LOOP));
-	activefields.put(N_NAME, new Integer(V_NAME));
-	activefields.put(N_PLAY, new Integer(V_PLAY));
-	activefields.put(N_STOP, new Integer(V_STOP));
+        activefields.put(N_DISABLED, new Integer(V_DISABLED));
+        activefields.put(N_LOOP, new Integer(V_LOOP));
+        activefields.put(N_NAME, new Integer(V_NAME));
+        activefields.put(N_PLAY, new Integer(V_PLAY));
+        activefields.put(N_STOP, new Integer(V_STOP));
     }
 
     ///////////////////////////////////
@@ -60,10 +60,10 @@ class YoixBodyAudioClip extends YoixPointerActive
 
     YoixBodyAudioClip(YoixObject data) {
 
-	super(data);
-	buildAudioClip();
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        buildAudioClip();
+        setFixedSize();
+        setPermissions(permissions);
     }
 
     ///////////////////////////////////
@@ -75,7 +75,7 @@ class YoixBodyAudioClip extends YoixPointerActive
     public final int
     type() {
 
-	return(AUDIOCLIP);
+        return(AUDIOCLIP);
     }
 
     ///////////////////////////////////
@@ -87,35 +87,35 @@ class YoixBodyAudioClip extends YoixPointerActive
     protected final void
     finalize() {
 
-	audioclip = null;
-	super.finalize();
+        audioclip = null;
+        super.finalize();
     }
 
 
     protected final YoixObject
     executeField(String name, YoixObject argv[]) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	switch (activeField(name, activefields)) {
-	    case V_LOOP:
-		obj = builtinLoop(name, argv);
-		break;
+        switch (activeField(name, activefields)) {
+            case V_LOOP:
+                obj = builtinLoop(name, argv);
+                break;
 
-	    case V_PLAY:
-		obj = builtinPlay(name, argv);
-		break;
+            case V_PLAY:
+                obj = builtinPlay(name, argv);
+                break;
 
-	    case V_STOP:
-		obj = builtinStop(name, argv);
-		break;
+            case V_STOP:
+                obj = builtinStop(name, argv);
+                break;
 
-	    default:
-		obj = null;
-		break;
-	}
+            default:
+                obj = null;
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
@@ -123,35 +123,35 @@ class YoixBodyAudioClip extends YoixPointerActive
     protected final synchronized YoixObject
     getField(String name, YoixObject obj) {
 
-	switch (activeField(name, activefields)) {
-	    case V_DISABLED:
-		obj = getDisabled();
-		break;
-	}
+        switch (activeField(name, activefields)) {
+            case V_DISABLED:
+                obj = getDisabled();
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(audioclip);
+        return(audioclip);
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	if (obj != null) {
-	    switch (activeField(name, activefields)) {
-		case V_NAME:
-		    setName(obj);
-		    break;
-	    }
-	}
+        if (obj != null) {
+            switch (activeField(name, activefields)) {
+                case V_NAME:
+                    setName(obj);
+                    break;
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -163,115 +163,115 @@ class YoixBodyAudioClip extends YoixPointerActive
     private void
     buildAudioClip() {
 
-	audioclip = null;
-	setField(N_NAME);
+        audioclip = null;
+        setField(N_NAME);
     }
 
 
     private synchronized YoixObject
     builtinLoop(String name, YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	boolean     result = false;
+        YoixObject  obj = null;
+        boolean     result = false;
 
-	if (arg.length == 0 || arg.length == 1) {
-	    if (arg.length == 1) {
-		if (arg[0].isString())
-		    setName(arg[0]);
-		else VM.badArgument(name, 0);
-	    }
-	    if (audioclip != null) {
-		audioclip.loop();
-		result = true;
-	    }
-	} else VM.badCall(name);
+        if (arg.length == 0 || arg.length == 1) {
+            if (arg.length == 1) {
+                if (arg[0].isString())
+                    setName(arg[0]);
+                else VM.badArgument(name, 0);
+            }
+            if (audioclip != null) {
+                audioclip.loop();
+                result = true;
+            }
+        } else VM.badCall(name);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     private synchronized YoixObject
     builtinPlay(String name, YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	boolean     result = false;
+        YoixObject  obj = null;
+        boolean     result = false;
 
-	if (arg.length == 0 || arg.length == 1) {
-	    if (arg.length == 1) {
-		if (arg[0].isString())
-		    setName(arg[0]);
-		else VM.badArgument(name, 0);
-	    }
-	    if (audioclip != null) {
-		audioclip.play();
-		result = true;
-	    }
-	} else VM.badCall(name);
+        if (arg.length == 0 || arg.length == 1) {
+            if (arg.length == 1) {
+                if (arg[0].isString())
+                    setName(arg[0]);
+                else VM.badArgument(name, 0);
+            }
+            if (audioclip != null) {
+                audioclip.play();
+                result = true;
+            }
+        } else VM.badCall(name);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     private synchronized YoixObject
     builtinStop(String name, YoixObject arg[]) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if (arg.length == 0) {
-	    if (audioclip != null) {
-		audioclip.stop();
-		audioclip = null;
-	    }
-	    obj = YoixObject.newEmpty();
-	} else VM.badCall(name);
+        if (arg.length == 0) {
+            if (audioclip != null) {
+                audioclip.stop();
+                audioclip = null;
+            }
+            obj = YoixObject.newEmpty();
+        } else VM.badCall(name);
 
-	return(obj);
+        return(obj);
     }
 
 
     private synchronized YoixObject
     getDisabled() {
 
-	return(YoixObject.newInt(audioclip == null));
+        return(YoixObject.newInt(audioclip == null));
     }
 
 
     private synchronized void
     setName(YoixObject obj) {
 
-	InputStream  stream = null;
-	String       name;
-	URL          url;
+        InputStream  stream = null;
+        String       name;
+        URL          url;
 
-	if (obj != null) {
-	    name = obj.stringValue();
-	    if (audioclip != null) {
-		audioclip.stop();
-	        audioclip = null;
-	    }
-	    if (name.length() > 0) {
-		if (YoixMisc.guessStreamType(name) == FILE) {
-		    name = YoixMisc.toYoixPath(name);
-		    name = "file:" + YoixMisc.toLocalPath(name);
-		}
-		try {
-		    url = new URL(name);
-		    stream = YoixMisc.getInputStream(url);	// only for existence check
-		    audioclip = Applet.newAudioClip(url);
-		}
-		catch(IOException e) {
-		    VM.caughtException(e, true);
-		}
-		finally {
-		    if (stream != null) {
-			try {
-			    stream.close();
-			}
-			catch(IOException e) {}
-		    }
-		}
-	    }
-	}
+        if (obj != null) {
+            name = obj.stringValue();
+            if (audioclip != null) {
+                audioclip.stop();
+                audioclip = null;
+            }
+            if (name.length() > 0) {
+                if (YoixMisc.guessStreamType(name) == FILE) {
+                    name = YoixMisc.toYoixPath(name);
+                    name = "file:" + YoixMisc.toLocalPath(name);
+                }
+                try {
+                    url = new URL(name);
+                    stream = YoixMisc.getInputStream(url);	// only for existence check
+                    audioclip = Applet.newAudioClip(url);
+                }
+                catch(IOException e) {
+                    VM.caughtException(e, true);
+                }
+                finally {
+                    if (stream != null) {
+                        try {
+                            stream.close();
+                        }
+                        catch(IOException e) {}
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -156,152 +156,152 @@ class YoixModuleGraph extends YoixModule
     public static YoixObject
     countElements(YoixObject arg[]) {
 
-	YoixGraphElement  elem = null;
-	int               types = GRAPH_NODE|GRAPH_EDGE|GRAPH_GRAPH;
-	int               count = 0;
+        YoixGraphElement  elem = null;
+        int               types = GRAPH_NODE|GRAPH_EDGE|GRAPH_GRAPH;
+        int               count = 0;
 
-	if (arg.length <= 2) {
-	    if (arg[0].isGraph()) {
-		if (arg[0].notNull()) {
-		    elem = ((YoixBodyElement)arg[0].body()).getElement();
-		    if (elem != null) {
-			if (arg.length == 2) {
-			    if (arg[1].isInteger())
-				types &= arg[1].intValue();
-			    else if (arg[1].notNull() && arg[1].isString())
-				types &= YoixBodyElement.parseGraphTypes(arg[1].stringValue());
-			    else VM.badArgument(1);
-			}
-			count = elem.countElements(types);
-		    }
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 2) {
+            if (arg[0].isGraph()) {
+                if (arg[0].notNull()) {
+                    elem = ((YoixBodyElement)arg[0].body()).getElement();
+                    if (elem != null) {
+                        if (arg.length == 2) {
+                            if (arg[1].isInteger())
+                                types &= arg[1].intValue();
+                            else if (arg[1].notNull() && arg[1].isString())
+                                types &= YoixBodyElement.parseGraphTypes(arg[1].stringValue());
+                            else VM.badArgument(1);
+                        }
+                        count = elem.countElements(types);
+                    }
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(count));
+        return(YoixObject.newInt(count));
     }
 
 
     public static YoixObject
     dotGraph(YoixObject arg[]) {
 
-	YoixGraphElement  elem = null;
+        YoixGraphElement  elem = null;
 
-	if (arg[0].notNull() && arg[0].isString())
-	    elem = YoixGraphElement.loadDOTGraph(arg[0].stringValue());
-	else VM.badArgument(0);
+        if (arg[0].notNull() && arg[0].isString())
+            elem = YoixGraphElement.loadDOTGraph(arg[0].stringValue());
+        else VM.badArgument(0);
 
-	return(elem == null ? YoixObject.newElement() : YoixObject.newElement(elem.getWrapper()));
+        return(elem == null ? YoixObject.newElement() : YoixObject.newElement(elem.getWrapper()));
     }
 
 
     public static YoixObject
     dotGraphToText(YoixObject arg[]) {
 
-	//
-	// The name of this builtin has been changed to dotGraphToYDAT and
-	// all of our references to it have been changed, but there could
-	// be someold config files lying around need this.
-	// 
+        //
+        // The name of this builtin has been changed to dotGraphToYDAT and
+        // all of our references to it have been changed, but there could
+        // be someold config files lying around need this.
+        // 
 
-	return(dotGraphToYDAT(arg));
+        return(dotGraphToYDAT(arg));
     }
 
 
     public static YoixObject
     dotGraphToYDAT(YoixObject arg[]) {
 
-	String  text = null;
-	char    delim = '|';
+        String  text = null;
+        char    delim = '|';
 
-	//
-	// Pretty much duplicates the graphPlotText() builtin that was
-	// included in a custom module, but means we don't need that
-	// module.
-	//
+        //
+        // Pretty much duplicates the graphPlotText() builtin that was
+        // included in a custom module, but means we don't need that
+        // module.
+        //
 
-	if (arg.length <= 5) {
-	    if (arg[0].isGraphElement() || arg[0].isString()) {
-		if (arg[0].notNull()) {
-		    if (arg.length <= 1 || arg[1].isString() || arg[1].isNull()) {
-			if (arg.length <= 2 || arg[2].isArray() || arg[2].isDictionary() || arg[2].isNull()) {
-			    if (arg.length <= 3 || arg[3].isInteger()) {
-				if (arg.length <= 4 || arg[4].isInteger()) {
-				    if (arg.length > 1 && arg[1].sizeof() > 0)
-					delim = arg[1].stringValue().charAt(0);
-				    text = YoixMiscGraph.graphdata(
-					arg[0],
-					delim,
-					arg.length > 2 ? arg[2] : null,
-					arg.length > 3 ? arg[3].booleanValue() : false,
-					arg.length > 4 ? arg[4].booleanValue() : false
-				    );
-				} else VM.badArgument(4);
-			    } else VM.badArgument(3);
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 5) {
+            if (arg[0].isGraphElement() || arg[0].isString()) {
+                if (arg[0].notNull()) {
+                    if (arg.length <= 1 || arg[1].isString() || arg[1].isNull()) {
+                        if (arg.length <= 2 || arg[2].isArray() || arg[2].isDictionary() || arg[2].isNull()) {
+                            if (arg.length <= 3 || arg[3].isInteger()) {
+                                if (arg.length <= 4 || arg[4].isInteger()) {
+                                    if (arg.length > 1 && arg[1].sizeof() > 0)
+                                        delim = arg[1].stringValue().charAt(0);
+                                    text = YoixMiscGraph.graphdata(
+                                        arg[0],
+                                        delim,
+                                        arg.length > 2 ? arg[2] : null,
+                                        arg.length > 3 ? arg[3].booleanValue() : false,
+                                        arg.length > 4 ? arg[4].booleanValue() : false
+                                    );
+                                } else VM.badArgument(4);
+                            } else VM.badArgument(3);
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(text == null ? YoixObject.newString() : YoixObject.newString(text));
+        return(text == null ? YoixObject.newString() : YoixObject.newString(text));
     }
 
 
     public static YoixObject
     listElements(YoixObject arg[]) {
 
-	YoixGraphElement  elem = null;
-	YoixObject        result = null;
-	YoixObject        args[] = null;
-	Vector            list = null;
-	int               types = GRAPH_NODE|GRAPH_EDGE|GRAPH_GRAPH;
-	int               sz;
-	int               i;
+        YoixGraphElement  elem = null;
+        YoixObject        result = null;
+        YoixObject        args[] = null;
+        Vector            list = null;
+        int               types = GRAPH_NODE|GRAPH_EDGE|GRAPH_GRAPH;
+        int               sz;
+        int               i;
 
-	if (arg[0].isGraph()) {
-	    if (arg[0].notNull()) {
-		elem = ((YoixBodyElement)arg[0].body()).getElement();
-		if (elem != null) {
-		    if (arg.length > 1) {
-			if (arg[1].notNull() && (arg[1].isInteger() || arg[1].isString())) {
-			    if (arg[1].isInteger())
-				types &= arg[1].intValue();
-			    else types &= YoixBodyElement.parseGraphTypes(arg[1].stringValue());
-			    if (arg.length > 2) {
-				if (arg[2].notNull() && arg[2].isFunction()) {
-				    args = new YoixObject[arg.length - 2];
-				    System.arraycopy(arg,2,args,0,args.length);
-				} else VM.badArgument(2);
-			    }
-			} else if (arg[1].notNull() && arg[1].isFunction()) {
-			    args = new YoixObject[arg.length - 1];
-			    System.arraycopy(arg,1,args,0,args.length);
-			} else VM.badArgument(1);
-		    }
-		    list = elem.listElements(types, args);
-		    result = YoixObject.newArray(sz = list.size());
-		    for (i = 0; i < sz; i++) {
-			result.put(i, YoixObject.newElement((YoixBodyElement)list.elementAt(i)), false);
-		    }
-		}
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isGraph()) {
+            if (arg[0].notNull()) {
+                elem = ((YoixBodyElement)arg[0].body()).getElement();
+                if (elem != null) {
+                    if (arg.length > 1) {
+                        if (arg[1].notNull() && (arg[1].isInteger() || arg[1].isString())) {
+                            if (arg[1].isInteger())
+                                types &= arg[1].intValue();
+                            else types &= YoixBodyElement.parseGraphTypes(arg[1].stringValue());
+                            if (arg.length > 2) {
+                                if (arg[2].notNull() && arg[2].isFunction()) {
+                                    args = new YoixObject[arg.length - 2];
+                                    System.arraycopy(arg,2,args,0,args.length);
+                                } else VM.badArgument(2);
+                            }
+                        } else if (arg[1].notNull() && arg[1].isFunction()) {
+                            args = new YoixObject[arg.length - 1];
+                            System.arraycopy(arg,1,args,0,args.length);
+                        } else VM.badArgument(1);
+                    }
+                    list = elem.listElements(types, args);
+                    result = YoixObject.newArray(sz = list.size());
+                    for (i = 0; i < sz; i++) {
+                        result.put(i, YoixObject.newElement((YoixBodyElement)list.elementAt(i)), false);
+                    }
+                }
+            }
+        } else VM.badArgument(0);
 
-	return(result == null ? YoixObject.newArray(0) : result);
+        return(result == null ? YoixObject.newArray(0) : result);
     }
 
 
     public static YoixObject
     xmlGraph(YoixObject arg[]) {
 
-	YoixGraphElement  elem = null;
+        YoixGraphElement  elem = null;
 
-	if (arg[0].notNull() && arg[0].isString())
-	    elem = YoixGraphElement.loadXMLGraph(arg[0].stringValue());
-	else VM.badArgument(0);
+        if (arg[0].notNull() && arg[0].isString())
+            elem = YoixGraphElement.loadXMLGraph(arg[0].stringValue());
+        else VM.badArgument(0);
 
-	return(elem == null ? YoixObject.newElement() : YoixObject.newElement(elem.getWrapper()));
+        return(elem == null ? YoixObject.newElement() : YoixObject.newElement(elem.getWrapper()));
     }
 }
 

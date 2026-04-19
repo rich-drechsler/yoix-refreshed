@@ -56,177 +56,177 @@ class Module extends YoixModule
     public static YoixObject
     getJNLPCodeBase(YoixObject arg[]) {
 
-	Object  bs;
-	URL     url = null;
+        Object  bs;
+        URL     url = null;
 
-	try {
-	    if (checkJNLP()) {
-		if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
-		    url = ((javax.jnlp.BasicService)bs).getCodeBase();
-	    }
-	}
-	catch(Exception e) {}
+        try {
+            if (checkJNLP()) {
+                if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
+                    url = ((javax.jnlp.BasicService)bs).getCodeBase();
+            }
+        }
+        catch(Exception e) {}
 
-	return(url != null ? YoixObject.newString(url.toString()) : YoixObject.newString());
+        return(url != null ? YoixObject.newString(url.toString()) : YoixObject.newString());
     }
 
 
     public static YoixObject
     isJNLPPartCached(YoixObject arg[]) {
 
-	boolean  result = false;
-	Object   ds;
-	URL      url;
+        boolean  result = false;
+        Object   ds;
+        URL      url;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    if (arg[0].isString()) {
-		try {
-		    if (checkJNLP()) {
-			if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
-			    result = ((javax.jnlp.DownloadService)ds).isPartCached(arg[0].stringValue());
-		    }
-		}
-		catch(Exception e) {
-		    result = false;
-		}
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            if (arg[0].isString()) {
+                try {
+                    if (checkJNLP()) {
+                        if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
+                            result = ((javax.jnlp.DownloadService)ds).isPartCached(arg[0].stringValue());
+                    }
+                }
+                catch(Exception e) {
+                    result = false;
+                }
+            }
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isJNLPResourceCached(YoixObject arg[]) {
 
-	boolean  result = false;
-	Object   ds;
-	String   version;
-	URL      url;
+        boolean  result = false;
+        Object   ds;
+        String   version;
+        URL      url;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isString() || arg[0].isNull()) {
-		if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
-		    if (arg[0].isString()) {
-			try {
-			    url = new URL(arg[0].stringValue());
-			    version = (arg.length > 1 && arg[1].isString()) ? arg[1].stringValue() : null;
-			    if (checkJNLP()) {
-				if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
-				    result = ((javax.jnlp.DownloadService)ds).isResourceCached(url, version);
-			    }
-			}
-			catch(Exception e) {}
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isString() || arg[0].isNull()) {
+                if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
+                    if (arg[0].isString()) {
+                        try {
+                            url = new URL(arg[0].stringValue());
+                            version = (arg.length > 1 && arg[1].isString()) ? arg[1].stringValue() : null;
+                            if (checkJNLP()) {
+                                if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
+                                    result = ((javax.jnlp.DownloadService)ds).isResourceCached(url, version);
+                            }
+                        }
+                        catch(Exception e) {}
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isWebBrowserSupported(YoixObject arg[]) {
 
-	boolean  result = false;
-	Object   bs;
+        boolean  result = false;
+        Object   bs;
 
-	try {
-	    if (checkJNLP()) {
-		if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
-		    result = ((javax.jnlp.BasicService)bs).isWebBrowserSupported();
-	    }
-	}
-	catch(Exception e) {
-	    result = false;
-	}
+        try {
+            if (checkJNLP()) {
+                if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
+                    result = ((javax.jnlp.BasicService)bs).isWebBrowserSupported();
+            }
+        }
+        catch(Exception e) {
+            result = false;
+        }
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     removeJNLPPart(YoixObject arg[]) {
 
-	String  part;
-	Object  ds;
-	URL     url;
+        String  part;
+        Object  ds;
+        URL     url;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    if (arg[0].isString()) {
-		try {
-		    if (checkJNLP()) {
-			if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
-			    ((javax.jnlp.DownloadService)ds).removePart(arg[0].stringValue());
-		    }
-		}
-		catch(Exception e) {}
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            if (arg[0].isString()) {
+                try {
+                    if (checkJNLP()) {
+                        if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
+                            ((javax.jnlp.DownloadService)ds).removePart(arg[0].stringValue());
+                    }
+                }
+                catch(Exception e) {}
+            }
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     removeJNLPResource(YoixObject arg[]) {
 
-	Object  ds;
-	String  version;
-	URL     url;
+        Object  ds;
+        String  version;
+        URL     url;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isString() || arg[0].isNull()) {
-		if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
-		    if (arg[0].isString()) {
-			try {
-			    url = new URL(arg[0].stringValue());
-			    version = (arg.length > 1 && arg[1].isString()) ? arg[1].stringValue() : null;
-			    if (checkJNLP()) {
-				if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
-				    ((javax.jnlp.DownloadService)ds).removeResource(url, version);
-			    }
-			}
-			catch(Exception e) {}
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isString() || arg[0].isNull()) {
+                if (arg.length == 1 || arg[1].isString() || arg[1].isNull()) {
+                    if (arg[0].isString()) {
+                        try {
+                            url = new URL(arg[0].stringValue());
+                            version = (arg.length > 1 && arg[1].isString()) ? arg[1].stringValue() : null;
+                            if (checkJNLP()) {
+                                if ((ds = javax.jnlp.ServiceManager.lookup("javax.jnlp.DownloadService")) != null)
+                                    ((javax.jnlp.DownloadService)ds).removeResource(url, version);
+                            }
+                        }
+                        catch(Exception e) {}
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     showDocument(YoixObject arg[]) {
 
-	boolean  result = false;
-	Object   bs;
-	URL      url;
+        boolean  result = false;
+        Object   bs;
+        URL      url;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    if (arg[0].isString()) {
-		try {
-		    url = new URL(arg[0].stringValue());
-		    //
-		    // The check prevents a ClassNotFoundException when we try
-		    // to call lookup() when javax.jnlp classes aren't available.
-		    // Not sure why the exception wasn't caught by the existing
-		    // catch - investigate later.
-		    //
-		    if (checkJNLP()) {
-			if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
-			    result = ((javax.jnlp.BasicService)bs).showDocument(url);
-		    }
-		}
-		catch(Exception e) {
-		    result = false;
-		}
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            if (arg[0].isString()) {
+                try {
+                    url = new URL(arg[0].stringValue());
+                    //
+                    // The check prevents a ClassNotFoundException when we try
+                    // to call lookup() when javax.jnlp classes aren't available.
+                    // Not sure why the exception wasn't caught by the existing
+                    // catch - investigate later.
+                    //
+                    if (checkJNLP()) {
+                        if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
+                            result = ((javax.jnlp.BasicService)bs).showDocument(url);
+                    }
+                }
+                catch(Exception e) {
+                    result = false;
+                }
+            }
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
     ///////////////////////////////////
@@ -238,15 +238,15 @@ class Module extends YoixModule
     private static boolean
     checkJNLP() {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	try {
-	    Class.forName("javax.jnlp.ServiceManager");
-	    result = true;
-	}
-	catch(ClassNotFoundException e) {}
+        try {
+            Class.forName("javax.jnlp.ServiceManager");
+            result = true;
+        }
+        catch(ClassNotFoundException e) {}
 
-	return(result);
+        return(result);
     }
 }
 

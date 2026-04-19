@@ -133,633 +133,633 @@ class YoixModuleIO extends YoixModule
     public static YoixObject
     available(YoixObject arg[]) {
 
-	int  available = 0;
+        int  available = 0;
 
-	if (arg[0].isStream() && arg[0].notNull())
-	    available = arg[0].streamValue().available();
-	else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull())
+            available = arg[0].streamValue().available();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(available));
+        return(YoixObject.newInt(available));
     }
 
 
     public static YoixObject
     chkstr(YoixObject arg[]) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if (arg[0].isDouble() && arg[0].notNull())
-	    obj = YoixObject.newString(YoixChecksum.chkstr(arg[0].doubleValue()));
-	else VM.badArgument(0);
+        if (arg[0].isDouble() && arg[0].notNull())
+            obj = YoixObject.newString(YoixChecksum.chkstr(arg[0].doubleValue()));
+        else VM.badArgument(0);
 
-	return(obj);
+        return(obj);
     }
 
 
     public static YoixObject
     close(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	//
-	// Decided to initially only accept a stream argument, but left
-	// most of the code that supports the mode argument in for now.
-	//
+        //
+        // Decided to initially only accept a stream argument, but left
+        // most of the code that supports the mode argument in for now.
+        //
 
-	if (arg.length == 1) {		// currently rejects second argument
-	    if (arg[0].isStream() && arg[0].notNull()) {
-		if (arg.length == 2) {
-		    if (arg[1].isInteger())
-			result = arg[0].streamValue().close(arg[1].intValue());
-		    else if (arg[1].isString() && arg[1].notNull())
-			result = arg[0].streamValue().close(arg[1].stringValue());
-		    else VM.badArgument(1);
-		} else result = arg[0].streamValue().close();
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1) {		// currently rejects second argument
+            if (arg[0].isStream() && arg[0].notNull()) {
+                if (arg.length == 2) {
+                    if (arg[1].isInteger())
+                        result = arg[0].streamValue().close(arg[1].intValue());
+                    else if (arg[1].isString() && arg[1].notNull())
+                        result = arg[0].streamValue().close(arg[1].stringValue());
+                    else VM.badArgument(1);
+                } else result = arg[0].streamValue().close();
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result ? 0 : -1));
+        return(YoixObject.newInt(result ? 0 : -1));
     }
 
 
     public static YoixObject
     closeEntry(YoixObject arg[]) {
 
-	boolean result = false;
+        boolean result = false;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    result = arg[0].streamValue().closeEntry();
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            result = arg[0].streamValue().closeEntry();
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result ? 0 : -1));
+        return(YoixObject.newInt(result ? 0 : -1));
     }
 
 
     public static YoixObject
     getAvailableCharsets(YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	SortedMap   sm;
-	Charset     charset;
-	String      names[];
-	String      name;
-	Set         keyset;
-	int         n;
+        YoixObject  obj = null;
+        SortedMap   sm;
+        Charset     charset;
+        String      names[];
+        String      name;
+        Set         keyset;
+        int         n;
 
-	if (arg.length == 0 || (arg.length == 1 && arg[0].isNull())) {
-	    if ((sm = Charset.availableCharsets()) != null) {
-		if ((keyset = sm.keySet()) != null) {
-		    if ((names = (String[])keyset.toArray(new String[0])) != null) {
-			obj = YoixObject.newArray(names.length);
-			for (n = 0; n < names.length; n++)
-			    obj.putString(n, names[n]);
-		    }
-		}
-	    }
-	} else if (arg.length == 1) {
-	    if (arg[0].isString()) {
-		name = arg[0].stringValue();
-		try {
-		    if (Charset.isSupported(name)) {
-			if ((charset = Charset.forName(name)) != null) {
-			    keyset = charset.aliases();
-			    if ((names = (String[])keyset.toArray(new String[0])) != null) {
-				obj = YoixObject.newArray(names.length + 1);
-				obj.putString(0, charset.name());
-				for (n = 0; n < names.length; n++)
-				    obj.putString(n+1, names[n]);
-			    }
-			}
-		    }
-		}
-		catch(Exception e) {
-		    obj = null;
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 0 || (arg.length == 1 && arg[0].isNull())) {
+            if ((sm = Charset.availableCharsets()) != null) {
+                if ((keyset = sm.keySet()) != null) {
+                    if ((names = (String[])keyset.toArray(new String[0])) != null) {
+                        obj = YoixObject.newArray(names.length);
+                        for (n = 0; n < names.length; n++)
+                            obj.putString(n, names[n]);
+                    }
+                }
+            }
+        } else if (arg.length == 1) {
+            if (arg[0].isString()) {
+                name = arg[0].stringValue();
+                try {
+                    if (Charset.isSupported(name)) {
+                        if ((charset = Charset.forName(name)) != null) {
+                            keyset = charset.aliases();
+                            if ((names = (String[])keyset.toArray(new String[0])) != null) {
+                                obj = YoixObject.newArray(names.length + 1);
+                                obj.putString(0, charset.name());
+                                for (n = 0; n < names.length; n++)
+                                    obj.putString(n+1, names[n]);
+                            }
+                        }
+                    }
+                }
+                catch(Exception e) {
+                    obj = null;
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj != null ? obj : YoixObject.newArray());
+        return(obj != null ? obj : YoixObject.newArray());
     }
 
 
     public static YoixObject
     getZipEntries(YoixObject arg[]) {
 
-	Enumeration  enm;
-	YoixObject   dict = null;
-	ZipEntry     ze = null;
-	ZipFile      zf = null;
+        Enumeration  enm;
+        YoixObject   dict = null;
+        ZipEntry     ze = null;
+        ZipFile      zf = null;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    try {
-		zf = new ZipFile(YoixMisc.toYoixPath(arg[0].stringValue()));
-	    }
-	    catch(IOException e) {
-		VM.caughtException(e);
-	    }
-	    if (zf != null) {
-		dict = YoixObject.newDictionary(0);
-		dict.setGrowable(true);
-		enm = zf.entries();
-		while (enm.hasMoreElements()) {
-		    ze = (ZipEntry)enm.nextElement();
-		    dict.put(ze.getName(), YoixObject.newZipEntry(ze), false);
-		}
-		dict.setGrowable(false);
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isString() && arg[0].notNull()) {
+            try {
+                zf = new ZipFile(YoixMisc.toYoixPath(arg[0].stringValue()));
+            }
+            catch(IOException e) {
+                VM.caughtException(e);
+            }
+            if (zf != null) {
+                dict = YoixObject.newDictionary(0);
+                dict.setGrowable(true);
+                enm = zf.entries();
+                while (enm.hasMoreElements()) {
+                    ze = (ZipEntry)enm.nextElement();
+                    dict.put(ze.getName(), YoixObject.newZipEntry(ze), false);
+                }
+                dict.setGrowable(false);
+            }
+        } else VM.badArgument(0);
 
-	return(dict == null ? YoixObject.newDictionary() : dict);
+        return(dict == null ? YoixObject.newDictionary() : dict);
     }
 
 
     public static YoixObject
     getZipMember(YoixObject arg[]) {
 
-	InputStream  istream = null;
-	YoixObject   stream = null;
-	YoixObject   data;
-	ZipEntry     ze;
-	ZipFile      zf = null;
+        InputStream  istream = null;
+        YoixObject   stream = null;
+        YoixObject   data;
+        ZipEntry     ze;
+        ZipFile      zf = null;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    if (arg[1].isString() && arg[1].notNull()) {
-		try {
-		    zf = new ZipFile(YoixMisc.toYoixPath(arg[0].stringValue()));
-		}
-		catch(IOException e) {
-		    VM.caughtException(e);
-		}
-		if (zf != null) {
-		    if ((ze = zf.getEntry(arg[1].stringValue())) != null) {
-			try {
-			    istream = zf.getInputStream(ze);
-			}
-			catch(IOException e) {
-			    VM.caughtException(e, true, true);
-			}
-			data = VM.getTypeTemplate(T_FILE);
-			data.putString(N_NAME, zf.getName());
-			data.putInt(N_MODE, READ);
-			data.putInt(N_OPEN, true);
-			stream = YoixObject.newStream(data, istream);
-		    } else VM.badArgument(1);
-		}
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString() && arg[0].notNull()) {
+            if (arg[1].isString() && arg[1].notNull()) {
+                try {
+                    zf = new ZipFile(YoixMisc.toYoixPath(arg[0].stringValue()));
+                }
+                catch(IOException e) {
+                    VM.caughtException(e);
+                }
+                if (zf != null) {
+                    if ((ze = zf.getEntry(arg[1].stringValue())) != null) {
+                        try {
+                            istream = zf.getInputStream(ze);
+                        }
+                        catch(IOException e) {
+                            VM.caughtException(e, true, true);
+                        }
+                        data = VM.getTypeTemplate(T_FILE);
+                        data.putString(N_NAME, zf.getName());
+                        data.putInt(N_MODE, READ);
+                        data.putInt(N_OPEN, true);
+                        stream = YoixObject.newStream(data, istream);
+                    } else VM.badArgument(1);
+                }
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(stream == null ? YoixObject.newStream() : stream);
+        return(stream == null ? YoixObject.newStream() : stream);
     }
 
 
     public static YoixObject
     mark(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    if (arg[1].isInteger())
-		result = arg[0].streamValue().mark(arg[1].intValue());
-	    else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            if (arg[1].isInteger())
+                result = arg[0].streamValue().mark(arg[1].intValue());
+            else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     offsetBytes(YoixObject arg[]) {
 
-	long  offset = -1;
+        long  offset = -1;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isStream() && arg[0].notNull()) {
-		if (arg[0].streamValue().offsetSupported()) {
-		    if (arg.length == 2) {
-			if (arg[1].isNumber())
-			    offset = arg[0].streamValue().offsetBytes((long)arg[1].doubleValue());
-			else VM.badArgument(1);
-		    } else offset = arg[0].streamValue().offsetBytes();
-		} else VM.badArgument(0);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isStream() && arg[0].notNull()) {
+                if (arg[0].streamValue().offsetSupported()) {
+                    if (arg.length == 2) {
+                        if (arg[1].isNumber())
+                            offset = arg[0].streamValue().offsetBytes((long)arg[1].doubleValue());
+                        else VM.badArgument(1);
+                    } else offset = arg[0].streamValue().offsetBytes();
+                } else VM.badArgument(0);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newDouble((double)offset));
+        return(YoixObject.newDouble((double)offset));
     }
 
 
     public static YoixObject
     offsetSupported(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg[0].isStream() && arg[0].notNull())
-	    result = arg[0].streamValue().offsetSupported();
-	else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull())
+            result = arg[0].streamValue().offsetSupported();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     open(YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	YoixObject  data = null;
-	YoixObject  path;
-	YoixObject  mode;
-	Object      body;
-	int         type;
-	int         n;
+        YoixObject  obj = null;
+        YoixObject  data = null;
+        YoixObject  path;
+        YoixObject  mode;
+        Object      body;
+        int         type;
+        int         n;
 
-	if (arg.length >= 2) {
-	    if (arg[0].isNull() || arg[0].isString()) {
-		if ((arg[1].isString() && arg[1].notNull()) || arg[1].isInteger()) {
-		    path = arg[0];
-		    mode = arg[1];
-		    n = 2;
-		    if (arg.length > n && arg[n].isStream()) {
-			obj = arg[n++];
-			obj.putInt(N_OPEN, false);
-			if (n < arg.length) {
-			    if (n < arg.length - 1) {
-				for (; n < arg.length - 1; n += 2) {
-				    if (arg[n].isString() && arg[n].notNull())
-					obj.putObject(arg[n].stringValue(), arg[n+1]);
-				    else VM.badArgument(n);
-				}
-			    } else if (arg[n].notNull()) {
-				if (arg[n].isDictionary())
-				    YoixMisc.copyInto(arg[n], obj);
-				else VM.badArgument(n);
-			    }
-			}
-			obj.put(N_NAME, path);
-			obj.put(N_MODE, mode);
-			obj.putInt(N_OPEN, true);
-		    } else {
-			if (arg.length > n && arg[n].isInteger())
-			    type = arg[n++].intValue();
-			else if (path.notNull())
-			    type = YoixMisc.guessStreamType(path.stringValue());
-			else type = STRINGSTREAM;
+        if (arg.length >= 2) {
+            if (arg[0].isNull() || arg[0].isString()) {
+                if ((arg[1].isString() && arg[1].notNull()) || arg[1].isInteger()) {
+                    path = arg[0];
+                    mode = arg[1];
+                    n = 2;
+                    if (arg.length > n && arg[n].isStream()) {
+                        obj = arg[n++];
+                        obj.putInt(N_OPEN, false);
+                        if (n < arg.length) {
+                            if (n < arg.length - 1) {
+                                for (; n < arg.length - 1; n += 2) {
+                                    if (arg[n].isString() && arg[n].notNull())
+                                        obj.putObject(arg[n].stringValue(), arg[n+1]);
+                                    else VM.badArgument(n);
+                                }
+                            } else if (arg[n].notNull()) {
+                                if (arg[n].isDictionary())
+                                    YoixMisc.copyInto(arg[n], obj);
+                                else VM.badArgument(n);
+                            }
+                        }
+                        obj.put(N_NAME, path);
+                        obj.put(N_MODE, mode);
+                        obj.putInt(N_OPEN, true);
+                    } else {
+                        if (arg.length > n && arg[n].isInteger())
+                            type = arg[n++].intValue();
+                        else if (path.notNull())
+                            type = YoixMisc.guessStreamType(path.stringValue());
+                        else type = STRINGSTREAM;
 
-			switch (type) {
-			    case FILE:
-				if (path.notNull())
-				    data = VM.getTypeTemplate(T_FILE);
-				else VM.badArgumentValue(0);
-				break;
+                        switch (type) {
+                            case FILE:
+                                if (path.notNull())
+                                    data = VM.getTypeTemplate(T_FILE);
+                                else VM.badArgumentValue(0);
+                                break;
 
-			    case STRINGSTREAM:
-				data = VM.getTypeTemplate(T_STRINGSTREAM);
-				break;
+                            case STRINGSTREAM:
+                                data = VM.getTypeTemplate(T_STRINGSTREAM);
+                                break;
 
-			    case URL:
-				if (path.notNull())
-				    data = VM.getTypeTemplate(T_URL);
-				else VM.badArgumentValue(0);
-				break;
+                            case URL:
+                                if (path.notNull())
+                                    data = VM.getTypeTemplate(T_URL);
+                                else VM.badArgumentValue(0);
+                                break;
 
-			    default:
-				data = VM.badArgument(2);
-				break;
-			}
-			//
-			// Now accepts key/value pairs or a single dictionary
-			// argument - changed on 6/24/07.
-			//
-			if (n < arg.length) {
-			    if (n < arg.length - 1) {
-				for (; n < arg.length - 1; n += 2) {
-				    if (arg[n].isString() && arg[n].notNull())
-					data.putObject(arg[n].stringValue(), arg[n+1]);
-				    else VM.badArgument(n);
-				}
-			    } else if (arg[n].notNull()) {
-				if (arg[n].isDictionary())
-				    YoixMisc.copyInto(arg[n], data);
-				else VM.badArgument(n);
-			    }
-			}
-			data.put(N_NAME, path);
-			data.put(N_MODE, mode);
-			data.putInt(N_OPEN, true);
-			obj = YoixObject.newStream(data);
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+                            default:
+                                data = VM.badArgument(2);
+                                break;
+                        }
+                        //
+                        // Now accepts key/value pairs or a single dictionary
+                        // argument - changed on 6/24/07.
+                        //
+                        if (n < arg.length) {
+                            if (n < arg.length - 1) {
+                                for (; n < arg.length - 1; n += 2) {
+                                    if (arg[n].isString() && arg[n].notNull())
+                                        data.putObject(arg[n].stringValue(), arg[n+1]);
+                                    else VM.badArgument(n);
+                                }
+                            } else if (arg[n].notNull()) {
+                                if (arg[n].isDictionary())
+                                    YoixMisc.copyInto(arg[n], data);
+                                else VM.badArgument(n);
+                            }
+                        }
+                        data.put(N_NAME, path);
+                        data.put(N_MODE, mode);
+                        data.putInt(N_OPEN, true);
+                        obj = YoixObject.newStream(data);
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return((obj != null && obj.getBoolean(N_OPEN)) ? obj : YoixObject.newStream());
+        return((obj != null && obj.getBoolean(N_OPEN)) ? obj : YoixObject.newStream());
     }
 
 
     public static YoixObject
     read(YoixObject arg[]) {
 
-	String  buf;
-	int     value = -1;
+        String  buf;
+        int     value = -1;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    if (arg[1].isString() && arg[1].notNull()) {
-		if (arg[2].isInteger() && arg[2].intValue() >= 0) {
-		    buf = arg[0].streamValue().read(arg[2].intValue());
-		    if (buf != null) {
-			if ((value = buf.length()) > 0)
-			    arg[1].overlay(buf);
-		    } else value = -1;
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            if (arg[1].isString() && arg[1].notNull()) {
+                if (arg[2].isInteger() && arg[2].intValue() >= 0) {
+                    buf = arg[0].streamValue().read(arg[2].intValue());
+                    if (buf != null) {
+                        if ((value = buf.length()) > 0)
+                            arg[1].overlay(buf);
+                    } else value = -1;
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(value));
+        return(YoixObject.newInt(value));
     }
 
 
     public static YoixObject
     readChar(YoixObject arg[]) {
 
-	int  value = -1;
+        int  value = -1;
 
-	if (arg[0].isStream() && arg[0].notNull())
-	    value = arg[0].streamValue().read();
-	else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull())
+            value = arg[0].streamValue().read();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(value));
+        return(YoixObject.newInt(value));
     }
 
 
     public static YoixObject
     readInto(YoixObject arg[]) {
 
-	YoixBodyStream  stream;
-	char            buf[];
-	int             count = -1;
-	int             offset;
-	int             length;
+        YoixBodyStream  stream;
+        char            buf[];
+        int             count = -1;
+        int             offset;
+        int             length;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isStream() && arg[0].notNull()) {
-		if (arg[1].isString() && arg[1].notNull()) {
-		    if (arg.length <= 2 || arg[2].isInteger()) {
-			if ((buf = arg[1].toCharArray(true, null)) != null) {
-			    offset = arg[1].offset();
-			    length = buf.length - offset;
-			    if (arg.length > 2)
-				length = Math.min(arg[2].intValue(), length);
-			    if (length > 0) {
-				stream = arg[0].streamValue();
-				count = stream.readInto(buf, offset, length, -1, null);
-			    } else count = (length == 0) ? 0 : -1;
-			} else VM.abort(INVALIDACCESS);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isStream() && arg[0].notNull()) {
+                if (arg[1].isString() && arg[1].notNull()) {
+                    if (arg.length <= 2 || arg[2].isInteger()) {
+                        if ((buf = arg[1].toCharArray(true, null)) != null) {
+                            offset = arg[1].offset();
+                            length = buf.length - offset;
+                            if (arg.length > 2)
+                                length = Math.min(arg[2].intValue(), length);
+                            if (length > 0) {
+                                stream = arg[0].streamValue();
+                                count = stream.readInto(buf, offset, length, -1, null);
+                            } else count = (length == 0) ? 0 : -1;
+                        } else VM.abort(INVALIDACCESS);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(count));
+        return(YoixObject.newInt(count));
     }
 
 
     public static YoixObject
     readLine(YoixObject arg[]) {
 
-	String  str = null;
+        String  str = null;
 
-	if (arg[0].isStream() && arg[0].notNull())
-	    str = arg[0].streamValue().readLine(EOL_MASK);
-	else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull())
+            str = arg[0].streamValue().readLine(EOL_MASK);
+        else VM.badArgument(0);
 
-	return(YoixObject.newString(str));
+        return(YoixObject.newString(str));
     }
 
 
     public static YoixObject
     readStream(YoixObject arg[]) {
 
-	YoixBodyStream  stream;
-	char            buf[] = null;
+        YoixBodyStream  stream;
+        char            buf[] = null;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg[0].isStream() && arg[0].notNull()) {
-		if (arg.length == 1 || arg[1].isNumber()) {
-		    stream = arg[0].streamValue();
-		    buf = stream.readStream(arg.length == 1 ? -1 : arg[1].intValue());
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg[0].isStream() && arg[0].notNull()) {
+                if (arg.length == 1 || arg[1].isNumber()) {
+                    stream = arg[0].streamValue();
+                    buf = stream.readStream(arg.length == 1 ? -1 : arg[1].intValue());
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newString(buf));
+        return(YoixObject.newString(buf));
     }
 
 
     public static YoixObject
     ready(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg[0].isStream() && arg[0].notNull())
-	    result = arg[0].streamValue().ready();
-	else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull())
+            result = arg[0].streamValue().ready();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     reopen(YoixObject arg[]) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    if (arg[1].isStream() && arg[1].notNull()) {
-		if (arg[1].streamValue().reopen(arg[0].streamValue()))
-		    obj = arg[1];
-		else obj = YoixObject.newStream();
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            if (arg[1].isStream() && arg[1].notNull()) {
+                if (arg[1].streamValue().reopen(arg[0].streamValue()))
+                    obj = arg[1];
+                else obj = YoixObject.newStream();
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(obj);
+        return(obj);
     }
 
 
     public static YoixObject
     reset(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg[0].isStream() && arg[0].notNull())
-	    result = arg[0].streamValue().reset();
-	else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull())
+            result = arg[0].streamValue().reset();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     setZipComment(YoixObject arg[]) {
 
-	int  result = 0;
+        int  result = 0;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    if (arg[1].isString() && arg[1].notNull()) {
-		result = arg[0].streamValue().setZipComment(arg[1].stringValue());
-		if (result != 0)
-		    VM.badArgument(0);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            if (arg[1].isString() && arg[1].notNull()) {
+                result = arg[0].streamValue().setZipComment(arg[1].stringValue());
+                if (result != 0)
+                    VM.badArgument(0);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     setZipLevel(YoixObject arg[]) {
 
-	int  result = 0;
+        int  result = 0;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    if (arg[1].isInteger()) {
-		result = arg[0].streamValue().setZipLevel(arg[1].intValue());
-		if (result != 0)
-		    VM.badArgument(0);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            if (arg[1].isInteger()) {
+                result = arg[0].streamValue().setZipLevel(arg[1].intValue());
+                if (result != 0)
+                    VM.badArgument(0);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(null);
+        return(null);
     }
 
 
     public static YoixObject
     tellCount(YoixObject arg[]) {
 
-	YoixBodyStream  stream;
-	double          count = -1;
-	int             mode = -1;
+        YoixBodyStream  stream;
+        double          count = -1;
+        int             mode = -1;
 
-	if (arg[0].isStream()) {
-	    stream = arg[0].streamValue();
-	    if (arg.length > 1) {
-		if (arg[1].isInteger()) {
-		    mode = arg[1].intValue();
-		    if (mode != READ && mode != WRITE)
-			VM.badArgumentValue(1);
-		} else VM.badArgument(1);
-	    } else {
-		if (stream.checkMode(READ))
-		    mode = READ;
-		else if (stream.checkMode(WRITE))
-		    mode = WRITE;
-	    }
-	    if (mode == READ)
-		count = (double)arg[0].streamValue().getInputCount();
-	    else if (mode == WRITE)
-		count = (double)arg[0].streamValue().getOutputCount();
-	} else VM.badArgument(0);
+        if (arg[0].isStream()) {
+            stream = arg[0].streamValue();
+            if (arg.length > 1) {
+                if (arg[1].isInteger()) {
+                    mode = arg[1].intValue();
+                    if (mode != READ && mode != WRITE)
+                        VM.badArgumentValue(1);
+                } else VM.badArgument(1);
+            } else {
+                if (stream.checkMode(READ))
+                    mode = READ;
+                else if (stream.checkMode(WRITE))
+                    mode = WRITE;
+            }
+            if (mode == READ)
+                count = (double)arg[0].streamValue().getInputCount();
+            else if (mode == WRITE)
+                count = (double)arg[0].streamValue().getOutputCount();
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt((int)count));
+        return(YoixObject.newInt((int)count));
     }
 
 
     public static YoixObject
     truncateBytes(YoixObject arg[]) {
 
-	long  length = -1;
+        long  length = -1;
 
-	if (arg.length == 2) {
-	    if (arg[0].isStream() && arg[0].notNull()) {
-		// only works on a offsetSupported stream
-		if (arg[0].streamValue().offsetSupported()) {
-		    if (arg[1].isNumber()) {
-			length = arg[0].streamValue().setLength((long)arg[1].doubleValue());
-		    } else VM.badArgument(1);
-		} else VM.badArgument(0);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2) {
+            if (arg[0].isStream() && arg[0].notNull()) {
+                // only works on a offsetSupported stream
+                if (arg[0].streamValue().offsetSupported()) {
+                    if (arg[1].isNumber()) {
+                        length = arg[0].streamValue().setLength((long)arg[1].doubleValue());
+                    } else VM.badArgument(1);
+                } else VM.badArgument(0);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newDouble((double)length));
+        return(YoixObject.newDouble((double)length));
     }
 
 
     public static YoixObject
     write(YoixObject arg[]) {
 
-	char  buf[];
-	int   count = -1;
-	int   len;
+        char  buf[];
+        int   count = -1;
+        int   len;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isStream() && arg[0].notNull()) {
-		if (arg[1].isString() && arg[1].notNull()) {
-		    if (arg.length == 3) {
-			if (arg[2].isInteger()) {
-			    buf = arg[1].toCharArray();
-			    len = Math.min(Math.max(arg[2].intValue(), 0), buf.length);
-			    count = arg[0].streamValue().write(buf, 0, len);
-			} else VM.badArgument(2);
-		    } else count = arg[0].streamValue().write(arg[1].stringValue());
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isStream() && arg[0].notNull()) {
+                if (arg[1].isString() && arg[1].notNull()) {
+                    if (arg.length == 3) {
+                        if (arg[2].isInteger()) {
+                            buf = arg[1].toCharArray();
+                            len = Math.min(Math.max(arg[2].intValue(), 0), buf.length);
+                            count = arg[0].streamValue().write(buf, 0, len);
+                        } else VM.badArgument(2);
+                    } else count = arg[0].streamValue().write(arg[1].stringValue());
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(count));
+        return(YoixObject.newInt(count));
     }
 
 
     public static YoixObject
     writeChar(YoixObject arg[]) {
 
-	int  count = -1;
+        int  count = -1;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    if (arg[1].isInteger())
-		count = arg[0].streamValue().write(arg[1].intValue());
-	    else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            if (arg[1].isInteger())
+                count = arg[0].streamValue().write(arg[1].intValue());
+            else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(count));
+        return(YoixObject.newInt(count));
     }
 
 
     public static YoixObject
     writeFrom(YoixObject arg[]) {
 
-	char  buf[];
-	int   count = -1;
-	int   len;
+        char  buf[];
+        int   count = -1;
+        int   len;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isStream() && arg[0].notNull()) {
-		if (arg[1].isString() && arg[1].notNull()) {
-		    if (arg.length == 2 || arg[2].isInteger()) {
-			if ((buf = arg[1].toCharArray(true, null)) != null) {
-			    if (arg.length > 2)
-				len = Math.min(Math.max(arg[2].intValue(), 0), buf.length);
-			    else len = buf.length;
-			    count = arg[0].streamValue().write(buf, 0, len);
-			} else VM.abort(INVALIDACCESS);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isStream() && arg[0].notNull()) {
+                if (arg[1].isString() && arg[1].notNull()) {
+                    if (arg.length == 2 || arg[2].isInteger()) {
+                        if ((buf = arg[1].toCharArray(true, null)) != null) {
+                            if (arg.length > 2)
+                                len = Math.min(Math.max(arg[2].intValue(), 0), buf.length);
+                            else len = buf.length;
+                            count = arg[0].streamValue().write(buf, 0, len);
+                        } else VM.abort(INVALIDACCESS);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(count));
+        return(YoixObject.newInt(count));
     }
 
 
     public static YoixObject
     writeLine(YoixObject arg[]) {
 
-	int  count = -1;
+        int  count = -1;
 
-	if (arg[0].isStream() && arg[0].notNull()) {
-	    if (arg[1].isString() && arg[1].notNull())
-		count = arg[0].streamValue().writeLine(arg[1].stringValue());
-	    else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isStream() && arg[0].notNull()) {
+            if (arg[1].isString() && arg[1].notNull())
+                count = arg[0].streamValue().writeLine(arg[1].stringValue());
+            else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(count));
+        return(YoixObject.newInt(count));
     }
 }
 

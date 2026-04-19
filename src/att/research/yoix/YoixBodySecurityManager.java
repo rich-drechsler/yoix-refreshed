@@ -29,29 +29,29 @@ class YoixBodySecurityManager extends YoixPointerActive
      //
      // FIELD                        OBJECT       BODY
      // -----                        ------       ----
-	N_CHECKACCEPT,               $LR_X,       null,
-	N_CHECKCONNECT,              $LR_X,       null,
-	N_CHECKCREATEROBOT,          $LR_X,       null,
-	N_CHECKDELETE,               $LR_X,       null,
-	N_CHECKEXEC,                 $LR_X,       null,
-	N_CHECKEXIT,                 $LR_X,       null,
-	N_CHECKLISTEN,               $LR_X,       null,
-	N_CHECKMULTICAST,            $LR_X,       null,
-	N_CHECKPROPERTIESACCESS,     $LR_X,       null,
-	N_CHECKREAD,                 $LR_X,       null,
-	N_CHECKREADDISPLAYPIXELS,    $LR_X,       null,
-	N_CHECKREADENVIRONMENT,      $LR_X,       null,
-	N_CHECKREADPROPERTY,         $LR_X,       null,
-	N_CHECKSYSTEMCLIPBOARDACCESS,$LR_X,       null,
-	N_CHECKWRITE,                $LR_X,       null,
-	N_CHECKWRITEPROPERTY,        $LR_X,       null,
-	N_CHECKYOIXADDPROVIDER,      $LR_X,       null,
-	N_CHECKYOIXEVAL,             $LR_X,       null,
-	N_CHECKYOIXEXECUTE,          $LR_X,       null,
-	N_CHECKYOIXINCLUDE,          $LR_X,       null,
-	N_CHECKYOIXMODULE,           $LR_X,       null,
-	N_CHECKYOIXOPEN,             $LR_X,       null,
-	N_CHECKYOIXREMOVEPROVIDER,   $LR_X,       null,
+        N_CHECKACCEPT,               $LR_X,       null,
+        N_CHECKCONNECT,              $LR_X,       null,
+        N_CHECKCREATEROBOT,          $LR_X,       null,
+        N_CHECKDELETE,               $LR_X,       null,
+        N_CHECKEXEC,                 $LR_X,       null,
+        N_CHECKEXIT,                 $LR_X,       null,
+        N_CHECKLISTEN,               $LR_X,       null,
+        N_CHECKMULTICAST,            $LR_X,       null,
+        N_CHECKPROPERTIESACCESS,     $LR_X,       null,
+        N_CHECKREAD,                 $LR_X,       null,
+        N_CHECKREADDISPLAYPIXELS,    $LR_X,       null,
+        N_CHECKREADENVIRONMENT,      $LR_X,       null,
+        N_CHECKREADPROPERTY,         $LR_X,       null,
+        N_CHECKSYSTEMCLIPBOARDACCESS,$LR_X,       null,
+        N_CHECKWRITE,                $LR_X,       null,
+        N_CHECKWRITEPROPERTY,        $LR_X,       null,
+        N_CHECKYOIXADDPROVIDER,      $LR_X,       null,
+        N_CHECKYOIXEVAL,             $LR_X,       null,
+        N_CHECKYOIXEXECUTE,          $LR_X,       null,
+        N_CHECKYOIXINCLUDE,          $LR_X,       null,
+        N_CHECKYOIXMODULE,           $LR_X,       null,
+        N_CHECKYOIXOPEN,             $LR_X,       null,
+        N_CHECKYOIXREMOVEPROVIDER,   $LR_X,       null,
     };
 
     //
@@ -64,7 +64,7 @@ class YoixBodySecurityManager extends YoixPointerActive
     private static HashMap  activefields = new HashMap(3);
 
     static {
-	activefields.put(N_INCHECK, new Integer(V_INCHECK));
+        activefields.put(N_INCHECK, new Integer(V_INCHECK));
     }
 
     ///////////////////////////////////
@@ -75,10 +75,10 @@ class YoixBodySecurityManager extends YoixPointerActive
 
     YoixBodySecurityManager(YoixObject data) {
 
-	super(data);
-	buildSecurityManager();
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        buildSecurityManager();
+        setFixedSize();
+        setPermissions(permissions);
     }
 
     ///////////////////////////////////
@@ -90,7 +90,7 @@ class YoixBodySecurityManager extends YoixPointerActive
     public final int
     type() {
 
-	return(SECURITYMANAGER);
+        return(SECURITYMANAGER);
     }
 
     ///////////////////////////////////
@@ -102,29 +102,29 @@ class YoixBodySecurityManager extends YoixPointerActive
     protected final void
     finalize() {
 
-	manager = null;
-	super.finalize();
+        manager = null;
+        super.finalize();
     }
 
 
     protected final synchronized YoixObject
     getField(String name, YoixObject obj) {
 
-	switch (activeField(name, activefields)) {
-	    case V_INCHECK:
-		if (manager != null)
-		    obj = YoixObject.newInt(manager.getInCheck());
-		break;
-	}
+        switch (activeField(name, activefields)) {
+            case V_INCHECK:
+                if (manager != null)
+                    obj = YoixObject.newInt(manager.getInCheck());
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(manager);
+        return(manager);
     }
 
     ///////////////////////////////////
@@ -136,19 +136,19 @@ class YoixBodySecurityManager extends YoixPointerActive
     private void
     buildSecurityManager() {
 
-	//
-	// YoixSecurityManager extends SecurityManager, but Java won't
-	// create a new SecurityManager when one is already installed.
-	// We don't care if Yoix programs create SecurityManagers, so
-	// we trap the exception and set manager to null.
-	//
+        //
+        // YoixSecurityManager extends SecurityManager, but Java won't
+        // create a new SecurityManager when one is already installed.
+        // We don't care if Yoix programs create SecurityManagers, so
+        // we trap the exception and set manager to null.
+        //
 
-	try {
-	    manager = new YoixSecurityManager(data, this);
-	}
-	catch(SecurityException e) {
-	    manager = null;
-	}
+        try {
+            manager = new YoixSecurityManager(data, this);
+        }
+        catch(SecurityException e) {
+            manager = null;
+        }
     }
 }
 

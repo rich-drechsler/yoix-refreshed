@@ -25,31 +25,31 @@ class YoixAWTCheckboxMenuItem extends CheckboxMenuItem {
 
     YoixAWTCheckboxMenuItem() {
 
-	super();
-	group = null;
+        super();
+        group = null;
     }
 
 
     YoixAWTCheckboxMenuItem(String label) {
 
-	super(label);
-	group = null;
+        super(label);
+        group = null;
     }
 
 
     YoixAWTCheckboxMenuItem(String label, boolean state) {
 
-	super(label, state);
-	group = null;
+        super(label, state);
+        group = null;
     }
 
 
     YoixAWTCheckboxMenuItem(String label, boolean state, YoixAWTCheckboxMenuItemGroup group) {
 
-	super(label, state);
-	this.group = group;
-	if (state && group != null)
-	    group.setSelectedBox(this);
+        super(label, state);
+        this.group = group;
+        if (state && group != null)
+            group.setSelectedBox(this);
     }
 
     ///////////////////////////////////
@@ -61,14 +61,14 @@ class YoixAWTCheckboxMenuItem extends CheckboxMenuItem {
     final YoixAWTCheckboxMenuItemGroup
     getGroup() {
 
-	return(group);
+        return(group);
     }
 
 
     public final void
     setState(boolean state) {
 
-	setState(state, true);
+        setState(state, true);
     }
 
 
@@ -77,21 +77,21 @@ class YoixAWTCheckboxMenuItem extends CheckboxMenuItem {
 
     	YoixAWTCheckboxMenuItemGroup  group = this.group;
 
-	if (group != null) {
-	    if (state) {
-		group.setSelectedBox(this);
-		super.setState(true);
-	    } else if (group.getSelectedBox() == this)
-		super.setState(selectedstate);
-	    else super.setState(false);
-	} else super.setState(state);
+        if (group != null) {
+            if (state) {
+                group.setSelectedBox(this);
+                super.setState(true);
+            } else if (group.getSelectedBox() == this)
+                super.setState(selectedstate);
+            else super.setState(false);
+        } else super.setState(state);
     }
 
 
     final void
     setSuperState(boolean state) {
 
-	super.setState(state);
+        super.setState(state);
     }
 }
 

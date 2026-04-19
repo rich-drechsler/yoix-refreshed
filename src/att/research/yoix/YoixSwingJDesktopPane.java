@@ -18,8 +18,8 @@ import javax.swing.*;
 class YoixSwingJDesktopPane extends JDesktopPane
 
     implements YoixConstants,
-	       YoixConstantsImage,
-	       YoixInterfaceDrawable
+               YoixConstantsImage,
+               YoixInterfaceDrawable
 
 {
 
@@ -55,8 +55,8 @@ class YoixSwingJDesktopPane extends JDesktopPane
 
     YoixSwingJDesktopPane(YoixObject data, YoixBodyComponent parent) {
 
-	this.data = data;
-	this.parent = parent;
+        this.data = data;
+        this.parent = parent;
     }
 
     ///////////////////////////////////
@@ -68,92 +68,92 @@ class YoixSwingJDesktopPane extends JDesktopPane
     public final Graphics
     getPaintGraphics() {
 
-	Graphics  g;
-	Point     origin;
+        Graphics  g;
+        Point     origin;
 
-	if ((g = paintgraphics) != null) {
-	    if (Thread.currentThread() == paintthread)
-		g = g.create();
-	}
-	return(g);
+        if ((g = paintgraphics) != null) {
+            if (Thread.currentThread() == paintthread)
+                g = g.create();
+        }
+        return(g);
     }
 
 
     public final boolean
     isDrawable() {
 
-	return(true);
+        return(true);
     }
 
 
     public final boolean
     isPaintable() {
 
-	return(true);
+        return(true);
     }
 
 
     public final boolean
     isTileable() {
 
-	return(true);
+        return(true);
     }
 
 
     public final void
     paintBackground(Graphics g) {
 
-	//
-	// A recent change (6/17/05) now always clears the background if
-	// backgroundimage exists. Older versions didn't bother clearing
-	// it if there was a backgroundimage that also painted the entire
-	// background. The check was only for efficiency, but transparent
-	// images caused problems.
-	//
+        //
+        // A recent change (6/17/05) now always clears the background if
+        // backgroundimage exists. Older versions didn't bother clearing
+        // it if there was a backgroundimage that also painted the entire
+        // background. The check was only for efficiency, but transparent
+        // images caused problems.
+        //
 
-	if (backgroundimage != null || opaque)
-	    YoixMiscJFC.paintBackground(this, g);
+        if (backgroundimage != null || opaque)
+            YoixMiscJFC.paintBackground(this, g);
     }
 
 
     public final void
     paintBackgroundImage(Graphics g) {
 
-	Image  image;
+        Image  image;
 
-	if (backgroundimage != null) {
-	    if ((image = getFilteredImage(backgroundhints)) != null)
-		YoixMiscJFC.paintImage(this, image, backgroundhints, g);
-	}
+        if (backgroundimage != null) {
+            if ((image = getFilteredImage(backgroundhints)) != null)
+                YoixMiscJFC.paintImage(this, image, backgroundhints, g);
+        }
     }
 
 
     public final synchronized void
     setBackgroundHints(int hints) {
 
-	if (this.backgroundhints != hints) {
-	    this.backgroundhints = hints;
-	    this.filteredimage = null;
-	    repaint();
-	}
+        if (this.backgroundhints != hints) {
+            this.backgroundhints = hints;
+            this.filteredimage = null;
+            repaint();
+        }
     }
 
 
     public final synchronized void
     setBackgroundImage(Image image) {
 
-	if (this.backgroundimage != image) {
-	    this.backgroundimage = image;
-	    this.filteredimage = null;
-	    repaint();
-	}
+        if (this.backgroundimage != image) {
+            this.backgroundimage = image;
+            this.filteredimage = null;
+            repaint();
+        }
     }
 
 
     public final synchronized void
     setPaint(YoixObject obj) {
 
-	paint = obj.notNull() ? obj : null;
+        paint = obj.notNull() ? obj : null;
     }
 
     ///////////////////////////////////
@@ -165,92 +165,92 @@ class YoixSwingJDesktopPane extends JDesktopPane
     protected void
     finalize() {
 
-	Graphics  g;
+        Graphics  g;
 
-	data = null;
-	parent = null;
-	backgroundimage = null;
-	filteredimage = null;
-	paint = null;
-	paintthread = null;
-	if ((g = paintgraphics) != null) {
-	    g.dispose();
-	    paintgraphics = null;
-	}
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        parent = null;
+        backgroundimage = null;
+        filteredimage = null;
+        paint = null;
+        paintthread = null;
+        if ((g = paintgraphics) != null) {
+            g.dispose();
+            paintgraphics = null;
+        }
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     public final boolean
     isOpaque() {
 
-	//
-	// Return value is faked when we want to prevent super.paint()
-	// from repainting our background - needed when there's a Yoix
-	// paint() function or a background image (see paint() below
-	// and javax.swing.JLayeredPane.paint() for more details).
-	//
+        //
+        // Return value is faked when we want to prevent super.paint()
+        // from repainting our background - needed when there's a Yoix
+        // paint() function or a background image (see paint() below
+        // and javax.swing.JLayeredPane.paint() for more details).
+        //
 
-	return(protectbackground ? false : opaque);
+        return(protectbackground ? false : opaque);
     }
 
 
     public final void
     paint(Graphics g) {
 
-	String  msg;
+        String  msg;
 
-	//
-	// The way we use protectbackground is very tricky so be careful
-	// if you make changes here. Setting it to false is how we have
-	// super.paint() to leave our background alone (you may want to
-	// look at JLayeredPane.paint() and our version of isOpaque() to
-	// see how it works).
-	//
-	// NOTE - old versions set protectbackground to true before the
-	// paintBackground() call, but we recently moved it. See comments
-	// in YoixSwingJLayeredPane.java for more details.
-	//
+        //
+        // The way we use protectbackground is very tricky so be careful
+        // if you make changes here. Setting it to false is how we have
+        // super.paint() to leave our background alone (you may want to
+        // look at JLayeredPane.paint() and our version of isOpaque() to
+        // see how it works).
+        //
+        // NOTE - old versions set protectbackground to true before the
+        // paintBackground() call, but we recently moved it. See comments
+        // in YoixSwingJLayeredPane.java for more details.
+        //
 
-	if (backgroundimage != null || paint != null) {
-	    paintBackground(g);
-	    protectbackground = true;		// moved on 2/28/06
-	    paintBackgroundImage(g);
-	    paintCallback(g);
-	} else protectbackground = false;
+        if (backgroundimage != null || paint != null) {
+            paintBackground(g);
+            protectbackground = true;		// moved on 2/28/06
+            paintBackgroundImage(g);
+            paintCallback(g);
+        } else protectbackground = false;
 
-	try {
-	    super.paint(g);
-	}
-	catch(RuntimeException e) {
-	    //
-	    // This seems to help on Mac OSX where we sometimes can get
-	    // an exception that looks like
-	    //
-	    //    apple.awt.EventQueueExceptionHandler Caught Throwable : java.lang.ArrayIndexOutOfBoundsException: No such child: ...
-	    //
-	    // and appears to be an Apple Java bug. Not 100% sure who's
-	    // to blame, but this elimintes unwanted noise.
-	    // 
+        try {
+            super.paint(g);
+        }
+        catch(RuntimeException e) {
+            //
+            // This seems to help on Mac OSX where we sometimes can get
+            // an exception that looks like
+            //
+            //    apple.awt.EventQueueExceptionHandler Caught Throwable : java.lang.ArrayIndexOutOfBoundsException: No such child: ...
+            //
+            // and appears to be an Apple Java bug. Not 100% sure who's
+            // to blame, but this elimintes unwanted noise.
+            // 
 
-	    msg = e.getMessage();
-	    if ((msg = e.getMessage()) == null || !msg.startsWith("No such child:"))
-		throw(e);
-	}
-	finally {
-	    protectbackground = false;
-	}
+            msg = e.getMessage();
+            if ((msg = e.getMessage()) == null || !msg.startsWith("No such child:"))
+                throw(e);
+        }
+        finally {
+            protectbackground = false;
+        }
     }
 
 
     public final void
     setOpaque(boolean state) {
 
-	opaque = state;
-	super.setOpaque(opaque);		// unnecessary
+        opaque = state;
+        super.setOpaque(opaque);		// unnecessary
     }
 
     ///////////////////////////////////
@@ -262,86 +262,86 @@ class YoixSwingJDesktopPane extends JDesktopPane
     private YoixBodyMatrix
     getCTMBody() {
 
-	YoixObject  graphics;
-	YoixObject  mtx;
+        YoixObject  graphics;
+        YoixObject  mtx;
 
-	if ((graphics = data.getObject(N_GRAPHICS)) != null) {
-	    if ((mtx = graphics.getObject(N_CTM)) == null)
-		mtx = VM.getDefaultMatrix();
-	} else mtx = VM.getDefaultMatrix();
-	return((YoixBodyMatrix)mtx.body());
+        if ((graphics = data.getObject(N_GRAPHICS)) != null) {
+            if ((mtx = graphics.getObject(N_CTM)) == null)
+                mtx = VM.getDefaultMatrix();
+        } else mtx = VM.getDefaultMatrix();
+        return((YoixBodyMatrix)mtx.body());
     }
 
 
     private Image
     getFilteredImage(int hints) {
 
-	Dimension  size;
-	Image      image;
-	int        height;
-	int        width;
+        Dimension  size;
+        Image      image;
+        int        height;
+        int        width;
 
-	//
-	// Old versions always synchronized, but as a precaution we decided
-	// the most common case (no background image) shouldn't bother. We
-	// wanted to avoid any chance of deadlock, despite the fact that we
-	// had no evidence the old implementation caused problems.
-	//
+        //
+        // Old versions always synchronized, but as a precaution we decided
+        // the most common case (no background image) shouldn't bother. We
+        // wanted to avoid any chance of deadlock, despite the fact that we
+        // had no evidence the old implementation caused problems.
+        //
 
-	if (backgroundimage != null) {
-	    synchronized(this) {
-		image = (filteredimage != null) ? filteredimage : backgroundimage;
-		if (image != null) {
-		    size = getSize();
-		    height = image.getHeight(null);
-		    width = image.getWidth(null);
-		    if ((hints & YOIX_SCALE_TILE) == 0) {
-			if ((hints & YOIX_SCALE_NONE) == 0) {
-			    if (size.height != height || size.width != width) {
-				image = IMAGEOBSERVER.scaleImage(
-				    image,
-				    size.width,
-				    size.height,
-				    hints,
-				    null
-				);
-			    }
-			}
-		    }
-		    filteredimage = image;
-		}
-	    }
-	} else image = null;
+        if (backgroundimage != null) {
+            synchronized(this) {
+                image = (filteredimage != null) ? filteredimage : backgroundimage;
+                if (image != null) {
+                    size = getSize();
+                    height = image.getHeight(null);
+                    width = image.getWidth(null);
+                    if ((hints & YOIX_SCALE_TILE) == 0) {
+                        if ((hints & YOIX_SCALE_NONE) == 0) {
+                            if (size.height != height || size.width != width) {
+                                image = IMAGEOBSERVER.scaleImage(
+                                    image,
+                                    size.width,
+                                    size.height,
+                                    hints,
+                                    null
+                                );
+                            }
+                        }
+                    }
+                    filteredimage = image;
+                }
+            }
+        } else image = null;
 
-	return(image);
+        return(image);
     }
 
 
     private void
     paintCallback(Graphics g) {
 
-	YoixObject  funct;
-	YoixObject  argv[];
-	Rectangle   bounds;
-	Point       origin;
+        YoixObject  funct;
+        YoixObject  argv[];
+        Rectangle   bounds;
+        Point       origin;
 
-	if ((funct = paint) != null && funct.notNull()) {
-	    if (funct.callable(1)) {
-		bounds = g.getClipBounds();
-		if (bounds != null && !getSize().equals(bounds.getSize()))
-		    argv = new YoixObject[] {YoixMake.yoixBBox(bounds, getCTMBody())};
-		else argv = new YoixObject[] {YoixObject.newNull()};
-	    } else argv = new YoixObject[0];
-	    try {
-		paintgraphics = g;
-		paintthread = Thread.currentThread();
-		parent.call(funct, argv);
-	    }
-	    finally {
-		paintthread = null;
-		paintgraphics = null;
-	    }
-	}
+        if ((funct = paint) != null && funct.notNull()) {
+            if (funct.callable(1)) {
+                bounds = g.getClipBounds();
+                if (bounds != null && !getSize().equals(bounds.getSize()))
+                    argv = new YoixObject[] {YoixMake.yoixBBox(bounds, getCTMBody())};
+                else argv = new YoixObject[] {YoixObject.newNull()};
+            } else argv = new YoixObject[0];
+            try {
+                paintgraphics = g;
+                paintthread = Thread.currentThread();
+                parent.call(funct, argv);
+            }
+            finally {
+                paintthread = null;
+                paintgraphics = null;
+            }
+        }
     }
 }
 

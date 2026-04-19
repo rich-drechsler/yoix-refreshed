@@ -18,9 +18,9 @@ final
 class YoixBodyTag
 
     implements YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCloneable,
-	       Serializable
+               YoixInterfaceBody,
+               YoixInterfaceCloneable,
+               Serializable
 
 {
 
@@ -48,25 +48,25 @@ class YoixBodyTag
 
     YoixBodyTag(int line) {
 
-	this.line = line;
-	this.column = -1;
-	this.source = "--unknown--";
+        this.line = line;
+        this.column = -1;
+        this.source = "--unknown--";
     }
 
 
     YoixBodyTag(int line, String source) {
 
-	this.line = line;
-	this.column = -1;
-	this.source = source;
+        this.line = line;
+        this.column = -1;
+        this.source = source;
     }
 
 
     YoixBodyTag(int line, int column, String source) {
 
-	this.line = line;
-	this.column = column;
-	this.source = source;
+        this.line = line;
+        this.column = column;
+        this.source = source;
     }
 
     ///////////////////////////////////
@@ -78,23 +78,23 @@ class YoixBodyTag
     public final synchronized Object
     clone() {
 
-	Object  obj;
+        Object  obj;
 
-	try {
-	    obj = super.clone();
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
+        try {
+            obj = super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     public final Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -106,56 +106,56 @@ class YoixBodyTag
     public final String
     dump() {
 
-	String  str = "";
-	String  sep = "";
+        String  str = "";
+        String  sep = "";
 
-	//
-	// Eventually could collect and include more information about the
-	// function, but this will be sufficient for now. For example, we
-	// could store the YoixBodyFunction instead of its name and ask it
-	// for more info here.
-	//
+        //
+        // Eventually could collect and include more information about the
+        // function, but this will be sufficient for now. For example, we
+        // could store the YoixBodyFunction instead of its name and ask it
+        // for more info here.
+        //
 
-	if (function_name != null) {
-	    str += sep + FUNCTION_PREFIX + function_name;
-	    sep = "; ";
-	}
-	if (line >= 0) {
-	    str += sep + LINE_PREFIX + line;
-	    sep = "; ";
-	}
+        if (function_name != null) {
+            str += sep + FUNCTION_PREFIX + function_name;
+            sep = "; ";
+        }
+        if (line >= 0) {
+            str += sep + LINE_PREFIX + line;
+            sep = "; ";
+        }
 
-	if (column >= 0) {
-	    str += sep + COLUMN_PREFIX + column;
-	    sep = "; ";
-	}
-	if (source != null) {
-	    str += sep + SOURCE_PREFIX + source;
-	    sep = "; ";
-	}
+        if (column >= 0) {
+            str += sep + COLUMN_PREFIX + column;
+            sep = "; ";
+        }
+        if (source != null) {
+            str += sep + SOURCE_PREFIX + source;
+            sep = "; ";
+        }
 
-	return(str + NL);
+        return(str + NL);
     }
 
 
     public final int
     length() {
 
-	return(0);
+        return(0);
     }
 
 
     public final String
     toString() {
 
-	return(dump().trim());
+        return(dump().trim());
     }
 
 
     public final int
     type() {
 
-	return(TAG);
+        return(TAG);
     }
 
     ///////////////////////////////////
@@ -167,63 +167,63 @@ class YoixBodyTag
     final int
     getColumn() {
 
-	return(column);
+        return(column);
     }
 
 
     static String
     getColumnPrefix() {
 
-	return(COLUMN_PREFIX);
+        return(COLUMN_PREFIX);
     }
 
 
     final String
     getFunctionName() {
 
-	return(function_name);
+        return(function_name);
     }
 
 
     final int
     getLine() {
 
-	return(line);
+        return(line);
     }
 
 
     static String
     getLinePrefix() {
 
-	return(LINE_PREFIX);
+        return(LINE_PREFIX);
     }
 
 
     final String
     getSource() {
 
-	return(source);
+        return(source);
     }
 
 
     static String
     getSourcePrefix() {
 
-	return(SOURCE_PREFIX);
+        return(SOURCE_PREFIX);
     }
 
 
     final boolean
     isFunctionTag() {
 
-	return(function_name != null);
+        return(function_name != null);
     }
 
 
     final void
     setFunctionName(String name) {
 
-	this.function_name = name;
+        this.function_name = name;
     }
 }
 

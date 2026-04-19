@@ -35,7 +35,7 @@ class YoixAWTTexturePaint extends TexturePaint
     public
     YoixAWTTexturePaint(BufferedImage image, Rectangle2D anchor) {
 
-	super(image, anchor);
+        super(image, anchor);
     }
 
     ///////////////////////////////////
@@ -47,8 +47,8 @@ class YoixAWTTexturePaint extends TexturePaint
     public final PaintContext
     createContext(ColorModel cm, Rectangle device, Rectangle2D user, AffineTransform xform, RenderingHints hints) {
 
-	xform.scale(1/xform.getScaleX(), 1/xform.getScaleY());
-	return(super.createContext(cm, device, user, xform, hints));
+        xform.scale(1/xform.getScaleX(), 1/xform.getScaleY());
+        return(super.createContext(cm, device, user, xform, hints));
     }
 }
 

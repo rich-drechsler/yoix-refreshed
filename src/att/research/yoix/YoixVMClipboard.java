@@ -20,7 +20,7 @@ public abstract
 class YoixVMClipboard extends YoixVMError
 
     implements ClipboardOwner,
-	       YoixConstants
+               YoixConstants
 
 {
 
@@ -51,65 +51,65 @@ class YoixVMClipboard extends YoixVMError
     public synchronized void
     lostOwnership(Clipboard clipboard, Transferable contents) {
 
-	DataFlavor  flavors[];
-	YoixObject  funct;
-	YoixObject  argv[];
-	YoixObject  owner;
-	Runnable    event;
-	Object      value;
-	int         n;
+        DataFlavor  flavors[];
+        YoixObject  funct;
+        YoixObject  argv[];
+        YoixObject  owner;
+        Runnable    event;
+        Object      value;
+        int         n;
 
-	//
-	// We have never seen a YoixObject hit in the flavor loop so we
-	// could be doing something wrong or maybe we don't understand
-	// the contents argument. Doesn't seem to cause problems, so we
-	// may investigate later.
-	//
+        //
+        // We have never seen a YoixObject hit in the flavor loop so we
+        // could be doing something wrong or maybe we don't understand
+        // the contents argument. Doesn't seem to cause problems, so we
+        // may investigate later.
+        //
 
-	if (clipboard != null) {
-	    if ((value = clipboards.get(clipboard)) != null) {
-		clipboards.remove(clipboard);
-		if (value instanceof YoixObject) {
-		    owner = (YoixObject)value;
-		    if ((funct = owner.getObject(N_LOSTCLIPBOARDOWNERSHIP)) != null) {
-			if (funct.callable(2)) {
-			    argv = new YoixObject[] {YoixObject.newClipboard(clipboard), null};
-			    if (contents != null) {
-				if ((flavors = contents.getTransferDataFlavors()) != null) {
-				    for (n = 0; n < flavors.length; n++) {
-					if (flavors[n] != null) {
-					    try {
-						value = contents.getTransferData(flavors[n]);
-						if (value instanceof YoixObject) {
-						    argv[1] = (YoixObject)value;
-						    break;
-						}
-					    }
-					    catch(UnsupportedFlavorException e) {}
-					    catch(IOException e) {}
-					}
-				    }
-				}
-			    }
-			    if (argv[1] == null)
-				argv[1] = YoixObject.newNull();
-			} else if (funct.callable(1))
-			    argv = new YoixObject[] {YoixObject.newClipboard(clipboard)};
-			else if (funct.callable(0))
-			    argv = new YoixObject[0];
-			else argv = null;
-			if (argv != null) {
-			    event = new YoixAWTInvocationEvent(
-				funct,
-				argv,
-				owner.compound() ? owner : null
-			    );
-			    EventQueue.invokeLater(event);
-			}
-		    }
-		}
-	    }
-	}
+        if (clipboard != null) {
+            if ((value = clipboards.get(clipboard)) != null) {
+                clipboards.remove(clipboard);
+                if (value instanceof YoixObject) {
+                    owner = (YoixObject)value;
+                    if ((funct = owner.getObject(N_LOSTCLIPBOARDOWNERSHIP)) != null) {
+                        if (funct.callable(2)) {
+                            argv = new YoixObject[] {YoixObject.newClipboard(clipboard), null};
+                            if (contents != null) {
+                                if ((flavors = contents.getTransferDataFlavors()) != null) {
+                                    for (n = 0; n < flavors.length; n++) {
+                                        if (flavors[n] != null) {
+                                            try {
+                                                value = contents.getTransferData(flavors[n]);
+                                                if (value instanceof YoixObject) {
+                                                    argv[1] = (YoixObject)value;
+                                                    break;
+                                                }
+                                            }
+                                            catch(UnsupportedFlavorException e) {}
+                                            catch(IOException e) {}
+                                        }
+                                    }
+                                }
+                            }
+                            if (argv[1] == null)
+                                argv[1] = YoixObject.newNull();
+                        } else if (funct.callable(1))
+                            argv = new YoixObject[] {YoixObject.newClipboard(clipboard)};
+                        else if (funct.callable(0))
+                            argv = new YoixObject[0];
+                        else argv = null;
+                        if (argv != null) {
+                            event = new YoixAWTInvocationEvent(
+                                funct,
+                                argv,
+                                owner.compound() ? owner : null
+                            );
+                            EventQueue.invokeLater(event);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     ///////////////////////////////////
@@ -121,109 +121,109 @@ class YoixVMClipboard extends YoixVMError
     final synchronized YoixObject
     getClipboardOwner(Clipboard clipboard) {
 
-	Object  currentowner = null;
+        Object  currentowner = null;
 
-	if (clipboard != null)
-	    currentowner = clipboards.get(clipboard);
-	return(currentowner instanceof YoixObject ? (YoixObject)currentowner : YoixObject.newNull());
+        if (clipboard != null)
+            currentowner = clipboards.get(clipboard);
+        return(currentowner instanceof YoixObject ? (YoixObject)currentowner : YoixObject.newNull());
     }
 
 
     final synchronized YoixObject
     getSystemClipboard() {
 
-	if (systemclipboard == null)
-	    systemclipboard = YoixObject.newClipboard(YoixAWTToolkit.getSystemClipboard());
-	return(systemclipboard);
+        if (systemclipboard == null)
+            systemclipboard = YoixObject.newClipboard(YoixAWTToolkit.getSystemClipboard());
+        return(systemclipboard);
     }
 
 
     final synchronized void
     removeClipboard(Clipboard clipboard) {
 
-	if (clipboard != null) {
-	    try {
-		clipboards.remove(clipboard);
-		clipboard.setContents(YoixObject.newNull(), null);
-	    }
-	    catch(IllegalStateException e) {}
-	}
+        if (clipboard != null) {
+            try {
+                clipboards.remove(clipboard);
+                clipboard.setContents(YoixObject.newNull(), null);
+            }
+            catch(IllegalStateException e) {}
+        }
     }
 
 
     final synchronized void
     removeClipboard(Clipboard clipboard, YoixObject owner) {
 
-	Object  currentowner;
+        Object  currentowner;
 
-	if (clipboard != null) {
-	    if (owner != null && owner.compound()) {
-		currentowner = clipboards.get(clipboard);
-		if (currentowner instanceof YoixObject) {
-		    if (owner.bodyEquals((YoixObject)currentowner))
-			removeClipboard(clipboard);
-		}
-	    }
-	}
+        if (clipboard != null) {
+            if (owner != null && owner.compound()) {
+                currentowner = clipboards.get(clipboard);
+                if (currentowner instanceof YoixObject) {
+                    if (owner.bodyEquals((YoixObject)currentowner))
+                        removeClipboard(clipboard);
+                }
+            }
+        }
     }
 
     final synchronized void
     removeClipboards(YoixObject owner) {
 
-	Enumeration  enm;
-	Clipboard    clipboard;
-	Object       currentowner;
+        Enumeration  enm;
+        Clipboard    clipboard;
+        Object       currentowner;
 
-	if (owner != null && owner.compound()) {
-	    for (enm = clipboards.keys(); enm.hasMoreElements(); ) {
-		if ((clipboard = (Clipboard)enm.nextElement()) != null) {
-		    currentowner = clipboards.get(clipboard);
-		    if (currentowner instanceof YoixObject) {
-			if (owner.bodyEquals((YoixObject)currentowner))
-			    removeClipboard(clipboard);
-		    }
-		}
-	    }
-	}
+        if (owner != null && owner.compound()) {
+            for (enm = clipboards.keys(); enm.hasMoreElements(); ) {
+                if ((clipboard = (Clipboard)enm.nextElement()) != null) {
+                    currentowner = clipboards.get(clipboard);
+                    if (currentowner instanceof YoixObject) {
+                        if (owner.bodyEquals((YoixObject)currentowner))
+                            removeClipboard(clipboard);
+                    }
+                }
+            }
+        }
     }
 
 
     final synchronized boolean
     setClipboardContents(Clipboard clipboard, YoixObject contents, YoixObject owner) {
 
-	boolean  result = false;
-	Object   currentowner;
+        boolean  result = false;
+        Object   currentowner;
 
-	//
-	// Harder than you might expect because we're only a proxy owner
-	// for YoixObjects that can define their own callback functions
-	// that are supposed to be called when the ownership of clipboard
-	// ownership changes. When required we trigger the callback by
-	// calling our own lostOwnership() method, which should be safe
-	// because it's synchronized and uses invokeLater() to actually
-	// call the Yoix function.
-	//
-	// First implementation tried to force Java to make the call by
-	// calling setContents() with a null owner field. That worked on
-	// 1.4.X, but didn't behave well on 1.5.0.
-	//
+        //
+        // Harder than you might expect because we're only a proxy owner
+        // for YoixObjects that can define their own callback functions
+        // that are supposed to be called when the ownership of clipboard
+        // ownership changes. When required we trigger the callback by
+        // calling our own lostOwnership() method, which should be safe
+        // because it's synchronized and uses invokeLater() to actually
+        // call the Yoix function.
+        //
+        // First implementation tried to force Java to make the call by
+        // calling setContents() with a null owner field. That worked on
+        // 1.4.X, but didn't behave well on 1.5.0.
+        //
 
-	if (clipboard != null) {
-	    try {
-		currentowner = clipboards.get(clipboard);
-		if (currentowner instanceof YoixObject) {
-		    if (((YoixObject)currentowner).bodyEquals(owner) == false)
-			lostOwnership(clipboard, clipboard.getContents(this));
-		}
-		clipboard.setContents(contents, this);
-		if (owner != null && owner.compound())
-		    clipboards.put(clipboard, owner);
-		else clipboards.remove(clipboard);
-		result = true;
-	    }
-	    catch(IllegalStateException e) {}
-	}
-	return(result);
+        if (clipboard != null) {
+            try {
+                currentowner = clipboards.get(clipboard);
+                if (currentowner instanceof YoixObject) {
+                    if (((YoixObject)currentowner).bodyEquals(owner) == false)
+                        lostOwnership(clipboard, clipboard.getContents(this));
+                }
+                clipboard.setContents(contents, this);
+                if (owner != null && owner.compound())
+                    clipboards.put(clipboard, owner);
+                else clipboards.remove(clipboard);
+                result = true;
+            }
+            catch(IllegalStateException e) {}
+        }
+        return(result);
     }
 }
 

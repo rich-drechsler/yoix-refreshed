@@ -63,16 +63,16 @@ class YoixAWTList extends List
     private static Dimension  scrollbarsize = new Dimension(0, 0);
 
     static {
-	Scrollbar  vbar = new Scrollbar(Scrollbar.VERTICAL);
-	Scrollbar  hbar = new Scrollbar(Scrollbar.HORIZONTAL);
-	Frame      f = new Frame();
+        Scrollbar  vbar = new Scrollbar(Scrollbar.VERTICAL);
+        Scrollbar  hbar = new Scrollbar(Scrollbar.HORIZONTAL);
+        Frame      f = new Frame();
 
-	f.add(hbar, BorderLayout.SOUTH);
-	f.add(vbar, BorderLayout.EAST);
-	f.pack();
-	scrollbarsize.height = hbar.getBounds().height;
-	scrollbarsize.width = vbar.getBounds().width;
-	YoixMiscJFC.dispose(f);
+        f.add(hbar, BorderLayout.SOUTH);
+        f.add(vbar, BorderLayout.EAST);
+        f.pack();
+        scrollbarsize.height = hbar.getBounds().height;
+        scrollbarsize.width = vbar.getBounds().width;
+        YoixMiscJFC.dispose(f);
     }
 
     ///////////////////////////////////
@@ -83,9 +83,9 @@ class YoixAWTList extends List
 
     YoixAWTList(YoixObject data, YoixBodyComponent parent, int rows) {
 
-	super(rows);
-	this.parent = parent;
-	this.data = data;
+        super(rows);
+        this.parent = parent;
+        this.data = data;
     }
 
     ///////////////////////////////////
@@ -97,57 +97,57 @@ class YoixAWTList extends List
     protected void
     finalize() {
 
-	data = null;
-	parent = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        parent = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     public final Dimension
     getMaximumSize() {
 
-	return(getLayoutSize(N_MAXIMUMSIZE, super.getMaximumSize()));
+        return(getLayoutSize(N_MAXIMUMSIZE, super.getMaximumSize()));
     }
 
 
     public final Dimension
     getMinimumSize() {
 
-	return(getLayoutSize(N_MINIMUMSIZE, super.getMinimumSize()));
+        return(getLayoutSize(N_MINIMUMSIZE, super.getMinimumSize()));
     }
 
 
     public final Dimension
     getPreferredSize() {
 
-	return(getLayoutSize(N_PREFERREDSIZE, super.getPreferredSize()));
+        return(getLayoutSize(N_PREFERREDSIZE, super.getPreferredSize()));
     }
 
 
     public final int
     getVisibleIndex() {
 
-	return(visibleindex);
+        return(visibleindex);
     }
 
 
     public final synchronized void
     makeVisible(int index) {
 
-	visibleindex = Math.min(Math.max(index, -1), getItemCount() - 1);
-	if (visibleindex >= 0)
-	    super.makeVisible(visibleindex);
+        visibleindex = Math.min(Math.max(index, -1), getItemCount() - 1);
+        if (visibleindex >= 0)
+            super.makeVisible(visibleindex);
     }
 
 
     public final synchronized void
     removeAll() {
 
-	super.removeAll();
-	visibleindex = -1;
+        super.removeAll();
+        visibleindex = -1;
     }
 
     ///////////////////////////////////
@@ -159,88 +159,88 @@ class YoixAWTList extends List
     private Dimension
     getLayoutSize(String name, Dimension size) {
 
-	String  str;
-	String  items[];
-	int     scroll;
-	int     width;
-	int     dx;
-	int     dy;
-	int     n;
+        String  str;
+        String  items[];
+        int     scroll;
+        int     width;
+        int     dx;
+        int     dy;
+        int     n;
 
-	if (loadFont()) {
-	    if ((items = getItems()) != null && items.length > 0) {
-		if ((scroll = data.getInt(N_SCROLL, YOIX_BOTH)) != YOIX_BOTH) {
-		    synchronized(FONTLOCK) {
-			size = (size == null) ? new Dimension(0, 0) : size;
-			switch (scroll) {
-			    case YOIX_NONE:
-			    case YOIX_VERTICAL:
-				for (n = 0; n < items.length; n++) {
-				    str = items[n];
-				    if ((width = fm.stringWidth(str)) > size.width)
-					size.width = width;
-				}
-				size.width += slopsize.width;
-				if (scroll == YOIX_VERTICAL)
-				    size.width += scrollbarsize.width;
-				break;
+        if (loadFont()) {
+            if ((items = getItems()) != null && items.length > 0) {
+                if ((scroll = data.getInt(N_SCROLL, YOIX_BOTH)) != YOIX_BOTH) {
+                    synchronized(FONTLOCK) {
+                        size = (size == null) ? new Dimension(0, 0) : size;
+                        switch (scroll) {
+                            case YOIX_NONE:
+                            case YOIX_VERTICAL:
+                                for (n = 0; n < items.length; n++) {
+                                    str = items[n];
+                                    if ((width = fm.stringWidth(str)) > size.width)
+                                        size.width = width;
+                                }
+                                size.width += slopsize.width;
+                                if (scroll == YOIX_VERTICAL)
+                                    size.width += scrollbarsize.width;
+                                break;
 
-			    default:
-				break;
-			}
+                            default:
+                                break;
+                        }
 
-			switch (scroll) {
-			    case YOIX_NONE:
-			    case YOIX_HORIZONTAL:
-				size.height = items.length*cellsize.height;
-				size.height += slopsize.height;
-				if (scroll == YOIX_HORIZONTAL)
-				    size.height += scrollbarsize.height;
-				break;
+                        switch (scroll) {
+                            case YOIX_NONE:
+                            case YOIX_HORIZONTAL:
+                                size.height = items.length*cellsize.height;
+                                size.height += slopsize.height;
+                                if (scroll == YOIX_HORIZONTAL)
+                                    size.height += scrollbarsize.height;
+                                break;
 
-			    default:
-				break;
-			}
-		    }
-		}
-	    }
-	}
+                            default:
+                                break;
+                        }
+                    }
+                }
+            }
+        }
 
-	return(size);
+        return(size);
     }
 
 
     private boolean
     loadFont() {
 
-	YoixAWTFontMetrics  metrics;
-	Font                font;
+        YoixAWTFontMetrics  metrics;
+        Font                font;
 
-	if ((font = getFont()) != null) {
-	    if (font.equals(currentfont) == false) {
-		if ((metrics = YoixAWTToolkit.getFontMetrics(font)) != null) {
-		    synchronized(FONTLOCK) {
-			fm = metrics;
-			currentfont = font;
-			spacewidth = fm.stringWidth(" ");
-			cellsize.width = fm.stringWidth(samplestring)/samplestring.length();
-			cellsize.height = fm.getMaxAscent() + fm.getMaxDescent() + fm.getLeading();
-			//
-			// Kludges that currently try to match GFMS adjustments. We
-			// eventually will experiment and try to improve things.
-			//
-			slopsize.width = 4*spacewidth;
-			slopsize.height = 0;
-			if (ISUNIX) {
-			    if (OSNAME.startsWith("Irix"))
-				slopsize.height += fm.getAscent();
-			}
-		    }
-		} else font = null;
-	    }
-	}
+        if ((font = getFont()) != null) {
+            if (font.equals(currentfont) == false) {
+                if ((metrics = YoixAWTToolkit.getFontMetrics(font)) != null) {
+                    synchronized(FONTLOCK) {
+                        fm = metrics;
+                        currentfont = font;
+                        spacewidth = fm.stringWidth(" ");
+                        cellsize.width = fm.stringWidth(samplestring)/samplestring.length();
+                        cellsize.height = fm.getMaxAscent() + fm.getMaxDescent() + fm.getLeading();
+                        //
+                        // Kludges that currently try to match GFMS adjustments. We
+                        // eventually will experiment and try to improve things.
+                        //
+                        slopsize.width = 4*spacewidth;
+                        slopsize.height = 0;
+                        if (ISUNIX) {
+                            if (OSNAME.startsWith("Irix"))
+                                slopsize.height += fm.getAscent();
+                        }
+                    }
+                } else font = null;
+            }
+        }
 
-	return(font != null);
+        return(font != null);
     }
 }
 

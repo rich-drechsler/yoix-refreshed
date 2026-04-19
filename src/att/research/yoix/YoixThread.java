@@ -16,7 +16,7 @@ public
 class YoixThread extends Thread
 
     implements YoixAPI,
-	       YoixConstants
+               YoixConstants
 
 {
 
@@ -35,15 +35,15 @@ class YoixThread extends Thread
     public
     YoixThread() {
 
-	setDaemon(true);
+        setDaemon(true);
     }
 
 
     public
     YoixThread(Runnable target) {
 
-	super(target);
-	setDaemon(true);
+        super(target);
+        setDaemon(true);
     }
 }
 

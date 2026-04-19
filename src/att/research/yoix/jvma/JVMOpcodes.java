@@ -543,318 +543,318 @@ interface JVMOpcodes {
     //
 
     public static final String  OPCODE_MNEMONICS[] = {
-	NAME_NOP,			// 0x00
-	NAME_ACONST_NULL,		// 0x01
-	NAME_ICONST_M1,			// 0x02
-	NAME_ICONST_0,			// 0x03
-	NAME_ICONST_1,			// 0x04
-	NAME_ICONST_2,			// 0x05
-	NAME_ICONST_3,			// 0x06
-	NAME_ICONST_4,			// 0x07
-	NAME_ICONST_5,			// 0x08
-	NAME_LCONST_0,			// 0x09
-	NAME_LCONST_1,			// 0x0A
-	NAME_FCONST_0,			// 0x0B
-	NAME_FCONST_1,			// 0x0C
-	NAME_FCONST_2,			// 0x0D
-	NAME_DCONST_0,			// 0x0E
-	NAME_DCONST_1,			// 0x0F
-	NAME_BIPUSH,			// 0x10
-	NAME_SIPUSH,			// 0x11
-	NAME_LDC,			// 0x12
-	NAME_LDC_W,			// 0x13
-	NAME_LDC2_W,			// 0x14
-	NAME_ILOAD,			// 0x15
-	NAME_LLOAD,			// 0x16
-	NAME_FLOAD,			// 0x17
-	NAME_DLOAD,			// 0x18
-	NAME_ALOAD,			// 0x19
-	NAME_ILOAD_0,			// 0x1A
-	NAME_ILOAD_1,			// 0x1B
-	NAME_ILOAD_2,			// 0x1C
-	NAME_ILOAD_3,			// 0x1D
-	NAME_LLOAD_0,			// 0x1E
-	NAME_LLOAD_1,			// 0x1F
-	NAME_LLOAD_2,			// 0x20
-	NAME_LLOAD_3,			// 0x21
-	NAME_FLOAD_0,			// 0x22
-	NAME_FLOAD_1,			// 0x23
-	NAME_FLOAD_2,			// 0x24
-	NAME_FLOAD_3,			// 0x25
-	NAME_DLOAD_0,			// 0x26
-	NAME_DLOAD_1,			// 0x27
-	NAME_DLOAD_2,			// 0x28
-	NAME_DLOAD_3,			// 0x29
-	NAME_ALOAD_0,			// 0x2A
-	NAME_ALOAD_1,			// 0x2B
-	NAME_ALOAD_2,			// 0x2C
-	NAME_ALOAD_3,			// 0x2D
-	NAME_IALOAD,			// 0x2E
-	NAME_LALOAD,			// 0x2F
-	NAME_FALOAD,			// 0x30
-	NAME_DALOAD,			// 0x31
-	NAME_AALOAD,			// 0x32
-	NAME_BALOAD,			// 0x33
-	NAME_CALOAD,			// 0x34
-	NAME_SALOAD,			// 0x35
-	NAME_ISTORE,			// 0x36
-	NAME_LSTORE,			// 0x37
-	NAME_FSTORE,			// 0x38
-	NAME_DSTORE,			// 0x39
-	NAME_ASTORE,			// 0x3A
-	NAME_ISTORE_0,			// 0x3B
-	NAME_ISTORE_1,			// 0x3C
-	NAME_ISTORE_2,			// 0x3D
-	NAME_ISTORE_3,			// 0x3E
-	NAME_LSTORE_0,			// 0x3F
-	NAME_LSTORE_1,			// 0x40
-	NAME_LSTORE_2,			// 0x41
-	NAME_LSTORE_3,			// 0x42
-	NAME_FSTORE_0,			// 0x43
-	NAME_FSTORE_1,			// 0x44
-	NAME_FSTORE_2,			// 0x45
-	NAME_FSTORE_3,			// 0x46
-	NAME_DSTORE_0,			// 0x47
-	NAME_DSTORE_1,			// 0x48
-	NAME_DSTORE_2,			// 0x49
-	NAME_DSTORE_3,			// 0x4A
-	NAME_ASTORE_0,			// 0x4B
-	NAME_ASTORE_1,			// 0x4C
-	NAME_ASTORE_2,			// 0x4D
-	NAME_ASTORE_3,			// 0x4E
-	NAME_IASTORE,			// 0x4F
-	NAME_LASTORE,			// 0x50
-	NAME_FASTORE,			// 0x51
-	NAME_DASTORE,			// 0x52
-	NAME_AASTORE,			// 0x53
-	NAME_BASTORE,			// 0x54
-	NAME_CASTORE,			// 0x55
-	NAME_SASTORE,			// 0x56
-	NAME_POP,			// 0x57
-	NAME_POP2,			// 0x58
-	NAME_DUP,			// 0x59
-	NAME_DUP_X1,			// 0x5A
-	NAME_DUP_X2,			// 0x5B
-	NAME_DUP2,			// 0x5C
-	NAME_DUP2_X1,			// 0x5D
-	NAME_DUP2_X2,			// 0x5E
-	NAME_SWAP,			// 0x5F
-	NAME_IADD,			// 0x60
-	NAME_LADD,			// 0x61
-	NAME_FADD,			// 0x62
-	NAME_DADD,			// 0x63
-	NAME_ISUB,			// 0x64
-	NAME_LSUB,			// 0x65
-	NAME_FSUB,			// 0x66
-	NAME_DSUB,			// 0x67
-	NAME_IMUL,			// 0x68
-	NAME_LMUL,			// 0x69
-	NAME_FMUL,			// 0x6A
-	NAME_DMUL,			// 0x6B
-	NAME_IDIV,			// 0x6C
-	NAME_LDIV,			// 0x6D
-	NAME_FDIV,			// 0x6E
-	NAME_DDIV,			// 0x6F
-	NAME_IREM,			// 0x70
-	NAME_LREM,			// 0x71
-	NAME_FREM,			// 0x72
-	NAME_DREM,			// 0x73
-	NAME_INEG,			// 0x74
-	NAME_LNEG,			// 0x75
-	NAME_FNEG,			// 0x76
-	NAME_DNEG,			// 0x77
-	NAME_ISHL,			// 0x78
-	NAME_LSHL,			// 0x79
-	NAME_ISHR,			// 0x7A
-	NAME_LSHR,			// 0x7B
-	NAME_IUSHR,			// 0x7C
-	NAME_LUSHR,			// 0x7D
-	NAME_IAND,			// 0x7E
-	NAME_LAND,			// 0x7F
-	NAME_IOR,			// 0x80
-	NAME_LOR,			// 0x81
-	NAME_IXOR,			// 0x82
-	NAME_LXOR,			// 0x83
-	NAME_IINC,			// 0x84
-	NAME_I2L,			// 0x85
-	NAME_I2F,			// 0x86
-	NAME_I2D,			// 0x87
-	NAME_L2I,			// 0x88
-	NAME_L2F,			// 0x89
-	NAME_L2D,			// 0x8A
-	NAME_F2I,			// 0x8B
-	NAME_F2L,			// 0x8C
-	NAME_F2D,			// 0x8D
-	NAME_D2I,			// 0x8E
-	NAME_D2L,			// 0x8F
-	NAME_D2F,			// 0x90
-	NAME_I2B,			// 0x91
-	NAME_I2C,			// 0x92
-	NAME_I2S,			// 0x93
-	NAME_LCMP,			// 0x94
-	NAME_FCMPL,			// 0x95
-	NAME_FCMPG,			// 0x96
-	NAME_DCMPL,			// 0x97
-	NAME_DCMPG,			// 0x98
-	NAME_IFEQ,			// 0x99
-	NAME_IFNE,			// 0x9A
-	NAME_IFLT,			// 0x9B
-	NAME_IFGE,			// 0x9C
-	NAME_IFGT,			// 0x9D
-	NAME_IFLE,			// 0x9E
-	NAME_IF_ICMPEQ,			// 0x9F
-	NAME_IF_ICMPNE,			// 0xA0
-	NAME_IF_ICMPLT,			// 0xA1
-	NAME_IF_ICMPGE,			// 0xA2
-	NAME_IF_ICMPGT,			// 0xA3
-	NAME_IF_ICMPLE,			// 0xA4
-	NAME_IF_ACMPEQ,			// 0xA5
-	NAME_IF_ACMPNE,			// 0xA6
-	NAME_GOTO,			// 0xA7
-	NAME_JSR,			// 0xA8
-	NAME_RET,			// 0xA9
-	NAME_TABLESWITCH,		// 0xAA
-	NAME_LOOKUPSWITCH,		// 0xAB
-	NAME_IRETURN,			// 0xAC
-	NAME_LRETURN,			// 0xAD
-	NAME_FRETURN,			// 0xAE
-	NAME_DRETURN,			// 0xAF
-	NAME_ARETURN,			// 0xB0
-	NAME_RETURN,			// 0xB1
-	NAME_GETSTATIC,			// 0xB2
-	NAME_PUTSTATIC,			// 0xB3
-	NAME_GETFIELD,			// 0xB4
-	NAME_PUTFIELD,			// 0xB5
-	NAME_INVOKEVIRTUAL,		// 0xB6
-	NAME_INVOKESPECIAL,		// 0xB7
-	NAME_INVOKESTATIC,		// 0xB8
-	NAME_INVOKEINTERFACE,		// 0xB9
-	null,				// 0xBA - unused
-	NAME_NEW,			// 0xBB
-	NAME_NEWARRAY,			// 0xBC
-	NAME_ANEWARRAY,			// 0xBD
-	NAME_ARRAYLENGTH,		// 0xBE
-	NAME_ATHROW,			// 0xBF
-	NAME_CHECKCAST,			// 0xC0
-	NAME_INSTANCEOF,		// 0xC1
-	NAME_MONITORENTER,		// 0xC2
-	NAME_MONITOREXIT,		// 0xC3
-	NAME_WIDE,			// 0xC4
-	NAME_MULTIANEWARRAY,		// 0xC5
-	NAME_IFNULL,			// 0xC6
-	NAME_IFNONNULL,			// 0xC7
-	NAME_GOTO_W,			// 0xC8
-	NAME_JSR_W,			// 0xC9
+        NAME_NOP,			// 0x00
+        NAME_ACONST_NULL,		// 0x01
+        NAME_ICONST_M1,			// 0x02
+        NAME_ICONST_0,			// 0x03
+        NAME_ICONST_1,			// 0x04
+        NAME_ICONST_2,			// 0x05
+        NAME_ICONST_3,			// 0x06
+        NAME_ICONST_4,			// 0x07
+        NAME_ICONST_5,			// 0x08
+        NAME_LCONST_0,			// 0x09
+        NAME_LCONST_1,			// 0x0A
+        NAME_FCONST_0,			// 0x0B
+        NAME_FCONST_1,			// 0x0C
+        NAME_FCONST_2,			// 0x0D
+        NAME_DCONST_0,			// 0x0E
+        NAME_DCONST_1,			// 0x0F
+        NAME_BIPUSH,			// 0x10
+        NAME_SIPUSH,			// 0x11
+        NAME_LDC,			// 0x12
+        NAME_LDC_W,			// 0x13
+        NAME_LDC2_W,			// 0x14
+        NAME_ILOAD,			// 0x15
+        NAME_LLOAD,			// 0x16
+        NAME_FLOAD,			// 0x17
+        NAME_DLOAD,			// 0x18
+        NAME_ALOAD,			// 0x19
+        NAME_ILOAD_0,			// 0x1A
+        NAME_ILOAD_1,			// 0x1B
+        NAME_ILOAD_2,			// 0x1C
+        NAME_ILOAD_3,			// 0x1D
+        NAME_LLOAD_0,			// 0x1E
+        NAME_LLOAD_1,			// 0x1F
+        NAME_LLOAD_2,			// 0x20
+        NAME_LLOAD_3,			// 0x21
+        NAME_FLOAD_0,			// 0x22
+        NAME_FLOAD_1,			// 0x23
+        NAME_FLOAD_2,			// 0x24
+        NAME_FLOAD_3,			// 0x25
+        NAME_DLOAD_0,			// 0x26
+        NAME_DLOAD_1,			// 0x27
+        NAME_DLOAD_2,			// 0x28
+        NAME_DLOAD_3,			// 0x29
+        NAME_ALOAD_0,			// 0x2A
+        NAME_ALOAD_1,			// 0x2B
+        NAME_ALOAD_2,			// 0x2C
+        NAME_ALOAD_3,			// 0x2D
+        NAME_IALOAD,			// 0x2E
+        NAME_LALOAD,			// 0x2F
+        NAME_FALOAD,			// 0x30
+        NAME_DALOAD,			// 0x31
+        NAME_AALOAD,			// 0x32
+        NAME_BALOAD,			// 0x33
+        NAME_CALOAD,			// 0x34
+        NAME_SALOAD,			// 0x35
+        NAME_ISTORE,			// 0x36
+        NAME_LSTORE,			// 0x37
+        NAME_FSTORE,			// 0x38
+        NAME_DSTORE,			// 0x39
+        NAME_ASTORE,			// 0x3A
+        NAME_ISTORE_0,			// 0x3B
+        NAME_ISTORE_1,			// 0x3C
+        NAME_ISTORE_2,			// 0x3D
+        NAME_ISTORE_3,			// 0x3E
+        NAME_LSTORE_0,			// 0x3F
+        NAME_LSTORE_1,			// 0x40
+        NAME_LSTORE_2,			// 0x41
+        NAME_LSTORE_3,			// 0x42
+        NAME_FSTORE_0,			// 0x43
+        NAME_FSTORE_1,			// 0x44
+        NAME_FSTORE_2,			// 0x45
+        NAME_FSTORE_3,			// 0x46
+        NAME_DSTORE_0,			// 0x47
+        NAME_DSTORE_1,			// 0x48
+        NAME_DSTORE_2,			// 0x49
+        NAME_DSTORE_3,			// 0x4A
+        NAME_ASTORE_0,			// 0x4B
+        NAME_ASTORE_1,			// 0x4C
+        NAME_ASTORE_2,			// 0x4D
+        NAME_ASTORE_3,			// 0x4E
+        NAME_IASTORE,			// 0x4F
+        NAME_LASTORE,			// 0x50
+        NAME_FASTORE,			// 0x51
+        NAME_DASTORE,			// 0x52
+        NAME_AASTORE,			// 0x53
+        NAME_BASTORE,			// 0x54
+        NAME_CASTORE,			// 0x55
+        NAME_SASTORE,			// 0x56
+        NAME_POP,			// 0x57
+        NAME_POP2,			// 0x58
+        NAME_DUP,			// 0x59
+        NAME_DUP_X1,			// 0x5A
+        NAME_DUP_X2,			// 0x5B
+        NAME_DUP2,			// 0x5C
+        NAME_DUP2_X1,			// 0x5D
+        NAME_DUP2_X2,			// 0x5E
+        NAME_SWAP,			// 0x5F
+        NAME_IADD,			// 0x60
+        NAME_LADD,			// 0x61
+        NAME_FADD,			// 0x62
+        NAME_DADD,			// 0x63
+        NAME_ISUB,			// 0x64
+        NAME_LSUB,			// 0x65
+        NAME_FSUB,			// 0x66
+        NAME_DSUB,			// 0x67
+        NAME_IMUL,			// 0x68
+        NAME_LMUL,			// 0x69
+        NAME_FMUL,			// 0x6A
+        NAME_DMUL,			// 0x6B
+        NAME_IDIV,			// 0x6C
+        NAME_LDIV,			// 0x6D
+        NAME_FDIV,			// 0x6E
+        NAME_DDIV,			// 0x6F
+        NAME_IREM,			// 0x70
+        NAME_LREM,			// 0x71
+        NAME_FREM,			// 0x72
+        NAME_DREM,			// 0x73
+        NAME_INEG,			// 0x74
+        NAME_LNEG,			// 0x75
+        NAME_FNEG,			// 0x76
+        NAME_DNEG,			// 0x77
+        NAME_ISHL,			// 0x78
+        NAME_LSHL,			// 0x79
+        NAME_ISHR,			// 0x7A
+        NAME_LSHR,			// 0x7B
+        NAME_IUSHR,			// 0x7C
+        NAME_LUSHR,			// 0x7D
+        NAME_IAND,			// 0x7E
+        NAME_LAND,			// 0x7F
+        NAME_IOR,			// 0x80
+        NAME_LOR,			// 0x81
+        NAME_IXOR,			// 0x82
+        NAME_LXOR,			// 0x83
+        NAME_IINC,			// 0x84
+        NAME_I2L,			// 0x85
+        NAME_I2F,			// 0x86
+        NAME_I2D,			// 0x87
+        NAME_L2I,			// 0x88
+        NAME_L2F,			// 0x89
+        NAME_L2D,			// 0x8A
+        NAME_F2I,			// 0x8B
+        NAME_F2L,			// 0x8C
+        NAME_F2D,			// 0x8D
+        NAME_D2I,			// 0x8E
+        NAME_D2L,			// 0x8F
+        NAME_D2F,			// 0x90
+        NAME_I2B,			// 0x91
+        NAME_I2C,			// 0x92
+        NAME_I2S,			// 0x93
+        NAME_LCMP,			// 0x94
+        NAME_FCMPL,			// 0x95
+        NAME_FCMPG,			// 0x96
+        NAME_DCMPL,			// 0x97
+        NAME_DCMPG,			// 0x98
+        NAME_IFEQ,			// 0x99
+        NAME_IFNE,			// 0x9A
+        NAME_IFLT,			// 0x9B
+        NAME_IFGE,			// 0x9C
+        NAME_IFGT,			// 0x9D
+        NAME_IFLE,			// 0x9E
+        NAME_IF_ICMPEQ,			// 0x9F
+        NAME_IF_ICMPNE,			// 0xA0
+        NAME_IF_ICMPLT,			// 0xA1
+        NAME_IF_ICMPGE,			// 0xA2
+        NAME_IF_ICMPGT,			// 0xA3
+        NAME_IF_ICMPLE,			// 0xA4
+        NAME_IF_ACMPEQ,			// 0xA5
+        NAME_IF_ACMPNE,			// 0xA6
+        NAME_GOTO,			// 0xA7
+        NAME_JSR,			// 0xA8
+        NAME_RET,			// 0xA9
+        NAME_TABLESWITCH,		// 0xAA
+        NAME_LOOKUPSWITCH,		// 0xAB
+        NAME_IRETURN,			// 0xAC
+        NAME_LRETURN,			// 0xAD
+        NAME_FRETURN,			// 0xAE
+        NAME_DRETURN,			// 0xAF
+        NAME_ARETURN,			// 0xB0
+        NAME_RETURN,			// 0xB1
+        NAME_GETSTATIC,			// 0xB2
+        NAME_PUTSTATIC,			// 0xB3
+        NAME_GETFIELD,			// 0xB4
+        NAME_PUTFIELD,			// 0xB5
+        NAME_INVOKEVIRTUAL,		// 0xB6
+        NAME_INVOKESPECIAL,		// 0xB7
+        NAME_INVOKESTATIC,		// 0xB8
+        NAME_INVOKEINTERFACE,		// 0xB9
+        null,				// 0xBA - unused
+        NAME_NEW,			// 0xBB
+        NAME_NEWARRAY,			// 0xBC
+        NAME_ANEWARRAY,			// 0xBD
+        NAME_ARRAYLENGTH,		// 0xBE
+        NAME_ATHROW,			// 0xBF
+        NAME_CHECKCAST,			// 0xC0
+        NAME_INSTANCEOF,		// 0xC1
+        NAME_MONITORENTER,		// 0xC2
+        NAME_MONITOREXIT,		// 0xC3
+        NAME_WIDE,			// 0xC4
+        NAME_MULTIANEWARRAY,		// 0xC5
+        NAME_IFNULL,			// 0xC6
+        NAME_IFNONNULL,			// 0xC7
+        NAME_GOTO_W,			// 0xC8
+        NAME_JSR_W,			// 0xC9
 
-	//
-	// The remaining 8-bit opcodes are reserved or currently unused.
-	//
+        //
+        // The remaining 8-bit opcodes are reserved or currently unused.
+        //
 
-	null,				// 0xCA
-	null,				// 0xCB
-	null,				// 0xCC
-	null,				// 0xCD
-	null,				// 0xCE
-	null,				// 0xCF
-	null,				// 0xD0
-	null,				// 0xD1
-	null,				// 0xD2
-	null,				// 0xD3
-	null,				// 0xD4
-	null,				// 0xD5
-	null,				// 0xD6
-	null,				// 0xD7
-	null,				// 0xD8
-	null,				// 0xD9
-	null,				// 0xDA
-	null,				// 0xDB
-	null,				// 0xDC
-	null,				// 0xDD
-	null,				// 0xDE
-	null,				// 0xDF
-	null,				// 0xE0
-	null,				// 0xE1
-	null,				// 0xE2
-	null,				// 0xE3
-	null,				// 0xE4
-	null,				// 0xE5
-	null,				// 0xE6
-	null,				// 0xE7
-	null,				// 0xE8
-	null,				// 0xE9
-	null,				// 0xEA
-	null,				// 0xEB
-	null,				// 0xEC
-	null,				// 0xED
-	null,				// 0xEE
-	null,				// 0xEF
-	null,				// 0xF0
-	null,				// 0xF1
-	null,				// 0xF2
-	null,				// 0xF3
-	null,				// 0xF4
-	null,				// 0xF5
-	null,				// 0xF6
-	null,				// 0xF7
-	null,				// 0xF8
-	null,				// 0xF9
-	null,				// 0xFA
-	null,				// 0xFB
-	null,				// 0xFC
-	null,				// 0xFD
-	null,				// 0xFE
-	null,				// 0xFF
+        null,				// 0xCA
+        null,				// 0xCB
+        null,				// 0xCC
+        null,				// 0xCD
+        null,				// 0xCE
+        null,				// 0xCF
+        null,				// 0xD0
+        null,				// 0xD1
+        null,				// 0xD2
+        null,				// 0xD3
+        null,				// 0xD4
+        null,				// 0xD5
+        null,				// 0xD6
+        null,				// 0xD7
+        null,				// 0xD8
+        null,				// 0xD9
+        null,				// 0xDA
+        null,				// 0xDB
+        null,				// 0xDC
+        null,				// 0xDD
+        null,				// 0xDE
+        null,				// 0xDF
+        null,				// 0xE0
+        null,				// 0xE1
+        null,				// 0xE2
+        null,				// 0xE3
+        null,				// 0xE4
+        null,				// 0xE5
+        null,				// 0xE6
+        null,				// 0xE7
+        null,				// 0xE8
+        null,				// 0xE9
+        null,				// 0xEA
+        null,				// 0xEB
+        null,				// 0xEC
+        null,				// 0xED
+        null,				// 0xEE
+        null,				// 0xEF
+        null,				// 0xF0
+        null,				// 0xF1
+        null,				// 0xF2
+        null,				// 0xF3
+        null,				// 0xF4
+        null,				// 0xF5
+        null,				// 0xF6
+        null,				// 0xF7
+        null,				// 0xF8
+        null,				// 0xF9
+        null,				// 0xFA
+        null,				// 0xFB
+        null,				// 0xFC
+        null,				// 0xFD
+        null,				// 0xFE
+        null,				// 0xFF
 
-	//
-	// Virtual instructions that aren't official JVM opcodes, but they
-	// are recognized by our assembler where they're translated into one
-	// or more real instructions.
-	//
+        //
+        // Virtual instructions that aren't official JVM opcodes, but they
+        // are recognized by our assembler where they're translated into one
+        // or more real instructions.
+        //
 
-	NAME_EXCH,			// 0x100
-	NAME_PUSH,			// 0x101
-	NAME_STORE,			// 0x102
-	NAME_NEG,			// 0x103
-	NAME_ADD,			// 0x104
-	NAME_SUB,			// 0x105
-	NAME_MUL,			// 0x106
-	NAME_DIV,			// 0x107
-	NAME_REM,			// 0x108
-	NAME_AND,			// 0x109
-	NAME_OR,			// 0x10A
-	NAME_XOR,			// 0x10B
-	NAME_SHL,			// 0x10C
-	NAME_SHR,			// 0x10D
-	NAME_USHR,			// 0x10E
-	NAME_INVOKE,			// 0x10F
-	NAME_SWITCH,			// 0x110
-	NAME_ARRAYLOAD,			// 0x111
-	NAME_ARRAYSTORE,		// 0x112
+        NAME_EXCH,			// 0x100
+        NAME_PUSH,			// 0x101
+        NAME_STORE,			// 0x102
+        NAME_NEG,			// 0x103
+        NAME_ADD,			// 0x104
+        NAME_SUB,			// 0x105
+        NAME_MUL,			// 0x106
+        NAME_DIV,			// 0x107
+        NAME_REM,			// 0x108
+        NAME_AND,			// 0x109
+        NAME_OR,			// 0x10A
+        NAME_XOR,			// 0x10B
+        NAME_SHL,			// 0x10C
+        NAME_SHR,			// 0x10D
+        NAME_USHR,			// 0x10E
+        NAME_INVOKE,			// 0x10F
+        NAME_SWITCH,			// 0x110
+        NAME_ARRAYLOAD,			// 0x111
+        NAME_ARRAYSTORE,		// 0x112
 
-	//
-	// Virtual instructions that are for internal use only, so we set
-	// their entries to null which means the assembler won't recognize
-	// them when it parses assembly language source code.
-	//
+        //
+        // Virtual instructions that are for internal use only, so we set
+        // their entries to null which means the assembler won't recognize
+        // them when it parses assembly language source code.
+        //
 
-	null,				// 0x113 - NAME_DCONST
-	null,				// 0x114 - NAME_FCONST
-	null,				// 0x115 - NAME_GET
-	null,				// 0x116 - NAME_ICONST
-	null,				// 0x117 - NAME_LCONST
-	null,				// 0x118 - NAME_LOAD
-	null,				// 0x119 - NAME_PUT
+        null,				// 0x113 - NAME_DCONST
+        null,				// 0x114 - NAME_FCONST
+        null,				// 0x115 - NAME_GET
+        null,				// 0x116 - NAME_ICONST
+        null,				// 0x117 - NAME_LCONST
+        null,				// 0x118 - NAME_LOAD
+        null,				// 0x119 - NAME_PUT
 
-	//
-	// Recent additions - NAME_CALL really isn't ready for prime time.
-	//
+        //
+        // Recent additions - NAME_CALL really isn't ready for prime time.
+        //
 
-	NAME_CALL,			// 0x11A
-	NAME_CAST2D,			// 0x11B
-	NAME_CAST2F,			// 0x11C
-	NAME_CAST2I,			// 0x11D
-	NAME_CAST2L,			// 0x11E
-	NAME_DUPX,			// 0x11F
+        NAME_CALL,			// 0x11A
+        NAME_CAST2D,			// 0x11B
+        NAME_CAST2F,			// 0x11C
+        NAME_CAST2I,			// 0x11D
+        NAME_CAST2L,			// 0x11E
+        NAME_DUPX,			// 0x11F
     };
 }
 

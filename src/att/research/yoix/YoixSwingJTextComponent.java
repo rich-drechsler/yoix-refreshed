@@ -95,8 +95,8 @@ class YoixSwingJTextComponent extends YoixSwingJCanvas
     protected
     YoixSwingJTextComponent(YoixObject data, YoixBodyComponent parent) {
 
-	super(data, parent);
-	initialized = true;
+        super(data, parent);
+        initialized = true;
     }
 
     ///////////////////////////////////
@@ -108,87 +108,87 @@ class YoixSwingJTextComponent extends YoixSwingJCanvas
     protected final synchronized void
     disposeSavedGraphics() {
 
-	//
-	// Saving graphics objects the way AWT versions did causes
-	// problems, so it's currently disabled.
-	//
+        //
+        // Saving graphics objects the way AWT versions did causes
+        // problems, so it's currently disabled.
+        //
     }
 
 
     protected final synchronized void
     disposeSavedGraphics(Graphics g) {
 
-	//
-	// Saving graphics objects the way AWT versions did causes
-	// problems, so it's currently disabled.
-	//
+        //
+        // Saving graphics objects the way AWT versions did causes
+        // problems, so it's currently disabled.
+        //
 
-	g.dispose();
+        g.dispose();
     }
 
 
     protected final synchronized Graphics
     getSavedGraphics() {
 
-	Graphics  g;
+        Graphics  g;
 
-	//
-	// Saving graphics objects the way AWT versions did causes
-	// problems, so it's currently disabled.
-	//
+        //
+        // Saving graphics objects the way AWT versions did causes
+        // problems, so it's currently disabled.
+        //
 
-	if ((g = getGraphics()) != null) {
-	    g.setClip(insets.left, insets.top, viewport.width, viewport.height);
-	    ((Graphics2D)g).setBackground(getBackground());
-	}
-	return(g);
+        if ((g = getGraphics()) != null) {
+            g.setClip(insets.left, insets.top, viewport.width, viewport.height);
+            ((Graphics2D)g).setBackground(getBackground());
+        }
+        return(g);
     }
 
 
     protected final synchronized int
     getSyncCount() {
 
-	return(synccount);
+        return(synccount);
     }
 
 
     protected final void
     horizontalScrollTo(int x) {
 
-	setOrigin(new Point(x, viewport.y));
+        setOrigin(new Point(x, viewport.y));
     }
 
 
     protected final boolean
     loadFont() {
 
-	YoixAWTFontMetrics  metrics;
-	Font                font;
+        YoixAWTFontMetrics  metrics;
+        Font                font;
 
-	if ((font = getFont()) != null) {
-	    if (font.equals(currentfont) == false) {
-		if ((metrics = YoixAWTToolkit.getFontMetrics(font)) != null) {
-		    synchronized(FONTLOCK) {
-			fm = metrics;
-			currentfont = font;
-			spacewidth = fm.stringWidth(" ");
-			baseline = fm.getMaxAscent() + ipad.top;
-			leading = fm.getLeading();
-			cellsize.width = fm.stringWidth(samplestring)/samplestring.length();
-			cellsize.height = baseline + leading + fm.getMaxDescent() + ipad.bottom;
-		    }
-		} else font = null;
-	    }
-	}
+        if ((font = getFont()) != null) {
+            if (font.equals(currentfont) == false) {
+                if ((metrics = YoixAWTToolkit.getFontMetrics(font)) != null) {
+                    synchronized(FONTLOCK) {
+                        fm = metrics;
+                        currentfont = font;
+                        spacewidth = fm.stringWidth(" ");
+                        baseline = fm.getMaxAscent() + ipad.top;
+                        leading = fm.getLeading();
+                        cellsize.width = fm.stringWidth(samplestring)/samplestring.length();
+                        cellsize.height = baseline + leading + fm.getMaxDescent() + ipad.bottom;
+                    }
+                } else font = null;
+            }
+        }
 
-	return(font != null);
+        return(font != null);
     }
 
 
     public void
     paintBackground(Graphics g) {
 
-	YoixMiscJFC.paintBackground(this, g);
+        YoixMiscJFC.paintBackground(this, g);
     }
 
 
@@ -201,132 +201,132 @@ class YoixSwingJTextComponent extends YoixSwingJCanvas
     protected synchronized void
     setAnchor(int anchor) {
 
-	if (this.anchor != anchor) {
-	    this.anchor = anchor;
-	    reset(false);
-	}
+        if (this.anchor != anchor) {
+            this.anchor = anchor;
+            reset(false);
+        }
     }
 
 
     protected synchronized void
     setAlignment(int alignment) {
 
-	if (this.alignment != alignment) {
-	    this.alignment = alignment;
-	    reset(false);
-	}
+        if (this.alignment != alignment) {
+            this.alignment = alignment;
+            reset(false);
+        }
     }
 
 
     protected synchronized void
     setOrigin(Point point) {
 
-	Graphics  g;
-	int       height;
-	int       width;
-	int       dx;
-	int       dy;
+        Graphics  g;
+        int       height;
+        int       width;
+        int       dx;
+        int       dy;
 
-	//
-	// Decided, that it would be best if we explicitly handled the
-	// low level scrolling details. All lines are redrawn if too
-	// many changed (half the text but it should be tunable) using
-	// a version of repaint(). Should be able to use update(g) to
-	// avoid some overhead, (e.g., creating a new Graphics context)
-	// provided you set an appropriate clipping rectangle.
-	//
-	// The if statement that checks extent.width and extent.height
-	// originally also bracketed the statements that adjust the
-	// viewport. That sometimes caused minor scrolling problems in
-	// an important application so the viewport initialization was
-	// moved outside the extent check on 1/21/05. NOTE - think the
-	// 5/2/02 date mentioned below is completely bogus. We suspect
-	// it was more like 2/5/04, but that's just a guess.
-	//
-	// The Thread.yield() call seems to help the painting of Swing
-	// components if copyArea() generated a repaint(). It apparently
-	// gives that PaintEvent a chance to get on the EventQueue where
-	// our isPainting() test will find it. May not be a complete fix,
-	// but more complicated approaches, probably using invokeLater(),
-	// don't seem worth extra effort because we haven't noticed any
-	// painting problems.
-	//
+        //
+        // Decided, that it would be best if we explicitly handled the
+        // low level scrolling details. All lines are redrawn if too
+        // many changed (half the text but it should be tunable) using
+        // a version of repaint(). Should be able to use update(g) to
+        // avoid some overhead, (e.g., creating a new Graphics context)
+        // provided you set an appropriate clipping rectangle.
+        //
+        // The if statement that checks extent.width and extent.height
+        // originally also bracketed the statements that adjust the
+        // viewport. That sometimes caused minor scrolling problems in
+        // an important application so the viewport initialization was
+        // moved outside the extent check on 1/21/05. NOTE - think the
+        // 5/2/02 date mentioned below is completely bogus. We suspect
+        // it was more like 2/5/04, but that's just a guess.
+        //
+        // The Thread.yield() call seems to help the painting of Swing
+        // components if copyArea() generated a repaint(). It apparently
+        // gives that PaintEvent a chance to get on the EventQueue where
+        // our isPainting() test will find it. May not be a complete fix,
+        // but more complicated approaches, probably using invokeLater(),
+        // don't seem worth extra effort because we haven't noticed any
+        // painting problems.
+        //
 
-	if (point != null && point.equals(viewport.getLocation()) == false) {
-	    dx = point.x - viewport.x;
-	    dy = point.y - viewport.y;
-	    viewport.x = point.x;
-	    viewport.y = point.y;
-	    if (extent.width > 0 && extent.height > 0) {	// recent addition (5/2/02 - bogus date??)
-		if (isPainting() == false) {
-		    if ((g = getSavedGraphics()) != null) {
-			width = viewport.width;
-			height = viewport.height;
-			if (Math.abs(dx) < width/2 && Math.abs(dy) < height/2) {
-			    g.translate(insets.left, insets.top);
-			    if (dx >= 0 && dy >= 0) {
-				g.copyArea(dx, dy, width - dx, height - dy, -dx, -dy);
-				repaintRect(width - dx, 0, dx, height - dy, g);
-				repaintRect(0, height - dy, width, dy, g);
-			    } else if (dx >= 0 && dy < 0) {
-				g.copyArea(dx, 0, width - dx, height + dy, -dx, -dy);
-				repaintRect(0, 0, width, -dy, g);
-				repaintRect(width - dx, -dy, dx, height + dy, g);
-			    } else if (dx < 0 && dy >= 0) {
-				g.copyArea(0, dy, width + dx, height - dy, -dx, -dy);
-				repaintRect(0, 0, -dx, height - dy, g);
-				repaintRect(0, height - dy, width, dy, g);
-			    } else if (dx < 0 && dy < 0) {	// obviously unnecessary test
-				g.copyArea(0, 0, width + dx, height + dy, -dx, -dy);
-				repaintRect(0, 0, width, -dy, g);
-				repaintRect(0, -dy, -dx, height + dy, g);
-			    }
-			    g.translate(-insets.left, -insets.top);
-			} else repaint(insets.left, insets.top, width, height);
-			Thread.yield();
-			disposeSavedGraphics(g);
-		    }
-		} else repaintComponent();
-		syncViewport();		// recent addition (4/30/04)
-	    }
-	}
+        if (point != null && point.equals(viewport.getLocation()) == false) {
+            dx = point.x - viewport.x;
+            dy = point.y - viewport.y;
+            viewport.x = point.x;
+            viewport.y = point.y;
+            if (extent.width > 0 && extent.height > 0) {	// recent addition (5/2/02 - bogus date??)
+                if (isPainting() == false) {
+                    if ((g = getSavedGraphics()) != null) {
+                        width = viewport.width;
+                        height = viewport.height;
+                        if (Math.abs(dx) < width/2 && Math.abs(dy) < height/2) {
+                            g.translate(insets.left, insets.top);
+                            if (dx >= 0 && dy >= 0) {
+                                g.copyArea(dx, dy, width - dx, height - dy, -dx, -dy);
+                                repaintRect(width - dx, 0, dx, height - dy, g);
+                                repaintRect(0, height - dy, width, dy, g);
+                            } else if (dx >= 0 && dy < 0) {
+                                g.copyArea(dx, 0, width - dx, height + dy, -dx, -dy);
+                                repaintRect(0, 0, width, -dy, g);
+                                repaintRect(width - dx, -dy, dx, height + dy, g);
+                            } else if (dx < 0 && dy >= 0) {
+                                g.copyArea(0, dy, width + dx, height - dy, -dx, -dy);
+                                repaintRect(0, 0, -dx, height - dy, g);
+                                repaintRect(0, height - dy, width, dy, g);
+                            } else if (dx < 0 && dy < 0) {	// obviously unnecessary test
+                                g.copyArea(0, 0, width + dx, height + dy, -dx, -dy);
+                                repaintRect(0, 0, width, -dy, g);
+                                repaintRect(0, -dy, -dx, height + dy, g);
+                            }
+                            g.translate(-insets.left, -insets.top);
+                        } else repaint(insets.left, insets.top, width, height);
+                        Thread.yield();
+                        disposeSavedGraphics(g);
+                    }
+                } else repaintComponent();
+                syncViewport();		// recent addition (4/30/04)
+            }
+        }
     }
 
 
     protected final synchronized void
     syncViewport() {
 
-	YoixObject  funct;
-	YoixObject  argv[];
-	Runnable    event;
+        YoixObject  funct;
+        YoixObject  argv[];
+        Runnable    event;
 
-	//
-	// Calls a user defined function, so to be safe we build an
-	// InvocationEvent for the call and then post it on the AWT
-	// event queue (to try to avoid deadlock).
-	// 
+        //
+        // Calls a user defined function, so to be safe we build an
+        // InvocationEvent for the call and then post it on the AWT
+        // event queue (to try to avoid deadlock).
+        // 
 
-	funct = syncviewport;		// snapshot - just to be safe
+        funct = syncviewport;		// snapshot - just to be safe
 
-	if (funct != null) {
-	    synccount++;
-	    if (funct.callable(3)) {
-		argv = new YoixObject[] {
-		    YoixMakeScreen.yoixRectangle(viewport),
-		    YoixMakeScreen.yoixDimension(extent),
-		    YoixMakeScreen.yoixDimension(cellsize)
-		};
-	    } else argv = new YoixObject[] {YoixObject.newInt(synccount)};
-	    event = new YoixAWTInvocationEvent(funct, argv, getContext());
-	    EventQueue.invokeLater(event);
-	}
+        if (funct != null) {
+            synccount++;
+            if (funct.callable(3)) {
+                argv = new YoixObject[] {
+                    YoixMakeScreen.yoixRectangle(viewport),
+                    YoixMakeScreen.yoixDimension(extent),
+                    YoixMakeScreen.yoixDimension(cellsize)
+                };
+            } else argv = new YoixObject[] {YoixObject.newInt(synccount)};
+            event = new YoixAWTInvocationEvent(funct, argv, getContext());
+            EventQueue.invokeLater(event);
+        }
     }
 
 
     protected final void
     verticalScrollTo(int y) {
 
-	setOrigin(new Point(viewport.x, y));
+        setOrigin(new Point(viewport.x, y));
     }
 
     ///////////////////////////////////
@@ -338,246 +338,246 @@ class YoixSwingJTextComponent extends YoixSwingJCanvas
     protected void
     finalize() {
 
-	Graphics  g;
+        Graphics  g;
 
-	if ((g = savedgraphics) != null)
-	    g.dispose();
-	super.finalize();
+        if ((g = savedgraphics) != null)
+            g.dispose();
+        super.finalize();
     }
 
 
     public final int
     getAlignment() {
 
-	return(alignment);
+        return(alignment);
     }
 
 
     public final int
     getAnchor() {
 
-	return(anchor);
+        return(anchor);
     }
 
 
     public final int
     getBaseline() {
 
-	return(baseline);
+        return(baseline);
     }
 
 
     public final int
     getCellHeight() {
 
-	return(cellsize.height);
+        return(cellsize.height);
     }
 
 
     public final Dimension
     getCellSize() {
 
-	return(cellsize);
+        return(cellsize);
     }
 
 
     public final int
     getCellWidth() {
 
-	return(cellsize.width);
+        return(cellsize.width);
     }
 
 
     public final int
     getColumns() {
 
-	return(columns);
+        return(columns);
     }
 
 
     public final Dimension
     getExtent() {
 
-	return(extent);
+        return(extent);
     }
 
 
     public final YoixAWTFontMetrics
     getFontMetrics() {
 
-	return(fm);
+        return(fm);
     }
 
 
     public final Insets
     getInsets() {
 
-	return((Insets)(insets != null ? insets : ZEROINSETS).clone());
+        return((Insets)(insets != null ? insets : ZEROINSETS).clone());
     }
 
 
     public final Insets
     getIpad() {
 
-	return((Insets)(ipad != null ? ipad : ZEROINSETS).clone());
+        return((Insets)(ipad != null ? ipad : ZEROINSETS).clone());
     }
 
 
     public final int
     getLeading() {
 
-	return(leading);
+        return(leading);
     }
 
 
     public final Point
     getOrigin() {
 
-	return(viewport.getLocation());
+        return(viewport.getLocation());
     }
 
 
     public final int
     getRows() {
 
-	return(rows);
+        return(rows);
     }
 
 
     String
     getText() {
 
-	return(null);
+        return(null);
     }
 
 
     public final Rectangle
     getViewport() {
 
-	return(viewport);
+        return(viewport);
     }
 
 
     public final boolean
     isDrawable() {
 
-	return(false);
+        return(false);
     }
 
 
     public final boolean
     isPaintable() {
 
-	return(false);
+        return(false);
     }
 
 
     public final boolean
     isTileable() {
 
-	return(false);
+        return(false);
     }
 
 
     void
     reset() {
 
-	repaint();
+        repaint();
     }
 
 
     void
     reset(boolean sync) {
 
-	//
-	// A true argument means something changed that could affect
-	// any other components that are grouped with this one. Means
-	// we should call manager's reset() if there is one. For now
-	// I'll leave the check out, but classes that extend this one,
-	// like YoixAWTTableColumn, should override this method.
-	//
+        //
+        // A true argument means something changed that could affect
+        // any other components that are grouped with this one. Means
+        // we should call manager's reset() if there is one. For now
+        // I'll leave the check out, but classes that extend this one,
+        // like YoixAWTTableColumn, should override this method.
+        //
 
-	reset();
+        reset();
     }
 
 
     final synchronized void
     setColumns(int count) {
 
-	columns = count;
+        columns = count;
     }
 
 
     public synchronized void
     setFont(Font font) {
 
-	super.setFont(font);
-	if (initialized) {		// Swing version needs this
-	    loadFont();
-	    reset(true);
-	}
+        super.setFont(font);
+        if (initialized) {		// Swing version needs this
+            loadFont();
+            reset(true);
+        }
     }
 
 
     final synchronized void
     setInsets(Insets insets) {
 
-	if (insets != null && insets.equals(this.insets) == false) {
-	    this.insets = insets;
-	    reset(false);
-	}
+        if (insets != null && insets.equals(this.insets) == false) {
+            this.insets = insets;
+            reset(false);
+        }
     }
 
 
     final synchronized void
     setIpad(Insets ipad) {
 
-	//
-	// Negative values are currently ignored because we noticed a few
-	// scrolling problems when there were no restrictions. May try to
-	// track it down - much later. Also decided to ignore horizontal
-	// padding adjustments until they're actually requested.
-	//
+        //
+        // Negative values are currently ignored because we noticed a few
+        // scrolling problems when there were no restrictions. May try to
+        // track it down - much later. Also decided to ignore horizontal
+        // padding adjustments until they're actually requested.
+        //
 
-	if (ipad != null && ipad.equals(this.ipad) == false) {
-	    this.ipad.top = Math.max(ipad.top, 0);
-	    this.ipad.bottom = Math.max(ipad.bottom, 0);
-	    this.ipad.left = Math.max(ipad.left, 0);
-	    this.ipad.right = Math.max(ipad.right, 0);
-	    currentfont = null;
-	    loadFont();		// recent addition
-	    reset(true);
-	}
+        if (ipad != null && ipad.equals(this.ipad) == false) {
+            this.ipad.top = Math.max(ipad.top, 0);
+            this.ipad.bottom = Math.max(ipad.bottom, 0);
+            this.ipad.left = Math.max(ipad.left, 0);
+            this.ipad.right = Math.max(ipad.right, 0);
+            currentfont = null;
+            loadFont();		// recent addition
+            reset(true);
+        }
     }
 
 
     final synchronized void
     setRows(int count) {
 
-	rows = count;
+        rows = count;
     }
 
 
     final synchronized void
     setSaveGraphics(boolean state) {
 
-	//
-	// Saving graphics objects the way AWT versions did causes
-	// problems, so it's currently disabled.
-	//
+        //
+        // Saving graphics objects the way AWT versions did causes
+        // problems, so it's currently disabled.
+        //
 
-	savegraphics = false;
+        savegraphics = false;
     }
 
 
     final synchronized void
     setSyncViewport(YoixObject obj) {
 
-	if (obj.notNull()) {
-	    if (obj.callable(1) || obj.callable(3))
-		syncviewport = obj;
-	    else VM.abort(TYPECHECK, N_SYNCVIEWPORT);
-	} else syncviewport = null;
+        if (obj.notNull()) {
+            if (obj.callable(1) || obj.callable(3))
+                syncviewport = obj;
+            else VM.abort(TYPECHECK, N_SYNCVIEWPORT);
+        } else syncviewport = null;
     }
 
 
@@ -595,31 +595,31 @@ class YoixSwingJTextComponent extends YoixSwingJCanvas
     private boolean
     isPainting() {
 
-	EventQueue  queue = YoixAWTToolkit.getSystemEventQueue();
+        EventQueue  queue = YoixAWTToolkit.getSystemEventQueue();
 
-	return(queue.peekEvent(PaintEvent.UPDATE) != null || queue.peekEvent(PaintEvent.PAINT) != null);
+        return(queue.peekEvent(PaintEvent.UPDATE) != null || queue.peekEvent(PaintEvent.PAINT) != null);
     }
 
 
     private void
     repaintComponent() {
 
-	super.repaint();
+        super.repaint();
     }
 
 
     private void
     repaintRect(int x, int y, int width, int height, Graphics g) {
 
-	Color  color;
+        Color  color;
 
-	if (width > 0 && height > 0) {
-	    color = g.getColor();
-	    g.setColor(getBackground());
-	    g.fillRect(x, y, width, height);
-	    g.setColor(color);
-	    paintRect(x + viewport.x, y + viewport.y, width, height, g);
-	}
+        if (width > 0 && height > 0) {
+            color = g.getColor();
+            g.setColor(getBackground());
+            g.fillRect(x, y, width, height);
+            g.setColor(color);
+            paintRect(x + viewport.x, y + viewport.y, width, height, g);
+        }
     }
 }
 

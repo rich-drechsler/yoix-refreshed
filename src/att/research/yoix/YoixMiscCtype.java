@@ -34,22 +34,22 @@ class YoixMiscCtype
     private static final short  LC = 0x100;	// lower case
 
     private static final short  ctype[] = {
-	CN, CN, CN, CN, CN, CN, CN, CN,
-	CN, CN|WS, CN|WS, CN|WS, CN|WS, CN|WS, CN, CN,
-	CN, CN, CN, CN, CN, CN, CN, CN,
-	CN, CN, CN, CN, CN, CN, CN, CN,
-	WS|SP, PU, PU, PU, PU, PU, PU, PU,
-	PU, PU, PU, PU, PU, PU, PU, PU,
-	DG|OD, DG|OD, DG|OD, DG|OD, DG|OD, DG|OD, DG|OD, DG|OD,
-	DG, DG, PU, PU, PU, PU, PU, PU,
-	PU, UC|HD, UC|HD, UC|HD, UC|HD, UC|HD, UC|HD, UC,
-	UC, UC, UC, UC, UC, UC, UC, UC,
-	UC, UC, UC, UC, UC, UC, UC, UC,
-	UC, UC, UC, PU, PU, PU, PU, PU,
-	PU, LC|HD, LC|HD, LC|HD, LC|HD, LC|HD, LC|HD, LC,
-	LC, LC, LC, LC, LC, LC, LC, LC,
-	LC, LC, LC, LC, LC, LC, LC, LC,
-	LC, LC, LC, PU, PU, PU, PU, CN,
+        CN, CN, CN, CN, CN, CN, CN, CN,
+        CN, CN|WS, CN|WS, CN|WS, CN|WS, CN|WS, CN, CN,
+        CN, CN, CN, CN, CN, CN, CN, CN,
+        CN, CN, CN, CN, CN, CN, CN, CN,
+        WS|SP, PU, PU, PU, PU, PU, PU, PU,
+        PU, PU, PU, PU, PU, PU, PU, PU,
+        DG|OD, DG|OD, DG|OD, DG|OD, DG|OD, DG|OD, DG|OD, DG|OD,
+        DG, DG, PU, PU, PU, PU, PU, PU,
+        PU, UC|HD, UC|HD, UC|HD, UC|HD, UC|HD, UC|HD, UC,
+        UC, UC, UC, UC, UC, UC, UC, UC,
+        UC, UC, UC, UC, UC, UC, UC, UC,
+        UC, UC, UC, PU, PU, PU, PU, PU,
+        PU, LC|HD, LC|HD, LC|HD, LC|HD, LC|HD, LC|HD, LC,
+        LC, LC, LC, LC, LC, LC, LC, LC,
+        LC, LC, LC, LC, LC, LC, LC, LC,
+        LC, LC, LC, PU, PU, PU, PU, CN,
     };
 
     private static final short  ALPHA = (UC|LC);
@@ -71,105 +71,105 @@ class YoixMiscCtype
     static boolean
     isalnum(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&ALNUM) != 0);
+        return(isascii(ch) && (ctype[ch]&ALNUM) != 0);
     }
 
 
     static boolean
     isalpha(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&ALPHA) != 0);
+        return(isascii(ch) && (ctype[ch]&ALPHA) != 0);
     }
 
 
     static boolean
     isascii(int ch) {
 
-	return(ch >= 0 && ch < 128);
+        return(ch >= 0 && ch < 128);
     }
 
 
     static boolean
     iscntrl(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&CN) != 0);
+        return(isascii(ch) && (ctype[ch]&CN) != 0);
     }
 
 
     static boolean
     isdigit(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&DG) != 0);
+        return(isascii(ch) && (ctype[ch]&DG) != 0);
     }
 
 
     static boolean
     isgraph(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&DG) != 0);
+        return(isascii(ch) && (ctype[ch]&DG) != 0);
     }
 
 
     static boolean
     islower(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&LC) != 0);
+        return(isascii(ch) && (ctype[ch]&LC) != 0);
     }
 
 
     static boolean
     isoctal(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&ODIGIT) != 0);
+        return(isascii(ch) && (ctype[ch]&ODIGIT) != 0);
     }
 
 
     static boolean
     isprint(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&PRINT) != 0);
+        return(isascii(ch) && (ctype[ch]&PRINT) != 0);
     }
 
 
     static boolean
     ispunct(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&PU) != 0);
+        return(isascii(ch) && (ctype[ch]&PU) != 0);
     }
 
 
     public static boolean
     isspace(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&WS) != 0);
+        return(isascii(ch) && (ctype[ch]&WS) != 0);
     }
 
 
     static boolean
     isupper(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&UC) != 0);
+        return(isascii(ch) && (ctype[ch]&UC) != 0);
     }
 
 
     static boolean
     isxdigit(int ch) {
 
-	return(isascii(ch) && (ctype[ch]&XDIGIT) != 0);
+        return(isascii(ch) && (ctype[ch]&XDIGIT) != 0);
     }
 
 
     static int
     tolower(int ch) {
 
-	return(isupper(ch) ? ch + UPPERTOLOWER : ch);
+        return(isupper(ch) ? ch + UPPERTOLOWER : ch);
     }
 
 
     static int
     toupper(int ch) {
 
-	return(islower(ch) ? ch + LOWERTOUPPER : ch);
+        return(islower(ch) ? ch + LOWERTOUPPER : ch);
     }
 }
 

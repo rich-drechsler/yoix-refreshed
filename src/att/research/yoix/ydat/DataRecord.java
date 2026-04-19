@@ -17,7 +17,7 @@ import att.research.yoix.*;
 class DataRecord
 
     implements YoixConstants,
-	       YoixInterfaceSortable
+               YoixInterfaceSortable
 
 {
 
@@ -66,15 +66,15 @@ class DataRecord
 
     DataRecord() {
 
-	this(null, 0);
+        this(null, 0);
     }
 
 
     DataRecord(Object data[], int id) {
 
-	this.data = data;
-	this.id = id;
-	this.index = id;
+        this.data = data;
+        this.id = id;
+        this.index = id;
     }
 
     ///////////////////////////////////
@@ -86,7 +86,7 @@ class DataRecord
     public final int
     compare(YoixInterfaceSortable element, int flag) {
 
-	return((id > ((DataRecord)element).id) ? 1 : -1);
+        return((id > ((DataRecord)element).id) ? 1 : -1);
     } 
 
     ///////////////////////////////////
@@ -98,441 +98,441 @@ class DataRecord
     final Object
     changeField(int field, Object value) {
 
-	Object  ovalue;
+        Object  ovalue;
 
-	if (field >= 0 && field < data.length) {
-	    if (data[field] != null) {
-		if (!(data[field] instanceof DataPartition)) {
-		    ovalue = data[field];
-		    data[field] = value;
-		} else ovalue = ((DataPartition)data[field]).changeField(value);
-	    } else ovalue = null;
-	} else ovalue = null;
+        if (field >= 0 && field < data.length) {
+            if (data[field] != null) {
+                if (!(data[field] instanceof DataPartition)) {
+                    ovalue = data[field];
+                    data[field] = value;
+                } else ovalue = ((DataPartition)data[field]).changeField(value);
+            } else ovalue = null;
+        } else ovalue = null;
 
-	return(ovalue);
+        return(ovalue);
     }
 
 
     final void
     clearSelected(int mask) {
 
-	int  index = mask&INDEX_MASK;
+        int  index = mask&INDEX_MASK;
 
-	if (index >= selected.length)
-	    growTo(index);
-	selected[index] &= ~mask|CONTROL_MASK;
+        if (index >= selected.length)
+            growTo(index);
+        selected[index] &= ~mask|CONTROL_MASK;
     }
 
 
     final void
     clearSelected(int masks[]) {
 
-	int  n;
+        int  n;
 
-	if (masks != null) {
-	    for (n = 0; n < masks.length; n++)
-		clearSelected(masks[n]);
-	}
+        if (masks != null) {
+            for (n = 0; n < masks.length; n++)
+                clearSelected(masks[n]);
+        }
     }
 
 
     final Color
     getColor() {
 
-	return(color);
+        return(color);
     }
 
 
     final String
     getField(int field) {
 
-	String  value = null;
+        String  value = null;
 
-	if (field >= 0 && field < data.length) {
-	    if (!(data[field] instanceof String)) {
-		if (data[field] instanceof Object[]) {
-		    DataGenerator.generateData((Object[])data[field]);
-		    if (data[field] instanceof String)
-			value = (String)data[field];
-		    else if (data[field] instanceof Number)
-			value = data[field].toString();
-		    else if (data[field] instanceof DataPartition)
-			value = ((DataPartition)data[field]).getField();
-		} else if (data[field] instanceof Number)
-		    value = data[field].toString();
-		else if (data[field] instanceof DataPartition)
-		    value = ((DataPartition)data[field]).getField();
-	    } else value = (String)data[field];
-	}
+        if (field >= 0 && field < data.length) {
+            if (!(data[field] instanceof String)) {
+                if (data[field] instanceof Object[]) {
+                    DataGenerator.generateData((Object[])data[field]);
+                    if (data[field] instanceof String)
+                        value = (String)data[field];
+                    else if (data[field] instanceof Number)
+                        value = data[field].toString();
+                    else if (data[field] instanceof DataPartition)
+                        value = ((DataPartition)data[field]).getField();
+                } else if (data[field] instanceof Number)
+                    value = data[field].toString();
+                else if (data[field] instanceof DataPartition)
+                    value = ((DataPartition)data[field]).getField();
+            } else value = (String)data[field];
+        }
 
-	return(value);
+        return(value);
     }
 
 
     final String
     getField(int field, int partition) {
 
-	String  value = null;
+        String  value = null;
 
-	if (partition >= 0) {
-	    if (field >= 0 && field < data.length) {
-		if (data[field] instanceof Object[])
-		    DataGenerator.generateData((Object[])data[field]);
-		if (data[field] instanceof DataPartition)
-		    value = ((DataPartition)data[field]).getField(partition);
-	    }
-	} else value = getField(field);
+        if (partition >= 0) {
+            if (field >= 0 && field < data.length) {
+                if (data[field] instanceof Object[])
+                    DataGenerator.generateData((Object[])data[field]);
+                if (data[field] instanceof DataPartition)
+                    value = ((DataPartition)data[field]).getField(partition);
+            }
+        } else value = getField(field);
 
-	return(value);
+        return(value);
     }
 
 
     final YoixObject
     getFields() {
 
-	YoixObject  fields;
-	String      field;
-	double      value;
-	int         length;
-	int         n;
+        YoixObject  fields;
+        String      field;
+        double      value;
+        int         length;
+        int         n;
 
-	length = getLength();
-	fields = YoixObject.newArray(length);
+        length = getLength();
+        fields = YoixObject.newArray(length);
 
-	for (n = 0; n < length; n++) {
-	    if ((field = getField(n)) == null) {
-		value = getValue(n);
-		if (Double.isNaN(value))
-		    fields.put(n, YoixObject.newNull(), false);
-		else fields.put(n, YoixObject.newDouble(value), false);
-	    } else fields.put(n, YoixObject.newString(field), false);
-	}
+        for (n = 0; n < length; n++) {
+            if ((field = getField(n)) == null) {
+                value = getValue(n);
+                if (Double.isNaN(value))
+                    fields.put(n, YoixObject.newNull(), false);
+                else fields.put(n, YoixObject.newDouble(value), false);
+            } else fields.put(n, YoixObject.newString(field), false);
+        }
 
-	return(fields);
+        return(fields);
     }
 
 
     final int
     getID() {
 
-	return(id);
+        return(id);
     }
 
 
     final int
     getIndex() {
 
-	return(index);
+        return(index);
     }
 
 
     final String
     getKey(int field) {
 
-	//
-	// Exactly duplicates some old code, but there's a chance we
-	// can use field[n] - invesitgate later.
-	//
+        //
+        // Exactly duplicates some old code, but there's a chance we
+        // can use field[n] - invesitgate later.
+        //
 
-	return(id + ":" + field);
+        return(id + ":" + field);
     }
 
 
     final int
     getLength() {
 
-	return(data != null ? data.length : 0);
+        return(data != null ? data.length : 0);
     }
 
 
     static int[]
     getMasks() {
 
-	int  masks[];
-	int  mask;
-	int  start;
-	int  count;
-	int  index;
-	int  n;
+        int  masks[];
+        int  mask;
+        int  start;
+        int  count;
+        int  index;
+        int  n;
 
-	count = (1 << INDEX_BITS);
-	masks = new int[count*(32 - (INDEX_BITS + 1))];
+        count = (1 << INDEX_BITS);
+        masks = new int[count*(32 - (INDEX_BITS + 1))];
 
-	for (n = 0, index = 0; n < count; n++) {
-	    for (mask = 1 << (INDEX_BITS + 1); mask != 0; mask <<= 1)
-		masks[index++] = mask | n;
-	}
-	return(masks);
+        for (n = 0, index = 0; n < count; n++) {
+            for (mask = 1 << (INDEX_BITS + 1); mask != 0; mask <<= 1)
+                masks[index++] = mask | n;
+        }
+        return(masks);
     }
 
 
     final int
     getPartition(int field) {
 
-	int  partition;
+        int  partition;
 
-	if (field >= 0 && field < data.length) {
-	    if (data[field] instanceof DataPartition)
-		partition = ((DataPartition)data[field]).id;
-	    else partition = -1;
-	} else partition = -1;
+        if (field >= 0 && field < data.length) {
+            if (data[field] instanceof DataPartition)
+                partition = ((DataPartition)data[field]).id;
+            else partition = -1;
+        } else partition = -1;
 
-	return(partition);
+        return(partition);
     }
 
 
     static int[]
     getSelectMasks(int masks[], boolean andmodel) {
 
-	int  selectmasks[];
-	int  length;
-	int  n;
+        int  selectmasks[];
+        int  length;
+        int  n;
 
-	if (masks != null) {
-	    if ((length = masks.length) > 0) {
-		selectmasks = new int[length];
-		for (n = 0; n < length; n++) {
-		    selectmasks[n] = masks[n] & (SELECT_MASK|INDEX_MASK);
-		    if (andmodel)
-			selectmasks[n] |= MODEL_MASK;	// marks it as AND model
-		}
-	    } else selectmasks = null;
-	} else selectmasks = null;
-	return(selectmasks);
+        if (masks != null) {
+            if ((length = masks.length) > 0) {
+                selectmasks = new int[length];
+                for (n = 0; n < length; n++) {
+                    selectmasks[n] = masks[n] & (SELECT_MASK|INDEX_MASK);
+                    if (andmodel)
+                        selectmasks[n] |= MODEL_MASK;	// marks it as AND model
+                }
+            } else selectmasks = null;
+        } else selectmasks = null;
+        return(selectmasks);
     }
 
 
     static int[]
     getSelectMasks(int xmask, int ymask) {
 
-	int  selectmasks[];
-	int  masks[];
+        int  selectmasks[];
+        int  masks[];
 
-	if (xmask != 0 || ymask != 0) {
-	    if (xmask != 0 && ymask != 0)
-		masks = new int[] {xmask, ymask};
-	    else if (xmask != 0)
-		masks = new int[] {xmask};
-	    else masks = new int[] {ymask};
-	    selectmasks = getSelectMasks(masks, true);
-	} else selectmasks = null;
-	return(selectmasks);
+        if (xmask != 0 || ymask != 0) {
+            if (xmask != 0 && ymask != 0)
+                masks = new int[] {xmask, ymask};
+            else if (xmask != 0)
+                masks = new int[] {xmask};
+            else masks = new int[] {ymask};
+            selectmasks = getSelectMasks(masks, true);
+        } else selectmasks = null;
+        return(selectmasks);
     }
 
 
     final double
     getValue(int field) {
 
-	double  value = Double.NaN;
+        double  value = Double.NaN;
 
-	if (field >= 0 && field < data.length) {
-	    if (!(data[field] instanceof Number)) {
-		if (data[field] instanceof Object[]) {
-		    DataGenerator.generateData((Object[])data[field]);
-		    if (data[field] instanceof Number)
-			value = ((Number)data[field]).doubleValue();
-		    else if (data[field] instanceof DataPartition)
-			value = ((DataPartition)data[field]).getValue();
-		} else if (data[field] instanceof DataPartition)
-		    value = ((DataPartition)data[field]).getValue();
-	    } else value = ((Number)data[field]).doubleValue();
-	}
+        if (field >= 0 && field < data.length) {
+            if (!(data[field] instanceof Number)) {
+                if (data[field] instanceof Object[]) {
+                    DataGenerator.generateData((Object[])data[field]);
+                    if (data[field] instanceof Number)
+                        value = ((Number)data[field]).doubleValue();
+                    else if (data[field] instanceof DataPartition)
+                        value = ((DataPartition)data[field]).getValue();
+                } else if (data[field] instanceof DataPartition)
+                    value = ((DataPartition)data[field]).getValue();
+            } else value = ((Number)data[field]).doubleValue();
+        }
 
-	return(value);
+        return(value);
     }
 
 
     final double
     getValue(int field, int partition) {
 
-	double  value = Double.NaN;
+        double  value = Double.NaN;
 
-	if (partition >= 0) {
-	    if (field >= 0 && field < data.length) {
-		if (data[field] instanceof Object[])
-		    DataGenerator.generateData((Object[])data[field]);
-		if (data[field] instanceof DataPartition)
-		    value = ((DataPartition)data[field]).getValue(partition);
-	    }
-	} else value = getValue(field);
+        if (partition >= 0) {
+            if (field >= 0 && field < data.length) {
+                if (data[field] instanceof Object[])
+                    DataGenerator.generateData((Object[])data[field]);
+                if (data[field] instanceof DataPartition)
+                    value = ((DataPartition)data[field]).getValue(partition);
+            }
+        } else value = getValue(field);
 
-	return(value);
+        return(value);
     }
 
 
     final boolean
     isRequired() {
 
-	return(required);
+        return(required);
     }
 
 
     final boolean
     isSelected() {
 
-	int  n;
+        int  n;
 
-	for (n = 0; n < selected.length; n++) {
-	    if ((selected[n]&SELECT_MASK) != SELECT_MASK)
-		return(false);
-	}
-	return(true);
+        for (n = 0; n < selected.length; n++) {
+            if ((selected[n]&SELECT_MASK) != SELECT_MASK)
+                return(false);
+        }
+        return(true);
     }
 
 
     final boolean
     isSelected(int mask) {
 
-	int  index = mask&INDEX_MASK;
+        int  index = mask&INDEX_MASK;
 
-	//
-	// The original version called growTo() when index was too big, but
-	// it seems like we should be able to assume the mask bit is set if
-	// the entry hasn't been allocated yet. May be a very small chance
-	// threads could cause problems, but we suspect not because masks
-	// now are single select bits that belong to a component that gets
-	// here from a synchronized method. There are lots of things to try,
-	// including calling growTo(), if we stumble into into problems.
-	//
+        //
+        // The original version called growTo() when index was too big, but
+        // it seems like we should be able to assume the mask bit is set if
+        // the entry hasn't been allocated yet. May be a very small chance
+        // threads could cause problems, but we suspect not because masks
+        // now are single select bits that belong to a component that gets
+        // here from a synchronized method. There are lots of things to try,
+        // including calling growTo(), if we stumble into into problems.
+        //
 
-	return((mask &= SELECT_MASK) != 0 && ((index >= selected.length) || (selected[index]&mask) == mask));
+        return((mask &= SELECT_MASK) != 0 && ((index >= selected.length) || (selected[index]&mask) == mask));
     }
 
 
     final boolean
     isSelected(int masks[]) {
 
-	boolean  result;
-	int      length;
-	int      n;
+        boolean  result;
+        int      length;
+        int      n;
 
-	if (masks != null && (length = masks.length) > 0) {
-	    if (length > 1) {
-		result = ((masks[0]&MODEL_MASK) != 0);
-		for (n = 0; n < length; n++) {
-		    if (isSelected(masks[n]) != result) {
-			result = !result;
-			break;
-		    }
-		}
-	    } else result = isSelected(masks[0]);
-	} else result = false;
-	return(result);
+        if (masks != null && (length = masks.length) > 0) {
+            if (length > 1) {
+                result = ((masks[0]&MODEL_MASK) != 0);
+                for (n = 0; n < length; n++) {
+                    if (isSelected(masks[n]) != result) {
+                        result = !result;
+                        break;
+                    }
+                }
+            } else result = isSelected(masks[0]);
+        } else result = false;
+        return(result);
     }
 
 
     final boolean
     notSelected() {
 
-	int  n;
+        int  n;
 
-	for (n = 0; n < selected.length; n++) {
-	    if ((selected[n]&SELECT_MASK) != SELECT_MASK)
-		return(true);
-	}
-	return(false);
+        for (n = 0; n < selected.length; n++) {
+            if ((selected[n]&SELECT_MASK) != SELECT_MASK)
+                return(true);
+        }
+        return(false);
     }
 
 
     final boolean
     notSelected(int mask) {
 
-	int  index = mask&INDEX_MASK;
+        int  index = mask&INDEX_MASK;
 
-	//
-	// The original version called growTo() when index was too big, but
-	// it seems like we should be able to assume the mask bit is set if
-	// the entry hasn't been allocated yet. May be a very small chance
-	// threads could cause problems, but we suspect not because masks
-	// now are single select bits that belong to a component that gets
-	// here from a synchronized method. There are lots of things to try,
-	// including calling growTo(), if we stumble into into problems.
-	//
+        //
+        // The original version called growTo() when index was too big, but
+        // it seems like we should be able to assume the mask bit is set if
+        // the entry hasn't been allocated yet. May be a very small chance
+        // threads could cause problems, but we suspect not because masks
+        // now are single select bits that belong to a component that gets
+        // here from a synchronized method. There are lots of things to try,
+        // including calling growTo(), if we stumble into into problems.
+        //
 
-	return((mask &= SELECT_MASK) == 0 || ((index < selected.length) && (selected[index]&mask) != mask));
+        return((mask &= SELECT_MASK) == 0 || ((index < selected.length) && (selected[index]&mask) != mask));
     }
 
 
     final boolean
     notSelected(int masks[]) {
 
-	boolean  result;
-	int      length;
-	int      n;
+        boolean  result;
+        int      length;
+        int      n;
 
-	if (masks != null && (length = masks.length) > 0) {
-	    if (length > 1) {
-		result = ((masks[0]&MODEL_MASK) == 0);
-		for (n = 0; n < length; n++) {
-		    if (notSelected(masks[n]) != result) {
-			result = !result;
-			break;
-		    }
-		}
-	    } else result = notSelected(masks[0]);
-	} else result = true;
-	return(result);
+        if (masks != null && (length = masks.length) > 0) {
+            if (length > 1) {
+                result = ((masks[0]&MODEL_MASK) == 0);
+                for (n = 0; n < length; n++) {
+                    if (notSelected(masks[n]) != result) {
+                        result = !result;
+                        break;
+                    }
+                }
+            } else result = notSelected(masks[0]);
+        } else result = true;
+        return(result);
     }
 
 
     final void
     setColor(Color color) {
 
-	this.color = color;
+        this.color = color;
     }
 
 
     final void
     setIndex(int index) {
 
-	this.index = index;
+        this.index = index;
     }
 
 
     final void
     setRequired(boolean state) {
 
-	required = state;
+        required = state;
     }
 
 
     final void
     setSelected(int mask) {
 
-	int  index = mask&INDEX_MASK;
+        int  index = mask&INDEX_MASK;
 
-	if (index >= selected.length)
-	    growTo(index);
-	selected[index] |= (mask&SELECT_MASK);
+        if (index >= selected.length)
+            growTo(index);
+        selected[index] |= (mask&SELECT_MASK);
     }
 
 
     final void
     setSelected(int masks[]) {
 
-	int  n;
+        int  n;
 
-	if (masks != null) {
-	    for (n = 0; n < masks.length; n++)
-		setSelected(masks[n]);
-	}
+        if (masks != null) {
+            for (n = 0; n < masks.length; n++)
+                setSelected(masks[n]);
+        }
     }
 
 
     public String
     toString() {
 
-	String  str;
-	int     n;
+        String  str;
+        int     n;
 
-	str = "<" + id + ":" + index + ":" + selected[0] + "> ";
+        str = "<" + id + ":" + index + ":" + selected[0] + "> ";
 
-	for (n = 0; n < data.length; n++) {
-	    if (n == 0)
-		str += data[n];
-	    else str += "|" + data[n];
-	}
-	return(str);
+        for (n = 0; n < data.length; n++) {
+            if (n == 0)
+                str += data[n];
+            else str += "|" + data[n];
+        }
+        return(str);
     }
 
     ///////////////////////////////////
@@ -544,17 +544,17 @@ class DataRecord
     private synchronized void
     growTo(int index) {
 
-	int  temp[];
-	int  length;
-	int  n;
+        int  temp[];
+        int  length;
+        int  n;
 
-	if ((length = selected.length) <= index) {
-	    temp = new int[index + 1];
-	    System.arraycopy(selected, 0, temp, 0, length);
-	    for (n = length; n <= index; n++)
-		temp[n] = SELECT_MASK;
-	    selected = temp;
-	}
+        if ((length = selected.length) <= index) {
+            temp = new int[index + 1];
+            System.arraycopy(selected, 0, temp, 0, length);
+            for (n = length; n <= index; n++)
+                temp[n] = SELECT_MASK;
+            selected = temp;
+        }
     }
 }
 

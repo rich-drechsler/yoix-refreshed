@@ -78,13 +78,13 @@ class YoixAWTGridLayout extends GridLayout
 
     YoixAWTGridLayout(int model, int rows, int columns, int hgap, int vgap, int orientation, boolean useall) {
 
-	super();
-	setModel(model);
-	setOrientation(orientation);
-	setUseAll(useall);
-	setGrid(rows, columns);
-	setHgap(hgap);
-	setVgap(vgap);
+        super();
+        setModel(model);
+        setOrientation(orientation);
+        setUseAll(useall);
+        setGrid(rows, columns);
+        setHgap(hgap);
+        setVgap(vgap);
     }
 
     ///////////////////////////////////
@@ -96,138 +96,138 @@ class YoixAWTGridLayout extends GridLayout
     public final Dimension
     preferredLayoutSize(Container parent) {
 
-	return(getLayoutSize(parent, V_PREFERREDSIZE));
+        return(getLayoutSize(parent, V_PREFERREDSIZE));
     }
 
 
     public final Dimension
     maximumLayoutSize(Container parent) {
 
-	return(getLayoutSize(parent, V_MAXIMUMSIZE));
+        return(getLayoutSize(parent, V_MAXIMUMSIZE));
     }
 
 
     public final Dimension
     minimumLayoutSize(Container parent) {
 
-	return(getLayoutSize(parent, V_MINIMUMSIZE));
+        return(getLayoutSize(parent, V_MINIMUMSIZE));
     }
 
 
     public final void
     layoutContainer(Container parent) {
 
-	Component  components[];
-	Dimension  size;
-	Insets     insets;
-	int        cells;
-	int        row;
-	int        rows;
-	int        column;
-	int        columns;
-	int        hgap;
-	int        vgap;
-	int        width;
-	int        height;
-	int        dx;
-	int        dy;
-	int        x;
-	int        y;
-	int        n;
+        Component  components[];
+        Dimension  size;
+        Insets     insets;
+        int        cells;
+        int        row;
+        int        rows;
+        int        column;
+        int        columns;
+        int        hgap;
+        int        vgap;
+        int        width;
+        int        height;
+        int        dx;
+        int        dy;
+        int        x;
+        int        y;
+        int        n;
 
-	synchronized (parent.getTreeLock()) {
-	    if ((components = getComponents(parent)) != null) {
-		cells = components.length;
-		rows = getRowCount(cells);
-		columns = getColumnCount(cells);
-		hgap = getHgap();
-		vgap = getVgap();
-		size = parent.getSize();
-		insets = parent.getInsets();
+        synchronized (parent.getTreeLock()) {
+            if ((components = getComponents(parent)) != null) {
+                cells = components.length;
+                rows = getRowCount(cells);
+                columns = getColumnCount(cells);
+                hgap = getHgap();
+                vgap = getVgap();
+                size = parent.getSize();
+                insets = parent.getInsets();
 
-		width = (size.width - (insets.left + insets.right) - (columns - 1)*hgap)/columns;
-		height = (size.height - (insets.top + insets.bottom) - (rows - 1)*vgap)/rows;
+                width = (size.width - (insets.left + insets.right) - (columns - 1)*hgap)/columns;
+                height = (size.height - (insets.top + insets.bottom) - (rows - 1)*vgap)/rows;
 
-		dx = width + hgap;
-		dy = height + vgap;
-		x = insets.left;
-		for (column = 0; column < columns; column++) {
-		    y = insets.top;
-		    for (row = 0; row < rows; row++) {
-			if (orientation == YOIX_VERTICAL)
-			    n = column*rows + row;
-			else n = row*columns + column;
-			if (n < cells)
-			    components[n].setBounds(x, y, width, height);
-			y += dy;
-		    }
-		    x += dx;
-		}
-	    }
-	}
+                dx = width + hgap;
+                dy = height + vgap;
+                x = insets.left;
+                for (column = 0; column < columns; column++) {
+                    y = insets.top;
+                    for (row = 0; row < rows; row++) {
+                        if (orientation == YOIX_VERTICAL)
+                            n = column*rows + row;
+                        else n = row*columns + column;
+                        if (n < cells)
+                            components[n].setBounds(x, y, width, height);
+                        y += dy;
+                    }
+                    x += dx;
+                }
+            }
+        }
     }
 
 
     public final void
     setColumns(int columns) {
 
-	super.setColumns(Math.max(columns, 0));
+        super.setColumns(Math.max(columns, 0));
     }
 
 
     final void
     setGrid(int rows, int columns) {
 
-	//
-	// Setting rows and columns to legitimate values is harder than
-	// it should be - see a 1.1.X version of java.awt.GridLayout if
-	// you want more details. A try/catch is not sufficient because
-	// GridLayout doesn't check for negative numbers.
-	//
+        //
+        // Setting rows and columns to legitimate values is harder than
+        // it should be - see a 1.1.X version of java.awt.GridLayout if
+        // you want more details. A try/catch is not sufficient because
+        // GridLayout doesn't check for negative numbers.
+        //
 
-	if (rows > 0) {
-	    super.setRows(rows);
-	    super.setColumns(Math.max(columns, 0));
-	} else if (columns > 0) {
-	    super.setColumns(columns);
-	    super.setRows(Math.max(rows, 0));
-	} else {
-	    if (orientation == YOIX_HORIZONTAL) {
-		super.setRows(1);
-		super.setColumns(0);
-	    } else {
-		super.setColumns(1);
-		super.setRows(0);
-	    }
-	}
+        if (rows > 0) {
+            super.setRows(rows);
+            super.setColumns(Math.max(columns, 0));
+        } else if (columns > 0) {
+            super.setColumns(columns);
+            super.setRows(Math.max(rows, 0));
+        } else {
+            if (orientation == YOIX_HORIZONTAL) {
+                super.setRows(1);
+                super.setColumns(0);
+            } else {
+                super.setColumns(1);
+                super.setRows(0);
+            }
+        }
     }
 
 
     final void
     setModel(int value) {
 
-	model = (value != 0) ? (value < 0 ? -1 : 1) : 0;
+        model = (value != 0) ? (value < 0 ? -1 : 1) : 0;
     }
 
 
     final void
     setOrientation(int value) {
 
-	orientation = (value == YOIX_VERTICAL) ? value : YOIX_HORIZONTAL;
+        orientation = (value == YOIX_VERTICAL) ? value : YOIX_HORIZONTAL;
     }
 
 
     public final void
     setRows(int rows) {
 
-	super.setRows(Math.max(rows, 0));
+        super.setRows(Math.max(rows, 0));
     }
 
 
     final void
     setUseAll(boolean state) {
 
-	useall = state;
+        useall = state;
     }
 
     ///////////////////////////////////
@@ -239,162 +239,162 @@ class YoixAWTGridLayout extends GridLayout
     private int
     getColumnCount(int cells) {
 
-	int  columns;
-	int  rows;
+        int  columns;
+        int  rows;
 
-	columns = getColumns();
-	rows = getRows();
+        columns = getColumns();
+        rows = getRows();
 
-	switch (model) {
-	    case -1:
-		if (rows > 0)
-		    columns = (cells + rows - 1)/rows;
-		break;
+        switch (model) {
+            case -1:
+                if (rows > 0)
+                    columns = (cells + rows - 1)/rows;
+                break;
 
-	    case 0:
-		if (columns == 0) {
-		    if (rows > 0)
-			columns = (cells + rows - 1)/rows;
-		    else columns = (orientation == YOIX_HORIZONTAL) ? cells : 1;
-		} else if (orientation == YOIX_VERTICAL) {
-		    if (rows > 0 && rows*columns < cells)
-			columns = (cells + rows - 1)/rows;
-		}
-		break;
+            case 0:
+                if (columns == 0) {
+                    if (rows > 0)
+                        columns = (cells + rows - 1)/rows;
+                    else columns = (orientation == YOIX_HORIZONTAL) ? cells : 1;
+                } else if (orientation == YOIX_VERTICAL) {
+                    if (rows > 0 && rows*columns < cells)
+                        columns = (cells + rows - 1)/rows;
+                }
+                break;
 
-	    case 1:
-		if (columns == 0) {
-		    if (rows > 0)
-			columns = (cells + rows - 1)/rows;
-		    else columns = (orientation == YOIX_HORIZONTAL) ? cells : 1;
-		}
-		break;
-	}
+            case 1:
+                if (columns == 0) {
+                    if (rows > 0)
+                        columns = (cells + rows - 1)/rows;
+                    else columns = (orientation == YOIX_HORIZONTAL) ? cells : 1;
+                }
+                break;
+        }
 
-	return(Math.max(columns, 1));
+        return(Math.max(columns, 1));
     }
 
 
     private Component[]
     getComponents(Container parent) {
 
-	Component  components[];
-	Component  temp[];
-	int        count;
-	int        n;
+        Component  components[];
+        Component  temp[];
+        int        count;
+        int        n;
 
-	if ((components = parent.getComponents()) != null) {
-	    if (components.length > 0) {
-		if (useall == false) {
-		    for (n = 0, count = 0; n < components.length; n++) {
-			if (components[n].isVisible())
-			    components[count++] = components[n];
-		    }
-		    temp = new Component[count];
-		    System.arraycopy(components, 0, temp, 0, count);
-		    components = temp;
-		}
-	    }
-	}
+        if ((components = parent.getComponents()) != null) {
+            if (components.length > 0) {
+                if (useall == false) {
+                    for (n = 0, count = 0; n < components.length; n++) {
+                        if (components[n].isVisible())
+                            components[count++] = components[n];
+                    }
+                    temp = new Component[count];
+                    System.arraycopy(components, 0, temp, 0, count);
+                    components = temp;
+                }
+            }
+        }
 
-	return((components != null && components.length > 0) ? components : null);
+        return((components != null && components.length > 0) ? components : null);
     }
 
 
     private Dimension
     getLayoutSize(Container parent, int type) {
 
-	Component  components[];
-	Dimension  size;
-	Insets     insets;
-	int        cells;
-	int        rows;
-	int        columns;
-	int        width;
-	int        height;
-	int        n;
+        Component  components[];
+        Dimension  size;
+        Insets     insets;
+        int        cells;
+        int        rows;
+        int        columns;
+        int        width;
+        int        height;
+        int        n;
 
-	synchronized(parent.getTreeLock()){
-	    insets = parent.getInsets();
-	    if ((components = getComponents(parent)) != null) {
-		cells = components.length;
-		rows = getRowCount(cells);
-		columns = getColumnCount(cells);
-		width = 0;
-		height = 0;
-		for (n = 0; n < components.length; n++) {
-		    switch (type) {
-			case V_MAXIMUMSIZE:
-			    size = components[n].getMaximumSize();
-			    break;
+        synchronized(parent.getTreeLock()){
+            insets = parent.getInsets();
+            if ((components = getComponents(parent)) != null) {
+                cells = components.length;
+                rows = getRowCount(cells);
+                columns = getColumnCount(cells);
+                width = 0;
+                height = 0;
+                for (n = 0; n < components.length; n++) {
+                    switch (type) {
+                        case V_MAXIMUMSIZE:
+                            size = components[n].getMaximumSize();
+                            break;
 
-			case V_MINIMUMSIZE:
-			    size = components[n].getMinimumSize();
-			    break;
+                        case V_MINIMUMSIZE:
+                            size = components[n].getMinimumSize();
+                            break;
 
-			case V_PREFERREDSIZE:
-			default:
-			    size = components[n].getPreferredSize();
-			    break;
-		    }
-		    if (size.width > width)
-			width = size.width;
-		    if (size.height > height)
-			height = size.height;
-		}
-		size = new Dimension(
-		    columns*width + (columns - 1)*getHgap(),
-		    rows*height + (rows - 1)*getVgap()
-		);
-	    } else size = new Dimension(0, 0);
+                        case V_PREFERREDSIZE:
+                        default:
+                            size = components[n].getPreferredSize();
+                            break;
+                    }
+                    if (size.width > width)
+                        width = size.width;
+                    if (size.height > height)
+                        height = size.height;
+                }
+                size = new Dimension(
+                    columns*width + (columns - 1)*getHgap(),
+                    rows*height + (rows - 1)*getVgap()
+                );
+            } else size = new Dimension(0, 0);
 
-	    size.width += insets.left + insets.right;
-	    size.height += insets.top + insets.bottom;
-	}
+            size.width += insets.left + insets.right;
+            size.height += insets.top + insets.bottom;
+        }
 
-	return(size);
+        return(size);
     }
 
 
     private int
     getRowCount(int cells) {
 
-	int  columns;
-	int  rows;
+        int  columns;
+        int  rows;
 
-	columns = getColumns();
-	rows = getRows();
+        columns = getColumns();
+        rows = getRows();
 
-	switch (model) {
-	    case -1:
-		if (rows == 0) {
-		    if (columns > 0)
-			rows = (cells + columns - 1)/columns;
-		    else rows = cells;
-		}
-		break;
+        switch (model) {
+            case -1:
+                if (rows == 0) {
+                    if (columns > 0)
+                        rows = (cells + columns - 1)/columns;
+                    else rows = cells;
+                }
+                break;
 
-	    case 0:
-		if (rows == 0) {
-		    if (columns > 0)
-			rows = (cells + columns - 1)/columns;
-		    else rows = (orientation == YOIX_HORIZONTAL) ? 1 : cells;
-		} else if (orientation == YOIX_HORIZONTAL) {
-		    if (columns > 0  && rows*columns < cells)
-			rows = (cells + columns - 1)/columns;
-		}
-		break;
+            case 0:
+                if (rows == 0) {
+                    if (columns > 0)
+                        rows = (cells + columns - 1)/columns;
+                    else rows = (orientation == YOIX_HORIZONTAL) ? 1 : cells;
+                } else if (orientation == YOIX_HORIZONTAL) {
+                    if (columns > 0  && rows*columns < cells)
+                        rows = (cells + columns - 1)/columns;
+                }
+                break;
 
-	    case 1:
-		if (rows == 0) {
-		    if (columns > 0)
-			rows = (cells + columns - 1)/columns;
-		    else rows = (orientation == YOIX_HORIZONTAL) ? 1 : cells;
-		}
-		break;
-	}
+            case 1:
+                if (rows == 0) {
+                    if (columns > 0)
+                        rows = (cells + columns - 1)/columns;
+                    else rows = (orientation == YOIX_HORIZONTAL) ? 1 : cells;
+                }
+                break;
+        }
 
-	return(Math.max(rows, 1));
+        return(Math.max(rows, 1));
     }
 }
 

@@ -39,772 +39,772 @@ class YoixCompilerSupport
     public static void
     abortBadOperand() {
 
-	VM.abort(BADOPERAND);
+        VM.abort(BADOPERAND);
     }
 
 
     public static void
     abortIllegalJump() {
 
-	//
-	// Eventually should think about this. Error handling and tags will
-	// need attention first.
-	//
+        //
+        // Eventually should think about this. Error handling and tags will
+        // need attention first.
+        //
 
-	VM.abort(ILLEGALJUMP);
+        VM.abort(ILLEGALJUMP);
     }
 
 
     public static void
     abortTypecheck() {
 
-	VM.abort(TYPECHECK);
+        VM.abort(TYPECHECK);
     }
 
 
     public static YoixObject
     assignObject(YoixObject obj, YoixObject dest, int index) {
 
-	//
-	// This duplicates what's currently done when the Yoix interpreter
-	// handles an assignment expression.
-	//
-	// NOTE - the order of the arguments was picked to match what's on
-	// the JVM stack whenever we call this method.
-	//
+        //
+        // This duplicates what's currently done when the Yoix interpreter
+        // handles an assignment expression.
+        //
+        // NOTE - the order of the arguments was picked to match what's on
+        // the JVM stack whenever we call this method.
+        //
 
-	return((YoixObject)dest.put(index, obj, true).clone());
+        return((YoixObject)dest.put(index, obj, true).clone());
     }
 
 
     public static void
     assignObjectVoid(YoixObject obj, YoixObject dest, int index) {
 
-	dest.put(index, obj, true);
+        dest.put(index, obj, true);
     }
 
 
     public static YoixObject
     assignObject(YoixObject lval, YoixObject obj) {
 
-	//
-	// This duplicates what's currently done when the Yoix interpreter
-	// handles an assignment expression.
-	//
-	// NOTE - the order of the arguments was picked to match what's on
-	// the JVM stack whenever we call this method.
-	//
+        //
+        // This duplicates what's currently done when the Yoix interpreter
+        // handles an assignment expression.
+        //
+        // NOTE - the order of the arguments was picked to match what's on
+        // the JVM stack whenever we call this method.
+        //
 
-	return((YoixObject)lval.put(lval.offset(), obj, true).clone());
+        return((YoixObject)lval.put(lval.offset(), obj, true).clone());
     }
 
 
     public static void
     assignObjectVoid(YoixObject lval, YoixObject obj) {
 
-	lval.put(lval.offset(), obj, true);
+        lval.put(lval.offset(), obj, true);
     }
 
 
     public static int
     declareVariable(SimpleNode node, String typename, int index, YoixStack stack) {
 
-	SimpleNode  child;
-	SimpleNode  dnode;
-	SimpleNode  inode;
-	YoixObject  lval;
-	int         offset = -1;
+        SimpleNode  child;
+        SimpleNode  dnode;
+        SimpleNode  inode;
+        YoixObject  lval;
+        int         offset = -1;
 
-	if (VM.isTypename(typename)) {
-	    child = node.getChild(index);
-	    dnode = child.getChild0();
-	    inode = child.getChild1();
-	    lval = YoixBodyBlock.newDvalue(dnode.getChild0().stringValue());
-	    YoixInterpreter.declareVariable(lval, typename, dnode, inode, stack);
-	    if (node.getChild0().type() != NAME)
-		YoixInterpreter.qualifier(node.getChild0(), lval.get(), stack);
-	    offset = lval.offset();
-	} else VM.abort(BADTYPENAME, typename);
+        if (VM.isTypename(typename)) {
+            child = node.getChild(index);
+            dnode = child.getChild0();
+            inode = child.getChild1();
+            lval = YoixBodyBlock.newDvalue(dnode.getChild0().stringValue());
+            YoixInterpreter.declareVariable(lval, typename, dnode, inode, stack);
+            if (node.getChild0().type() != NAME)
+                YoixInterpreter.qualifier(node.getChild0(), lval.get(), stack);
+            offset = lval.offset();
+        } else VM.abort(BADTYPENAME, typename);
 
-	return(offset);
+        return(offset);
     }
 
 
     public static void
     declareVariableVoid(SimpleNode node, String typename, int index, YoixStack stack) {
 
-	SimpleNode  child;
-	SimpleNode  dnode;
-	SimpleNode  inode;
-	YoixObject  lval;
+        SimpleNode  child;
+        SimpleNode  dnode;
+        SimpleNode  inode;
+        YoixObject  lval;
 
-	if (VM.isTypename(typename)) {
-	    child = node.getChild(index);
-	    dnode = child.getChild0();
-	    inode = child.getChild1();
-	    lval = YoixBodyBlock.newDvalue(dnode.getChild0().stringValue());
-	    YoixInterpreter.declareVariable(lval, typename, dnode, inode, stack);
-	    if (node.getChild0().type() != NAME)
-		YoixInterpreter.qualifier(node.getChild0(), lval.resolve(), stack);
-	} else VM.abort(BADTYPENAME, typename);
+        if (VM.isTypename(typename)) {
+            child = node.getChild(index);
+            dnode = child.getChild0();
+            inode = child.getChild1();
+            lval = YoixBodyBlock.newDvalue(dnode.getChild0().stringValue());
+            YoixInterpreter.declareVariable(lval, typename, dnode, inode, stack);
+            if (node.getChild0().type() != NAME)
+                YoixInterpreter.qualifier(node.getChild0(), lval.resolve(), stack);
+        } else VM.abort(BADTYPENAME, typename);
     }
 
 
     public static YoixObject
     expressionArithmetic(YoixObject left, YoixObject right, int op, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushYoixObject(left);
-	stack.pushYoixObject(right);
-	YoixInterpreter.expressionArithmetic(op, stack);
+        stack.pushYoixObject(left);
+        stack.pushYoixObject(right);
+        YoixInterpreter.expressionArithmetic(op, stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     expressionAttribute(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.expressionAttribute(node, stack);
-	return(stack.popYoixObject());
+        YoixInterpreter.expressionAttribute(node, stack);
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     expressionBitwise(YoixObject left, YoixObject right, int op, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushYoixObject(left);
-	stack.pushYoixObject(right);
-	YoixInterpreter.expressionBitwise(op, stack);
+        stack.pushYoixObject(left);
+        stack.pushYoixObject(right);
+        YoixInterpreter.expressionBitwise(op, stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     expressionCast(YoixObject obj, String typename, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushString(typename);
-	stack.pushYoixObject(obj);
-	YoixInterpreter.expressionCast(stack);
+        stack.pushString(typename);
+        stack.pushYoixObject(obj);
+        YoixInterpreter.expressionCast(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     expressionInitializer(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.expressionInitializer(node, stack);
-	return(stack.popYoixObject());
+        YoixInterpreter.expressionInitializer(node, stack);
+        return(stack.popYoixObject());
     }
 
 
     public static boolean
     expressionInstanceof(YoixObject obj, String typename, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushYoixObject(obj);
-	stack.pushString(typename);
-	YoixInterpreter.expressionInstanceof(stack);
+        stack.pushYoixObject(obj);
+        stack.pushString(typename);
+        YoixInterpreter.expressionInstanceof(stack);
 
-	return(stack.popYoixObject().booleanValue());
+        return(stack.popYoixObject().booleanValue());
     }
 
 
     public static YoixObject
     expressionNew(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.expressionNew(node, stack);
-	return(stack.popYoixObject());
+        YoixInterpreter.expressionNew(node, stack);
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     expressionPostDecrement(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPostDecrement(stack);
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPostDecrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPostDecrementVoid(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPostDecrement(stack);
-	stack.popYoixObject();
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPostDecrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     expressionPostDecrement(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPostDecrement(stack);
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPostDecrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPostDecrementVoid(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPostDecrement(stack);
-	stack.popYoixObject();
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPostDecrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     expressionPostIncrement(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPostIncrement(stack);
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPostIncrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPostIncrementVoid(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPostIncrement(stack);
-	stack.popYoixObject();
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPostIncrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     expressionPostIncrement(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPostIncrement(stack);
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPostIncrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPostIncrementVoid(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPostIncrement(stack);
-	stack.popYoixObject();
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPostIncrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     expressionPreDecrement(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPreDecrement(stack);
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPreDecrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPreDecrementVoid(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPreDecrement(stack);
-	stack.popYoixObject();
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPreDecrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     expressionPreDecrement(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPreDecrement(stack);
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPreDecrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPreDecrementVoid(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPreDecrement(stack);
-	stack.popYoixObject();
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPreDecrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     expressionPreIncrement(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPreIncrement(stack);
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPreIncrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPreIncrementVoid(YoixObject lval, YoixStack stack) {
 
-	stack.pushYoixObject(lval);
-	YoixInterpreter.expressionPreIncrement(stack);
-	stack.popYoixObject();
+        stack.pushYoixObject(lval);
+        YoixInterpreter.expressionPreIncrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     expressionPreIncrement(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPreIncrement(stack);
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPreIncrement(stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static void
     expressionPreIncrementVoid(YoixObject dest, int index, YoixStack stack) {
 
-	stack.pushLvalue(dest, index);
-	stack.peekYoixObject().setResolve(true);
-	YoixInterpreter.expressionPreIncrement(stack);
-	stack.popYoixObject();
+        stack.pushLvalue(dest, index);
+        stack.peekYoixObject().setResolve(true);
+        YoixInterpreter.expressionPreIncrement(stack);
+        stack.popYoixObject();
     }
 
 
     public static boolean
     expressionRelational(YoixObject left, YoixObject right, int op, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushYoixObject(left);
-	stack.pushYoixObject(right);
-	YoixInterpreter.expressionRelational(op, stack);
+        stack.pushYoixObject(left);
+        stack.pushYoixObject(right);
+        YoixInterpreter.expressionRelational(op, stack);
 
-	return(stack.popYoixObject().booleanValue());
+        return(stack.popYoixObject().booleanValue());
     }
 
 
     public static boolean
     expressionRERelational(YoixObject left, YoixObject right, int op, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushYoixObject(left);
-	stack.pushYoixObject(right);
-	YoixInterpreter.expressionRERelational(op, stack);
+        stack.pushYoixObject(left);
+        stack.pushYoixObject(right);
+        YoixInterpreter.expressionRERelational(op, stack);
 
-	return(stack.popYoixObject().booleanValue());
+        return(stack.popYoixObject().booleanValue());
     }
 
 
     public static YoixObject
     expressionShift(YoixObject left, YoixObject right, int op, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushYoixObject(left);
-	stack.pushYoixObject(right);
-	YoixInterpreter.expressionShift(op, stack);
+        stack.pushYoixObject(left);
+        stack.pushYoixObject(right);
+        YoixInterpreter.expressionShift(op, stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     expressionUnary(YoixObject right, int op, YoixStack stack) {
 
-	//
-	// NOTE - we also currently ignoring the YoixObject.resolve() call
-	// that's triggered by stack.popRvalue(). Think we can get around
-	// it in YoixCompiler when we start dealing with lvalues.
-	//
+        //
+        // NOTE - we also currently ignoring the YoixObject.resolve() call
+        // that's triggered by stack.popRvalue(). Think we can get around
+        // it in YoixCompiler when we start dealing with lvalues.
+        //
 
-	stack.pushYoixObject(right);
-	YoixInterpreter.expressionUnary(op, stack);
+        stack.pushYoixObject(right);
+        YoixInterpreter.expressionUnary(op, stack);
 
-	return(stack.popYoixObject());
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     functionCall(YoixObject lval, YoixObject argv[], YoixStack stack) {
 
-	YoixObject  tag;
-	int         argc;
-	int         n;
+        YoixObject  tag;
+        int         argc;
+        int         n;
 
-	//
-	// NOTE - we may not be getting an lvalue as the first argument, so
-	// the compiler code might need checking.
-	//
-	// NOTE - the direct call of execute() made here should be OK, but
-	// if there are any problems you can change it to:
-	//
-	//     return((YoixObject)lval.execute(argv).clone());
-	//
-	// Basically all we're doing eliminating one method call and making
-	// the assumption that lval is a pointer.
-	//
+        //
+        // NOTE - we may not be getting an lvalue as the first argument, so
+        // the compiler code might need checking.
+        //
+        // NOTE - the direct call of execute() made here should be OK, but
+        // if there are any problems you can change it to:
+        //
+        //     return((YoixObject)lval.execute(argv).clone());
+        //
+        // Basically all we're doing eliminating one method call and making
+        // the assumption that lval is a pointer.
+        //
 
-	if ((argc = argv.length) > 0) {
-	    for (n = 0; n < argc; n++) {
-		if (argv[n].canUnroll()) {
-		    argv = YoixMisc.unrollArray(argv);
-		    break;
-		}
-	    }
-	}
+        if ((argc = argv.length) > 0) {
+            for (n = 0; n < argc; n++) {
+                if (argv[n].canUnroll()) {
+                    argv = YoixMisc.unrollArray(argv);
+                    break;
+                }
+            }
+        }
 
-	if ((tag = stack.peekYoixObject(null)) != null) {
-	    if (tag.isTag() && lval.isFunctionPointer())
-		((YoixBodyTag)tag.body()).setFunctionName(lval.name());
-	}
+        if ((tag = stack.peekYoixObject(null)) != null) {
+            if (tag.isTag() && lval.isFunctionPointer())
+                ((YoixBodyTag)tag.body()).setFunctionName(lval.name());
+        }
 
-	return((YoixObject)(((YoixInterfacePointer)lval.value[0]).execute(lval.offset(), argv, lval).clone()));
-	
+        return((YoixObject)(((YoixInterfacePointer)lval.value[0]).execute(lval.offset(), argv, lval).clone()));
+        
     }
 
 
     public static YoixObject
     lvalue(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.lvalue(node, stack);
-	return(stack.popYoixObject());
+        YoixInterpreter.lvalue(node, stack);
+        return(stack.popYoixObject());
     }
 
 
     public static YoixObject
     lvalueByExpression(YoixObject left, YoixObject right) {
 
-	YoixObject  lval = null;
+        YoixObject  lval = null;
 
-	left.resolve();
+        left.resolve();
 
-	if (right.isInteger()) {
-	    lval = YoixObject.newLvalue(left, left.offset() + right.intValue());
-	    lval.setResolve(true);
-	} else if (right.isString()) {
-	    lval = YoixObject.newLvalue(left, right.stringValue());
-	    lval.setResolve(true);
-	} else VM.abort(TYPECHECK);
+        if (right.isInteger()) {
+            lval = YoixObject.newLvalue(left, left.offset() + right.intValue());
+            lval.setResolve(true);
+        } else if (right.isString()) {
+            lval = YoixObject.newLvalue(left, right.stringValue());
+            lval.setResolve(true);
+        } else VM.abort(TYPECHECK);
 
-	return(lval);
+        return(lval);
     }
 
 
     public static YoixObject
     lvalueByName(YoixObject obj, String name) {
 
-	YoixObject  lval;
+        YoixObject  lval;
 
-	lval = YoixObject.newLvalue(obj.resolve(), name);
-	lval.setResolve(true);
+        lval = YoixObject.newLvalue(obj.resolve(), name);
+        lval.setResolve(true);
 
-	return(lval);
+        return(lval);
     }
 
 
     public static void
     lvalueIncrement(int incr, YoixObject lval) {
 
-	lval.incrementLvalue(incr);
+        lval.incrementLvalue(incr);
     }
 
 
     public static YoixObject
     newBlockLvalue(String name) {
 
-	return(YoixBodyBlock.newLvalue(name));
+        return(YoixBodyBlock.newLvalue(name));
     }
 
 
     public static YoixObject
     newBlockLvalue(int level, int offset) {
 
-	return(YoixBodyBlock.newLvalue(level, offset));
+        return(YoixBodyBlock.newLvalue(level, offset));
     }
 
 
     public static YoixObject
     newGlobalLvalue() {
 
-	YoixObject  lval;
+        YoixObject  lval;
 
-	lval = YoixObject.newLvalue(YoixBodyBlock.getGlobal(), 0);
-	lval.setResolve(false);
+        lval = YoixObject.newLvalue(YoixBodyBlock.getGlobal(), 0);
+        lval.setResolve(false);
 
-	return(lval);
+        return(lval);
     }
 
 
     public static YoixObject
     newThisLvalue() {
 
-	YoixObject  lval;
+        YoixObject  lval;
 
-	lval = YoixObject.newLvalue(YoixBodyBlock.getThis(), 0);
-	lval.setResolve(false);
+        lval = YoixObject.newLvalue(YoixBodyBlock.getThis(), 0);
+        lval.setResolve(false);
 
-	return(lval);
+        return(lval);
     }
 
 
     public static int
     pickSwitchStatementIndex(SimpleNode node, YoixObject expr) {
 
-	//
-	// This method probably can be eliminated (assuming permissions of
-	// the real version are OK).
-	//
+        //
+        // This method probably can be eliminated (assuming permissions of
+        // the real version are OK).
+        //
 
-	return(YoixInterpreter.pickSwitchStatementIndex(node, expr));
+        return(YoixInterpreter.pickSwitchStatementIndex(node, expr));
     }
 
 
     public static void
     popForEachBlock(YoixStack stack) {
 
-	//
-	// Unfortunately this method can now provide access to the stack
-	// that wasn't previously available - investigate later.
-	// 
+        //
+        // Unfortunately this method can now provide access to the stack
+        // that wasn't previously available - investigate later.
+        // 
 
-	stack.popBlock();
+        stack.popBlock();
     }
 
 
     public static void
     popTag(YoixStack stack) {
 
-	stack.popYoixObject();
+        stack.popYoixObject();
     }
 
 
     public static YoixObject
     pushForEachBlock(YoixObject obj, String name, YoixStack stack) {
 
-	stack.pushForEachBlock(name, (YoixObject)obj.clone());
-	return(YoixBodyBlock.getBlockValues(0));
+        stack.pushForEachBlock(name, (YoixObject)obj.clone());
+        return(YoixBodyBlock.getBlockValues(0));
     }
 
 
     public static void
     pushTag(SimpleNode node, YoixStack stack) {
 
-	stack.pushYoixObjectClone(node.getTaggedLocation());
-	if (VM.bitCheck(N_DEBUG, DEBUG_TAGGEDSTATEMENT))
-	    VM.print(N_STDOUT, stack.peekYoixObject());
+        stack.pushYoixObjectClone(node.getTaggedLocation());
+        if (VM.bitCheck(N_DEBUG, DEBUG_TAGGEDSTATEMENT))
+            VM.print(N_STDOUT, stack.peekYoixObject());
     }
 
 
     public static YoixObject
     statementBeginCompound(SimpleNode node, YoixStack stack) {
 
-	YoixObject  names;
-	YoixObject  values;
+        YoixObject  names;
+        YoixObject  values;
 
-	//
-	// Unfortunately this method can now provide access to the stack
-	// that wasn't previously available - investigate later.
-	// 
+        //
+        // Unfortunately this method can now provide access to the stack
+        // that wasn't previously available - investigate later.
+        // 
 
-	names = node.getLocalDict();
-	values = YoixObject.newArray(names.length());
-	stack.pushLocalBlock(names, values, false);
-	return(values);
+        names = node.getLocalDict();
+        values = YoixObject.newArray(names.length());
+        stack.pushLocalBlock(names, values, false);
+        return(values);
     }
 
 
     public static void
     statementEndCompound(YoixStack stack) {
 
-	//
-	// Unfortunately this method can now provide access to the stack
-	// that wasn't previously available - investigate later.
-	// 
+        //
+        // Unfortunately this method can now provide access to the stack
+        // that wasn't previously available - investigate later.
+        // 
 
-	stack.popBlock();
+        stack.popBlock();
     }
 
 
     public static void
     statementEOF(YoixStack stack) {
 
-	stack.jumpToEOF();
+        stack.jumpToEOF();
     }
 
 
     public static void
     statementExit(YoixObject value, YoixStack stack) {
 
-	stack.pushYoixObject(value);
-	stack.jumpToExit();
+        stack.pushYoixObject(value);
+        stack.jumpToExit();
     }
 
 
     public static void
     statementFinally(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementFinally(node, stack);
+        YoixInterpreter.statementFinally(node, stack);
     }
 
 
     public static void
     statementFunction(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementFunction(node, stack);
+        YoixInterpreter.statementFunction(node, stack);
     }
 
 
     public static void
     statementImport(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementImport(node, stack);
+        YoixInterpreter.statementImport(node, stack);
     }
 
 
     public static void
     statementInclude(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementInclude(node, stack);
+        YoixInterpreter.statementInclude(node, stack);
     }
 
 
     public static void
     statementNamedBlock(SimpleNode node, int type, YoixStack stack) {
 
-	YoixInterpreter.statementNamedBlock(node, type, stack);
+        YoixInterpreter.statementNamedBlock(node, type, stack);
     }
 
 
     public static void
     statementQualifier(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementQualifier(node, stack);
+        YoixInterpreter.statementQualifier(node, stack);
     }
 
 
     public static void
     statementSave(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementSave(node, stack);
+        YoixInterpreter.statementSave(node, stack);
     }
 
 
     public static void
     statementSynchronized(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementSynchronized(node, stack);
+        YoixInterpreter.statementSynchronized(node, stack);
     }
 
 
     public static void
     statementTry(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementTry(node, stack);
+        YoixInterpreter.statementTry(node, stack);
     }
 
 
     public static void
     statementTypedef(SimpleNode node, YoixStack stack) {
 
-	YoixInterpreter.statementTypedef(node, stack);
+        YoixInterpreter.statementTypedef(node, stack);
     }
 
 
     public static void
     storeDouble(double value, YoixObject dest, int index) {
 
-	//
-	// The isPointer() check is probably unnecessary. Also eventaully
-	// may consider adding a "void" version of put to the classes that
-	// implement YoixInterfacePointer.
-	//
+        //
+        // The isPointer() check is probably unnecessary. Also eventaully
+        // may consider adding a "void" version of put to the classes that
+        // implement YoixInterfacePointer.
+        //
 
-	if (dest.isPointer())
-	    ((YoixInterfacePointer)dest.value[0]).put(index, YoixObject.newDouble(value), false);
-	else VM.abort(TYPECHECK);
+        if (dest.isPointer())
+            ((YoixInterfacePointer)dest.value[0]).put(index, YoixObject.newDouble(value), false);
+        else VM.abort(TYPECHECK);
     }
 
 
     public static void
     storeInt(int value, YoixObject dest, int index) {
 
-	//
-	// The isPointer() check is probably unnecessary. Also eventaully
-	// may consider adding a "void" version of put to the classes that
-	// implement YoixInterfacePointer.
-	//
+        //
+        // The isPointer() check is probably unnecessary. Also eventaully
+        // may consider adding a "void" version of put to the classes that
+        // implement YoixInterfacePointer.
+        //
 
-	if (dest.isPointer())
-	    ((YoixInterfacePointer)dest.value[0]).put(index, YoixObject.newInt(value), false);
-	else VM.abort(TYPECHECK);
+        if (dest.isPointer())
+            ((YoixInterfacePointer)dest.value[0]).put(index, YoixObject.newInt(value), false);
+        else VM.abort(TYPECHECK);
     }
 
 
     public static void
     storeObject(YoixObject obj, YoixObject dest, int index) {
 
-	//
-	// The isPointer() check is probably unnecessary. Also eventaully
-	// may consider adding a "void" version of put to the classes that
-	// implement YoixInterfacePointer.
-	//
+        //
+        // The isPointer() check is probably unnecessary. Also eventaully
+        // may consider adding a "void" version of put to the classes that
+        // implement YoixInterfacePointer.
+        //
 
-	if (dest.isPointer())
-	    ((YoixInterfacePointer)dest.value[0]).put(index, obj != null ? obj : YoixObject.newNull(), false);
-	else VM.abort(TYPECHECK);
+        if (dest.isPointer())
+            ((YoixInterfacePointer)dest.value[0]).put(index, obj != null ? obj : YoixObject.newNull(), false);
+        else VM.abort(TYPECHECK);
     }
 
 
     public static void
     typecheckIfNotPointer(YoixObject obj) {
 
-	if (obj.isPointer() == false)
-	    VM.abort(TYPECHECK);
+        if (obj.isPointer() == false)
+            VM.abort(TYPECHECK);
     }
 }
 

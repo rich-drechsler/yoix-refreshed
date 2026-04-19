@@ -18,8 +18,8 @@ import javax.swing.*;
 class YoixSwingJPanel extends JPanel
 
     implements YoixConstants,
-	       YoixConstantsImage,
-	       YoixInterfaceDrawable
+               YoixConstantsImage,
+               YoixInterfaceDrawable
 
 {
 
@@ -58,8 +58,8 @@ class YoixSwingJPanel extends JPanel
 
     YoixSwingJPanel(YoixObject data, YoixBodyComponent parent) {
 
-	this.parent = parent;
-	this.data = data;
+        this.parent = parent;
+        this.data = data;
     }
 
     ///////////////////////////////////
@@ -71,103 +71,103 @@ class YoixSwingJPanel extends JPanel
     public Graphics
     getPaintGraphics() {
 
-	Component  components[];
-	Graphics   g;
-	Shape      clip;
-	Area       area;
-	Area       mask;
+        Component  components[];
+        Graphics   g;
+        Shape      clip;
+        Area       area;
+        Area       mask;
 
-	if ((g = paintgraphics) == null || Thread.currentThread() != paintthread) {
-	    if ((g = super.getGraphics()) != null) {
-		if ((mask = YoixMiscJFC.getComponentMask(this)) != null) {
-		    if ((clip = g.getClip()) != null)
-			area = new Area(clip);
-		    else area = new Area(new Rectangle(getSize()));
-		    area.subtract(mask);
-		    g.setClip(area);
-		}
-	    }
-	} else g = g.create();
-	return(g);
+        if ((g = paintgraphics) == null || Thread.currentThread() != paintthread) {
+            if ((g = super.getGraphics()) != null) {
+                if ((mask = YoixMiscJFC.getComponentMask(this)) != null) {
+                    if ((clip = g.getClip()) != null)
+                        area = new Area(clip);
+                    else area = new Area(new Rectangle(getSize()));
+                    area.subtract(mask);
+                    g.setClip(area);
+                }
+            }
+        } else g = g.create();
+        return(g);
     }
 
 
     public boolean
     isDrawable() {
 
-	return(true);
+        return(true);
     }
 
 
     public boolean
     isPaintable() {
 
-	return(true);
+        return(true);
     }
 
 
     public boolean
     isTileable() {
 
-	return(true);
+        return(true);
     }
 
 
     public void
     paintBackground(Graphics g) {
 
-	//
-	// A recent change (6/17/05) now always clears the background if
-	// backgroundimage exists. Older versions didn't bother clearing
-	// it if there was a backgroundimage that also painted the entire
-	// background. The check was only for efficiency, but transparent
-	// images caused problems.
-	//
+        //
+        // A recent change (6/17/05) now always clears the background if
+        // backgroundimage exists. Older versions didn't bother clearing
+        // it if there was a backgroundimage that also painted the entire
+        // background. The check was only for efficiency, but transparent
+        // images caused problems.
+        //
 
-	if (backgroundimage != null || isOpaque())
-	    YoixMiscJFC.paintBackground(this, g);
+        if (backgroundimage != null || isOpaque())
+            YoixMiscJFC.paintBackground(this, g);
     }
 
 
     public void
     paintBackgroundImage(Graphics g) {
 
-	Image  image;
+        Image  image;
 
-	if (backgroundimage != null) {
-	    if ((image = getFilteredImage(backgroundhints)) != null)
-		YoixMiscJFC.paintImage(this, image, backgroundhints, g);
-	}
+        if (backgroundimage != null) {
+            if ((image = getFilteredImage(backgroundhints)) != null)
+                YoixMiscJFC.paintImage(this, image, backgroundhints, g);
+        }
     }
 
 
     public final synchronized void
     setBackgroundHints(int hints) {
 
-	if (this.backgroundhints != hints) {
-	    this.backgroundhints = hints;
-	    this.filteredimage = null;
-	    repaint();
-	}
+        if (this.backgroundhints != hints) {
+            this.backgroundhints = hints;
+            this.filteredimage = null;
+            repaint();
+        }
     }
 
 
     public final synchronized void
     setBackgroundImage(Image image) {
 
-	if (this.backgroundimage != image) {
-	    this.backgroundimage = image;
-	    this.filteredimage = null;
-	    repaint();
-	}
+        if (this.backgroundimage != image) {
+            this.backgroundimage = image;
+            this.filteredimage = null;
+            repaint();
+        }
     }
 
 
     public synchronized void
     setPaint(YoixObject obj) {
 
-	if (isPaintable())
-	    paint = obj.notNull() ? obj : null;
+        if (isPaintable())
+            paint = obj.notNull() ? obj : null;
     }
 
     ///////////////////////////////////
@@ -179,146 +179,146 @@ class YoixSwingJPanel extends JPanel
     protected void
     finalize() {
 
-	Graphics  g;
+        Graphics  g;
 
-	data = null;
-	parent = null;
-	backgroundimage = null;
-	filteredimage = null;
-	paint = null;
-	paintthread = null;
-	if ((g = paintgraphics) != null) {
-	    g.dispose();
-	    paintgraphics = null;
-	}
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        parent = null;
+        backgroundimage = null;
+        filteredimage = null;
+        paint = null;
+        paintthread = null;
+        if ((g = paintgraphics) != null) {
+            g.dispose();
+            paintgraphics = null;
+        }
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     protected Image
     getFilteredImage(int hints) {
 
-	Dimension  size;
-	Image      image;
-	int        height;
-	int        width;
+        Dimension  size;
+        Image      image;
+        int        height;
+        int        width;
 
-	//
-	// Old versions always synchronized, but as a precaution we decided
-	// the most common case (no background image) shouldn't bother. We
-	// wanted to avoid any chance of deadlock, despite the fact that we
-	// had no evidence the old implementation caused problems.
-	//
+        //
+        // Old versions always synchronized, but as a precaution we decided
+        // the most common case (no background image) shouldn't bother. We
+        // wanted to avoid any chance of deadlock, despite the fact that we
+        // had no evidence the old implementation caused problems.
+        //
 
-	if (backgroundimage != null) {
-	    synchronized(this) {
-		image = (filteredimage != null) ? filteredimage : backgroundimage;
-		if (image != null) {
-		    size = getSize();
-		    height = image.getHeight(null);
-		    width = image.getWidth(null);
-		    if ((hints & YOIX_SCALE_TILE) == 0) {
-			if ((hints & YOIX_SCALE_NONE) == 0) {
-			    if (size.height != height || size.width != width) {
-				image = IMAGEOBSERVER.scaleImage(
-				    image,
-				    size.width,
-				    size.height,
-				    hints,
-				    null
-				);
-			    }
-			}
-		    }
-		    filteredimage = image;
-		}
-	    }
-	} else image = null;
+        if (backgroundimage != null) {
+            synchronized(this) {
+                image = (filteredimage != null) ? filteredimage : backgroundimage;
+                if (image != null) {
+                    size = getSize();
+                    height = image.getHeight(null);
+                    width = image.getWidth(null);
+                    if ((hints & YOIX_SCALE_TILE) == 0) {
+                        if ((hints & YOIX_SCALE_NONE) == 0) {
+                            if (size.height != height || size.width != width) {
+                                image = IMAGEOBSERVER.scaleImage(
+                                    image,
+                                    size.width,
+                                    size.height,
+                                    hints,
+                                    null
+                                );
+                            }
+                        }
+                    }
+                    filteredimage = image;
+                }
+            }
+        } else image = null;
 
-	return(image);
+        return(image);
     }
 
 
     protected Dimension
     getLayoutSize(String name, Dimension size) {
 
-	YoixObject  obj;
-	Dimension   defaultsize;
+        YoixObject  obj;
+        Dimension   defaultsize;
 
-	if ((obj = data.getObject(name)) != null && obj.notNull()) {
-	    defaultsize = size;
-	    size = YoixMakeScreen.javaDimension(obj);
-	    if (size.width <= 0 || size.height <= 0) {
-		if (size.width < 0 || (size.width == 0 && name.equals(N_PREFERREDSIZE)))
-		    size.width = (defaultsize != null) ? defaultsize.width : 0;
-		if (size.height < 0 || (size.height == 0 && name.equals(N_PREFERREDSIZE)))
-		    size.height = (defaultsize != null) ? defaultsize.height : 0;
-	    }
-	}
+        if ((obj = data.getObject(name)) != null && obj.notNull()) {
+            defaultsize = size;
+            size = YoixMakeScreen.javaDimension(obj);
+            if (size.width <= 0 || size.height <= 0) {
+                if (size.width < 0 || (size.width == 0 && name.equals(N_PREFERREDSIZE)))
+                    size.width = (defaultsize != null) ? defaultsize.width : 0;
+                if (size.height < 0 || (size.height == 0 && name.equals(N_PREFERREDSIZE)))
+                    size.height = (defaultsize != null) ? defaultsize.height : 0;
+            }
+        }
 
-	return(size);
+        return(size);
     }
 
 
     public final Dimension
     getMaximumSize() {
 
-	return(getLayoutSize(N_MAXIMUMSIZE, super.getMaximumSize()));
+        return(getLayoutSize(N_MAXIMUMSIZE, super.getMaximumSize()));
     }
 
 
     public final Dimension
     getMinimumSize() {
 
-	return(getLayoutSize(N_MINIMUMSIZE, super.getMinimumSize()));
+        return(getLayoutSize(N_MINIMUMSIZE, super.getMinimumSize()));
     }
 
 
     public final Dimension
     getPreferredSize() {
 
-	return(getLayoutSize(N_PREFERREDSIZE, super.getPreferredSize()));
+        return(getLayoutSize(N_PREFERREDSIZE, super.getPreferredSize()));
     }
 
 
     public void
     paint(Graphics g) {
 
-	paintBackground(g);
-	paintBackgroundImage(g);
-	paintCallback(g);
-	paintChildren(g);
-	paintBorder(g);
+        paintBackground(g);
+        paintBackgroundImage(g);
+        paintCallback(g);
+        paintChildren(g);
+        paintBorder(g);
     }
 
 
     protected final void
     paintCallback(Graphics g) {
 
-	YoixObject  funct;
-	YoixObject  argv[];
-	Rectangle   bounds;
+        YoixObject  funct;
+        YoixObject  argv[];
+        Rectangle   bounds;
 
-	if ((funct = paint) != null && funct.notNull()) {
-	    if (funct.callable(1)) {
-		bounds = g.getClipBounds();
-		if (bounds == null || getSize().equals(bounds.getSize()))
-		    argv = new YoixObject[] {YoixObject.newNull()};
-	        else argv = new YoixObject[] {YoixMake.yoixBBox(bounds, getCTMBody())};
-	    } else argv = new YoixObject[0];
-	    try {
-		paintgraphics = g;
-		paintthread = Thread.currentThread();
-		parent.call(funct, argv);
-	    }
-	    finally {
-		paintthread = null;
-		paintgraphics = null;
-	    }
-	}
+        if ((funct = paint) != null && funct.notNull()) {
+            if (funct.callable(1)) {
+                bounds = g.getClipBounds();
+                if (bounds == null || getSize().equals(bounds.getSize()))
+                    argv = new YoixObject[] {YoixObject.newNull()};
+                else argv = new YoixObject[] {YoixMake.yoixBBox(bounds, getCTMBody())};
+            } else argv = new YoixObject[0];
+            try {
+                paintgraphics = g;
+                paintthread = Thread.currentThread();
+                parent.call(funct, argv);
+            }
+            finally {
+                paintthread = null;
+                paintgraphics = null;
+            }
+        }
     }
 
     ///////////////////////////////////
@@ -330,14 +330,14 @@ class YoixSwingJPanel extends JPanel
     private YoixBodyMatrix
     getCTMBody() {
 
-	YoixObject  graphics;
-	YoixObject  mtx;
+        YoixObject  graphics;
+        YoixObject  mtx;
 
-	if ((graphics = data.getObject(N_GRAPHICS)) != null) {
-	    if ((mtx = graphics.getObject(N_CTM)) == null)
-		mtx = VM.getDefaultMatrix();
-	} else mtx = VM.getDefaultMatrix();
-	return((YoixBodyMatrix)mtx.body());
+        if ((graphics = data.getObject(N_GRAPHICS)) != null) {
+            if ((mtx = graphics.getObject(N_CTM)) == null)
+                mtx = VM.getDefaultMatrix();
+        } else mtx = VM.getDefaultMatrix();
+        return((YoixBodyMatrix)mtx.body());
     }
 }
 

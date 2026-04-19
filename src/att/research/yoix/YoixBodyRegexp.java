@@ -41,8 +41,8 @@ class YoixBodyRegexp extends YoixPointerActive
     private static HashMap  activefields = new HashMap(5);
 
     static {
-	activefields.put(N_PATTERN, new Integer(V_PATTERN));
-	activefields.put(N_TYPE, new Integer(V_TYPE));
+        activefields.put(N_PATTERN, new Integer(V_PATTERN));
+        activefields.put(N_TYPE, new Integer(V_TYPE));
     }
 
     ///////////////////////////////////
@@ -53,10 +53,10 @@ class YoixBodyRegexp extends YoixPointerActive
 
     YoixBodyRegexp(YoixObject data) {
 
-	super(data);
-	buildRegexp();
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        buildRegexp();
+        setFixedSize();
+        setPermissions(permissions);
     }
 
     ///////////////////////////////////
@@ -68,7 +68,7 @@ class YoixBodyRegexp extends YoixPointerActive
     public final int
     type() {
 
-	return(REGEXP);
+        return(REGEXP);
     }
 
     ///////////////////////////////////
@@ -80,44 +80,44 @@ class YoixBodyRegexp extends YoixPointerActive
     protected final void
     finalize() {
 
-	regexp = null;
-	super.finalize();
+        regexp = null;
+        super.finalize();
     }
 
 
     protected final synchronized Object
     getManagedObject() {
 
-	String  pat;
-	int     flags;
+        String  pat;
+        int     flags;
 
-	if (regexp == null) {
-	    pat = data.getString(N_PATTERN, null);
-	    flags = data.getInt(N_TYPE, SINGLE_BYTE);
-	    if ((regexp = new YoixRERegexp(pat, flags)) == null)	// impossible??
-		VM.abort(BADVALUE, N_PATTERN);
-	}
+        if (regexp == null) {
+            pat = data.getString(N_PATTERN, null);
+            flags = data.getInt(N_TYPE, SINGLE_BYTE);
+            if ((regexp = new YoixRERegexp(pat, flags)) == null)	// impossible??
+                VM.abort(BADVALUE, N_PATTERN);
+        }
 
-	return(regexp);
+        return(regexp);
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	if (obj != null) {
-	    switch (activeField(name, activefields)) {
-		case V_PATTERN:
-		    setPattern(obj);
-		    break;
+        if (obj != null) {
+            switch (activeField(name, activefields)) {
+                case V_PATTERN:
+                    setPattern(obj);
+                    break;
 
-		case V_TYPE:
-		    setType(obj);
-		    break;
-	    }
-	}
+                case V_TYPE:
+                    setType(obj);
+                    break;
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -129,30 +129,30 @@ class YoixBodyRegexp extends YoixPointerActive
     private void
     buildRegexp() {
 
-	regexp = null;
-	setField(N_PATTERN);
-	setField(N_TYPE);
+        regexp = null;
+        setField(N_PATTERN);
+        setField(N_TYPE);
     }
 
 
     private synchronized void
     setPattern(YoixObject obj) {
 
-	if (obj.notNull()) {
-	    obj = YoixObject.newString(obj.stringValue());
-	    obj.setAccessBody(LR__);
-	    data.put(N_PATTERN, obj);
-	}
+        if (obj.notNull()) {
+            obj = YoixObject.newString(obj.stringValue());
+            obj.setAccessBody(LR__);
+            data.put(N_PATTERN, obj);
+        }
 
-	regexp = null;
+        regexp = null;
     }
 
 
     private synchronized void
     setType(YoixObject obj) {
 
-	data.putInt(N_TYPE, obj.intValue()&REFLAGS_MASK);
-	regexp = null;
+        data.putInt(N_TYPE, obj.intValue()&REFLAGS_MASK);
+        regexp = null;
     }
 
 }

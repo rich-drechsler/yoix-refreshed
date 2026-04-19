@@ -40,9 +40,9 @@ class DataPartition
 
     DataPartition(Object data, int id, DataGenerator generator) {
 
-	this.data = data;
-	this.id = id;
-	this.generator = generator;
+        this.data = data;
+        this.id = id;
+        this.generator = generator;
     }
 
     ///////////////////////////////////
@@ -54,55 +54,55 @@ class DataPartition
     final Object
     changeField(Object value) {
 
-	Object  ovalue = data;
+        Object  ovalue = data;
 
-	data = value;
-	return(ovalue);
+        data = value;
+        return(ovalue);
     }
 
 
     final String
     getField() {
 
-	String  value;
+        String  value;
 
-	if (data instanceof String) {
-	    if (generator != null)
-		translate();
-	    value = (String)data;
-	} else if (data instanceof Number)
-	    value = data.toString();
-	else value = null;
+        if (data instanceof String) {
+            if (generator != null)
+                translate();
+            value = (String)data;
+        } else if (data instanceof Number)
+            value = data.toString();
+        else value = null;
 
-	return(value);
+        return(value);
     }
 
 
     final String
     getField(int partition) {
 
-	return(partition == id ? getField() : null);
+        return(partition == id ? getField() : null);
     }
 
 
     final double
     getValue() {
 
-	return(data instanceof Number ? ((Number)data).doubleValue() : Double.NaN);
+        return(data instanceof Number ? ((Number)data).doubleValue() : Double.NaN);
     }
 
 
     final double
     getValue(int partition) {
 
-	return(partition == id ? getValue() : Double.NaN);
+        return(partition == id ? getValue() : Double.NaN);
     }
 
 
     public String
     toString() {
 
-	return(data != null ? data.toString() : "null");
+        return(data != null ? data.toString() : "null");
     }
 
     ///////////////////////////////////
@@ -114,10 +114,10 @@ class DataPartition
     private synchronized void
     translate() {
 
-	if (generator != null) {
-	    data = generator.translate((String)data);
-	    generator = null;
-	}
+        if (generator != null) {
+            data = generator.translate((String)data);
+            generator = null;
+        }
     }
 }
 

@@ -17,7 +17,7 @@ abstract
 class YoixBodyDictionary extends YoixPointer
 
     implements YoixConstants,
-	       YoixInterfaceBody
+               YoixInterfaceBody
 
 {
 
@@ -30,21 +30,21 @@ class YoixBodyDictionary extends YoixPointer
     public final String
     dump() {
 
-	return(dump(0, "", null));
+        return(dump(0, "", null));
     }
 
 
     public final String
     toString() {
 
-	return(dump());
+        return(dump());
     }
 
 
     public final int
     type() {
 
-	return(DICTIONARY);
+        return(DICTIONARY);
     }
 
     ///////////////////////////////////

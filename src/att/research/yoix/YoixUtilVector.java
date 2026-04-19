@@ -27,7 +27,7 @@ class YoixUtilVector extends Vector
 
     YoixUtilVector(int capacity) {
 
-	super(Math.max(capacity, 0));
+        super(Math.max(capacity, 0));
     }
 
     ///////////////////////////////////
@@ -39,292 +39,292 @@ class YoixUtilVector extends Vector
     final synchronized boolean
     containsYoixObject(int index) {
 
-	return(getYoixObject(index) != null);
+        return(getYoixObject(index) != null);
     }
 
 
     final synchronized boolean
     containsYoixObject(YoixObject value) {
 
-	return(findYoixObjectIndex(value) >= 0);
+        return(findYoixObjectIndex(value) >= 0);
     }
 
 
     final synchronized Vector
     findYoixObject(YoixObject target) {
 
-	Object  element;
-	Vector  result;
-	int     n;
+        Object  element;
+        Vector  result;
+        int     n;
 
-	result = new Vector();
+        result = new Vector();
 
-	if (target != null) {
-	    for (n = 0; n < elementCount; n++) {
-		if ((element = elementData[n]) != null) {
-		    if (element instanceof YoixObject) {
-			if (YoixInterpreter.equalsEQEQ(target, (YoixObject)element))
-			    result.addElement(YoixObject.newInt(n));
-		    }
-		}
-	    }
-	}
+        if (target != null) {
+            for (n = 0; n < elementCount; n++) {
+                if ((element = elementData[n]) != null) {
+                    if (element instanceof YoixObject) {
+                        if (YoixInterpreter.equalsEQEQ(target, (YoixObject)element))
+                            result.addElement(YoixObject.newInt(n));
+                    }
+                }
+            }
+        }
 
-	return(result);
+        return(result);
     }
 
 
     final synchronized YoixObject
     firstYoixObject() {
 
-	return(getYoixObject(0));
+        return(getYoixObject(0));
     }
 
 
     final synchronized void
     firstYoixObject(YoixObject value) {
 
-	insertYoixObject(0, value);
+        insertYoixObject(0, value);
     }
 
 
     final synchronized Vector
     getYoixObject() {
 
-	Object  element;
-	Vector  result;
-	int     n;
+        Object  element;
+        Vector  result;
+        int     n;
 
-	result = new Vector(elementCount);
+        result = new Vector(elementCount);
 
-	for (n = 0; n < elementCount; n++) {
-	    element = elementData[n];
-	    result.addElement(element instanceof YoixObject ? element : null);
-	}
+        for (n = 0; n < elementCount; n++) {
+            element = elementData[n];
+            result.addElement(element instanceof YoixObject ? element : null);
+        }
 
-	return(result);
+        return(result);
     }
 
 
     final synchronized YoixObject
     getYoixObject(int index) {
 
-	Object  element;
+        Object  element;
 
-	if (index >= 0 && index < elementCount) {
-	    element = elementData[index];
-	    if (!(element instanceof YoixObject))
-		element = null;
-	} else element = null;
+        if (index >= 0 && index < elementCount) {
+            element = elementData[index];
+            if (!(element instanceof YoixObject))
+                element = null;
+        } else element = null;
 
-	return((YoixObject)element);
+        return((YoixObject)element);
     }
 
 
     final synchronized int
     getYoixObjectElementCount() {
 
-	Object  element;
-	int     count = 0;
-	int     n;
+        Object  element;
+        int     count = 0;
+        int     n;
 
-	for (n = 0; n < elementCount; n++) {
-	    element = elementData[n];
-	    if (element instanceof YoixObject)
-		count++;
-	}
+        for (n = 0; n < elementCount; n++) {
+            element = elementData[n];
+            if (element instanceof YoixObject)
+                count++;
+        }
 
-	return(count);
+        return(count);
     }
 
 
     final synchronized Vector
     getYoixObjectElements() {
 
-	Object  element;
-	Vector  result;
-	int     n;
+        Object  element;
+        Vector  result;
+        int     n;
 
-	result = new Vector();
+        result = new Vector();
 
-	for (n = 0; n < elementCount; n++) {
-	    element = elementData[n];
-	    if (element instanceof YoixObject)
-		result.addElement(element);
-	}
+        for (n = 0; n < elementCount; n++) {
+            element = elementData[n];
+            if (element instanceof YoixObject)
+                result.addElement(element);
+        }
 
-	return(result);
+        return(result);
     }
 
 
     final synchronized int
     getYoixObjectSize() {
 
-	return(size());
+        return(size());
     }
 
 
     final synchronized int
     insertYoixObject(YoixObject pairs[]) {
 
-	YoixObject  loc;
-	YoixObject  value;
-	int         count = 0;
-	int         n;
+        YoixObject  loc;
+        YoixObject  value;
+        int         count = 0;
+        int         n;
 
-	for (n = 0; n < pairs.length - 1; n += 2) {
-	    loc = pairs[n];
-	    value = pairs[n + 1];
-	    if (loc != null && value != null) {
-		if (loc.isInteger()) {
-		    if (insertYoixObject(loc.intValue(), value))
-			count++;
-		}
-	    }
-	}
+        for (n = 0; n < pairs.length - 1; n += 2) {
+            loc = pairs[n];
+            value = pairs[n + 1];
+            if (loc != null && value != null) {
+                if (loc.isInteger()) {
+                    if (insertYoixObject(loc.intValue(), value))
+                        count++;
+                }
+            }
+        }
 
-	return(count);
+        return(count);
     }
 
 
     final synchronized boolean
     insertYoixObject(int index, YoixObject value) {
 
-	if (index >= 0) {
-	    if (index > elementCount)
-		setSize(index);
-	    insertElementAt(value, index);
-	}
+        if (index >= 0) {
+            if (index > elementCount)
+                setSize(index);
+            insertElementAt(value, index);
+        }
 
-	return(index >= 0);
+        return(index >= 0);
     }
 
 
     final synchronized YoixObject
     lastYoixObject() {
 
-	return(getYoixObject(elementCount - 1));
+        return(getYoixObject(elementCount - 1));
     }
 
 
     final synchronized void
     lastYoixObject(YoixObject value) {
 
-	putYoixObject(elementCount, value);
+        putYoixObject(elementCount, value);
     }
 
 
     final synchronized void
     loadYoixObject(YoixObject obj) {
 
-	int  length;
-	int  m;
-	int  n;
+        int  length;
+        int  m;
+        int  n;
 
-	removeAllElements();
+        removeAllElements();
 
-	if (obj != null) {
-	    length = obj.length();
-	    setSize(obj.sizeof());
-	    for (n = obj.offset(), m = 0; n < length; n++, m++) {
-		if (obj.defined(n))
-		    putYoixObject(m, obj.get(n, false));
-	    }
-	}
+        if (obj != null) {
+            length = obj.length();
+            setSize(obj.sizeof());
+            for (n = obj.offset(), m = 0; n < length; n++, m++) {
+                if (obj.defined(n))
+                    putYoixObject(m, obj.get(n, false));
+            }
+        }
     }
 
 
     final synchronized Vector
     putYoixObject(YoixObject pairs[]) {
 
-	YoixObject  loc;
-	YoixObject  value;
-	YoixObject  prev;
-	Vector      result;
-	int         n;
+        YoixObject  loc;
+        YoixObject  value;
+        YoixObject  prev;
+        Vector      result;
+        int         n;
 
-	result = new Vector();
+        result = new Vector();
 
-	for (n = 0; n < pairs.length - 1; n += 2) {
-	    loc = pairs[n];
-	    value = pairs[n + 1];
-	    if (loc != null && value != null) {
-		if (loc.isInteger()) {
-		    if ((prev = putYoixObject(loc.intValue(), value)) != null) {
-			result.addElement(loc);
-			result.addElement(prev);
-		    }
-		}
-	    }
-	}
+        for (n = 0; n < pairs.length - 1; n += 2) {
+            loc = pairs[n];
+            value = pairs[n + 1];
+            if (loc != null && value != null) {
+                if (loc.isInteger()) {
+                    if ((prev = putYoixObject(loc.intValue(), value)) != null) {
+                        result.addElement(loc);
+                        result.addElement(prev);
+                    }
+                }
+            }
+        }
 
-	return(result);
+        return(result);
     }
 
 
     final synchronized YoixObject
     putYoixObject(int index, YoixObject value) {
 
-	Object  element = null;
+        Object  element = null;
 
-	if (index >= 0) {
-	    if (index < elementCount) {
-		element = elementData[index];
-		if (!(element instanceof YoixObject))
-		    element = null;
-	    } else setSize(index + 1);
-	    elementData[index] = value;
-	}
+        if (index >= 0) {
+            if (index < elementCount) {
+                element = elementData[index];
+                if (!(element instanceof YoixObject))
+                    element = null;
+            } else setSize(index + 1);
+            elementData[index] = value;
+        }
 
-	return((YoixObject)element);
+        return((YoixObject)element);
     }
 
 
     final synchronized int
     removeYoixObject(YoixObject value, boolean preserve) {
 
-	int  count = 0;
-	int  n;
+        int  count = 0;
+        int  n;
 
-	while ((n = findYoixObjectIndex(value)) >= 0) {
-	    if (preserve)
-		elementData[n] = null;
-	    else removeElementAt(n);
-	    count++;
-	}
+        while ((n = findYoixObjectIndex(value)) >= 0) {
+            if (preserve)
+                elementData[n] = null;
+            else removeElementAt(n);
+            count++;
+        }
 
-	return(count);
+        return(count);
     }
 
 
     final synchronized YoixObject
     removeYoixObject(int index, boolean preserve) {
 
-	Object  element;
+        Object  element;
 
-	if (index >= 0 && index < elementCount) {
-	    element = elementData[index];
-	    if (element instanceof YoixObject) {
-		if (preserve)
-		    elementData[index] = null;
-		else removeElementAt(index);
-	    } else element = null;
-	} else element = null;
+        if (index >= 0 && index < elementCount) {
+            element = elementData[index];
+            if (element instanceof YoixObject) {
+                if (preserve)
+                    elementData[index] = null;
+                else removeElementAt(index);
+            } else element = null;
+        } else element = null;
 
-	return((YoixObject)element);
+        return((YoixObject)element);
     }
 
 
     final synchronized void
     setSizeTo(int size) {
 
-	if (size >= 0 && size != size()) {
-	    setSize(size);
-	    if (capacity() != size) {
-		trimToSize();
-		ensureCapacity(size);
-	    }
-	}
+        if (size >= 0 && size != size()) {
+            setSize(size);
+            if (capacity() != size) {
+                trimToSize();
+                ensureCapacity(size);
+            }
+        }
     }
 
     ///////////////////////////////////
@@ -336,21 +336,21 @@ class YoixUtilVector extends Vector
     private int
     findYoixObjectIndex(YoixObject value) {
 
-	Object  element;
-	int     n;
+        Object  element;
+        int     n;
 
-	if (value != null) {
-	    for (n = 0; n < elementCount; n++) {
-		if ((element = elementData[n]) != null) {
-		    if (element instanceof YoixObject) {	// probably unnecessary
-			if (YoixInterpreter.equalsEQEQ(value, (YoixObject)element))
-			    break;
-		    }
-		}
-	    }
-	} else n = -1;
+        if (value != null) {
+            for (n = 0; n < elementCount; n++) {
+                if ((element = elementData[n]) != null) {
+                    if (element instanceof YoixObject) {	// probably unnecessary
+                        if (YoixInterpreter.equalsEQEQ(value, (YoixObject)element))
+                            break;
+                    }
+                }
+            }
+        } else n = -1;
 
-	return(n < elementCount ? n : -1);
+        return(n < elementCount ? n : -1);
     }
 }
 

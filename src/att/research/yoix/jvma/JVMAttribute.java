@@ -37,31 +37,31 @@ class JVMAttribute
     final String
     dumpAttribute() {
 
-	return(dumpAttribute(""));
+        return(dumpAttribute(""));
     }
 
 
     final String
     dumpAttribute(String indent) {
 
-	StringBuffer  sbuf = new StringBuffer();
+        StringBuffer  sbuf = new StringBuffer();
 
-	dumpAttributeInto(indent, sbuf);
-	return(sbuf.toString());
+        dumpAttributeInto(indent, sbuf);
+        return(sbuf.toString());
     }
 
 
     final String
     getName() {
 
-	return(constant_pool.getStringFromUTF(name_index));
+        return(constant_pool.getStringFromUTF(name_index));
     }
 
 
     final int
     getNameIndex() {
 
-	return(name_index);
+        return(name_index);
     }
 
     ///////////////////////////////////

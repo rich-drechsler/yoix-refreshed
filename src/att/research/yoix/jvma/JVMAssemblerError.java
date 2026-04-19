@@ -26,15 +26,15 @@ class JVMAssemblerError extends Exception {
     public
     JVMAssemblerError(String message) {
 
-	this(message, null);
+        this(message, null);
     }
 
 
     public
     JVMAssemblerError(String message, String details) {
 
-	super(message);
-	this.details = details;
+        super(message);
+        this.details = details;
     }
 
     ///////////////////////////////////
@@ -46,14 +46,14 @@ class JVMAssemblerError extends Exception {
     public String
     getDetails() {
 
-	return(details);
+        return(details);
     }
 
 
     public void
     setDetails(String details) {
 
-	this.details = details;
+        this.details = details;
     }
 }
 

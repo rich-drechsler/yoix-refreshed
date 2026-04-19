@@ -43,8 +43,8 @@ class YoixBodySubexp extends YoixPointerActive
     private static HashMap  activefields = new HashMap(5);
 
     static {
-	activefields.put(N_TARGET, new Integer(V_TARGET));
-	activefields.put(N_RANGES, new Integer(V_RANGES));
+        activefields.put(N_TARGET, new Integer(V_TARGET));
+        activefields.put(N_RANGES, new Integer(V_RANGES));
     }
 
     ///////////////////////////////////
@@ -55,10 +55,10 @@ class YoixBodySubexp extends YoixPointerActive
 
     YoixBodySubexp(YoixObject data) {
 
-	super(data);
-	buildSubexp();
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        buildSubexp();
+        setFixedSize();
+        setPermissions(permissions);
     }
 
     ///////////////////////////////////
@@ -70,7 +70,7 @@ class YoixBodySubexp extends YoixPointerActive
     public final int
     type() {
 
-	return(SUBEXP);
+        return(SUBEXP);
     }
 
     ///////////////////////////////////
@@ -82,46 +82,46 @@ class YoixBodySubexp extends YoixPointerActive
     protected final void
     finalize() {
 
-	subexp = null;
-	super.finalize();
+        subexp = null;
+        super.finalize();
     }
 
 
     protected final YoixObject
     getField(String name, YoixObject obj) {
 
-	YoixRESubexp  subexp;
-	YoixObject    dict;
-	int           n;
+        YoixRESubexp  subexp;
+        YoixObject    dict;
+        int           n;
 
-	subexp = this.subexp;
+        subexp = this.subexp;
 
-	switch (activeField(name, activefields)) {
-	    case V_TARGET:
-		obj = YoixObject.newString(subexp.getSource());
-		break;
+        switch (activeField(name, activefields)) {
+            case V_TARGET:
+                obj = YoixObject.newString(subexp.getSource());
+                break;
 
-	    case V_RANGES:
-		obj = YoixObject.newArray(subexp.size());
-		for (n = 0; n < subexp.size(); n++) {
-		    dict = YoixObject.newDictionary(2);
-		    dict.put(N_SP, YoixObject.newInt(subexp.getSpAt(n)), false);
-		    dict.put(N_EP, YoixObject.newInt(subexp.getEpAt(n)), false);
-		    dict.setAccessBody(LR__);
-		    obj.put(n, dict, false);
-		}
-		obj.setAccessBody(LR__);
-		break;
-	}
+            case V_RANGES:
+                obj = YoixObject.newArray(subexp.size());
+                for (n = 0; n < subexp.size(); n++) {
+                    dict = YoixObject.newDictionary(2);
+                    dict.put(N_SP, YoixObject.newInt(subexp.getSpAt(n)), false);
+                    dict.put(N_EP, YoixObject.newInt(subexp.getEpAt(n)), false);
+                    dict.setAccessBody(LR__);
+                    obj.put(n, dict, false);
+                }
+                obj.setAccessBody(LR__);
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(subexp);
+        return(subexp);
     }
 
     ///////////////////////////////////
@@ -133,7 +133,7 @@ class YoixBodySubexp extends YoixPointerActive
     private void
     buildSubexp() {
 
-	subexp = new YoixRESubexp();
+        subexp = new YoixRESubexp();
     }
 }
 

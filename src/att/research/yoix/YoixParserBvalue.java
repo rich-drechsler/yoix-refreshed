@@ -42,15 +42,15 @@ class YoixParserBvalue
 
     YoixParserBvalue(String name, int level, int offset) {
 
-	//
-	// We ignore name, which currently isn't needed when BOUND_LVALUE
-	// nodes are processed, but that undoubtedly will change. Right now
-	// the only reason to save name is because we want more information
-	// in a dump of a parse tree that contains bound nodes.
-	//
+        //
+        // We ignore name, which currently isn't needed when BOUND_LVALUE
+        // nodes are processed, but that undoubtedly will change. Right now
+        // the only reason to save name is because we want more information
+        // in a dump of a parse tree that contains bound nodes.
+        //
 
-	this.level = level;
-	this.offset = offset;
+        this.level = level;
+        this.offset = offset;
     }
 
     ///////////////////////////////////
@@ -62,28 +62,28 @@ class YoixParserBvalue
     public final String
     toString() {
 
-	return(level + ":" + offset);
+        return(level + ":" + offset);
     }
 
 
     final int
     getLevel() {
 
-	return(level);
+        return(level);
     }
 
 
     final String
     getName() {
 
-	return(null);
+        return(null);
     }
 
 
     final int
     getOffset() {
 
-	return(offset);
+        return(offset);
     }
 }
 

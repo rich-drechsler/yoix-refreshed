@@ -45,14 +45,14 @@ class YoixBodyZipEntry extends YoixPointerActive
     private static HashMap  activefields = new HashMap(12);
 
     static {
-	activefields.put(N_COMMENT, new Integer(V_COMMENT));
-	activefields.put(N_COMPRESSEDSIZE, new Integer(V_COMPRESSEDSIZE));
-	activefields.put(N_CRC, new Integer(V_CRC));
-	activefields.put(N_EXTRA, new Integer(V_EXTRA));
-	activefields.put(N_DEFLATED, new Integer(V_DEFLATED));
-	activefields.put(N_NAME, new Integer(V_NAME));
-	activefields.put(N_SIZE, new Integer(V_SIZE));
-	activefields.put(N_TIMESTAMP, new Integer(V_TIMESTAMP));
+        activefields.put(N_COMMENT, new Integer(V_COMMENT));
+        activefields.put(N_COMPRESSEDSIZE, new Integer(V_COMPRESSEDSIZE));
+        activefields.put(N_CRC, new Integer(V_CRC));
+        activefields.put(N_EXTRA, new Integer(V_EXTRA));
+        activefields.put(N_DEFLATED, new Integer(V_DEFLATED));
+        activefields.put(N_NAME, new Integer(V_NAME));
+        activefields.put(N_SIZE, new Integer(V_SIZE));
+        activefields.put(N_TIMESTAMP, new Integer(V_TIMESTAMP));
     }
 
     ///////////////////////////////////
@@ -63,20 +63,20 @@ class YoixBodyZipEntry extends YoixPointerActive
 
     YoixBodyZipEntry(YoixObject data) {
 
-	this(data, null);
+        this(data, null);
     }
 
 
     YoixBodyZipEntry(YoixObject data, ZipEntry zipentry) {
 
-	super(data);
+        super(data);
 
-	if (zipentry != null)
-	    this.zipentry = zipentry;
-	else buildZipEntry();
+        if (zipentry != null)
+            this.zipentry = zipentry;
+        else buildZipEntry();
 
-	setFixedSize();
-	setPermissions(permissions);
+        setFixedSize();
+        setPermissions(permissions);
     }
 
     ///////////////////////////////////
@@ -88,7 +88,7 @@ class YoixBodyZipEntry extends YoixPointerActive
     public final int
     type() {
 
-	return(ZIPENTRY);
+        return(ZIPENTRY);
     }
 
     ///////////////////////////////////
@@ -100,148 +100,148 @@ class YoixBodyZipEntry extends YoixPointerActive
     protected final void
     finalize() {
 
-	zipentry = null;
-	super.finalize();
+        zipentry = null;
+        super.finalize();
     }
 
 
     protected final YoixObject
     getField(String name, YoixObject obj) {
 
-	ZipEntry  zipentry;
+        ZipEntry  zipentry;
 
-	zipentry = this.zipentry;
+        zipentry = this.zipentry;
 
-	if (zipentry != null) {
-	    switch (activeField(name, activefields)) {
-		case V_COMMENT:
-		    obj = YoixObject.newString(zipentry.getComment());
-		    break;
+        if (zipentry != null) {
+            switch (activeField(name, activefields)) {
+                case V_COMMENT:
+                    obj = YoixObject.newString(zipentry.getComment());
+                    break;
 
-		case V_COMPRESSEDSIZE:
-		    obj = YoixObject.newDouble(zipentry.getCompressedSize());
-		    break;
+                case V_COMPRESSEDSIZE:
+                    obj = YoixObject.newDouble(zipentry.getCompressedSize());
+                    break;
 
-		case V_CRC:
-		    obj = YoixObject.newDouble(zipentry.getCrc());
-		    break;
+                case V_CRC:
+                    obj = YoixObject.newDouble(zipentry.getCrc());
+                    break;
 
-		case V_DEFLATED:
-		    obj = YoixObject.newInt(zipentry.getMethod() == ZipEntry.DEFLATED);
-		    break;
+                case V_DEFLATED:
+                    obj = YoixObject.newInt(zipentry.getMethod() == ZipEntry.DEFLATED);
+                    break;
 
-		case V_EXTRA:
-		    obj = YoixObject.newString(YoixMake.javaUTFString(zipentry.getExtra()));
-		    break;
+                case V_EXTRA:
+                    obj = YoixObject.newString(YoixMake.javaUTFString(zipentry.getExtra()));
+                    break;
 
-	        case V_NAME:
-		    obj = YoixObject.newString(zipentry.getName());
-		    break;
+                case V_NAME:
+                    obj = YoixObject.newString(zipentry.getName());
+                    break;
 
-		case V_SIZE:
-		    obj = YoixObject.newDouble(zipentry.getSize());
-		    break;
+                case V_SIZE:
+                    obj = YoixObject.newDouble(zipentry.getSize());
+                    break;
 
-		case V_TIMESTAMP:
-		    obj = YoixObject.newDouble(zipentry.getTime()/1000.0);
-		    break;
-	    }
-	}
+                case V_TIMESTAMP:
+                    obj = YoixObject.newDouble(zipentry.getTime()/1000.0);
+                    break;
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(zipentry);
+        return(zipentry);
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	ZipEntry  zipentry;
-	ZipEntry  ze;
-	String    sval;
-	double    dval;
-	byte      bval[];
-	long      lval;
-	int       ival;
+        ZipEntry  zipentry;
+        ZipEntry  ze;
+        String    sval;
+        double    dval;
+        byte      bval[];
+        long      lval;
+        int       ival;
 
-	zipentry = this.zipentry;
+        zipentry = this.zipentry;
 
-	if (obj != null && obj.notNull()) {
-	    if (zipentry == null) {
-		data.put(name, obj, true);
-		if (name.equals(N_NAME))
-		    buildZipEntry();
-	    } else {
-		switch (activeField(name, activefields)) {
-		    case V_COMMENT:
-			sval = obj.stringValue();
-			if (YoixConverter.utf8Length(sval) <= 0xFFFF)
-			    zipentry.setComment(sval);
-			else VM.abort(BADVALUE, N_COMMENT);
-			break;
+        if (obj != null && obj.notNull()) {
+            if (zipentry == null) {
+                data.put(name, obj, true);
+                if (name.equals(N_NAME))
+                    buildZipEntry();
+            } else {
+                switch (activeField(name, activefields)) {
+                    case V_COMMENT:
+                        sval = obj.stringValue();
+                        if (YoixConverter.utf8Length(sval) <= 0xFFFF)
+                            zipentry.setComment(sval);
+                        else VM.abort(BADVALUE, N_COMMENT);
+                        break;
 
-		    case V_CRC:
-			dval = obj.doubleValue();
-			if (dval >= 0 && (long)dval <= 0xFFFFFFFFL)
-			    zipentry.setCrc((long)dval);
-			else VM.abort(BADVALUE, N_CRC);
-			break;
+                    case V_CRC:
+                        dval = obj.doubleValue();
+                        if (dval >= 0 && (long)dval <= 0xFFFFFFFFL)
+                            zipentry.setCrc((long)dval);
+                        else VM.abort(BADVALUE, N_CRC);
+                        break;
 
-		    case V_DEFLATED:
-			if (obj.intValue() != 0)
-			    zipentry.setMethod(ZipEntry.DEFLATED);
-			else zipentry.setMethod(ZipEntry.STORED);
-			break;
+                    case V_DEFLATED:
+                        if (obj.intValue() != 0)
+                            zipentry.setMethod(ZipEntry.DEFLATED);
+                        else zipentry.setMethod(ZipEntry.STORED);
+                        break;
 
-		    case V_EXTRA:
-			sval = obj.stringValue();
-			bval = YoixMake.javaUTFByteArray(sval);
-			if (bval.length <= 0xFFFF) {
-			    if (bval.length > 0)
-				zipentry.setExtra(bval);
-			     else zipentry.setExtra(null);
-			} else VM.abort(BADVALUE, N_EXTRA);
-			break;
+                    case V_EXTRA:
+                        sval = obj.stringValue();
+                        bval = YoixMake.javaUTFByteArray(sval);
+                        if (bval.length <= 0xFFFF) {
+                            if (bval.length > 0)
+                                zipentry.setExtra(bval);
+                             else zipentry.setExtra(null);
+                        } else VM.abort(BADVALUE, N_EXTRA);
+                        break;
 
-		    case V_NAME:
-			sval = obj.stringValue();
-			if (YoixConverter.utf8Length(sval) <= 0xFFFF) {
-			    ze = new ZipEntry(sval);
-			    ze.setComment(zipentry.getComment());
-			    if ((lval = zipentry.getCrc()) >= 0)
-				ze.setCrc(lval);
-			    ze.setExtra(zipentry.getExtra());
-			    if ((lval = zipentry.getMethod()) != -1)
-				ze.setMethod((int)lval);
-			    if ((lval = zipentry.getSize()) >= 0)
-				ze.setSize(lval);
-			    zipentry.setTime(System.currentTimeMillis());
-			    this.zipentry = ze;
-			} else VM.abort(BADVALUE, N_NAME);
-			break;
+                    case V_NAME:
+                        sval = obj.stringValue();
+                        if (YoixConverter.utf8Length(sval) <= 0xFFFF) {
+                            ze = new ZipEntry(sval);
+                            ze.setComment(zipentry.getComment());
+                            if ((lval = zipentry.getCrc()) >= 0)
+                                ze.setCrc(lval);
+                            ze.setExtra(zipentry.getExtra());
+                            if ((lval = zipentry.getMethod()) != -1)
+                                ze.setMethod((int)lval);
+                            if ((lval = zipentry.getSize()) >= 0)
+                                ze.setSize(lval);
+                            zipentry.setTime(System.currentTimeMillis());
+                            this.zipentry = ze;
+                        } else VM.abort(BADVALUE, N_NAME);
+                        break;
 
-		    case V_SIZE:
-			dval = obj.doubleValue();
-			if (dval >= 0 && (long)dval <= 0xFFFFFFFFL)
-			    zipentry.setSize((long)dval);
-			else VM.abort(BADVALUE, N_SIZE);
-			break;
+                    case V_SIZE:
+                        dval = obj.doubleValue();
+                        if (dval >= 0 && (long)dval <= 0xFFFFFFFFL)
+                            zipentry.setSize((long)dval);
+                        else VM.abort(BADVALUE, N_SIZE);
+                        break;
 
-		    case V_TIMESTAMP:
-			dval = obj.doubleValue() * 1000.0;
-			zipentry.setTime((long)dval);
-			break;
-		}
-	    }
-	}
+                    case V_TIMESTAMP:
+                        dval = obj.doubleValue() * 1000.0;
+                        zipentry.setTime((long)dval);
+                        break;
+                }
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -253,55 +253,55 @@ class YoixBodyZipEntry extends YoixPointerActive
     private void
     buildZipEntry() {
 
-	ZipEntry  zipentry = null;
-	String    comment = data.getString(N_COMMENT, "");
-	String    extra = data.getString(N_EXTRA, "");
-	String    name = data.getString(N_NAME, "");
-	double    crc = data.getDouble(N_CRC, -1);
-	double    size = data.getDouble(N_SIZE, -1);
-	double    time = data.getDouble(N_TIMESTAMP, -1);
-	byte      bval[];
-	int       deflated = data.getInt(N_DEFLATED, 1);
+        ZipEntry  zipentry = null;
+        String    comment = data.getString(N_COMMENT, "");
+        String    extra = data.getString(N_EXTRA, "");
+        String    name = data.getString(N_NAME, "");
+        double    crc = data.getDouble(N_CRC, -1);
+        double    size = data.getDouble(N_SIZE, -1);
+        double    time = data.getDouble(N_TIMESTAMP, -1);
+        byte      bval[];
+        int       deflated = data.getInt(N_DEFLATED, 1);
 
-	if (name.length() != 0) {
-	    if (YoixConverter.utf8Length(name) <= 0xFFFF) {
-		zipentry = new ZipEntry(name);
-		if (comment.length() > 0) {
-		    if (YoixConverter.utf8Length(comment) <= 0xFFFF)
-			zipentry.setComment(comment);
-		    else VM.abort(BADVALUE, N_COMMENT);
-		}
-		if (crc >= 0) {
-		    if ((long)crc <= 0xFFFFFFFFL)
-			zipentry.setCrc((long)crc);
-		    else VM.abort(BADVALUE, N_CRC);
-		}
+        if (name.length() != 0) {
+            if (YoixConverter.utf8Length(name) <= 0xFFFF) {
+                zipentry = new ZipEntry(name);
+                if (comment.length() > 0) {
+                    if (YoixConverter.utf8Length(comment) <= 0xFFFF)
+                        zipentry.setComment(comment);
+                    else VM.abort(BADVALUE, N_COMMENT);
+                }
+                if (crc >= 0) {
+                    if ((long)crc <= 0xFFFFFFFFL)
+                        zipentry.setCrc((long)crc);
+                    else VM.abort(BADVALUE, N_CRC);
+                }
 
-		if (extra.length() > 0) {
-		    bval = YoixMake.javaUTFByteArray(extra);
-		    if (bval.length <= 0xFFFF) {
-			if (bval.length > 0)
-			    zipentry.setExtra(bval);
-			else zipentry.setExtra(null);
-		    } else VM.abort(BADVALUE, N_EXTRA);
-		}
+                if (extra.length() > 0) {
+                    bval = YoixMake.javaUTFByteArray(extra);
+                    if (bval.length <= 0xFFFF) {
+                        if (bval.length > 0)
+                            zipentry.setExtra(bval);
+                        else zipentry.setExtra(null);
+                    } else VM.abort(BADVALUE, N_EXTRA);
+                }
 
-		zipentry.setMethod(deflated != 0 ? ZipEntry.DEFLATED : ZipEntry.STORED);
+                zipentry.setMethod(deflated != 0 ? ZipEntry.DEFLATED : ZipEntry.STORED);
 
-		if (size >= 0) {
-		    if ((long)size <= 0xFFFFFFFFL)
-			zipentry.setSize((long)size);
-		    else VM.abort(BADVALUE, N_SIZE);
-		}
+                if (size >= 0) {
+                    if ((long)size <= 0xFFFFFFFFL)
+                        zipentry.setSize((long)size);
+                    else VM.abort(BADVALUE, N_SIZE);
+                }
 
-		if (time == -1)
-		    time = System.currentTimeMillis();
-		else time *= 1000.0;
+                if (time == -1)
+                    time = System.currentTimeMillis();
+                else time *= 1000.0;
 
-		zipentry.setTime((long)time);
-		this.zipentry = zipentry;
-	    } else VM.abort(BADVALUE, N_NAME);
-	}
+                zipentry.setTime((long)time);
+                this.zipentry = zipentry;
+            } else VM.abort(BADVALUE, N_NAME);
+        }
     }
 }
 

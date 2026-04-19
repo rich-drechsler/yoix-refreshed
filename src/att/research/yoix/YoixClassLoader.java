@@ -29,28 +29,28 @@ class YoixClassLoader extends URLClassLoader
     public
     YoixClassLoader(ClassLoader parent) {
 
-	this(new URL[] {}, parent);
+        this(new URL[] {}, parent);
     }
 
 
     public
     YoixClassLoader(URL urls[], ClassLoader parent) {
 
-	super(urls, parent);
+        super(urls, parent);
     }
 
 
     public
     YoixClassLoader(URL urls[]) {
 
-	super(urls);
+        super(urls);
     }
 
 
     public
     YoixClassLoader(URL urls[], ClassLoader parent, URLStreamHandlerFactory factory) {
 
-	super(urls, parent, factory);
+        super(urls, parent, factory);
     }
 
     ///////////////////////////////////
@@ -62,18 +62,18 @@ class YoixClassLoader extends URLClassLoader
     public void
     addURL(URL url) {
 
-	if (url != null)
-	    super.addURL(url);
+        if (url != null)
+            super.addURL(url);
     }
 
 
     public Class
     findClass(String name)
 
-	throws ClassNotFoundException
+        throws ClassNotFoundException
 
     {
 
-	return(super.findClass(name));
+        return(super.findClass(name));
     }
 }

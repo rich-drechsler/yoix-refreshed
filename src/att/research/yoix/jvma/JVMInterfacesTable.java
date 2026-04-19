@@ -63,34 +63,34 @@ class JVMInterfacesTable
     public
     JVMInterfacesTable(JVMClassFile owner, JVMConstantPool constant_pool) {
 
-	buildInterfacesTable(owner, 0, constant_pool);
+        buildInterfacesTable(owner, 0, constant_pool);
     }
 
 
     public
     JVMInterfacesTable(JVMClassFile owner, int count, JVMConstantPool constant_pool) {
 
-	buildInterfacesTable(owner, count, constant_pool);
+        buildInterfacesTable(owner, count, constant_pool);
     }
 
 
     public
     JVMInterfacesTable(JVMClassFile owner, byte classfile[], JVMConstantPool constant_pool) {
 
-	buildInterfacesTable(
-	    owner,
-	    classfile,
-	    CLASSFILE_CONSTANT_POOL_TABLE,
-	    JVMMisc.getUnsignedShort(classfile, CLASSFILE_CONSTANT_POOL_COUNT),
-	    constant_pool
-	);
+        buildInterfacesTable(
+            owner,
+            classfile,
+            CLASSFILE_CONSTANT_POOL_TABLE,
+            JVMMisc.getUnsignedShort(classfile, CLASSFILE_CONSTANT_POOL_COUNT),
+            constant_pool
+        );
     }
 
 
     public
     JVMInterfacesTable(JVMClassFile owner, byte bytes[], int offset, int count, JVMConstantPool constant_pool) {
 
-	buildInterfacesTable(owner, bytes, offset, count, constant_pool);
+        buildInterfacesTable(owner, bytes, offset, count, constant_pool);
     }
 
     ///////////////////////////////////
@@ -102,113 +102,113 @@ class JVMInterfacesTable
     final String
     dumpTable() {
 
-	return(dumpTable(""));
+        return(dumpTable(""));
     }
 
 
     final String
     dumpTable(String indent) {
 
-	StringBuffer  sbuf = new StringBuffer();
+        StringBuffer  sbuf = new StringBuffer();
 
-	dumpTableInto(indent, null, sbuf);
-	return(sbuf.toString());
+        dumpTableInto(indent, null, sbuf);
+        return(sbuf.toString());
     }
 
 
     final void
     dumpTableInto(String indent, String header, StringBuffer sbuf) {
 
-	String  name;
-	int     interface_index;
+        String  name;
+        int     interface_index;
 
-	if (header != null) {
-	    if (header.trim().length() > 0) {
-		sbuf.append(indent);
-		sbuf.append(header);
-		indent += "    ";
-	    }
-	    sbuf.append("\n");
-	}
+        if (header != null) {
+            if (header.trim().length() > 0) {
+                sbuf.append(indent);
+                sbuf.append(header);
+                indent += "    ";
+            }
+            sbuf.append("\n");
+        }
 
-	for (interface_index = 0; interface_index < interfaces_table_count; interface_index++) {
-	    if ((name = getInterfaceName(interface_index)) != null) {
-		sbuf.append(indent);
-		sbuf.append(name);
-		sbuf.append("\n");
-	    }
-	}
+        for (interface_index = 0; interface_index < interfaces_table_count; interface_index++) {
+            if ((name = getInterfaceName(interface_index)) != null) {
+                sbuf.append(indent);
+                sbuf.append(name);
+                sbuf.append("\n");
+            }
+        }
     }
 
 
     final byte[]
     getBytes() {
 
-	byte  bytes[];
-	int   nextbyte;
-	int   n;
+        byte  bytes[];
+        int   nextbyte;
+        int   n;
 
-	bytes = new byte[getSize()];
-	nextbyte = 0;
+        bytes = new byte[getSize()];
+        nextbyte = 0;
 
-	for (n = 0; n < interfaces_table_count; n++) {
-	    bytes[nextbyte++] = (byte)(interfaces_table[n] >> 8);
-	    bytes[nextbyte++] = (byte)interfaces_table[n];
-	}
+        for (n = 0; n < interfaces_table_count; n++) {
+            bytes[nextbyte++] = (byte)(interfaces_table[n] >> 8);
+            bytes[nextbyte++] = (byte)interfaces_table[n];
+        }
 
-	return(bytes);
+        return(bytes);
     }
 
 
     final int
     getBytesConsumed() {
 
-	return(bytes_consumed);
+        return(bytes_consumed);
     }
 
 
     final int
     getCount() {
 
-	return(interfaces_table_count);
+        return(interfaces_table_count);
     }
 
 
     final String
     getInterfaceName(int index) {
 
-	return(index >= 0 && index < interfaces_table_count ? constant_pool.getClass(interfaces_table[index]) : null);
+        return(index >= 0 && index < interfaces_table_count ? constant_pool.getClass(interfaces_table[index]) : null);
     }
 
 
     final int
     getSize() {
 
-	return(2*interfaces_table_count);
+        return(2*interfaces_table_count);
     }
 
 
     final int
     storeInterface(String name) {
 
-	Object  obj;
-	int     name_index;
-	int     interface_index = -1;
+        Object  obj;
+        int     name_index;
+        int     interface_index = -1;
 
-	name = name.replace('.', '/');
+        name = name.replace('.', '/');
 
-	if (JVMMisc.isClassName(name)) {
-	    if ((obj = directory.get(name)) == null) {
-		if ((name_index = constant_pool.storeClass(name)) > 0) {
-		    interface_index = interfaces_table_count++;
-		    ensureCapacity(1);
-		    interfaces_table[interface_index] = name_index;
-		    registerInterface(name, interface_index);
-		}
-	    } else interface_index = ((Integer)obj).intValue();
-	}
+        if (JVMMisc.isClassName(name)) {
+            if ((obj = directory.get(name)) == null) {
+                if ((name_index = constant_pool.storeClass(name)) > 0) {
+                    interface_index = interfaces_table_count++;
+                    ensureCapacity(1);
+                    interfaces_table[interface_index] = name_index;
+                    registerInterface(name, interface_index);
+                }
+            } else interface_index = ((Integer)obj).intValue();
+        }
 
-	return(interface_index);
+        return(interface_index);
     }
 
     ///////////////////////////////////
@@ -220,55 +220,55 @@ class JVMInterfacesTable
     private void
     buildInterfacesTable(JVMClassFile owner, int count, JVMConstantPool constants) {
 
-	this.owner = owner;
-	this.constant_pool = constants;
-	interfaces_table = new int[0];
-	interfaces_table_count = 0;
-	directory = new HashMap();
-	ensureCapacity(count);
+        this.owner = owner;
+        this.constant_pool = constants;
+        interfaces_table = new int[0];
+        interfaces_table_count = 0;
+        directory = new HashMap();
+        ensureCapacity(count);
     }
 
 
     private void
     buildInterfacesTable(JVMClassFile owner, byte bytes[], int offset, int count, JVMConstantPool constants) {
 
-	String  name;
-	int     initial_offset;
-	int     index;
+        String  name;
+        int     initial_offset;
+        int     index;
 
-	initial_offset = offset;
-	buildInterfacesTable(owner, count, constants);
+        initial_offset = offset;
+        buildInterfacesTable(owner, count, constants);
 
-	for (index = 0; index < count && offset < bytes.length; index++, offset += 2) {
-	    name = constants.getClass(JVMMisc.getUnsignedShort(bytes, offset));
-	    storeInterface(name);
-	}
+        for (index = 0; index < count && offset < bytes.length; index++, offset += 2) {
+            name = constants.getClass(JVMMisc.getUnsignedShort(bytes, offset));
+            storeInterface(name);
+        }
 
-	bytes_consumed = offset - initial_offset;
-	interfaces_table = JVMMisc.trimToCurrentSize(interfaces_table, interfaces_table_count);
+        bytes_consumed = offset - initial_offset;
+        interfaces_table = JVMMisc.trimToCurrentSize(interfaces_table, interfaces_table_count);
     }
 
 
     private void
     ensureCapacity(int count) {
 
-	int  tmp[];
-	int  length;
+        int  tmp[];
+        int  length;
 
-	if (interfaces_table_count + count > interfaces_table.length) {
-	    length = interfaces_table.length + count;
-	    tmp = new int[length];
-	    if (interfaces_table.length > 0)
-		System.arraycopy(interfaces_table, 0, tmp, 0, interfaces_table.length);
-	    interfaces_table = tmp;
-	}
+        if (interfaces_table_count + count > interfaces_table.length) {
+            length = interfaces_table.length + count;
+            tmp = new int[length];
+            if (interfaces_table.length > 0)
+                System.arraycopy(interfaces_table, 0, tmp, 0, interfaces_table.length);
+            interfaces_table = tmp;
+        }
     }
 
 
     private void
     registerInterface(String key, int interface_index) {
 
-	directory.put(key, new Integer(interface_index));
+        directory.put(key, new Integer(interface_index));
     }
 }
 

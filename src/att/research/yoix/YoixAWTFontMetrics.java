@@ -17,7 +17,7 @@ public
 class YoixAWTFontMetrics
 
     implements YoixAPI,
-	       YoixConstants
+               YoixConstants
 
 {
 
@@ -39,20 +39,20 @@ class YoixAWTFontMetrics
 
     YoixAWTFontMetrics(FontMetrics fm) {
 
-	this.fm = fm;
+        this.fm = fm;
 
-	ascent = fm.getAscent();
-	descent = fm.getDescent();
-	height = fm.getHeight();
-	leading = fm.getLeading();
-	maxadvance = fm.getMaxAdvance();
-	maxascent = fm.getMaxAscent();
-	maxdescent = fm.getMaxDescent();
+        ascent = fm.getAscent();
+        descent = fm.getDescent();
+        height = fm.getHeight();
+        leading = fm.getLeading();
+        maxadvance = fm.getMaxAdvance();
+        maxascent = fm.getMaxAscent();
+        maxdescent = fm.getMaxDescent();
 
-	if (VM.getBoolean(N_FIXFONTMETRICS)) {
-	    ascent = ascent - descent - leading + 1;
-	    maxascent = maxascent - maxdescent - leading + 1;
-	}
+        if (VM.getBoolean(N_FIXFONTMETRICS)) {
+            ascent = ascent - descent - leading + 1;
+            maxascent = maxascent - maxdescent - leading + 1;
+        }
     }
 
     ///////////////////////////////////
@@ -64,63 +64,63 @@ class YoixAWTFontMetrics
     public final int
     charWidth(char ch) {
 
-	return(fm.charWidth(ch));
+        return(fm.charWidth(ch));
     }
 
 
     public final int
     getAscent() {
 
-	return(ascent);
+        return(ascent);
     }
 
 
     public final int
     getDescent() {
 
-	return(descent);
+        return(descent);
     }
 
 
     public final int
     getHeight() {
 
-	return(height);
+        return(height);
     }
 
 
     public final int
     getLeading() {
 
-	return(leading);
+        return(leading);
     }
 
 
     public final int
     getMaxAdvance() {
 
-	return(maxadvance);
+        return(maxadvance);
     }
 
 
     public final int
     getMaxAscent() {
 
-	return(maxascent);
+        return(maxascent);
     }
 
 
     public final int
     getMaxDescent() {
 
-	return(maxdescent);
+        return(maxdescent);
     }
 
 
     public final int
     stringWidth(String str) {
 
-	return(fm.stringWidth(str));
+        return(fm.stringWidth(str));
     }
 
     ///////////////////////////////////
@@ -132,11 +132,11 @@ class YoixAWTFontMetrics
     protected void
     finalize() {
 
-	fm = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        fm = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 }
 

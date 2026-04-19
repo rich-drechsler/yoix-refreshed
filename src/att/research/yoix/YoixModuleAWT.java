@@ -17,7 +17,7 @@ abstract
 class YoixModuleAWT extends YoixModule
 
     implements YoixConstantsAWT,
-	       YoixConstantsImage
+               YoixConstantsImage
 
 {
 

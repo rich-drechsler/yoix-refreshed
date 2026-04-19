@@ -67,284 +67,284 @@ class YoixModuleRE extends YoixModule
     public static YoixObject
     gsubsti(YoixObject arg[]) {
 
-	YoixRERegexp  regexp;
-	YoixRESubexp  subexp;
-	YoixObject    obj = null;
-	String        substitute;
-	StringBuffer  result;
-	String        remainder;
-	boolean       initial = true;
+        YoixRERegexp  regexp;
+        YoixRESubexp  subexp;
+        YoixObject    obj = null;
+        String        substitute;
+        StringBuffer  result;
+        String        remainder;
+        boolean       initial = true;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    substitute = arg[0].stringValue();
-	    if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
-		if (arg[1].isRegexp()) {
-		    regexp = (YoixRERegexp)(arg[1].getManagedObject());
-		} else {
-		    regexp = new YoixRERegexp(arg[1].stringValue());
-		}
-		if (arg[2].isString() && arg[2].notNull()) {
-		    obj = arg[2];
-		    remainder = arg[2].stringValue();
-		    subexp = new YoixRESubexp();
-		    result = new StringBuffer();
+        if (arg[0].isString() && arg[0].notNull()) {
+            substitute = arg[0].stringValue();
+            if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
+                if (arg[1].isRegexp()) {
+                    regexp = (YoixRERegexp)(arg[1].getManagedObject());
+                } else {
+                    regexp = new YoixRERegexp(arg[1].stringValue());
+                }
+                if (arg[2].isString() && arg[2].notNull()) {
+                    obj = arg[2];
+                    remainder = arg[2].stringValue();
+                    subexp = new YoixRESubexp();
+                    result = new StringBuffer();
 
-		    synchronized(result) {
-			while (regexp.exec(remainder, subexp, initial)) {
-			    initial = false;
-			    obj = null;
-			    result.append(subexp.getSource().substring(0, subexp.getSpAt(0)));
-			    result.append(YoixRERegexp.regsub(substitute, subexp));
-			    //
-			    // If the start and end indices are equal we must
-			    // have matched "^" or "$" and they'll either be
-			    // 0 or remainder.length(). Either way we end up
-			    // in an infinite loop if we don't break.
-			    //
-			    if (subexp.getSpAt(0) == subexp.getEpAt(0)) {
-				if (subexp.getSpAt(0) != 0)	// it's already in result
-				    remainder = "";
-				break;
-			    } else remainder = subexp.getSource().substring(subexp.getEpAt(0));
-			}
-			if (obj == null) {
-			    if (remainder.length() > 0)
-				result.append(remainder);
-			    obj = YoixObject.newString(result.toString());
-			}
-		    }
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+                    synchronized(result) {
+                        while (regexp.exec(remainder, subexp, initial)) {
+                            initial = false;
+                            obj = null;
+                            result.append(subexp.getSource().substring(0, subexp.getSpAt(0)));
+                            result.append(YoixRERegexp.regsub(substitute, subexp));
+                            //
+                            // If the start and end indices are equal we must
+                            // have matched "^" or "$" and they'll either be
+                            // 0 or remainder.length(). Either way we end up
+                            // in an infinite loop if we don't break.
+                            //
+                            if (subexp.getSpAt(0) == subexp.getEpAt(0)) {
+                                if (subexp.getSpAt(0) != 0)	// it's already in result
+                                    remainder = "";
+                                break;
+                            } else remainder = subexp.getSource().substring(subexp.getEpAt(0));
+                        }
+                        if (obj == null) {
+                            if (remainder.length() > 0)
+                                result.append(remainder);
+                            obj = YoixObject.newString(result.toString());
+                        }
+                    }
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(obj);
+        return(obj);
     }
 
 
     public static YoixObject
     gvsubsti(YoixObject arg[]) {
 
-	YoixRERegexp  regexp;
-	YoixRESubexp  subexp;
-	YoixObject    obj = null;
-	String        substitute;
-	StringBuffer  result;
-	String        remainder;
+        YoixRERegexp  regexp;
+        YoixRESubexp  subexp;
+        YoixObject    obj = null;
+        String        substitute;
+        StringBuffer  result;
+        String        remainder;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    substitute = arg[0].stringValue();
-	    if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
-		if (arg[1].isRegexp()) {
-		    regexp = (YoixRERegexp)(arg[1].getManagedObject());
-		} else {
-		    regexp = new YoixRERegexp(arg[1].stringValue());
-		}
-		if (arg[2].isString() && arg[2].notNull()) {
-		    obj = arg[2];
-		    remainder = arg[2].stringValue();
-		    subexp = new YoixRESubexp();
-		    result = new StringBuffer();
+        if (arg[0].isString() && arg[0].notNull()) {
+            substitute = arg[0].stringValue();
+            if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
+                if (arg[1].isRegexp()) {
+                    regexp = (YoixRERegexp)(arg[1].getManagedObject());
+                } else {
+                    regexp = new YoixRERegexp(arg[1].stringValue());
+                }
+                if (arg[2].isString() && arg[2].notNull()) {
+                    obj = arg[2];
+                    remainder = arg[2].stringValue();
+                    subexp = new YoixRESubexp();
+                    result = new StringBuffer();
 
-		    synchronized(result) {
-			while (regexp.exec(remainder, subexp)) {
-			    obj = null;
-			    result.append(subexp.getSource().substring(0, subexp.getSpAt(0)));
-			    result.append(substitute);
-			    //
-			    // If the start and end indices are equal we must
-			    // have matched "^" or "$" and they'll either be
-			    // 0 or remainder.length(). Either way we end up
-			    // in an infinite loop if we don't break.
-			    //
-			    if (subexp.getSpAt(0) == subexp.getEpAt(0)) {
-				if (subexp.getSpAt(0) != 0)	// it's already in result
-				    remainder = "";
-				break;
-			    } else remainder = subexp.getSource().substring(subexp.getEpAt(0));
-			}
-			if (obj == null) {
-			    if (remainder.length() > 0)
-				result.append(remainder);
-			    obj = YoixObject.newString(result.toString());
-			}
-		    }
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+                    synchronized(result) {
+                        while (regexp.exec(remainder, subexp)) {
+                            obj = null;
+                            result.append(subexp.getSource().substring(0, subexp.getSpAt(0)));
+                            result.append(substitute);
+                            //
+                            // If the start and end indices are equal we must
+                            // have matched "^" or "$" and they'll either be
+                            // 0 or remainder.length(). Either way we end up
+                            // in an infinite loop if we don't break.
+                            //
+                            if (subexp.getSpAt(0) == subexp.getEpAt(0)) {
+                                if (subexp.getSpAt(0) != 0)	// it's already in result
+                                    remainder = "";
+                                break;
+                            } else remainder = subexp.getSource().substring(subexp.getEpAt(0));
+                        }
+                        if (obj == null) {
+                            if (remainder.length() > 0)
+                                result.append(remainder);
+                            obj = YoixObject.newString(result.toString());
+                        }
+                    }
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(obj);
+        return(obj);
     }
 
 
     public static YoixObject
     regexec(YoixObject arg[]) {
 
-	YoixRERegexp  regexp;
-	YoixRESubexp  subexp;
-	YoixObject    obj;
-	boolean       match = false;
-	String        target;
+        YoixRERegexp  regexp;
+        YoixRESubexp  subexp;
+        YoixObject    obj;
+        boolean       match = false;
+        String        target;
 
-	if (arg.length >= 2 && arg.length <= 3) {
-	    if (arg[0].isRegexp() && arg[0].notNull()) {
-		regexp = (YoixRERegexp)(arg[0].getManagedObject());
-		if (arg[1].isString() && arg[1].notNull()) {
-		    target = arg[1].stringValue();
-		    if (arg.length == 3) {
-			if (arg[2].isSubexp() && arg[2].notNull()) {
-			    subexp = (YoixRESubexp)(arg[2].getManagedObject());
-			    match = regexp.exec(target, subexp);
-			} else VM.badArgument(2);
-		    } else match = regexp.exec(target, null);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 2 && arg.length <= 3) {
+            if (arg[0].isRegexp() && arg[0].notNull()) {
+                regexp = (YoixRERegexp)(arg[0].getManagedObject());
+                if (arg[1].isString() && arg[1].notNull()) {
+                    target = arg[1].stringValue();
+                    if (arg.length == 3) {
+                        if (arg[2].isSubexp() && arg[2].notNull()) {
+                            subexp = (YoixRESubexp)(arg[2].getManagedObject());
+                            match = regexp.exec(target, subexp);
+                        } else VM.badArgument(2);
+                    } else match = regexp.exec(target, null);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(match ? YoixObject.newInt(1) : YoixObject.newInt(0));
+        return(match ? YoixObject.newInt(1) : YoixObject.newInt(0));
     }
 
 
     public static YoixObject
     regexp(YoixObject arg[]) {
 
-	YoixObject  obj = null;
-	YoixObject  data;
-	String      pattern;
+        YoixObject  obj = null;
+        YoixObject  data;
+        String      pattern;
 
-	if (arg.length >= 1 && arg.length <= 2) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		data = VM.getTypeTemplate(T_REGEXP);
-		data.put(N_PATTERN, arg[0]);
-		if (arg.length >= 2) {
-		    if (arg[1].isInteger()) {
-			data.putInt(N_TYPE, (REFLAGS_MASK&arg[1].intValue()));
-		    } else VM.badArgument(1);
-		}
-		obj = YoixObject.newRegexp(data);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 1 && arg.length <= 2) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                data = VM.getTypeTemplate(T_REGEXP);
+                data.put(N_PATTERN, arg[0]);
+                if (arg.length >= 2) {
+                    if (arg[1].isInteger()) {
+                        data.putInt(N_TYPE, (REFLAGS_MASK&arg[1].intValue()));
+                    } else VM.badArgument(1);
+                }
+                obj = YoixObject.newRegexp(data);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj == null ? YoixObject.newRegexp() : obj);
+        return(obj == null ? YoixObject.newRegexp() : obj);
     }
 
 
     public static YoixObject
     regsub(YoixObject arg[]) {
 
-	YoixRESubexp  subexp;
-	YoixObject    obj;
-	String        result = null;
-	String        target;
+        YoixRESubexp  subexp;
+        YoixObject    obj;
+        String        result = null;
+        String        target;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    target = arg[0].stringValue();
-	    if (arg[1].isSubexp() && arg[1].notNull()) {
-		subexp = (YoixRESubexp)(arg[1].getManagedObject());
-		result = YoixRERegexp.regsub(target, subexp);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString() && arg[0].notNull()) {
+            target = arg[0].stringValue();
+            if (arg[1].isSubexp() && arg[1].notNull()) {
+                subexp = (YoixRESubexp)(arg[1].getManagedObject());
+                result = YoixRERegexp.regsub(target, subexp);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(result == null ? YoixObject.newString() : YoixObject.newString(result));
+        return(result == null ? YoixObject.newString() : YoixObject.newString(result));
     }
 
 
     public static YoixObject
     substi(YoixObject arg[]) {
 
-	YoixRERegexp  regexp;
-	YoixRESubexp  subexp;
-	YoixObject    obj = null;
-	String        substitute;
-	String        target;
+        YoixRERegexp  regexp;
+        YoixRESubexp  subexp;
+        YoixObject    obj = null;
+        String        substitute;
+        String        target;
 
-	if (arg.length == 2) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		substitute = arg[0].stringValue();
-		if (arg[1].isSubexp() && arg[1].notNull()) {
-		    subexp = (YoixRESubexp)(arg[1].getManagedObject());
-		    if (subexp != null && subexp.getSpAt(0) >= 0) {
-			obj = YoixObject.newString(
-			    subexp.getSource().substring(0, subexp.getSpAt(0)) +
-			    YoixRERegexp.regsub(substitute, subexp) +
-			    subexp.getSource().substring(subexp.getEpAt(0))
-			);
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else if (arg.length == 3) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		substitute = arg[0].stringValue();
-		if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
-		    if (arg[1].isRegexp())
-			regexp = (YoixRERegexp)(arg[1].getManagedObject());
-		    else regexp = new YoixRERegexp(arg[1].stringValue());
-		    if (arg[2].isString() && arg[2].notNull()) {
-			obj = arg[2];
-			target = arg[2].stringValue();
-			subexp = new YoixRESubexp();
-			if (regexp.exec(target, subexp)) {
-			    obj = YoixObject.newString(
-				subexp.getSource().substring(0, subexp.getSpAt(0)) +
-				YoixRERegexp.regsub(substitute, subexp) +
-				subexp.getSource().substring(subexp.getEpAt(0))
-			    );
-			}
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                substitute = arg[0].stringValue();
+                if (arg[1].isSubexp() && arg[1].notNull()) {
+                    subexp = (YoixRESubexp)(arg[1].getManagedObject());
+                    if (subexp != null && subexp.getSpAt(0) >= 0) {
+                        obj = YoixObject.newString(
+                            subexp.getSource().substring(0, subexp.getSpAt(0)) +
+                            YoixRERegexp.regsub(substitute, subexp) +
+                            subexp.getSource().substring(subexp.getEpAt(0))
+                        );
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else if (arg.length == 3) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                substitute = arg[0].stringValue();
+                if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
+                    if (arg[1].isRegexp())
+                        regexp = (YoixRERegexp)(arg[1].getManagedObject());
+                    else regexp = new YoixRERegexp(arg[1].stringValue());
+                    if (arg[2].isString() && arg[2].notNull()) {
+                        obj = arg[2];
+                        target = arg[2].stringValue();
+                        subexp = new YoixRESubexp();
+                        if (regexp.exec(target, subexp)) {
+                            obj = YoixObject.newString(
+                                subexp.getSource().substring(0, subexp.getSpAt(0)) +
+                                YoixRERegexp.regsub(substitute, subexp) +
+                                subexp.getSource().substring(subexp.getEpAt(0))
+                            );
+                        }
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj);
+        return(obj);
     }
 
 
     public static YoixObject
     vsubsti(YoixObject arg[]) {
 
-	YoixRERegexp  regexp;
-	YoixRESubexp  subexp;
-	YoixObject    obj = null;
-	String        substitute;
-	String        target;
+        YoixRERegexp  regexp;
+        YoixRESubexp  subexp;
+        YoixObject    obj = null;
+        String        substitute;
+        String        target;
 
-	if (arg.length == 2) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		substitute = arg[0].stringValue();
-		if (arg[1].isSubexp() && arg[1].notNull()) {
-		    subexp = (YoixRESubexp)(arg[1].getManagedObject());
-		    if (subexp != null && subexp.getSpAt(0) >= 0) {
-			obj = YoixObject.newString(
-			    subexp.getSource().substring(0, subexp.getSpAt(0)) +
-			    substitute +
-			    subexp.getSource().substring(subexp.getEpAt(0))
-			);
-		    }
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else if (arg.length == 3) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		substitute = arg[0].stringValue();
-		if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
-		    if (arg[1].isRegexp())
-			regexp = (YoixRERegexp)(arg[1].getManagedObject());
-		    else regexp = new YoixRERegexp(arg[1].stringValue());
-		    if (arg[2].isString() && arg[2].notNull()) {
-			obj = arg[2];
-			target = arg[2].stringValue();
-			subexp = new YoixRESubexp();
-			if (regexp.exec(target, subexp)) {
-			    obj = YoixObject.newString(
-				subexp.getSource().substring(0, subexp.getSpAt(0)) +
-				substitute +
-				subexp.getSource().substring(subexp.getEpAt(0))
-			    );
-			}
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 2) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                substitute = arg[0].stringValue();
+                if (arg[1].isSubexp() && arg[1].notNull()) {
+                    subexp = (YoixRESubexp)(arg[1].getManagedObject());
+                    if (subexp != null && subexp.getSpAt(0) >= 0) {
+                        obj = YoixObject.newString(
+                            subexp.getSource().substring(0, subexp.getSpAt(0)) +
+                            substitute +
+                            subexp.getSource().substring(subexp.getEpAt(0))
+                        );
+                    }
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else if (arg.length == 3) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                substitute = arg[0].stringValue();
+                if (arg[1].notNull() && (arg[1].isRegexp() || arg[1].isString())) {
+                    if (arg[1].isRegexp())
+                        regexp = (YoixRERegexp)(arg[1].getManagedObject());
+                    else regexp = new YoixRERegexp(arg[1].stringValue());
+                    if (arg[2].isString() && arg[2].notNull()) {
+                        obj = arg[2];
+                        target = arg[2].stringValue();
+                        subexp = new YoixRESubexp();
+                        if (regexp.exec(target, subexp)) {
+                            obj = YoixObject.newString(
+                                subexp.getSource().substring(0, subexp.getSpAt(0)) +
+                                substitute +
+                                subexp.getSource().substring(subexp.getEpAt(0))
+                            );
+                        }
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(obj);
+        return(obj);
     }
 }
 

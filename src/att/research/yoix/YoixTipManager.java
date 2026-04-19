@@ -20,8 +20,8 @@ public
 class YoixTipManager
 
     implements MouseListener,
-	       MouseMotionListener,
-	       YoixConstants
+               MouseMotionListener,
+               YoixConstants
 
 {
 
@@ -147,29 +147,29 @@ class YoixTipManager
     public
     YoixTipManager(JComponent source) {
 
-	this(source, null, null, null);
+        this(source, null, null, null);
     }
 
 
     public
     YoixTipManager(JComponent source, Color background) {
 
-	this(source, background, null, null);
+        this(source, background, null, null);
     }
 
 
     public
     YoixTipManager(JComponent source, Color background, Color foreground) {
 
-	this(source, background, foreground, null);
+        this(source, background, foreground, null);
     }
 
 
     public
     YoixTipManager(JComponent source, Color background, Color foreground, Font font) {
 
-	this.source = source;
-	buildTipManager(background, foreground, font);
+        this.source = source;
+        buildTipManager(background, foreground, font);
     }
 
     ///////////////////////////////////
@@ -181,69 +181,69 @@ class YoixTipManager
     public final void
     mouseClicked(MouseEvent e) {
 
-	if (e.getSource() == source)
-	    setCursorLocation(e.getPoint());
+        if (e.getSource() == source)
+            setCursorLocation(e.getPoint());
     }
 
 
     public final void
     mouseEntered(MouseEvent e) {
 
-	if (e.getSource() == source) {
-	    if (shifting == false)
-		setCursorLocation(e.getPoint());
-	}
+        if (e.getSource() == source) {
+            if (shifting == false)
+                setCursorLocation(e.getPoint());
+        }
     }
 
 
     public final void
     mouseExited(MouseEvent e) {
 
-	if (e.getSource() == source) {
-	    if (shifting == false)
-		setCursorLocation(null);
-	}
+        if (e.getSource() == source) {
+            if (shifting == false)
+                setCursorLocation(null);
+        }
     }
 
 
     public final void
     mousePressed(MouseEvent e) {
 
-	mousepoint = e.getPoint();
+        mousepoint = e.getPoint();
 
-	if (e.getSource() == tipwindow) {
-	    if (dropped) {
-		SwingUtilities.convertPointToScreen(mousepoint, tipwindow);
-		tipwindow.setCursor(MOVE_CURSOR);
-	    }
-	} else if (e.getSource() == source) {
-	    if (tipshiftmodel == 1) {
-		if ((e.getModifiers()&tipshiftmodifiers) == tipshiftmodifiers)
-		    shifting = !dropped;
-	    }
-	    setCursorLocation(mousepoint);
-	}
+        if (e.getSource() == tipwindow) {
+            if (dropped) {
+                SwingUtilities.convertPointToScreen(mousepoint, tipwindow);
+                tipwindow.setCursor(MOVE_CURSOR);
+            }
+        } else if (e.getSource() == source) {
+            if (tipshiftmodel == 1) {
+                if ((e.getModifiers()&tipshiftmodifiers) == tipshiftmodifiers)
+                    shifting = !dropped;
+            }
+            setCursorLocation(mousepoint);
+        }
     }
 
 
     public final void
     mouseReleased(MouseEvent e) {
 
-	Point  point = e.getPoint();
+        Point  point = e.getPoint();
 
-	if (e.getSource() == tipwindow) {
-	    if (dropped)
-		tipwindow.setCursor(DROPPED_CURSOR);
-	    else tipwindow.setCursor(DEFAULT_CURSOR);
-	} else if (e.getSource() == source) {
-	    if (shifting) {
-		tipoffset.x += (mousepoint.x - point.x);
-		tipoffset.y += (mousepoint.y - point.y);
-	    }
-	    shifting = false;
-	    setCursorLocation(point);
-	    showTip();
-	}
+        if (e.getSource() == tipwindow) {
+            if (dropped)
+                tipwindow.setCursor(DROPPED_CURSOR);
+            else tipwindow.setCursor(DEFAULT_CURSOR);
+        } else if (e.getSource() == source) {
+            if (shifting) {
+                tipoffset.x += (mousepoint.x - point.x);
+                tipoffset.y += (mousepoint.y - point.y);
+            }
+            shifting = false;
+            setCursorLocation(point);
+            showTip();
+        }
     }
 
     ///////////////////////////////////
@@ -255,29 +255,29 @@ class YoixTipManager
     public final void
     mouseDragged(MouseEvent e) {
 
-	Point  point = e.getPoint();
-	Point  location;
+        Point  point = e.getPoint();
+        Point  location;
 
-	if (e.getSource() == tipwindow) {
-	    SwingUtilities.convertPointToScreen(point, tipwindow);
-	    location = tipwindow.getLocation();
-	    location.x += (point.x - mousepoint.x);
-	    location.y += (point.y - mousepoint.y);
-	    tipwindow.setLocation(location);
-	    mousepoint = point;
-	} else if (e.getSource() == source)
-	    setCursorLocation(point);
+        if (e.getSource() == tipwindow) {
+            SwingUtilities.convertPointToScreen(point, tipwindow);
+            location = tipwindow.getLocation();
+            location.x += (point.x - mousepoint.x);
+            location.y += (point.y - mousepoint.y);
+            tipwindow.setLocation(location);
+            mousepoint = point;
+        } else if (e.getSource() == source)
+            setCursorLocation(point);
     }
 
 
     public final void
     mouseMoved(MouseEvent e) {
 
-	if (e.getSource() == source) {
-	    setCursorLocation(e.getPoint());
-	    showTip();
-	    lastmovepoint = e.getPoint();
-	}
+        if (e.getSource() == source) {
+            setCursorLocation(e.getPoint());
+            showTip();
+            lastmovepoint = e.getPoint();
+        }
     }
 
     ///////////////////////////////////
@@ -289,264 +289,264 @@ class YoixTipManager
     protected void
     finalize() {
 
-	hideTip();
-	source = null;
-	layeredpane = null;
-	tipcontainer = null;
-	tiplabel = null;
-	tippanel = null;
-	if (tipwindow != null) {
-	    new YoixVMDisposer(tipwindow);
-	    tipwindow = null;
-	}
+        hideTip();
+        source = null;
+        layeredpane = null;
+        tipcontainer = null;
+        tiplabel = null;
+        tippanel = null;
+        if (tipwindow != null) {
+            new YoixVMDisposer(tipwindow);
+            tipwindow = null;
+        }
     }
 
 
     public final Point
     getCursorLocation() {
 
-	Point  point;
+        Point  point;
 
-	return((point = tipcursorpoint) != null ? new Point(point) : null);
+        return((point = tipcursorpoint) != null ? new Point(point) : null);
     }
 
 
     public final String
     getText() {
 
-	return(tiptext);
+        return(tiptext);
     }
 
 
     public final synchronized Rectangle
     getTipBounds() {
 
-	Dimension  size;
-	Rectangle  bounds;
-	Point      point;
+        Dimension  size;
+        Rectangle  bounds;
+        Point      point;
 
-	if (isShowing()) {
-	    size = tipcontainer.getSize();
-	    point = tipcontainer.getLocationOnScreen();
-	    SwingUtilities.convertPointFromScreen(point, source);
-	    bounds = new Rectangle(point, size);
-	} else bounds = null;
+        if (isShowing()) {
+            size = tipcontainer.getSize();
+            point = tipcontainer.getLocationOnScreen();
+            SwingUtilities.convertPointFromScreen(point, source);
+            bounds = new Rectangle(point, size);
+        } else bounds = null;
 
-	return(bounds);
+        return(bounds);
     }
 
 
     public final synchronized Point
     getTipOffset() {
 
-	return(tipoffset != null ? new Point(tipoffset) : pickTipOffset());
+        return(tipoffset != null ? new Point(tipoffset) : pickTipOffset());
     }
 
 
     public final int
     getTipShiftModel() {
 
-	return(tipshiftmodel);
+        return(tipshiftmodel);
     }
 
 
     public final int
     getTipShiftModifiers() {
 
-	return(tipshiftmodifiers);
+        return(tipshiftmodifiers);
     }
 
 
     public final void
     handleRun(Object args[]) {
 
-	if (args != null && args.length > 0) {
-	    switch (((Integer)args[0]).intValue()) {
-		case RUN_SETDROPPED:
-		    handleSetDropped(((Boolean)args[1]).booleanValue());
-		    break;
+        if (args != null && args.length > 0) {
+            switch (((Integer)args[0]).intValue()) {
+                case RUN_SETDROPPED:
+                    handleSetDropped(((Boolean)args[1]).booleanValue());
+                    break;
 
-		case RUN_SETENABLED:
-		    handleSetEnabled(((Boolean)args[1]).booleanValue());
-		    break;
+                case RUN_SETENABLED:
+                    handleSetEnabled(((Boolean)args[1]).booleanValue());
+                    break;
 
-		case RUN_SETTEXT:
-		    handleSetText((String)args[1]);
-		    break;
+                case RUN_SETTEXT:
+                    handleSetText((String)args[1]);
+                    break;
 
-		case RUN_SETTIPLOCKMODEL:
-		    handleSetTipLockModel(((Integer)args[1]).intValue());
-		    break;
+                case RUN_SETTIPLOCKMODEL:
+                    handleSetTipLockModel(((Integer)args[1]).intValue());
+                    break;
 
-		case RUN_SETTIPLOCKPOINT:
-		    handleSetTipLockPoint((Point)args[1]);
-		    break;
+                case RUN_SETTIPLOCKPOINT:
+                    handleSetTipLockPoint((Point)args[1]);
+                    break;
 
-		case RUN_SETTIPOFFSET:
-		    handleSetTipOffset((Point)args[1]);
-		    break;
-	    }
-	}
+                case RUN_SETTIPOFFSET:
+                    handleSetTipOffset((Point)args[1]);
+                    break;
+            }
+        }
     }
 
 
     public final boolean
     isDropped() {
 
-	return(dropped);
+        return(dropped);
     }
 
 
     public final boolean
     isEnabled() {
 
-	return(enabled);
+        return(enabled);
     }
 
 
     public final boolean
     isShifting() {
 
-	return(shifting);
+        return(shifting);
     }
 
 
     public final boolean
     isShowing() {
 
-	JPanel  panel;
+        JPanel  panel;
 
-	return((panel = tippanel) != null && panel.isShowing());
+        return((panel = tippanel) != null && panel.isShowing());
     }
 
 
     public final synchronized void
     setDropped(boolean state) {
 
-	if (EventQueue.isDispatchThread() == false) {
-	    EventQueue.invokeLater(
-		new YoixAWTInvocationEvent(
-		    this,
-		    new Object[] {new Integer(RUN_SETDROPPED), new Boolean(state)}
-		)
-	    );
-	} else handleSetDropped(state);
+        if (EventQueue.isDispatchThread() == false) {
+            EventQueue.invokeLater(
+                new YoixAWTInvocationEvent(
+                    this,
+                    new Object[] {new Integer(RUN_SETDROPPED), new Boolean(state)}
+                )
+            );
+        } else handleSetDropped(state);
     }
 
 
     public final synchronized void
     setEnabled(boolean state) {
 
-	if (EventQueue.isDispatchThread() == false) {
-	    EventQueue.invokeLater(
-		new YoixAWTInvocationEvent(
-		    this,
-		    new Object[] {new Integer(RUN_SETENABLED), new Boolean(state)}
-		)
-	    );
-	} else handleSetEnabled(state);
+        if (EventQueue.isDispatchThread() == false) {
+            EventQueue.invokeLater(
+                new YoixAWTInvocationEvent(
+                    this,
+                    new Object[] {new Integer(RUN_SETENABLED), new Boolean(state)}
+                )
+            );
+        } else handleSetEnabled(state);
     }
 
 
     public final synchronized void
     setText(String text) {
 
-	if (EventQueue.isDispatchThread() == false) {
-	    EventQueue.invokeLater(
-		new YoixAWTInvocationEvent(
-		    this,
-		    new Object[] {new Integer(RUN_SETTEXT), text}
-		)
-	    );
-	} else handleSetText(text);
+        if (EventQueue.isDispatchThread() == false) {
+            EventQueue.invokeLater(
+                new YoixAWTInvocationEvent(
+                    this,
+                    new Object[] {new Integer(RUN_SETTEXT), text}
+                )
+            );
+        } else handleSetText(text);
     }
 
 
     public final synchronized void
     setTipLockModel(int model) {
 
-	if (EventQueue.isDispatchThread() == false) {
-	    EventQueue.invokeLater(
-		new YoixAWTInvocationEvent(
-		    this,
-		    new Object[] {new Integer(RUN_SETTIPLOCKMODEL), new Integer(model)}
-		)
-	    );
-	} else handleSetTipLockModel(model);
+        if (EventQueue.isDispatchThread() == false) {
+            EventQueue.invokeLater(
+                new YoixAWTInvocationEvent(
+                    this,
+                    new Object[] {new Integer(RUN_SETTIPLOCKMODEL), new Integer(model)}
+                )
+            );
+        } else handleSetTipLockModel(model);
     }
 
 
     public final synchronized void
     setTipLockPoint(int x, int y) {
 
-	Point  point = new Point(x, y);
+        Point  point = new Point(x, y);
 
-	if (EventQueue.isDispatchThread() == false) {
-	    EventQueue.invokeLater(
-		new YoixAWTInvocationEvent(
-		    this,
-		    new Object[] {new Integer(RUN_SETTIPLOCKPOINT), point}
-		)
-	    );
-	} else handleSetTipLockPoint(point);
+        if (EventQueue.isDispatchThread() == false) {
+            EventQueue.invokeLater(
+                new YoixAWTInvocationEvent(
+                    this,
+                    new Object[] {new Integer(RUN_SETTIPLOCKPOINT), point}
+                )
+            );
+        } else handleSetTipLockPoint(point);
     }
 
 
     public final synchronized void
     setTipOffset(Point point) {
 
-	point = (point != null) ? new Point(point) : pickTipOffset();
+        point = (point != null) ? new Point(point) : pickTipOffset();
 
-	if (EventQueue.isDispatchThread() == false) {
-	    EventQueue.invokeLater(
-		new YoixAWTInvocationEvent(
-		    this,
-		    new Object[] {new Integer(RUN_SETTIPOFFSET), point}
-		)
-	    );
-	} else handleSetTipOffset(point);
+        if (EventQueue.isDispatchThread() == false) {
+            EventQueue.invokeLater(
+                new YoixAWTInvocationEvent(
+                    this,
+                    new Object[] {new Integer(RUN_SETTIPOFFSET), point}
+                )
+            );
+        } else handleSetTipOffset(point);
     }
 
 
     public final synchronized void
     setTipShiftModel(int model) {
 
-	//
-	// Currently just 0, which means shifting must be started with a
-	// startShifting() call, and 1, which leaves the decision to our
-	// our mousePressed() method.
-	//
+        //
+        // Currently just 0, which means shifting must be started with a
+        // startShifting() call, and 1, which leaves the decision to our
+        // our mousePressed() method.
+        //
 
-	switch (model) {
-	    case 0:
-	    case 1:
-		tipshiftmodel = model;
-		break;
+        switch (model) {
+            case 0:
+            case 1:
+                tipshiftmodel = model;
+                break;
 
-	    default:
-		tipshiftmodel = 0;
-		break;
-	}
+            default:
+                tipshiftmodel = 0;
+                break;
+        }
     }
 
 
     public final synchronized void
     setTipShiftModifiers(int modifiers) {
 
-	tipshiftmodifiers = modifiers;
+        tipshiftmodifiers = modifiers;
     }
 
 
     public final synchronized boolean
     startShifting() {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (tipshiftmodel == 0)  {
-	    shifting = !dropped;
-	    result = shifting;
-	}
-	return(result);
+        if (tipshiftmodel == 0)  {
+            shifting = !dropped;
+            result = shifting;
+        }
+        return(result);
     }
 
     ///////////////////////////////////
@@ -558,386 +558,386 @@ class YoixTipManager
     private synchronized void
     addAllListeners() {
 
-	if (listeners == 0) {
-	    listeners++;
-	    source.addMouseListener(this);
-	    source.addMouseMotionListener(this);
-	}
+        if (listeners == 0) {
+            listeners++;
+            source.addMouseListener(this);
+            source.addMouseMotionListener(this);
+        }
     }
 
 
     private synchronized void
     buildTipManager(Color background, Color foreground, Font font) {
 
-	Dimension  size;
+        Dimension  size;
 
-	if (tippanel == null) {
-	    tiplabel = new JLabel(tiptext);
-	    tiplabel.setBorder(new EmptyBorder(1, 1, 1, 1));
-	    tippanel = new JPanel();
-	    tippanel.setLayout(new BorderLayout());
-	    tippanel.setBorder(new BevelBorder(BevelBorder.RAISED));
-	    tippanel.add(tiplabel, BorderLayout.CENTER);
-	    tipoffset = pickTipOffset();
-	    setBackground(background);
-	    setForeground(foreground);
-	    setFont(font);
-	}
+        if (tippanel == null) {
+            tiplabel = new JLabel(tiptext);
+            tiplabel.setBorder(new EmptyBorder(1, 1, 1, 1));
+            tippanel = new JPanel();
+            tippanel.setLayout(new BorderLayout());
+            tippanel.setBorder(new BevelBorder(BevelBorder.RAISED));
+            tippanel.add(tiplabel, BorderLayout.CENTER);
+            tipoffset = pickTipOffset();
+            setBackground(background);
+            setForeground(foreground);
+            setFont(font);
+        }
     }
 
 
     private synchronized JLayeredPane
     getLayeredPane() {
 
-	if (layeredpane == null) {
-	    if (source != null)
-		layeredpane = YoixMiscJFC.getJLayeredPane(source);
-	}
-	return(layeredpane);
+        if (layeredpane == null) {
+            if (source != null)
+                layeredpane = YoixMiscJFC.getJLayeredPane(source);
+        }
+        return(layeredpane);
     }
 
 
     private synchronized JWindow
     getTipWindow() {
 
-	if (tipwindow == null) {
-	    tipwindow = new JWindow(SwingUtilities.getWindowAncestor(source));
-	    tipwindow.addMouseListener(this);
-	    tipwindow.addMouseMotionListener(this);
-	}
-	return(tipwindow);
+        if (tipwindow == null) {
+            tipwindow = new JWindow(SwingUtilities.getWindowAncestor(source));
+            tipwindow.addMouseListener(this);
+            tipwindow.addMouseMotionListener(this);
+        }
+        return(tipwindow);
     }
 
 
     private synchronized void
     handleSetDropped(boolean state) {
 
-	boolean  forced = false;
-	Point    point;
+        boolean  forced = false;
+        Point    point;
 
-	if (state != dropped) {
-	    if (tiptext == null && state) {
-		if (tipcursorpoint != null)
-		    tippoint = new Point(tipcursorpoint);
-		else if (lastmovepoint != null)
-		    tippoint = new Point(lastmovepoint);
-		else tippoint = new Point();
-		handleSetText(lasttiptext);
-		forced = true;
-	    }
-	    dropped = state;
-	    if (dropped) {
-		if (getTipWindow() != null) {
-		    if (tippoint != null) {
-			point = new Point(tippoint.x + tipoffset.x, tippoint.y + tipoffset.y);
-			SwingUtilities.convertPointToScreen(point, source);
-			tipwindow.setLocation(point);
-		    }
-		}
-		showTip();
-		if (forced)
-		    handleSetText(null);
-	    } else {
-		if (tiptext != null) {
-		    tipcontainer = null;
-		    showTip();
-		} else hideTip();
-	    }
-	}
+        if (state != dropped) {
+            if (tiptext == null && state) {
+                if (tipcursorpoint != null)
+                    tippoint = new Point(tipcursorpoint);
+                else if (lastmovepoint != null)
+                    tippoint = new Point(lastmovepoint);
+                else tippoint = new Point();
+                handleSetText(lasttiptext);
+                forced = true;
+            }
+            dropped = state;
+            if (dropped) {
+                if (getTipWindow() != null) {
+                    if (tippoint != null) {
+                        point = new Point(tippoint.x + tipoffset.x, tippoint.y + tipoffset.y);
+                        SwingUtilities.convertPointToScreen(point, source);
+                        tipwindow.setLocation(point);
+                    }
+                }
+                showTip();
+                if (forced)
+                    handleSetText(null);
+            } else {
+                if (tiptext != null) {
+                    tipcontainer = null;
+                    showTip();
+                } else hideTip();
+            }
+        }
     }
 
 
     private synchronized void
     handleSetEnabled(boolean state) {
 
-	if (state != enabled) {
-	    enabled = state;
-	    if (enabled) {
-		addAllListeners();
-		showTip();
-	    } else {
-		hideTip();
-		tipcontainer = null;
-		layeredpane = null;
-		tiptext = null;
-	    }
-	}
+        if (state != enabled) {
+            enabled = state;
+            if (enabled) {
+                addAllListeners();
+                showTip();
+            } else {
+                hideTip();
+                tipcontainer = null;
+                layeredpane = null;
+                tiptext = null;
+            }
+        }
     }
 
 
     private synchronized void
     handleSetText(String text) {
 
-	if (text != tiptext && (text == null || text.equals(tiptext) == false)) {
-	    if (tiptext != null)
-		lasttiptext = tiptext;
-	    tiptext = (text != null && text.length() > 0) ? text : null;
-	    if (dropped == false) {
-		if (tiptext == null)
-		    hideTip();
-		tiplabel.setForeground(foreground);
-		tiplabel.setText(tiptext);
-		tipcontainer = null;		// force reset in showTipAt()
-		if (tiptext != null)
-		    showTip();
-	    } else {
-		if (tiptext != null) {
-		    tiplabel.setForeground(foreground);
-		    tiplabel.setText(tiptext);
-		    tipcontainer = null;	// force reset in showTipAt()
-		    showTip();
-		} else tiplabel.setForeground(foreground_disabled);
-	    }
-	}
+        if (text != tiptext && (text == null || text.equals(tiptext) == false)) {
+            if (tiptext != null)
+                lasttiptext = tiptext;
+            tiptext = (text != null && text.length() > 0) ? text : null;
+            if (dropped == false) {
+                if (tiptext == null)
+                    hideTip();
+                tiplabel.setForeground(foreground);
+                tiplabel.setText(tiptext);
+                tipcontainer = null;		// force reset in showTipAt()
+                if (tiptext != null)
+                    showTip();
+            } else {
+                if (tiptext != null) {
+                    tiplabel.setForeground(foreground);
+                    tiplabel.setText(tiptext);
+                    tipcontainer = null;	// force reset in showTipAt()
+                    showTip();
+                } else tiplabel.setForeground(foreground_disabled);
+            }
+        }
     }
 
 
     private synchronized void
     handleSetTipLockModel(int model) {
 
-	if (model != tiplockmodel) {
-	    switch (model) {
-		case YOIX_BOTH:
-		case YOIX_HORIZONTAL:
-		case YOIX_NONE:
-		case YOIX_VERTICAL:
-		    tiplockmodel = model;
-		    break;
+        if (model != tiplockmodel) {
+            switch (model) {
+                case YOIX_BOTH:
+                case YOIX_HORIZONTAL:
+                case YOIX_NONE:
+                case YOIX_VERTICAL:
+                    tiplockmodel = model;
+                    break;
 
-		default:
-		    tiplockmodel = YOIX_NONE;
-		    break;
-	    }
-	    setTipPoint(tipcursorpoint);
-	    showTip();
-	}
+                default:
+                    tiplockmodel = YOIX_NONE;
+                    break;
+            }
+            setTipPoint(tipcursorpoint);
+            showTip();
+        }
     }
 
 
     private synchronized void
     handleSetTipLockPoint(Point point) {
 
-	if (point != tiplockpoint) {
-	    if (point == null || point.equals(tiplockpoint) == false) {
-		tiplockpoint = point;
-		setTipPoint(tipcursorpoint);
-	    }
-	}
+        if (point != tiplockpoint) {
+            if (point == null || point.equals(tiplockpoint) == false) {
+                tiplockpoint = point;
+                setTipPoint(tipcursorpoint);
+            }
+        }
     }
 
 
     private synchronized void
     handleSetTipOffset(Point point) {
 
-	//
-	// It's safe to assume point isn't null.
-	//
+        //
+        // It's safe to assume point isn't null.
+        //
 
-	if (point.equals(tipoffset) == false) {
-	    tipoffset = point;
-	    showTip();
-	}
+        if (point.equals(tipoffset) == false) {
+            tipoffset = point;
+            showTip();
+        }
     }
 
 
     private synchronized void
     hideTip() {
 
-	if (tipcontainer != null) {
-	    if (tipcontainer == tippanel) {
-		tippanel.setVisible(false);
-		if (layeredpane != null)
-		    layeredpane.remove(tippanel);
-	    } else tipcontainer.setVisible(false);
-	}
+        if (tipcontainer != null) {
+            if (tipcontainer == tippanel) {
+                tippanel.setVisible(false);
+                if (layeredpane != null)
+                    layeredpane.remove(tippanel);
+            } else tipcontainer.setVisible(false);
+        }
     }
 
 
     private synchronized Container
     pickTipContainer(Point point) {
 
-	Rectangle  layerrect;
-	Rectangle  tiprect;
-	Dimension  size;
+        Rectangle  layerrect;
+        Rectangle  tiprect;
+        Dimension  size;
 
-	//
-	// Decided to show the tip as the bottom component in layeredpane's
-	// POPUP_LAYER. Done so it doesn't obscure things like menus if the
-	// owner decides to always show the tip when the mouse moves, even
-	// it doesn't have the focus. Means a pulldown menu and our tip can
-	// end up in the layer and it seems better to keep the menu on top.
-	//
-	// NOTE - it's important to position tippanel before adding it to
-	// layeredpane, otherwise we could be asked to repaint much more
-	// than is really necessary. Most noticeable repainting problems
-	// only happen when tippanel is removed from tipwindow, because in
-	// that case it's located at (0, 0). If it's added to layeredpane
-	// and then properly positioned we get a repaint for (0, 0), but
-	// we also get one when tippanel is moved to the correct location.
-	// The two rectangles will usually be small, however they can be
-	// combined into a single large rectangle by the time we're asked
-	// to paint.
-	//
-	// NOTE - the moveToBack(tippanel) call seems to be required, even
-	// if we try to add tippanel at the bottom. Seems like a Java bug,
-	// but we didn't investigate.
-	//
+        //
+        // Decided to show the tip as the bottom component in layeredpane's
+        // POPUP_LAYER. Done so it doesn't obscure things like menus if the
+        // owner decides to always show the tip when the mouse moves, even
+        // it doesn't have the focus. Means a pulldown menu and our tip can
+        // end up in the layer and it seems better to keep the menu on top.
+        //
+        // NOTE - it's important to position tippanel before adding it to
+        // layeredpane, otherwise we could be asked to repaint much more
+        // than is really necessary. Most noticeable repainting problems
+        // only happen when tippanel is removed from tipwindow, because in
+        // that case it's located at (0, 0). If it's added to layeredpane
+        // and then properly positioned we get a repaint for (0, 0), but
+        // we also get one when tippanel is moved to the correct location.
+        // The two rectangles will usually be small, however they can be
+        // combined into a single large rectangle by the time we're asked
+        // to paint.
+        //
+        // NOTE - the moveToBack(tippanel) call seems to be required, even
+        // if we try to add tippanel at the bottom. Seems like a Java bug,
+        // but we didn't investigate.
+        //
 
-	if (getLayeredPane() != null && tiptext != null) {
-	    if ((layerrect = layeredpane.getBounds()) != null) {
-		size = tippanel.getPreferredSize();
-		tiprect = new Rectangle(size);
-		point = SwingUtilities.convertPoint(source, point, layeredpane);
-		tiprect.x = point.x + tipoffset.x;
-		tiprect.y = point.y + tipoffset.y;
-		if (tiplockmodel != YOIX_HORIZONTAL && tiplockmodel != YOIX_BOTH) {
-		    if (tiprect.x + tiprect.width > layerrect.width)
-			tiprect.x = layerrect.width - tiprect.width;
-		    if (tiprect.x < 0)
-			tiprect.x = 0;
-		}
-		point.x = tiprect.x;
-		point.y = tiprect.y;
-		if (dropped == false && SwingUtilities.isRectangleContainingRectangle(layerrect, tiprect)) {
-		    if (tipcontainer != tippanel) {
-			if (tipwindow != null) {
-			    tipwindow.setVisible(false);
-			    tipwindow.remove(tippanel);
-			}
-			tippanel.setVisible(false);
-			tippanel.setLocation(point.x, point.y);
-			tippanel.setSize(size);
-			layeredpane.add(tippanel, JLayeredPane.POPUP_LAYER);
-			tipcontainer = tippanel;
-		    }
-		    layeredpane.moveToBack(tippanel);		// seems necessary
-		} else {
-		    if (tipcontainer != getTipWindow()) {
-			tippanel.setVisible(false);
-			layeredpane.remove(tippanel);
-			tippanel.setSize(size);
-			tippanel.setLocation(0, 0);
-			tippanel.setVisible(true);
-			tipwindow.getContentPane().add(tippanel);
-			tipwindow.pack();
-			tipcontainer = tipwindow;
-		    }
-		    SwingUtilities.convertPointToScreen(point, layeredpane);
-		}
-		if (dropped == false)
-		    tipcontainer.setLocation(point.x, point.y);
-	    }
-	}
+        if (getLayeredPane() != null && tiptext != null) {
+            if ((layerrect = layeredpane.getBounds()) != null) {
+                size = tippanel.getPreferredSize();
+                tiprect = new Rectangle(size);
+                point = SwingUtilities.convertPoint(source, point, layeredpane);
+                tiprect.x = point.x + tipoffset.x;
+                tiprect.y = point.y + tipoffset.y;
+                if (tiplockmodel != YOIX_HORIZONTAL && tiplockmodel != YOIX_BOTH) {
+                    if (tiprect.x + tiprect.width > layerrect.width)
+                        tiprect.x = layerrect.width - tiprect.width;
+                    if (tiprect.x < 0)
+                        tiprect.x = 0;
+                }
+                point.x = tiprect.x;
+                point.y = tiprect.y;
+                if (dropped == false && SwingUtilities.isRectangleContainingRectangle(layerrect, tiprect)) {
+                    if (tipcontainer != tippanel) {
+                        if (tipwindow != null) {
+                            tipwindow.setVisible(false);
+                            tipwindow.remove(tippanel);
+                        }
+                        tippanel.setVisible(false);
+                        tippanel.setLocation(point.x, point.y);
+                        tippanel.setSize(size);
+                        layeredpane.add(tippanel, JLayeredPane.POPUP_LAYER);
+                        tipcontainer = tippanel;
+                    }
+                    layeredpane.moveToBack(tippanel);		// seems necessary
+                } else {
+                    if (tipcontainer != getTipWindow()) {
+                        tippanel.setVisible(false);
+                        layeredpane.remove(tippanel);
+                        tippanel.setSize(size);
+                        tippanel.setLocation(0, 0);
+                        tippanel.setVisible(true);
+                        tipwindow.getContentPane().add(tippanel);
+                        tipwindow.pack();
+                        tipcontainer = tipwindow;
+                    }
+                    SwingUtilities.convertPointToScreen(point, layeredpane);
+                }
+                if (dropped == false)
+                    tipcontainer.setLocation(point.x, point.y);
+            }
+        }
 
-	return(tipcontainer);
+        return(tipcontainer);
     }
 
 
     private Point
     pickTipOffset() {
 
-	Dimension  size;
+        Dimension  size;
 
-	//
-	// Picks a default offset, assuming a 16x16 cursor, which seems
-	// reasonable.
-	//
+        //
+        // Picks a default offset, assuming a 16x16 cursor, which seems
+        // reasonable.
+        //
 
-	size = YoixAWTToolkit.getBestCursorSize(16, 16);
-	if (size.height <= 16) {
-	    if (size.height == 0)
-		size.height = YoixMakeScreen.javaDistance(3*72.0/16);
-	    size.height += YoixMakeScreen.javaDistance(72.0/16);
-	}
-	return(new Point(0, size.height));
+        size = YoixAWTToolkit.getBestCursorSize(16, 16);
+        if (size.height <= 16) {
+            if (size.height == 0)
+                size.height = YoixMakeScreen.javaDistance(3*72.0/16);
+            size.height += YoixMakeScreen.javaDistance(72.0/16);
+        }
+        return(new Point(0, size.height));
     }
 
 
     private synchronized void
     removeAllListeners() {
 
-	if (listeners > 0) {
-	    listeners--;
-	    source.removeMouseListener(this);
-	    source.removeMouseMotionListener(this);
-	}
+        if (listeners > 0) {
+            listeners--;
+            source.removeMouseListener(this);
+            source.removeMouseMotionListener(this);
+        }
     }
 
 
     private void
     setBackground(Color color) {
 
-	if (color != null || (color = UIManager.getColor("ToolTip.background")) != null)
-	    tippanel.setBackground(color);
+        if (color != null || (color = UIManager.getColor("ToolTip.background")) != null)
+            tippanel.setBackground(color);
     }
 
 
     private synchronized void
     setCursorLocation(Point point) {
 
-	tipcursorpoint = point;
-	setTipPoint(point);
+        tipcursorpoint = point;
+        setTipPoint(point);
     }
 
 
     private void
     setFont(Font font) {
 
-	if (font != null || (font = UIManager.getFont("ToolTip.font")) != null)
-	    tiplabel.setFont(font);
+        if (font != null || (font = UIManager.getFont("ToolTip.font")) != null)
+            tiplabel.setFont(font);
     }
 
 
     private void
     setForeground(Color color) {
 
-	if (color != null || (color = UIManager.getColor("ToolTip.foreground")) != null) {
-	    foreground = color;
-	    if ((foreground_disabled = UIManager.getColor("Label.disabledForeground")) == null)
-		foreground_disabled = Color.gray;
-	    tiplabel.setForeground(color);
-	}
+        if (color != null || (color = UIManager.getColor("ToolTip.foreground")) != null) {
+            foreground = color;
+            if ((foreground_disabled = UIManager.getColor("Label.disabledForeground")) == null)
+                foreground_disabled = Color.gray;
+            tiplabel.setForeground(color);
+        }
     }
 
 
     private synchronized void
     setTipPoint(Point point) {
 
-	if (point != null) {
-	    tippoint = new Point(point);
-	    if (tiplockpoint != null) {
-		if (tiplockmodel == YOIX_HORIZONTAL || tiplockmodel == YOIX_BOTH)
-		    tippoint.x = tiplockpoint.x;
-		if (tiplockmodel == YOIX_VERTICAL || tiplockmodel == YOIX_BOTH)
-		    tippoint.y = tiplockpoint.y;
-	    }
-	} else tippoint = null;
+        if (point != null) {
+            tippoint = new Point(point);
+            if (tiplockpoint != null) {
+                if (tiplockmodel == YOIX_HORIZONTAL || tiplockmodel == YOIX_BOTH)
+                    tippoint.x = tiplockpoint.x;
+                if (tiplockmodel == YOIX_VERTICAL || tiplockmodel == YOIX_BOTH)
+                    tippoint.y = tiplockpoint.y;
+            }
+        } else tippoint = null;
     }
 
 
     private void
     showTip() {
 
-	showTipAt(tippoint);
+        showTipAt(tippoint);
     }
 
 
     private synchronized void
     showTipAt(Point point) {
 
-	if (enabled) {
-	    if (point != null && tiptext != null) {
-		if (pickTipContainer(point) != null) {
-		    if (isShowing() == false)
-			tipcontainer.setVisible(true);
-		    if (tipcontainer instanceof Window) {
-			((Window)tipcontainer).toFront();	// unnecessary??
-			if ((++tipcounter%5) == 0)
-			    Thread.yield();
-		    }
-		}
-	    }
-	}
+        if (enabled) {
+            if (point != null && tiptext != null) {
+                if (pickTipContainer(point) != null) {
+                    if (isShowing() == false)
+                        tipcontainer.setVisible(true);
+                    if (tipcontainer instanceof Window) {
+                        ((Window)tipcontainer).toFront();	// unnecessary??
+                        if ((++tipcounter%5) == 0)
+                            Thread.yield();
+                    }
+                }
+            }
+        }
     }
 }
 

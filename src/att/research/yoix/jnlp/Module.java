@@ -51,52 +51,52 @@ class Module extends YoixModule
     public static YoixObject
     isWebBrowserSupported(YoixObject arg[]) {
 
-	boolean  result = false;
-	Object   bs;
+        boolean  result = false;
+        Object   bs;
 
-	try {
-	    if (checkJNLP()) {
-		if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
-		    result = ((javax.jnlp.BasicService)bs).isWebBrowserSupported();
-	    }
-	}
-	catch(Exception e) {
-	    result = false;
-	}
+        try {
+            if (checkJNLP()) {
+                if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
+                    result = ((javax.jnlp.BasicService)bs).isWebBrowserSupported();
+            }
+        }
+        catch(Exception e) {
+            result = false;
+        }
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     showDocument(YoixObject arg[]) {
 
-	boolean  result = false;
-	Object   bs;
-	URL      url;
+        boolean  result = false;
+        Object   bs;
+        URL      url;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    if (arg[0].isString()) {
-		try {
-		    url = new URL(arg[0].stringValue());
-		    //
-		    // The check prevents a ClassNotFoundException when we try
-		    // to call lookup() when javax.jnlp classes aren't available.
-		    // Not sure why the exception wasn't caught by the existing
-		    // catch - investigate later.
-		    //
-		    if (checkJNLP()) {
-			if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
-			    result = ((javax.jnlp.BasicService)bs).showDocument(url);
-		    }
-		}
-		catch(Exception e) {
-		    result = false;
-		}
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            if (arg[0].isString()) {
+                try {
+                    url = new URL(arg[0].stringValue());
+                    //
+                    // The check prevents a ClassNotFoundException when we try
+                    // to call lookup() when javax.jnlp classes aren't available.
+                    // Not sure why the exception wasn't caught by the existing
+                    // catch - investigate later.
+                    //
+                    if (checkJNLP()) {
+                        if ((bs = javax.jnlp.ServiceManager.lookup("javax.jnlp.BasicService")) != null)
+                            result = ((javax.jnlp.BasicService)bs).showDocument(url);
+                    }
+                }
+                catch(Exception e) {
+                    result = false;
+                }
+            }
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
     ///////////////////////////////////
@@ -108,15 +108,15 @@ class Module extends YoixModule
     private static boolean
     checkJNLP() {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	try {
-	    Class.forName("javax.jnlp.ServiceManager");
-	    result = true;
-	}
-	catch(ClassNotFoundException e) {}
+        try {
+            Class.forName("javax.jnlp.ServiceManager");
+            result = true;
+        }
+        catch(ClassNotFoundException e) {}
 
-	return(result);
+        return(result);
     }
 }
 

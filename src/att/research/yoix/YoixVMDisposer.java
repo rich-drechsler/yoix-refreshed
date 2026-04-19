@@ -16,7 +16,7 @@ import java.awt.*;
 class YoixVMDisposer
 
     implements Runnable,
-	       YoixConstants
+               YoixConstants
 
 {
 
@@ -39,15 +39,15 @@ class YoixVMDisposer
 
     YoixVMDisposer(Object window) {
 
-	this(window, Thread.currentThread().getPriority());
+        this(window, Thread.currentThread().getPriority());
     }
 
 
     YoixVMDisposer(Object window, int priority) {
 
-	this.window = window;
-	this.priority = priority;
-	startThread();
+        this.window = window;
+        this.priority = priority;
+        startThread();
     }
 
     ///////////////////////////////////
@@ -59,8 +59,8 @@ class YoixVMDisposer
     public final void
     run() {
 
-	dispose(window);
-	window = null;
+        dispose(window);
+        window = null;
     }
 
     ///////////////////////////////////
@@ -72,11 +72,11 @@ class YoixVMDisposer
     protected final void
     finalize() {
 
-	window = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        window = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
     ///////////////////////////////////
@@ -88,25 +88,25 @@ class YoixVMDisposer
     private void
     dispose(Object window) {
 
-	if (VM.bitCheck(N_DEBUG, DEBUG_DISPOSE))
-	    VM.println(N_STDOUT, "dispose " + window);
+        if (VM.bitCheck(N_DEBUG, DEBUG_DISPOSE))
+            VM.println(N_STDOUT, "dispose " + window);
 
-	if (window instanceof Window)
-	    ((Window)window).dispose();
-	else if (window instanceof YoixInterfaceWindow)
-	    ((YoixInterfaceWindow)window).dispose();
+        if (window instanceof Window)
+            ((Window)window).dispose();
+        else if (window instanceof YoixInterfaceWindow)
+            ((YoixInterfaceWindow)window).dispose();
     }
 
 
     private synchronized void
     startThread() {
 
-	YoixThread  thread;
+        YoixThread  thread;
 
-	thread = new YoixThread(this);
-	thread.setPriority(priority);
-	thread.setDaemon(true);
-	thread.start();
+        thread = new YoixThread(this);
+        thread.setPriority(priority);
+        thread.setDaemon(true);
+        thread.start();
     }
 }
 

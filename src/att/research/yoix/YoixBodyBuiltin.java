@@ -18,9 +18,9 @@ final
 class YoixBodyBuiltin
 
     implements YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCallable,
-	       YoixInterfaceCloneable
+               YoixInterfaceBody,
+               YoixInterfaceCallable,
+               YoixInterfaceCloneable
 
 {
 
@@ -50,21 +50,21 @@ class YoixBodyBuiltin
 
     YoixBodyBuiltin(String fullname, int argc, boolean varargs) {
 
-	this.fullname = fullname;
-	this.method = null;
-	this.argc = Math.abs(argc);
-	this.varargs = varargs;
-	this.extraargs = null;
+        this.fullname = fullname;
+        this.method = null;
+        this.argc = Math.abs(argc);
+        this.varargs = varargs;
+        this.extraargs = null;
     }
 
 
     YoixBodyBuiltin(String fullname, int argc, boolean varargs, Object extraargs[]) {
 
-	this.fullname = fullname;
-	this.method = null;
-	this.argc = Math.abs(argc);
-	this.varargs = varargs;
-	this.extraargs = extraargs;
+        this.fullname = fullname;
+        this.method = null;
+        this.argc = Math.abs(argc);
+        this.varargs = varargs;
+        this.extraargs = extraargs;
     }
 
     ///////////////////////////////////
@@ -76,23 +76,23 @@ class YoixBodyBuiltin
     public final synchronized Object
     clone() {
 
-	Object  obj;
+        Object  obj;
 
-	try {
-	    obj = super.clone();
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
+        try {
+            obj = super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     public final Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -104,38 +104,38 @@ class YoixBodyBuiltin
     public final String
     dump() {
 
-	String  str;
-	int     n;
+        String  str;
+        int     n;
 
-	str = fullname + "(";
+        str = fullname + "(";
 
-	for (n = 1; n <= argc; n++)
-	    str += (n == 1 ? "" : ", ") + "arg" + n;
-	if (varargs)
-	    str += (n == 1 ? "..." : ", ...");
+        for (n = 1; n <= argc; n++)
+            str += (n == 1 ? "" : ", ") + "arg" + n;
+        if (varargs)
+            str += (n == 1 ? "..." : ", ...");
 
-	return(str + ")" + NL);
+        return(str + ")" + NL);
     }
 
 
     public final int
     length() {
 
-	return(argc);
+        return(argc);
     }
 
 
     public final String
     toString() {
 
-	return(dump().trim());
+        return(dump().trim());
     }
 
 
     public final int
     type() {
 
-	return(BUILTIN);
+        return(BUILTIN);
     }
 
     ///////////////////////////////////
@@ -147,63 +147,63 @@ class YoixBodyBuiltin
     public final YoixObject
     call(YoixObject argv[], YoixObject context) {
 
-	YoixObject  result = null;
-	YoixError   error_point = null;
-	Throwable   t;
+        YoixObject  result = null;
+        YoixError   error_point = null;
+        Throwable   t;
 
-	//
-	// Proper error handling probably means a more work than you
-	// might expect. Still room for improvement!!
-	//
+        //
+        // Proper error handling probably means a more work than you
+        // might expect. Still room for improvement!!
+        //
 
-	if (method == null)
-	    load();
+        if (method == null)
+            load();
 
-	if (argv.length == argc || (varargs && argv.length > argc)) {
-	    try {
-		error_point = VM.pushError(OFFENDINGBUILTIN, methodname);
-		if (extraargs == null)
-		    result = (YoixObject)method.invoke(null, new Object[] {argv});
-		else result = (YoixObject)method.invoke(null, new Object[] {argv, extraargs});
-		VM.popError();
-	    }
-	    catch(InvocationTargetException e) {
-		VM.caughtException(e);
-		if ((t = e.getTargetException()) != error_point) {
-		    if (t instanceof YoixError)
-			throw((YoixError)t);
-		    else {
-			VM.popError();
-			if (t instanceof SecurityException)
-			    throw((SecurityException)t);
-			else if (t instanceof ThreadDeath)
-			    throw((ThreadDeath)t);
-			VM.abort(t);
-		    }
-		} else VM.jumpToError(error_point.getDetails());
-	    }
-	    catch(Exception e) {
-		if (e instanceof SecurityException)
-		    throw((SecurityException)e);
-		VM.die(INTERNALERROR);	// should never get here
-	    }
-	} else VM.badCall(methodname);
+        if (argv.length == argc || (varargs && argv.length > argc)) {
+            try {
+                error_point = VM.pushError(OFFENDINGBUILTIN, methodname);
+                if (extraargs == null)
+                    result = (YoixObject)method.invoke(null, new Object[] {argv});
+                else result = (YoixObject)method.invoke(null, new Object[] {argv, extraargs});
+                VM.popError();
+            }
+            catch(InvocationTargetException e) {
+                VM.caughtException(e);
+                if ((t = e.getTargetException()) != error_point) {
+                    if (t instanceof YoixError)
+                        throw((YoixError)t);
+                    else {
+                        VM.popError();
+                        if (t instanceof SecurityException)
+                            throw((SecurityException)t);
+                        else if (t instanceof ThreadDeath)
+                            throw((ThreadDeath)t);
+                        VM.abort(t);
+                    }
+                } else VM.jumpToError(error_point.getDetails());
+            }
+            catch(Exception e) {
+                if (e instanceof SecurityException)
+                    throw((SecurityException)e);
+                VM.die(INTERNALERROR);	// should never get here
+            }
+        } else VM.badCall(methodname);
 
-	return(result != null ? result : YoixObject.newEmpty());
+        return(result != null ? result : YoixObject.newEmpty());
     }
 
 
     public final boolean
     callable(int argc) {
 
-	return(argc == this.argc || (varargs && argc > this.argc));
+        return(argc == this.argc || (varargs && argc > this.argc));
     }
 
 
     public final boolean
     callable(YoixObject argv[]) {
 
-	return(callable(argv.length));
+        return(callable(argv.length));
     }
 
     ///////////////////////////////////
@@ -215,32 +215,32 @@ class YoixBodyBuiltin
     private synchronized void
     load() {
 
-	Class  owner;
-	int    dot;
+        Class  owner;
+        int    dot;
 
-	if (method == null) {
-	    dot = fullname.lastIndexOf('.');
-	    try {
-		owner = Class.forName(fullname.substring(0, dot));
-		methodname = fullname.substring(dot + 1);
-		method = owner.getMethod(
-		    methodname,
-		    extraargs == null ? STANDARDARGS : EXTRAARGS
-		);
-	    }
-	    catch(RuntimeException e) {
-		VM.caughtException(e);
-		VM.abort(UNDEFINEDBUILTIN, fullname);
-	    }
-	    catch(ClassNotFoundException e) {
-		VM.caughtException(e);
-		VM.abort(UNDEFINEDCLASS, fullname.substring(0, dot));
-	    }
-	    catch(NoSuchMethodException e) {
-		VM.caughtException(e);
-		VM.abort(UNDEFINEDBUILTIN, fullname);
-	    }
-	}
+        if (method == null) {
+            dot = fullname.lastIndexOf('.');
+            try {
+                owner = Class.forName(fullname.substring(0, dot));
+                methodname = fullname.substring(dot + 1);
+                method = owner.getMethod(
+                    methodname,
+                    extraargs == null ? STANDARDARGS : EXTRAARGS
+                );
+            }
+            catch(RuntimeException e) {
+                VM.caughtException(e);
+                VM.abort(UNDEFINEDBUILTIN, fullname);
+            }
+            catch(ClassNotFoundException e) {
+                VM.caughtException(e);
+                VM.abort(UNDEFINEDCLASS, fullname.substring(0, dot));
+            }
+            catch(NoSuchMethodException e) {
+                VM.caughtException(e);
+                VM.abort(UNDEFINEDBUILTIN, fullname);
+            }
+        }
     }
 }
 

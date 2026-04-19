@@ -43,15 +43,15 @@ class YoixConverterOutput extends YoixConverter
 
     YoixConverterOutput(String enc, int size) {
 
-	super(enc);
-	charBuf = new char[size];
-	charStart = 0;
-	nextCharIdx = 0;
-	charEnd = charBuf.length;
-	byteBuf = new byte[(size*maxBytesPerChar) + maxCharsPerByte - 1];
-	byteStart = nextByteIdx = byteEnd = 0;
-	lastpos = new Integer(byteBuf.length);
-	this.bufsiz = size;
+        super(enc);
+        charBuf = new char[size];
+        charStart = 0;
+        nextCharIdx = 0;
+        charEnd = charBuf.length;
+        byteBuf = new byte[(size*maxBytesPerChar) + maxCharsPerByte - 1];
+        byteStart = nextByteIdx = byteEnd = 0;
+        lastpos = new Integer(byteBuf.length);
+        this.bufsiz = size;
     }
 
     ///////////////////////////////////
@@ -63,118 +63,118 @@ class YoixConverterOutput extends YoixConverter
     final int
     convert() {
 
-	byte  tmp_bytes[];
-	int   lastchar = nextCharIdx;
-	int   nb = 0;
+        byte  tmp_bytes[];
+        int   lastchar = nextCharIdx;
+        int   nb = 0;
 
-	if (nextByteIdx != byteEnd)
-	    VM.abort(INTERNALERROR);
+        if (nextByteIdx != byteEnd)
+            VM.abort(INTERNALERROR);
 
-	if (haveConverters() && !useKludge()) {
-	    six_args[0] = charBuf;
-	    six_args[1] = new Integer(charStart);
-	    six_args[2] = new Integer(lastchar);
-	    six_args[3] = byteBuf;
-	    six_args[4] = ZERO;
-	    six_args[5] = lastpos;
-	    try {
-		nb = ((Integer)(ctb_convert.invoke(ctb, six_args))).intValue();
-		nextCharIdx = ((Integer)(ctb_nextCharIndex.invoke(ctb, null))).intValue();
-		if (nextCharIdx != lastchar)
-		    VM.abort(INTERNALERROR);
-		nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
-	    }
-	    catch(IllegalArgumentException e) {
-		VM.caughtException(e, false, true);
-	    }
-	    catch(IllegalAccessException e) {
-		VM.caughtException(e, false, true);
-	    }
-	    catch(InvocationTargetException e) {
-		Throwable  t = e.getTargetException();
+        if (haveConverters() && !useKludge()) {
+            six_args[0] = charBuf;
+            six_args[1] = new Integer(charStart);
+            six_args[2] = new Integer(lastchar);
+            six_args[3] = byteBuf;
+            six_args[4] = ZERO;
+            six_args[5] = lastpos;
+            try {
+                nb = ((Integer)(ctb_convert.invoke(ctb, six_args))).intValue();
+                nextCharIdx = ((Integer)(ctb_nextCharIndex.invoke(ctb, null))).intValue();
+                if (nextCharIdx != lastchar)
+                    VM.abort(INTERNALERROR);
+                nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
+            }
+            catch(IllegalArgumentException e) {
+                VM.caughtException(e, false, true);
+            }
+            catch(IllegalAccessException e) {
+                VM.caughtException(e, false, true);
+            }
+            catch(InvocationTargetException e) {
+                Throwable  t = e.getTargetException();
 
-		if (t instanceof CharConversionException) {
-		    if (cbfe_handle.equals(t.getClass())) {
-			try {
-			    nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
-			    nb = nextByteIdx - byteStart;
-			}
-			catch(Exception ex) {
-			    VM.caughtException(ex, false, true);
-			}
-		    } else VM.abort(e.getTargetException());
-		} else VM.abort(e.getTargetException());
-	    }
-	    byteEnd = nextByteIdx;
-	    nextByteIdx = 0;
-	} else {
-	    try {
-		tmp_bytes = (String.copyValueOf(charBuf, charStart, nextCharIdx - charStart)).getBytes(encoding);
-		nb = tmp_bytes.length;
-		System.arraycopy(tmp_bytes, 0, byteBuf, 0, nb);
-		byteEnd = nb;
-		nextByteIdx = 0;
-	    }
-	    catch(UnsupportedEncodingException e) {
-		VM.abort(BADENCODING, encoding);
-	    }
-	}
+                if (t instanceof CharConversionException) {
+                    if (cbfe_handle.equals(t.getClass())) {
+                        try {
+                            nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
+                            nb = nextByteIdx - byteStart;
+                        }
+                        catch(Exception ex) {
+                            VM.caughtException(ex, false, true);
+                        }
+                    } else VM.abort(e.getTargetException());
+                } else VM.abort(e.getTargetException());
+            }
+            byteEnd = nextByteIdx;
+            nextByteIdx = 0;
+        } else {
+            try {
+                tmp_bytes = (String.copyValueOf(charBuf, charStart, nextCharIdx - charStart)).getBytes(encoding);
+                nb = tmp_bytes.length;
+                System.arraycopy(tmp_bytes, 0, byteBuf, 0, nb);
+                byteEnd = nb;
+                nextByteIdx = 0;
+            }
+            catch(UnsupportedEncodingException e) {
+                VM.abort(BADENCODING, encoding);
+            }
+        }
 
-	charStart = nextCharIdx = 0;
-	return(nb);
+        charStart = nextCharIdx = 0;
+        return(nb);
     }
 
 
     final int
     flush() {
 
-	int  nb = 0;
+        int  nb = 0;
 
-	if (nextByteIdx != byteEnd)
-	    VM.abort(INTERNALERROR);
+        if (nextByteIdx != byteEnd)
+            VM.abort(INTERNALERROR);
 
-	if (haveConverters() && !useKludge()) {
-	    three_args[0] = byteBuf;
-	    three_args[1] = ZERO;
-	    three_args[2] = lastpos;
-	    try {
-		nb = ((Integer)(ctb_flush.invoke(ctb, three_args))).intValue();
-		nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
-	    }
-	    catch(IllegalArgumentException e) {
-		VM.caughtException(e, false, true);
-	    }
-	    catch(IllegalAccessException e) {
-		VM.caughtException(e, false, true);
-	    }
-	    catch(InvocationTargetException e) {
-		Throwable  t = e.getTargetException();
+        if (haveConverters() && !useKludge()) {
+            three_args[0] = byteBuf;
+            three_args[1] = ZERO;
+            three_args[2] = lastpos;
+            try {
+                nb = ((Integer)(ctb_flush.invoke(ctb, three_args))).intValue();
+                nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
+            }
+            catch(IllegalArgumentException e) {
+                VM.caughtException(e, false, true);
+            }
+            catch(IllegalAccessException e) {
+                VM.caughtException(e, false, true);
+            }
+            catch(InvocationTargetException e) {
+                Throwable  t = e.getTargetException();
 
-		if (t instanceof CharConversionException) {
-		    if (cbfe_handle.equals(t.getClass())) {
-			try {
-			    nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
-			    nb = nextByteIdx - byteStart;
-			}
-			catch(Exception ex) {
-			    VM.caughtException(ex, false, true);
-			}
-		    } else VM.abort(e.getTargetException());
-		} else VM.abort(e.getTargetException());
-	    }
-	    byteEnd = nextByteIdx;
-	    nextByteIdx = 0;
-	} else byteEnd = nextByteIdx = 0;
+                if (t instanceof CharConversionException) {
+                    if (cbfe_handle.equals(t.getClass())) {
+                        try {
+                            nextByteIdx = ((Integer)(ctb_nextByteIndex.invoke(ctb, null))).intValue();
+                            nb = nextByteIdx - byteStart;
+                        }
+                        catch(Exception ex) {
+                            VM.caughtException(ex, false, true);
+                        }
+                    } else VM.abort(e.getTargetException());
+                } else VM.abort(e.getTargetException());
+            }
+            byteEnd = nextByteIdx;
+            nextByteIdx = 0;
+        } else byteEnd = nextByteIdx = 0;
 
-	charStart = nextCharIdx = 0;
-	return(nb);
+        charStart = nextCharIdx = 0;
+        return(nb);
     }
 
 
     final int
     getBufsize() {
 
-	return(bufsiz);
+        return(bufsiz);
     }
 }
 

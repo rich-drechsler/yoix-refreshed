@@ -40,9 +40,9 @@ class YoixAWTTextArea extends TextArea
 
     YoixAWTTextArea(YoixObject data, YoixBodyComponent parent, int rows, int columns, int scroll) {
 
-	super("", rows, columns, scroll);
-	this.parent = parent;
-	this.data = data;
+        super("", rows, columns, scroll);
+        this.parent = parent;
+        this.data = data;
     }
 
     ///////////////////////////////////
@@ -54,113 +54,113 @@ class YoixAWTTextArea extends TextArea
     public final void
     addNotify() {
 
-	super.addNotify();
-	if (lastcaret != null) {
-	    synchronized(this) {
-		try {
-		    super.setCaretPosition(lastcaret.intValue());
-		}
-		catch(RuntimeException e) {}
-		finally {
-		    lastcaret = null;
-		}
-	    }
-	}
+        super.addNotify();
+        if (lastcaret != null) {
+            synchronized(this) {
+                try {
+                    super.setCaretPosition(lastcaret.intValue());
+                }
+                catch(RuntimeException e) {}
+                finally {
+                    lastcaret = null;
+                }
+            }
+        }
     }
 
 
     protected void
     finalize() {
 
-	data = null;
-	parent = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        parent = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     final synchronized int
     replaceText(int offset, int length, String str, boolean trim, boolean adjust, ArrayList undo) {
 
-	String  dest;
-	String  text;
-	int     delta;
+        String  dest;
+        String  text;
+        int     delta;
 
-	dest = getText();
-	offset = Math.max(0, Math.min(offset, dest.length()));
-	length = Math.max(0, Math.min(length, dest.length() - offset));
-	str = (str != null) ? str : "";
+        dest = getText();
+        offset = Math.max(0, Math.min(offset, dest.length()));
+        length = Math.max(0, Math.min(length, dest.length() - offset));
+        str = (str != null) ? str : "";
 
-	if (length > 0 || offset < dest.length()) {
-	    text = YoixMisc.replaceString(dest, offset, length, str, trim, undo);
-	    setText(text);
-	} else {
-	    if (undo != null) {
-		undo.add(new Integer(offset));
-		undo.add(new Integer(str.length()));
-		undo.add(dest.substring(offset, offset+length));
-	    }
-	    append(trim ? YoixMisc.trimWhiteSpace(str, false, true) : str);
-	    text = getText();
-	}
+        if (length > 0 || offset < dest.length()) {
+            text = YoixMisc.replaceString(dest, offset, length, str, trim, undo);
+            setText(text);
+        } else {
+            if (undo != null) {
+                undo.add(new Integer(offset));
+                undo.add(new Integer(str.length()));
+                undo.add(dest.substring(offset, offset+length));
+            }
+            append(trim ? YoixMisc.trimWhiteSpace(str, false, true) : str);
+            text = getText();
+        }
 
-	delta = text.length() - dest.length();
+        delta = text.length() - dest.length();
 
-	if (adjust) {
-	    //
-	    // A very recent change (10/25/04) from
-	    //
-	    //    setCaretPosition(Math.max(0, offset + delta));
-	    //
-	    // that imporves caret positioning for replaceText and
-	    // deleteText builtins. Be suspicious if older related
-	    // builtins, like appendText, misbehave. Change matches
-	    // Swing implementation in YoixSwingHighlighter.java, so
-	    // the behavior is consistent.
-	    //
-	    setCaretPosition(offset + str.length());
-	}
-	return(delta);
+        if (adjust) {
+            //
+            // A very recent change (10/25/04) from
+            //
+            //    setCaretPosition(Math.max(0, offset + delta));
+            //
+            // that imporves caret positioning for replaceText and
+            // deleteText builtins. Be suspicious if older related
+            // builtins, like appendText, misbehave. Change matches
+            // Swing implementation in YoixSwingHighlighter.java, so
+            // the behavior is consistent.
+            //
+            setCaretPosition(offset + str.length());
+        }
+        return(delta);
     }
 
 
     public final synchronized void
     setBackground(Color c) {
 
-	background_set = c;
+        background_set = c;
 
-	if (c != null) {
-	    if (YoixMisc.jvmCompareTo("1.3") < 0) {
-		if (YoixMisc.jvmCompareTo("1.2") < 0 || ISWIN) {
-		    if (isEditable())
-			c = c.darker();
-		}
-	    }
-	}
+        if (c != null) {
+            if (YoixMisc.jvmCompareTo("1.3") < 0) {
+                if (YoixMisc.jvmCompareTo("1.2") < 0 || ISWIN) {
+                    if (isEditable())
+                        c = c.darker();
+                }
+            }
+        }
 
-	super.setBackground(c);
+        super.setBackground(c);
     }
 
 
     public final synchronized void
     setCaretPosition(int position) {
 
-	try {
-	    super.setCaretPosition(position);
-	}
-	catch(RuntimeException e) {
-	    lastcaret = new Integer(position);
-	}
+        try {
+            super.setCaretPosition(position);
+        }
+        catch(RuntimeException e) {
+            lastcaret = new Integer(position);
+        }
     }
 
 
     public final synchronized void
     setEditable(boolean state) {
 
-	super.setEditable(state);
-	setBackground(background_set);
+        super.setEditable(state);
+        setBackground(background_set);
     }
 }
 

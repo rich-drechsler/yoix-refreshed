@@ -57,9 +57,9 @@ interface Constants
     //
 
     static final FontRenderContext  FONTCONTEXT = new FontRenderContext(
-	new AffineTransform(),
-	false,
-	true
+        new AffineTransform(),
+        false,
+        true
     );
 
     //

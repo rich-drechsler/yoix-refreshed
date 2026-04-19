@@ -18,10 +18,10 @@ final
 class YoixBodyNull extends YoixPointer
 
     implements YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCallable,
-	       YoixInterfaceCloneable,
-	       Serializable
+               YoixInterfaceBody,
+               YoixInterfaceCallable,
+               YoixInterfaceCloneable,
+               Serializable
 
 {
 
@@ -35,8 +35,8 @@ class YoixBodyNull extends YoixPointer
 
     YoixBodyNull(int type) {
 
-	this.type = type;
-	this.length = 0;
+        this.type = type;
+        this.length = 0;
     }
 
     ///////////////////////////////////
@@ -48,23 +48,23 @@ class YoixBodyNull extends YoixPointer
     public final synchronized Object
     clone() {
 
-	Object  obj;
+        Object  obj;
 
-	try {
-	    obj = super.clone();
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
+        try {
+            obj = super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     public final Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -76,28 +76,28 @@ class YoixBodyNull extends YoixPointer
     public final String
     dump() {
 
-	return(dump(0, "", null));
+        return(dump(0, "", null));
     }
 
 
     public final int
     length() {
 
-	return(0);
+        return(0);
     }
 
 
     public final String
     toString() {
 
-	return(dump().trim());
+        return(dump().trim());
     }
 
 
     public final int
     type() {
 
-	return(type);
+        return(type);
     }
 
     ///////////////////////////////////
@@ -109,156 +109,156 @@ class YoixBodyNull extends YoixPointer
     public final YoixObject
     cast(YoixObject obj, int index, boolean clone) {
 
-	return(VM.abort(NULLPOINTER, index));
+        return(VM.abort(NULLPOINTER, index));
     }
 
 
     public final YoixObject
     cast(YoixObject obj, String name, boolean clone) {
 
-	return(VM.abort(NULLPOINTER, name));
+        return(VM.abort(NULLPOINTER, name));
     }
 
 
     public final boolean
     compound() {
 
-	return(false);
+        return(false);
     }
 
 
     public final void
     declare(int index, YoixObject obj, int mode) {
 
-	VM.abort(NULLPOINTER, index);
+        VM.abort(NULLPOINTER, index);
     }
 
 
     public final void
     declare(String name, YoixObject obj, int mode) {
 
-	VM.abort(NULLPOINTER, name);
+        VM.abort(NULLPOINTER, name);
     }
 
 
     public final boolean
     defined(int index) {
 
-	return(false);
+        return(false);
     }
 
 
     public final boolean
     defined(String name) {
 
-	return(false);
+        return(false);
     }
 
 
     public final String
     dump(int index, String indent, String typename) {
 
-	String  str;
+        String  str;
 
-	if (typename == null) {
-	    if (type != EMPTY && type != NULL)		// EMPTY should be temporary
-		str = "NULL:" + SimpleNode.typeString(type);
-	    else str = "NULL";
-	} else str = "NULL:" + typename;
+        if (typename == null) {
+            if (type != EMPTY && type != NULL)		// EMPTY should be temporary
+                str = "NULL:" + SimpleNode.typeString(type);
+            else str = "NULL";
+        } else str = "NULL:" + typename;
 
-	return(str + NL);
+        return(str + NL);
     }
 
 
     public final boolean
     executable(int index) {
 
-	return(false);
+        return(false);
     }
 
 
     public final boolean
     executable(String name) {
 
-	return(false);
+        return(false);
     }
 
 
     public final YoixObject
     execute(int index, YoixObject argv[], YoixObject context) {
 
-	return(VM.abort(NULLPOINTER, index));
+        return(VM.abort(NULLPOINTER, index));
     }
 
 
     public final YoixObject
     execute(String name, YoixObject argv[], YoixObject context) {
 
-	return(VM.abort(NULLPOINTER, name));
+        return(VM.abort(NULLPOINTER, name));
     }
 
 
     public final YoixObject
     get(int index, boolean clone) {
 
-	return(VM.abort(NULLPOINTER, index));
+        return(VM.abort(NULLPOINTER, index));
     }
 
 
     public final YoixObject
     get(String name, boolean clone) {
 
-	return(VM.abort(NULLPOINTER, name));
+        return(VM.abort(NULLPOINTER, name));
     }
 
 
     public final int
     hash(String name) {
 
-	return(-1);
+        return(-1);
     }
 
 
     public final String
     name(int index) {
 
-	return(defined(index) ? (index + "") : null);
+        return(defined(index) ? (index + "") : null);
     }
 
 
     public final YoixObject
     put(int index, YoixObject obj, boolean clone) {
 
-	return(VM.abort(NULLPOINTER, index));
+        return(VM.abort(NULLPOINTER, index));
     }
 
 
     public final YoixObject
     put(String name, YoixObject obj, boolean clone) {
 
-	return(VM.abort(NULLPOINTER, name));
+        return(VM.abort(NULLPOINTER, name));
     }
 
 
     public final boolean
     readable(int index) {
 
-	return(false);
+        return(false);
     }
 
 
     public final boolean
     readable(String name) {
 
-	return(false);
+        return(false);
     }
 
 
     public final int
     reserve(String name) {
 
-	VM.abort(NULLPOINTER, name);
-	return(-1);
+        VM.abort(NULLPOINTER, name);
+        return(-1);
     }
 
     ///////////////////////////////////
@@ -270,21 +270,21 @@ class YoixBodyNull extends YoixPointer
     public final YoixObject
     call(YoixObject argv[], YoixObject context) {
 
-	return(argv.length == 0 ? YoixObject.newEmpty() : VM.badCall());
+        return(argv.length == 0 ? YoixObject.newEmpty() : VM.badCall());
     }
 
 
     public final boolean
     callable(int argc) {
 
-	return(argc == 0);
+        return(argc == 0);
     }
 
 
     public final boolean
     callable(YoixObject argv[]) {
 
-	return(callable(argv.length));
+        return(callable(argv.length));
     }
 }
 

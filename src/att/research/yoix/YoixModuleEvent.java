@@ -348,7 +348,7 @@ class YoixModuleEvent extends YoixModule
     };
 
     static Object  extracted[] = {
-	"Handlers",
+        "Handlers",
     };
 
     ///////////////////////////////////
@@ -360,86 +360,86 @@ class YoixModuleEvent extends YoixModule
     public static YoixObject
     listEventHandlers(YoixObject arg[]) {
 
-	YoixObject  dict;
-	YoixObject  result = null;
-	YoixObject  yobj;
-	Object      body;
-	String      keys[];
-	String      list[];
-	String      newkeys[];
-	int         bit;
-	int         bits;
-	int         len;
-	int         n;
+        YoixObject  dict;
+        YoixObject  result = null;
+        YoixObject  yobj;
+        Object      body;
+        String      keys[];
+        String      list[];
+        String      newkeys[];
+        int         bit;
+        int         bits;
+        int         len;
+        int         n;
 
-	if (arg.length == 0 || arg.length == 1) {
-	    if (arg.length == 0 || arg[0].isNull()) {
-		dict = (YoixObject)extracted[0];
-		len = dict.length(); 
-		keys = new String[len];
-		for (n = 0; n < len; n++)
-		    keys[n] = dict.name(n);
-	    } else if (arg[0].isComponent() || arg[0].isString()) {
-		if (arg[0].isString())
-		    yobj = YoixMake.yoixType(arg[0].stringValue());
-		else yobj = YoixMake.yoixType(arg[0].typename());
-		if (yobj != null && yobj.notNull() && yobj.isComponent()) {
-		    body = yobj.body();
-		    if (body instanceof YoixBodyComponentSwing) {
-			bits = ((YoixBodyComponentSwing)body).addListeners(YoixBodyComponent.NEXTLISTENER - 1);
-		    } else if (body instanceof YoixBodyComponentAWT) {
-			bits = ((YoixBodyComponentAWT)body).addListeners(YoixBodyComponent.NEXTLISTENER - 1);
-		    } else {
-			VM.abort(INTERNALERROR);
-			bits = 0; // for compiler
-		    }
-		    bits = (YoixBodyComponent.NEXTLISTENER - 1) & ~bits;
-		    keys = new String[0];
-		    if (bits != 0) {
-			if (body instanceof YoixBodyComponentSwing)
-			    n = ((YoixBodyComponentSwing)body).removeListeners(bits);
-			else // can just use else by this time (error detected above)
-			    n = ((YoixBodyComponentAWT)body).removeListeners(bits);
-			if (n != 0)
-			    VM.abort(INTERNALERROR, "Mask", n); // removeListeners didn't remove them all
-			for (bit = 1; bit != YoixBodyComponent.NEXTLISTENER; bit <<= 1) {
-			    if ((bit&bits) != 0) {
-				if ((list = YoixBodyComponent.listenerList(bit)) != null) {
-				    newkeys = new String[keys.length + list.length];
-				    System.arraycopy(keys, 0, newkeys, 0, keys.length);
-				    System.arraycopy(list, 0, newkeys, keys.length, list.length);
-				    keys = newkeys;
-				}
-			    }
-			}
-		    }
-		    len = keys.length;
-		} else if (yobj == null || yobj.notNull()) {
-		    VM.abort(BADVALUE, new String[] { "typename" }); // yoixType should have complained already
-		    // for compiler
-		    keys = null;
-		    len = 0;
-		} else {
-		    // not a component
-		    keys = null;
-		    len = 0;
-		}
-	    } else {
-		VM.badArgument(0);
-		// for compiler
-		keys = null;
-		len = 0;
-	    }
-	    if (keys != null) {
-		if (len > 1)
-		    YoixMiscQsort.sort(keys, 1);
-		result = YoixObject.newArray(len);
-		for (n = 0; n < len; n++)
-		    result.putString(n, keys[n]);
-	    }
-	} else VM.badCall();
+        if (arg.length == 0 || arg.length == 1) {
+            if (arg.length == 0 || arg[0].isNull()) {
+                dict = (YoixObject)extracted[0];
+                len = dict.length(); 
+                keys = new String[len];
+                for (n = 0; n < len; n++)
+                    keys[n] = dict.name(n);
+            } else if (arg[0].isComponent() || arg[0].isString()) {
+                if (arg[0].isString())
+                    yobj = YoixMake.yoixType(arg[0].stringValue());
+                else yobj = YoixMake.yoixType(arg[0].typename());
+                if (yobj != null && yobj.notNull() && yobj.isComponent()) {
+                    body = yobj.body();
+                    if (body instanceof YoixBodyComponentSwing) {
+                        bits = ((YoixBodyComponentSwing)body).addListeners(YoixBodyComponent.NEXTLISTENER - 1);
+                    } else if (body instanceof YoixBodyComponentAWT) {
+                        bits = ((YoixBodyComponentAWT)body).addListeners(YoixBodyComponent.NEXTLISTENER - 1);
+                    } else {
+                        VM.abort(INTERNALERROR);
+                        bits = 0; // for compiler
+                    }
+                    bits = (YoixBodyComponent.NEXTLISTENER - 1) & ~bits;
+                    keys = new String[0];
+                    if (bits != 0) {
+                        if (body instanceof YoixBodyComponentSwing)
+                            n = ((YoixBodyComponentSwing)body).removeListeners(bits);
+                        else // can just use else by this time (error detected above)
+                            n = ((YoixBodyComponentAWT)body).removeListeners(bits);
+                        if (n != 0)
+                            VM.abort(INTERNALERROR, "Mask", n); // removeListeners didn't remove them all
+                        for (bit = 1; bit != YoixBodyComponent.NEXTLISTENER; bit <<= 1) {
+                            if ((bit&bits) != 0) {
+                                if ((list = YoixBodyComponent.listenerList(bit)) != null) {
+                                    newkeys = new String[keys.length + list.length];
+                                    System.arraycopy(keys, 0, newkeys, 0, keys.length);
+                                    System.arraycopy(list, 0, newkeys, keys.length, list.length);
+                                    keys = newkeys;
+                                }
+                            }
+                        }
+                    }
+                    len = keys.length;
+                } else if (yobj == null || yobj.notNull()) {
+                    VM.abort(BADVALUE, new String[] { "typename" }); // yoixType should have complained already
+                    // for compiler
+                    keys = null;
+                    len = 0;
+                } else {
+                    // not a component
+                    keys = null;
+                    len = 0;
+                }
+            } else {
+                VM.badArgument(0);
+                // for compiler
+                keys = null;
+                len = 0;
+            }
+            if (keys != null) {
+                if (len > 1)
+                    YoixMiscQsort.sort(keys, 1);
+                result = YoixObject.newArray(len);
+                for (n = 0; n < len; n++)
+                    result.putString(n, keys[n]);
+            }
+        } else VM.badCall();
 
-	return(result == null ? YoixObject.newNull() : result);
+        return(result == null ? YoixObject.newNull() : result);
     }
 }
 

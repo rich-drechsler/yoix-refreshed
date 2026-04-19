@@ -45,14 +45,14 @@ class JVMUnimplemented extends JVMAttribute
     public
     JVMUnimplemented(JVMClassFile owner, byte bytes[], JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, bytes, 0, constant_pool);
+        buildAttribute(owner, bytes, 0, constant_pool);
     }
 
 
     public
     JVMUnimplemented(JVMClassFile owner, byte bytes[], int offset, JVMConstantPool constant_pool) {
 
-	buildAttribute(owner, bytes, offset, constant_pool);
+        buildAttribute(owner, bytes, offset, constant_pool);
     }
 
     ///////////////////////////////////
@@ -64,59 +64,59 @@ class JVMUnimplemented extends JVMAttribute
     final void
     dumpAttributeInto(String indent, StringBuffer sbuf) {
 
-	String  name;
-	int     ch;
-	int     n;
+        String  name;
+        int     ch;
+        int     n;
 
-	if ((name = constant_pool.getStringFromUTF(name_index)) != null) {
-	    sbuf.append(indent);
-	    sbuf.append(name);
-	    sbuf.append(" [unimplemented or unrecognized attribute]");
-	    for (n = 0; n < attribute_length; n++) {
-		if ((n % 16) == 0) {
-		    sbuf.append("\n");
-		    sbuf.append(indent);
-		    sbuf.append("    ");
-		}
-		ch = attribute[n]&0xFF;
-		if (ch < 16)
-		    sbuf.append('0');
-		sbuf.append(Integer.toString(ch, 16).toUpperCase());
-	    }
-	    sbuf.append("\n");
-	}
+        if ((name = constant_pool.getStringFromUTF(name_index)) != null) {
+            sbuf.append(indent);
+            sbuf.append(name);
+            sbuf.append(" [unimplemented or unrecognized attribute]");
+            for (n = 0; n < attribute_length; n++) {
+                if ((n % 16) == 0) {
+                    sbuf.append("\n");
+                    sbuf.append(indent);
+                    sbuf.append("    ");
+                }
+                ch = attribute[n]&0xFF;
+                if (ch < 16)
+                    sbuf.append('0');
+                sbuf.append(Integer.toString(ch, 16).toUpperCase());
+            }
+            sbuf.append("\n");
+        }
     }
 
 
     final byte[]
     getBytes() {
 
-	byte  bytes[];
-	int   nextbyte;
+        byte  bytes[];
+        int   nextbyte;
 
-	bytes = new byte[getSize()];
-	nextbyte = 0;
+        bytes = new byte[getSize()];
+        nextbyte = 0;
 
-	bytes[nextbyte++] = (byte)(name_index >> 8);
-	bytes[nextbyte++] = (byte)name_index;
-	bytes[nextbyte++] = (byte)(attribute_length >> 24);
-	bytes[nextbyte++] = (byte)(attribute_length >> 16);
-	bytes[nextbyte++] = (byte)(attribute_length >> 8);
-	bytes[nextbyte++] = (byte)attribute_length;
+        bytes[nextbyte++] = (byte)(name_index >> 8);
+        bytes[nextbyte++] = (byte)name_index;
+        bytes[nextbyte++] = (byte)(attribute_length >> 24);
+        bytes[nextbyte++] = (byte)(attribute_length >> 16);
+        bytes[nextbyte++] = (byte)(attribute_length >> 8);
+        bytes[nextbyte++] = (byte)attribute_length;
 
-	if (attribute.length > 0) {
-	    System.arraycopy(attribute, 0, bytes, nextbyte, attribute.length);
-	    nextbyte += attribute.length;	// unnecessary
-	}
+        if (attribute.length > 0) {
+            System.arraycopy(attribute, 0, bytes, nextbyte, attribute.length);
+            nextbyte += attribute.length;	// unnecessary
+        }
 
-	return(bytes);
+        return(bytes);
     }
 
 
     final int
     getSize() {
 
-	return(6 + attribute_length);
+        return(6 + attribute_length);
     }
 
     ///////////////////////////////////
@@ -128,12 +128,12 @@ class JVMUnimplemented extends JVMAttribute
     private void
     buildAttribute(JVMClassFile owner, byte bytes[], int offset, JVMConstantPool constant_pool) {
 
-	this.owner = owner;
-	this.constant_pool = constant_pool;
-	this.name_index = JVMMisc.getUnsignedShort(bytes, offset);
-	this.attribute_length = JVMMisc.getUnsignedInt(bytes, offset+2);
-	attribute = new byte[attribute_length];
-	System.arraycopy(bytes, offset+6, attribute, 0, attribute_length);
+        this.owner = owner;
+        this.constant_pool = constant_pool;
+        this.name_index = JVMMisc.getUnsignedShort(bytes, offset);
+        this.attribute_length = JVMMisc.getUnsignedInt(bytes, offset+2);
+        attribute = new byte[attribute_length];
+        System.arraycopy(bytes, offset+6, attribute, 0, attribute_length);
     }
 }
 

@@ -20,9 +20,9 @@ import javax.swing.filechooser.FileFilter;
 class YoixSwingJFileDialog extends YoixSwingJDialog
 
     implements ActionListener,
-	       WindowListener,
-	       YoixConstants,
-	       YoixInterfaceFileChooser
+               WindowListener,
+               YoixConstants,
+               YoixInterfaceFileChooser
 
 {
 
@@ -51,15 +51,15 @@ class YoixSwingJFileDialog extends YoixSwingJDialog
 
     YoixSwingJFileDialog(YoixObject data, YoixBodyComponent parent, Dialog owner, GraphicsConfiguration gc) {
 
-	super(data, parent, owner, gc);
-	buildDialog(data, parent);
+        super(data, parent, owner, gc);
+        buildDialog(data, parent);
     }
 
 
     YoixSwingJFileDialog(YoixObject data, YoixBodyComponent parent, Frame owner, GraphicsConfiguration gc) {
 
-	super(data, parent, owner, gc);
-	buildDialog(data, parent);
+        super(data, parent, owner, gc);
+        buildDialog(data, parent);
     }
 
     ///////////////////////////////////
@@ -71,22 +71,22 @@ class YoixSwingJFileDialog extends YoixSwingJDialog
     public final void
     actionPerformed(ActionEvent e) {
 
-	//
-	// When autodispose is true we need to make sure the file field in
-	// data is properly set because when we hide the dialog it will be
-	// disposed. What that means is the peer defined in parent will be
-	// set to null and in that case getFile() method defined in parent
-	// will return the value that's defined in data. Done on 9/19/11 in
-	// response to a problem that was reported by a user.
-	//
+        //
+        // When autodispose is true we need to make sure the file field in
+        // data is properly set because when we hide the dialog it will be
+        // disposed. What that means is the peer defined in parent will be
+        // set to null and in that case getFile() method defined in parent
+        // will return the value that's defined in data. Done on 9/19/11 in
+        // response to a problem that was reported by a user.
+        //
 
-	if (data.getBoolean(N_AUTODISPOSE, false)) {
-	    if (CANCEL_SELECTION.equals(e.getActionCommand()))
-		data.putObject(N_FILE, YoixObject.newString());
-	    else data.putObject(N_FILE, parent.getField(N_FILE, YoixObject.newString()));
-	}
+        if (data.getBoolean(N_AUTODISPOSE, false)) {
+            if (CANCEL_SELECTION.equals(e.getActionCommand()))
+                data.putObject(N_FILE, YoixObject.newString());
+            else data.putObject(N_FILE, parent.getField(N_FILE, YoixObject.newString()));
+        }
 
-	parent.setField(N_VISIBLE, YoixObject.newInt(false));
+        parent.setField(N_VISIBLE, YoixObject.newInt(false));
     }
 
     ///////////////////////////////////
@@ -110,9 +110,9 @@ class YoixSwingJFileDialog extends YoixSwingJDialog
     public final void
     windowClosing(WindowEvent e) {
 
-	if (data.writable(N_FILE))
-	    data.put(N_FILE, YoixObject.newNull(), false);
-	setSelectedFile(null);
+        if (data.writable(N_FILE))
+            data.put(N_FILE, YoixObject.newNull(), false);
+        setSelectedFile(null);
     }
 
 
@@ -148,182 +148,182 @@ class YoixSwingJFileDialog extends YoixSwingJDialog
     public final void
     addChoosableFileFilter(FileFilter filter) {
 
-	filechooser.addChoosableFileFilter(filter);
+        filechooser.addChoosableFileFilter(filter);
     }
 
 
     public final int
     getApproveButtonMnemonic() {
 
-	return(filechooser.getApproveButtonMnemonic());
+        return(filechooser.getApproveButtonMnemonic());
     }
 
 
     public final String
     getApproveButtonText() {
 
-	return(filechooser.getApproveButtonText());
+        return(filechooser.getApproveButtonText());
     }
 
 
     public final String
     getApproveButtonToolTipText() {
 
-	return(filechooser.getApproveButtonToolTipText());
+        return(filechooser.getApproveButtonToolTipText());
     }
 
 
     public final FileFilter[]
     getChoosableFileFilters() {
 
-	return(filechooser.getChoosableFileFilters());
+        return(filechooser.getChoosableFileFilters());
     }
 
 
     public final File
     getCurrentDirectory() {
 
-	return(filechooser.getCurrentDirectory());
+        return(filechooser.getCurrentDirectory());
     }
 
 
     public final FileFilter
     getFileFilter() {
 
-	return(filechooser.getFileFilter());
+        return(filechooser.getFileFilter());
     }
 
 
     public final File
     getSelectedFile() {
 
-	return(filechooser.getSelectedFile());
+        return(filechooser.getSelectedFile());
     }
 
 
     public final File[]
     getSelectedFiles() {
 
-	return(filechooser.getSelectedFiles());
+        return(filechooser.getSelectedFiles());
     }
 
 
     public final boolean
     isDirectorySelectionEnabled() {
 
-	return(filechooser.isDirectorySelectionEnabled());
+        return(filechooser.isDirectorySelectionEnabled());
     }
 
 
     public final boolean
     isFileHidingEnabled() {
 
-	return(filechooser.isFileHidingEnabled());
+        return(filechooser.isFileHidingEnabled());
     }
 
 
     public final boolean
     isFileSelectionEnabled() {
 
-	return(filechooser.isFileSelectionEnabled());
+        return(filechooser.isFileSelectionEnabled());
     }
 
 
     public final boolean
     isMultiSelectionEnabled() {
 
-	return(filechooser.isMultiSelectionEnabled());
+        return(filechooser.isMultiSelectionEnabled());
     }
 
 
     public final void
     resetChoosableFileFilters() {
 
-	filechooser.resetChoosableFileFilters();
+        filechooser.resetChoosableFileFilters();
     }
 
 
     public final void
     setAcceptAllFileFilterUsed(boolean state) {
 
-	filechooser.setAcceptAllFileFilterUsed(state);
+        filechooser.setAcceptAllFileFilterUsed(state);
     }
 
 
     public final void
     setApproveButtonMnemonic(int value) {
 
-	filechooser.setApproveButtonMnemonic(value);
+        filechooser.setApproveButtonMnemonic(value);
     }
 
 
     public final void
     setApproveButtonText(String text) {
 
-	filechooser.setApproveButtonText(text);
+        filechooser.setApproveButtonText(text);
     }
 
 
     public final void
     setApproveButtonToolTipText(String text) {
 
-	filechooser.setApproveButtonToolTipText(text);
+        filechooser.setApproveButtonToolTipText(text);
     }
 
 
     public final void
     setCurrentDirectory(File dir) {
 
-	filechooser.setCurrentDirectory(dir);
+        filechooser.setCurrentDirectory(dir);
     }
 
 
     public final void
     setDialogType(int type) {
 
-	filechooser.setDialogType(type);
+        filechooser.setDialogType(type);
     }
 
 
     public final void
     setFileSelectionMode(int mode) {
 
-	filechooser.setFileSelectionMode(mode);
+        filechooser.setFileSelectionMode(mode);
     }
 
 
     public final void
     setMultiSelectionEnabled(boolean mode) {
 
-	filechooser.setMultiSelectionEnabled(mode);
+        filechooser.setMultiSelectionEnabled(mode);
     }
 
 
     public final void
     setFileFilter(FileFilter filter) {
 
-	filechooser.setFileFilter(filter);
+        filechooser.setFileFilter(filter);
     }
 
 
     public final void
     setFileHidingEnabled(boolean mode) {
 
-	filechooser.setFileHidingEnabled(mode);
+        filechooser.setFileHidingEnabled(mode);
     }
 
 
     public final void
     setSelectedFile(File file) {
 
-	filechooser.setSelectedFile(file);
+        filechooser.setSelectedFile(file);
     }
 
 
     public final void
     setSelectedFiles(File files[]) {
 
-	filechooser.setSelectedFiles(files);
+        filechooser.setSelectedFiles(files);
     }
 
     ///////////////////////////////////
@@ -335,42 +335,42 @@ class YoixSwingJFileDialog extends YoixSwingJDialog
     protected void
     finalize() {
 
-	data = null;
-	parent = null;
-	chooser = null;
-	filechooser = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        parent = null;
+        chooser = null;
+        filechooser = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     final YoixObject
     getFileChooser() {
 
-	return(chooser);
+        return(chooser);
     }
 
 
     public final void
     show() {
 
-	YoixObject  obj;
-	Window      owner;
+        YoixObject  obj;
+        Window      owner;
 
-	//
-	// Tries to center over the owner, which should have been set from
-	// N_PARENT, if it's showing and the N_LOCATION field is NULL.
-	// 
+        //
+        // Tries to center over the owner, which should have been set from
+        // N_PARENT, if it's showing and the N_LOCATION field is NULL.
+        // 
 
-	if ((owner = getOwner()) != null) {
-	    if (owner.isShowing()) {
-		if ((obj = data.getObject(N_LOCATION)) == null || obj.isNull())
-		    setLocationRelativeTo(owner);
-	    }
-	}
-	super.show();
+        if ((owner = getOwner()) != null) {
+            if (owner.isShowing()) {
+                if ((obj = data.getObject(N_LOCATION)) == null || obj.isNull())
+                    setLocationRelativeTo(owner);
+            }
+        }
+        super.show();
     }
 
     ///////////////////////////////////
@@ -382,27 +382,27 @@ class YoixSwingJFileDialog extends YoixSwingJDialog
     private void
     buildDialog(YoixObject data, YoixBodyComponent parent) {
 
-	YoixObject  ival;
+        YoixObject  ival;
 
-	//
-	// Using ival to pass N_OPAQUEFLAGS from our data dictionary to
-	// to the filechooser is a quick fix that's good enough for now,
-	// but we eventually may want a better solution. Implementation
-	// means setting opaqueflags field in a JFileDialog only works
-	// in declarations. Really not important because opaqueflags is
-	// currently undocumented and may remain that way.
-	//
+        //
+        // Using ival to pass N_OPAQUEFLAGS from our data dictionary to
+        // to the filechooser is a quick fix that's good enough for now,
+        // but we eventually may want a better solution. Implementation
+        // means setting opaqueflags field in a JFileDialog only works
+        // in declarations. Really not important because opaqueflags is
+        // currently undocumented and may remain that way.
+        //
 
-	this.parent = parent;
-	this.data = data;
+        this.parent = parent;
+        this.data = data;
 
-	ival = YoixObject.newDictionary(1);
-	ival.putInt(N_OPAQUEFLAGS, data.getInt(N_OPAQUEFLAGS, 0));
-	chooser = YoixMake.yoixType(T_JFILECHOOSER, ival);
-	filechooser = (YoixSwingJFileChooser)chooser.getManagedObject();
-	filechooser.addActionListener(this);
-	addWindowListener(this);
-	setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        ival = YoixObject.newDictionary(1);
+        ival.putInt(N_OPAQUEFLAGS, data.getInt(N_OPAQUEFLAGS, 0));
+        chooser = YoixMake.yoixType(T_JFILECHOOSER, ival);
+        filechooser = (YoixSwingJFileChooser)chooser.getManagedObject();
+        filechooser.addActionListener(this);
+        addWindowListener(this);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 }
 

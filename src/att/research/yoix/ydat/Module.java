@@ -1042,219 +1042,219 @@ class Module extends YoixModule
     public static YoixObject
     buildDataFields(YoixObject arg[]) {
 
-	YoixObject  source;
-	YoixObject  translators;
-	YoixObject  context;
-	YoixObject  desc;
-	ArrayList   table = null;
-	String      tag;
-	int         type;
-	int         columns;
-	int         length;
-	int         n;
+        YoixObject  source;
+        YoixObject  translators;
+        YoixObject  context;
+        YoixObject  desc;
+        ArrayList   table = null;
+        String      tag;
+        int         type;
+        int         columns;
+        int         length;
+        int         n;
 
-	//
-	// Decided to return null if columns doesn't match what we expect
-	// (currently 7), so the caller can decide to parse the table or
-	// issue a warning. A column mismatch undoubtedly means we need
-	// to update this builtin because the format has changed. Other
-	// errors are currently not dealt with gracefully, but probably
-	// should also trigger a null return - later.
-	// 
+        //
+        // Decided to return null if columns doesn't match what we expect
+        // (currently 7), so the caller can decide to parse the table or
+        // issue a warning. A column mismatch undoubtedly means we need
+        // to update this builtin because the format has changed. Other
+        // errors are currently not dealt with gracefully, but probably
+        // should also trigger a null return - later.
+        // 
 
-	if (arg.length == 3 || arg.length == 4) {
-	    if (arg[0].isArray() || arg[0].isNull()) {
-		if (arg[1].isNumber()) {
-		    if (arg[2].isDictionary() || arg[2].isNull()) {
-			if (arg.length == 3 || arg[3].isDictionary() || arg[3].isNull()) {
-			    if (arg[0].sizeof() > 0) {
-				if ((columns = arg[1].intValue()) == 7) {	// should we abort??
-				    source = arg[0];
-				    translators = arg[2].notNull() ? arg[2] : null;
-				    context = (arg.length == 4 && arg[3].notNull()) ? arg[3] : null;
-				    table = new ArrayList(source.sizeof());
-				    length = source.length() - columns + 1;
-				    for (n = source.offset(); n < length; n += columns) {
-					tag = source.getString(n);
-					type = source.getInt(n+1, DATA_STRING);
-					desc = YoixObject.newDictionary(7);
-					desc.putString(NL_TAG, tag);
-					desc.putInt(NL_TYPE, type);
-					desc.put(NL_INDEX, source.get(n+2, true), false);
-					desc.put(NL_ACCUMULATE, source.get(n+3, true), false);
-					desc.put(NL_UNIXTIME, source.get(n+4, true), false);
-					desc.put(
-					    NL_TRANSLATOR,
-					    newTranslator(source.getString(n+5), translators),
-					    false
-					);
-					desc.put(
-					    NL_GENERATOR,
-					    newTableGenerator(source.getObject(n+6), type, translators),
-					    false
-					);
-					if (context != null)
-					    context.put(tag, desc, false);
-					table.add(desc);
-				    }
-				}
-			    }
-			} else VM.badArgument(3);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 3 || arg.length == 4) {
+            if (arg[0].isArray() || arg[0].isNull()) {
+                if (arg[1].isNumber()) {
+                    if (arg[2].isDictionary() || arg[2].isNull()) {
+                        if (arg.length == 3 || arg[3].isDictionary() || arg[3].isNull()) {
+                            if (arg[0].sizeof() > 0) {
+                                if ((columns = arg[1].intValue()) == 7) {	// should we abort??
+                                    source = arg[0];
+                                    translators = arg[2].notNull() ? arg[2] : null;
+                                    context = (arg.length == 4 && arg[3].notNull()) ? arg[3] : null;
+                                    table = new ArrayList(source.sizeof());
+                                    length = source.length() - columns + 1;
+                                    for (n = source.offset(); n < length; n += columns) {
+                                        tag = source.getString(n);
+                                        type = source.getInt(n+1, DATA_STRING);
+                                        desc = YoixObject.newDictionary(7);
+                                        desc.putString(NL_TAG, tag);
+                                        desc.putInt(NL_TYPE, type);
+                                        desc.put(NL_INDEX, source.get(n+2, true), false);
+                                        desc.put(NL_ACCUMULATE, source.get(n+3, true), false);
+                                        desc.put(NL_UNIXTIME, source.get(n+4, true), false);
+                                        desc.put(
+                                            NL_TRANSLATOR,
+                                            newTranslator(source.getString(n+5), translators),
+                                            false
+                                        );
+                                        desc.put(
+                                            NL_GENERATOR,
+                                            newTableGenerator(source.getObject(n+6), type, translators),
+                                            false
+                                        );
+                                        if (context != null)
+                                            context.put(tag, desc, false);
+                                        table.add(desc);
+                                    }
+                                }
+                            }
+                        } else VM.badArgument(3);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixMisc.copyIntoGrowableArray(table, false, table));
+        return(YoixMisc.copyIntoGrowableArray(table, false, table));
     }
 
 
     public static YoixObject
     dotPlot(YoixObject arg[]) {
 
-	YoixObject  obj;
-	String      text = null;
-	String      attrs[] = null;
-	char        delim = '|';
-	int         offset;
-	int         n;
+        YoixObject  obj;
+        String      text = null;
+        String      attrs[] = null;
+        char        delim = '|';
+        int         offset;
+        int         n;
 
-	if (arg[0].isBodyInstanceOf(DataManager.class)) {
-	    if (arg[1].isString() || arg[1].isGraph()) {
-		if (arg.length >= 3) {
-		    if (arg[2].notNull() && arg[2].isString() && arg[2].sizeof() == 1) {
-			delim = arg[2].stringValue().charAt(0);
-		    } else if (arg[2].notNull())
-			VM.badArgument(2);
-		    if (arg.length == 4 && arg[3].notNull()) {
-			if (arg[3].isArray()) {
-			    attrs = new String[arg[3].sizeof()];
-			    offset = arg[3].offset();
-			    for (n = 0; n < attrs.length; n++) {
-				if ((obj = arg[3].getObject(n + offset)) != null) {
-				    if (obj.isString() && obj.notNull())
-					attrs[n] = obj.stringValue();
-				    else VM.badArgument(3);
-				} else VM.badArgument(3);
-			    }
-			} else VM.badArgument(3);
-		    }
-		}
-		text = YoixMiscGraph.graphdata(arg[1], delim, attrs);
-		if (text != null) {
-		    arg[0].setBodyField(NL_TEXT, YoixObject.newString(text), false);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isBodyInstanceOf(DataManager.class)) {
+            if (arg[1].isString() || arg[1].isGraph()) {
+                if (arg.length >= 3) {
+                    if (arg[2].notNull() && arg[2].isString() && arg[2].sizeof() == 1) {
+                        delim = arg[2].stringValue().charAt(0);
+                    } else if (arg[2].notNull())
+                        VM.badArgument(2);
+                    if (arg.length == 4 && arg[3].notNull()) {
+                        if (arg[3].isArray()) {
+                            attrs = new String[arg[3].sizeof()];
+                            offset = arg[3].offset();
+                            for (n = 0; n < attrs.length; n++) {
+                                if ((obj = arg[3].getObject(n + offset)) != null) {
+                                    if (obj.isString() && obj.notNull())
+                                        attrs[n] = obj.stringValue();
+                                    else VM.badArgument(3);
+                                } else VM.badArgument(3);
+                            }
+                        } else VM.badArgument(3);
+                    }
+                }
+                text = YoixMiscGraph.graphdata(arg[1], delim, attrs);
+                if (text != null) {
+                    arg[0].setBodyField(NL_TEXT, YoixObject.newString(text), false);
+                } else VM.badArgument(1);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newEmpty());
+        return(YoixObject.newEmpty());
     }
 
 
     public static YoixObject
     graphPlotText(YoixObject arg[]) {
 
-	String  text = null;
-	char    delim = '|';
+        String  text = null;
+        char    delim = '|';
 
-	//
-	// Pretty much duplicates the YoixModuleGraph.dotGraphToText()
-	// builtin, which is the one we now recommend that you use. In
-	// fact there's a chance this one will disappear, so don't use
-	// it in new applications. The reasons for the change was so
-	// we could write a server based Yoix script that could parse
-	// graphs but that didn't need a custom module that might also
-	// be licensed.
-	//
+        //
+        // Pretty much duplicates the YoixModuleGraph.dotGraphToText()
+        // builtin, which is the one we now recommend that you use. In
+        // fact there's a chance this one will disappear, so don't use
+        // it in new applications. The reasons for the change was so
+        // we could write a server based Yoix script that could parse
+        // graphs but that didn't need a custom module that might also
+        // be licensed.
+        //
 
-	if (arg.length <= 4) {
-	    if (arg[0].isGraph() || arg[0].isString()) {
-		if (arg[0].notNull()) {
-		    if (arg.length <= 1 || arg[1].isString() || arg[1].isNull()) {
-			if (arg.length <= 2 || arg[2].isArray() || arg[2].isDictionary() || arg[2].isNull()) {
-			    if (arg.length <= 3 || arg[3].isInteger()) {
-				if (arg.length > 1 && arg[1].sizeof() > 0)
-				    delim = arg[1].stringValue().charAt(0);
-				text = YoixMiscGraph.graphdata(
-				    arg[0],
-				    delim,
-				    arg.length > 2 ? arg[2] : null,
-				    arg.length > 3 ? arg[3].booleanValue() : false
-				);
-			    } else VM.badArgument(3);
-			} else VM.badArgument(2);
-		    } else VM.badArgument(1);
-		}
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length <= 4) {
+            if (arg[0].isGraph() || arg[0].isString()) {
+                if (arg[0].notNull()) {
+                    if (arg.length <= 1 || arg[1].isString() || arg[1].isNull()) {
+                        if (arg.length <= 2 || arg[2].isArray() || arg[2].isDictionary() || arg[2].isNull()) {
+                            if (arg.length <= 3 || arg[3].isInteger()) {
+                                if (arg.length > 1 && arg[1].sizeof() > 0)
+                                    delim = arg[1].stringValue().charAt(0);
+                                text = YoixMiscGraph.graphdata(
+                                    arg[0],
+                                    delim,
+                                    arg.length > 2 ? arg[2] : null,
+                                    arg.length > 3 ? arg[3].booleanValue() : false
+                                );
+                            } else VM.badArgument(3);
+                        } else VM.badArgument(2);
+                    } else VM.badArgument(1);
+                }
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(text == null ? YoixObject.newString() : YoixObject.newString(text));
+        return(text == null ? YoixObject.newString() : YoixObject.newString(text));
     }
 
 
     public static YoixObject
     mercatorToYDAT(YoixObject arg[]) {
 
-	String  text = null;
+        String  text = null;
 
-	if (arg.length >= 4 || arg.length <= 10) {
-	    if (arg[0].isString()) {
-		if (arg[1].isNumber()) {
-		    if (arg[2].isNumber()) {
-			if (arg[3].isNumber()) {
-			    if (arg[4].isNumber()) {
-				if (arg.length <= 5 || arg[5].isString() || arg[5].isNull()) {
-				    if (arg.length <= 6 || arg[6].isNumber()) {
-					if (arg.length <= 7 || arg[7].isNumber()) {
-					    if (arg.length <= 8 || arg[8].isNumber()) {
-						if (arg.length <= 9 || arg[9].isMatrix() || arg[9].isNull()) {
-						    text = Misc.mercatorToYDAT(
-							arg[0].stringValue(),
-							arg[1].intValue(),
-							arg[2].intValue(),
-							arg[3].intValue(),
-							arg.length > 4 ? arg[4].intValue() : 2,
-							arg.length > 5 && arg[5].notNull() ? arg[5].stringValue() : null,
-							arg.length > 6 ? arg[6].doubleValue() : 0,
-							arg.length > 7 ? arg[7].doubleValue() : 0,
-							arg.length > 8 ? arg[8].booleanValue() : true,
-							arg.length > 9 && arg[9].isMatrix() ? arg[9] : null
-						    );
-						} else VM.badArgument(9);
-					    } else VM.badArgument(8);
-					} else VM.badArgument(7);
-				    } else VM.badArgument(6);
-				} else VM.badArgument(5);
-			    } else VM.badArgument(4);
-			} else VM.badArgument(3);
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 4 || arg.length <= 10) {
+            if (arg[0].isString()) {
+                if (arg[1].isNumber()) {
+                    if (arg[2].isNumber()) {
+                        if (arg[3].isNumber()) {
+                            if (arg[4].isNumber()) {
+                                if (arg.length <= 5 || arg[5].isString() || arg[5].isNull()) {
+                                    if (arg.length <= 6 || arg[6].isNumber()) {
+                                        if (arg.length <= 7 || arg[7].isNumber()) {
+                                            if (arg.length <= 8 || arg[8].isNumber()) {
+                                                if (arg.length <= 9 || arg[9].isMatrix() || arg[9].isNull()) {
+                                                    text = Misc.mercatorToYDAT(
+                                                        arg[0].stringValue(),
+                                                        arg[1].intValue(),
+                                                        arg[2].intValue(),
+                                                        arg[3].intValue(),
+                                                        arg.length > 4 ? arg[4].intValue() : 2,
+                                                        arg.length > 5 && arg[5].notNull() ? arg[5].stringValue() : null,
+                                                        arg.length > 6 ? arg[6].doubleValue() : 0,
+                                                        arg.length > 7 ? arg[7].doubleValue() : 0,
+                                                        arg.length > 8 ? arg[8].booleanValue() : true,
+                                                        arg.length > 9 && arg[9].isMatrix() ? arg[9] : null
+                                                    );
+                                                } else VM.badArgument(9);
+                                            } else VM.badArgument(8);
+                                        } else VM.badArgument(7);
+                                    } else VM.badArgument(6);
+                                } else VM.badArgument(5);
+                            } else VM.badArgument(4);
+                        } else VM.badArgument(3);
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(text == null ? YoixObject.newString() : YoixObject.newString(text));
+        return(text == null ? YoixObject.newString() : YoixObject.newString(text));
     }
 
 
     public static YoixObject
     newPointer(int id, int length, YoixObject data) {
 
-	YoixObject  obj = null;
+        YoixObject  obj = null;
 
-	switch (id) {
-	    case DATAMANAGER:
-		obj = YoixObject.newPointer(new DataManager(data));
-		break;
+        switch (id) {
+            case DATAMANAGER:
+                obj = YoixObject.newPointer(new DataManager(data));
+                break;
 
-	    case JCOMPONENT:
-		obj = YoixObject.newPointer(new BodyComponentSwing(data));
-		break;
+            case JCOMPONENT:
+                obj = YoixObject.newPointer(new BodyComponentSwing(data));
+                break;
 
-	    case PALETTE:
-		obj = YoixObject.newPointer(new Palette(data));
-		break;
-	}
-	return(obj);
+            case PALETTE:
+                obj = YoixObject.newPointer(new Palette(data));
+                break;
+        }
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -1266,58 +1266,58 @@ class Module extends YoixModule
     private static YoixObject
     newTableGenerator(YoixObject generator, int type, YoixObject translators) {
 
-	YoixObject  translator;
-	ArrayList   table = null;
-	int         columns = 5;
-	int         length;
-	int         n;
+        YoixObject  translator;
+        ArrayList   table = null;
+        int         columns = 5;
+        int         length;
+        int         n;
 
-	if (generator != null && generator.notNull()) {
-	    switch (type) {
-		case DATA_TABLE:
-		    table = new ArrayList(generator.length());
-		    length = generator.length() - columns + 1;
-		    for (n = 0; n < length; n += columns) {
-			table.add(generator.getObject(n+0));
-			table.add(generator.getObject(n+1));
-			table.add(generator.getObject(n+2));
-			table.add(generator.getObject(n+3));
-			if ((translator = generator.getObject(n+4)) != null) {
-			    if (translator.isString())
-				translator = newTranslator(translator.stringValue(), translators);
-			} else translator = YoixObject.newDictionary();
-			table.add(translator);
-		    }
-		    generator = YoixMisc.copyIntoArray(table, false, table);
-		    break;
+        if (generator != null && generator.notNull()) {
+            switch (type) {
+                case DATA_TABLE:
+                    table = new ArrayList(generator.length());
+                    length = generator.length() - columns + 1;
+                    for (n = 0; n < length; n += columns) {
+                        table.add(generator.getObject(n+0));
+                        table.add(generator.getObject(n+1));
+                        table.add(generator.getObject(n+2));
+                        table.add(generator.getObject(n+3));
+                        if ((translator = generator.getObject(n+4)) != null) {
+                            if (translator.isString())
+                                translator = newTranslator(translator.stringValue(), translators);
+                        } else translator = YoixObject.newDictionary();
+                        table.add(translator);
+                    }
+                    generator = YoixMisc.copyIntoArray(table, false, table);
+                    break;
 
-		case DATA_TABLE_NEW:
-		    table = new ArrayList(generator.length());
-		    length = generator.length() - columns + 1;
-		    for (n = 0; n < length; n += columns) {
-			table.add(generator.getObject(n+0));
-			table.add(generator.getObject(n+1));
-			table.add(generator.getObject(n+2));
-			table.add(generator.getObject(n+3));
-			table.add(generator.getObject(n+4));
-		    }
-		    generator = YoixMisc.copyIntoArray(table, false, table);
-		    break;
-	    }
-	}
+                case DATA_TABLE_NEW:
+                    table = new ArrayList(generator.length());
+                    length = generator.length() - columns + 1;
+                    for (n = 0; n < length; n += columns) {
+                        table.add(generator.getObject(n+0));
+                        table.add(generator.getObject(n+1));
+                        table.add(generator.getObject(n+2));
+                        table.add(generator.getObject(n+3));
+                        table.add(generator.getObject(n+4));
+                    }
+                    generator = YoixMisc.copyIntoArray(table, false, table);
+                    break;
+            }
+        }
 
-	return(generator);
+        return(generator);
     }
 
 
     private static YoixObject
     newTranslator(String name, YoixObject translators) {
 
-	YoixObject  translator = null;
+        YoixObject  translator = null;
 
-	if (translators != null && name != null)
-	    translator = translators.getObject(name);
-	return(translator == null ? YoixObject.newDictionary() : translator);
+        if (translators != null && name != null)
+            translator = translators.getObject(name);
+        return(translator == null ? YoixObject.newDictionary() : translator);
     }
 }
 

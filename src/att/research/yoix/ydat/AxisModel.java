@@ -31,7 +31,7 @@ class AxisModel
 
     AxisModel(DataAxis axis) {
 
-	this.axis = axis;
+        this.axis = axis;
     }
 
     ///////////////////////////////////
@@ -43,11 +43,11 @@ class AxisModel
     protected void
     finalize() {
 
-	this.axis = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        this.axis = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 

@@ -81,398 +81,398 @@ class JVMTestModule extends YoixModule
     public static YoixObject
     assembleClass(YoixObject arg[]) {
 
-	String  details;
+        String  details;
 
-	if (arg[0].isString()) {
-	    try {
-		classfile = (new JVMAssembler()).assembleClass(arg[0].stringValue());
-	    }
-	    catch(JVMAssemblerError e) {
-		classfile = null;
-		if (e.getMessage() != null)
-		    System.err.println(e.getMessage());
-		if ((details = e.getDetails()) != null)
-		    System.err.println(details);
-	    }
-	} else VM.badArgument(0);
+        if (arg[0].isString()) {
+            try {
+                classfile = (new JVMAssembler()).assembleClass(arg[0].stringValue());
+            }
+            catch(JVMAssemblerError e) {
+                classfile = null;
+                if (e.getMessage() != null)
+                    System.err.println(e.getMessage());
+                if ((details = e.getDetails()) != null)
+                    System.err.println(details);
+            }
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(1));
+        return(YoixObject.newInt(1));
     }
 
 
     public static YoixObject
     defineClass(YoixObject arg[]) {
 
-	String  details;
-	Method  method;
-	Class   definedclass = null;
-	Class   types[];
-	Object  args[];
-	int     length;
-	int     m;
-	int     n;
+        String  details;
+        Method  method;
+        Class   definedclass = null;
+        Class   types[];
+        Object  args[];
+        int     length;
+        int     m;
+        int     n;
 
-	//
-	// Code that takes over after the class is defined only handles a
-	// trivial test call to a static method that's in the successfully
-	// defined class.
-	//
+        //
+        // Code that takes over after the class is defined only handles a
+        // trivial test call to a static method that's in the successfully
+        // defined class.
+        //
 
-	if (arg[0].isString()) {
-	    try {
-		definedclass = (new JVMClassLoader()).defineClass(arg[0].stringValue());
-	    }
-	    catch(JVMAssemblerError e) {
-		if (e.getMessage() != null)
-		    System.err.println(e.getMessage());
-		if ((details = e.getDetails()) != null)
-		    System.err.println(details);
-	    }
+        if (arg[0].isString()) {
+            try {
+                definedclass = (new JVMClassLoader()).defineClass(arg[0].stringValue());
+            }
+            catch(JVMAssemblerError e) {
+                if (e.getMessage() != null)
+                    System.err.println(e.getMessage());
+                if ((details = e.getDetails()) != null)
+                    System.err.println(details);
+            }
 
-	    if (definedclass != null) {
-		if (arg.length > 1) {
-		    if (arg[1].isString()) {
-			try {
-			    length = arg.length - 2;
-			    args = new Object[length];
-			    types = new Class[length];
-			    for (n = 2, m = 0; n < arg.length; n++, m++) {
-				if (arg[n].isDouble()) {
-				    types[m] = Double.TYPE;
-				    args[m] = new Double(arg[n].doubleValue());
-				} else if (arg[n].isInteger()) {
-				    types[m] = Integer.TYPE;
-				    args[m] = new Integer(arg[n].intValue());
-				} else if (arg[n].isString()) {
-				    types[m] = String.class;
-				    args[m] = arg[n].stringValue();
-				} else {
-				    types[m] = Object.class;
-				    args[m] = null;
-				}
-			    }
-			    method = definedclass.getMethod(arg[1].stringValue(), types);
-			    method.invoke(null, args);
-			}
-			catch(Exception e) {
-			    System.err.println("caught e=" + e);
-			}
-		    } else VM.badArgument(1);
-		}
-	    }
-	} else VM.badArgument(0);
+            if (definedclass != null) {
+                if (arg.length > 1) {
+                    if (arg[1].isString()) {
+                        try {
+                            length = arg.length - 2;
+                            args = new Object[length];
+                            types = new Class[length];
+                            for (n = 2, m = 0; n < arg.length; n++, m++) {
+                                if (arg[n].isDouble()) {
+                                    types[m] = Double.TYPE;
+                                    args[m] = new Double(arg[n].doubleValue());
+                                } else if (arg[n].isInteger()) {
+                                    types[m] = Integer.TYPE;
+                                    args[m] = new Integer(arg[n].intValue());
+                                } else if (arg[n].isString()) {
+                                    types[m] = String.class;
+                                    args[m] = arg[n].stringValue();
+                                } else {
+                                    types[m] = Object.class;
+                                    args[m] = null;
+                                }
+                            }
+                            method = definedclass.getMethod(arg[1].stringValue(), types);
+                            method.invoke(null, args);
+                        }
+                        catch(Exception e) {
+                            System.err.println("caught e=" + e);
+                        }
+                    } else VM.badArgument(1);
+                }
+            }
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(definedclass != null));
+        return(YoixObject.newInt(definedclass != null));
     }
 
 
     public static YoixObject
     dumpClassFile(YoixObject arg[]) {
 
-	String  str = null;
+        String  str = null;
 
-	if (arg.length == 0) {
-	    if (classfile != null)
-		str = classfile.dumpClassFile();
-	} else VM.badCall();
+        if (arg.length == 0) {
+            if (classfile != null)
+                str = classfile.dumpClassFile();
+        } else VM.badCall();
 
-	return(YoixObject.newString(str));
+        return(YoixObject.newString(str));
     }
 
 
     public static YoixObject
     loadClassFile(YoixObject arg[]) {
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    if (arg[0].notNull())
-		classfile = new JVMClassFile(arg[0].stringValue());
-	}
-	return(YoixObject.newEmpty());
+        if (arg[0].isString() || arg[0].isNull()) {
+            if (arg[0].notNull())
+                classfile = new JVMClassFile(arg[0].stringValue());
+        }
+        return(YoixObject.newEmpty());
     }
 
 
     public static YoixObject
     storeConstantValue(YoixObject arg[]) {
 
-	String  name;
-	int     index = -1;
+        String  name;
+        int     index = -1;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    if (classfile != null) {
-		name = arg[0].stringValue();
-		if (arg[1].isInteger())
-		    index = classfile.storeConstantValue(name, arg[1].intValue());
-		else if (arg[1].isDouble())
-		    index = classfile.storeConstantValue(name, arg[1].doubleValue());
-		else if (arg[1].isString())
-		    index = classfile.storeConstantValue(name, arg[1].stringValue());
-	    }
-	} else VM.badArgument(1);
+        if (arg[0].isString() && arg[0].notNull()) {
+            if (classfile != null) {
+                name = arg[0].stringValue();
+                if (arg[1].isInteger())
+                    index = classfile.storeConstantValue(name, arg[1].intValue());
+                else if (arg[1].isDouble())
+                    index = classfile.storeConstantValue(name, arg[1].doubleValue());
+                else if (arg[1].isString())
+                    index = classfile.storeConstantValue(name, arg[1].stringValue());
+            }
+        } else VM.badArgument(1);
 
-	return(YoixObject.newInt(index));
+        return(YoixObject.newInt(index));
     }
 
 
     public static YoixObject
     storeDeprecatedClass(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (classfile != null)
-	    index = classfile.storeDeprecatedClass();
+        if (classfile != null)
+            index = classfile.storeDeprecatedClass();
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     storeDeprecatedField(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    if (classfile != null)
-		 index = classfile.storeDeprecatedField(arg[0].stringValue());
-	} else VM.badArgument(0);
+        if (arg[0].isString() && arg[0].notNull()) {
+            if (classfile != null)
+                 index = classfile.storeDeprecatedField(arg[0].stringValue());
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     storeDeprecatedMethod(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    if (arg[1].isString() && arg[1].notNull()) {
-		if (classfile != null)
-		    index = classfile.storeDeprecatedMethod(arg[0].stringValue(), arg[1].stringValue());
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString() && arg[0].notNull()) {
+            if (arg[1].isString() && arg[1].notNull()) {
+                if (classfile != null)
+                    index = classfile.storeDeprecatedMethod(arg[0].stringValue(), arg[1].stringValue());
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     storeFieldInfo(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (arg.length >= 2 || arg.length <= 4) {
-	    if (arg[0].isString()) {
-		if (arg[1].isString()) {
-		    if (arg.length <= 2 || arg[2].isInteger()) {
-			if (arg.length <= 3) {	// no attributes - for now
-			    if (classfile != null) {
-				index = classfile.storeField(
-				    arg[0].stringValue(),
-				    arg[1].stringValue(),
-				    arg.length > 2 ? arg[2].intValue() : 0,
-				    null
-				 );
-			    }
-			}
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 2 || arg.length <= 4) {
+            if (arg[0].isString()) {
+                if (arg[1].isString()) {
+                    if (arg.length <= 2 || arg[2].isInteger()) {
+                        if (arg.length <= 3) {	// no attributes - for now
+                            if (classfile != null) {
+                                index = classfile.storeField(
+                                    arg[0].stringValue(),
+                                    arg[1].stringValue(),
+                                    arg.length > 2 ? arg[2].intValue() : 0,
+                                    null
+                                 );
+                            }
+                        }
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     storeMethodInfo(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (arg.length >= 2 || arg.length <= 4) {
-	    if (arg[0].isString()) {
-		if (arg[1].isString()) {
-		    if (arg.length <= 2 || arg[2].isInteger()) {
-			if (arg.length <= 3) {	// no attributes - for now
-			    if (classfile != null) {
-				index = classfile.storeMethod(
-				    arg[0].stringValue(),
-				    arg[1].stringValue(),
-				    arg.length > 2 ? arg[2].intValue() : 0,
-				    null
-				);
-			    }
-			}
-		    } else VM.badArgument(2);
-		} else VM.badArgument(1);
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length >= 2 || arg.length <= 4) {
+            if (arg[0].isString()) {
+                if (arg[1].isString()) {
+                    if (arg.length <= 2 || arg[2].isInteger()) {
+                        if (arg.length <= 3) {	// no attributes - for now
+                            if (classfile != null) {
+                                index = classfile.storeMethod(
+                                    arg[0].stringValue(),
+                                    arg[1].stringValue(),
+                                    arg.length > 2 ? arg[2].intValue() : 0,
+                                    null
+                                );
+                            }
+                        }
+                    } else VM.badArgument(2);
+                } else VM.badArgument(1);
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     storeInterface(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString()) {
-		if (classfile != null)
-		    index = classfile.storeInterface(arg[0].stringValue());
-	    } else VM.badArgument(0);
-	} else VM.badCall();
+        if (arg.length == 1) {
+            if (arg[0].isString()) {
+                if (classfile != null)
+                    index = classfile.storeInterface(arg[0].stringValue());
+            } else VM.badArgument(0);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     storeThrownException(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    if (arg[1].isString() && arg[1].notNull()) {
-		if (arg[2].isString() && arg[2].notNull()) {
-		    if (classfile != null) {
-			index = classfile.storeThrownException(
-			    arg[0].stringValue(),
-			    arg[1].stringValue(),
-			    arg[2].stringValue()
-			);
-		    }
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString() && arg[0].notNull()) {
+            if (arg[1].isString() && arg[1].notNull()) {
+                if (arg[2].isString() && arg[2].notNull()) {
+                    if (classfile != null) {
+                        index = classfile.storeThrownException(
+                            arg[0].stringValue(),
+                            arg[1].stringValue(),
+                            arg[2].stringValue()
+                        );
+                    }
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     storeInnerClass(YoixObject arg[]) {
 
-	int  index = -1;
+        int  index = -1;
 
-	if (arg[0].isString() && arg[0].notNull()) {
-	    if (arg[1].isString() && arg[1].notNull()) {
-		if (arg[2].isString() && arg[2].notNull()) {
-		    if (arg[3].isInteger()) {
-			if (classfile != null) {
-			    index = classfile.storeInnerClass(
-				arg[0].stringValue(),
-			 	arg[1].stringValue(),
-				arg[2].stringValue(),
-				arg[3].intValue()
-			    );
-			}
-		    } else VM.badArgument(3);
-		} else VM.badArgument(2);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString() && arg[0].notNull()) {
+            if (arg[1].isString() && arg[1].notNull()) {
+                if (arg[2].isString() && arg[2].notNull()) {
+                    if (arg[3].isInteger()) {
+                        if (classfile != null) {
+                            index = classfile.storeInnerClass(
+                                arg[0].stringValue(),
+                         	arg[1].stringValue(),
+                                arg[2].stringValue(),
+                                arg[3].intValue()
+                            );
+                        }
+                    } else VM.badArgument(3);
+                } else VM.badArgument(2);
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newInt(index >= 0));
+        return(YoixObject.newInt(index >= 0));
     }
 
 
     public static YoixObject
     writeClassFile(YoixObject arg[]) {
 
-	FileOutputStream  stream;
-	String            path;
-	File              file;
-	byte              bytes[];
-	int               total = -1;
+        FileOutputStream  stream;
+        String            path;
+        File              file;
+        byte              bytes[];
+        int               total = -1;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    if (arg[0].notNull()) {
-		path = arg[0].stringValue();
-		if (classfile != null) {
-		    if ((bytes = classfile.getBytes()) != null) {
-			try {
-			    stream = new FileOutputStream(path);
-			    stream.write(bytes);
-			    stream.close();
-			    total = bytes.length;
-			}
-			catch(IOException e) {}
-		    }
-		}
-	    }
-	}
+        if (arg[0].isString() || arg[0].isNull()) {
+            if (arg[0].notNull()) {
+                path = arg[0].stringValue();
+                if (classfile != null) {
+                    if ((bytes = classfile.getBytes()) != null) {
+                        try {
+                            stream = new FileOutputStream(path);
+                            stream.write(bytes);
+                            stream.close();
+                            total = bytes.length;
+                        }
+                        catch(IOException e) {}
+                    }
+                }
+            }
+        }
 
-	return(YoixObject.newInt(total));
+        return(YoixObject.newInt(total));
     }
 
 
     public static YoixObject
     getDeclarationFromDescriptor(YoixObject arg[]) {
 
-	String  str = null;
+        String  str = null;
 
-	if (arg[0].isString() || arg[0].isNull()) {
-	    if (arg[1].isString()) {
-		str = JVMDescriptor.getDeclarationFromDescriptor(
-		    arg[0].notNull() ? arg[0].stringValue() : null,
-		    arg[1].stringValue()
-		);
-	    } else VM.badArgument(1);
-	} else VM.badArgument(0);
+        if (arg[0].isString() || arg[0].isNull()) {
+            if (arg[1].isString()) {
+                str = JVMDescriptor.getDeclarationFromDescriptor(
+                    arg[0].notNull() ? arg[0].stringValue() : null,
+                    arg[1].stringValue()
+                );
+            } else VM.badArgument(1);
+        } else VM.badArgument(0);
 
-	return(YoixObject.newString(str));
+        return(YoixObject.newString(str));
     }
 
 
     public static YoixObject
     getDescriptorForMethod(YoixObject arg[]) {
 
-	String  str = null;
+        String  str = null;
 
-	if (arg[0].isString())
-	    str = JVMDescriptor.getDescriptorForMethod(arg[0].stringValue());
-	else VM.badArgument(0);
+        if (arg[0].isString())
+            str = JVMDescriptor.getDescriptorForMethod(arg[0].stringValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newString(str));
+        return(YoixObject.newString(str));
     }
 
 
     public static YoixObject
     getNameFromDescriptor(YoixObject arg[]) {
 
-	String  str = null;
+        String  str = null;
 
-	if (arg[0].isString())
-	    str = JVMDescriptor.getDeclarationFromDescriptor(null, arg[0].stringValue());
-	else VM.badArgument(0);
+        if (arg[0].isString())
+            str = JVMDescriptor.getDeclarationFromDescriptor(null, arg[0].stringValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newString(str));
+        return(YoixObject.newString(str));
     }
 
 
     public static YoixObject
     isFieldDescriptor(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg[0].isString())
-	    result = JVMDescriptor.isFieldDescriptor(arg[0].stringValue());
-	else VM.badArgument(0);
+        if (arg[0].isString())
+            result = JVMDescriptor.isFieldDescriptor(arg[0].stringValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isMethodDescriptor(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg[0].isString())
-	    result = JVMDescriptor.isMethodDescriptor(arg[0].stringValue());
-	else VM.badArgument(0);
+        if (arg[0].isString())
+            result = JVMDescriptor.isMethodDescriptor(arg[0].stringValue());
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 }
 

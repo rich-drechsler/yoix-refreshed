@@ -33,8 +33,8 @@ class YoixAWTTextField extends TextField
 
     YoixAWTTextField(YoixObject data, YoixBodyComponent parent) {
 
-	this.parent = parent;
-	this.data = data;
+        this.parent = parent;
+        this.data = data;
     }
 
     ///////////////////////////////////
@@ -46,89 +46,89 @@ class YoixAWTTextField extends TextField
     public final void
     addNotify() {
 
-	super.addNotify();
-	if (lastcaret != null) {
-	    synchronized(this) {
-		try {
-		    super.setCaretPosition(lastcaret.intValue());
-		}
-		catch(RuntimeException e) {}
-		finally {
-		    lastcaret = null;
-		}
-	    }
-	}
+        super.addNotify();
+        if (lastcaret != null) {
+            synchronized(this) {
+                try {
+                    super.setCaretPosition(lastcaret.intValue());
+                }
+                catch(RuntimeException e) {}
+                finally {
+                    lastcaret = null;
+                }
+            }
+        }
     }
 
 
     protected void
     finalize() {
 
-	data = null;
-	parent = null;
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        data = null;
+        parent = null;
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
 
     public final Dimension
     getMaximumSize() {
 
-	return(getLayoutSize(N_MAXIMUMSIZE, super.getMaximumSize()));
+        return(getLayoutSize(N_MAXIMUMSIZE, super.getMaximumSize()));
     }
 
 
     public final Dimension
     getMinimumSize() {
 
-	return(getLayoutSize(N_MINIMUMSIZE, super.getMinimumSize()));
+        return(getLayoutSize(N_MINIMUMSIZE, super.getMinimumSize()));
     }
 
 
     public final Dimension
     getPreferredSize() {
 
-	return(getLayoutSize(N_PREFERREDSIZE, super.getPreferredSize()));
+        return(getLayoutSize(N_PREFERREDSIZE, super.getPreferredSize()));
     }
 
 
     public final synchronized void
     setBackground(Color c) {
 
-	background_set = c;
+        background_set = c;
 
-	if (c != null) {
-	    if (YoixMisc.jvmCompareTo("1.3") < 0) {
-		if (YoixMisc.jvmCompareTo("1.2") < 0 || ISWIN) {
-		    if (isEditable())
-			c = c.darker();
-		}
-	    }
-	}
+        if (c != null) {
+            if (YoixMisc.jvmCompareTo("1.3") < 0) {
+                if (YoixMisc.jvmCompareTo("1.2") < 0 || ISWIN) {
+                    if (isEditable())
+                        c = c.darker();
+                }
+            }
+        }
 
-	super.setBackground(c);
+        super.setBackground(c);
     }
 
 
     public final synchronized void
     setCaretPosition(int position) {
 
-	try {
-	    super.setCaretPosition(position);
-	}
-	catch(RuntimeException e) {
-	    lastcaret = new Integer(position);
-	}
+        try {
+            super.setCaretPosition(position);
+        }
+        catch(RuntimeException e) {
+            lastcaret = new Integer(position);
+        }
     }
 
 
     public final synchronized void
     setEditable(boolean state) {
 
-	super.setEditable(state);
-	setBackground(background_set);
+        super.setEditable(state);
+        setBackground(background_set);
     }
 
 
@@ -141,21 +141,21 @@ class YoixAWTTextField extends TextField
     private Dimension
     getLayoutSize(String name, Dimension size) {
 
-	YoixObject  obj;
-	Dimension   defaultsize;
+        YoixObject  obj;
+        Dimension   defaultsize;
 
-	if ((obj = data.getObject(name)) != null && obj.notNull()) {
-	    defaultsize = size;
-	    size = YoixMakeScreen.javaDimension(obj);
-	    if (size.width <= 0 || size.height <= 0) {
-		if (size.width < 0 || (size.width == 0 && name.equals(N_PREFERREDSIZE)))
-		    size.width = (defaultsize != null) ? defaultsize.width : 0;
-		if (size.height < 0 || (size.height == 0 && name.equals(N_PREFERREDSIZE)))
-		    size.height = (defaultsize != null) ? defaultsize.height : 0;
-	    }
-	}
+        if ((obj = data.getObject(name)) != null && obj.notNull()) {
+            defaultsize = size;
+            size = YoixMakeScreen.javaDimension(obj);
+            if (size.width <= 0 || size.height <= 0) {
+                if (size.width < 0 || (size.width == 0 && name.equals(N_PREFERREDSIZE)))
+                    size.width = (defaultsize != null) ? defaultsize.width : 0;
+                if (size.height < 0 || (size.height == 0 && name.equals(N_PREFERREDSIZE)))
+                    size.height = (defaultsize != null) ? defaultsize.height : 0;
+            }
+        }
 
-	return(size);
+        return(size);
     }
 }
 

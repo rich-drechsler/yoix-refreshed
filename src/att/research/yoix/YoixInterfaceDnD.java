@@ -20,7 +20,7 @@ interface YoixInterfaceDnD
     extends DragGestureListener,
             DragSourceListener,
             DropTargetListener,
-	    YoixInterfaceDragable
+            YoixInterfaceDragable
 
 {
 

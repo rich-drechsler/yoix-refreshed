@@ -39,7 +39,7 @@ class YoixVMThreadData
 
     YoixVMThreadData(Thread owner) {
 
-	reset(owner);
+        reset(owner);
     }
 
     ///////////////////////////////////
@@ -51,51 +51,51 @@ class YoixVMThreadData
     final boolean
     active() {
 
-	return(thread != null);
+        return(thread != null);
     }
 
 
     final String
     name() {
 
-	return(thread != null ? thread.getName() : null);
+        return(thread != null ? thread.getName() : null);
     }
 
 
     final void
     reset() {
 
-	if (thread instanceof YoixVMShutdownThread)
-	    reset(thread);
+        if (thread instanceof YoixVMShutdownThread)
+            reset(thread);
     }
 
 
     final void
     reset(Thread owner) {
 
-	thread = owner;
-	handlingerror = false;
-	interruptable = false;
-	loadingtype = false;
-	block = null;
-	access = 0;
-	stack.reset();
+        thread = owner;
+        handlingerror = false;
+        interruptable = false;
+        loadingtype = false;
+        block = null;
+        access = 0;
+        stack.reset();
     }
 
 
     final String
     status() {
 
-	String  str;
+        String  str;
 
-	if (thread != null) {
-	    str = name() + ", " + access + ", ";
-	    if (thread == Thread.currentThread())
-		str += "RUNNING";
-	    else str += (thread.isAlive()) ? "WAITING" : "STOPPED";
-	} else str = "???, DEAD";	// can this happen??
+        if (thread != null) {
+            str = name() + ", " + access + ", ";
+            if (thread == Thread.currentThread())
+                str += "RUNNING";
+            else str += (thread.isAlive()) ? "WAITING" : "STOPPED";
+        } else str = "???, DEAD";	// can this happen??
 
-	return("<" + str + ">");
+        return("<" + str + ">");
     }
 
     ///////////////////////////////////

@@ -50,12 +50,12 @@ class YoixBodyKey extends YoixPointerActive
     private static HashMap  activefields = new HashMap(5);
 
     static {
-	activefields.put(N_ALGORITHM, new Integer(V_ALGORITHM));
-	activefields.put(N_KEY, new Integer(V_KEY));
-	activefields.put(N_KEYSTRING, new Integer(V_KEYSTRING));
-	activefields.put(N_PARAMETERS, new Integer(V_PARAMETERS));
-	activefields.put(N_PROVIDER, new Integer(V_PROVIDER));
-	activefields.put(N_SPECIFICATION, new Integer(V_SPECIFICATION));
+        activefields.put(N_ALGORITHM, new Integer(V_ALGORITHM));
+        activefields.put(N_KEY, new Integer(V_KEY));
+        activefields.put(N_KEYSTRING, new Integer(V_KEYSTRING));
+        activefields.put(N_PARAMETERS, new Integer(V_PARAMETERS));
+        activefields.put(N_PROVIDER, new Integer(V_PROVIDER));
+        activefields.put(N_SPECIFICATION, new Integer(V_SPECIFICATION));
     }
 
     private static AlgorithmParameters  cipherparams = null;
@@ -65,16 +65,16 @@ class YoixBodyKey extends YoixPointerActive
     private final static String  CIPHERALGORITHM = "DES/CBC/PKCS5Padding";
     private final static String  CIPHERPROVIDER = "SunJCE";
     private final static byte[]  CIPHERPARAMS = {
-	(byte)0x04, (byte)0x08, (byte)0x21, (byte)0x88,
-	(byte)0xDD, (byte)0xB5, (byte)0x57, (byte)0x94,
-	(byte)0xC1, (byte)0xEE,
+        (byte)0x04, (byte)0x08, (byte)0x21, (byte)0x88,
+        (byte)0xDD, (byte)0xB5, (byte)0x57, (byte)0x94,
+        (byte)0xC1, (byte)0xEE,
     };
 
     private final static String  KEYALGORITHM = "DES";
     private final static int     KEYTYPE = Cipher.SECRET_KEY;
     private final static byte[]  KEYBYTES = {
-	(byte)0xE3, (byte)0x46, (byte)0xD6, (byte)0x6E,
-	(byte)0x62, (byte)0x26, (byte)0x29, (byte)0xFE,
+        (byte)0xE3, (byte)0x46, (byte)0xD6, (byte)0x6E,
+        (byte)0x62, (byte)0x26, (byte)0x29, (byte)0xFE,
     };
 
     private final static String  KEYSTRINGDELIM = "\t";
@@ -87,9 +87,9 @@ class YoixBodyKey extends YoixPointerActive
 
     YoixBodyKey(YoixObject data) {
 
-	super(data);
-	buildKey();
-	setFixedSize();
+        super(data);
+        buildKey();
+        setFixedSize();
     }
 
     ///////////////////////////////////
@@ -101,7 +101,7 @@ class YoixBodyKey extends YoixPointerActive
     public final int
     type() {
 
-	return(KEY);
+        return(KEY);
     }
 
     ///////////////////////////////////
@@ -113,147 +113,147 @@ class YoixBodyKey extends YoixPointerActive
     protected final YoixObject
     executeField(String name, YoixObject argv[]) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	switch (activeField(name, activefields)) {
-	    case V_KEYSTRING:
-		obj = builtinKeyString(name, argv);
-		break;
+        switch (activeField(name, activefields)) {
+            case V_KEYSTRING:
+                obj = builtinKeyString(name, argv);
+                break;
 
-	    default:
-		obj = null;
-		break;
-	}
+            default:
+                obj = null;
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final void
     finalize() {
 
-	super.finalize();
+        super.finalize();
     }
 
 
     protected final YoixObject
     getField(String name, YoixObject obj) {
 
-	switch (activeField(name, activefields)) {
-	    case V_ALGORITHM:
-	        obj = getAlgorithm();
-	        break;
+        switch (activeField(name, activefields)) {
+            case V_ALGORITHM:
+                obj = getAlgorithm();
+                break;
 
-	    case V_KEY:
-	        obj = getKey();
-	        break;
+            case V_KEY:
+                obj = getKey();
+                break;
 
-	    case V_PARAMETERS:
-	        obj = getParameters();
-	        break;
+            case V_PARAMETERS:
+                obj = getParameters();
+                break;
 
-	    case V_PROVIDER:
-	        obj = getProvider();
-	        break;
-	}
+            case V_PROVIDER:
+                obj = getProvider();
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(gentype == SYMMETRIC_KEY ? (Object)key : gentype == ASYMMETRIC_KEY ? (Object)keypair : null);
+        return(gentype == SYMMETRIC_KEY ? (Object)key : gentype == ASYMMETRIC_KEY ? (Object)keypair : null);
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	if (obj != null) {
-	    switch (activeField(name, activefields)) {
-		case V_KEY:
-		    setKey(obj);
-		    break;
+        if (obj != null) {
+            switch (activeField(name, activefields)) {
+                case V_KEY:
+                    setKey(obj);
+                    break;
 
-		case V_SPECIFICATION:
-		    setSpecification(obj);
-		    break;
-	    }
-	}
+                case V_SPECIFICATION:
+                    setSpecification(obj);
+                    break;
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     static String
     yoixKeyString(Key key, String algorithm, int type) {
 
-	StringBuffer  sb;
-	String        str;
-	byte          bytearray[] = null;
+        StringBuffer  sb;
+        String        str;
+        byte          bytearray[] = null;
 
-	if (keycipher != null || buildKeyCipher()) {
-	    try {
-		keycipher.init(Cipher.WRAP_MODE, cipherkey, cipherparams);
-		bytearray = keycipher.wrap(key);
-		sb = new StringBuffer(3 + algorithm.length() + 2 * bytearray.length);
-		sb.append(algorithm);
-		sb.append(KEYSTRINGDELIM);
-		sb.append(type);
-		sb.append(KEYSTRINGDELIM);
-		sb.append(YoixMisc.hexBytesToString(bytearray));
-		str = sb.toString();
-		keycipher.init(Cipher.ENCRYPT_MODE, cipherkey, cipherparams);
-		bytearray = keycipher.doFinal(str.getBytes(YoixConverter.getISO88591Encoding()));
-	    }
-	    catch(GeneralSecurityException e) {}
-	    catch(UnsupportedEncodingException e) {}
-	} else VM.abort(INTERNALERROR);
+        if (keycipher != null || buildKeyCipher()) {
+            try {
+                keycipher.init(Cipher.WRAP_MODE, cipherkey, cipherparams);
+                bytearray = keycipher.wrap(key);
+                sb = new StringBuffer(3 + algorithm.length() + 2 * bytearray.length);
+                sb.append(algorithm);
+                sb.append(KEYSTRINGDELIM);
+                sb.append(type);
+                sb.append(KEYSTRINGDELIM);
+                sb.append(YoixMisc.hexBytesToString(bytearray));
+                str = sb.toString();
+                keycipher.init(Cipher.ENCRYPT_MODE, cipherkey, cipherparams);
+                bytearray = keycipher.doFinal(str.getBytes(YoixConverter.getISO88591Encoding()));
+            }
+            catch(GeneralSecurityException e) {}
+            catch(UnsupportedEncodingException e) {}
+        } else VM.abort(INTERNALERROR);
 
-	return(YoixMisc.hexBytesToString(bytearray));
+        return(YoixMisc.hexBytesToString(bytearray));
     }
 
 
     static Key
     yoixStringKey(String codedkey) {
 
-	StringTokenizer  st;
-	StringBuffer     sb;
-	String           algorithm;
-	String           str;
-	byte             bytearray[];
-	Key              key = null;
-	int              type;
+        StringTokenizer  st;
+        StringBuffer     sb;
+        String           algorithm;
+        String           str;
+        byte             bytearray[];
+        Key              key = null;
+        int              type;
 
-	if (keycipher != null || buildKeyCipher()) {
-	    if ((bytearray = YoixMisc.hexStringToBytes(codedkey)) != null) {
-		try {
-		    keycipher.init(Cipher.DECRYPT_MODE, cipherkey, cipherparams);
-		    bytearray = keycipher.doFinal(bytearray);
-		    str = new String(bytearray, YoixConverter.getISO88591Encoding());
-		    st = new StringTokenizer(str, KEYSTRINGDELIM, false);
-		    if (st.hasMoreTokens()) {
-			algorithm = st.nextToken();
-			if (st.hasMoreTokens()) {
-			    type = Integer.parseInt(st.nextToken());
-			    if (st.hasMoreTokens()) {
-				codedkey = st.nextToken();
-				if ((bytearray = YoixMisc.hexStringToBytes(codedkey)) != null) {
-				    keycipher.init(Cipher.UNWRAP_MODE, cipherkey, cipherparams);
-				    key = keycipher.unwrap(bytearray, algorithm, type);
-				}
-			    }
-			}
-		    }
-		}
-		catch(GeneralSecurityException e) {}
-		catch(UnsupportedEncodingException e) {}
-	    }
-	}
+        if (keycipher != null || buildKeyCipher()) {
+            if ((bytearray = YoixMisc.hexStringToBytes(codedkey)) != null) {
+                try {
+                    keycipher.init(Cipher.DECRYPT_MODE, cipherkey, cipherparams);
+                    bytearray = keycipher.doFinal(bytearray);
+                    str = new String(bytearray, YoixConverter.getISO88591Encoding());
+                    st = new StringTokenizer(str, KEYSTRINGDELIM, false);
+                    if (st.hasMoreTokens()) {
+                        algorithm = st.nextToken();
+                        if (st.hasMoreTokens()) {
+                            type = Integer.parseInt(st.nextToken());
+                            if (st.hasMoreTokens()) {
+                                codedkey = st.nextToken();
+                                if ((bytearray = YoixMisc.hexStringToBytes(codedkey)) != null) {
+                                    keycipher.init(Cipher.UNWRAP_MODE, cipherkey, cipherparams);
+                                    key = keycipher.unwrap(bytearray, algorithm, type);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch(GeneralSecurityException e) {}
+                catch(UnsupportedEncodingException e) {}
+            }
+        }
 
-	return(key);
+        return(key);
     }
 
     ///////////////////////////////////
@@ -265,466 +265,466 @@ class YoixBodyKey extends YoixPointerActive
     private void
     buildKey() {
 
-	key = null;
-	keygenerator = null;
-	keypairgenerator = null;
-	gentype = 0;
-	setField(N_SPECIFICATION);
+        key = null;
+        keygenerator = null;
+        keypairgenerator = null;
+        gentype = 0;
+        setField(N_SPECIFICATION);
     }
 
 
     private static synchronized boolean
     buildKeyCipher() {
 
-	SecretKeyFactory  factory;
-	DESKeySpec        keyspec;
+        SecretKeyFactory  factory;
+        DESKeySpec        keyspec;
 
-	if (keycipher == null) {
-	    try {
-		keycipher = Cipher.getInstance(CIPHERALGORITHM, CIPHERPROVIDER);
-		keyspec = new DESKeySpec(KEYBYTES);
-		factory = SecretKeyFactory.getInstance(KEYALGORITHM, CIPHERPROVIDER);
-		cipherkey = factory.generateSecret(keyspec);
-		cipherparams = AlgorithmParameters.getInstance(KEYALGORITHM, CIPHERPROVIDER);
-		cipherparams.init(CIPHERPARAMS);
-	    }
-	    catch(GeneralSecurityException e) {}
-	    catch(IOException e) {}
-	}
+        if (keycipher == null) {
+            try {
+                keycipher = Cipher.getInstance(CIPHERALGORITHM, CIPHERPROVIDER);
+                keyspec = new DESKeySpec(KEYBYTES);
+                factory = SecretKeyFactory.getInstance(KEYALGORITHM, CIPHERPROVIDER);
+                cipherkey = factory.generateSecret(keyspec);
+                cipherparams = AlgorithmParameters.getInstance(KEYALGORITHM, CIPHERPROVIDER);
+                cipherparams.init(CIPHERPARAMS);
+            }
+            catch(GeneralSecurityException e) {}
+            catch(IOException e) {}
+        }
 
-	return(keycipher != null);
+        return(keycipher != null);
     }
 
 
     private synchronized YoixObject
     builtinKeyString(String name, YoixObject arg[]) {
 
-	String  keystring = null;
-	Key     wrapkey = null;
-	int     type = -1;
+        String  keystring = null;
+        Key     wrapkey = null;
+        int     type = -1;
 
-	if (arg.length == 0 || arg.length == 1) {
-	    if (arg.length == 1) {
-		if (arg[0].isInteger()) {
-		    switch(type = arg[0].intValue()) {
-			case Cipher.SECRET_KEY:
-			    if (key != null)
-				wrapkey = key;
-			    else VM.badArgumentValue(name, 0);
-			    break;
+        if (arg.length == 0 || arg.length == 1) {
+            if (arg.length == 1) {
+                if (arg[0].isInteger()) {
+                    switch(type = arg[0].intValue()) {
+                        case Cipher.SECRET_KEY:
+                            if (key != null)
+                                wrapkey = key;
+                            else VM.badArgumentValue(name, 0);
+                            break;
 
-			case Cipher.PRIVATE_KEY:
-			    if (keypair != null)
-				wrapkey = keypair.getPrivate();
-			    else VM.badArgumentValue(name, 0);
-			    break;
+                        case Cipher.PRIVATE_KEY:
+                            if (keypair != null)
+                                wrapkey = keypair.getPrivate();
+                            else VM.badArgumentValue(name, 0);
+                            break;
 
-			case Cipher.PUBLIC_KEY:
-			    if (keypair != null)
-				wrapkey = keypair.getPublic();
-			    else VM.badArgumentValue(name, 0);
-			    break;
+                        case Cipher.PUBLIC_KEY:
+                            if (keypair != null)
+                                wrapkey = keypair.getPublic();
+                            else VM.badArgumentValue(name, 0);
+                            break;
 
-			default:
-			    VM.badArgumentValue(name, 0);
-			    break;
-		    }
-		} else VM.badArgument(name, 0);
-	    } else {
-		if (key != null) {
-		    wrapkey = key;
-		    type = Cipher.SECRET_KEY;
-		} else if (keypair != null) {
-		    wrapkey = keypair.getPublic();
-		    type = Cipher.PUBLIC_KEY;
-		} else VM.badCall(name);
-	    }
-	    if (wrapkey != null)
-		keystring = YoixBodyKey.yoixKeyString(wrapkey, wrapkey.getAlgorithm(), type);
-	    else VM.abort(INTERNALERROR);	// impossible, I believe
-	} else VM.badCall(name);
+                        default:
+                            VM.badArgumentValue(name, 0);
+                            break;
+                    }
+                } else VM.badArgument(name, 0);
+            } else {
+                if (key != null) {
+                    wrapkey = key;
+                    type = Cipher.SECRET_KEY;
+                } else if (keypair != null) {
+                    wrapkey = keypair.getPublic();
+                    type = Cipher.PUBLIC_KEY;
+                } else VM.badCall(name);
+            }
+            if (wrapkey != null)
+                keystring = YoixBodyKey.yoixKeyString(wrapkey, wrapkey.getAlgorithm(), type);
+            else VM.abort(INTERNALERROR);	// impossible, I believe
+        } else VM.badCall(name);
 
-	return(YoixObject.newString(keystring));
+        return(YoixObject.newString(keystring));
     }
 
 
     private synchronized YoixObject
     getAlgorithm() {
 
-	String  name = null;
+        String  name = null;
 
-	if (key == null) {
-	    if (keypair != null) {
-		name = keypair.getPrivate().getAlgorithm();
-		if (!name.equals(keypair.getPublic().getAlgorithm()))
-		    VM.abort(INTERNALERROR); // thought they would always be the same
-	    }
-	} else name = key.getAlgorithm();
+        if (key == null) {
+            if (keypair != null) {
+                name = keypair.getPrivate().getAlgorithm();
+                if (!name.equals(keypair.getPublic().getAlgorithm()))
+                    VM.abort(INTERNALERROR); // thought they would always be the same
+            }
+        } else name = key.getAlgorithm();
 
-	return(YoixObject.newString(name));
+        return(YoixObject.newString(name));
     }
 
 
     private synchronized YoixObject
     getKey() {
 
-	YoixObject  result = null;
-	PrivateKey  prikey;
-	YoixObject  yobj;
-	PublicKey   pubkey;
-	byte        bytearray[];
-	int         n;
+        YoixObject  result = null;
+        PrivateKey  prikey;
+        YoixObject  yobj;
+        PublicKey   pubkey;
+        byte        bytearray[];
+        int         n;
 
-	if (gentype == SYMMETRIC_KEY && key != null) {
-	    result = YoixObject.newDictionary(2);
+        if (gentype == SYMMETRIC_KEY && key != null) {
+            result = YoixObject.newDictionary(2);
 
-	    bytearray = key.getEncoded();
-	    yobj = YoixMake.yoixByteArray(bytearray);
-	    result.putObject("secret_bytes", yobj == null ? YoixObject.newArray() : yobj);
-	    yobj = YoixMake.yoixByteArrayString(bytearray);
-	    result.putObject("secret_text", yobj == null ? YoixObject.newString() : yobj);
-	} else if (gentype == ASYMMETRIC_KEY && keypair != null) {
-	    result = YoixObject.newDictionary(4);
+            bytearray = key.getEncoded();
+            yobj = YoixMake.yoixByteArray(bytearray);
+            result.putObject("secret_bytes", yobj == null ? YoixObject.newArray() : yobj);
+            yobj = YoixMake.yoixByteArrayString(bytearray);
+            result.putObject("secret_text", yobj == null ? YoixObject.newString() : yobj);
+        } else if (gentype == ASYMMETRIC_KEY && keypair != null) {
+            result = YoixObject.newDictionary(4);
 
-	    pubkey = keypair.getPublic();
-	    bytearray = pubkey.getEncoded();
-	    yobj = YoixMake.yoixByteArray(bytearray);
-	    result.putObject("public_bytes", yobj == null ? YoixObject.newArray() : yobj);
-	    yobj = YoixMake.yoixByteArrayString(bytearray);
-	    result.putObject("public_text", yobj == null ? YoixObject.newString() : yobj);
+            pubkey = keypair.getPublic();
+            bytearray = pubkey.getEncoded();
+            yobj = YoixMake.yoixByteArray(bytearray);
+            result.putObject("public_bytes", yobj == null ? YoixObject.newArray() : yobj);
+            yobj = YoixMake.yoixByteArrayString(bytearray);
+            result.putObject("public_text", yobj == null ? YoixObject.newString() : yobj);
 
-	    prikey = keypair.getPrivate();
-	    bytearray = prikey.getEncoded();
-	    yobj = YoixMake.yoixByteArray(bytearray);
-	    result.putObject("private_bytes", yobj == null ? YoixObject.newArray() : yobj);
-	    yobj = YoixMake.yoixByteArrayString(bytearray);
-	    result.putObject("private_text", yobj == null ? YoixObject.newString() : yobj);
-	}
+            prikey = keypair.getPrivate();
+            bytearray = prikey.getEncoded();
+            yobj = YoixMake.yoixByteArray(bytearray);
+            result.putObject("private_bytes", yobj == null ? YoixObject.newArray() : yobj);
+            yobj = YoixMake.yoixByteArrayString(bytearray);
+            result.putObject("private_text", yobj == null ? YoixObject.newString() : yobj);
+        }
 
-	return (result == null ? YoixObject.newDictionary() : result);
+        return (result == null ? YoixObject.newDictionary() : result);
     }
 
 
     private static YoixObject
     getKeyDictionary(String refname, Key key, int type) {
 
-	YoixObject  dict;
-	YoixObject  yobj;
-	Method      methods[];
-	Object      obj;
+        YoixObject  dict;
+        YoixObject  yobj;
+        Method      methods[];
+        Object      obj;
  	String      name = null;
-	Class       cls;
-	byte        bytearray[];
-	int         m;
+        Class       cls;
+        byte        bytearray[];
+        int         m;
 
-	// assumes key is not null
+        // assumes key is not null
 
-	cls = key.getClass();
-	try {
-	    methods = cls.getMethods();
-	}
-	catch(SecurityException se) {
-	    methods = new Method[0];
-	}
-	dict = YoixObject.newDictionary(4);
-	dict.setGrowable(true);
-	dict.setGrowto(-1);
-	dict.putInt(N_TYPE, type);
-	dict.putString("algorithm", key.getAlgorithm());
-	dict.putString("format", key.getFormat());
-	dict.putObject("encoded", YoixMake.yoixByteArray(key.getEncoded()));
-	for (m = 0; m < methods.length; m++) {
-	    name = methods[m].getName();
-	    try {
-		if (name.startsWith("get") && methods[m].getParameterTypes().length == 0) {
-		    obj = methods[m].invoke(key, null);
-		    name = name.substring(3).toLowerCase();
-		    if (obj instanceof BigInteger) {
-			dict.putString(name, ((BigInteger)obj).toString(16));
-		    } else if (obj instanceof BigDecimal) { // unused so far
-			dict.putString(name, obj.toString());
-		    } else if (obj instanceof Integer) {
-			dict.putInt(name, ((Integer)obj).intValue());
-		    } else if (obj instanceof Double) {
-			dict.putDouble(name, ((Double)obj).doubleValue());
-		    } else if (obj instanceof Float) {
-			dict.putDouble(name, ((Float)obj).doubleValue());
-		    } else if (obj instanceof byte[]) {
-			bytearray = (byte[])obj;
-			yobj = YoixMake.yoixByteArray(bytearray);
-			dict.putObject(name, yobj);
-		    } else if (obj instanceof String) {
-			dict.putString(name, (String)obj);
-		    } else if (obj instanceof Class) {
-			dict.putString(name, ((Class)obj).getName());
-		    } else {
-			dict.putString(name, obj.toString());
-		    }
-		}
-	    }
-	    catch(IllegalAccessException e) {}
-	    catch(InvocationTargetException e) {}
-	}
-	dict.setGrowable(false);
+        cls = key.getClass();
+        try {
+            methods = cls.getMethods();
+        }
+        catch(SecurityException se) {
+            methods = new Method[0];
+        }
+        dict = YoixObject.newDictionary(4);
+        dict.setGrowable(true);
+        dict.setGrowto(-1);
+        dict.putInt(N_TYPE, type);
+        dict.putString("algorithm", key.getAlgorithm());
+        dict.putString("format", key.getFormat());
+        dict.putObject("encoded", YoixMake.yoixByteArray(key.getEncoded()));
+        for (m = 0; m < methods.length; m++) {
+            name = methods[m].getName();
+            try {
+                if (name.startsWith("get") && methods[m].getParameterTypes().length == 0) {
+                    obj = methods[m].invoke(key, null);
+                    name = name.substring(3).toLowerCase();
+                    if (obj instanceof BigInteger) {
+                        dict.putString(name, ((BigInteger)obj).toString(16));
+                    } else if (obj instanceof BigDecimal) { // unused so far
+                        dict.putString(name, obj.toString());
+                    } else if (obj instanceof Integer) {
+                        dict.putInt(name, ((Integer)obj).intValue());
+                    } else if (obj instanceof Double) {
+                        dict.putDouble(name, ((Double)obj).doubleValue());
+                    } else if (obj instanceof Float) {
+                        dict.putDouble(name, ((Float)obj).doubleValue());
+                    } else if (obj instanceof byte[]) {
+                        bytearray = (byte[])obj;
+                        yobj = YoixMake.yoixByteArray(bytearray);
+                        dict.putObject(name, yobj);
+                    } else if (obj instanceof String) {
+                        dict.putString(name, (String)obj);
+                    } else if (obj instanceof Class) {
+                        dict.putString(name, ((Class)obj).getName());
+                    } else {
+                        dict.putString(name, obj.toString());
+                    }
+                }
+            }
+            catch(IllegalAccessException e) {}
+            catch(InvocationTargetException e) {}
+        }
+        dict.setGrowable(false);
 
-	return(dict);
+        return(dict);
     }
 
 
     private synchronized YoixObject
     getParameters() {
 
-	YoixObject  result;
+        YoixObject  result;
 
-	if (key != null) {
-	    result = YoixObject.newDictionary(1);
-	    result.putObject("secretkey", getKeyDictionary(N_PARAMETERS, key, Cipher.SECRET_KEY));
-	} else if (keypair != null) {
-	    result = YoixObject.newDictionary(2);
-	    result.putObject("publickey", getKeyDictionary(N_PARAMETERS, keypair.getPublic(), Cipher.PUBLIC_KEY));
-	    result.putObject("privatekey", getKeyDictionary(N_PARAMETERS, keypair.getPrivate(), Cipher.PRIVATE_KEY));
-	} else result = null;
+        if (key != null) {
+            result = YoixObject.newDictionary(1);
+            result.putObject("secretkey", getKeyDictionary(N_PARAMETERS, key, Cipher.SECRET_KEY));
+        } else if (keypair != null) {
+            result = YoixObject.newDictionary(2);
+            result.putObject("publickey", getKeyDictionary(N_PARAMETERS, keypair.getPublic(), Cipher.PUBLIC_KEY));
+            result.putObject("privatekey", getKeyDictionary(N_PARAMETERS, keypair.getPrivate(), Cipher.PRIVATE_KEY));
+        } else result = null;
 
-	return(result == null ? YoixObject.newDictionary() : result);
+        return(result == null ? YoixObject.newDictionary() : result);
     }
 
 
     private synchronized YoixObject
     getProvider() {
 
-	Enumeration  enm;
-	YoixObject   result;
-	Provider     provider;
-	String       name;
-	String       pname;
-	String       pinfo;
-	int          sz;
+        Enumeration  enm;
+        YoixObject   result;
+        Provider     provider;
+        String       name;
+        String       pname;
+        String       pinfo;
+        int          sz;
 
-	if (keygenerator != null || keypairgenerator != null) {
-	    provider = (keygenerator != null) ? keygenerator.getProvider() : keypairgenerator.getProvider();
-	    if (provider != null) {
-		sz = provider.size() + 2;
-		if (( pname = provider.getName()) != null)
-		    sz++;
-		if (( pinfo = provider.getInfo()) != null)
-		    sz++;
-		result = YoixObject.newDictionary(sz);
-		enm = provider.propertyNames();
-		while (enm.hasMoreElements()) {
-		    name = (String)enm.nextElement();
-		    result.putString(name, provider.getProperty(name));
-		}
-		if (pname != null)
-		    result.putString("name", pname);
-		if (pinfo != null)
-		    result.putString("info", pinfo);
-		result.putString("summary", provider.toString());
-		result.putString("version", "" + provider.getVersion());
-	    } else result = null;
-	} else result = null;
+        if (keygenerator != null || keypairgenerator != null) {
+            provider = (keygenerator != null) ? keygenerator.getProvider() : keypairgenerator.getProvider();
+            if (provider != null) {
+                sz = provider.size() + 2;
+                if (( pname = provider.getName()) != null)
+                    sz++;
+                if (( pinfo = provider.getInfo()) != null)
+                    sz++;
+                result = YoixObject.newDictionary(sz);
+                enm = provider.propertyNames();
+                while (enm.hasMoreElements()) {
+                    name = (String)enm.nextElement();
+                    result.putString(name, provider.getProperty(name));
+                }
+                if (pname != null)
+                    result.putString("name", pname);
+                if (pinfo != null)
+                    result.putString("info", pinfo);
+                result.putString("summary", provider.toString());
+                result.putString("version", "" + provider.getVersion());
+            } else result = null;
+        } else result = null;
 
-	return(result == null ? YoixObject.newNull() : result);
+        return(result == null ? YoixObject.newNull() : result);
     }
 
 
     private synchronized void
     setKey(YoixObject obj) {
 
-	if (obj.isNull()) {
-	    if (keygenerator != null) {
-		try {
-		    key = keygenerator.generateKey();
-		}
-		catch(Exception e) {
-		    VM.abort(EXCEPTION, e.getMessage()); // should never happen
-		}
-	    } else if (keypairgenerator != null) {
-		try {
-		    keypair = keypairgenerator.generateKeyPair();
-		}
-		catch(Exception e) {
-		    VM.abort(EXCEPTION, e.getMessage()); // should never happen
-		}
-	    }
-	} else VM.abort(BADVALUE, N_KEY);
+        if (obj.isNull()) {
+            if (keygenerator != null) {
+                try {
+                    key = keygenerator.generateKey();
+                }
+                catch(Exception e) {
+                    VM.abort(EXCEPTION, e.getMessage()); // should never happen
+                }
+            } else if (keypairgenerator != null) {
+                try {
+                    keypair = keypairgenerator.generateKeyPair();
+                }
+                catch(Exception e) {
+                    VM.abort(EXCEPTION, e.getMessage()); // should never happen
+                }
+            }
+        } else VM.abort(BADVALUE, N_KEY);
     }
 
 
     private synchronized void
     setSpecification(YoixObject obj) {
 
-	AlgorithmParameterSpec  newparameterspec = null;
-	AlgorithmParameters     newparameters = null;
-	KeyPairGenerator        newkeypairgenerator = null;
-	KeyGenerator            newkeygenerator = null;
-	SecureRandom            random;
-	YoixObject              yobj;
-	SecretKey               newkey = null;
-	Boolean                 custom;
-	Integer                 typeobj;
-	Integer                 keysize;
-	KeyPair                 newkeypair = null;
-	String                  trans;
-	String                  provider;
-	int                     newtype = 0;
+        AlgorithmParameterSpec  newparameterspec = null;
+        AlgorithmParameters     newparameters = null;
+        KeyPairGenerator        newkeypairgenerator = null;
+        KeyGenerator            newkeygenerator = null;
+        SecureRandom            random;
+        YoixObject              yobj;
+        SecretKey               newkey = null;
+        Boolean                 custom;
+        Integer                 typeobj;
+        Integer                 keysize;
+        KeyPair                 newkeypair = null;
+        String                  trans;
+        String                  provider;
+        int                     newtype = 0;
 
-	if (obj.notNull()) {
-	    if (obj.isDictionary()) {
-		if ((typeobj = obj.getDefinedInteger(N_TYPE)) != null) {
-		    newtype = typeobj.intValue();
-		    trans = obj.getDefinedString(N_TRANSFORMATION);
-		    provider = obj.getDefinedString(N_PROVIDER);
-		    random = obj.getDefinedSecureRandom(N_RANDOM);
-		    keysize = obj.getDefinedInteger(N_KEYSIZE);
-		    custom = obj.getDefinedBoolean(N_CUSTOM);
+        if (obj.notNull()) {
+            if (obj.isDictionary()) {
+                if ((typeobj = obj.getDefinedInteger(N_TYPE)) != null) {
+                    newtype = typeobj.intValue();
+                    trans = obj.getDefinedString(N_TRANSFORMATION);
+                    provider = obj.getDefinedString(N_PROVIDER);
+                    random = obj.getDefinedSecureRandom(N_RANDOM);
+                    keysize = obj.getDefinedInteger(N_KEYSIZE);
+                    custom = obj.getDefinedBoolean(N_CUSTOM);
 
-		    if (trans != null) {
-			if (newtype == SYMMETRIC_KEY) {
-			    try {
-				if (provider == null)
-				    newkeygenerator = KeyGenerator.getInstance(trans);
-				else newkeygenerator = KeyGenerator.getInstance(trans, provider);
-			    }
-			    catch(Exception e) {
-				VM.abort(BADVALUE, N_SPECIFICATION);
-			    }
+                    if (trans != null) {
+                        if (newtype == SYMMETRIC_KEY) {
+                            try {
+                                if (provider == null)
+                                    newkeygenerator = KeyGenerator.getInstance(trans);
+                                else newkeygenerator = KeyGenerator.getInstance(trans, provider);
+                            }
+                            catch(Exception e) {
+                                VM.abort(BADVALUE, N_SPECIFICATION);
+                            }
 
-			    if (custom != null && custom.booleanValue()) {
-				if ((newparameterspec = YoixModuleSecure.algorithmParameterSpec(obj, trans, N_SPECIFICATION)) == null)
-				    VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
-				if (random != null) {
-				    try {
-					newkeygenerator.init(newparameterspec, random);
-				    }
-				    catch(Exception e) {
-					VM.abort(BADVALUE, N_SPECIFICATION, "["+N_CUSTOM+"|"+N_RANDOM+"]");
-				    }
-				} else {
-				    try {
-					newkeygenerator.init(newparameterspec);
-				    }
-				    catch(Exception e) {
-					VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
-				    }
-				}
-				try {
-				    newparameters = AlgorithmParameters.getInstance(trans);
-				    newparameters.init(newparameterspec);
-				}
-				catch(Exception e) {
-				    VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
-				}
-			    } else {
-				if (keysize == null || keysize.intValue() <= 0) {
-				    if (random != null) {
-					try {
-					    newkeygenerator.init(random);
-					}
-					catch(Exception e) {
-					    VM.abort(BADVALUE, N_SPECIFICATION, N_RANDOM);
-					}
-				    }
-				} else {
-				    if (random != null) {
-					try {
-					    newkeygenerator.init(keysize.intValue(), random);
-					}
-					catch(Exception e) {
-					    VM.abort(BADVALUE, N_SPECIFICATION, "["+N_KEYSIZE+"|"+N_RANDOM+"]");
-					}
-				    } else {
-					try {
-					    newkeygenerator.init(keysize.intValue());
-					}
-					catch(Exception e) {
-					    VM.abort(BADVALUE, N_SPECIFICATION, N_KEYSIZE);
-					}
-				    }
-				}
-			    }
+                            if (custom != null && custom.booleanValue()) {
+                                if ((newparameterspec = YoixModuleSecure.algorithmParameterSpec(obj, trans, N_SPECIFICATION)) == null)
+                                    VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
+                                if (random != null) {
+                                    try {
+                                        newkeygenerator.init(newparameterspec, random);
+                                    }
+                                    catch(Exception e) {
+                                        VM.abort(BADVALUE, N_SPECIFICATION, "["+N_CUSTOM+"|"+N_RANDOM+"]");
+                                    }
+                                } else {
+                                    try {
+                                        newkeygenerator.init(newparameterspec);
+                                    }
+                                    catch(Exception e) {
+                                        VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
+                                    }
+                                }
+                                try {
+                                    newparameters = AlgorithmParameters.getInstance(trans);
+                                    newparameters.init(newparameterspec);
+                                }
+                                catch(Exception e) {
+                                    VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
+                                }
+                            } else {
+                                if (keysize == null || keysize.intValue() <= 0) {
+                                    if (random != null) {
+                                        try {
+                                            newkeygenerator.init(random);
+                                        }
+                                        catch(Exception e) {
+                                            VM.abort(BADVALUE, N_SPECIFICATION, N_RANDOM);
+                                        }
+                                    }
+                                } else {
+                                    if (random != null) {
+                                        try {
+                                            newkeygenerator.init(keysize.intValue(), random);
+                                        }
+                                        catch(Exception e) {
+                                            VM.abort(BADVALUE, N_SPECIFICATION, "["+N_KEYSIZE+"|"+N_RANDOM+"]");
+                                        }
+                                    } else {
+                                        try {
+                                            newkeygenerator.init(keysize.intValue());
+                                        }
+                                        catch(Exception e) {
+                                            VM.abort(BADVALUE, N_SPECIFICATION, N_KEYSIZE);
+                                        }
+                                    }
+                                }
+                            }
 
-			    try {
-				newkey = newkeygenerator.generateKey();
-			    }
-			    catch(Exception e) {
-				VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
-			    }
+                            try {
+                                newkey = newkeygenerator.generateKey();
+                            }
+                            catch(Exception e) {
+                                VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
+                            }
 
-			} else if (newtype == ASYMMETRIC_KEY) {
-			    try {
-				if (provider == null)
-				    newkeypairgenerator = KeyPairGenerator.getInstance(trans);
-				else newkeypairgenerator = KeyPairGenerator.getInstance(trans, provider);
-			    }
-			    catch(Exception e) {
-				VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
-			    }
+                        } else if (newtype == ASYMMETRIC_KEY) {
+                            try {
+                                if (provider == null)
+                                    newkeypairgenerator = KeyPairGenerator.getInstance(trans);
+                                else newkeypairgenerator = KeyPairGenerator.getInstance(trans, provider);
+                            }
+                            catch(Exception e) {
+                                VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
+                            }
 
-			    if (custom != null && custom.booleanValue()) {
-				if ((newparameterspec = YoixModuleSecure.algorithmParameterSpec(obj, trans, N_SPECIFICATION)) == null)
-				    VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
-				if (random != null) {
-				    try {
-					newkeypairgenerator.initialize(newparameterspec, random);
-				    }
-				    catch(Exception e) {
-					VM.abort(BADVALUE, N_SPECIFICATION, "["+N_CUSTOM+"|"+N_RANDOM+"]");
-				    }
-				} else {
-				    try {
-					newkeypairgenerator.initialize(newparameterspec);
-				    }
-				    catch(Exception e) {
-					VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
-				    }
-				}
-				try {
-				    newparameters = AlgorithmParameters.getInstance(trans);
-				    newparameters.init(newparameterspec);
-				}
-				catch(Exception e) {
-				    VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
-				}
-			    } else {
-				if (keysize != null && keysize.intValue() > 0) {
-				    if (random != null) {
-					try {
-					    newkeypairgenerator.initialize(keysize.intValue(), random);
-					}
-					catch(Exception e) {
-					    VM.abort(BADVALUE, N_SPECIFICATION, "["+N_KEYSIZE+"|"+N_RANDOM+"]");
-					}
-				    } else {
-					try {
-					    newkeypairgenerator.initialize(keysize.intValue());
-					}
-					catch(Exception e) {
-					    VM.abort(BADVALUE, N_SPECIFICATION, N_KEYSIZE);
-					}
-				    }
-				}
-			    }
+                            if (custom != null && custom.booleanValue()) {
+                                if ((newparameterspec = YoixModuleSecure.algorithmParameterSpec(obj, trans, N_SPECIFICATION)) == null)
+                                    VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
+                                if (random != null) {
+                                    try {
+                                        newkeypairgenerator.initialize(newparameterspec, random);
+                                    }
+                                    catch(Exception e) {
+                                        VM.abort(BADVALUE, N_SPECIFICATION, "["+N_CUSTOM+"|"+N_RANDOM+"]");
+                                    }
+                                } else {
+                                    try {
+                                        newkeypairgenerator.initialize(newparameterspec);
+                                    }
+                                    catch(Exception e) {
+                                        VM.abort(BADVALUE, N_SPECIFICATION, N_CUSTOM);
+                                    }
+                                }
+                                try {
+                                    newparameters = AlgorithmParameters.getInstance(trans);
+                                    newparameters.init(newparameterspec);
+                                }
+                                catch(Exception e) {
+                                    VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
+                                }
+                            } else {
+                                if (keysize != null && keysize.intValue() > 0) {
+                                    if (random != null) {
+                                        try {
+                                            newkeypairgenerator.initialize(keysize.intValue(), random);
+                                        }
+                                        catch(Exception e) {
+                                            VM.abort(BADVALUE, N_SPECIFICATION, "["+N_KEYSIZE+"|"+N_RANDOM+"]");
+                                        }
+                                    } else {
+                                        try {
+                                            newkeypairgenerator.initialize(keysize.intValue());
+                                        }
+                                        catch(Exception e) {
+                                            VM.abort(BADVALUE, N_SPECIFICATION, N_KEYSIZE);
+                                        }
+                                    }
+                                }
+                            }
 
-			    try {
-				newkeypair = newkeypairgenerator.generateKeyPair();
-			    }
-			    catch(Exception e) {
-				VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
-			    }
+                            try {
+                                newkeypair = newkeypairgenerator.generateKeyPair();
+                            }
+                            catch(Exception e) {
+                                VM.abort(BADVALUE, N_SPECIFICATION, new String[] { e.getMessage() });
+                            }
 
 
-			} else VM.abort(BADVALUE, N_SPECIFICATION, N_TYPE);
-		    } else VM.abort(MISSINGVALUE, N_SPECIFICATION, N_TRANSFORMATION);
-		} else VM.abort(MISSINGVALUE, N_SPECIFICATION, N_TYPE);
-	    } else VM.abort(TYPECHECK, N_SPECIFICATION);
-	}
+                        } else VM.abort(BADVALUE, N_SPECIFICATION, N_TYPE);
+                    } else VM.abort(MISSINGVALUE, N_SPECIFICATION, N_TRANSFORMATION);
+                } else VM.abort(MISSINGVALUE, N_SPECIFICATION, N_TYPE);
+            } else VM.abort(TYPECHECK, N_SPECIFICATION);
+        }
 
-	gentype = newtype;
-	parameters = newparameters;
-	key = newkey;
-	keygenerator = newkeygenerator;
-	keypair = newkeypair;
-	keypairgenerator = newkeypairgenerator;
+        gentype = newtype;
+        parameters = newparameters;
+        key = newkey;
+        keygenerator = newkeygenerator;
+        keypair = newkeypair;
+        keypairgenerator = newkeypairgenerator;
     }
 }
 

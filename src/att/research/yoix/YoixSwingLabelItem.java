@@ -32,27 +32,27 @@ class YoixSwingLabelItem {
 
     YoixSwingLabelItem() {
 
-	this(null, null, null);
+        this(null, null, null);
     }
 
 
     YoixSwingLabelItem(String text) {
 
-	this(null, text, null);
+        this(null, text, null);
     }
 
 
     YoixSwingLabelItem(String text, String mapping) {
 
-	this(null, text, mapping);
+        this(null, text, mapping);
     }
 
 
     YoixSwingLabelItem(Icon icon, String text, String mapping) {
 
-	this.icon = icon;
-	this.text = text;
-	this.mapping = mapping;
+        this.icon = icon;
+        this.text = text;
+        this.mapping = mapping;
     }
 
     ///////////////////////////////////
@@ -64,56 +64,56 @@ class YoixSwingLabelItem {
     final Icon
     getIcon() {
 
-	return(icon);
+        return(icon);
     }
 
 
     final String
     getMapping() {
 
-	return(mapping);
+        return(mapping);
     }
 
 
     final String
     getText() {
 
-	return(text);
+        return(text);
     }
 
 
     final String
     getValue() {
 
-	return(mapping == null ? text : mapping);
+        return(mapping == null ? text : mapping);
     }
 
 
     final void
     setIcon(Icon icon) {
 
-	this.icon = icon;
+        this.icon = icon;
     }
 
 
     final void
     setMapping(String mapping) {
 
-	this.mapping = mapping;
+        this.mapping = mapping;
     }
 
 
     final void
     setText(String text) {
 
-	this.text = text;
+        this.text = text;
     }
 
 
     public final String
     toString() {
 
-	return(text == null ? "" : text);
+        return(text == null ? "" : text);
     }
 }
 

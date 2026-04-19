@@ -125,11 +125,11 @@ class YoixSecurityOptions
     private static final Hashtable  accessmap = new Hashtable(10);
 
     static {
-	accessmap.put("deny", new Integer(DENY));
-	accessmap.put("refuse", new Integer(DENY));
-	accessmap.put("prompt", new Integer(PROMPT));
-	accessmap.put("allow", new Integer(ALLOW));
-	accessmap.put("permit", new Integer(ALLOW));
+        accessmap.put("deny", new Integer(DENY));
+        accessmap.put("refuse", new Integer(DENY));
+        accessmap.put("prompt", new Integer(PROMPT));
+        accessmap.put("allow", new Integer(ALLOW));
+        accessmap.put("permit", new Integer(ALLOW));
     }
 
     //
@@ -154,36 +154,36 @@ class YoixSecurityOptions
     private static final Hashtable  categorymap = new Hashtable(25);
 
     static {
-	categorymap.put("accept", new Integer(ACCEPT));
-	categorymap.put("addprovider", new Integer(ADDPROVIDER));
-	categorymap.put("clipboard", new Integer(CLIPBOARD));
-	categorymap.put("connect", new Integer(CONNECT));
-	categorymap.put("delete", new Integer(DELETE));
-	categorymap.put("eval", new Integer(EVAL));
-	categorymap.put("exec", new Integer(EXEC));
-	categorymap.put("execute", new Integer(EXECUTE));
-	categorymap.put("exit", new Integer(EXIT));
-	categorymap.put("file", new Integer(FILE));
-	categorymap.put("include", new Integer(INCLUDE));
-	categorymap.put("listen", new Integer(LISTEN));
-	categorymap.put("module", new Integer(MODULE));
-	categorymap.put("multicast", new Integer(MULTICAST));
-	categorymap.put("open", new Integer(OPEN));
-	categorymap.put("properties", new Integer(PROPERTIES));
-	categorymap.put("read", new Integer(READ));
-	categorymap.put("readdisplay", new Integer(READDISPLAY));
-	categorymap.put("readenvironment", new Integer(READENVIRONMENT));
-	categorymap.put("readproperty", new Integer(READPROPERTY));
-	categorymap.put("removeprovider", new Integer(REMOVEPROVIDER));
-	categorymap.put("robot", new Integer(ROBOT));
-	categorymap.put("socket", new Integer(SOCKET));
-	categorymap.put("write", new Integer(WRITE));
-	categorymap.put("writeproperty", new Integer(WRITEPROPERTY));
+        categorymap.put("accept", new Integer(ACCEPT));
+        categorymap.put("addprovider", new Integer(ADDPROVIDER));
+        categorymap.put("clipboard", new Integer(CLIPBOARD));
+        categorymap.put("connect", new Integer(CONNECT));
+        categorymap.put("delete", new Integer(DELETE));
+        categorymap.put("eval", new Integer(EVAL));
+        categorymap.put("exec", new Integer(EXEC));
+        categorymap.put("execute", new Integer(EXECUTE));
+        categorymap.put("exit", new Integer(EXIT));
+        categorymap.put("file", new Integer(FILE));
+        categorymap.put("include", new Integer(INCLUDE));
+        categorymap.put("listen", new Integer(LISTEN));
+        categorymap.put("module", new Integer(MODULE));
+        categorymap.put("multicast", new Integer(MULTICAST));
+        categorymap.put("open", new Integer(OPEN));
+        categorymap.put("properties", new Integer(PROPERTIES));
+        categorymap.put("read", new Integer(READ));
+        categorymap.put("readdisplay", new Integer(READDISPLAY));
+        categorymap.put("readenvironment", new Integer(READENVIRONMENT));
+        categorymap.put("readproperty", new Integer(READPROPERTY));
+        categorymap.put("removeprovider", new Integer(REMOVEPROVIDER));
+        categorymap.put("robot", new Integer(ROBOT));
+        categorymap.put("socket", new Integer(SOCKET));
+        categorymap.put("write", new Integer(WRITE));
+        categorymap.put("writeproperty", new Integer(WRITEPROPERTY));
 
-	categorymap.put("tempfile", new Integer(TEMPFILE));
-	categorymap.put("tmpfile", new Integer(TEMPFILE));
-	categorymap.put("update", new Integer(UPDATE));
-	categorymap.put("cwd", new Integer(CWD));
+        categorymap.put("tempfile", new Integer(TEMPFILE));
+        categorymap.put("tmpfile", new Integer(TEMPFILE));
+        categorymap.put("update", new Integer(UPDATE));
+        categorymap.put("cwd", new Integer(CWD));
     }
 
     //
@@ -242,609 +242,609 @@ class YoixSecurityOptions
     static final String
     addOption(String text) {
 
-	ArrayList  commands;
-	ArrayList  fields;
-	String     command;
-	String     pattern;
-	String     error = null;
-	int        count;
-	int        m;
-	int        n;
+        ArrayList  commands;
+        ArrayList  fields;
+        String     command;
+        String     pattern;
+        String     error = null;
+        int        count;
+        int        m;
+        int        n;
 
-	if (handlers != null && VM.notBooted()) {
-	    if ((commands = YoixMisc.split(text, " ")) != null) {
-		for (n = 0; n < commands.size() && error == null; n++) {
-		    if ((command = (String)commands.get(n)) != null) {
-			command = command.trim();
-			if (command.length() > 0) {
-			    if ((fields = YoixMisc.split(command, ":")) != null) {
-				if ((count = fields.size()) > 1) {
-				    if (count > 2) {
-					//
-					// Argument could contain colons, so
-					// glue things back together. Typical
-					// case is a host:port pattern.
-					//
-					pattern = (String)fields.get(2);
-					for (m = 3; m < count; m++)
-					    pattern += ":" + (String)fields.get(m);
-				    } else pattern = STAR;
-				    error = addOption(
-					(String)fields.get(0),
-					(String)fields.get(1),
-					pattern,
-					OPTIONSTABLE
-				    );
-				} else error = SECURITYOPTION;
-			    }
-			}
-		    }
-		}
-	    }
-	}
-	return(error);
+        if (handlers != null && VM.notBooted()) {
+            if ((commands = YoixMisc.split(text, " ")) != null) {
+                for (n = 0; n < commands.size() && error == null; n++) {
+                    if ((command = (String)commands.get(n)) != null) {
+                        command = command.trim();
+                        if (command.length() > 0) {
+                            if ((fields = YoixMisc.split(command, ":")) != null) {
+                                if ((count = fields.size()) > 1) {
+                                    if (count > 2) {
+                                        //
+                                        // Argument could contain colons, so
+                                        // glue things back together. Typical
+                                        // case is a host:port pattern.
+                                        //
+                                        pattern = (String)fields.get(2);
+                                        for (m = 3; m < count; m++)
+                                            pattern += ":" + (String)fields.get(m);
+                                    } else pattern = STAR;
+                                    error = addOption(
+                                        (String)fields.get(0),
+                                        (String)fields.get(1),
+                                        pattern,
+                                        OPTIONSTABLE
+                                    );
+                                } else error = SECURITYOPTION;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return(error);
     }
 
 
     public static YoixObject
     checkAccept(YoixObject arg[], Object extra[]) {
 
-	ArrayList  lists[];
-	String     host;
-	int        port;
-	int        index;
-	int        result = 0;
+        ArrayList  lists[];
+        String     host;
+        int        port;
+        int        index;
+        int        result = 0;
 
-	if (arg.length == 2) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		if (arg[1].isInteger()) {
-		    host = arg[0].stringValue();
-		    port = arg[1].intValue();
-		    lists = (ArrayList[])extra[0];
-		    if (!host.startsWith("[") && host.indexOf(':') != -1)
-			host = "[" + host + "]";
-		    if ((index = findAccessIndex(host + ":" + port, lists, null)) == SKIPPED)
-			index = findAccessIndex(host, lists, null);
-		    result = getAccessAnswer(index, ALLOW_ACCEPT, host + ":" + port);
-		}
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 2) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                if (arg[1].isInteger()) {
+                    host = arg[0].stringValue();
+                    port = arg[1].intValue();
+                    lists = (ArrayList[])extra[0];
+                    if (!host.startsWith("[") && host.indexOf(':') != -1)
+                        host = "[" + host + "]";
+                    if ((index = findAccessIndex(host + ":" + port, lists, null)) == SKIPPED)
+                        index = findAccessIndex(host, lists, null);
+                    result = getAccessAnswer(index, ALLOW_ACCEPT, host + ":" + port);
+                }
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkConnect(YoixObject arg[], Object extra[]) {
 
-	ArrayList  lists[];
-	ArrayList  list;
-	String     host;
-	int        port;
-	int        index;
-	int        result = 0;
-	int        n;
+        ArrayList  lists[];
+        ArrayList  list;
+        String     host;
+        int        port;
+        int        index;
+        int        result = 0;
+        int        n;
 
-	//
-	// Decided that we should either allow or skip the check when port
-	// is -1 (i.e., caller wants to determine an IP address) and our
-	// answer should only be based on whether or not the lists array
-	// contains at least one non-empty list. That would mean there was
-	// at least one command line option that targeted this method.
-	//
+        //
+        // Decided that we should either allow or skip the check when port
+        // is -1 (i.e., caller wants to determine an IP address) and our
+        // answer should only be based on whether or not the lists array
+        // contains at least one non-empty list. That would mean there was
+        // at least one command line option that targeted this method.
+        //
 
-	if (arg.length == 2) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		if (arg[1].isInteger()) {
-		    host = arg[0].stringValue();
-		    port = arg[1].intValue();
-		    lists = (ArrayList[])extra[0];
-		    if (!host.startsWith("[") && host.indexOf(':') != -1)
-			host = "[" + host + "]";
-		    if (port != -1) {
-			if ((index = findAccessIndex(host + ":" + port, lists, null)) == SKIPPED)
-			    index = findAccessIndex(host, lists, null);
-			result = getAccessAnswer(index, ALLOW_CONNECT, host + ":" + port);
-		    } else {
-			index = SKIPPED;
-			for (n = 0; n < lists.length; n++) {
-			    if ((list = lists[n]) != null && list.size() > 0) {
-				index = ALLOW;
-				break;
-			    }
-			}
-			result = getAccessAnswer(index, ALLOW_RESOLVE, host);
-		    }
-		}
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 2) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                if (arg[1].isInteger()) {
+                    host = arg[0].stringValue();
+                    port = arg[1].intValue();
+                    lists = (ArrayList[])extra[0];
+                    if (!host.startsWith("[") && host.indexOf(':') != -1)
+                        host = "[" + host + "]";
+                    if (port != -1) {
+                        if ((index = findAccessIndex(host + ":" + port, lists, null)) == SKIPPED)
+                            index = findAccessIndex(host, lists, null);
+                        result = getAccessAnswer(index, ALLOW_CONNECT, host + ":" + port);
+                    } else {
+                        index = SKIPPED;
+                        for (n = 0; n < lists.length; n++) {
+                            if ((list = lists[n]) != null && list.size() > 0) {
+                                index = ALLOW;
+                                break;
+                            }
+                        }
+                        result = getAccessAnswer(index, ALLOW_RESOLVE, host);
+                    }
+                }
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkCreateRobot(YoixObject arg[], Object extra[]) {
 
-	int  result = 0;
+        int  result = 0;
 
-	if (arg.length == 0) {
-	    result = getAccessAnswer(
-		findAccessIndex(null, (ArrayList[])extra[0], null),
-		ALLOW_ROBOT_CREATION, null
-	    );
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 0) {
+            result = getAccessAnswer(
+                findAccessIndex(null, (ArrayList[])extra[0], null),
+                ALLOW_ROBOT_CREATION, null
+            );
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkDelete(YoixObject arg[], Object extra[]) {
 
-	String  path;
-	int     result = 0;
+        String  path;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		path = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
-		    ALLOW_DELETE, path
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                path = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
+                    ALLOW_DELETE, path
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkExec(YoixObject arg[], Object extra[]) {
 
-	String  cmd;
-	File    file;
-	int     result = 0;
+        String  cmd;
+        File    file;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		cmd = arg[0].stringValue();
-		file = new File(cmd);
-		if (file.isAbsolute()) {
-		    result = getAccessAnswer(
-			findAccessIndex(cmd, (ArrayList[])extra[0], DOTDOT),
-			ALLOW_EXEC, cmd
-		    );
-		} else {
-		    result = getAccessAnswer(
-			findAccessIndex(null, (ArrayList[])extra[0], null),
-			ALLOW_EXEC_ANY_FILE, null
-		    );
-		}
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                cmd = arg[0].stringValue();
+                file = new File(cmd);
+                if (file.isAbsolute()) {
+                    result = getAccessAnswer(
+                        findAccessIndex(cmd, (ArrayList[])extra[0], DOTDOT),
+                        ALLOW_EXEC, cmd
+                    );
+                } else {
+                    result = getAccessAnswer(
+                        findAccessIndex(null, (ArrayList[])extra[0], null),
+                        ALLOW_EXEC_ANY_FILE, null
+                    );
+                }
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkExit(YoixObject arg[], Object extra[]) {
 
-	String  status;
-	int     result = 0;
+        String  status;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isNumber() && arg[0].notNull()) {
-		status = arg[0].intValue() + "";
-		result = getAccessAnswer(
-		    findAccessIndex(null, (ArrayList[])extra[0], null),
-		    ALLOW_EXIT, "status=" + status
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isNumber() && arg[0].notNull()) {
+                status = arg[0].intValue() + "";
+                result = getAccessAnswer(
+                    findAccessIndex(null, (ArrayList[])extra[0], null),
+                    ALLOW_EXIT, "status=" + status
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkListen(YoixObject arg[], Object extra[]) {
 
-	int  port;
-	int  result = 0;
+        int  port;
+        int  result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isInteger()) {
-		port = arg[0].intValue();
-		result = getAccessAnswer(
-		    findAccessIndex(port + "", (ArrayList[])extra[0], null),
-		    ALLOW_LISTEN, "port=" + port
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isInteger()) {
+                port = arg[0].intValue();
+                result = getAccessAnswer(
+                    findAccessIndex(port + "", (ArrayList[])extra[0], null),
+                    ALLOW_LISTEN, "port=" + port
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkMulticast(YoixObject arg[], Object extra[]) {
 
-	String  address;
-	int     result = 0;
+        String  address;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		address = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(address, (ArrayList[])extra[0], null),
-		    ALLOW_MULTICAST, address
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                address = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(address, (ArrayList[])extra[0], null),
+                    ALLOW_MULTICAST, address
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkPropertiesAccess(YoixObject arg[], Object extra[]) {
 
-	int  result = 0;
+        int  result = 0;
 
-	if (arg.length == 0) {
-	    result = getAccessAnswer(
-		findAccessIndex(null, (ArrayList[])extra[0], null),
-		ALLOW_PROPERTIES_ACCESS, null
-	    );
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 0) {
+            result = getAccessAnswer(
+                findAccessIndex(null, (ArrayList[])extra[0], null),
+                ALLOW_PROPERTIES_ACCESS, null
+            );
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkRead(YoixObject arg[], Object extra[]) {
 
-	String  path;
-	int     result = 0;
+        String  path;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		path = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
-		    ALLOW_FILE_READ, path
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                path = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
+                    ALLOW_FILE_READ, path
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkReadDisplayPixels(YoixObject arg[], Object extra[]) {
 
-	int  result = 0;
+        int  result = 0;
 
-	if (arg.length == 0) {
-	    result = getAccessAnswer(
-		findAccessIndex(null, (ArrayList[])extra[0], null),
-		ALLOW_DISPLAY_READ, null
-	    );
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 0) {
+            result = getAccessAnswer(
+                findAccessIndex(null, (ArrayList[])extra[0], null),
+                ALLOW_DISPLAY_READ, null
+            );
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkReadEnvironment(YoixObject arg[], Object extra[]) {
 
-	String  name;
-	int     result = 0;
+        String  name;
+        int     result = 0;
 
-	if (arg.length == 0 || arg.length == 1) {
-	    if (arg.length == 0 || arg[0].isString() || arg[0].isNull()) {
-		name = (arg.length == 0 || arg[0].isNull()) ? null : arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(name, (ArrayList[])extra[0], null),
-		    ALLOW_ENVIRONMENT_READ, name
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 0 || arg.length == 1) {
+            if (arg.length == 0 || arg[0].isString() || arg[0].isNull()) {
+                name = (arg.length == 0 || arg[0].isNull()) ? null : arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(name, (ArrayList[])extra[0], null),
+                    ALLOW_ENVIRONMENT_READ, name
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkReadProperty(YoixObject arg[], Object extra[]) {
 
-	String  property;
-	int     result = 0;
+        String  property;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		property = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(property, (ArrayList[])extra[0], null),
-		    ALLOW_PROPERTY_READ, property
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                property = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(property, (ArrayList[])extra[0], null),
+                    ALLOW_PROPERTY_READ, property
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkSystemClipboardAccess(YoixObject arg[], Object extra[]) {
 
-	int  result = 0;
+        int  result = 0;
 
-	if (arg.length == 0) {
-	    result = getAccessAnswer(
-		findAccessIndex(null, (ArrayList[])extra[0], null),
-		ALLOW_SYSTEM_CLIPBOARD_ACCESS, null
-	    );
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 0) {
+            result = getAccessAnswer(
+                findAccessIndex(null, (ArrayList[])extra[0], null),
+                ALLOW_SYSTEM_CLIPBOARD_ACCESS, null
+            );
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkWrite(YoixObject arg[], Object extra[]) {
 
-	String  path;
-	int     result = 0;
+        String  path;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		path = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
-		    ALLOW_FILE_WRITE, path
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                path = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
+                    ALLOW_FILE_WRITE, path
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkWriteProperty(YoixObject arg[], Object extra[]) {
 
-	String  property;
-	int     result = 0;
+        String  property;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		property = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(property, (ArrayList[])extra[0], null),
-		    ALLOW_PROPERTY_WRITE, property
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                property = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(property, (ArrayList[])extra[0], null),
+                    ALLOW_PROPERTY_WRITE, property
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkYoixAddProvider(YoixObject arg[], Object extra[]) {
 
-	String  provider;
-	int     result = 0;
+        String  provider;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		provider = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(provider, (ArrayList[])extra[0], null),
-		    ALLOW_YOIX_PROVIDER_ADD, provider
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                provider = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(provider, (ArrayList[])extra[0], null),
+                    ALLOW_YOIX_PROVIDER_ADD, provider
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkYoixEval(YoixObject arg[], Object extra[]) {
 
-	boolean  ispath;
-	String   source;
-	int      result = 0;
+        boolean  ispath;
+        String   source;
+        int      result = 0;
 
-	if (arg.length == 2) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		if (arg[1].isInteger()) {
-		    source = arg[0].stringValue();
-		    ispath = arg[1].booleanValue();
-		    if (ispath) {
-			result = getAccessAnswer(
-			    findAccessIndex(source, (ArrayList[])extra[0], DOTDOT),
-			    ALLOW_YOIX_EVAL_FILE, source
-			);
-		    } else {
-			if (source.length() > 40)
-			    source = source.substring(0, 40) + "...";
-			result = getAccessAnswer(
-			    findAccessIndex(null, (ArrayList[])extra[0], null),
-			    ALLOW_YOIX_EVAL_STRING, source
-			);
-		    }
-		}
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 2) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                if (arg[1].isInteger()) {
+                    source = arg[0].stringValue();
+                    ispath = arg[1].booleanValue();
+                    if (ispath) {
+                        result = getAccessAnswer(
+                            findAccessIndex(source, (ArrayList[])extra[0], DOTDOT),
+                            ALLOW_YOIX_EVAL_FILE, source
+                        );
+                    } else {
+                        if (source.length() > 40)
+                            source = source.substring(0, 40) + "...";
+                        result = getAccessAnswer(
+                            findAccessIndex(null, (ArrayList[])extra[0], null),
+                            ALLOW_YOIX_EVAL_STRING, source
+                        );
+                    }
+                }
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkYoixExecute(YoixObject arg[], Object extra[]) {
 
-	boolean  ispath;
-	String   source;
-	int      result = 0;
+        boolean  ispath;
+        String   source;
+        int      result = 0;
 
-	if (arg.length == 2 || arg.length == 3) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		if (arg[1].isInteger()) {
-		    source = arg[0].stringValue();
-		    ispath = arg[1].booleanValue();
-		    if (ispath) {
-			result = getAccessAnswer(
-			    findAccessIndex(source, (ArrayList[])extra[0], DOTDOT),
-			    ALLOW_YOIX_EXECUTE_FILE, source
-			);
-		    } else {
-			if (source.length() > 40)
-			    source = source.substring(0, 40) + "...";
-			result = getAccessAnswer(
-			    findAccessIndex(null, (ArrayList[])extra[0], null),
-			    ALLOW_YOIX_EXECUTE_STRING, source
-			);
-		    }
-		}
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 2 || arg.length == 3) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                if (arg[1].isInteger()) {
+                    source = arg[0].stringValue();
+                    ispath = arg[1].booleanValue();
+                    if (ispath) {
+                        result = getAccessAnswer(
+                            findAccessIndex(source, (ArrayList[])extra[0], DOTDOT),
+                            ALLOW_YOIX_EXECUTE_FILE, source
+                        );
+                    } else {
+                        if (source.length() > 40)
+                            source = source.substring(0, 40) + "...";
+                        result = getAccessAnswer(
+                            findAccessIndex(null, (ArrayList[])extra[0], null),
+                            ALLOW_YOIX_EXECUTE_STRING, source
+                        );
+                    }
+                }
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkYoixInclude(YoixObject arg[], Object extra[]) {
 
-	String  path;
-	int     result = 0;
+        String  path;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		path = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
-		    ALLOW_YOIX_INCLUDE, path
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                path = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(path, (ArrayList[])extra[0], DOTDOT),
+                    ALLOW_YOIX_INCLUDE, path
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkYoixModule(YoixObject arg[], Object extra[]) {
 
-	String  classname;
-	int     result = 0;
+        String  classname;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		classname = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(classname, (ArrayList[])extra[0], null),
-		    ALLOW_YOIX_MODULE, classname
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                classname = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(classname, (ArrayList[])extra[0], null),
+                    ALLOW_YOIX_MODULE, classname
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkYoixOpen(YoixObject arg[], Object extra[]) {
 
-	String  path;
-	String  title;
-	int     type;
-	int     mode;
-	int     result = 0;
+        String  path;
+        String  title;
+        int     type;
+        int     mode;
+        int     result = 0;
 
-	if (arg.length == 3) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		path = arg[0].stringValue();
-		type = arg[1].intValue();
-		mode = arg[2].intValue();
-		if ((title = (String)extra[2]) == null) {
-		    if ((mode&RW_) == RW_)
-			title = ALLOW_YOIX_OPEN_READWRITE;
-		    else if ((mode&R__) == R__)
-			title = ALLOW_YOIX_OPEN_READ;
-		    else if ((mode&_W_) == _W_)
-			title = ALLOW_YOIX_OPEN_WRITE;
-		    else title = ALLOW_YOIX_OPEN;
-		}
-		switch (type) {
-		    case YoixConstants.FILE:
-			//
-			// Not completely convinced about using toYoixPath()
-			// but it's only for the argument lookup and is what
-			// YoixBodyStream() uses to get the file's fullname.
-			//
-			result = getAccessAnswer(
-			    findAccessIndex(YoixMisc.toYoixPath(path), (ArrayList[])extra[0], DOTDOT),
-			    title, path
-			);
-			break;
+        if (arg.length == 3) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                path = arg[0].stringValue();
+                type = arg[1].intValue();
+                mode = arg[2].intValue();
+                if ((title = (String)extra[2]) == null) {
+                    if ((mode&RW_) == RW_)
+                        title = ALLOW_YOIX_OPEN_READWRITE;
+                    else if ((mode&R__) == R__)
+                        title = ALLOW_YOIX_OPEN_READ;
+                    else if ((mode&_W_) == _W_)
+                        title = ALLOW_YOIX_OPEN_WRITE;
+                    else title = ALLOW_YOIX_OPEN;
+                }
+                switch (type) {
+                    case YoixConstants.FILE:
+                        //
+                        // Not completely convinced about using toYoixPath()
+                        // but it's only for the argument lookup and is what
+                        // YoixBodyStream() uses to get the file's fullname.
+                        //
+                        result = getAccessAnswer(
+                            findAccessIndex(YoixMisc.toYoixPath(path), (ArrayList[])extra[0], DOTDOT),
+                            title, path
+                        );
+                        break;
 
-		    case YoixConstants.STRINGSTREAM:
-			//
-			// Don't see much point in checking a STRINGSTREAM
-			// open, so for now we just say it's always OK.
-			//
-			result = 1;
-			break;
+                    case YoixConstants.STRINGSTREAM:
+                        //
+                        // Don't see much point in checking a STRINGSTREAM
+                        // open, so for now we just say it's always OK.
+                        //
+                        result = 1;
+                        break;
 
-		    case YoixConstants.URL:
-			result = getAccessAnswer(
-			    findAccessIndex(path, (ArrayList[])extra[0], null),
-			    title, path
-			);
-			break;
-		}
-	    }
-	}
-	return(YoixObject.newInt(result));
+                    case YoixConstants.URL:
+                        result = getAccessAnswer(
+                            findAccessIndex(path, (ArrayList[])extra[0], null),
+                            title, path
+                        );
+                        break;
+                }
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     checkYoixRemoveProvider(YoixObject arg[], Object extra[]) {
 
-	String  provider;
-	int     result = 0;
+        String  provider;
+        int     result = 0;
 
-	if (arg.length == 1) {
-	    if (arg[0].isString() && arg[0].notNull()) {
-		provider = arg[0].stringValue();
-		result = getAccessAnswer(
-		    findAccessIndex(provider, (ArrayList[])extra[0], null),
-		    ALLOW_YOIX_PROVIDER_REMOVE, provider
-		);
-	    }
-	}
-	return(YoixObject.newInt(result));
+        if (arg.length == 1) {
+            if (arg[0].isString() && arg[0].notNull()) {
+                provider = arg[0].stringValue();
+                result = getAccessAnswer(
+                    findAccessIndex(provider, (ArrayList[])extra[0], null),
+                    ALLOW_YOIX_PROVIDER_REMOVE, provider
+                );
+            }
+        }
+        return(YoixObject.newInt(result));
     }
 
 
     static boolean
     installOptions() {
 
-	Enumeration  keys;
-	YoixObject   handler;
-	boolean      result = false;
-	String       classname;
-	Object       key;
+        Enumeration  keys;
+        YoixObject   handler;
+        boolean      result = false;
+        String       classname;
+        Object       key;
 
-	if (handlers != null && handlers.size() > 0) {
-	    classname = YoixSecurityOptions.class.getName();
-	    for (keys = handlers.keys(); keys.hasMoreElements(); ) {
-		key = keys.nextElement();
-		if (key instanceof String) {
-		    handler = YoixObject.newBuiltin(
-			classname + "." + (String)key,
-			0,
-			true,
-			(Object[])handlers.get(key)
-		    );
-		    if (VM.setSecurityChecker((String)key, handler) == false)
-			VM.die(INVALIDACCESS, (String)key);
-		    result = true;
-		}
-	    }
-	    handlers = null;
-	}
-	return(result);
+        if (handlers != null && handlers.size() > 0) {
+            classname = YoixSecurityOptions.class.getName();
+            for (keys = handlers.keys(); keys.hasMoreElements(); ) {
+                key = keys.nextElement();
+                if (key instanceof String) {
+                    handler = YoixObject.newBuiltin(
+                        classname + "." + (String)key,
+                        0,
+                        true,
+                        (Object[])handlers.get(key)
+                    );
+                    if (VM.setSecurityChecker((String)key, handler) == false)
+                        VM.die(INVALIDACCESS, (String)key);
+                    result = true;
+                }
+            }
+            handlers = null;
+        }
+        return(result);
     }
 
     ///////////////////////////////////
@@ -856,231 +856,231 @@ class YoixSecurityOptions
     private static void
     addAddresses(ArrayList arglist, String pattern) {
 
-	InetAddress  addrs[];
-	String       host;
-	String       port;
-	String       address;
-	int          index;
-	int          n;
+        InetAddress  addrs[];
+        String       host;
+        String       port;
+        String       address;
+        int          index;
+        int          n;
 
-	//
-	// Takes a pattern that includes a host and port and tries to add
-	// the same permissions for all IP addresses that getAllByName()
-	// returns for that host. Omitting this step means the user also
-	// has to include options that cover IP addresses for hosts that
-	// are listed on the command line. There are other solutions, but
-	// this seemed like the simplest approach.
-	// 
+        //
+        // Takes a pattern that includes a host and port and tries to add
+        // the same permissions for all IP addresses that getAllByName()
+        // returns for that host. Omitting this step means the user also
+        // has to include options that cover IP addresses for hosts that
+        // are listed on the command line. There are other solutions, but
+        // this seemed like the simplest approach.
+        // 
 
-	if (pattern != null && arglist != null) {
-	    if (pattern != STAR && pattern.indexOf('*') < 0) {
-		if ((index = pattern.indexOf(':')) > 0 && index < pattern.length() - 1) {
-		    if (index == pattern.lastIndexOf(':')) {
-			host = pattern.substring(0, index);
-			port = pattern.substring(index+1);
-			if (host.length() > 0 && port.length() > 0) {	// unnecessary test
-			    try {
-				if ((addrs = InetAddress.getAllByName(host)) != null) {
-				    for (n = 0; n < addrs.length; n++) {
-					if (addrs[n] != null) {
-					    address = addrs[n].getHostAddress();
-					    if (address != null && address.indexOf('/') < 0 && address.equals(host) == false)
-						arglist.add(newMatcher(address + ":" + port));
-					}
-				    }
-				}
-			    }
-			    catch(Exception e) {}
-			}
-		    }
-		}
-	    }
-	}
+        if (pattern != null && arglist != null) {
+            if (pattern != STAR && pattern.indexOf('*') < 0) {
+                if ((index = pattern.indexOf(':')) > 0 && index < pattern.length() - 1) {
+                    if (index == pattern.lastIndexOf(':')) {
+                        host = pattern.substring(0, index);
+                        port = pattern.substring(index+1);
+                        if (host.length() > 0 && port.length() > 0) {	// unnecessary test
+                            try {
+                                if ((addrs = InetAddress.getAllByName(host)) != null) {
+                                    for (n = 0; n < addrs.length; n++) {
+                                        if (addrs[n] != null) {
+                                            address = addrs[n].getHostAddress();
+                                            if (address != null && address.indexOf('/') < 0 && address.equals(host) == false)
+                                                arglist.add(newMatcher(address + ":" + port));
+                                        }
+                                    }
+                                }
+                            }
+                            catch(Exception e) {}
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
     private static String
     addOption(String access, String category, String pattern, Object table[]) {
 
-	ArrayList  arglist;
-	ArrayList  lists[];
-	String     error = null;
-	String     name;
-	String     title;
-	String     path;
-	Object     value;
-	Object     arg;
-	int        flag;
-	int        mask;
-	int        columns = 4;
-	int        matches = 0;
-	int        index;
-	int        n;
+        ArrayList  arglist;
+        ArrayList  lists[];
+        String     error = null;
+        String     name;
+        String     title;
+        String     path;
+        Object     value;
+        Object     arg;
+        int        flag;
+        int        mask;
+        int        columns = 4;
+        int        matches = 0;
+        int        index;
+        int        n;
 
-	if ((value = accessmap.get(access.toLowerCase())) != null) {
-	    if ((index = ((Integer)value).intValue()) >= 0 && index < 3) {
-		if ((value = categorymap.get(category.toLowerCase())) != null) {
-		    if (value instanceof String) {
-			category = (String)value;
-			mask = 0;
-		    } else mask = ((Integer)value).intValue();
-		} else mask = 0;
-		for (n = 0; n < table.length && error == null; n += columns) {
-		    name = (String)table[n];
-		    arg = table[n+1];
-		    title = (String)table[n+2];
-		    flag = ((Integer)table[n+3]).intValue();
-		    if ((flag&mask) != 0 || category.equals(name)) {
-			if ((value = handlers.get(name)) == null) {
-			    lists = new ArrayList[] {null, null, null};
-			    handlers.put(name, new Object[] {lists, arg, title});
-			} else lists = (ArrayList[])((Object[])value)[0];
-			if ((arglist = lists[index]) == null) {
-			    arglist = new ArrayList();
-			    lists[index] = arglist;
-			}
-			if (mask == UPDATE) {
-			    if ((path = YoixMisc.getLocalJarPath()) != null) {
-				arglist.add(newMatcher(YoixMisc.toYoixPath(path)));
-				arglist.add(newMatcher(YoixMisc.toYoixPath(path + ".update")));
-			    }
-			} else if (mask == TEMPFILE) {
-			    //
-			    // In some cases directory gets checked, too, so include that.
-			    // Also add path with symbolic links removed (toRealPath)
-			    //
-			    arglist.add(newMatcher(TMPDIR));
-			    arglist.add(newMatcher(TMPDIR + FILESEP + "*"));
-			    arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath(TMPDIR))));
-			    arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath(TMPDIR) + "/*")));
-			} else if (mask == CWD) {
-			    // should be the initPWD computed in YoixMisc
-			    arglist.add(newMatcher(YoixMisc.toLocalPath(".")));
-			    arglist.add(newMatcher(YoixMisc.toLocalPath(".") + FILESEP + "*"));
-			    arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath("."))));
-			    arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath(".") + "/*")));
-			} else arglist.add(newMatcher(pattern));
+        if ((value = accessmap.get(access.toLowerCase())) != null) {
+            if ((index = ((Integer)value).intValue()) >= 0 && index < 3) {
+                if ((value = categorymap.get(category.toLowerCase())) != null) {
+                    if (value instanceof String) {
+                        category = (String)value;
+                        mask = 0;
+                    } else mask = ((Integer)value).intValue();
+                } else mask = 0;
+                for (n = 0; n < table.length && error == null; n += columns) {
+                    name = (String)table[n];
+                    arg = table[n+1];
+                    title = (String)table[n+2];
+                    flag = ((Integer)table[n+3]).intValue();
+                    if ((flag&mask) != 0 || category.equals(name)) {
+                        if ((value = handlers.get(name)) == null) {
+                            lists = new ArrayList[] {null, null, null};
+                            handlers.put(name, new Object[] {lists, arg, title});
+                        } else lists = (ArrayList[])((Object[])value)[0];
+                        if ((arglist = lists[index]) == null) {
+                            arglist = new ArrayList();
+                            lists[index] = arglist;
+                        }
+                        if (mask == UPDATE) {
+                            if ((path = YoixMisc.getLocalJarPath()) != null) {
+                                arglist.add(newMatcher(YoixMisc.toYoixPath(path)));
+                                arglist.add(newMatcher(YoixMisc.toYoixPath(path + ".update")));
+                            }
+                        } else if (mask == TEMPFILE) {
+                            //
+                            // In some cases directory gets checked, too, so include that.
+                            // Also add path with symbolic links removed (toRealPath)
+                            //
+                            arglist.add(newMatcher(TMPDIR));
+                            arglist.add(newMatcher(TMPDIR + FILESEP + "*"));
+                            arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath(TMPDIR))));
+                            arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath(TMPDIR) + "/*")));
+                        } else if (mask == CWD) {
+                            // should be the initPWD computed in YoixMisc
+                            arglist.add(newMatcher(YoixMisc.toLocalPath(".")));
+                            arglist.add(newMatcher(YoixMisc.toLocalPath(".") + FILESEP + "*"));
+                            arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath("."))));
+                            arglist.add(newMatcher(YoixMisc.toLocalPath(YoixMisc.toRealPath(".") + "/*")));
+                        } else arglist.add(newMatcher(pattern));
 
-			if (mask == ACCEPT || mask == CONNECT || mask == LISTEN) {
-			    addAddresses(arglist, pattern);
-			}
-			//
-			// Recent addition that makes DENY the default choice
-			// unless DEFAULTMATCHER is explicitly added to one
-			// of the other lists. The code in findAccessIndex()
-			// that looks for DEFAULTMATCHER was also changed to
-			// let later a DEFAULTMATCHER win.
-			//
-			if (index != DENY) {
-			    if ((arglist = lists[DENY]) == null) {
-				arglist = new ArrayList();
-				lists[DENY] = arglist;
-			    }
-			    if (arglist.contains(DEFAULTMATCHER) == false)
-				arglist.add(DEFAULTMATCHER);
-			}
-			matches++;
-		    }
-		}
-	    } else error = INTERNALERROR;
-	} else error = SECURITYOPTION;
+                        if (mask == ACCEPT || mask == CONNECT || mask == LISTEN) {
+                            addAddresses(arglist, pattern);
+                        }
+                        //
+                        // Recent addition that makes DENY the default choice
+                        // unless DEFAULTMATCHER is explicitly added to one
+                        // of the other lists. The code in findAccessIndex()
+                        // that looks for DEFAULTMATCHER was also changed to
+                        // let later a DEFAULTMATCHER win.
+                        //
+                        if (index != DENY) {
+                            if ((arglist = lists[DENY]) == null) {
+                                arglist = new ArrayList();
+                                lists[DENY] = arglist;
+                            }
+                            if (arglist.contains(DEFAULTMATCHER) == false)
+                                arglist.add(DEFAULTMATCHER);
+                        }
+                        matches++;
+                    }
+                }
+            } else error = INTERNALERROR;
+        } else error = SECURITYOPTION;
 
-	return(error == null && matches == 0 ? SECURITYOPTION : error);
+        return(error == null && matches == 0 ? SECURITYOPTION : error);
     }
 
 
     private static int
     findAccessIndex(String arg, ArrayList lists[], String reject) {
 
-	YoixRERegexp  matcher;
-	ArrayList     list;
-	boolean       unmatched = true;
-	int           index = SKIPPED;
-	int           m;
-	int           n;
+        YoixRERegexp  matcher;
+        ArrayList     list;
+        boolean       unmatched = true;
+        int           index = SKIPPED;
+        int           m;
+        int           n;
 
-	//
-	// Be careful if you make changes here - we implicilty assume that
-	// the DENY list is first, PROMPT list is second, and the ALLOW is
-	// last.
-	//
+        //
+        // Be careful if you make changes here - we implicilty assume that
+        // the DENY list is first, PROMPT list is second, and the ALLOW is
+        // last.
+        //
 
-	if (arg == null || reject == null || arg.indexOf(reject) < 0) {
-	    for (n = 0; n < lists.length && unmatched; n++) {
-		if ((list = lists[n]) != null) {
-		    if (list.contains(DEFAULTMATCHER))
-			index = n;
-		    if (arg != null && arg.length() > 0) {
-			for (m = 0; m < list.size() && unmatched; m++) {
-			    if ((matcher = (YoixRERegexp)list.get(m)) != null) {
-				if (matcher != DEFAULTMATCHER) {
-				    if (matcher.exec(arg, null)) {
-					index = n;
-					unmatched = false;
-				    }
-				}
-			    }
-			}
-		    }
-		}
-	    }
-	}
-	return(index);
+        if (arg == null || reject == null || arg.indexOf(reject) < 0) {
+            for (n = 0; n < lists.length && unmatched; n++) {
+                if ((list = lists[n]) != null) {
+                    if (list.contains(DEFAULTMATCHER))
+                        index = n;
+                    if (arg != null && arg.length() > 0) {
+                        for (m = 0; m < list.size() && unmatched; m++) {
+                            if ((matcher = (YoixRERegexp)list.get(m)) != null) {
+                                if (matcher != DEFAULTMATCHER) {
+                                    if (matcher.exec(arg, null)) {
+                                        index = n;
+                                        unmatched = false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return(index);
     }
 
 
     private static int
     getAccessAnswer(int index, String action, String text) {
 
-	Object  message;
-	int     response;
-	int     answer = 0;
+        Object  message;
+        int     response;
+        int     answer = 0;
 
-	//
-	// Builtins called to check stuff should return an integer that is
-	// 0 if the check failed, 1 if it succeeded, 2 if there wasn't an
-	// answer, and -1 if the user was prompted and ended up rejecting
-	// the request. In other words, a return of -1 means the failure
-	// is definitive and the caller shouldn't try to get a different
-	// answer (e.g., by calling Java's default security checker).
-	//
+        //
+        // Builtins called to check stuff should return an integer that is
+        // 0 if the check failed, 1 if it succeeded, 2 if there wasn't an
+        // answer, and -1 if the user was prompted and ended up rejecting
+        // the request. In other words, a return of -1 means the failure
+        // is definitive and the caller shouldn't try to get a different
+        // answer (e.g., by calling Java's default security checker).
+        //
 
-	if (index == PROMPT) {
-	    if (action != null || text != null) {
-		if (action != null && text != null)
-		    message = new String[] {SECURITY_CHECK, " ", action + ":", text};
-		else message = new String[] {SECURITY_CHECK, " ", (action != null ? action + "?" : text)};
-		try {
-		    response = JOptionPane.showConfirmDialog(
-			null,
-			message,
-			SECURITY_CHECK,
-			JOptionPane.YES_NO_OPTION,
-			JOptionPane.QUESTION_MESSAGE
-		    );
-		}
-		catch(HeadlessException e) {
-		    response = JOptionPane.YES_OPTION;
-		}
-		answer = (response == JOptionPane.YES_OPTION) ? 1 : -1;
-	    } else answer = 1;
-	} else if (index == ALLOW)
-	    answer = 1;
-	else if (index == SKIPPED)
-	    answer = 2;
-	else answer = 0;
+        if (index == PROMPT) {
+            if (action != null || text != null) {
+                if (action != null && text != null)
+                    message = new String[] {SECURITY_CHECK, " ", action + ":", text};
+                else message = new String[] {SECURITY_CHECK, " ", (action != null ? action + "?" : text)};
+                try {
+                    response = JOptionPane.showConfirmDialog(
+                        null,
+                        message,
+                        SECURITY_CHECK,
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE
+                    );
+                }
+                catch(HeadlessException e) {
+                    response = JOptionPane.YES_OPTION;
+                }
+                answer = (response == JOptionPane.YES_OPTION) ? 1 : -1;
+            } else answer = 1;
+        } else if (index == ALLOW)
+            answer = 1;
+        else if (index == SKIPPED)
+            answer = 2;
+        else answer = 0;
 
-	return(answer);
+        return(answer);
     }
 
 
     private static YoixRERegexp
     newMatcher(String pattern) {
 
-	return(pattern != null && pattern != STAR
-	    ? new YoixRERegexp(pattern, MATCHERFLAGS)
-	    : DEFAULTMATCHER
-	);
+        return(pattern != null && pattern != STAR
+            ? new YoixRERegexp(pattern, MATCHERFLAGS)
+            : DEFAULTMATCHER
+        );
     }
 }
 

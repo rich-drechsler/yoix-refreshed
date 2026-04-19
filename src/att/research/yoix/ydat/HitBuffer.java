@@ -47,10 +47,10 @@ class HitBuffer
 
     HitBuffer(int length) {
 
-	this.length = length;
-	this.records = new DataRecord[length];
-	this.selected = new boolean[length];
-	this.recordindices = new int[length];		// recent addition
+        this.length = length;
+        this.records = new DataRecord[length];
+        this.selected = new boolean[length];
+        this.recordindices = new int[length];		// recent addition
     }
 
     ///////////////////////////////////
@@ -62,122 +62,122 @@ class HitBuffer
     final DataRecord[]
     copyRecords(int count) {
 
-	DataRecord  copy[];
+        DataRecord  copy[];
 
-	copy = new DataRecord[count];
-	System.arraycopy(records, 0, copy, 0, count);
-	return(copy);
+        copy = new DataRecord[count];
+        System.arraycopy(records, 0, copy, 0, count);
+        return(copy);
     }
 
 
     final int[]
     copyRecordIndices(int count) {
 
-	int  indices[];
+        int  indices[];
 
-	indices = new int[count];
-	System.arraycopy(recordindices, 0, indices, 0, count);
-	return(indices);
+        indices = new int[count];
+        System.arraycopy(recordindices, 0, indices, 0, count);
+        return(indices);
     }
 
 
     final int
     getLength() {
 
-	return(length);
+        return(length);
     }
 
 
     final DataRecord
     getRecord(int index) {
 
-	return(records[index]);
+        return(records[index]);
     }
 
 
     final int
     getRecordIndex(int index) {
 
-	return(recordindices[index]);
+        return(recordindices[index]);
     }
 
 
     final int[]
     getRecordIndices() {
 
-	return(recordindices);
+        return(recordindices);
     }
 
 
     final int[]
     getSortedIndices(int count, int mapping[]) {
 
-	int  indices[];
-	int  n;
+        int  indices[];
+        int  n;
 
-	//
-	// When mapping is null we assume the caller has determined that
-	// any additional record sorting is unnecessary.
-	// 
+        //
+        // When mapping is null we assume the caller has determined that
+        // any additional record sorting is unnecessary.
+        // 
 
-	indices = new int[count];
-	if (mapping != null) {
-	    for (n = 0; n < count; n++)
-		indices[n] = mapping[recordindices[n]];
-	    YoixMiscQsort.sort(indices);
-	} else System.arraycopy(recordindices, 0, indices, 0, count);
+        indices = new int[count];
+        if (mapping != null) {
+            for (n = 0; n < count; n++)
+                indices[n] = mapping[recordindices[n]];
+            YoixMiscQsort.sort(indices);
+        } else System.arraycopy(recordindices, 0, indices, 0, count);
 
-	return(indices);
+        return(indices);
     }
 
 
     final boolean
     isSelected(int index) {
 
-	return(selected[index]);
+        return(selected[index]);
     }
 
 
     final void
     releaseBuffers() {
 
-	//
-	// Should only be called when we're certain the HitBuffer will
-	// not be used again. We've skipped bounds and existence checks
-	// in other methods to help efficiency, but that means users of
-	// HitBuffers must be careful.
-	//
+        //
+        // Should only be called when we're certain the HitBuffer will
+        // not be used again. We've skipped bounds and existence checks
+        // in other methods to help efficiency, but that means users of
+        // HitBuffers must be careful.
+        //
 
-	length = 0;
-	records = null;
-	selected = null;
-	recordindices = null;
+        length = 0;
+        records = null;
+        selected = null;
+        recordindices = null;
     }
 
 
     final void
     setRecord(int index, DataRecord record) {
 
-	//
-	// Calling this essentially means the stuff saved selected is 
-	// useless. Means callers need to be consistent and make sure
-	// a single use of a HitBuffer always calls the same version
-	// of setRecord(). Also means hits collected by this method
-	// shouldn't be passed to the DataManager's updateDate method.
-	// Not hard to imagine being more careful, but once again we
-	// chose not to for efficieny reasons (at least for now).
+        //
+        // Calling this essentially means the stuff saved selected is 
+        // useless. Means callers need to be consistent and make sure
+        // a single use of a HitBuffer always calls the same version
+        // of setRecord(). Also means hits collected by this method
+        // shouldn't be passed to the DataManager's updateDate method.
+        // Not hard to imagine being more careful, but once again we
+        // chose not to for efficieny reasons (at least for now).
 
-	records[index] = record;
-	recordindices[index] = record.getIndex();
+        records[index] = record;
+        recordindices[index] = record.getIndex();
     }
 
 
     final void
     setRecord(int index, DataRecord record, boolean state) {
 
-	records[index] = record;
-	recordindices[index] = record.getIndex();
-	selected[index] = state;
+        records[index] = record;
+        recordindices[index] = record.getIndex();
+        selected[index] = state;
     }
 }
 

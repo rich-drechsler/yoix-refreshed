@@ -19,7 +19,7 @@ public
 class YoixMiscPrintf
 
     implements YoixAPI,
-	       YoixConstants
+               YoixConstants
 
 {
 
@@ -42,162 +42,162 @@ class YoixMiscPrintf
     public static Object[]
     format(YoixObject args[]) {
 
-	return(format(args, 0));
+        return(format(args, 0));
     }
 
 
     public static Object[]
     format(YoixObject args[], int argn) {
 
-	PrintfParser  cvt;
-	StringBuffer  buf = null;
-	boolean       valid = false;
-	char          format[];
-	char          ch;
-	int           length;
-	boolean       delimited;
-	int           n;
+        PrintfParser  cvt;
+        StringBuffer  buf = null;
+        boolean       valid = false;
+        char          format[];
+        char          ch;
+        int           length;
+        boolean       delimited;
+        int           n;
 
-	if (argn < args.length && args[argn].isString()) {
-	    valid = true;
-	    format = args[argn++].stringValue(true).toCharArray();
-	    length = format.length;
-	    buf = new StringBuffer(5*length);
-	    cvt = new PrintfParser();
-	    for (n = 0; n < length && valid; ) {
-		if ((ch = format[n++]) == '%') {
-		    if ((n = cvt.parse(format, n)) < length) {
-			switch (ch = format[n++]) {
-			    case 'c':
-			    case 'd':
-			    case 'e':
-			    case 'E':
-			    case 'f':
-			    case 'g':
-			    case 'G':
-			    case 'o':
-			    case 'O':
-			    case 's':
-			    case 'S':
-			    case 'x':
-			    case 'X':
-				if (args.length > argn) {
-				    switch (ch) {
-					case 'c':
-					    if (args[argn].isNormalNumber())
-						cvt.buildChar(buf, args[argn++]);
-					    else if (args[argn].isNumber())
-						cvt.buildJavaDouble(buf, args[argn++]);
-					    else valid = false;
-					    break;
+        if (argn < args.length && args[argn].isString()) {
+            valid = true;
+            format = args[argn++].stringValue(true).toCharArray();
+            length = format.length;
+            buf = new StringBuffer(5*length);
+            cvt = new PrintfParser();
+            for (n = 0; n < length && valid; ) {
+                if ((ch = format[n++]) == '%') {
+                    if ((n = cvt.parse(format, n)) < length) {
+                        switch (ch = format[n++]) {
+                            case 'c':
+                            case 'd':
+                            case 'e':
+                            case 'E':
+                            case 'f':
+                            case 'g':
+                            case 'G':
+                            case 'o':
+                            case 'O':
+                            case 's':
+                            case 'S':
+                            case 'x':
+                            case 'X':
+                                if (args.length > argn) {
+                                    switch (ch) {
+                                        case 'c':
+                                            if (args[argn].isNormalNumber())
+                                                cvt.buildChar(buf, args[argn++]);
+                                            else if (args[argn].isNumber())
+                                                cvt.buildJavaDouble(buf, args[argn++]);
+                                            else valid = false;
+                                            break;
 
-					case 'd':
-					    if (args[argn].isNormalNumber())
-						cvt.buildInteger(buf, args[argn++]);
-					    else if (args[argn].isNumber())
-						cvt.buildJavaDouble(buf, args[argn++]);
-					    else valid = false;
-					    break;
+                                        case 'd':
+                                            if (args[argn].isNormalNumber())
+                                                cvt.buildInteger(buf, args[argn++]);
+                                            else if (args[argn].isNumber())
+                                                cvt.buildJavaDouble(buf, args[argn++]);
+                                            else valid = false;
+                                            break;
 
-					case 'e':
-					case 'E':
-					    if (args[argn].isNormalNumber())
-						cvt.buildExp(buf, args[argn++], ch == 'E');
-					    else if (args[argn].isNumber())
-						cvt.buildJavaDouble(buf, args[argn++]);
-					    else valid = false;
-					    break;
+                                        case 'e':
+                                        case 'E':
+                                            if (args[argn].isNormalNumber())
+                                                cvt.buildExp(buf, args[argn++], ch == 'E');
+                                            else if (args[argn].isNumber())
+                                                cvt.buildJavaDouble(buf, args[argn++]);
+                                            else valid = false;
+                                            break;
 
-					case 'f':
-					    if (args[argn].isNormalNumber())
-						cvt.buildFloat(buf, args[argn++]);
-					    else if (args[argn].isNumber())
-						cvt.buildJavaDouble(buf, args[argn++]);
-					    else valid = false;
-					    break;
+                                        case 'f':
+                                            if (args[argn].isNormalNumber())
+                                                cvt.buildFloat(buf, args[argn++]);
+                                            else if (args[argn].isNumber())
+                                                cvt.buildJavaDouble(buf, args[argn++]);
+                                            else valid = false;
+                                            break;
 
-					case 'g':
-					case 'G':
-					    if (args[argn].isNormalNumber())
-						cvt.buildFlex(buf, args[argn++], ch == 'G');
-					    else if (args[argn].isNumber())
-						cvt.buildJavaDouble(buf, args[argn++]);
-					    else valid = false;
-					    break;
+                                        case 'g':
+                                        case 'G':
+                                            if (args[argn].isNormalNumber())
+                                                cvt.buildFlex(buf, args[argn++], ch == 'G');
+                                            else if (args[argn].isNumber())
+                                                cvt.buildJavaDouble(buf, args[argn++]);
+                                            else valid = false;
+                                            break;
 
-					case 'o':
-					    if (args[argn].isNormalNumber())
-						cvt.buildOctal(buf, args[argn++]);
-					    else if (args[argn].isNumber())
-						cvt.buildJavaDouble(buf, args[argn++]);
-					    else valid = false;
-					    break;
+                                        case 'o':
+                                            if (args[argn].isNormalNumber())
+                                                cvt.buildOctal(buf, args[argn++]);
+                                            else if (args[argn].isNumber())
+                                                cvt.buildJavaDouble(buf, args[argn++]);
+                                            else valid = false;
+                                            break;
 
-					case 'O':
-					    cvt.buildObject(buf, args[argn++]);
-					    break;
+                                        case 'O':
+                                            cvt.buildObject(buf, args[argn++]);
+                                            break;
 
-					case 's':
-					case 'S':
-					    if (args[argn].isString())
-						cvt.buildString(buf, args[argn++].stringValue(ch == 's'));
-					    else if (cvt.buildString(buf, args[argn], ch == 's') != null)	// JTable kludge
-						argn++;
-					    else valid = false;
-					    break;
+                                        case 's':
+                                        case 'S':
+                                            if (args[argn].isString())
+                                                cvt.buildString(buf, args[argn++].stringValue(ch == 's'));
+                                            else if (cvt.buildString(buf, args[argn], ch == 's') != null)	// JTable kludge
+                                                argn++;
+                                            else valid = false;
+                                            break;
 
-					case 'x':
-					case 'X':
-					    if (args[argn].isNormalNumber())
-						cvt.buildHex(buf, args[argn++], ch == 'X');
-					    else if (args[argn].isNumber())
-						cvt.buildJavaDouble(buf, args[argn++]);
-					    else valid = false;
-					    break;
-				    }
-				} else valid = false;
-				break;
+                                        case 'x':
+                                        case 'X':
+                                            if (args[argn].isNormalNumber())
+                                                cvt.buildHex(buf, args[argn++], ch == 'X');
+                                            else if (args[argn].isNumber())
+                                                cvt.buildJavaDouble(buf, args[argn++]);
+                                            else valid = false;
+                                            break;
+                                    }
+                                } else valid = false;
+                                break;
 
-			    case '%':
-				buf.append('%');
-				break;
+                            case '%':
+                                buf.append('%');
+                                break;
 
-			    default:
-				// different libraries handle this different ways,
-				// some just do the equivalent of buf.append(ch),
-				// but we will just ignore the unrecognized format
-				break;
-			}
-		    } else buf.append(ch);
-		} else buf.append(ch);
-	    }
-	}
+                            default:
+                                // different libraries handle this different ways,
+                                // some just do the equivalent of buf.append(ch),
+                                // but we will just ignore the unrecognized format
+                                break;
+                        }
+                    } else buf.append(ch);
+                } else buf.append(ch);
+            }
+        }
 
-	return(new Object[] {valid ? buf.toString() : null, new Integer(argn)});
+        return(new Object[] {valid ? buf.toString() : null, new Integer(argn)});
     }
 
 
     public static String
     strfmt(String fmt, int value) {
 
-	YoixObject  obj;
-	Object      formatted[];
+        YoixObject  obj;
+        Object      formatted[];
 
-	obj = YoixObject.newInt(value);
-	formatted = format(new YoixObject[] {YoixObject.newString(fmt), obj}, 0);
-	return(formatted[0] == null ? obj.toString() : (String)formatted[0]);
+        obj = YoixObject.newInt(value);
+        formatted = format(new YoixObject[] {YoixObject.newString(fmt), obj}, 0);
+        return(formatted[0] == null ? obj.toString() : (String)formatted[0]);
     }
 
 
     public static String
     strfmt(String fmt, double value) {
 
-	YoixObject  obj;
-	Object      formatted[];
+        YoixObject  obj;
+        Object      formatted[];
 
-	obj = YoixObject.newDouble(value);
-	formatted = format(new YoixObject[] {YoixObject.newString(fmt), obj}, 0);
-	return(formatted[0] == null ? obj.toString() : (String)formatted[0]);
+        obj = YoixObject.newDouble(value);
+        formatted = format(new YoixObject[] {YoixObject.newString(fmt), obj}, 0);
+        return(formatted[0] == null ? obj.toString() : (String)formatted[0]);
     }
 
     ///////////////////////////////////
@@ -209,23 +209,23 @@ class YoixMiscPrintf
     static String
     print(YoixObject args[]) {
 
-	return(print(args, 0));
+        return(print(args, 0));
     }
 
 
     static String
     print(YoixObject args[], int argn) {
 
-	Object  formatted[];
+        Object  formatted[];
 
-	formatted = format(args, argn);
-	if (formatted[0] == null) {
-	    argn = ((Integer)formatted[1]).intValue();
-	    if (argn < args.length)
-		VM.badArgument(argn);
-	    else VM.badCall();
-	}
-	return((String)formatted[0]);
+        formatted = format(args, argn);
+        if (formatted[0] == null) {
+            argn = ((Integer)formatted[1]).intValue();
+            if (argn < args.length)
+                VM.badArgument(argn);
+            else VM.badCall();
+        }
+        return((String)formatted[0]);
     }
 }
 
@@ -264,7 +264,7 @@ class PrintfParser
 
     PrintfParser() {
 
-	scratch = new StringBuffer();
+        scratch = new StringBuffer();
     }
 
     ///////////////////////////////////
@@ -276,320 +276,320 @@ class PrintfParser
     final int
     parse(char cfmt[]) {
 
-	return(parse(cfmt, 0));
+        return(parse(cfmt, 0));
     }
 
 
     final int
     parse(char cfmt[], int n) {
 
-	boolean  done;
+        boolean  done;
 
-	//
-	// Parse the conversion specification that starts at index n in
-	// fmt. Results are stored in class variables and the index of
-	// the character that stopped the parse is returned.
-	//
+        //
+        // Parse the conversion specification that starts at index n in
+        // fmt. Results are stored in class variables and the index of
+        // the character that stopped the parse is returned.
+        //
 
-	alternate = false;
-	delimited = false;
-	rightpad = false;
-	sign = false;
-	space = false;
-	zeropad = false;
-	trim = false;
+        alternate = false;
+        delimited = false;
+        rightpad = false;
+        sign = false;
+        space = false;
+        zeropad = false;
+        trim = false;
 
-	for (done = false; n < cfmt.length && !done; n++) {
-	    switch (cfmt[n]) {
-		case '\'': delimited = true; break;
-		case '-': rightpad = true; break;
-		case '+': sign = true; break;
-		case ' ': space = true; break;
-		case '0': zeropad = true; break;
-		case '#': alternate = true; break;
-		default: done = true; n--; break;
-	    }
-	}
+        for (done = false; n < cfmt.length && !done; n++) {
+            switch (cfmt[n]) {
+                case '\'': delimited = true; break;
+                case '-': rightpad = true; break;
+                case '+': sign = true; break;
+                case ' ': space = true; break;
+                case '0': zeropad = true; break;
+                case '#': alternate = true; break;
+                default: done = true; n--; break;
+            }
+        }
 
-	if (delimited && formatter == null)
-	    formatter = NumberFormat.getIntegerInstance();
+        if (delimited && formatter == null)
+            formatter = NumberFormat.getIntegerInstance();
 
-	plus = (sign ? "+" : (space ? " " : ""));
-	for (width = 0; n < cfmt.length && YoixMiscCtype.isdigit(cfmt[n]); n++)
-	    width = width*10 + (cfmt[n] - '0');
+        plus = (sign ? "+" : (space ? " " : ""));
+        for (width = 0; n < cfmt.length && YoixMiscCtype.isdigit(cfmt[n]); n++)
+            width = width*10 + (cfmt[n] - '0');
 
-	if (n < cfmt.length && cfmt[n] == '.') {
-	    n++;
-	    for (precision = 0; n < cfmt.length && YoixMiscCtype.isdigit(cfmt[n]); n++)
-		precision = precision*10 + (cfmt[n] - '0');
-	} else precision = -1;
-	padding = (zeropad && !rightpad) ? '0' : ' ';
+        if (n < cfmt.length && cfmt[n] == '.') {
+            n++;
+            for (precision = 0; n < cfmt.length && YoixMiscCtype.isdigit(cfmt[n]); n++)
+                precision = precision*10 + (cfmt[n] - '0');
+        } else precision = -1;
+        padding = (zeropad && !rightpad) ? '0' : ' ';
 
-	return(n);
+        return(n);
     }
 
 
     final StringBuffer
     buildChar(StringBuffer buf, YoixObject arg) {
 
-	scratch.setLength(0);
-	scratch.append((char)arg.intValue());
+        scratch.setLength(0);
+        scratch.append((char)arg.intValue());
 
-	return(strpad(buf, scratch.toString(), ' ', width, rightpad));
+        return(strpad(buf, scratch.toString(), ' ', width, rightpad));
     }
 
 
     final StringBuffer
     buildExp(StringBuffer buf, YoixObject arg, boolean upper) {
 
-	double  exp;
-	double  base;
-	double  val;
-	int     sign;
-	int     iexp;
+        double  exp;
+        double  base;
+        double  val;
+        int     sign;
+        int     iexp;
 
-	precision = (precision >= 0) ? precision : 6;
+        precision = (precision >= 0) ? precision : 6;
 
-	val = arg.doubleValue();
-	sign = (val >= 0) ? 1 : -1;
-	val = (val < 0) ? -val : val;
+        val = arg.doubleValue();
+        sign = (val >= 0) ? 1 : -1;
+        val = (val < 0) ? -val : val;
 
-	exp = Math.log(val)/LOG10;
-	if (Math.abs(Math.rint(exp)-exp) < EPSILON)
-	    iexp = (int)Math.rint(exp);
-	else iexp = (int)exp;
-	base = Math.pow(10, exp - iexp);
+        exp = Math.log(val)/LOG10;
+        if (Math.abs(Math.rint(exp)-exp) < EPSILON)
+            iexp = (int)Math.rint(exp);
+        else iexp = (int)exp;
+        base = Math.pow(10, exp - iexp);
 
-	scratch.setLength(0);
-	scratch.append(upper ? 'E' : 'e');
-	scratch.append(exp > 0 ? '+' : '-');
+        scratch.setLength(0);
+        scratch.append(upper ? 'E' : 'e');
+        scratch.append(exp > 0 ? '+' : '-');
 
-	strpad(scratch, ("" + (iexp > 0 ? iexp : -iexp)), '0', 2, false);
-	if (padding == '0' && precision >= 0)
-	    padding = ' ';
+        strpad(scratch, ("" + (iexp > 0 ? iexp : -iexp)), '0', 2, false);
+        if (padding == '0' && precision >= 0)
+            padding = ' ';
 
-	return(strpad(buf, doubleToString(sign*base, scratch.toString()), padding, width, rightpad));
+        return(strpad(buf, doubleToString(sign*base, scratch.toString()), padding, width, rightpad));
     }
 
 
     final StringBuffer
     buildFlex(StringBuffer buf, YoixObject arg, boolean upper) {
 
-	StringBuffer  retbuf;
-	double        exp;
-	double        base;
-	double        val;
-	double        ival;
-	int           iexp;
+        StringBuffer  retbuf;
+        double        exp;
+        double        base;
+        double        val;
+        double        ival;
+        int           iexp;
 
-	trim = true;
-	val = arg.doubleValue();
-	if (val >= (double)Integer.MIN_VALUE && val <= (double)Integer.MAX_VALUE) {
-	    ival = arg.intValue();
-	    ival = (ival < 0) ? -ival : ival;
-	} else ival = 0;
+        trim = true;
+        val = arg.doubleValue();
+        if (val >= (double)Integer.MIN_VALUE && val <= (double)Integer.MAX_VALUE) {
+            ival = arg.intValue();
+            ival = (ival < 0) ? -ival : ival;
+        } else ival = 0;
 
-	val = (val < 0) ? -val : val;
-	exp = Math.log(val)/LOG10;
-	if (Math.abs(Math.rint(exp)-exp) < EPSILON)
-	    iexp = (int)Math.rint(exp);
-	else iexp = (int)exp;
-	base = Math.pow(10, exp - iexp);
+        val = (val < 0) ? -val : val;
+        exp = Math.log(val)/LOG10;
+        if (Math.abs(Math.rint(exp)-exp) < EPSILON)
+            iexp = (int)Math.rint(exp);
+        else iexp = (int)exp;
+        base = Math.pow(10, exp - iexp);
 
-	precision = (precision >= 0) ? precision : 5;
+        precision = (precision >= 0) ? precision : 5;
 
-	if (val == ival) {
-	    if (alternate) {
-		if (precision < 0 || iexp <= precision) {
-		    precision -= iexp;
-		    retbuf = buildFloat(buf, arg);
-		} else retbuf = buildExp(buf, arg, upper);
-	    } else {
-		if (precision < 0 || iexp <= precision) {
-		    precision = -1;
-		    retbuf = buildInteger(buf, arg);
-		} else retbuf = buildExp(buf, arg, upper);
-	    }
-	} else if (iexp < -precision || iexp > precision)
-	    retbuf = buildExp(buf, arg, upper);
-	else retbuf = buildFloat(buf, arg);
+        if (val == ival) {
+            if (alternate) {
+                if (precision < 0 || iexp <= precision) {
+                    precision -= iexp;
+                    retbuf = buildFloat(buf, arg);
+                } else retbuf = buildExp(buf, arg, upper);
+            } else {
+                if (precision < 0 || iexp <= precision) {
+                    precision = -1;
+                    retbuf = buildInteger(buf, arg);
+                } else retbuf = buildExp(buf, arg, upper);
+            }
+        } else if (iexp < -precision || iexp > precision)
+            retbuf = buildExp(buf, arg, upper);
+        else retbuf = buildFloat(buf, arg);
 
-	return(retbuf);
+        return(retbuf);
     }
 
 
     final StringBuffer
     buildFloat(StringBuffer buf, YoixObject arg) {
 
-	double  val;
-	int     sign;
+        double  val;
+        int     sign;
 
-	precision = (precision >= 0) ? precision : 6;
-	val = arg.doubleValue();
-	if (padding == '0' && precision >= 0)
-	    padding = ' ';
+        precision = (precision >= 0) ? precision : 6;
+        val = arg.doubleValue();
+        if (padding == '0' && precision >= 0)
+            padding = ' ';
 
-	return(strpad(buf, doubleToString(val, ""), padding, width, rightpad));
+        return(strpad(buf, doubleToString(val, ""), padding, width, rightpad));
     }
 
 
     final StringBuffer
     buildHex(StringBuffer buf, YoixObject arg, boolean upper) {
 
-	String  str;
+        String  str;
 
-	scratch.setLength(0);
-	str = upper ? Integer.toHexString(arg.intValue()).toUpperCase()
-		    : Integer.toHexString(arg.intValue());
+        scratch.setLength(0);
+        str = upper ? Integer.toHexString(arg.intValue()).toUpperCase()
+                    : Integer.toHexString(arg.intValue());
 
-	if (precision > str.length()) {
-	    if (alternate)
-		scratch.append(upper ? "0X" : "0x");
-	    strpad(scratch, str, '0', precision, false);
-	    strpad(buf, scratch.toString(), ' ', width, rightpad);
-	} else {
-	    if (zeropad && !rightpad && precision < 0) {
-		if (alternate) {
-		    if (width > 2) {
-			strpad(scratch, str, '0', width-2, rightpad);
-			buf.append(upper ? "0X" : "0x");
-			buf.append(scratch.toString());
-		    } else {
-			buf.append(upper ? "0X" : "0x");
-			buf.append(str);
-		    }
-		} else strpad(buf, str, '0', width, rightpad);
-	    } else {
-		if (alternate) {
-		    scratch.append(upper ? "0X" : "0x");
-		    scratch.append(str);
-		    str = scratch.toString();
-		}
-		strpad(buf, str, ' ', width, rightpad);
-	    }
-	}
+        if (precision > str.length()) {
+            if (alternate)
+                scratch.append(upper ? "0X" : "0x");
+            strpad(scratch, str, '0', precision, false);
+            strpad(buf, scratch.toString(), ' ', width, rightpad);
+        } else {
+            if (zeropad && !rightpad && precision < 0) {
+                if (alternate) {
+                    if (width > 2) {
+                        strpad(scratch, str, '0', width-2, rightpad);
+                        buf.append(upper ? "0X" : "0x");
+                        buf.append(scratch.toString());
+                    } else {
+                        buf.append(upper ? "0X" : "0x");
+                        buf.append(str);
+                    }
+                } else strpad(buf, str, '0', width, rightpad);
+            } else {
+                if (alternate) {
+                    scratch.append(upper ? "0X" : "0x");
+                    scratch.append(str);
+                    str = scratch.toString();
+                }
+                strpad(buf, str, ' ', width, rightpad);
+            }
+        }
 
-	return(buf);
+        return(buf);
     }
 
 
     final StringBuffer
     buildInteger(StringBuffer buf, YoixObject arg) {
 
-	String  str;
-	String  sign;
-	long    val;
+        String  str;
+        String  sign;
+        long    val;
 
-	scratch.setLength(0);
-	val = (long)arg.doubleValue();
-	sign = (val >= 0) ? plus : "-";
-	if (delimited)
-	    str = ((val < 0) ? formatter.format(-val) : formatter.format(val));
-	else str = "" + ((val < 0) ? -val : val);
+        scratch.setLength(0);
+        val = (long)arg.doubleValue();
+        sign = (val >= 0) ? plus : "-";
+        if (delimited)
+            str = ((val < 0) ? formatter.format(-val) : formatter.format(val));
+        else str = "" + ((val < 0) ? -val : val);
 
-	if (precision > str.length()) {
-	    strpad(scratch, str, '0', precision, false);
-	    scratch.insert(0, sign);
-	} else {
-	    scratch.append(sign);
-	    scratch.append(str);
-	}
+        if (precision > str.length()) {
+            strpad(scratch, str, '0', precision, false);
+            scratch.insert(0, sign);
+        } else {
+            scratch.append(sign);
+            scratch.append(str);
+        }
 
-	if (padding == '0' && precision >= 0)
-	    padding = ' ';
+        if (padding == '0' && precision >= 0)
+            padding = ' ';
 
-	return(strpad(buf, scratch.toString(), padding, width, rightpad));
+        return(strpad(buf, scratch.toString(), padding, width, rightpad));
     }
 
 
     final StringBuffer
     buildJavaDouble(StringBuffer buf, YoixObject arg) {
 
-	//
-	// Only supposed to handle printing when arg is a special double
-	// (i.e., NaN, Infinity, or -Infinity).
-	//
+        //
+        // Only supposed to handle printing when arg is a special double
+        // (i.e., NaN, Infinity, or -Infinity).
+        //
 
-	return(strpad(buf, Double.toString(arg.doubleValue()), ' ', width, rightpad));
+        return(strpad(buf, Double.toString(arg.doubleValue()), ' ', width, rightpad));
     }
 
 
     final StringBuffer
     buildObject(StringBuffer buf, YoixObject arg) {
 
-	YoixObject  level;
-	String      str;
+        YoixObject  level;
+        String      str;
 
-	//
-	// This must match what's done by the toString() builtin!!
-	//
+        //
+        // This must match what's done by the toString() builtin!!
+        //
 
-	if (arg.isString() == false) {
-	    if (arg.isPointer()) {
-		level = YoixObject.newInt(precision > 0 ? precision : 1);
-		VM.pushMark();
-		VM.pushRestore(N_DUMPDEPTH, level);
-		str = arg.toString().trim();
-		VM.popMark();
-	    } else str = arg.toString().trim();
-	} else str = arg.stringValue(false);
+        if (arg.isString() == false) {
+            if (arg.isPointer()) {
+                level = YoixObject.newInt(precision > 0 ? precision : 1);
+                VM.pushMark();
+                VM.pushRestore(N_DUMPDEPTH, level);
+                str = arg.toString().trim();
+                VM.popMark();
+            } else str = arg.toString().trim();
+        } else str = arg.stringValue(false);
 
-	return(strpad(buf, str, padding, width, rightpad));
+        return(strpad(buf, str, padding, width, rightpad));
     }
 
 
     final StringBuffer
     buildOctal(StringBuffer buf, YoixObject arg) {
 
-	String  str;
+        String  str;
 
-	scratch.setLength(0);
-	if (alternate)
-	    scratch.append('0');
+        scratch.setLength(0);
+        if (alternate)
+            scratch.append('0');
 
-	scratch.append(Integer.toOctalString(arg.intValue()));
-	if (precision > scratch.length()) {
-	    str = scratch.toString();
-	    scratch.setLength(0);
-	    strpad(scratch, str, '0', precision, false);
-	}
+        scratch.append(Integer.toOctalString(arg.intValue()));
+        if (precision > scratch.length()) {
+            str = scratch.toString();
+            scratch.setLength(0);
+            strpad(scratch, str, '0', precision, false);
+        }
 
-	if (padding == '0' && precision >= 0)
-	    padding = ' ';
+        if (padding == '0' && precision >= 0)
+            padding = ' ';
 
-	return(strpad(buf, scratch.toString(), padding, width, rightpad));
+        return(strpad(buf, scratch.toString(), padding, width, rightpad));
     }
 
 
     final StringBuffer
     buildString(StringBuffer buf, String str) {
 
-	if (precision > 0 && precision < str.length())
-	    str = str.substring(0, precision);
+        if (precision > 0 && precision < str.length())
+            str = str.substring(0, precision);
 
-	return(strpad(buf, str, padding, width, rightpad));
+        return(strpad(buf, str, padding, width, rightpad));
     }
 
 
     final StringBuffer
     buildString(StringBuffer buf, YoixObject obj, boolean tonull) {
 
-	YoixObject  element;
-	String      str = null;
+        YoixObject  element;
+        String      str = null;
 
-	//
-	// A temporary backward compatibility kludge that was added to
-	// handle the JTable outputfilter - it probably will disappear
-	// in the next release.
-	//
+        //
+        // A temporary backward compatibility kludge that was added to
+        // handle the JTable outputfilter - it probably will disappear
+        // in the next release.
+        //
 
-	if (obj.isArray()) {
-	    if ((element = obj.getObject()) != null && element.isString())
-		str = element.stringValue(tonull);
-	} else if (obj.isInteger())
-	    str = new String(new char[] {(char)(obj.intValue()&0xFF)});
+        if (obj.isArray()) {
+            if ((element = obj.getObject()) != null && element.isString())
+                str = element.stringValue(tonull);
+        } else if (obj.isInteger())
+            str = new String(new char[] {(char)(obj.intValue()&0xFF)});
 
-	return(str != null ? buildString(buf, str) : null);
+        return(str != null ? buildString(buf, str) : null);
     }
 
     ///////////////////////////////////
@@ -601,97 +601,97 @@ class PrintfParser
     private String
     doubleToString(double val, String exp) {
 
-	String  sign;
-	String  srnd;
-	double  whole;
-	double  power;
-	double  frac;
-	double  rnd;
+        String  sign;
+        String  srnd;
+        double  whole;
+        double  power;
+        double  frac;
+        double  rnd;
 
-	//
-	// Building the string by casting val to an int or long doesn't
-	// always work, so we use an algorithm that may look harder and
-	// slower than necessary.
-	//
+        //
+        // Building the string by casting val to an int or long doesn't
+        // always work, so we use an algorithm that may look harder and
+        // slower than necessary.
+        //
 
-	scratch.setLength(0);
-	sign = (val >= 0) ? plus : "-";
-	val = (val < 0) ? -val : val;
-	whole = Math.floor(val);
+        scratch.setLength(0);
+        sign = (val >= 0) ? plus : "-";
+        val = (val < 0) ? -val : val;
+        whole = Math.floor(val);
 
-	if (precision != 0) {
-	    power = Math.pow(10, precision);
-	    frac = (val - whole)*power;
-	    if ((rnd = Math.round(frac)) >= power) {
-		whole += 1;
-		frac = 0;
-		rnd = 0;
-	    }
-	    if (delimited)
-		scratch.append(formatter.format((long)whole));
-	    else scratch.append((long)whole);
-	    if (rnd != 0 || !trim) {
-		if (delimited)
-		    scratch.append('.');
-		else scratch.append(YoixModuleUtil.DECIMAL_SEPARATOR);
-		if (trim) {
-		    srnd = "" + ((long)rnd);
-		    while (srnd.endsWith("0")) {
-			srnd = srnd.substring(0, srnd.length() - 1);
-			precision--;
-		    }
-		    if ((power/10) > frac)
-			strpad(scratch, srnd, '0', precision, false);
-		    else scratch.append(srnd);
-		} else {
-		    if ((power/10) > frac)
-			strpad(scratch, (""+((long)rnd)), '0', precision, false);
-		    else scratch.append((long)rnd);
-		}
-	    }
-	    scratch.append(exp);
-	} else {
-	    if (delimited)
-		scratch.append(formatter.format((long)whole));
-	    else scratch.append((long)whole);
-	    if (alternate && exp.length() == 0) {
-		if (delimited)
-		    scratch.append('.');
-		else scratch.append(YoixModuleUtil.DECIMAL_SEPARATOR);
-	    }
-	    scratch.append(exp);
-	}
+        if (precision != 0) {
+            power = Math.pow(10, precision);
+            frac = (val - whole)*power;
+            if ((rnd = Math.round(frac)) >= power) {
+                whole += 1;
+                frac = 0;
+                rnd = 0;
+            }
+            if (delimited)
+                scratch.append(formatter.format((long)whole));
+            else scratch.append((long)whole);
+            if (rnd != 0 || !trim) {
+                if (delimited)
+                    scratch.append('.');
+                else scratch.append(YoixModuleUtil.DECIMAL_SEPARATOR);
+                if (trim) {
+                    srnd = "" + ((long)rnd);
+                    while (srnd.endsWith("0")) {
+                        srnd = srnd.substring(0, srnd.length() - 1);
+                        precision--;
+                    }
+                    if ((power/10) > frac)
+                        strpad(scratch, srnd, '0', precision, false);
+                    else scratch.append(srnd);
+                } else {
+                    if ((power/10) > frac)
+                        strpad(scratch, (""+((long)rnd)), '0', precision, false);
+                    else scratch.append((long)rnd);
+                }
+            }
+            scratch.append(exp);
+        } else {
+            if (delimited)
+                scratch.append(formatter.format((long)whole));
+            else scratch.append((long)whole);
+            if (alternate && exp.length() == 0) {
+                if (delimited)
+                    scratch.append('.');
+                else scratch.append(YoixModuleUtil.DECIMAL_SEPARATOR);
+            }
+            scratch.append(exp);
+        }
 
-	if (zeropad && !rightpad) {
-	    String str = scratch.toString();
-	    scratch.setLength(0);
-	    strpad(scratch, str, '0', width - sign.length(), false);
-	}
+        if (zeropad && !rightpad) {
+            String str = scratch.toString();
+            scratch.setLength(0);
+            strpad(scratch, str, '0', width - sign.length(), false);
+        }
 
-	scratch.insert(0, sign);
+        scratch.insert(0, sign);
 
-	return(scratch.toString());
+        return(scratch.toString());
     }
 
 
     private StringBuffer
     strpad(StringBuffer buf, String str, int ch, int width, boolean right) {
 
-	int  len;
-	int  n;
+        int  len;
+        int  n;
 
-	if (width > 0) {
-	    if ((len = width - str.length()) > 0) {
-		if (right)
-		    buf.append(str);
-		for (n = 0; n < len; n++)
-		    buf.append((char)ch);
-		if (!right)
-		    buf.append(str);
-	    } else buf.append(str);
-	} else buf.append(str);
+        if (width > 0) {
+            if ((len = width - str.length()) > 0) {
+                if (right)
+                    buf.append(str);
+                for (n = 0; n < len; n++)
+                    buf.append((char)ch);
+                if (!right)
+                    buf.append(str);
+            } else buf.append(str);
+        } else buf.append(str);
 
-	return(buf);
+        return(buf);
     }
 }
 

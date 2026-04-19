@@ -17,8 +17,8 @@ final
 class YoixBodyControl
 
     implements YoixConstants,
-	       YoixInterfaceBody,
-	       YoixInterfaceCloneable
+               YoixInterfaceBody,
+               YoixInterfaceCloneable
 
 {
 
@@ -38,20 +38,20 @@ class YoixBodyControl
 
     YoixBodyControl(int type) {
 
-	this(type, null);
+        this(type, null);
     }
 
 
     YoixBodyControl(int type, int data) {
 
-	this(type, new Integer(data));
+        this(type, new Integer(data));
     }
 
 
     YoixBodyControl(int type, Object data) {
 
-	this.type = type;
-	this.data = data;
+        this.type = type;
+        this.data = data;
     }
 
     ///////////////////////////////////
@@ -63,23 +63,23 @@ class YoixBodyControl
     public final synchronized Object
     clone() {
 
-	Object  obj;
+        Object  obj;
 
-	try {
-	    obj = super.clone();
-	}
-	catch(CloneNotSupportedException e) {
-	    obj = VM.die(INTERNALERROR);
-	}
+        try {
+            obj = super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            obj = VM.die(INTERNALERROR);
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     public final Object
     copy(HashMap copied) {
 
-	return(clone());
+        return(clone());
     }
 
     ///////////////////////////////////
@@ -91,64 +91,64 @@ class YoixBodyControl
     public final String
     dump() {
 
-	String  str;
+        String  str;
 
-	switch (type) {
-	    case ACCESS:
-		str = "--access:" + intValue() + "--";
-		break;
+        switch (type) {
+            case ACCESS:
+                str = "--access:" + intValue() + "--";
+                break;
 
-	    case EMPTY:
-		str = "--empty--";
-		break;
+            case EMPTY:
+                str = "--empty--";
+                break;
 
-	    case FINALLY:
-		str = "--finally--";
-		break;
+            case FINALLY:
+                str = "--finally--";
+                break;
 
-	    case MARK:
-		str = "--mark--";
-		break;
+            case MARK:
+                str = "--mark--";
+                break;
 
-	    case RESTORE:
-		str = "--restore--";
-		break;
+            case RESTORE:
+                str = "--restore--";
+                break;
 
-	    case SAVE:
-		str = "--save--";
-		break;
+            case SAVE:
+                str = "--save--";
+                break;
 
-	    case TAG:
-		str = "--tag--";
-		break;
+            case TAG:
+                str = "--tag--";
+                break;
 
-	    default:
-		str = "--internal:" + data + "--";
-		break;
-	}
+            default:
+                str = "--internal:" + data + "--";
+                break;
+        }
 
-	return(str + NL);
+        return(str + NL);
     }
 
 
     public final int
     length() {
 
-	return(0);
+        return(0);
     }
 
 
     public String
     toString() {
 
-	return(dump().trim());
+        return(dump().trim());
     }
 
 
     public final int
     type() {
 
-	return(type);
+        return(type);
     }
 
     ///////////////////////////////////
@@ -160,14 +160,14 @@ class YoixBodyControl
     final Object
     getManagedObject() {
 
-	return(data);
+        return(data);
     }
 
 
     final int
     intValue() {
 
-	return(data instanceof Integer ? ((Integer)data).intValue() : 0);
+        return(data instanceof Integer ? ((Integer)data).intValue() : 0);
     }
 }
 

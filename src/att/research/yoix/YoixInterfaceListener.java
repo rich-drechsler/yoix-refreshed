@@ -18,22 +18,22 @@ public
 interface YoixInterfaceListener
 
     extends ActionListener,
-	    AdjustmentListener,
-	    CaretListener,
-	    ChangeListener,
-	    ComponentListener,
-	    FocusListener,
-	    HyperlinkListener,
-	    InternalFrameListener,
-	    ItemListener,
-	    KeyListener,
-	    ListSelectionListener,
-	    MouseListener,
-	    MouseMotionListener,
-	    MouseWheelListener,
-	    TextListener,
-	    TreeSelectionListener,
-	    WindowListener
+            AdjustmentListener,
+            CaretListener,
+            ChangeListener,
+            ComponentListener,
+            FocusListener,
+            HyperlinkListener,
+            InternalFrameListener,
+            ItemListener,
+            KeyListener,
+            ListSelectionListener,
+            MouseListener,
+            MouseMotionListener,
+            MouseWheelListener,
+            TextListener,
+            TreeSelectionListener,
+            WindowListener
 
 {
 

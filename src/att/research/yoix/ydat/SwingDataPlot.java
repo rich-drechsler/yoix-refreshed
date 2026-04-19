@@ -20,11 +20,11 @@ public abstract
 class SwingDataPlot extends YoixSwingJTextComponent
 
     implements Constants,
-	       ComponentListener,
-	       DataPlot,
-	       MouseListener,
-	       MouseMotionListener,
-	       YoixInterfaceShowing
+               ComponentListener,
+               DataPlot,
+               MouseListener,
+               MouseMotionListener,
+               YoixInterfaceShowing
 
 {
 
@@ -75,8 +75,8 @@ class SwingDataPlot extends YoixSwingJTextComponent
 
     SwingDataPlot(YoixObject data, YoixBodyComponent parent) {
 
-	super(data, parent);
-	addAllListeners();
+        super(data, parent);
+        addAllListeners();
     }
 
     ///////////////////////////////////
@@ -88,7 +88,7 @@ class SwingDataPlot extends YoixSwingJTextComponent
     public void
     componentHidden(ComponentEvent e) {
 
-	handleShowingChange(false);
+        handleShowingChange(false);
     }
 
 
@@ -107,7 +107,7 @@ class SwingDataPlot extends YoixSwingJTextComponent
     public void
     componentShown(ComponentEvent e) {
 
-	handleShowingChange(true);
+        handleShowingChange(true);
     }
 
     ///////////////////////////////////
@@ -171,42 +171,42 @@ class SwingDataPlot extends YoixSwingJTextComponent
     public final int
     getPartitionIndex() {
 
-	return(partitionindex);
+        return(partitionindex);
     }
 
 
     public final int
     getXIndex() {
 
-	return(xindex);
+        return(xindex);
     }
 
 
     public final int
     getXMask() {
 
-	return(xmask);
+        return(xmask);
     }
 
 
     public final int
     getYIndex() {
 
-	return(yindex);
+        return(yindex);
     }
 
 
     public final int
     getYMask() {
 
-	return(ymask);
+        return(ymask);
     }
 
 
     synchronized void
     setFrozen(boolean state) {
 
-	frozen = state;
+        frozen = state;
     }
 
 
@@ -219,8 +219,8 @@ class SwingDataPlot extends YoixSwingJTextComponent
     public final synchronized void
     setPartitionIndex(int index) {
 
-	partitionindex = Math.max(index, -1);
-	partitioned = (partitionindex >= 0);
+        partitionindex = Math.max(index, -1);
+        partitioned = (partitionindex >= 0);
     }
 
 
@@ -233,14 +233,14 @@ class SwingDataPlot extends YoixSwingJTextComponent
     public final synchronized void
     setXIndex(int index) {
 
-	xindex = Math.max(index, -1);
+        xindex = Math.max(index, -1);
     }
 
 
     public final synchronized void
     setYIndex(int index) {
 
-	yindex = Math.max(index, -1);
+        yindex = Math.max(index, -1);
     }
 
     ///////////////////////////////////
@@ -252,235 +252,235 @@ class SwingDataPlot extends YoixSwingJTextComponent
     final synchronized void
     addAllListeners() {
 
-	addComponentListener(this);
-	addMouseListener(this);
+        addComponentListener(this);
+        addMouseListener(this);
     }
 
 
     final synchronized void
     afterAppend(int offset, boolean allselected) {
 
-	YoixObject  funct;
-	YoixObject  argv[];
-	Runnable    event;
+        YoixObject  funct;
+        YoixObject  argv[];
+        Runnable    event;
 
-	if ((funct = afterappend) != null) {
-	    if (funct.callable(3)) {
-		argv = new YoixObject[] {
-		    YoixObject.newInt(totalcount),
-		    YoixObject.newInt(offset),
-		    YoixObject.newInt(allselected)
-		};
-	    } else if (funct.callable(2)) {
-		argv = new YoixObject[] {
-		    YoixObject.newInt(totalcount),
-		    YoixObject.newInt(offset),
-		};
-	    } else argv = new YoixObject[] {YoixObject.newInt(totalcount)};
-	    event = new YoixAWTInvocationEvent(funct, argv, getContext());
-	    EventQueue.invokeLater(event);
-	}
+        if ((funct = afterappend) != null) {
+            if (funct.callable(3)) {
+                argv = new YoixObject[] {
+                    YoixObject.newInt(totalcount),
+                    YoixObject.newInt(offset),
+                    YoixObject.newInt(allselected)
+                };
+            } else if (funct.callable(2)) {
+                argv = new YoixObject[] {
+                    YoixObject.newInt(totalcount),
+                    YoixObject.newInt(offset),
+                };
+            } else argv = new YoixObject[] {YoixObject.newInt(totalcount)};
+            event = new YoixAWTInvocationEvent(funct, argv, getContext());
+            EventQueue.invokeLater(event);
+        }
     }
 
 
     final synchronized void
     afterLoad(boolean reload) {
 
-	YoixObject  funct;
-	YoixObject  argv[];
-	Runnable    event;
+        YoixObject  funct;
+        YoixObject  argv[];
+        Runnable    event;
 
-	if ((funct = afterload) != null) {
-	    if (funct.callable(2)) {
-		argv = new YoixObject[] {
-		    YoixObject.newInt(totalcount),
-		    YoixObject.newInt(reload)
-		};
-	    } else if (funct.callable(1))
-		argv = new YoixObject[] {YoixObject.newInt(totalcount)};
-	    else argv = new YoixObject[0];
-	    event = new YoixAWTInvocationEvent(funct, argv, getContext());
-	    EventQueue.invokeLater(event);
-	}
+        if ((funct = afterload) != null) {
+            if (funct.callable(2)) {
+                argv = new YoixObject[] {
+                    YoixObject.newInt(totalcount),
+                    YoixObject.newInt(reload)
+                };
+            } else if (funct.callable(1))
+                argv = new YoixObject[] {YoixObject.newInt(totalcount)};
+            else argv = new YoixObject[0];
+            event = new YoixAWTInvocationEvent(funct, argv, getContext());
+            EventQueue.invokeLater(event);
+        }
     }
 
 
     final synchronized void
     afterSweep(int operation) {
 
-	YoixObject  funct;
-	YoixObject  argv[];
-	Runnable    event;
+        YoixObject  funct;
+        YoixObject  argv[];
+        Runnable    event;
 
-	if ((funct = aftersweep) != null) {
-	    if (funct.callable(1))
-		argv = new YoixObject[] {YoixObject.newInt(operation)};
-	    else argv = new YoixObject[0];
-	    event = new YoixAWTInvocationEvent(funct, argv, getContext());
-	    EventQueue.invokeLater(event);
-	}
+        if ((funct = aftersweep) != null) {
+            if (funct.callable(1))
+                argv = new YoixObject[] {YoixObject.newInt(operation)};
+            else argv = new YoixObject[0];
+            event = new YoixAWTInvocationEvent(funct, argv, getContext());
+            EventQueue.invokeLater(event);
+        }
     }
 
 
     final synchronized void
     afterUpdate() {
 
-	YoixObject  funct;
-	YoixObject  argv[];
-	Runnable    event;
+        YoixObject  funct;
+        YoixObject  argv[];
+        Runnable    event;
 
-	if ((funct = afterupdate) != null) {
-	    if (funct.callable(1))
-		argv = new YoixObject[] {YoixObject.newInt(selectedcount)};
-	    else argv = new YoixObject[0];
-	    event = new YoixAWTInvocationEvent(funct, argv, getContext());
-	    EventQueue.invokeLater(event);
-	}
+        if ((funct = afterupdate) != null) {
+            if (funct.callable(1))
+                argv = new YoixObject[] {YoixObject.newInt(selectedcount)};
+            else argv = new YoixObject[0];
+            event = new YoixAWTInvocationEvent(funct, argv, getContext());
+            EventQueue.invokeLater(event);
+        }
     }
 
 
     protected void
     finalize() {
 
-	super.finalize();
+        super.finalize();
     }
 
 
     final YoixObject
     getAfterUpdate() {
 
-	return(afterupdate);
+        return(afterupdate);
     }
 
 
     final synchronized Color
     getConnectColor() {
 
-	return(connectcolor != null ? connectcolor : CONNECTCOLOR);
+        return(connectcolor != null ? connectcolor : CONNECTCOLOR);
     }
 
 
     final boolean
     getFrozen() {
 
-	return(frozen);
+        return(frozen);
     }
 
 
     final synchronized Color
     getOffPeakColor() {
 
-	return(offpeakcolor != null ? offpeakcolor : OFFPEAKCOLOR);
+        return(offpeakcolor != null ? offpeakcolor : OFFPEAKCOLOR);
     }
 
 
     final synchronized Color
     getSweepColor() {
 
-	return(sweepcolor != null ? sweepcolor : SWEEPCOLOR);
+        return(sweepcolor != null ? sweepcolor : SWEEPCOLOR);
     }
 
 
     public final void
     paint(Graphics g) {
 
-	super.paintBackground(g);	// Swing version currently needs this
-	paintBackgroundImage(g);
-	paintBorder(insets, g);
-	paintRect(g);
-	painted = true;			// painted kludge
+        super.paintBackground(g);	// Swing version currently needs this
+        paintBackgroundImage(g);
+        paintBorder(insets, g);
+        paintRect(g);
+        painted = true;			// painted kludge
     }
 
 
     final synchronized void
     removeAllListeners() {
 
-	removeComponentListener(this);
-	removeMouseListener(this);
-	removeMouseMotionListener(this);
+        removeComponentListener(this);
+        removeMouseListener(this);
+        removeMouseMotionListener(this);
     }
 
 
     final void
     reset() {
 
-	if (frozen == false)
-	    repaint();
+        if (frozen == false)
+            repaint();
     }
 
 
     synchronized void
     setAfterAppend(YoixObject obj) {
 
-	if (obj.notNull()) {
-	    if (obj.callable(1) || obj.callable(2) || obj.callable(3))
-		afterappend = obj;
-	    else VM.abort(TYPECHECK, NL_AFTERAPPEND);
-	} else afterload = null;
+        if (obj.notNull()) {
+            if (obj.callable(1) || obj.callable(2) || obj.callable(3))
+                afterappend = obj;
+            else VM.abort(TYPECHECK, NL_AFTERAPPEND);
+        } else afterload = null;
     }
 
 
     synchronized void
     setAfterLoad(YoixObject obj) {
 
-	if (obj.notNull()) {
-	    if (obj.callable(0) || obj.callable(1) || obj.callable(2))
-		afterload = obj;
-	    else VM.abort(TYPECHECK, NL_AFTERLOAD);
-	} else afterload = null;
+        if (obj.notNull()) {
+            if (obj.callable(0) || obj.callable(1) || obj.callable(2))
+                afterload = obj;
+            else VM.abort(TYPECHECK, NL_AFTERLOAD);
+        } else afterload = null;
     }
 
 
     final synchronized void
     setAfterSweep(YoixObject obj) {
 
-	if (obj.notNull()) {
-	    if (obj.callable(0) || obj.callable(1))
-		aftersweep = obj;
-	    else VM.abort(TYPECHECK, NL_AFTERSWEEP);
-	} else aftersweep = null;
+        if (obj.notNull()) {
+            if (obj.callable(0) || obj.callable(1))
+                aftersweep = obj;
+            else VM.abort(TYPECHECK, NL_AFTERSWEEP);
+        } else aftersweep = null;
     }
 
 
     synchronized void
     setAfterUpdate(YoixObject obj) {
 
-	if (obj.notNull()) {
-	    if (obj.callable(0) || obj.callable(1))
-		afterupdate = obj;
-	    else VM.abort(TYPECHECK, NL_AFTERUPDATE);
-	} else afterupdate = null;
+        if (obj.notNull()) {
+            if (obj.callable(0) || obj.callable(1))
+                afterupdate = obj;
+            else VM.abort(TYPECHECK, NL_AFTERUPDATE);
+        } else afterupdate = null;
     }
 
 
     final synchronized void
     setConnectColor(Color color) {
 
-	color = (color != null) ? color : CONNECTCOLOR;
+        color = (color != null) ? color : CONNECTCOLOR;
 
-	if (connectcolor == null || connectcolor.equals(color) == false) {
-	    connectcolor = color;
-	    reset();
-	}
+        if (connectcolor == null || connectcolor.equals(color) == false) {
+            connectcolor = color;
+            reset();
+        }
     }
 
 
     final synchronized void
     setOffPeakColor(Color color) {
 
-	color = (color != null) ? color : OFFPEAKCOLOR;
+        color = (color != null) ? color : OFFPEAKCOLOR;
 
-	if (offpeakcolor == null || offpeakcolor.equals(color) == false) {
-	    offpeakcolor = color;
-	    reset();
-	}
+        if (offpeakcolor == null || offpeakcolor.equals(color) == false) {
+            offpeakcolor = color;
+            reset();
+        }
     }
 
 
     final synchronized void
     setSweepColor(Color color) {
 
-	sweepcolor = (color != null) ? color : SWEEPCOLOR;
+        sweepcolor = (color != null) ? color : SWEEPCOLOR;
     }
 }
 

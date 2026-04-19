@@ -68,261 +68,261 @@ class YoixModuleType extends YoixModule
     public static YoixObject
     isArray(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isArray()));
+        return(YoixObject.newInt(arg[0].isArray()));
     }
 
 
     public static YoixObject
     isBuiltin(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg.length == 1 || arg[1].isInteger()) {
-		result = arg[0].isBuiltin();
-		if (result && arg.length == 2)
-		    result = arg[0].callable(arg[1].intValue());
-	    } else VM.badArgument(1);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg.length == 1 || arg[1].isInteger()) {
+                result = arg[0].isBuiltin();
+                if (result && arg.length == 2)
+                    result = arg[0].callable(arg[1].intValue());
+            } else VM.badArgument(1);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isCallable(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg.length == 1 || arg[1].isInteger()) {
-		result = arg[0].isBuiltin() || arg[0].isFunction();
-		if (result && arg.length == 2)
-		    result = arg[0].callable(arg[1].intValue());
-	    } else VM.badArgument(1);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg.length == 1 || arg[1].isInteger()) {
+                result = arg[0].isBuiltin() || arg[0].isFunction();
+                if (result && arg.length == 2)
+                    result = arg[0].callable(arg[1].intValue());
+            } else VM.badArgument(1);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isComponent(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isComponent()));
+        return(YoixObject.newInt(arg[0].isComponent()));
     }
 
 
     public static YoixObject
     isDatagramSocket(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isDatagramSocket()));
+        return(YoixObject.newInt(arg[0].isDatagramSocket()));
     }
 
 
     public static YoixObject
     isDictionary(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isDictionary()));
+        return(YoixObject.newInt(arg[0].isDictionary()));
     }
 
 
     public static YoixObject
     isDouble(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isDouble()));
+        return(YoixObject.newInt(arg[0].isDouble()));
     }
 
 
     public static YoixObject
     isEdge(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isEdge()));
+        return(YoixObject.newInt(arg[0].isEdge()));
     }
 
 
     public static YoixObject
     isEvent(YoixObject arg[]) {
 
-	return(YoixObject.newInt(T_EVENT.equals(arg[0].getTypename())));
+        return(YoixObject.newInt(T_EVENT.equals(arg[0].getTypename())));
     }
 
 
     public static YoixObject
     isFile(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isFile()));
+        return(YoixObject.newInt(arg[0].isFile()));
     }
 
 
     public static YoixObject
     isFont(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isFont()));
+        return(YoixObject.newInt(arg[0].isFont()));
     }
 
 
     public static YoixObject
     isFunction(YoixObject arg[]) {
 
-	boolean  result = false;
+        boolean  result = false;
 
-	if (arg.length == 1 || arg.length == 2) {
-	    if (arg.length == 1 || arg[1].isInteger()) {
-		result = arg[0].isFunction();
-		if (result && arg.length == 2)
-		    result = arg[0].callable(arg[1].intValue());
-	    } else VM.badArgument(1);
-	} else VM.badCall();
+        if (arg.length == 1 || arg.length == 2) {
+            if (arg.length == 1 || arg[1].isInteger()) {
+                result = arg[0].isFunction();
+                if (result && arg.length == 2)
+                    result = arg[0].callable(arg[1].intValue());
+            } else VM.badArgument(1);
+        } else VM.badCall();
 
-	return(YoixObject.newInt(result));
+        return(YoixObject.newInt(result));
     }
 
 
     public static YoixObject
     isGraph(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isGraph()));
+        return(YoixObject.newInt(arg[0].isGraph()));
     }
 
 
     public static YoixObject
     isHashtable(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isHashtable()));
+        return(YoixObject.newInt(arg[0].isHashtable()));
     }
 
 
     public static YoixObject
     isImage(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isImage()));
+        return(YoixObject.newInt(arg[0].isImage()));
     }
 
 
     public static YoixObject
     isInt(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isInteger()));
+        return(YoixObject.newInt(arg[0].isInteger()));
     }
 
 
     public static YoixObject
     isLayoutManager(YoixObject arg[]) {
 
-	return(YoixObject.newInt(T_LAYOUTMANAGER.equals(arg[0].getTypename())));
+        return(YoixObject.newInt(T_LAYOUTMANAGER.equals(arg[0].getTypename())));
     }
 
 
     public static YoixObject
     isMatrix(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isMatrix()));
+        return(YoixObject.newInt(arg[0].isMatrix()));
     }
 
 
     public static YoixObject
     isNode(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isNode()));
+        return(YoixObject.newInt(arg[0].isNode()));
     }
 
 
     public static YoixObject
     isNumber(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isNumber()));
+        return(YoixObject.newInt(arg[0].isNumber()));
     }
 
 
     public static YoixObject
     isOption(YoixObject arg[]) {
 
-	return(YoixObject.newInt(T_OPTION.equals(arg[0].getTypename())));
+        return(YoixObject.newInt(T_OPTION.equals(arg[0].getTypename())));
     }
 
 
     public static YoixObject
     isParseTree(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isParseTree()));
+        return(YoixObject.newInt(arg[0].isParseTree()));
     }
 
 
     public static YoixObject
     isPointer(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isPointer()));
+        return(YoixObject.newInt(arg[0].isPointer()));
     }
 
 
     public static YoixObject
     isProcess(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isProcess()));
+        return(YoixObject.newInt(arg[0].isProcess()));
     }
 
 
     public static YoixObject
     isSecurityManager(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isSecurityManager()));
+        return(YoixObject.newInt(arg[0].isSecurityManager()));
     }
 
 
     public static YoixObject
     isServerSocket(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isServerSocket()));
+        return(YoixObject.newInt(arg[0].isServerSocket()));
     }
 
 
     public static YoixObject
     isSocket(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isSocket()));
+        return(YoixObject.newInt(arg[0].isSocket()));
     }
 
 
     public static YoixObject
     isStream(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isStream()));
+        return(YoixObject.newInt(arg[0].isStream()));
     }
 
 
     public static YoixObject
     isString(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isString()));
+        return(YoixObject.newInt(arg[0].isString()));
     }
 
 
     public static YoixObject
     isStringStream(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isStringStream()));
+        return(YoixObject.newInt(arg[0].isStringStream()));
     }
 
 
     public static YoixObject
     isThread(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isThread()));
+        return(YoixObject.newInt(arg[0].isThread()));
     }
 
 
     public static YoixObject
     isURL(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isURL()));
+        return(YoixObject.newInt(arg[0].isURL()));
     }
 
 
     public static YoixObject
     isVector(YoixObject arg[]) {
 
-	return(YoixObject.newInt(arg[0].isVector()));
+        return(YoixObject.newInt(arg[0].isVector()));
     }
 }
 

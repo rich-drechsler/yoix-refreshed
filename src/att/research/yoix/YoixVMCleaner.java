@@ -16,7 +16,7 @@ import java.lang.reflect.*;
 class YoixVMCleaner
 
     implements Runnable,
-	       YoixConstants
+               YoixConstants
 
 {
 
@@ -31,15 +31,15 @@ class YoixVMCleaner
 
     YoixVMCleaner(String classname) {
 
-	this(classname, Thread.MIN_PRIORITY);
+        this(classname, Thread.MIN_PRIORITY);
     }
 
 
     YoixVMCleaner(String classname, int priority) {
 
-	this.classname = classname;
-	this.priority = priority;
-	startThread();
+        this.classname = classname;
+        this.priority = priority;
+        startThread();
     }
 
     ///////////////////////////////////
@@ -51,7 +51,7 @@ class YoixVMCleaner
     public final void
     run() {
 
-	cleanup(classname);
+        cleanup(classname);
     }
 
     ///////////////////////////////////
@@ -63,10 +63,10 @@ class YoixVMCleaner
     protected final void
     finalize() {
 
-	try {
-	    super.finalize();
-	}
-	catch(Throwable t) {}
+        try {
+            super.finalize();
+        }
+        catch(Throwable t) {}
     }
 
     ///////////////////////////////////
@@ -78,49 +78,49 @@ class YoixVMCleaner
     private void
     cleanup(String classname) {
 
-	boolean  debug;
-	String   name;
-	Field    fields[];
-	Class    c;
-	int      n;
+        boolean  debug;
+        String   name;
+        Field    fields[];
+        Class    c;
+        int      n;
 
-	//
-	// The booted check is a recent addition that probably should
-	// not be required, but native threads out SGI sometimes started
-	// this thread too early. Only saw it once or twice, so it's not
-	// a big deal.
-	//
+        //
+        // The booted check is a recent addition that probably should
+        // not be required, but native threads out SGI sometimes started
+        // this thread too early. Only saw it once or twice, so it's not
+        // a big deal.
+        //
 
-	if (debug = (VM.isBooted() && VM.bitCheck(N_DEBUG, DEBUG_VMCLEANER)))
-	    VM.println(N_STDOUT, "clean " + classname);
+        if (debug = (VM.isBooted() && VM.bitCheck(N_DEBUG, DEBUG_VMCLEANER)))
+            VM.println(N_STDOUT, "clean " + classname);
 
-	try {
-	    c = Class.forName(classname);
-	    fields = c.getDeclaredFields();
-	    try {
-		for (n = 0; n < fields.length; n++) {
-		    name = fields[n].getName();
-		    if (name.charAt(0) == '$') {
-			fields[n].set(c, null);
-			if (debug)
-			    VM.println(N_STDOUT, "  field " + name + " set to null");
-		    }
-		}
-	    }
-	    catch(Exception e) {}
-	}
-	catch(ClassNotFoundException e) {}
+        try {
+            c = Class.forName(classname);
+            fields = c.getDeclaredFields();
+            try {
+                for (n = 0; n < fields.length; n++) {
+                    name = fields[n].getName();
+                    if (name.charAt(0) == '$') {
+                        fields[n].set(c, null);
+                        if (debug)
+                            VM.println(N_STDOUT, "  field " + name + " set to null");
+                    }
+                }
+            }
+            catch(Exception e) {}
+        }
+        catch(ClassNotFoundException e) {}
     }
 
 
     private synchronized void
     startThread() {
 
-	YoixThread  thread;
+        YoixThread  thread;
 
-	thread = new YoixThread(this);
-	thread.setPriority(priority);
-	thread.start();
+        thread = new YoixThread(this);
+        thread.setPriority(priority);
+        thread.start();
     }
 }
 

@@ -54,195 +54,195 @@ class YoixModuleCtype extends YoixModule
     public static YoixObject
     isalnum(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isalnum(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isalnum(ch)));
     }
 
 
     public static YoixObject
     isalpha(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isalpha(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isalpha(ch)));
     }
 
 
     public static YoixObject
     isascii(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isascii(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isascii(ch)));
     }
 
 
     public static YoixObject
     iscntrl(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.iscntrl(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.iscntrl(ch)));
     }
 
 
     public static YoixObject
     isdigit(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isdigit(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isdigit(ch)));
     }
 
 
     public static YoixObject
     isgraph(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isgraph(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isgraph(ch)));
     }
 
 
     public static YoixObject
     islower(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.islower(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.islower(ch)));
     }
 
 
     public static YoixObject
     isoctal(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isoctal(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isoctal(ch)));
     }
 
 
     public static YoixObject
     isprint(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isprint(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isprint(ch)));
     }
 
 
     public static YoixObject
     ispunct(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.ispunct(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.ispunct(ch)));
     }
 
 
     public static YoixObject
     isspace(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isspace(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isspace(ch)));
     }
 
 
     public static YoixObject
     isupper(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isupper(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isupper(ch)));
     }
 
 
     public static YoixObject
     isxdigit(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.isxdigit(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.isxdigit(ch)));
     }
 
 
     public static YoixObject
     tolower(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.tolower(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.tolower(ch)));
     }
 
 
     public static YoixObject
     toupper(YoixObject arg[]) {
 
-	int	ch = -1;
+        int	ch = -1;
 
-	if (arg[0].isInteger())
-	    ch = arg[0].intValue();
-	else VM.badArgument(0);
+        if (arg[0].isInteger())
+            ch = arg[0].intValue();
+        else VM.badArgument(0);
 
-	return(YoixObject.newInt(YoixMiscCtype.toupper(ch)));
+        return(YoixObject.newInt(YoixMiscCtype.toupper(ch)));
     }
 }
 

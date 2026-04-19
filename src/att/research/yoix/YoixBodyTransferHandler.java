@@ -79,12 +79,12 @@ class YoixBodyTransferHandler extends YoixPointerActive
      //
      // FIELD                      OBJECT       BODY
      // -----                      ------       ----
-	N_CANIMPORT,               $LR__,       null,
-	N_CREATETRANSFERABLE,      $LR__,       null,
-	N_EXPORTDONE,              $LR__,       null,
-	N_GETSOURCEACTIONS,        $LR__,       null,
-	N_GETVISUALREPRESENTATION, $LR__,       null,
-	N_IMPORTDATA,              $LR__,       null,
+        N_CANIMPORT,               $LR__,       null,
+        N_CREATETRANSFERABLE,      $LR__,       null,
+        N_EXPORTDONE,              $LR__,       null,
+        N_GETSOURCEACTIONS,        $LR__,       null,
+        N_GETVISUALREPRESENTATION, $LR__,       null,
+        N_IMPORTDATA,              $LR__,       null,
     };
 
     //
@@ -97,8 +97,8 @@ class YoixBodyTransferHandler extends YoixPointerActive
     private static HashMap  activefields = new HashMap(5);
 
     static {
-	activefields.put(N_EXPORTASDRAG, new Integer(V_EXPORTASDRAG));
-	activefields.put(N_EXPORTTOCLIPBOARD, new Integer(V_EXPORTTOCLIPBOARD));
+        activefields.put(N_EXPORTASDRAG, new Integer(V_EXPORTASDRAG));
+        activefields.put(N_EXPORTTOCLIPBOARD, new Integer(V_EXPORTTOCLIPBOARD));
     }
 
     ///////////////////////////////////
@@ -109,17 +109,17 @@ class YoixBodyTransferHandler extends YoixPointerActive
 
     YoixBodyTransferHandler(YoixObject data) {
 
-	super(data);
-	setFixedSize();
-	setPermissions(permissions);
+        super(data);
+        setFixedSize();
+        setPermissions(permissions);
     }
 
 
     YoixBodyTransferHandler(YoixObject data, TransferHandler handler) {
 
-	super(data);
-	setFixedSize();
-	setPermissions(permissions2);
+        super(data);
+        setFixedSize();
+        setPermissions(permissions2);
     }
 
     ///////////////////////////////////
@@ -131,7 +131,7 @@ class YoixBodyTransferHandler extends YoixPointerActive
     public final int
     type() {
 
-	return(TRANSFERHANDLER);
+        return(TRANSFERHANDLER);
     }
 
     ///////////////////////////////////
@@ -143,63 +143,63 @@ class YoixBodyTransferHandler extends YoixPointerActive
     protected final void
     finalize() {
 
-	super.finalize();
+        super.finalize();
     }
 
 
     protected final YoixObject
     executeField(String name, YoixObject argv[]) {
 
-	YoixObject  obj;
+        YoixObject  obj;
 
-	switch (activeField(name, activefields)) {
-	    case V_EXPORTASDRAG:
-		obj = builtinExportAsDrag(name, argv);
-		break;
+        switch (activeField(name, activefields)) {
+            case V_EXPORTASDRAG:
+                obj = builtinExportAsDrag(name, argv);
+                break;
 
-	    case V_EXPORTTOCLIPBOARD:
-		obj = builtinExportToClipboard(name, argv);
-		break;
+            case V_EXPORTTOCLIPBOARD:
+                obj = builtinExportToClipboard(name, argv);
+                break;
 
-	    default:
-		obj = null;
-		break;
-	}
+            default:
+                obj = null;
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final synchronized YoixObject
     getField(String name, YoixObject obj) {
 
-	switch (activeField(name, activefields)) {
-	    default:
-		break;
-	}
+        switch (activeField(name, activefields)) {
+            default:
+                break;
+        }
 
-	return(obj);
+        return(obj);
     }
 
 
     protected final Object
     getManagedObject() {
 
-	return(null);
+        return(null);
     }
 
 
     protected final YoixObject
     setField(String name, YoixObject obj) {
 
-	if (obj != null) {
-	    switch (activeField(name, activefields)) {
-		default:
-		    break;
-	    }
-	}
+        if (obj != null) {
+            switch (activeField(name, activefields)) {
+                default:
+                    break;
+            }
+        }
 
-	return(obj);
+        return(obj);
     }
 
     ///////////////////////////////////
@@ -211,99 +211,99 @@ class YoixBodyTransferHandler extends YoixPointerActive
     private synchronized YoixObject
     builtinExportAsDrag(String name, YoixObject arg[]) {
 
-	YoixBodyComponent  body;
-	TransferHandler    handler;
-	AWTEvent           event;
-	Object             comp;
-	int                action;
+        YoixBodyComponent  body;
+        TransferHandler    handler;
+        AWTEvent           event;
+        Object             comp;
+        int                action;
 
-	if (arg.length == 3) {
-	    if (arg[0].isJComponent()) {
-		if ((event = YoixMakeEvent.javaAWTEvent(arg[1], arg[0], false)) != null) {
-		    if (event instanceof MouseEvent) {
-			if (arg[2].isInteger()) {
-			    comp = arg[0].getManagedObject();
-			    if (comp instanceof JComponent) {
-				if ((handler = ((JComponent)comp).getTransferHandler()) != null) {
-				    body = (YoixBodyComponent)arg[0].body();
-				    action = YoixBodyComponent.jfcInt("TransferHandler", arg[2].intValue());
-				    handler.exportAsDrag(
-					(JComponent)comp,
-					body.pickTransferTrigger((MouseEvent)event),
-					pickExportAction((JComponent)comp, handler, action)
-				    );
-				}
-			    }
-			} else VM.badArgument(name, 2);
-		    } else VM.badArgument(name, 1);
-		} else VM.badArgument(name, 1);
-	    } else VM.badArgument(name, 0);
-	} else VM.badCall(name);
+        if (arg.length == 3) {
+            if (arg[0].isJComponent()) {
+                if ((event = YoixMakeEvent.javaAWTEvent(arg[1], arg[0], false)) != null) {
+                    if (event instanceof MouseEvent) {
+                        if (arg[2].isInteger()) {
+                            comp = arg[0].getManagedObject();
+                            if (comp instanceof JComponent) {
+                                if ((handler = ((JComponent)comp).getTransferHandler()) != null) {
+                                    body = (YoixBodyComponent)arg[0].body();
+                                    action = YoixBodyComponent.jfcInt("TransferHandler", arg[2].intValue());
+                                    handler.exportAsDrag(
+                                        (JComponent)comp,
+                                        body.pickTransferTrigger((MouseEvent)event),
+                                        pickExportAction((JComponent)comp, handler, action)
+                                    );
+                                }
+                            }
+                        } else VM.badArgument(name, 2);
+                    } else VM.badArgument(name, 1);
+                } else VM.badArgument(name, 1);
+            } else VM.badArgument(name, 0);
+        } else VM.badCall(name);
 
-	return(YoixObject.newEmpty());
+        return(YoixObject.newEmpty());
     }
 
 
     private synchronized YoixObject
     builtinExportToClipboard(String name, YoixObject arg[]) {
 
-	TransferHandler  handler;
-	AWTEvent         event;
-	Object           comp;
-	int              action;
+        TransferHandler  handler;
+        AWTEvent         event;
+        Object           comp;
+        int              action;
 
-	if (arg.length == 3) {
-	    if (arg[0].isJComponent()) {
-		if (arg[1].isClipboard()) {
-		    if (arg[2].isInteger()) {
-			comp = arg[0].getManagedObject();
-			if (comp instanceof JComponent) {
-			    if ((handler = ((JComponent)comp).getTransferHandler()) != null) {
-				action = YoixBodyComponent.jfcInt("TransferHandler", arg[2].intValue());
-				handler.exportToClipboard(
-				    (JComponent)comp,
-				    (Clipboard)arg[1].getManagedObject(),
-				    pickExportAction((JComponent)comp, handler, action)
-				);
-			    }
-			}
-		    } else VM.badArgument(name, 2);
-		} else VM.badArgument(name, 1);
-	    } else VM.badArgument(name, 0);
-	} else VM.badCall(name);
+        if (arg.length == 3) {
+            if (arg[0].isJComponent()) {
+                if (arg[1].isClipboard()) {
+                    if (arg[2].isInteger()) {
+                        comp = arg[0].getManagedObject();
+                        if (comp instanceof JComponent) {
+                            if ((handler = ((JComponent)comp).getTransferHandler()) != null) {
+                                action = YoixBodyComponent.jfcInt("TransferHandler", arg[2].intValue());
+                                handler.exportToClipboard(
+                                    (JComponent)comp,
+                                    (Clipboard)arg[1].getManagedObject(),
+                                    pickExportAction((JComponent)comp, handler, action)
+                                );
+                            }
+                        }
+                    } else VM.badArgument(name, 2);
+                } else VM.badArgument(name, 1);
+            } else VM.badArgument(name, 0);
+        } else VM.badCall(name);
 
-	return(YoixObject.newEmpty());
+        return(YoixObject.newEmpty());
     }
 
 
     private int
     pickExportAction(JComponent comp, TransferHandler handler, int action) {
 
-	Object  result;
+        Object  result;
 
-	//
-	// Just used to try and make TransferHandler.exportAsDrag() happy
-	// if the corresponding Yoix builtin was called with COPY_OR_MOVE
-	// as the action argument.
-	//
+        //
+        // Just used to try and make TransferHandler.exportAsDrag() happy
+        // if the corresponding Yoix builtin was called with COPY_OR_MOVE
+        // as the action argument.
+        //
 
-	if (handler != null) {
-	    switch (action) {
-		case DnDConstants.ACTION_COPY:
-		case DnDConstants.ACTION_MOVE:
-		case DnDConstants.ACTION_LINK:
-		case DnDConstants.ACTION_NONE:
-		    break;
+        if (handler != null) {
+            switch (action) {
+                case DnDConstants.ACTION_COPY:
+                case DnDConstants.ACTION_MOVE:
+                case DnDConstants.ACTION_LINK:
+                case DnDConstants.ACTION_NONE:
+                    break;
 
-		case DnDConstants.ACTION_COPY_OR_MOVE:
-		    action &= handler.getSourceActions(comp);
-		    if (action == DnDConstants.ACTION_COPY_OR_MOVE)
-			action = DnDConstants.ACTION_MOVE;
-		    break;
-	    }
-	}
+                case DnDConstants.ACTION_COPY_OR_MOVE:
+                    action &= handler.getSourceActions(comp);
+                    if (action == DnDConstants.ACTION_COPY_OR_MOVE)
+                        action = DnDConstants.ACTION_MOVE;
+                    break;
+            }
+        }
 
-	return(action);
+        return(action);
     }
 }
 
