@@ -98,66 +98,66 @@ class YoixParser
 
     private static short  operators[] = {
      //
-     // Operator		Precedence	Associativity
-     // --------		----------	-------------
-	MUL,			14,		LEFT,
-	DIV,			14,		LEFT,
-	MOD,			14,		LEFT,
-	PLUS,			13,		LEFT,
-	MINUS,			13,		LEFT,
-	LEFTSHIFT,		12,		LEFT,
-	RIGHTSHIFT,		12,		LEFT,
-	UNSIGNEDSHIFT,		12,		LEFT,
-	LT,			11,		LEFT,
-	LE,			11,		LEFT,
-	GT,			11,		LEFT,
-	GE,			11,		LEFT,
-	INSTANCEOF,		11,		LEFT,
-	EQ,			10,		LEFT,
-	NE,			10,		LEFT,
-	EQEQ,			10,		LEFT,
-	NEEQ,			10,		LEFT,
-	EQTILDA,		10,		LEFT,
-	NETILDA,		10,		LEFT,
-	AND,			9,		LEFT,
-	XOR,			8,		LEFT,
-	OR,			7,		LEFT,
-	LOGICALAND,		6,		LEFT,
-	LOGICALXOR,		5,		LEFT,
-	LOGICALOR,		4,		LEFT,
-	QUESTIONCOLON,          3,              RIGHT,
-	ASSIGN,			2,		RIGHT,
-	MULEQ,			2,		RIGHT,
-	DIVEQ,			2,		RIGHT,
-	MODEQ,			2,		RIGHT,
-	PLUSEQ,			2,		RIGHT,
-	MINUSEQ,		2,		RIGHT,
-	LEFTSHIFTEQ,		2,		RIGHT,
-	RIGHTSHIFTEQ,		2,		RIGHT,
-	UNSIGNEDSHIFTEQ,	2,		RIGHT,
-	ANDEQ,			2,		RIGHT,
-	XOREQ,			2,		RIGHT,
-	OREQ,			2,		RIGHT,
-	COMMA,			1,		LEFT,
+     // Operator                Precedence      Associativity
+     // --------                ----------      -------------
+        MUL,                    14,             LEFT,
+        DIV,                    14,             LEFT,
+        MOD,                    14,             LEFT,
+        PLUS,                   13,             LEFT,
+        MINUS,                  13,             LEFT,
+        LEFTSHIFT,              12,             LEFT,
+        RIGHTSHIFT,             12,             LEFT,
+        UNSIGNEDSHIFT,          12,             LEFT,
+        LT,                     11,             LEFT,
+        LE,                     11,             LEFT,
+        GT,                     11,             LEFT,
+        GE,                     11,             LEFT,
+        INSTANCEOF,             11,             LEFT,
+        EQ,                     10,             LEFT,
+        NE,                     10,             LEFT,
+        EQEQ,                   10,             LEFT,
+        NEEQ,                   10,             LEFT,
+        EQTILDA,                10,             LEFT,
+        NETILDA,                10,             LEFT,
+        AND,                    9,              LEFT,
+        XOR,                    8,              LEFT,
+        OR,                     7,              LEFT,
+        LOGICALAND,             6,              LEFT,
+        LOGICALXOR,             5,              LEFT,
+        LOGICALOR,              4,              LEFT,
+        QUESTIONCOLON,          3,              RIGHT,
+        ASSIGN,                 2,              RIGHT,
+        MULEQ,                  2,              RIGHT,
+        DIVEQ,                  2,              RIGHT,
+        MODEQ,                  2,              RIGHT,
+        PLUSEQ,                 2,              RIGHT,
+        MINUSEQ,                2,              RIGHT,
+        LEFTSHIFTEQ,            2,              RIGHT,
+        RIGHTSHIFTEQ,           2,              RIGHT,
+        UNSIGNEDSHIFTEQ,        2,              RIGHT,
+        ANDEQ,                  2,              RIGHT,
+        XOREQ,                  2,              RIGHT,
+        OREQ,                   2,              RIGHT,
+        COMMA,                  1,              LEFT,
 
-	CONDITIONAL,		0,		LEFT,
+        CONDITIONAL,            0,              LEFT,
     };
 
     private static short  precedence[] = new short[LASTTOKEN];
     private static short  associativity[] = new short[LASTTOKEN];
 
     static {
-	for (int n = 0; n < precedence.length; n++) {
-	    precedence[n] = (short)LASTTOKEN;	// higher than all operators
-	    associativity[n] = NONE;
-	}
+        for (int n = 0; n < precedence.length; n++) {
+            precedence[n] = (short)LASTTOKEN;        // higher than all operators
+            associativity[n] = NONE;
+        }
 
-	for (int n = 0; n < operators.length; n += 3) {
-	    precedence[operators[n]] = operators[n+1];
-	    associativity[operators[n]] = operators[n+2];
-	}
+        for (int n = 0; n < operators.length; n += 3) {
+            precedence[operators[n]] = operators[n+1];
+            associativity[operators[n]] = operators[n+2];
+        }
 
-	operators = null;
+        operators = null;
     }
 
     ///////////////////////////////////
@@ -169,31 +169,31 @@ class YoixParser
     static int
     getAssociativity(int op, int left, int none, int right) {
 
-	int  value = none;
+        int  value = none;
 
-	if ((op >= 0 && op < associativity.length)) {
-	    switch (associativity[op]) {
-		case LEFT:
-		    value = left;
-		    break;
+        if ((op >= 0 && op < associativity.length)) {
+            switch (associativity[op]) {
+                case LEFT:
+                    value = left;
+                    break;
 
-		case NONE:
-		    value = none;
-		    break;
+                case NONE:
+                    value = none;
+                    break;
 
-		case RIGHT:
-		    value = right;
-		    break;
-	    }
-	}
-	return(value);
+                case RIGHT:
+                    value = right;
+                    break;
+            }
+        }
+        return(value);
     }
 
 
     static int
     getPrecedence(int op) {
 
-	return((op >= 0 && op < precedence.length) ? precedence[op] : LASTTOKEN);
+        return((op >= 0 && op < precedence.length) ? precedence[op] : LASTTOKEN);
     }
 
     ///////////////////////////////////
@@ -205,670 +205,670 @@ class YoixParser
     private static YoixObject
     abort(String error) {
 
-	String  text;
-	int     line;
-	int     column;
-	int     n;
+        String  text;
+        int     line;
+        int     column;
+        int     n;
 
-	//
-	// Currently only gives special treatment to INVALIDASSIGNMENT, so
-	// you have to add code if you decide to support other errors that
-	// need thei own attention.
-	//
+        //
+        // Currently only gives special treatment to INVALIDASSIGNMENT, so
+        // you have to add code if you decide to support other errors that
+        // need thei own attention.
+        //
 
-	if (error == INVALIDASSIGNMENT) {
-	    if (token != null && parserstream.haveLine(token.beginLine)) {
-		line = token.beginLine;
-		column = token.beginColumn;
-	    } else {
-		line = parserstream.getBeginLine();
-		column = parserstream.getBeginColumn();
-	    }
+        if (error == INVALIDASSIGNMENT) {
+            if (token != null && parserstream.haveLine(token.beginLine)) {
+                line = token.beginLine;
+                column = token.beginColumn;
+            } else {
+                line = parserstream.getBeginLine();
+                column = parserstream.getBeginColumn();
+            }
 
-	    if ((text = parserstream.getBufferedLine(line)) != null) {
-		for (n = Math.min(column - 1, text.length() - 1); n >= 0; n--) {
-		    if (text.charAt(n) == '=') {
-			column = n + 1;
-			break;
-		    }
-		}
-	    }
-	} else {
-	    line = parserstream.getBeginLine();
-	    column = parserstream.getBeginColumn();
-	}
+            if ((text = parserstream.getBufferedLine(line)) != null) {
+                for (n = Math.min(column - 1, text.length() - 1); n >= 0; n--) {
+                    if (text.charAt(n) == '=') {
+                        column = n + 1;
+                        break;
+                    }
+                }
+            }
+        } else {
+            line = parserstream.getBeginLine();
+            column = parserstream.getBeginColumn();
+        }
 
-	return(abortHandler(error, line, column, -1, null, true, new ArrayList()));
+        return(abortHandler(error, line, column, -1, null, true, new ArrayList()));
     }
 
 
     private static YoixObject
     abort(ParseException e) {
 
-	ArrayList  args = new ArrayList();
-	String     text;
-	String     extra = null;
-	int        line;
-	int        column;
+        ArrayList  args = new ArrayList();
+        String     text;
+        String     extra = null;
+        int        line;
+        int        column;
 
-	if (e != null && e.currentToken != null) {
-	    line = e.currentToken.next.beginLine;
-	    column = e.currentToken.next.beginColumn;
+        if (e != null && e.currentToken != null) {
+            line = e.currentToken.next.beginLine;
+            column = e.currentToken.next.beginColumn;
 
-	    if ((text = parserstream.getEncounteredToken(e)) != null) {
-		args.add("Encountered");
-		args.add(text);
-	    }
+            if ((text = parserstream.getEncounteredToken(e)) != null) {
+                args.add("Encountered");
+                args.add(text);
+            }
 
-	    if ((text = parserstream.getExpectedToken(e)) != null) {
-		args.add("Expected");
-		args.add(text);
-	    }
+            if ((text = parserstream.getExpectedToken(e)) != null) {
+                args.add("Expected");
+                args.add(text);
+            }
 
-	    if (VM.bitCheck(N_DEBUG, DEBUG_SYNTAXERROR))
-		extra = parserstream.getExpectedTokens(e);
-	} else {		// should be unnecessary - later
-	    line = parserstream.getBeginLine();
-	    column = parserstream.getBeginColumn();
-	}
+            if (VM.bitCheck(N_DEBUG, DEBUG_SYNTAXERROR))
+                extra = parserstream.getExpectedTokens(e);
+        } else {        // should be unnecessary - later
+            line = parserstream.getBeginLine();
+            column = parserstream.getBeginColumn();
+        }
 
-	return(abortHandler(SYNTAXERROR, line, column, -1, extra, true, args));
+        return(abortHandler(SYNTAXERROR, line, column, -1, extra, true, args));
     }
 
 
     private static YoixObject
     abort(TokenMgrError e) {
 
-	String  error;
-	int     startline;
-	int     line;
-	int     column;
+        String  error;
+        int     startline;
+        int     line;
+        int     column;
 
-	line = parserstream.getLine();
-	column = -1;
-	startline = 0;
+        line = parserstream.getLine();
+        column = -1;
+        startline = 0;
 
-	switch (YoixParserTokenManager.curLexState) {
-	    case STATE_MULTILINE_STRING:
-	    case STATE_MULTILINE_ESCAPED_STRING:
-		error = UNCLOSEDSTRING;
-		if (lexicalstatestart > 0 && line != lexicalstatestart)
-		    startline = lexicalstatestart;
-		break;
+        switch (YoixParserTokenManager.curLexState) {
+            case STATE_MULTILINE_STRING:
+            case STATE_MULTILINE_ESCAPED_STRING:
+                error = UNCLOSEDSTRING;
+                if (lexicalstatestart > 0 && line != lexicalstatestart)
+                    startline = lexicalstatestart;
+                break;
 
-	    case STATE_CSTYLE:
-	    case STATE_CPLUS:
-		error = UNCLOSEDCOMMENT;
-		if (lexicalstatestart > 0 && line != lexicalstatestart)
-		    startline = lexicalstatestart;
-		break;
+            case STATE_CSTYLE:
+            case STATE_CPLUS:
+                error = UNCLOSEDCOMMENT;
+                if (lexicalstatestart > 0 && line != lexicalstatestart)
+                    startline = lexicalstatestart;
+                break;
 
-	    default:		// these probably shouldn't happen
-		error = SCANNERERROR;
-		startline = -1;
-		break;
-	}
+            default:        // these probably shouldn't happen
+                error = SCANNERERROR;
+                startline = -1;
+                break;
+        }
 
-	return(abortHandler(error, line, column, startline, null, false, new ArrayList()));
+        return(abortHandler(error, line, column, startline, null, false, new ArrayList()));
     }
 
 
     private static YoixObject
     abortHandler(String error, int line, int column, int startline, String extra, boolean recover, ArrayList args) {
 
-	String  text;
-	String  prefix;
-	Token   tok;
-	int     n;
+        String  text;
+        String  prefix;
+        Token   tok;
+        int     n;
 
-	//
-	// Eventually could encode more in the ParseException that's handed
-	// to VM.abort(), but right now the starting line is all we need. If
-	// the message in the ParseException changes you will also have to
-	// update methods in YoixError.java that examine ParseExceptions.
-	//
-	// Notice that we only set startline if it's initially negative and
-	// we're working on a statement, but if you look at where we use it
-	// you'll see that we only pass it along (as the message in a new
-	// ParseException) if it's positive and doesn't match line.
-	//
+        //
+        // Eventually could encode more in the ParseException that's handed
+        // to VM.abort(), but right now the starting line is all we need. If
+        // the message in the ParseException changes you will also have to
+        // update methods in YoixError.java that examine ParseExceptions.
+        //
+        // Notice that we only set startline if it's initially negative and
+        // we're working on a statement, but if you look at where we use it
+        // you'll see that we only pass it along (as the message in a new
+        // ParseException) if it's positive and doesn't match line.
+        //
 
-	if (startline < 0 && statementtop >= 0)
-	    startline = statementstack[statementtop];
+        if (startline < 0 && statementtop >= 0)
+            startline = statementstack[statementtop];
 
-	if (parserstream.haveLine(line)) {
-	    prefix = line + "";
-	    for (n = Math.min(ABORTERROR.length(), 5) - prefix.length(); n > 0; n--)
-		prefix = " " + prefix;
-	    prefix += ": ";
-	} else prefix = null;
+        if (parserstream.haveLine(line)) {
+            prefix = line + "";
+            for (n = Math.min(ABORTERROR.length(), 5) - prefix.length(); n > 0; n--)
+                prefix = " " + prefix;
+            prefix += ": ";
+        } else prefix = null;
 
-	if ((text = parserstream.getMarkedLine(line, column, prefix, true)) != null) {
-	    args.add(NL);
-	    args.add(text);
-	    column = -1;
-	}
+        if ((text = parserstream.getMarkedLine(line, column, prefix, true)) != null) {
+            args.add(NL);
+            args.add(text);
+            column = -1;
+        }
 
-	if (extra != null) {
-	    args.add(NL);
-	    args.add(extra);
-	}
+        if (extra != null) {
+            args.add(NL);
+            args.add(extra);
+        }
 
-	if (recover) {
-	    do {
-		tok = getNextToken();
-	    } while (tok.kind != SEMICOLON && tok.kind != EOF);
-	}
+        if (recover) {
+            do {
+                tok = getNextToken();
+            } while (tok.kind != SEMICOLON && tok.kind != EOF);
+        }
 
-	VM.pushTag(line, column, parserstream.getName());
-	return(VM.abort(error, args, new ParseException((startline > 0 && line != startline) ? startline + "": null)));
+        VM.pushTag(line, column, parserstream.getName());
+        return(VM.abort(error, args, new ParseException((startline > 0 && line != startline) ? startline + "": null)));
     }
 
 
     private static void
     arrangeBinary() {
 
-	SimpleNode  operand;
-	SimpleNode  operator;
-	SimpleNode  next;
-	int         prec1;
-	int         prec2;
-	int         type1;
-	int         type2;
+        SimpleNode  operand;
+        SimpleNode  operator;
+        SimpleNode  next;
+        int         prec1;
+        int         prec2;
+        int         type1;
+        int         type2;
 
-	//
-	// Important method that uses the precedence[] and associativity[]
-	// tables to rearrange the expression the parser has collected right
-	// after a binary expression is recognized.
-	//
+        //
+        // Important method that uses the precedence[] and associativity[]
+        // tables to rearrange the expression the parser has collected right
+        // after a binary expression is recognized.
+        //
 
-	operand = (SimpleNode)jjtree.popNode();
-	operator = (SimpleNode)jjtree.popNode();
+        operand = (SimpleNode)jjtree.popNode();
+        operator = (SimpleNode)jjtree.popNode();
 
-	type1 = operator.type();
-	type2 = ((SimpleNode)jjtree.peekNode()).type();
-	prec1 = precedence[type1];
-	prec2 = precedence[type2];
+        type1 = operator.type();
+        type2 = ((SimpleNode)jjtree.peekNode()).type();
+        prec1 = precedence[type1];
+        prec2 = precedence[type2];
 
-	while (prec1 > prec2 || (prec1 == prec2 && associativity[type2] == RIGHT)) {
-	    next = (SimpleNode)jjtree.popNode();
-	    if (next.type() == CONDITIONAL)
-		unroll(next.getChild0());
-	    else exprstack.push(next);
-	    type2 = ((SimpleNode)jjtree.peekNode()).type();
-	    prec2 = precedence[type2];
-	}
+        while (prec1 > prec2 || (prec1 == prec2 && associativity[type2] == RIGHT)) {
+            next = (SimpleNode)jjtree.popNode();
+            if (next.type() == CONDITIONAL)
+                unroll(next.getChild0());
+            else exprstack.push(next);
+            type2 = ((SimpleNode)jjtree.peekNode()).type();
+            prec2 = precedence[type2];
+        }
 
-	if (prec1 == precedence[ASSIGN] && type2 != LVALUE)
-	    abort(INVALIDASSIGNMENT);
+        if (prec1 == precedence[ASSIGN] && type2 != LVALUE)
+            abort(INVALIDASSIGNMENT);
 
-	//
-	// For consistency, but moving operator and operand to execstack
-	// is currently only needed by LOGICALAND and LOGICALOR.
-	//
+        //
+        // For consistency, but moving operator and operand to execstack
+        // is currently only needed by LOGICALAND and LOGICALOR.
+        //
 
-	exprstack.push(operator);
-	exprstack.push(operand);
+        exprstack.push(operator);
+        exprstack.push(operand);
 
-	while (exprstack.size() > 0) {
-	    next = (SimpleNode)exprstack.pop();
-	    switch (next.type()) {
-		case LOGICALAND:
-		case LOGICALOR:
-		    jjtree.pushNode(new SimpleNode(CONDITIONAL, collectExpression()));
-		    break;
-	    }
-	    jjtree.pushNode(next);
-	}
+        while (exprstack.size() > 0) {
+            next = (SimpleNode)exprstack.pop();
+            switch (next.type()) {
+                case LOGICALAND:
+                case LOGICALOR:
+                    jjtree.pushNode(new SimpleNode(CONDITIONAL, collectExpression()));
+                    break;
+            }
+            jjtree.pushNode(next);
+        }
     }
 
 
     private static void
     arrangeTernary() {
 
-	SimpleNode  operator;
-	SimpleNode  left;
-	SimpleNode  right;
-	SimpleNode  node;
-	SimpleNode  expr;
-	int         type1;
-	int         type2;
-	int         prec1;
-	int         prec2;
+        SimpleNode  operator;
+        SimpleNode  left;
+        SimpleNode  right;
+        SimpleNode  node;
+        SimpleNode  expr;
+        int         type1;
+        int         type2;
+        int         prec1;
+        int         prec2;
 
-	//
-	// Important method that uses the precedence[] table to rearrange
-	// the expression the parser has collected right after a ternary
-	// expression (i.e., ?:) is recognized.
-	//
+        //
+        // Important method that uses the precedence[] table to rearrange
+        // the expression the parser has collected right after a ternary
+        // expression (i.e., ?:) is recognized.
+        //
 
-	right = (SimpleNode)jjtree.popNode();
-	left = (SimpleNode)jjtree.popNode();
-	operator = (SimpleNode)jjtree.popNode();
+        right = (SimpleNode)jjtree.popNode();
+        left = (SimpleNode)jjtree.popNode();
+        operator = (SimpleNode)jjtree.popNode();
 
-	type1 = operator.type();	// currently must be QUESTIONCOLON
-	prec1 = precedence[type1];
-	type2 = ((SimpleNode)jjtree.peekNode()).type();
-	prec2 = precedence[type2];
+        type1 = operator.type();        // currently must be QUESTIONCOLON
+        prec1 = precedence[type1];
+        type2 = ((SimpleNode)jjtree.peekNode()).type();
+        prec2 = precedence[type2];
 
-	while (prec1 > prec2) {
-	    exprstack.push((SimpleNode)jjtree.popNode());
-	    type2 = ((SimpleNode)jjtree.peekNode()).type();
-	    prec2 = precedence[type2];
-	}
+        while (prec1 > prec2) {
+            exprstack.push((SimpleNode)jjtree.popNode());
+            type2 = ((SimpleNode)jjtree.peekNode()).type();
+            prec2 = precedence[type2];
+        }
 
-	expr = collectExpression();
-	node = new SimpleNode(type1);
-	node.jjtAppendChild(expr);
-	node.jjtAppendChild(left);
-	node.jjtAppendChild(right);
-	jjtree.pushNode(node);
+        expr = collectExpression();
+        node = new SimpleNode(type1);
+        node.jjtAppendChild(expr);
+        node.jjtAppendChild(left);
+        node.jjtAppendChild(right);
+        jjtree.pushNode(node);
 
-	while (exprstack.size() > 0)
-	    jjtree.pushNode((SimpleNode)exprstack.pop());
+        while (exprstack.size() > 0)
+            jjtree.pushNode((SimpleNode)exprstack.pop());
     }
 
 
     private static void
     backup(SimpleNode node) {
 
-	Token  tok;
+        Token  tok;
 
-	//
-	// This is only used to put parserstream back in a state that
-	// is ready for the next parseStatement() call. Lookahead used
-	// to recognize an "else" but not officially consumed belongs
-	// to next statement and must be returned to the input stream.
-	// If this step is omitted a trivial program like
-	//
-	//		if (1)
-	//		    xxx = 10;
-	//		yyy = 100;
-	//
-	// gets a syntaxerror. Small chance other statements will need
-	// the same kind of help.
-	//
+        //
+        // This is only used to put parserstream back in a state that
+        // is ready for the next parseStatement() call. Lookahead used
+        // to recognize an "else" but not officially consumed belongs
+        // to next statement and must be returned to the input stream.
+        // If this step is omitted a trivial program like
+        //
+        //     if (1)
+        //         xxx = 10;
+        //     yyy = 100;
+        //
+        // gets a syntaxerror. Small chance other statements will need
+        // the same kind of help.
+        //
 
-	switch (node.getTaggedNode().type()) {
-	    case IF:
-		do {
-		    if (node.getTaggedNode().length() == 2) {	// no else - restore lookahead
-			if ((tok = getToken(1)) != null)
-			    parserstream.backup(tok.image.length());
-			break;
-		    } else if (node.getTaggedNode().length() == 3) {	// always true?
-			//
-			// Could be "else", "else { }", which are harmless,
-			// or "else if ..." with the "if" putting us back
-			// where we started, so we descend down to find
-			// out.
-			//
-			node = node.getTaggedNode().getChild2();
-		    }
-		} while (node.getTaggedNode().type() == IF);
-		break;
+        switch (node.getTaggedNode().type()) {
+            case IF:
+                do {
+                    if (node.getTaggedNode().length() == 2) {        // no else - restore lookahead
+                        if ((tok = getToken(1)) != null)
+                            parserstream.backup(tok.image.length());
+                        break;
+                    } else if (node.getTaggedNode().length() == 3) {        // always true?
+                        //
+                        // Could be "else", "else { }", which are harmless,
+                        // or "else if ..." with the "if" putting us back
+                        // where we started, so we descend down to find
+                        // out.
+                        //
+                        node = node.getTaggedNode().getChild2();
+                    }
+                } while (node.getTaggedNode().type() == IF);
+                break;
 
-	    default:
-		break;
-	}
+            default:
+                break;
+        }
     }
 
 
     private static void
     buildAttribute(int kind) {
 
-	SimpleNode  node;
+        SimpleNode  node;
 
-	node = new SimpleNode(ATTRIBUTE);
-	node.jjtAppendChild((SimpleNode)jjtree.popNode());
-	node.jjtAppendChild(YoixObject.newInt(kind));
-	jjtree.pushNode(node);
+        node = new SimpleNode(ATTRIBUTE);
+        node.jjtAppendChild((SimpleNode)jjtree.popNode());
+        node.jjtAppendChild(YoixObject.newInt(kind));
+        jjtree.pushNode(node);
     }
 
 
     private static void
     buildCast() {
 
-	SimpleNode  expr;
-	SimpleNode  node;
+        SimpleNode  expr;
+        SimpleNode  node;
 
-	expr = (SimpleNode)jjtree.popNode();
-	buildExpression(expr, false);
-	node = new SimpleNode(EXPRESSION);
-	node.jjtAppendChild(expr);
-	node.jjtAppendChild(new SimpleNode(CAST));
-	jjtree.pushNode(node);
+        expr = (SimpleNode)jjtree.popNode();
+        buildExpression(expr, false);
+        node = new SimpleNode(EXPRESSION);
+        node.jjtAppendChild(expr);
+        node.jjtAppendChild(new SimpleNode(CAST));
+        jjtree.pushNode(node);
     }
 
 
     private static void
     buildDeclarator(SimpleNode node) {
 
-	node.setType(DECLARATOR);
-	scopestack[scopetop]++;
+        node.setType(DECLARATOR);
+        scopestack[scopetop]++;
     }
 
 
     private static void
     buildExpression(SimpleNode node, boolean exchange) {
 
-	Node  tmp;
-	int   n;
+        Node  tmp;
+        int   n;
 
-	node.setType(EXPRESSION);
+        node.setType(EXPRESSION);
 
-	//
-	// Next few lines are a recent addition that seems to eliminate
-	// unnecessary expression nodes. Needs to be carefully tested!!
-	//
-	if (node.length() == 1 && node.getChild0().type() == EXPRESSION)
-	    node.value = ((SimpleNode)node.getChild0().clone()).value;
+        //
+        // Next few lines are a recent addition that seems to eliminate
+        // unnecessary expression nodes. Needs to be carefully tested!!
+        //
+        if (node.length() == 1 && node.getChild0().type() == EXPRESSION)
+            node.value = ((SimpleNode)node.getChild0().clone()).value;
 
-	if (exchange) {
-	    if ((n = node.length() - 1) > 0) {
-		tmp = node.getChild(n);
-		node.jjtAddChild(node.getChild(n - 1), n);
-		node.jjtAddChild(tmp, n - 1);
-	    }
-	}
+        if (exchange) {
+            if ((n = node.length() - 1) > 0) {
+                tmp = node.getChild(n);
+                node.jjtAddChild(node.getChild(n - 1), n);
+                node.jjtAddChild(tmp, n - 1);
+            }
+        }
     }
 
 
     private static void
     buildIndex(SimpleNode node) {
 
-	int  children = node.jjtGetNumChildren();
+        int  children = node.jjtGetNumChildren();
 
-	if (children > 0) {
-	    if (children > 1 || token.kind == DOTDOTDOT)
-		node.setType(RANGE);
-	    else unrollTop();
-	} else node.setType(RANGE);
+        if (children > 0) {
+            if (children > 1 || token.kind == DOTDOTDOT)
+                node.setType(RANGE);
+            else unrollTop();
+        } else node.setType(RANGE);
     }
 
 
     private static void
     buildOptional(SimpleNode node) {
 
-	if (node.jjtGetNumChildren() > 0)
-	    unrollTop();
-	else node.setType(EXPRESSION);
+        if (node.jjtGetNumChildren() > 0)
+            unrollTop();
+        else node.setType(EXPRESSION);
     }
 
 
     private static void
     buildParameterList(SimpleNode node) {
 
-	node.setType(token.kind != DOTDOTDOT ? ARGLIST : VARARGLIST);
+        node.setType(token.kind != DOTDOTDOT ? ARGLIST : VARARGLIST);
     }
 
 
     private static void
     buildPrimaryLvalue(int type) {
 
-	switch (type) {
-	    case GLOBAL:
-	    case THIS:
-		jjtree.pushNode(new SimpleNode(type));
-		break;
+        switch (type) {
+            case GLOBAL:
+            case THIS:
+                jjtree.pushNode(new SimpleNode(type));
+                break;
 
-	    case LVALUE:
-		unrollTop();
-		break;
-	}
+            case LVALUE:
+                unrollTop();
+                break;
+        }
     }
 
 
     private static void
     buildStatement(SimpleNode node, int type) {
 
-	node.setType(type);
+        node.setType(type);
 
-	switch (type) {
-	    case COMPOUND:
-		unrollTop();
-		if (((SimpleNode)jjtree.peekNode()).length() == 0)
-		    ((SimpleNode)jjtree.peekNode()).setType(EMPTY);
-		break;
+        switch (type) {
+            case COMPOUND:
+                unrollTop();
+                if (((SimpleNode)jjtree.peekNode()).length() == 0)
+                    ((SimpleNode)jjtree.peekNode()).setType(EMPTY);
+                break;
 
-	    case DEFAULT_:
-		scopestack[scopetop] &= ~ACCEPTDEFAULT;
-		break;
+            case DEFAULT_:
+                scopestack[scopetop] &= ~ACCEPTDEFAULT;
+                break;
 
-	    case EOF:
-		validateEOF();
-		node.setType(YOIX_EOF);
-		break;
+            case EOF:
+                validateEOF();
+                node.setType(YOIX_EOF);
+                break;
 
-	    case FINALLY:
-	    case SAVE:
-		scopestack[scopetop] |= FORCEBLOCK;
-		tagTop();
-		break;
+            case FINALLY:
+            case SAVE:
+                scopestack[scopetop] |= FORCEBLOCK;
+                tagTop();
+                break;
 
-	    case FUNCTION:
-		scopestack[scopetop]++;
-		tagTop();
-		break;
+            case FUNCTION:
+                scopestack[scopetop]++;
+                tagTop();
+                break;
 
-	    case IMPORT:
-		tagTop();
-		break;
+            case IMPORT:
+                tagTop();
+                break;
 
-	    case SWITCH:
-		node.jjtAppendChild(YoixObject.newNull());
-		tagTop();
-		break;
+            case SWITCH:
+                node.jjtAppendChild(YoixObject.newNull());
+                tagTop();
+                break;
 
-	    default:
-		tagTop();
-		break;
-	}
-	closeStatement();
+            default:
+                tagTop();
+                break;
+        }
+        closeStatement();
     }
 
 
     private static void
     closeExpression() {
 
-	commatop--;
+        commatop--;
     }
 
 
     static void
     closeLexicalState() {
 
-	lexicalstatestart = -1;
+        lexicalstatestart = -1;
     }
 
 
     private static void
     closeScope(SimpleNode node) {
 
-	int  count;
+        int  count;
 
-	if ((count = scopestack[scopetop--]&BLOCKMASK) != 0) {
-	    node.setType(COMPOUND);
-	    jjtree.pushNode(YoixObject.newInt(count&LOCALCOUNT));
-	} else node.setType(STATEMENT);
+        if ((count = scopestack[scopetop--]&BLOCKMASK) != 0) {
+            node.setType(COMPOUND);
+            jjtree.pushNode(YoixObject.newInt(count&LOCALCOUNT));
+        } else node.setType(STATEMENT);
     }
 
 
     private static void
     closeStatement() {
 
-	statementtop--;
+        statementtop--;
     }
 
 
     private static SimpleNode
     collectExpression() {
 
-	SimpleNode  node;
-	SimpleNode  arg;
-	int         type;
-	int         count;
-	int         n;
+        SimpleNode  node;
+        SimpleNode  arg;
+        int         type;
+        int         count;
+        int         n;
 
-	//
-	// Eventually may want a better way to quickly recognize binary
-	// operators.
-	//
+        //
+        // Eventually may want a better way to quickly recognize binary
+        // operators.
+        //
 
-	for (n = 1, count = 0; n > 0; n--, count++) {
-	    arg = (SimpleNode)jjtree.popNode();
-	    exprstack.push(arg);
-	    switch (type = arg.type()) {
-		case CONDITIONAL:
-		case QUESTIONCOLON:
-		    break;
+        for (n = 1, count = 0; n > 0; n--, count++) {
+            arg = (SimpleNode)jjtree.popNode();
+            exprstack.push(arg);
+            switch (type = arg.type()) {
+                case CONDITIONAL:
+                case QUESTIONCOLON:
+                    break;
 
-		default:
-		    if (precedence[type] < LASTTOKEN)	// it's a binary operator??
-			n += 2;
-		    break;
-	    }
-	}
+                default:
+                    if (precedence[type] < LASTTOKEN)        // it's a binary operator??
+                        n += 2;
+                    break;
+            }
+        }
 
-	node = new SimpleNode(EXPRESSION, count);
-	for (n = 0; n < count; n++)
-	    node.jjtAddChild((SimpleNode)exprstack.pop(), n);
+        node = new SimpleNode(EXPRESSION, count);
+        for (n = 0; n < count; n++)
+            node.jjtAddChild((SimpleNode)exprstack.pop(), n);
 
-	return(node);
+        return(node);
     }
 
 
     private static void
     openExpression(boolean commas) {
 
-	commastack[++commatop] = commas;
+        commastack[++commatop] = commas;
     }
 
 
     static void
     openLexicalState() {
 
-	lexicalstatestart = parserstream.getLine();
+        lexicalstatestart = parserstream.getLine();
     }
 
 
     private static void
     openScope(int mask) {
 
-	scopestack[++scopetop] = mask;
+        scopestack[++scopetop] = mask;
     }
 
 
     private static void
     openStatement() {
 
-	Token  nexttoken;
-	int    line = -1;
+        Token  nexttoken;
+        int    line = -1;
 
-	//
-	// This is supposed to help make sure the line numbers in error
-	// messages point to the start of the statement rather than to
-	// the last token consumed by the statement.
-	//
+        //
+        // This is supposed to help make sure the line numbers in error
+        // messages point to the start of the statement rather than to
+        // the last token consumed by the statement.
+        //
 
-	try {
-	    if ((nexttoken = getToken(1)) != null)
-		line = nexttoken.beginLine;
-	}
-	catch (Throwable t) {}
-	statementstack[++statementtop] = line;
+        try {
+            if ((nexttoken = getToken(1)) != null)
+                line = nexttoken.beginLine;
+        }
+        catch (Throwable t) {}
+        statementstack[++statementtop] = line;
     }
 
 
     private static void
     reset(YoixParserStream stream, boolean tags) {
 
-	stream.setParent(parserstream);
-	parserstream = stream;
-	ReInit(parserstream);
+        stream.setParent(parserstream);
+        parserstream = stream;
+        ReInit(parserstream);
 
-	addtags = tags;
-	commastack[0] = true;
-	commatop = 0;
-	scopestack[0] = 0;
-	scopetop = 0;
-	statementtop = -1;
-	lexicalstatestart = -1;
-	exprstack.removeAllElements();
+        addtags = tags;
+        commastack[0] = true;
+        commatop = 0;
+        scopestack[0] = 0;
+        scopetop = 0;
+        statementtop = -1;
+        lexicalstatestart = -1;
+        exprstack.removeAllElements();
 
-	token_source.SwitchTo(DEFAULT);
+        token_source.SwitchTo(DEFAULT);
     }
 
 
     private static void
     restore() {
 
-	if (parserstream != null) {
-	    parserstream = parserstream.getParent();
-	    ReInit(parserstream);
-	}
+        if (parserstream != null) {
+            parserstream = parserstream.getParent();
+            ReInit(parserstream);
+        }
     }
 
 
     private static void
     tagTop() {
 
-	SimpleNode  node;
-	String      source;
-	int         line;
+        SimpleNode  node;
+        String      source;
+        int         line;
 
-	if (addtags) {
-	    node = (SimpleNode)jjtree.popNode();
-	    if (statementtop >= 0)
-		line = statementstack[statementtop];
-	    else line = -1;
-	    if (line < 0)
-		line = (token != null) ? token.beginLine : parserstream.getBeginLine();
-	    source = parserstream.getName();
-	    jjtree.pushNode(SimpleNode.newTagged(node, line, source));
-	}
+        if (addtags) {
+            node = (SimpleNode)jjtree.popNode();
+            if (statementtop >= 0)
+                line = statementstack[statementtop];
+            else line = -1;
+            if (line < 0)
+                line = (token != null) ? token.beginLine : parserstream.getBeginLine();
+            source = parserstream.getName();
+            jjtree.pushNode(SimpleNode.newTagged(node, line, source));
+        }
     }
 
 
     private static void
     unroll(SimpleNode node) {
 
-	int  n;
+        int  n;
 
-	for (n = 0; n < node.value.length; n++)
-	    jjtree.pushNode((SimpleNode)node.value[n]);
+        for (n = 0; n < node.value.length; n++)
+            jjtree.pushNode((SimpleNode)node.value[n]);
     }
 
 
     private static void
     unrollTop() {
 
-	unroll((SimpleNode)jjtree.popNode());
+        unroll((SimpleNode)jjtree.popNode());
     }
 
 
     private static void
     validateEOF() {
 
-	Token  tok;
+        Token  tok;
 
-	//
-	// Call the appropriate abort() method when it looks like we're not
-	// supposed to accept EOF, otherwise it just returns to the caller.
-	// Right now we reject EOF if we're not in the DEFAULT state or if
-	// we're already working on a statement.
-	//
+        //
+        // Call the appropriate abort() method when it looks like we're not
+        // supposed to accept EOF, otherwise it just returns to the caller.
+        // Right now we reject EOF if we're not in the DEFAULT state or if
+        // we're already working on a statement.
+        //
 
-	if (YoixParserTokenManager.curLexState == DEFAULT) {
-	    if (statementtop > 0) {
-		tok = new Token();
-		tok.kind = 0;
-		tok.next = new Token();
-		tok.next.kind = 0;
-		tok.next.beginLine = parserstream.getLine();
-		abort(new ParseException(tok, null, null));
-	    }
-	} else abort((TokenMgrError)null);
+        if (YoixParserTokenManager.curLexState == DEFAULT) {
+            if (statementtop > 0) {
+                tok = new Token();
+                tok.kind = 0;
+                tok.next = new Token();
+                tok.next.kind = 0;
+                tok.next.beginLine = parserstream.getLine();
+                abort(new ParseException(tok, null, null));
+            }
+        } else abort((TokenMgrError)null);
     }
 }
 
@@ -1210,7 +1210,7 @@ TOKEN : {"@" : STATE_ATTRIBUTE}
 
 TOKEN : {
     <LITERAL_INTEGER :
-	["1"-"9"] (["0"-"9"])*
+        ["1"-"9"] (["0"-"9"])*
       | "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+
       | "0" (["0"-"7"])*
     >
@@ -1218,34 +1218,34 @@ TOKEN : {
 
 TOKEN : {
     <LITERAL_DOUBLE :
-	(["0"-"9"])+ "." (["0"-"9"])* (["e","E"] (["+","-"])? (["0"-"9"])+)?
+        (["0"-"9"])+ "." (["0"-"9"])* (["e","E"] (["+","-"])? (["0"-"9"])+)?
       | (".")? (["0"-"9"])+ (["e","E"] (["+","-"])? (["0"-"9"])+)?
     >
 }
 
 TOKEN : {
     <LITERAL_CHARACTER :
-	"'" (
-	    ~["'","\\","\n","\r"]
-	  | "\\" ~["x","\n","\r"]
-	  | "\\x" ["0"-"9","a"-"f","A"-"F"]
-	)* "'"
+        "'" (
+            ~["'","\\","\n","\r"]
+          | "\\" ~["x","\n","\r"]
+          | "\\x" ["0"-"9","a"-"f","A"-"F"]
+        )* "'"
     >
 }
 
 TOKEN : {
     <LITERAL_STRING :
-	"\"" (
-	    ~["\"","\\","\n","\r"]
-	  | "\\" ~["x","\r"]
-	  | "\\x" ["0"-"9","a"-"f","A"-"F"]
-	  | "\\\r\n"
-	)* "\""
+        "\"" (
+            ~["\"","\\","\n","\r"]
+          | "\\" ~["x","\r"]
+          | "\\x" ["0"-"9","a"-"f","A"-"F"]
+          | "\\\r\n"
+        )* "\""
 
       | "0x\"" (
-	    ["0"-"9","a"-"f","A"-"F"]
-	  | [" ","\t","\n","\r"]
-	)* "\""
+            ["0"-"9","a"-"f","A"-"F"]
+          | [" ","\t","\n","\r"]
+        )* "\""
     >
 }
 
@@ -1277,12 +1277,12 @@ MORE : {
 
 TOKEN : {
     <LITERAL_REGEXP :
-	"#" (
-	    ~["#","\\","\n","\r"]
-	  | "\\" ~["x","\r"]
-	  | "\\x" ["0"-"9","a"-"f","A"-"F"]
-	  | "\\\r\n"
-	)+ "#"
+        "#" (
+            ~["#","\\","\n","\r"]
+          | "\\" ~["x","\r"]
+          | "\\x" ["0"-"9","a"-"f","A"-"F"]
+          | "\\\r\n"
+        )+ "#"
     >
 }
 
@@ -1321,34 +1321,34 @@ SimpleNode
 parseStatement(YoixParserStream stream, boolean tags) #void : {reset(stream, tags);}
 {
     try {
-	Statement()
-	{
-	    if (VM.bitCheck(N_DEBUG, DEBUG_PARSETREE))
-		VM.print(N_STDOUT, ((SimpleNode)jjtree.peekNode()).dump(PARSER_YOIX));
-	    backup((SimpleNode)jjtree.peekNode());
-	    return((SimpleNode)jjtree.popNode());
-	}
+        Statement()
+        {
+            if (VM.bitCheck(N_DEBUG, DEBUG_PARSETREE))
+                VM.print(N_STDOUT, ((SimpleNode)jjtree.peekNode()).dump(PARSER_YOIX));
+            backup((SimpleNode)jjtree.peekNode());
+            return((SimpleNode)jjtree.popNode());
+        }
     }
     catch(ParseException e) {
-	return(abort(e));
+        return(abort(e));
     }
     catch(TokenMgrError e) {
 
-	//
-	// We should only get here in unusual circumstances, like a C-style
-	// comment or multi-line string that wasn't closed while we were in
-	// the middle of parsing a statement. Anyway this one is unusual but
-	// it can occasionally happen. We leave it to the abort() defined in
-	// this class to handle things.
-	//
-	// NOTE - our old implementation died here, be now we just abort().
-	// Seems reasonable, but not 100% convinced about the change.
-	//
+        //
+        // We should only get here in unusual circumstances, like a C-style
+        // comment or multi-line string that wasn't closed while we were in
+        // the middle of parsing a statement. Anyway this one is unusual but
+        // it can occasionally happen. We leave it to the abort() defined in
+        // this class to handle things.
+        //
+        // NOTE - our old implementation died here, be now we just abort().
+        // Seems reasonable, but not 100% convinced about the change.
+        //
 
-	return(abort(e));
+        return(abort(e));
     }
     finally {
-	restore();
+        restore();
     }
 }
 
@@ -1361,123 +1361,123 @@ Statement() : {openStatement();}
 {
     <BREAK> ";"
     {
-	buildStatement(jjtThis, BREAK);
+        buildStatement(jjtThis, BREAK);
     }
   | <CONTINUE> ";"
     {
-	buildStatement(jjtThis, CONTINUE);
+        buildStatement(jjtThis, CONTINUE);
     }
   | <DO> Statement() <WHILE> Expression() ";"
     {
-	buildStatement(jjtThis, DO);
+        buildStatement(jjtThis, DO);
     }
   | <EXIT> Optional() ";"
     {
-	buildStatement(jjtThis, EXIT);
+        buildStatement(jjtThis, EXIT);
     }
   | <FINALLY> Compound(0)
     {
-	buildStatement(jjtThis, FINALLY);
+        buildStatement(jjtThis, FINALLY);
     }
   | LOOKAHEAD(HitForEach()) <FOR> "(" Name() <IN> Expression() (LOOKAHEAD(1) <BY> Expression())? ")" Statement()
     {
-	buildStatement(jjtThis, FOREACH);
+        buildStatement(jjtThis, FOREACH);
     }
   | <FOR> "(" Optional() ";" Optional() ";" Optional() ")" Statement()
     {
-	buildStatement(jjtThis, FOR);
+        buildStatement(jjtThis, FOR);
     }
   | <IF> "(" Expression() ")" Statement() (LOOKAHEAD(1) <ELSE> Statement())?
     {
-	buildStatement(jjtThis, IF);
+        buildStatement(jjtThis, IF);
     }
   | <IMPORT> Import() ";"
     {
-	buildStatement(jjtThis, IMPORT);
+        buildStatement(jjtThis, IMPORT);
     }
   | <INCLUDE> Expression() ";"
     {
-	buildStatement(jjtThis, INCLUDE);
+        buildStatement(jjtThis, INCLUDE);
     }
   | <RETURN> Optional() ";"
     {
-	buildStatement(jjtThis, RETURN);
+        buildStatement(jjtThis, RETURN);
     }
   | <SAVE> Lvalue() ("=" Expression())? ";"
     {
-	buildStatement(jjtThis, SAVE);
+        buildStatement(jjtThis, SAVE);
     }
   | <SWITCH> (Expression()) Compound(LABELMASK)
     {
-	buildStatement(jjtThis, SWITCH);
+        buildStatement(jjtThis, SWITCH);
     }
   | <SYNCHRONIZED> "(" Expression() ")" Statement()
     {
-	buildStatement(jjtThis, SYNCHRONIZED);
+        buildStatement(jjtThis, SYNCHRONIZED);
     }
   | <TRY> Compound(0) <CATCH> "(" Parameter() ")" Compound(0)
     {
-	buildStatement(jjtThis, TRY);
+        buildStatement(jjtThis, TRY);
     }
   | <TYPEDEF> Name() "(" ParameterList() ")" Compound(0)
     {
-	buildStatement(jjtThis, TYPEDEF);
+        buildStatement(jjtThis, TYPEDEF);
     }
   | <WHILE> "(" Expression() ")" Statement()
     {
-	buildStatement(jjtThis, WHILE);
+        buildStatement(jjtThis, WHILE);
     }
   | LOOKAHEAD(HitCase()) <CASE> CaseExpression() ":"
     {
-	buildStatement(jjtThis, CASE);
+        buildStatement(jjtThis, CASE);
     }
   | LOOKAHEAD(HitDefault()) <DEFAULT_> ":"
     {
-	buildStatement(jjtThis, DEFAULT_);
+        buildStatement(jjtThis, DEFAULT_);
     }
   | LOOKAHEAD(HitDeclaration()) Declaration() ";"
     {
-	buildStatement(jjtThis, DECLARATION);
+        buildStatement(jjtThis, DECLARATION);
     }
   | LOOKAHEAD(HitFunctionDefine()) FunctionDefine()
     {
-	buildStatement(jjtThis, FUNCTION);
+        buildStatement(jjtThis, FUNCTION);
     }
   | LOOKAHEAD(HitNamedBlock()) Lvalue() "{" (Statement())* "}"
     {
-	buildStatement(jjtThis, NAMEDBLOCK);
+        buildStatement(jjtThis, NAMEDBLOCK);
     }
   | LOOKAHEAD(HitThisBlock()) <THIS> Lvalue() "{" (Statement())* "}"
     {
-	buildStatement(jjtThis, THISBLOCK);
+        buildStatement(jjtThis, THISBLOCK);
     }
   | LOOKAHEAD(HitGlobalBlock()) <GLOBAL> (Lvalue())? "{" (Statement())* "}"
     {
-	buildStatement(jjtThis, GLOBALBLOCK);
+        buildStatement(jjtThis, GLOBALBLOCK);
     }
   | <RESTRICTED> (Lvalue())? "{" (Statement())* "}"
     {
-	buildStatement(jjtThis, RESTRICTEDBLOCK);
+        buildStatement(jjtThis, RESTRICTEDBLOCK);
     }
   | Expression() ";"
     {
-	buildStatement(jjtThis, EXPRESSION);
+        buildStatement(jjtThis, EXPRESSION);
     }
   | Compound(0)
     {
-	buildStatement(jjtThis, COMPOUND);
+        buildStatement(jjtThis, COMPOUND);
     }
   | Qualifier() Lvalue() ("=" Expression())? ";"
     {
-	buildStatement(jjtThis, QUALIFIER);
+        buildStatement(jjtThis, QUALIFIER);
     }
   | ";"
     {
-	buildStatement(jjtThis, EMPTY);
+        buildStatement(jjtThis, EMPTY);
     }
   | LOOKAHEAD({scopetop == 0}) <EOF>
     {
-	buildStatement(jjtThis, EOF);
+        buildStatement(jjtThis, EOF);
     }
 }
 
@@ -1495,21 +1495,21 @@ void
 Expression() : {}
 {
     UnaryExpression() (LOOKAHEAD(2) (
-	BinaryOperator() UnaryExpression()
-	{
-	    arrangeBinary();
-	}
+        BinaryOperator() UnaryExpression()
+        {
+            arrangeBinary();
+        }
       | InstanceofOperator() Name()
-	{
-	    arrangeBinary();
-	}
+        {
+            arrangeBinary();
+        }
       | TernaryOperator() Expression() <COLON> Expression()
-	{
-	    arrangeTernary();
-	}
+        {
+            arrangeTernary();
+        }
     ))*
     {
-	buildExpression(jjtThis, false);
+        buildExpression(jjtThis, false);
     }
 }
 
@@ -1518,31 +1518,31 @@ UnaryExpression() : {}
 {
     LOOKAHEAD(HitUnaryExpression()) UnaryOperator() UnaryExpression()
     {
-	buildExpression(jjtThis, true);
+        buildExpression(jjtThis, true);
     }
   | IncrementOperator(false) Lvalue()
     {
-	buildExpression(jjtThis, true);
+        buildExpression(jjtThis, true);
     }
   | LOOKAHEAD(HitPostIncrement()) Lvalue() IncrementOperator(true)
     {
-	buildExpression(jjtThis, false);
+        buildExpression(jjtThis, false);
     }
   | LOOKAHEAD(HitCast()) "(" Name() ")" UnaryExpression()
     {
-	buildCast();
+        buildCast();
     }
   | LOOKAHEAD(HitLvalue()) Lvalue() ("@" Attribute())?
     {
-	unrollTop();
+        unrollTop();
     }
   | <NEW> Constructor()
     {
-	jjtThis.setType(NEW);
+        jjtThis.setType(NEW);
     }
   | PrimaryExpression()
     {
-	unrollTop();
+        unrollTop();
     }
 }
 
@@ -1551,31 +1551,31 @@ PrimaryExpression() #void : {}
 {
     <LITERAL_INTEGER>
     {
-	jjtree.pushNode(YoixObject.newNumber(token.image));
+        jjtree.pushNode(YoixObject.newNumber(token.image));
     }
   | <LITERAL_DOUBLE>
     {
-	jjtree.pushNode(YoixObject.newDouble(token.image));
+        jjtree.pushNode(YoixObject.newDouble(token.image));
     }
   | <LITERAL_CHARACTER>
     {
-	jjtree.pushNode(YoixObject.newChar(token.image));
+        jjtree.pushNode(YoixObject.newChar(token.image));
     }
   | <LITERAL_STRING>
     {
-	jjtree.pushNode(YoixObject.newString(token.image, true, true));
+        jjtree.pushNode(YoixObject.newString(token.image, true, true));
     }
   | <LITERAL_MULTILINE_STRING>
     {
-	jjtree.pushNode(YoixObject.newString(token.image, false, true));
+        jjtree.pushNode(YoixObject.newString(token.image, false, true));
     }
   | <LITERAL_MULTILINE_ESCAPED_STRING>
     {
-	jjtree.pushNode(YoixObject.newString(token.image, true, true));
+        jjtree.pushNode(YoixObject.newString(token.image, true, true));
     }
   | <LITERAL_REGEXP>
     {
-	jjtree.pushNode(YoixObject.newString(token.image, true, true));
+        jjtree.pushNode(YoixObject.newString(token.image, true, true));
     }
   | "(" CommaExpression(true) ")"
 }
@@ -1584,7 +1584,7 @@ void
 Attribute() #void : {}
 {
     (
-	<ATTRIBUTE_ACCESS>
+        <ATTRIBUTE_ACCESS>
       | <ATTRIBUTE_GROWABLE>
       | <ATTRIBUTE_LENGTH>
       | <ATTRIBUTE_MAJOR>
@@ -1595,7 +1595,7 @@ Attribute() #void : {}
       | <ATTRIBUTE_TYPENAME>
     )
     {
-	buildAttribute(token.kind);
+        buildAttribute(token.kind);
     }
 }
 
@@ -1604,7 +1604,7 @@ CaseExpression() : {}
 {
     UnaryExpression()
     {
-	buildExpression(jjtThis, false);
+        buildExpression(jjtThis, false);
     }
 }
 
@@ -1631,7 +1631,7 @@ Optional() : {}
 {
     (Expression())?
     {
-	buildOptional(jjtThis);
+        buildOptional(jjtThis);
     }
 }
 
@@ -1643,12 +1643,12 @@ void
 Lvalue() : {}
 {
     PrimaryLvalue() (LOOKAHEAD(1) (
-	"." Name()
+        "." Name()
       | "[" Expression() "]"
       | "(" FunctionCall() ")"
     ))*
     {
-	jjtThis.setType(LVALUE);
+        jjtThis.setType(LVALUE);
     }
 }
 
@@ -1657,27 +1657,27 @@ PrimaryLvalue() #void : {}
 {
     <GLOBAL>
     {
-	buildPrimaryLvalue(GLOBAL);
+        buildPrimaryLvalue(GLOBAL);
     }
   | <THIS>
     {
-	buildPrimaryLvalue(THIS);
+        buildPrimaryLvalue(THIS);
     }
   | Name()
     {
-	buildPrimaryLvalue(NAME);
+        buildPrimaryLvalue(NAME);
     }
   | AddressOperator() Lvalue()
     {
-	buildPrimaryLvalue(ADDRESS);
+        buildPrimaryLvalue(ADDRESS);
     }
   | IndirectionOperator() Pointer()
     {
-	buildPrimaryLvalue(INDIRECTION);
+        buildPrimaryLvalue(INDIRECTION);
     }
   | "(" Lvalue() ")"
     {
-	buildPrimaryLvalue(LVALUE);
+        buildPrimaryLvalue(LVALUE);
     }
 }
 
@@ -1686,15 +1686,15 @@ Pointer() : {}
 {
     LOOKAHEAD(HitPostIncrement()) Lvalue() IncrementOperator(true)
     {
-	buildExpression(jjtThis, false);
+        buildExpression(jjtThis, false);
     }
   | IncrementOperator(false) Lvalue()
     {
-	buildExpression(jjtThis, true);
+        buildExpression(jjtThis, true);
     }
   | (LOOKAHEAD(1) "(" CommaExpression(true) ")" | Lvalue())
     {
-	unrollTop();
+        unrollTop();
     }
 }
 
@@ -1707,11 +1707,11 @@ Import() : {}
 {
     LOOKAHEAD(HitYoixModules()) Name() DotStar() DotStar()
     {
-	unrollTop();
+        unrollTop();
     }
   | Lvalue() (DotStar())?
     {
-	unrollTop();
+        unrollTop();
     }
 }
 
@@ -1730,7 +1730,7 @@ Qualifier() : {}
 {
     (<CONST> | <FINAL>)
     {
-	jjtThis.setType(token.kind);
+        jjtThis.setType(token.kind);
     }
 }
 
@@ -1739,7 +1739,7 @@ Declarator() : {}
 {
     Dvalue() ("=" Initializer())?
     {
-	buildDeclarator(jjtThis);
+        buildDeclarator(jjtThis);
     }
 }
 
@@ -1748,7 +1748,7 @@ Dvalue() : {}
 {
     VariableName() ("[" Index() "]")?
     {
-	jjtThis.setType(DVALUE);
+        jjtThis.setType(DVALUE);
     }
 }
 
@@ -1757,7 +1757,7 @@ Index() : {}
 {
     (CommaExpression(false) ("," (CommaExpression(false) | <DOTDOTDOT>))?)?
     {
-	buildIndex(jjtThis);
+        buildIndex(jjtThis);
     }
 }
 
@@ -1766,15 +1766,15 @@ Initializer() : {}
 {
     CommaExpression(false)
     {
-	jjtThis.setType(EXPRESSION);
+        jjtThis.setType(EXPRESSION);
     }
   | LOOKAHEAD(HitArray()) "{" ExpressionList() (LOOKAHEAD(1) ",")? "}"
     {
-	jjtThis.setType(ARRAY);
+        jjtThis.setType(ARRAY);
     }
   | Compound(NAMEMASK)
     {
-	jjtThis.setType(DICTIONARY);
+        jjtThis.setType(DICTIONARY);
     }
 }
 
@@ -1787,7 +1787,7 @@ FunctionCall() : {}
 {
     (ExpressionList())?
     {
-	jjtThis.setType(FUNCTION);
+        jjtThis.setType(FUNCTION);
     }
 }
 
@@ -1802,7 +1802,7 @@ Final() : {}
 {
     <FINAL>
     {
-	jjtThis.setType(FINAL);
+        jjtThis.setType(FINAL);
     }
 }
 
@@ -1811,11 +1811,11 @@ Parameter() : {}
 {
     LOOKAHEAD(2) Name() VariableName()
     {
-	jjtThis.setType(DECLARATION);
+        jjtThis.setType(DECLARATION);
     }
   | VariableName()
     {
-	unrollTop();
+        unrollTop();
     }
 }
 
@@ -1824,11 +1824,11 @@ ParameterList() : {}
 {
     <DOTDOTDOT>
     {
-	buildParameterList(jjtThis);
+        buildParameterList(jjtThis);
     }
   | (Parameter() (LOOKAHEAD(2) "," Parameter())* ("," <DOTDOTDOT>)?)?
     {
-	buildParameterList(jjtThis);
+        buildParameterList(jjtThis);
     }
 }
 
@@ -1841,7 +1841,7 @@ Name() #void : {}
 {
     (<NAME> | ReservedName())
     {
-	jjtree.pushNode(SimpleNode.newName(token.image));
+        jjtree.pushNode(SimpleNode.newName(token.image));
     }
 }
 
@@ -1850,7 +1850,7 @@ VariableName() #void : {}
 {
     (<NAME> | LOOKAHEAD({(scopestack[scopetop]&NAMEMASK) != 0}) ReservedName())
     {
-	jjtree.pushNode(SimpleNode.newName(token.image));
+        jjtree.pushNode(SimpleNode.newName(token.image));
     }
 }
 
@@ -1859,7 +1859,7 @@ DotStar() #void : {}
 {
     <DOTSTAR>
     {
-	jjtree.pushNode(new SimpleNode(DOTSTAR));
+        jjtree.pushNode(new SimpleNode(DOTSTAR));
     }
 }
 
@@ -1894,7 +1894,7 @@ AddressOperator() : {}
 {
     <AND>
     {
-	jjtThis.setType(ADDRESS);
+        jjtThis.setType(ADDRESS);
     }
 }
 
@@ -1902,7 +1902,7 @@ void
 BinaryOperator() : {}
 {
     (
-	<MUL>
+        <MUL>
       | <DIV>
       | <MOD>
       | <PLUS>
@@ -1941,7 +1941,7 @@ BinaryOperator() : {}
       | LOOKAHEAD(",", {commastack[commatop]}) <COMMA>
     )
     {
-	jjtThis.setType(token.kind);
+        jjtThis.setType(token.kind);
     }
 }
 
@@ -1950,11 +1950,11 @@ IncrementOperator(boolean post) : {}
 {
     <INCREMENT>
     {
-	jjtThis.setType(post ? POSTINCREMENT : PREINCREMENT);
+        jjtThis.setType(post ? POSTINCREMENT : PREINCREMENT);
     }
   | <DECREMENT>
     {
-	jjtThis.setType(post ? POSTDECREMENT : PREDECREMENT);
+        jjtThis.setType(post ? POSTDECREMENT : PREDECREMENT);
     }
 }
 
@@ -1963,7 +1963,7 @@ IndirectionOperator() : {}
 {
     <MUL>
     {
-	jjtThis.setType(INDIRECTION);
+        jjtThis.setType(INDIRECTION);
     }
 }
 
@@ -1972,7 +1972,7 @@ InstanceofOperator() : {}
 {
     <INSTANCEOF>
     {
-	jjtThis.setType(INSTANCEOF);
+        jjtThis.setType(INSTANCEOF);
     }
 }
 
@@ -1981,7 +1981,7 @@ TernaryOperator() : {}
 {
     <QUESTION>
     {
-	jjtThis.setType(QUESTIONCOLON);
+        jjtThis.setType(QUESTIONCOLON);
     }
 }
 
@@ -1990,19 +1990,19 @@ UnaryOperator() : {}
 {
     <PLUS>
     {
-	jjtThis.setType(UPLUS);
+        jjtThis.setType(UPLUS);
     }
   | <MINUS>
     {
-	jjtThis.setType(UMINUS);
+        jjtThis.setType(UMINUS);
     }
   | <NOT>
     {
-	jjtThis.setType(NOT);
+        jjtThis.setType(NOT);
     }
   | <COMPLEMENT>
     {
-	jjtThis.setType(COMPLEMENT);
+        jjtThis.setType(COMPLEMENT);
     }
 }
 
