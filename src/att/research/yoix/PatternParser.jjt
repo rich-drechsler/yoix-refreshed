@@ -65,30 +65,30 @@ class PatternParser
 
     private static short  operators[] = {
      //
-     // Operator		Precedence	Associativity
-     // --------		----------	-------------
-	AND,			3,		LEFT,
-	XOR,			2,		LEFT,
-	OR,			1,		LEFT,
+     // Operator                Precedence      Associativity
+     // --------                ----------      -------------
+        AND,                    3,              LEFT,
+        XOR,                    2,              LEFT,
+        OR,                     1,              LEFT,
 
-	CONDITIONAL,		0,		LEFT,
+        CONDITIONAL,            0,              LEFT,
     };
 
     private static short  precedence[] = new short[LASTTOKEN];
     private static short  associativity[] = new short[LASTTOKEN];
 
     static {
-	for (int n = 0; n < precedence.length; n++) {
-	    precedence[n] = (short)LASTTOKEN;	// higher than all operators
-	    associativity[n] = NONE;
-	}
+        for (int n = 0; n < precedence.length; n++) {
+            precedence[n] = (short)LASTTOKEN;        // higher than all operators
+            associativity[n] = NONE;
+        }
 
-	for (int n = 0; n < operators.length; n += 3) {
-	    precedence[operators[n]] = operators[n+1];
-	    associativity[operators[n]] = operators[n+2];
-	}
+        for (int n = 0; n < operators.length; n += 3) {
+            precedence[operators[n]] = operators[n+1];
+            associativity[operators[n]] = operators[n+2];
+        }
 
-	operators = null;
+        operators = null;
     }
 
     ///////////////////////////////////
@@ -100,240 +100,240 @@ class PatternParser
     private static YoixObject
     abort(String error) {
 
-	return(abort(error, null));
+        return(abort(error, null));
     }
 
 
     private static YoixObject
     abort(String error, ParseException e) {
 
-	ArrayList  args = new ArrayList();
-	String     token;
-	String     expected;
-	String     sep;
-	Token      tok;
-	int        line;
-	int        column;
-	int        m;
-	int        n;
+        ArrayList  args = new ArrayList();
+        String     token;
+        String     expected;
+        String     sep;
+        Token      tok;
+        int        line;
+        int        column;
+        int        m;
+        int        n;
 
-	//
-	// Wanted better control over parser error messages, primarily
-	// for consistency, so this routine is now a slightly modified
-	// version of ParseException.getMessage(). Change JavaCC and
-	// you may have to do some work here as well.
-	//
+        //
+        // Wanted better control over parser error messages, primarily
+        // for consistency, so this routine is now a slightly modified
+        // version of ParseException.getMessage(). Change JavaCC and
+        // you may have to do some work here as well.
+        //
 
-	if (e != null && e.currentToken != null) {
-	    line = e.currentToken.next.beginLine;
-	    column = e.currentToken.next.beginColumn;
-	    args.add("Encountered");
-	    token = "\"";
-	    sep = "";
-	    for (tok = e.currentToken.next; tok != null; tok = tok.next) {
-		if (tok.kind == 0) {
-		    token += sep + tokenImage[0];
-		    break;
-		} else token += sep + e.add_escapes(tok.image);
-		sep = " ";
-	    }
-	    token += "\"";
-	    args.add(token);
-	    args.add(NL);
-	    expected = NL + "    Parser was looking for one of the following tokens:" + NL;
-	    for (n = 0; n < e.expectedTokenSequences.length; n++) {
-		sep = "\t";
-		for (m = 0; m < e.expectedTokenSequences[n].length; m++) {
-		    expected += sep + e.tokenImage[e.expectedTokenSequences[n][m]];
-		    sep = " ";
-		}
-		if (m > 0) {
-		    if (e.expectedTokenSequences[n][m - 1] != 0)
-			expected += sep + "...";
-		    expected += NL;
-		}
-	    }
-	    args.add(expected);
-	} else {		// should be unnecessary - later
-	    if (e != null)
-		args.add(e.getMessage());
-	    line = parserstream.getBeginLine();
-	    column = parserstream.getBeginColumn();
-	}
+        if (e != null && e.currentToken != null) {
+            line = e.currentToken.next.beginLine;
+            column = e.currentToken.next.beginColumn;
+            args.add("Encountered");
+            token = "\"";
+            sep = "";
+            for (tok = e.currentToken.next; tok != null; tok = tok.next) {
+                if (tok.kind == 0) {
+                    token += sep + tokenImage[0];
+                    break;
+                } else token += sep + e.add_escapes(tok.image);
+                sep = " ";
+            }
+            token += "\"";
+            args.add(token);
+            args.add(NL);
+            expected = NL + "    Parser was looking for one of the following tokens:" + NL;
+            for (n = 0; n < e.expectedTokenSequences.length; n++) {
+                sep = "\t";
+                for (m = 0; m < e.expectedTokenSequences[n].length; m++) {
+                    expected += sep + e.tokenImage[e.expectedTokenSequences[n][m]];
+                    sep = " ";
+                }
+                if (m > 0) {
+                    if (e.expectedTokenSequences[n][m - 1] != 0)
+                        expected += sep + "...";
+                    expected += NL;
+                }
+            }
+            args.add(expected);
+        } else {        // should be unnecessary - later
+            if (e != null)
+                args.add(e.getMessage());
+            line = parserstream.getBeginLine();
+            column = parserstream.getBeginColumn();
+        }
 
-	VM.pushTag(line, column, parserstream.getName());
-	return(VM.abort(error, args, e));
+        VM.pushTag(line, column, parserstream.getName());
+        return(VM.abort(error, args, e));
     }
 
 
     private static void
     arrangeBinary() {
 
-	SimpleNode  operand;
-	SimpleNode  operator;
-	SimpleNode  next;
-	int         prec1;
-	int         prec2;
-	int         type1;
-	int         type2;
+        SimpleNode  operand;
+        SimpleNode  operator;
+        SimpleNode  next;
+        int         prec1;
+        int         prec2;
+        int         type1;
+        int         type2;
 
-	//
-	// Rearranges binary expressions based on the precedence[] and
-	// associativity[] tables.
-	//
+        //
+        // Rearranges binary expressions based on the precedence[] and
+        // associativity[] tables.
+        //
 
-	operand = (SimpleNode)jjtree.popNode();
-	operator = (SimpleNode)jjtree.popNode();
+        operand = (SimpleNode)jjtree.popNode();
+        operator = (SimpleNode)jjtree.popNode();
 
-	type1 = operator.type();
-	type2 = ((SimpleNode)jjtree.peekNode()).type();
-	prec1 = precedence(type1);
-	prec2 = precedence(type2);
+        type1 = operator.type();
+        type2 = ((SimpleNode)jjtree.peekNode()).type();
+        prec1 = precedence(type1);
+        prec2 = precedence(type2);
 
-	while (prec1 > prec2 || (prec1 == prec2 && associativity(type2) == RIGHT)) {
-	    next = (SimpleNode)jjtree.popNode();
-	    if (next.type() == CONDITIONAL && false)
-		unroll(next.getChild0());
-	    else exprstack.push(next);
-	    type2 = ((SimpleNode)jjtree.peekNode()).type();
-	    prec2 = precedence(type2);
-	}
+        while (prec1 > prec2 || (prec1 == prec2 && associativity(type2) == RIGHT)) {
+            next = (SimpleNode)jjtree.popNode();
+            if (next.type() == CONDITIONAL && false)
+                unroll(next.getChild0());
+            else exprstack.push(next);
+            type2 = ((SimpleNode)jjtree.peekNode()).type();
+            prec2 = precedence(type2);
+        }
 
-	exprstack.push(operator);
-	exprstack.push(operand);
+        exprstack.push(operator);
+        exprstack.push(operand);
 
-	while (exprstack.size() > 0) {
-	    next = (SimpleNode)exprstack.pop();
-	    switch (next.type()) {
-		case AND:
-		case OR:
-		    jjtree.pushNode(new SimpleNode(CONDITIONAL, collectExpression()));
-		    break;
-	    }
-	    jjtree.pushNode(next);
-	}
+        while (exprstack.size() > 0) {
+            next = (SimpleNode)exprstack.pop();
+            switch (next.type()) {
+                case AND:
+                case OR:
+                    jjtree.pushNode(new SimpleNode(CONDITIONAL, collectExpression()));
+                    break;
+            }
+            jjtree.pushNode(next);
+        }
     }
 
 
     private static int
     associativity(int type) {
 
-	return((type >= 0 && type < associativity.length) ? associativity[type] : NONE);
+        return((type >= 0 && type < associativity.length) ? associativity[type] : NONE);
     }
 
 
     private static void
     buildConcatenation(SimpleNode node) {
 
-	switch (currentparser) {
-	    case YoixConstants.PARSER_PATTERN_AND:
-		node.setType(AND);
-		break;
+        switch (currentparser) {
+            case YoixConstants.PARSER_PATTERN_AND:
+                node.setType(AND);
+                break;
 
-	    case YoixConstants.PARSER_PATTERN_OR:
-		node.setType(OR);
-		break;
+            case YoixConstants.PARSER_PATTERN_OR:
+                node.setType(OR);
+                break;
 
-	    case YoixConstants.PARSER_PATTERN_XOR:
-		node.setType(XOR);
-		break;
+            case YoixConstants.PARSER_PATTERN_XOR:
+                node.setType(XOR);
+                break;
 
-	    default:
-		abort(SYNTAXERROR);
-		break;
-	}
+            default:
+                abort(SYNTAXERROR);
+                break;
+        }
     }
 
 
     private static void
     buildExpression(SimpleNode node, boolean exchange) {
 
-	Node  tmp;
-	int   n;
+        Node  tmp;
+        int   n;
 
-	node.setType(PATTERN);
+        node.setType(PATTERN);
 
-	if (node.length() == 1 && node.getChild0().type() == PATTERN)
-	    node.value = ((SimpleNode)node.getChild0().clone()).value;
+        if (node.length() == 1 && node.getChild0().type() == PATTERN)
+            node.value = ((SimpleNode)node.getChild0().clone()).value;
 
-	if (exchange) {
-	    if ((n = node.length() - 1) > 0) {
-		tmp = node.getChild(n);
-		node.jjtAddChild(node.getChild(n - 1), n);
-		node.jjtAddChild(tmp, n - 1);
-	    }
-	}
+        if (exchange) {
+            if ((n = node.length() - 1) > 0) {
+                tmp = node.getChild(n);
+                node.jjtAddChild(node.getChild(n - 1), n);
+                node.jjtAddChild(tmp, n - 1);
+            }
+        }
     }
 
 
     private static SimpleNode
     collectExpression() {
 
-	SimpleNode  node;
-	SimpleNode  arg;
-	int         prec;
-	int         count;
-	int         n;
+        SimpleNode  node;
+        SimpleNode  arg;
+        int         prec;
+        int         count;
+        int         n;
 
-	for (n = 1, count = 0; n > 0; n--, count++) {
-	    arg = (SimpleNode)jjtree.popNode();
-	    prec = precedence(arg.type());
-	    exprstack.push(arg);
-	    if (prec > 0 && prec < LASTTOKEN)	// it's a binary operator - ugh??
-		n += 2;
-	}
+        for (n = 1, count = 0; n > 0; n--, count++) {
+            arg = (SimpleNode)jjtree.popNode();
+            prec = precedence(arg.type());
+            exprstack.push(arg);
+            if (prec > 0 && prec < LASTTOKEN)        // it's a binary operator - ugh??
+                n += 2;
+        }
 
-	node = new SimpleNode(PATTERN, count);
-	for (n = 0; n < count; n++)
-	    node.jjtAddChild((SimpleNode)exprstack.pop(), n);
+        node = new SimpleNode(PATTERN, count);
+        for (n = 0; n < count; n++)
+            node.jjtAddChild((SimpleNode)exprstack.pop(), n);
 
-	return(node);
+        return(node);
     }
 
 
     private static int
     precedence(int type) {
 
-	return((type >= 0 && type < precedence.length) ? precedence[type] : LASTTOKEN);
+        return((type >= 0 && type < precedence.length) ? precedence[type] : LASTTOKEN);
     }
 
 
     private static void
     reset(YoixParserStream stream, int parser) {
 
-	stream.setParent(parserstream);
-	parserstream = stream;
-	currentparser = parser;
-	ReInit(parserstream);
-	exprstack.removeAllElements();
-	token_source.SwitchTo(DEFAULT);
+        stream.setParent(parserstream);
+        parserstream = stream;
+        currentparser = parser;
+        ReInit(parserstream);
+        exprstack.removeAllElements();
+        token_source.SwitchTo(DEFAULT);
     }
 
 
     private static void
     restore() {
 
-	if (parserstream != null) {
-	    parserstream = parserstream.getParent();
-	    ReInit(parserstream);
-	}
+        if (parserstream != null) {
+            parserstream = parserstream.getParent();
+            ReInit(parserstream);
+        }
     }
 
 
     private static void
     unroll(SimpleNode node) {
 
-	int  n;
+        int  n;
 
-	for (n = 0; n < node.value.length; n++)
-	    jjtree.pushNode((SimpleNode)node.value[n]);
+        for (n = 0; n < node.value.length; n++)
+            jjtree.pushNode((SimpleNode)node.value[n]);
     }
 
 
     private static void
     unrollTop() {
 
-	unroll((SimpleNode)jjtree.popNode());
+        unroll((SimpleNode)jjtree.popNode());
     }
 }
 
@@ -377,21 +377,21 @@ TOKEN : {
 
 TOKEN : {
     <LITERAL_REGEXP :
-	"/" (
-	    ~["/", "\\", "\n", "\r"]
-	  | "\\" ~["\r"]
-	  | "\\\r\n"
-	)+ "/"
+        "/" (
+            ~["/", "\\", "\n", "\r"]
+          | "\\" ~["\r"]
+          | "\\\r\n"
+        )+ "/"
     >
 }
 
 TOKEN : {
     <LITERAL_PATTERN :
-	(
-	    ~["\\", " ", "\t", "\n", "\r", "\f", "(", ")", "!", "&", "^", "|"]
-	  | "\\" ~["\r"]
-	  | "\\\r\n"
-	)+
+        (
+            ~["\\", " ", "\t", "\n", "\r", "\f", "(", ")", "!", "&", "^", "|"]
+          | "\\" ~["\r"]
+          | "\\\r\n"
+        )+
     >
 }
 
@@ -422,19 +422,19 @@ SimpleNode
 parsePattern(YoixParserStream stream, int parser) #void : {reset(stream, parser);}
 {
     try {
-	Expression()
-	{
-	    return((SimpleNode)jjtree.popNode());
-	}
+        Expression()
+        {
+            return((SimpleNode)jjtree.popNode());
+        }
     }
     catch(ParseException e) {
-	return(abort(SYNTAXERROR, e));
+        return(abort(SYNTAXERROR, e));
     }
     catch(TokenMgrError e) {
-	return(VM.die(SYNTAXERROR));	// should never get here!!
+        return(VM.die(SYNTAXERROR));        // should never get here!!
     }
     finally {
-	restore();
+        restore();
     }
 }
 
@@ -446,13 +446,13 @@ void
 Expression() : {}
 {
     UnaryExpression() (LOOKAHEAD(2) (
-	BinaryOperator() UnaryExpression()
-	{
-	    arrangeBinary();
-	}
+        BinaryOperator() UnaryExpression()
+        {
+            arrangeBinary();
+        }
     ))*
     {
-	buildExpression(jjtThis, false);
+        buildExpression(jjtThis, false);
     }
 }
 
@@ -461,11 +461,11 @@ UnaryExpression() : {}
 {
     LOOKAHEAD(HitUnaryExpression()) UnaryOperator() UnaryExpression()
     {
-	buildExpression(jjtThis, true);
+        buildExpression(jjtThis, true);
     }
   | PrimaryExpression()
     {
-	unrollTop();
+        unrollTop();
     }
 }
 
@@ -474,11 +474,11 @@ PrimaryExpression() #void : {}
 {
     <LITERAL_PATTERN>
     {
-	jjtree.pushNode(YoixObject.newString(token.image, true, false));
+        jjtree.pushNode(YoixObject.newString(token.image, true, false));
     }
   | <LITERAL_REGEXP>
     {
-	jjtree.pushNode(YoixObject.newRegexp(token.image));
+        jjtree.pushNode(YoixObject.newRegexp(token.image));
     }
   | <LITERAL_LPAREN> Expression() <LITERAL_RPAREN>
 }
@@ -488,19 +488,19 @@ BinaryOperator() : {}
 {
     <LITERAL_AND>
     {
-	jjtThis.setType(AND);
+        jjtThis.setType(AND);
     }
   | <LITERAL_OR>
     {
-	jjtThis.setType(OR);
+        jjtThis.setType(OR);
     }
   | <LITERAL_XOR>
     {
-	jjtThis.setType(XOR);
+        jjtThis.setType(XOR);
     }
   | <LITERAL_SPACE>
     {
-	buildConcatenation(jjtThis);
+        buildConcatenation(jjtThis);
     }
 }
 
@@ -509,7 +509,7 @@ UnaryOperator() : {}
 {
     <LITERAL_NOT>
     {
-	jjtThis.setType(NOT);
+        jjtThis.setType(NOT);
     }
 }
 
