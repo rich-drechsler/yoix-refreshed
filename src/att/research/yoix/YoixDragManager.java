@@ -31,7 +31,7 @@ class YoixDragManager
     // This class started as a place to hide the DragSourceMotionListener,
     // which first appeared in Java 1.4, but we ended up handling lots of
     // special code that's used to customize Java's drag and drop behavior.
-    // 
+    //
 
     private YoixBodyComponent  owner = null;
     private DragGestureEvent   trigger = null;
@@ -305,7 +305,7 @@ class YoixDragManager
         // Even though we currently support it, centering the visual doesn't
         // make much sense if we're dragging a window around because nobody
         // else will get a get a chance to accept the drag!!
-        // 
+        //
 
         if (size != null) {
             if ((obj = event.getObject(N_OFFSET)) != null && obj.notNull()) {

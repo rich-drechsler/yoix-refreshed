@@ -504,7 +504,7 @@ class YoixCompilerSupport
         }
 
         return((YoixObject)(((YoixInterfacePointer)lval.value[0]).execute(lval.offset(), argv, lval).clone()));
-        
+
     }
 
 
@@ -610,7 +610,7 @@ class YoixCompilerSupport
         //
         // Unfortunately this method can now provide access to the stack
         // that wasn't previously available - investigate later.
-        // 
+        //
 
         stack.popBlock();
     }
@@ -649,7 +649,7 @@ class YoixCompilerSupport
         //
         // Unfortunately this method can now provide access to the stack
         // that wasn't previously available - investigate later.
-        // 
+        //
 
         names = node.getLocalDict();
         values = YoixObject.newArray(names.length());
@@ -664,7 +664,7 @@ class YoixCompilerSupport
         //
         // Unfortunately this method can now provide access to the stack
         // that wasn't previously available - investigate later.
-        // 
+        //
 
         stack.popBlock();
     }

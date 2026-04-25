@@ -42,7 +42,7 @@ class YoixSwingJDesktopPane extends JDesktopPane
     // Looks like javax.swing.JDesktopPane.isOpaque() always returns true
     // (at least through Java version 1.4.2), so we maintain the current
     // opaque setting.
-    // 
+    //
 
     private boolean  opaque = true;
     private boolean  protectbackground = false;
@@ -234,7 +234,7 @@ class YoixSwingJDesktopPane extends JDesktopPane
             //
             // and appears to be an Apple Java bug. Not 100% sure who's
             // to blame, but this elimintes unwanted noise.
-            // 
+            //
 
             msg = e.getMessage();
             if ((msg = e.getMessage()) == null || !msg.startsWith("No such child:"))

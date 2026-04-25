@@ -1532,7 +1532,7 @@ class YoixBodyPath extends YoixPointerActive
         // tried passing stroke values as optional arguments. This approach
         // seems like the most consistent when compared to YoixBodyGraphics,
         // which is why we picked it. Change was made on 4/3/08.
-        // 
+        //
 
         if (arg.length == 1 || arg.length == 2) {
             if (arg.length == 1) {

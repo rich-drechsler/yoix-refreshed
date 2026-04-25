@@ -567,7 +567,7 @@ class YoixMiscJFC
         // is a little harder than you might expect because JComponent
         // extends Container and it's doubtful we really want to look
         // through every JComponent.
-        // 
+        //
 
         if (container != null) {
             if (container.isShowing()) {
@@ -645,7 +645,7 @@ class YoixMiscJFC
         }
         return(bounds);
     }
-    
+
 
     static Point
     getWindowOffset(Object drawable) {
@@ -786,7 +786,7 @@ class YoixMiscJFC
         // 3/5/08 and Java's printing should now be happy. Should also note
         // that the old method that did this work to an additional shape
         // argument, but it was always null so we tossed that method.
-        // 
+        //
 
         if (comp != null) {
             if (comp.isOpaque()) {		// test added on 1/17/06

@@ -13,7 +13,7 @@
 package att.research.yoix;
 
 public
-interface YoixInterfacePointer 
+interface YoixInterfacePointer
 
     extends YoixInterfaceBody
 

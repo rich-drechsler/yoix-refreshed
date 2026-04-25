@@ -451,7 +451,7 @@ class YoixSwingJDialog extends JDialog
         offset = rootpane.getLocation();
         if (contentpane != null) {
             corner = contentpane.getLocation();
-            offset.translate(corner.x, corner.y); 
+            offset.translate(corner.x, corner.y);
         }
         return(offset);
     }

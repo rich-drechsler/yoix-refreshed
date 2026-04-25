@@ -28,7 +28,7 @@ class YoixMiscXML
     // code. Needs to revisited, along with the YoixModuleParser builtins
     // that use the code, before the next official release!! Most of the
     // code was written on 1/30/11 and 1/31/11.
-    // 
+    //
 
     //
     // Flags that control some of the low level behavior xmlToYoix(). Most
@@ -103,7 +103,7 @@ class YoixMiscXML
     // is the only other possible value, but that makes it impossible for
     // scripts to tell when xmlGet() didn't find anything so you probably
     // shouldn't change this.
-    // 
+    //
 
     private static String NOBLOCK_VALUE = "";
 
@@ -748,7 +748,7 @@ class YoixMiscXML
                                                         // or a storage array. In this case we're
                                                         // looking for the last name, so create an
                                                         // lvalue that references the slot.
-                                                        // 
+                                                        //
                                                         hits.add(YoixObject.newLvalue(target, m+1));
                                                     } else {
                                                         if (value.isArray()) {
@@ -812,7 +812,7 @@ class YoixMiscXML
                         }
                     }
                 }
-    
+
                 if (targets.size() > 0) {
                     if (values != null) {
                         for (n = 0; n < targets.size(); n++) {
@@ -832,8 +832,8 @@ class YoixMiscXML
                                 // in the structure, however the caveats mentioned
                                 // above are still valid. This probably should be
                                 // revisited in the near future!!!
-                                // 
-    
+                                //
+
                                 storage = YoixObject.newArray(0, -1);
                                 for (index = values.offset(); index < values.length() - 1; index += 2) {
                                     if ((value = values.getObject(index+1)) != null) {

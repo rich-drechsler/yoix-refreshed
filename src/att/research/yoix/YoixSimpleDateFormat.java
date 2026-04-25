@@ -132,7 +132,7 @@ class YoixSimpleDateFormat extends SimpleDateFormat
                 addColon(toAppendTo, len);
             }
         } else super.format(date, toAppendTo, fieldPosition);
-        
+
         return(toAppendTo);
     }
 
@@ -150,7 +150,7 @@ class YoixSimpleDateFormat extends SimpleDateFormat
         if (xml_tz_processors != null) {
             //
             // Date can only have one value, so go with the last value, which
-            // appears to be consistent with what SimpleDateFormat does in 
+            // appears to be consistent with what SimpleDateFormat does in
             // similar situations (i.e., multiple TZs specified)
             //
             for (n = 0; n < xml_tz_processors.length; n++) {

@@ -1447,7 +1447,7 @@ class YoixAWTTableManager extends Panel
         // Calls a user defined function, so to be safe we build an
         // InvocationEvent for the call and then post it on the AWT
         // event queue (to try to avoid deadlock).
-        // 
+        //
 
         funct = syncviewport;		// snapshot - just to be safe
 

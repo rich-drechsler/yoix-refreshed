@@ -296,7 +296,7 @@ class YoixBodyParseTree extends YoixPointerActive
 
         if (arg.length == 1) {
             if (arg[0].isInteger()) {
-                if (tree.length() > 0 && tree.value[0] instanceof SimpleNode) 
+                if (tree.length() > 0 && tree.value[0] instanceof SimpleNode)
                     obj = newParseTree(tree.getChild(arg[0].intValue()));
                 else obj = YoixObject.newNull();
             } else VM.badArgument(name, 0);

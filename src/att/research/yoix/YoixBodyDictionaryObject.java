@@ -164,7 +164,7 @@ class YoixBodyDictionaryObject extends YoixBodyDictionary
         // NOTE - the old version duplicated and replaced data[] rather
         // than obj.data, which clearly was a mistake that probably was
         // responsible for the thread related problems that we saw.
-        // 
+        //
 
         obj = (YoixBodyDictionaryObject)clone();
 

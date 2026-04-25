@@ -146,7 +146,7 @@ class YoixModuleImage extends YoixModule
                             // means we get the JTable's header, which is
                             // good, but it also means we get scrollbars,
                             // which may or may not be good.
-                            // 
+                            //
                             body = arg[0].body();
                             if (body instanceof YoixBodyComponentSwing) {
                                 if ((scroller = ((YoixBodyComponentSwing)body).getPeerScroller()) != null) {

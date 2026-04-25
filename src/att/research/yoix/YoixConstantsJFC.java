@@ -205,7 +205,7 @@ interface YoixConstantsJFC
     // event initialization may imply they're more general.
     //
 
-    static final int YOIX_TEXTCHANGE = 0; 
+    static final int YOIX_TEXTCHANGE = 0;
     static final int YOIX_TEXTINSERT = 1;
     static final int YOIX_TEXTREMOVE = 2;
 

@@ -258,7 +258,7 @@ interface YoixConstants
     // Made some incompatible changes to the debug flags on 8/25/07. The
     // two most used flags, namely DEBUG_EXPRESSION and DEBUG_JAVATRACE,
     // didn't change.
-    // 
+    //
 
     static final int  DEBUG_EXPRESSION      = 0x00000001;
     static final int  DEBUG_PARSETREE       = 0x00000002;
@@ -266,7 +266,7 @@ interface YoixConstants
     static final int  DEBUG_TAGGEDSTATEMENT = 0x00000008;
     static final int  DEBUG_JAVATRACE       = 0x00000010;
     static final int  DEBUG_SYNCHRONIZED    = 0x00000020;
-    static final int  DEBUG_CAUGHTEXCEPTION = 0x00000040; 
+    static final int  DEBUG_CAUGHTEXCEPTION = 0x00000040;
     static final int  DEBUG_LOADMODULE      = 0x00000080;
     static final int  DEBUG_READCLASS       = 0x00000100;
     static final int  DEBUG_AUTOIMPORT      = 0x00000200;

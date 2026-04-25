@@ -68,7 +68,7 @@ class YoixSwingJTabbedPane extends JTabbedPane
     // and mouseReleased() (and by making sure our MouseEvent handlers are
     // called last), but that probably doesn't work in a JPanel and relying
     // on componentShown() and componentHidden() probably also won't work.
-    // 
+    //
 
     private Component  lastfocused = null;
     private boolean    trackfocus = false;
@@ -474,7 +474,7 @@ class YoixSwingJTabbedPane extends JTabbedPane
                     color = (Color)value;
                 else color = getForeground();
                 setForegroundAt(index, color);
-            } else if (name.equals(N_ICON)) { 
+            } else if (name.equals(N_ICON)) {
                 if (value instanceof YoixObject)
                     value = YoixMake.javaIcon((YoixObject)value);
                 if (value instanceof Icon)
@@ -566,7 +566,7 @@ class YoixSwingJTabbedPane extends JTabbedPane
         //
         // This is where the final model selection is made, but only if the
         // appropriate locked flag isn't true. Picking the minsize model is
-        // a little harder because we usually want to let JSplitPanes adjust 
+        // a little harder because we usually want to let JSplitPanes adjust
         // our size down to zero, which is why we pick model 2 when we have
         // an ancestor that's a JSplitPane.
         //

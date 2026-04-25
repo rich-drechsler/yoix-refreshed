@@ -35,7 +35,7 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
     // which is why we use values in length(). In fact the only time when
     // the sizes will be different is for the block that's associated with
     // the arguments of a varargs function.
-    // 
+    //
 
     private YoixObject  names;
     private YoixObject  values;
@@ -103,7 +103,7 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
         return(values.cast(obj, index, clone));
     }
 
-    
+
     public final YoixObject
     cast(YoixObject obj, String name, boolean clone) {
 
@@ -175,7 +175,7 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
 
     public final String
     dump(int index, String indent, String typename) {
-    
+
         YoixObject  obj;
         String      str;
         String      key;

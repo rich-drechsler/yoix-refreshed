@@ -813,7 +813,7 @@ TOKEN [IGNORE_CASE] : {
 // 8/21/10. Also made a change in the ProcInst() production, which most of
 // the time refused to recognize valid processing instructions. The changes
 // seem reasonable, but probably need another look.
-// 
+//
 
 <Pi_State> TOKEN : {
     <PI_END: "?>"> { SwitchTo(popState()); }

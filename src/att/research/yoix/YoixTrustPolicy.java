@@ -222,13 +222,13 @@ class YoixTrustPolicy
         // the behavior, however there's a small chance the synchronization
         // that we added may cause problems. Suspect we eventually need to
         // take a closer look at everything in this class.
-        // 
+        //
         // NOTE - this method should be able to handle all the setup, but
         // just in case we probably still start things in YoixMain. There's
         // also a chance we need to finish the setup before installing a
         // security manager, and that would mean we probably want a method
         // that only synchronizes on trustpolicy - later.
-        // 
+        //
 
         if (url != null) {
             if (url.getProtocol().startsWith("https")) {

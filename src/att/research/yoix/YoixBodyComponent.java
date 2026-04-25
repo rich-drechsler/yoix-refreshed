@@ -866,7 +866,7 @@ class YoixBodyComponent extends YoixPointerActive
                             // a window used to drag an image around should be
                             // hidden and/or disposed). Problem doesn't seem
                             // to happen on 1.5.
-                            // 
+                            //
                             if (dragstarted)
                                 dragDropEnd(null);
                             dragmanager = new YoixDragManager(this, event, e, dragsource);
@@ -948,7 +948,7 @@ class YoixBodyComponent extends YoixPointerActive
         // that you accept the drop before looking at the Transferable.
         // Quite a few of Java's drag-and-drop "bugs" have been fixed
         // in their 5.0 release - we didn't look carefully for this one
-        // (or any of the others) because Yoix doesn't currently require 
+        // (or any of the others) because Yoix doesn't currently require
         // users to run 5.0.
         //
 
@@ -1186,7 +1186,7 @@ class YoixBodyComponent extends YoixPointerActive
         //
         // NOTE - checking to make sure the length of the listeners[] array
         // is 2 (or perhaps more) probably would be sufficient.
-        // 
+        //
 
         source = e.getSource();
         if (source instanceof JMenuItem && peer != source) {
@@ -1356,7 +1356,7 @@ class YoixBodyComponent extends YoixPointerActive
         //
         // NOTE - checking to make sure the length of the listeners[] array
         // is 2 (or perhaps more) probably would be sufficient.
-        // 
+        //
 
         source = e.getSource();
         if (source instanceof JMenuItem && peer != source) {
@@ -2730,7 +2730,7 @@ class YoixBodyComponent extends YoixPointerActive
         return(obj);
     }
 
- 
+
     final YoixObject
     getPreferredSize(Object comp, YoixObject obj) {
 
@@ -2984,7 +2984,7 @@ class YoixBodyComponent extends YoixPointerActive
         // field named N_ID that refers to an event that we recognize.
         // This method is not used much, so we doubt anyone will notice
         // the change.
-        // 
+        //
 
         if (event != null) {
             if ((id = event.getObject(N_ID)) != null) {
@@ -4204,7 +4204,7 @@ class YoixBodyComponent extends YoixPointerActive
         // assigned to N_VISIBLE. Things could easily be improved if we
         // only dealt with Swing because a JMenuBar is a JComponent, so
         // in that case changeMenuBar() always get the value.
-        // 
+        //
 
         if (comp instanceof YoixInterfaceMenuBar) {
             if ((menubar = obj.getManagedObject()) != null) {
@@ -4605,7 +4605,7 @@ class YoixBodyComponent extends YoixPointerActive
         // do the dirty work for the N_BACKGROUND and N_FOREGROUND fields.
         // If the set of fields changes (e.g., N_FONT may be added) make
         // sure those changes are reflected here.
-        // 
+        //
 
         setField(N_BACKGROUND);
         setField(N_FOREGROUND);
@@ -4615,7 +4615,7 @@ class YoixBodyComponent extends YoixPointerActive
     final void
     validateRoot(Object comp) {
 
-        YoixObject  obj;  
+        YoixObject  obj;
         Object      root;
 
         if (comp instanceof Component) {
@@ -4759,7 +4759,7 @@ class YoixBodyComponent extends YoixPointerActive
         // drop handling that may already have been setup. In other words,
         // this is mainly for AWT, because our Swing components will handle
         // everything in setTransferHandler().
-        // 
+        //
 
         if (comp.getDropTarget() == null)
             new DropTarget(comp, listener);
@@ -5052,7 +5052,7 @@ class YoixBodyComponent extends YoixPointerActive
         YoixObject                manager;
         YoixObject                yobj;
         YoixObject                yobj2;
-        YoixObject                objs[]; 
+        YoixObject                objs[];
         Component                 anchor;
         Component                 dependent;
         Object                    comp;
@@ -5174,7 +5174,7 @@ class YoixBodyComponent extends YoixPointerActive
                 //
                 // now add appropriate constraints
                 //
-                
+
                 hoffset = Spring.constant(0);
                 for (col = 0; col < cols; col++) {
                     voffset = Spring.constant(0);
@@ -5476,7 +5476,7 @@ class YoixBodyComponent extends YoixPointerActive
         // event to our peer should be correct - previous implementations
         // compared the source of event e to the source next event, which
         // was probably sufficient. Test was changed on 5/17/05.
-        // 
+        //
 
         if (name != null && e != null) {
             if ((compress = this.compressevents) != null && compress.containsKey(name) && (queue = YoixAWTToolkit.getSystemEventQueue()) != null) {
@@ -5548,7 +5548,7 @@ class YoixBodyComponent extends YoixPointerActive
                                     if (obj.notEmpty()) {
                                         event.putObject(N_TRANSFERABLE, obj);
                                         obj = event;
-                                    } else obj = null; 
+                                    } else obj = null;
                                 } else if (e instanceof DragSourceEvent)
                                     obj = event;
                                 else if (obj.isEmpty())

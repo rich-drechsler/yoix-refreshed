@@ -41,7 +41,7 @@ class PatternInterpreter
     ///////////////////////////////////
 
     static boolean
-    match(SimpleNode pattern, String arg, int flags) { 
+    match(SimpleNode pattern, String arg, int flags) {
 
         YoixStack  stack = VM.getThreadStack();
 

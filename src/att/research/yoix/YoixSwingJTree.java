@@ -837,7 +837,7 @@ class YoixSwingJTree extends JTree
 
     final static int
     getElementCount(YoixObject yjtreenode) {
-        
+
         YoixObject  ykids;
         int         count;
         int         ccount;
@@ -848,7 +848,7 @@ class YoixSwingJTree extends JTree
         if (count > 0) {
             ykids = yjtreenode.get(N_CHILDREN, false);
             ccount = ykids.isNull() ? 0 : ykids.length();
-        
+
             for (n=0; n<ccount; n++)
                 count += getElementCount(ykids.get(n, false));
         }

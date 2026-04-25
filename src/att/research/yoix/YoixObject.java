@@ -232,7 +232,7 @@ class YoixObject extends SimpleNode
         // A constructor added for custom modules that subclasses can call
         // when they want to create an official null object that's also an
         // instance of their class. Definitely not convinced by this!!!
-        // 
+        //
 
         super(null, typename);
         constructCachedNull(typename);
@@ -858,7 +858,7 @@ class YoixObject extends SimpleNode
         YoixObject   obj;
 
         if ((obj = getObject(name)) != null) {
-            if (obj.notNull() && obj.isCertificate()) 
+            if (obj.notNull() && obj.isCertificate())
                 value = (Certificate)obj.getManagedObject();
         }
         return(value);
@@ -1428,7 +1428,7 @@ class YoixObject extends SimpleNode
         //
         // but functions now expose some internal data by implementing the
         // YoixInterfacePointer interface, so we now need a different test.
-        // 
+        //
 
         return(value[0] instanceof YoixInterfacePointer);
     }

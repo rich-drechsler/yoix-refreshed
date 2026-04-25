@@ -23,7 +23,7 @@ interface YoixConstantsJTable
     // Exclusively for JTable related constants that are also loaded
     // automatically into a Yoix dictionary by the Swing module. The
     // load request in YoixModuleSwing.java selects the constants in
-    // this file that begin with the YOIX_ prefix, removes it, and 
+    // this file that begin with the YOIX_ prefix, removes it, and
     // then makes an appropriate definition in a yoix dictionary.
     // N.B. Be sure to change the $module Object array size in
     // YoixModuleSwing.java for each item you add to this list.

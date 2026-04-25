@@ -104,7 +104,7 @@ class YoixSwingJScrollPane extends JScrollPane
     // dependent scrolling behavior hasn't been addressed. In particular
     // you still can't use the mouse wheel to scroll up or down by one
     // unit on Linux or Windows.
-    // 
+    //
 
     private Vector  listeners;
 
@@ -144,7 +144,7 @@ class YoixSwingJScrollPane extends JScrollPane
     // different platforms that were all equipped with different mice. The
     // actual threshold can be passed as an argument to the constructor, so
     // it could also specified by a field that was sent in each component.
-    // 
+    //
 
     private static final int  THRESHOLD = 7;	// trial and error
 
@@ -207,7 +207,7 @@ class YoixSwingJScrollPane extends JScrollPane
                     e.getModifiers(),
                     e.getX(),
                     e.getY(),
-                    e.getClickCount(),	
+                    e.getClickCount(),
                     e.isPopupTrigger(),
                     e.getScrollType(),
                     scrollamount,
@@ -561,7 +561,7 @@ class YoixSwingJScrollPane extends JScrollPane
         //
         // This is where the final model selection is made, but only if the
         // appropriate locked flag isn't true. Picking the minsize model is
-        // a little harder because we usually want to let JSplitPanes adjust 
+        // a little harder because we usually want to let JSplitPanes adjust
         // our size down to zero, which is why we pick model 2 when we have
         // an ancestor that's a JSplitPane.
         //

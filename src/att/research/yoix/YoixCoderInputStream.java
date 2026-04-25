@@ -71,7 +71,7 @@ class YoixCoderInputStream extends FilterInputStream
         if (coder == HEXCODER || coder == LINEDHEXCODER)
             avail /= 2;
         else avail /= 3;
-    
+
         return(avail);
     }
 

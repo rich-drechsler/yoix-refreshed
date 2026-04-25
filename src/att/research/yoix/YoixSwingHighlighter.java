@@ -70,7 +70,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
     ///////////////////////////////////
 
     public final Object
-    addHighlight(int p0, int p1, HighlightPainter p) 
+    addHighlight(int p0, int p1, HighlightPainter p)
 
         throws BadLocationException
 
@@ -184,7 +184,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
         // Probably don't want to return null to the caller, so this
         // is harder than it should be. There's undoubtedly a better
         // way to pick the color when Java says it's null.
-        // 
+        //
 
         if (hasCaret()) {
             if (owner != null)
@@ -417,7 +417,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
                         if ((flags & ENABLE_CARET_OPENRIGHT) != 0)
                             end += 1;
                     }
-                } 
+                }
                 if (start <= end) {		// not 100% sure about this
                     start = Math.min(Math.max(offset, start), end - caret_width);
                     end = Math.min(start + caret_width, end);

@@ -24,7 +24,7 @@ class YoixAWTTexturePaint extends TexturePaint
     // any magic scaling of the image when its used as a texture. When
     // scaling is needed Yoix programs should scale the image before
     // using it as a texture.
-    // 
+    //
 
     ///////////////////////////////////
     //

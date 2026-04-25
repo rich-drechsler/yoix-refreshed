@@ -32,7 +32,7 @@ class YoixSwingJInternalFrame extends JInternalFrame
     // it, but it's not a high priority. Tried copying the border related
     // code from YoixSwingJFrame into this class, but it didn't seem to
     // have any effect - investigate later.
-    // 
+    //
 
     private YoixBodyComponent  parent;
     private YoixObject         data;
@@ -379,7 +379,7 @@ class YoixSwingJInternalFrame extends JInternalFrame
         offset = rootpane.getLocation();
         if (contentpane != null) {
             corner = contentpane.getLocation();
-            offset.translate(corner.x, corner.y); 
+            offset.translate(corner.x, corner.y);
         }
         return(offset);
     }

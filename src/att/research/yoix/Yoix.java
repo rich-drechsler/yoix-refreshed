@@ -244,14 +244,14 @@ class Yoix
                     objects = (YoixObject[])entries.get(N_OBJECTS);
                     compiled_class = null;
                     compiled_method = null;
-                    
+
                     //
                     // Trying loadClass() first is overkill, but means we only
                     // initialize the nodes and objects fields the first time
                     // we try to execute the compiled class. Probably could use
                     // some synchronization here to be absolutely sure, but as
                     // noted above, it's overkill as it currently stands!!
-                    // 
+                    //
                     try {
                         compiled_class = YoixCompiler.getClassLoader().loadClass(classname);
                     }

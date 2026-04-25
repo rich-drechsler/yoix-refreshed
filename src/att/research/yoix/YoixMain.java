@@ -35,7 +35,7 @@ class YoixMain
     // files and command line options. The name of the default property
     // file is yoix.properties, and the Yoix interpreter always looks
     // for them in the three directories that Java associates with the
-    // "yoix.home", "user.home", and "user.dir" system properties. 
+    // "yoix.home", "user.home", and "user.dir" system properties.
     //
     // Command line options are always processed after default property
     // files are loaded. The officially supported options are documented
@@ -116,7 +116,7 @@ class YoixMain
     //
     // We collect information about the system splash screen that comes
     // from command line options in the following variables.
-    // 
+    //
 
     private static String  splashtitle = null;
     private static String  splashforeground = null;
@@ -142,7 +142,7 @@ class YoixMain
     // followed by a single character which is the value that getopt()
     // returns when it recognizes the option. The default return value
     // when getopt() recognizes a long option is '-'.
-    // 
+    //
 
     private static String  option_letters = "b:d:e:fg::l:m:s:uxz:D:I:O::S:T:V?";
 
@@ -692,7 +692,7 @@ class YoixMain
             "      access to a web server and in this case pattern, which is",
             "      discussed below, should be host:port (e.g., www.yoix.org:80)",
             "      or address:port (e.g., 192.168.10.1:80).",
-            "",          
+            "",
             "      The optional pattern is used for shell-style matching of",
             "      arguments during a security check, but in this case the",
             "      matching is done using a variation in which the backslash",

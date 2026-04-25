@@ -51,7 +51,7 @@ class YoixModuleXColor extends YoixModule
         // module was loaded, which was behavior that was really hard to
         // explain. With the change the only way to update Color is for
         // the script to call the addColor() builtin with no arguments.
-        // 
+        //
 
         if (extracted[0] instanceof YoixObject) {
             YoixRegistryColor.setRegistry(null); // initializes

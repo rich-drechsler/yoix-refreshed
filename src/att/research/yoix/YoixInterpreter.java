@@ -409,7 +409,7 @@ class YoixInterpreter
         else if (obj.isNumber())
             obj = YoixObject.newDouble(obj.doubleValue() + 1);
         else if (obj.isPointer())
-            obj = YoixObject.newLvalue(obj, obj.offset() + 1); 
+            obj = YoixObject.newLvalue(obj, obj.offset() + 1);
         else VM.abort(BADOPERAND);
         return(obj);
     }
@@ -1734,7 +1734,7 @@ class YoixInterpreter
                 // to do a sequential search when it looks for something
                 // other than an integer (e.g., a double). We may be able
                 // to address this, but not right now.
-                // 
+                //
                 tmp = new int[2*(total + 1)];
                 tmp[0] = ends[0];
                 tmp[1] = array.getInt(1, length);

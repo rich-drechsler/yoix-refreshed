@@ -375,7 +375,7 @@ class YoixModuleEvent extends YoixModule
         if (arg.length == 0 || arg.length == 1) {
             if (arg.length == 0 || arg[0].isNull()) {
                 dict = (YoixObject)extracted[0];
-                len = dict.length(); 
+                len = dict.length();
                 keys = new String[len];
                 for (n = 0; n < len; n++)
                     keys[n] = dict.name(n);

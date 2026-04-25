@@ -956,7 +956,7 @@ class YoixMiscMenu
 
         YoixObject  obj;
         MenuItem    menuitem;
- 
+
         menuitem = new MenuItem(text.stringValue());
         if (arg.isDictionary()) {
             menuitem.setActionCommand(arg.getString(N_COMMAND));
@@ -976,8 +976,8 @@ class YoixMiscMenu
 
         //
         // We may want more tests (e.g., pattern could be a YoixObject so
-        // we might need to take a closer look). 
-        // 
+        // we might need to take a closer look).
+        //
 
         return(
             (pattern instanceof String && result < 0) ||

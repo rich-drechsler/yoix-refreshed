@@ -288,7 +288,7 @@ class YoixSwingJComboBox extends JComboBox
         // we update the UI list, because the most likely non-null value is
         // one that asks pickPrototypeValue() to choose the widest label but
         // the labels aren't necessarily loaded yet.
-        // 
+        //
 
         if (prototype != value && (prototype == null || prototype.equals(value) == false)) {
             prototype = value;

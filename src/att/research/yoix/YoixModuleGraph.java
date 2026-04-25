@@ -202,7 +202,7 @@ class YoixModuleGraph extends YoixModule
         // The name of this builtin has been changed to dotGraphToYDAT and
         // all of our references to it have been changed, but there could
         // be someold config files lying around need this.
-        // 
+        //
 
         return(dotGraphToYDAT(arg));
     }

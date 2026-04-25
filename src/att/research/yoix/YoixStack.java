@@ -924,7 +924,7 @@ class YoixStack
         // noise that comes from ThreadGroup.uncaughtException(). Think we
         // could force it in using relection if we really had to, but it's
         // not urgent and probably not worth the complications right now.
-        // 
+        //
 
         try {
             obj = stack[--next];

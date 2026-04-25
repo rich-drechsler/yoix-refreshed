@@ -111,7 +111,7 @@ class YoixMakeScreen
                 // This is only here to support an old version of the Border
                 // that defined an entry named width - probably still used by
                 // one important application, so don't remove without testing.
-                // 
+                //
                 if ((entry = obj.getObject(N_WIDTH)) != null && entry.isNumber()) {
                     width = entry.doubleValue();
                     if ((entry = obj.getObject(N_INSETS)) == null || entry.isNull())
@@ -237,7 +237,7 @@ class YoixMakeScreen
                 // comp's background and the title's color, but user's
                 // can always take control with a Yoix Border object or
                 // by setting the TitledBorder.titleColor property.
-                // 
+                //
             } else if (obj.isNumber() || obj.isInsets())
                 border = new EmptyBorder(javaInsets(obj));
         }

@@ -53,7 +53,7 @@ class YoixAWTFrame extends Frame
     private static boolean  usekludge = false;
 
     //
-    // An offset, calculated elsewhere, that accounts for decorations. 
+    // An offset, calculated elsewhere, that accounts for decorations.
     //
 
     private static Point  windowoffset = null;
@@ -248,7 +248,7 @@ class YoixAWTFrame extends Frame
             validate();
         return(result);
     }
- 
+
     ///////////////////////////////////
     //
     // YoixInterfaceWindow Methods

@@ -459,7 +459,7 @@ class YoixSecurityManager extends SecurityManager
                                                 // or Swing's Popup.java class should catch
                                                 // security exceptions. We carefully try to
                                                 // allow the call when the context looks OK.
-                                                // 
+                                                //
                                                 if (n > 2) {
                                                     if (stack[n] == YoixBodyComponentSwing.class) {
                                                         if (stack[1] == java.awt.Window.class) {
@@ -547,7 +547,7 @@ class YoixSecurityManager extends SecurityManager
         if ((status = check(N_CHECKREAD, argv, isApplication())) != CHECK_PASSED) {
             if (allowSystemRead(file) == false) {
                 if (isApplet()) {
-                    if (allowRead(file) == false) 
+                    if (allowRead(file) == false)
                         super.checkRead(file);
                 }
             }
@@ -864,7 +864,7 @@ class YoixSecurityManager extends SecurityManager
                             //
                             // We initialize yoixcodesource even though in
                             // this case it won't currently be used.
-                            // 
+                            //
                             if ((dir = url.getPath()) != null) {
                                 if ((index = dir.lastIndexOf('/')) >= 0) {
                                     dir = dir.substring(0, index+1);
@@ -928,7 +928,7 @@ class YoixSecurityManager extends SecurityManager
         //
         // Eventually could do more, like maybe use appletflags to help us
         // decide which classes should get access to the event queue.
-        // 
+        //
 
         return(inCodeSource(source));
     }
@@ -994,7 +994,7 @@ class YoixSecurityManager extends SecurityManager
         }
         return(result);
     }
- 
+
 
     private int
     callChecker(String name, YoixObject argv[]) {
@@ -1010,7 +1010,7 @@ class YoixSecurityManager extends SecurityManager
         // look at this approach, but it's sufficient enough for now. The
         // alternative is to use AccessController.doPrivileged() instead
         // of the checking Hashtable.
-        // 
+        //
         // NOTE - adding this thread to the checking Hashtable before we
         // call the function means any secondary checkPermission() calls
         // that might be triggered will pass, which obviously means their

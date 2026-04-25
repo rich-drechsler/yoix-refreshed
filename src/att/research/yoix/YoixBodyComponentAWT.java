@@ -996,7 +996,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
             // in the memory management issues that we were tried to fix
             // on 3/24/07.
             //
-        
+
             if (data.defined(N_MENUBAR))
                 data.putObject(N_MENUBAR, null);
             if (data.defined(N_POPUP))
@@ -3361,7 +3361,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                     // handle important initialization that would be skipped if we
                     // got here (the first time through) and the window already was
                     // visible. This probably could be moved up a few lines - later.
-                    // 
+                    //
                     if (state) {
                         if (comp instanceof Window) {
                             if (data.getBoolean(N_FULLSCREEN)) {

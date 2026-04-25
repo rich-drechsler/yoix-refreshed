@@ -69,13 +69,13 @@ class YoixMiscGeom
             pi = path.getPathIterator(null);
             while(!pi.isDone()) {
                 switch(type = pi.currentSegment(coords)) {
-                    case PathIterator.SEG_CLOSE: 
+                    case PathIterator.SEG_CLOSE:
                         sb.append(prefix);
                         sb.append("closepath();");
                         sb.append(suffix);
                         break;
 
-                    case PathIterator.SEG_CUBICTO: 
+                    case PathIterator.SEG_CUBICTO:
                         sb.append(prefix);
                         sb.append("cubicto(");
                         sb.append(coords[0]);
@@ -93,7 +93,7 @@ class YoixMiscGeom
                         sb.append(suffix);
                         break;
 
-                    case PathIterator.SEG_LINETO: 
+                    case PathIterator.SEG_LINETO:
                         sb.append(prefix);
                         sb.append("lineto(");
                         sb.append(coords[0]);
@@ -103,7 +103,7 @@ class YoixMiscGeom
                         sb.append(suffix);
                         break;
 
-                    case PathIterator.SEG_MOVETO: 
+                    case PathIterator.SEG_MOVETO:
                         sb.append(prefix);
                         sb.append("moveto(");
                         sb.append(coords[0]);
@@ -113,7 +113,7 @@ class YoixMiscGeom
                         sb.append(suffix);
                         break;
 
-                    case PathIterator.SEG_QUADTO: 
+                    case PathIterator.SEG_QUADTO:
                         sb.append(prefix);
                         sb.append("quadto(");
                         sb.append(coords[0]);
@@ -228,7 +228,7 @@ class YoixMiscGeom
 
     public static Point2D[]
     getEndPoints(GeneralPath path) {
- 
+
         Point2D  points[] = null;
         double   tangents[];
 

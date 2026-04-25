@@ -370,7 +370,7 @@ class YoixBodyFont extends YoixPointerActive
         //
         // NOTE - arguments 5 and 6 were a late addition and might not be
         // documented. If that's the case you shouldn't use them.
-        // 
+        //
 
         if (arg.length >= 2 && arg.length <= 6) {
             if (arg[0].isString() || arg[0].isNull()) {

@@ -783,7 +783,7 @@ class YoixSwingJCanvas extends YoixSwingJPanel
         // have to do is call parent.getCTMBody() and not worry about it,
         // but at this point I wasn't prepared to make the change in that
         // method without completely understanding the behavoir.
-        // 
+        //
 
         if (obj == null || obj.isPoint() || obj.isNull()) {
             if (parent.getGraphics(this, null) != null) {	// initialization kludge

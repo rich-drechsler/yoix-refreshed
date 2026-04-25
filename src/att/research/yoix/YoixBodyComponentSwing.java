@@ -55,7 +55,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
     //
     // Used with JPopupMenu components
     //
-    
+
     private YoixPopupMenuListener  popupmenulistener = null;
 
     //
@@ -84,7 +84,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
     // do it. This isn't an ideal solution, so we're going to investigate
     // a bit more and perhaps make it optional. Anwywya there's a bunch
     // more to do.
-    // 
+    //
 
     private static JFrame  menuframe = new JFrame();
 
@@ -410,7 +410,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // happened when running in threadsafe mode. It prevents setField()
         // from pushing work into the even thread before the constructor is
         // completely finished.
-        // 
+        //
 
         initialized = true;
     }
@@ -1062,7 +1062,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     // always possible so we really should wait around to make
                     // make sure the operation completed successfully. Also, if
                     // we don't wait error handling code can misbehave.
-                    // 
+                    //
                     synchronized(args[4]) {
                         error_point = VM.pushError();
                         try {
@@ -3493,7 +3493,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // This was added quickly for an existing application and primiarly
         // is trying to reproduce YoixAWTCanvas behavior. Probably needs a
         // closer look - later.
-        // 
+        //
 
         if (comp instanceof YoixSwingJCanvas) {
             if (obj == null || obj.isBorder() == false)
@@ -4279,12 +4279,12 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
     private YoixObject
     getOutputFilter(Object comp, YoixObject obj) {
- 
+
         if (comp instanceof YoixSwingJTable)
             obj = ((YoixSwingJTable)comp).getOutputFilter();
         return(obj);
     }
- 
+
 
     private YoixObject
     getPage(Object comp, YoixObject obj) {
@@ -4298,7 +4298,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         }
         return(obj);
     }
- 
+
 
     private YoixObject
     getPercentComplete(Object comp, YoixObject obj) {
@@ -6218,7 +6218,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         //
         // Calling pack() outside the event thread can cause problems because
         // it calls validate(), which in turn grabs the window's AWTTreeLock.
-        // 
+        //
 
         comp = this.peer;		// snapshot - just to be safe
 
@@ -6921,7 +6921,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
             if (obj.notNull()) {
                 dir = new File(YoixMisc.toLocalPath(obj.stringValue()));
                 ((YoixInterfaceFileChooser)comp).setCurrentDirectory(dir);
-            } else if (initialized) 
+            } else if (initialized)
                 ((YoixInterfaceFileChooser)comp).setCurrentDirectory(null);
         }
     }
@@ -8830,7 +8830,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // addressed a sizing problem that we sometimes saw when a screen
         // that contained a JTextArea with zero for its rows and columns
         // was built outside the event thread.
-        // 
+        //
 
         if (comp instanceof Component) {
             if (comp instanceof YoixInterfaceWindow) {
@@ -9322,7 +9322,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // addressed a sizing problem that we sometimes saw when a screen
         // that contained a JTextArea with zero for its rows and columns
         // was built outside the event thread.
-        // 
+        //
 
         if (comp instanceof Component) {
             state = obj.booleanValue();
@@ -9355,7 +9355,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     // handle important initialization that would be skipped if we
                     // got here (the first time through) and the window already was
                     // visible. This probably could be moved up a few lines - later.
-                    // 
+                    //
                     if (state) {
                         if (comp instanceof Window) {
                             if (data.getBoolean(N_FULLSCREEN)) {

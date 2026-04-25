@@ -612,7 +612,7 @@ class YoixSwingJTable extends JTable
         if (changeListenerMode) {
             obj = YoixMake.yoixType(T_INVOCATIONEVENT);
             obj.putInt(N_ID, V_INVOCATIONCHANGE);
-                
+
             obj.putString("change", "add");
             obj.putInt("viewColumn", e.getToIndex());
             obj.putInt("valuesColumn", yoixConvertColumnIndexToModel(e.getToIndex()));
@@ -663,7 +663,7 @@ class YoixSwingJTable extends JTable
             if (changeListenerMode) {
                 obj = YoixMake.yoixType(T_INVOCATIONEVENT);
                 obj.putInt(N_ID, V_INVOCATIONCHANGE);
-                
+
                 obj.putString("change", "drag");
                 obj.putInt("fromViewColumn", e.getFromIndex());
                 obj.putInt("toViewColumn", e.getToIndex());
@@ -692,7 +692,7 @@ class YoixSwingJTable extends JTable
         if (changeListenerMode) {
             obj = YoixMake.yoixType(T_INVOCATIONEVENT);
             obj.putInt(N_ID, V_INVOCATIONCHANGE);
-                
+
             obj.putString("change", "remove");
             obj.putInt("viewColumn", e.getFromIndex());
             idx = e.getFromIndex();
@@ -2819,7 +2819,7 @@ class YoixSwingJTable extends JTable
                                                     object = new YoixJTableIcon(image, source, desc);
                                                 } else object = new YoixJTableIcon("<unavailable>");
                                                 success = true;
-                                                
+
                                             } else if (yobj.isString()) {
                                                 object = new YoixJTableIcon(yobj.stringValue());
                                                 success = true;
@@ -2886,7 +2886,7 @@ class YoixSwingJTable extends JTable
                         } else {
                             if (arg.length != 5) {
                                 altmode = false;
-                                if (arg.length == 3 || arg[3].isNull()) 
+                                if (arg.length == 3 || arg[3].isNull())
                                     valmode = false;
                                 else if (arg[3].isString()) {
                                     if (N_TEXT.equalsIgnoreCase(arg[3].stringValue().trim()))
@@ -3249,7 +3249,7 @@ class YoixSwingJTable extends JTable
                                         } else valmode = true;
                                         len = arg[1].length();
                                         count = rowsnap.length;
-                                        if (vissnap == null) 
+                                        if (vissnap == null)
                                             vissnap = yjtm.getReverseRow2ModelMap();
                                         for (m = 0, n = arg[1].offset(); n < len; m++, n++) {
                                             yobj = arg[1].get(n, false);
@@ -3314,7 +3314,7 @@ class YoixSwingJTable extends JTable
                                             }
                                         } else VM.badArgumentValue(name, 2);
                                     } else VM.badArgument(name, 2);
-                                    if (vissnap == null) 
+                                    if (vissnap == null)
                                         vissnap = yjtm.getReverseRow2ModelMap();
                                     len = ivalues.length;
                                     if (toggle) {
@@ -3551,7 +3551,7 @@ class YoixSwingJTable extends JTable
             if (changeListenerMode) {
                 obj = YoixMake.yoixType(T_INVOCATIONEVENT);
                 obj.putInt(N_ID, V_INVOCATIONCHANGE);
-                
+
                 obj.putString("change", "resize");
                 if (resize != null) {
                     obj.putInt("viewColumn", resize.getModelIndex());
@@ -4612,12 +4612,12 @@ class YoixSwingJTable extends JTable
         // so for now we just try not to upset the broken logic. This was
         // broken in Java 1.5.0, but may eventually get fixed. If it does
         // we probably should make this a version dependent kludge.
-        // 
+        //
         // NOTE - changing the cursor in our peerscroller is a change that
         // that seems to improve things when scripts want to do something
         // like set a wait cursor and the JTable is empty. Was added on
         // 2/11/07.
-        // 
+        //
 
         if ((jth = getTableHeader()) != null) {
             if ((headercursor = jth.getCursor()) != null) {
@@ -5771,7 +5771,7 @@ class YoixSwingJTable extends JTable
                     result = obj.booleanValue();
             }
         }
-        
+
         return(result);
     }
 
@@ -8337,7 +8337,7 @@ class YoixSwingJTable extends JTable
                             // because we're adding one or more rows. Added rows
                             // are initialized below by setRow2ModelVisibility()
                             // since we now call it with a true argument.
-                            // 
+                            //
                             for (n = 0; n < oldrc; n++) {
                                 if (newinvis[n] >= oldrc)
                                     newinvis[n] += rowcount;
@@ -11566,7 +11566,7 @@ class YoixSwingJTable extends JTable
         // is a little deceptive, because the function, if there is one, is
         // only applied once by the constructor and currently isn't saved
         // here.
-        // 
+        //
 
         private YoixObject  yoixvalue = null;
         private Object      sortobject;
@@ -12574,7 +12574,7 @@ class YoixSwingJTable extends JTable
                 this.setToolTipText(tip);
             } else this.setToolTipText(null);
 
-            
+
             return(this);
         }
 
@@ -12734,7 +12734,7 @@ class YoixSwingJTable extends JTable
 
         public String getRendererLocale() { return(null); };
         public void   setRendererLocale(String locale) {};
-        
+
     }
 
     ///////////////////////////////////
@@ -14292,7 +14292,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -14323,7 +14323,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -14436,7 +14436,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -14467,7 +14467,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -14592,7 +14592,7 @@ class YoixSwingJTable extends JTable
             g.fillRect(rect.x, rect.y, rect.width, rect.height);
             g.setColor(orig);
         }
-        
+
     }
 
     ///////////////////////////////////
@@ -14775,7 +14775,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -14806,7 +14806,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -14905,7 +14905,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -14936,7 +14936,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -15082,7 +15082,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -15113,7 +15113,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -15595,7 +15595,7 @@ class YoixSwingJTable extends JTable
                 this.setToolTipText(tip);
             } else this.setToolTipText(null);
 
-            
+
             return(this);
         }
 
@@ -15910,7 +15910,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -15941,7 +15941,7 @@ class YoixSwingJTable extends JTable
                         }
                     }
                 }
-                
+
             }
             substimap = submap;
             substirev = subrev;
@@ -17177,7 +17177,7 @@ class YoixSwingJTable extends JTable
                 format = "rtf";
             else format = "plain";
 
-            final YoixSwingJTextPane pane = (YoixSwingJTextPane)jtp; 
+            final YoixSwingJTextPane pane = (YoixSwingJTextPane)jtp;
 
             delegate = new EditorDelegate() {
                 public void setValue(Object value) {
@@ -17189,7 +17189,7 @@ class YoixSwingJTable extends JTable
                 }
             };
 
-            
+
             scroller = new JScrollPane(pane);
             scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
             scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

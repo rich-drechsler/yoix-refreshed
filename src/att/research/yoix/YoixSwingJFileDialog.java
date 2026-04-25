@@ -362,7 +362,7 @@ class YoixSwingJFileDialog extends YoixSwingJDialog
         //
         // Tries to center over the owner, which should have been set from
         // N_PARENT, if it's showing and the N_LOCATION field is NULL.
-        // 
+        //
 
         if ((owner = getOwner()) != null) {
             if (owner.isShowing()) {

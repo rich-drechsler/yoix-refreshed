@@ -22,7 +22,7 @@ class YoixBodyCookieManager extends YoixPointerActive
     //
     // Right now this class is mostly a placeholder that was added quickly
     // to support command line cookie options. The CookieManager type can
-    // be used, but it doesn't yet provide any significant capabilites, so 
+    // be used, but it doesn't yet provide any significant capabilites, so
     // you shouldn't use it. Eventually expect the default cookie manager
     // that's created and installed when the --cookie and --cookiepolicy
     // command line options are used will be available as a CookieManager
@@ -189,7 +189,7 @@ class YoixBodyCookieManager extends YoixPointerActive
 
         //
         // Right now cookies without a domain are silently ignored.
-        // 
+        //
 
         if (source != null) {
             if ((cookies = httpCookieParse(source)) != null) {

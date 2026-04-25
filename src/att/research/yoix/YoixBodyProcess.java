@@ -448,7 +448,7 @@ class YoixBodyProcess extends YoixPointerActive
         // stream argument is NULL, but it might would be worthwhile if
         // readStream() and others simply returned NULL when handed a NULL
         // argument - later.
-        // 
+        //
 
         if (process != null) {
             VM.pushAccess(LRW_);

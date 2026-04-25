@@ -45,7 +45,7 @@ class YoixModuleFactorial extends YoixModule
         //
         // Constants go here...
         //
-       
+
         //
         // Builtins go here...
         //
@@ -66,7 +66,7 @@ class YoixModuleFactorial extends YoixModule
         //
         // Results through 12! can be stored by a 32 bit signed integer.
         //
-    
+
         new Integer(1),                          // 0!
         new Integer(1),                          // 1!
         new Integer(2),                          // 2!
@@ -80,27 +80,27 @@ class YoixModuleFactorial extends YoixModule
         new Integer(3628800),                    // 10!
         new Integer(39916800),                   // 11!
         new Integer(479001600),                  // 12!
-    
+
         //
         // Results for 13! through 18! are all less than MAX_COUNTABLE, so they fit
         // in a double without any loss of precision. Even though 19! and 20! can be
         // accurately represented using a double, we decided not to include them in
         // this group because they're bigger than MAX_COUNTABLE.
         //
-    
+
         new Double(6227020800.0),                       // 13!
         new Double(87178291200.0),                      // 14!
         new Double(1307674368000.0),                    // 15!
         new Double(20922789888000.0),                   // 16!
         new Double(355687428096000.0),                  // 17!
         new Double(6402373705728000.0),                 // 18!
-    
+
         //
         // A few more factorials that are represented as strings because they're all
         // bigger than MAX_COUNTABLE. All of them end in lots of zeros (base 10 or 2)
         // so many still fit in a double, but the integers close to them don't.
         //
-    
+
         "121645100408832000",                                                       // 19!
         "2432902008176640000",                                                      // 20!
         "51090942171709440000",                                                     // 21!

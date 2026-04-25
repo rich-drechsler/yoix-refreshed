@@ -70,7 +70,7 @@ class YoixRegistryCursor
                 else if (obj.isString())
                     cursor = getCursor(obj.stringValue(), comp);
             } else cursor = getStandardCursor(comp);
-        } 
+        }
         return(cursor != null ? cursor : Cursor.getDefaultCursor());
     }
 

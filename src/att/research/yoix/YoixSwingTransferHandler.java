@@ -35,7 +35,7 @@ class YoixSwingTransferHandler extends TransferHandler
     //
     // NOTE - we probably use reflection in YoixBodyComponentSwing.java
     // to call the constructor.
-    // 
+    //
 
     private YoixObject  data = null;
     private YoixObject  owner = null;
@@ -184,7 +184,7 @@ class YoixSwingTransferHandler extends TransferHandler
                 action = getJavaAction(data.getInt(N_ACTION, YOIX_COPY));
                 if ((funct = data.getObject(N_GETSOURCEACTIONS)) != null) {
                     if (funct.notNull()) {
-                        argv = new YoixObject[] {owner}; 
+                        argv = new YoixObject[] {owner};
                         if ((obj = call(funct, argv, data)) != null) {
                             if (obj.isNumber())
                                 action = getJavaAction(obj.intValue());

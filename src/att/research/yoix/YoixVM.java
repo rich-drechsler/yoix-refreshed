@@ -199,7 +199,7 @@ class YoixVM extends YoixVMClipboard
                 //
                 // NOTE - this branch probably could handle all excetions,
                 // or maybe everything except InterruptedException - later.
-                // 
+                //
                 if (Thread.currentThread().isInterrupted())
                     interrupt();
             } else if (e instanceof InterruptedException)
@@ -586,7 +586,7 @@ class YoixVM extends YoixVMClipboard
         // should let queued window visibility requests be handled if it's
         // not called from the event thread. Anyway, this was a last minute
         // change that we believe is OK.
-        // 
+        //
 
         if (YoixBodyThread.threadCount(false) == 0) {
             if (YoixBodyComponent.windowCount() == 0)
@@ -1006,7 +1006,7 @@ class YoixVM extends YoixVMClipboard
         // up being a fixed size dictionary. The dictionary automatically
         // includes types listed in YoixModuleVM.RESTRICTED_TYPES[], plus
         // any listed in obj, which should be an array of typename strings.
-        // 
+        //
 
         if (typedict != null) {
             pushAccess(LR__);
@@ -1089,7 +1089,7 @@ class YoixVM extends YoixVMClipboard
         }
         return(obj);
     }
- 
+
 
     final boolean
     notBooted() {
@@ -1410,7 +1410,7 @@ class YoixVM extends YoixVMClipboard
         // through. It's not a particularly important "feature" that we may
         // eventually decie to eliminate. Code elsewhere already rejects -S
         // options that appear after the --applet option.
-        // 
+        //
 
         if (isApplet() == false || vmstate < RUNNING) {
             if (obj != null && obj.isCallable() && obj.notNull()) {
@@ -1555,7 +1555,7 @@ class YoixVM extends YoixVMClipboard
                     //
                     // Macs always seem to handle fonts well, so we decided
                     // to skip the adjustments if we're running on a Mac.
-                    // 
+                    //
                     if (ISMAC == false) {
                         font = Font.decode(DEFAULT_JAVA_FONTNAME);
                         //
@@ -1763,7 +1763,7 @@ class YoixVM extends YoixVMClipboard
         // Finishes the booting process, but at this point everything the
         // interpreter needs to run has been loaded and installed, which
         // means methods, like YoixMake.yoixType(), will work properly.
-        // 
+        //
 
         if (vmstate == BOOTED) {
             if (checkedsuffix) {

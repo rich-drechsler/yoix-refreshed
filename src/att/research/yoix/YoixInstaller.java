@@ -482,7 +482,7 @@ class YoixInstaller extends ClassLoader
         //
         // This was added quickly and most of it came from YoixMisc.java,
         // so it's probably be more general than we really need. We may
-        // revisit it. The hardcoded instructions also aren't a very good 
+        // revisit it. The hardcoded instructions also aren't a very good
         // idea!!!
         //
 
@@ -530,7 +530,7 @@ class YoixInstaller extends ClassLoader
         //
         // We use AWT because we currently only get here when the version
         // of Java is too old, which means Swing might not be available.
-        // 
+        //
 
         if (details.length > 0) {
             toolkit = Toolkit.getDefaultToolkit();

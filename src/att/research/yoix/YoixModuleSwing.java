@@ -43,7 +43,7 @@ class YoixModuleSwing extends YoixModule
     static Integer    $COLUMNTYPE = new Integer(YOIX_STRING_TYPE);
     static Integer    $COPY = new Integer(YOIX_COPY);
     static Integer    $DEFAULTICON = new Integer(YOIX_DEFAULT_ICON);
-    static Integer    $NULLTRANSFERHANDLER = new Integer(0); 
+    static Integer    $NULLTRANSFERHANDLER = new Integer(0);
     static Integer    $RADIOBUTTON = new Integer(YOIX_RADIO_BUTTON);
     static Integer    $RESIZEMODE = new Integer(YOIX_AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     static Integer    $SINGLESELECTION = new Integer(YOIX_SINGLE_SELECTION);
@@ -80,7 +80,7 @@ class YoixModuleSwing extends YoixModule
     // Model 2 means both dimensions will be zero, which obviously doesn't
     // make sense for the preferred size, but occasionally can be a useful
     // minimum size.
-    // 
+    //
 
     static Integer  $JLIST_FLAGS = new Integer(0x111);
     static Integer  $JSCROLLPANE_FLAGS = new Integer(0x411);
@@ -2075,7 +2075,7 @@ class YoixModuleSwing extends YoixModule
             if (arg[0].isNumber()) {
                 if (arg.length == 1 || arg[1].isNumber()) {
                     state = YoixBodyComponentSwing.setThreadSafe(
-                        arg[0].booleanValue(), 
+                        arg[0].booleanValue(),
                         arg.length == 1 ? false : arg[1].booleanValue()
                     );
                 } else VM.badArgument(1);

@@ -24,7 +24,7 @@ class YoixVMShutdownThread extends YoixThread
     //
     // A single instance of this class will be registered with the JVM
     // as our official "shutdown hook".
-    // 
+    //
 
     private static boolean  installed = false;
     private static Vector   queue = new Vector();

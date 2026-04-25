@@ -51,7 +51,7 @@ class YoixSwingJLayeredPane extends JLayeredPane
     // Looks like javax.swing.JDesktopPane.isOpaque() always returns true
     // (at least through Java version 1.4.2), so we maintain the current
     // opaque setting.
-    // 
+    //
 
     private boolean  opaque = true;
     private boolean  protectbackground = false;
@@ -280,7 +280,7 @@ class YoixSwingJLayeredPane extends JLayeredPane
             //
             // and appeared to be an Apple Java bug, so to be safe we
             // added the same code here.
-            // 
+            //
 
             msg = e.getMessage();
             if ((msg = e.getMessage()) == null || !msg.startsWith("No such child:"))

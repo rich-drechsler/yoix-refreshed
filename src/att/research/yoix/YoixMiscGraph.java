@@ -184,7 +184,7 @@ class YoixMiscGraph
             if ((val = getPosition(attr)) != null) {
                 buf.append(" x ");
                 buf.append(val);
-            } 
+            }
         }
         if ((attr = atget(elem, "style")) != null) {
             if ((styles = parse_style(attr)) != null && (len = styles.length) > 0) {
@@ -315,7 +315,7 @@ class YoixMiscGraph
         // but not if an explicit text string (i.e., T n -text) ended with
         // whitspace but also included non-whitespace characters. Decided
         // trimming from the right end should be skipped, at least for now.
-        // 
+        //
 
         if ((yobj = obj.getAttribute(name)) != null && yobj.isString()) {
             value = yobj.stringValue();

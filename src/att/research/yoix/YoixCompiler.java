@@ -81,7 +81,7 @@ class YoixCompiler
     // copies), 1 (copy int and double), or 2 (copy all local variables).
     // Copying all local variables (model 2) may not improve performance.
     // We eventually will investigate.
-    // 
+    //
 
     private static final int  LOCALCOPYMODEL_NONE = 0;
     private static final int  LOCALCOPYMODEL_NUMBERS = 1;
@@ -132,11 +132,11 @@ class YoixCompiler
 
     //
     // Local variables are represented by Yoix dictionaries that define a
-    // a small set of fields the compiler uses while it's generating code. 
+    // a small set of fields the compiler uses while it's generating code.
     // Everytime we create a new representation of a local variable we also
     // register it in a HashMap that the compiler can use to determine if
     // an arbitrary YoixObject represents a local variable or not.
-    // 
+    //
 
     private HashMap  local_directory;
 
@@ -585,7 +585,7 @@ class YoixCompiler
         // Returns true if name references a reserved builtin that should
         // trigger a disabling of all local variable copies. Right now we
         // only recognize N_EVAL, but N_EXECUTE may also be a candidate.
-        // 
+        //
 
         return(N_EVAL.equals(name));
     }
@@ -673,7 +673,7 @@ class YoixCompiler
         // This method guarantees that the value that ends up on the stack
         // is 0 or 1. It's usually overkill because addCastToWeakBoolean(),
         // which generates less code, is all you really need.
-        // 
+        //
 
         obj = yoixstack.peekYoixObject();
         if (obj.isNumber()) {
@@ -1472,7 +1472,7 @@ class YoixCompiler
         //
         // NOTE - we could define a LONG_TYPE object for the compiler, but
         // right now that seems like overkill.
-        // 
+        //
 
         if (indented)
             sbuf.append("\t");
@@ -3158,11 +3158,11 @@ class YoixCompiler
         // Older versions of the Yoix interpreter automatically converted
         // an integer division by zero to a division operation on doubles.
         // It was a questionable approach that resulted in the generation
-        // of inefficient code when expressions involved integer division. 
+        // of inefficient code when expressions involved integer division.
         // As a result we changed the interpreter so it complains with a
         // badoperand error if the divisor is zero in an integer division,
         // so that's all we have to duplicate here.
-        // 
+        //
 
         top = yoixstack.peekYoixObject(0);
         flipped = addEvaluateBinaryOperands(op, sbuf);
@@ -3229,7 +3229,7 @@ class YoixCompiler
                     // stack. Telling addExchCastToYoixObject() that we're
                     // working on a commutative operator should eliminate
                     // unnecessary exchanges.
-                    // 
+                    //
                     flipped ^= addExchCastToYoixObject(true, sbuf);
                     if (flipped)
                         addInstruction(NAME_EXCH, sbuf);
@@ -3387,7 +3387,7 @@ class YoixCompiler
             //
             // Looks like something's wrong - call abort or the interpreter's
             // expressionAssign().
-            // 
+            //
             VM.abort(BADOPERAND);
         }
     }
@@ -4233,7 +4233,7 @@ class YoixCompiler
         // handed a local variable.
         //
         // NOTE - there could be other methods in the complier that really
-        // need the same kind of treatment, so we should carefully compare 
+        // need the same kind of treatment, so we should carefully compare
         // complier and interpreter methods when we're done with the first
         // pass through the compiler.
         //
@@ -4282,7 +4282,7 @@ class YoixCompiler
         // Boolean and the value on the JVM stack match. The third element
         // in the array, if there is one that's not null, is the label that
         // marks the end of the code the compiler generates for that node.
-        // 
+        //
         // The following tables try to describe the decisions that we make
         // when we realize we have to deal with the CONDITIONAL nodes that
         // are used by LOGICALAND and LOGIGICALOR. You definitely need some
@@ -4355,7 +4355,7 @@ class YoixCompiler
         //          T           F              T                 F        lastlabel
         //          F           T              F                 F        next
         //          T           T              F                 F        label
-        //          F           T              F                 T        next         
+        //          F           T              F                 T        next
         //          T           T              F                 T        label
         //          F           T              T                 T        next
         //          T           T              T                 T        label
@@ -4377,7 +4377,7 @@ class YoixCompiler
         //
         // NOTE - caller currently assumes there's always a non-null entry
         // for CONDITIONAL nodes.
-        // 
+        //
 
         if (isBranchExpression(node)) {
             map = new HashMap();
@@ -4774,7 +4774,7 @@ class YoixCompiler
         // NOTE - we're implicitly assuming that synclocals.syncStatement()
         // also deals with operators like & (via another callback) that may
         // need to do things like disable caching of all locals in a block.
-        // 
+        //
 
         length = node.length();
         for (n = lvaluePrimary(node, sbuf); n < length; n++) {
@@ -5574,7 +5574,7 @@ class YoixCompiler
         // block we have to pop the two objects from yoixstack that represent
         // the state of the JVM stack and restore them after the new block is
         // started.
-        // 
+        //
 
         tmp1 = yoixstack.popYoixObject();
         tmp2 = yoixstack.popYoixObject();
@@ -5927,7 +5927,7 @@ class YoixCompiler
         // also deals with operators like & (via another callback) that may
         // need to do things like disable caching of all locals in a block.
         // It's code we still have to add!!
-        // 
+        //
 
         modified = syncStatement(node, true, sbuf);
         addReferenceToNode(node, sbuf);

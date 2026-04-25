@@ -1308,7 +1308,7 @@ class YoixMake
         // of a few components (arrived at by trial and error) that seem
         // to let us eventually get our hands on a properly painted image.
         // Definitely a kludge, but there probably isn't a better fix.
-        // 
+        //
 
         if (icon != null) {
             width = icon.getIconWidth();

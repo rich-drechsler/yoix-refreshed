@@ -878,7 +878,7 @@ class YoixBodyFunction
     getFieldCode(String name) {
 
         Integer  value;
-        
+
         return((value = (Integer)fieldindices.get(name)) != null ? getFieldCode(value.intValue()) : -1);
     }
 

@@ -403,7 +403,7 @@ class YoixReflect
                         // really was no reason why. Changed to eliminate
                         // YoixSecurityManager.checkMemberAccess() errors
                         // when interpreter runs in applet mode.
-                        // 
+                        //
                         field = types[n].getField("TYPE");
                         types[n] = (Class)field.get(null);
                     }

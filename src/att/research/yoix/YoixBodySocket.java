@@ -494,7 +494,7 @@ class YoixBodySocket extends YoixPointerActive
         }
         return(obj);
     }
- 
+
 
     private synchronized YoixObject
     getOutput(YoixObject obj) {

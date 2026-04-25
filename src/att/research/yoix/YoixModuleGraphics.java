@@ -320,12 +320,12 @@ class YoixModuleGraphics extends YoixModule
                                         if (arg.length == 7 || arg[7].isNumber()) {
                                             YoixMiscJFC.copyArea(
                                                 arg[0],
-                                                arg[1].doubleValue(), 
-                                                arg[2].doubleValue(), 
-                                                arg[3].doubleValue(), 
-                                                arg[4].doubleValue(), 
-                                                arg[5].doubleValue(), 
-                                                arg[6].doubleValue(), 
+                                                arg[1].doubleValue(),
+                                                arg[2].doubleValue(),
+                                                arg[3].doubleValue(),
+                                                arg[4].doubleValue(),
+                                                arg[5].doubleValue(),
+                                                arg[6].doubleValue(),
                                                 arg.length == 7 ? false : arg[7].booleanValue()
                                             );
                                         } else VM.badArgument(7);

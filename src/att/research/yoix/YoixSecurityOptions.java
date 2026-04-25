@@ -870,7 +870,7 @@ class YoixSecurityOptions
         // has to include options that cover IP addresses for hosts that
         // are listed on the command line. There are other solutions, but
         // this seemed like the simplest approach.
-        // 
+        //
 
         if (pattern != null && arglist != null) {
             if (pattern != STAR && pattern.indexOf('*') < 0) {

@@ -22,7 +22,7 @@ interface YoixConstantsJTree
     // Exclusively for JTree related constants that are also loaded
     // automatically into a Yoix dictionary by the Swing module. The
     // load request in YoixModuleSwing.java selects the constants in
-    // this file that begin with the YOIX_ prefix, removes it, and 
+    // this file that begin with the YOIX_ prefix, removes it, and
     // then makes an appropriate definition in a Yoix Dictionary.
     //
 

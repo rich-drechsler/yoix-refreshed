@@ -28,7 +28,7 @@ class YoixSwingJScrollBar extends JScrollBar
 
     //
     // This was added (on 1/15/11) to help performance when Yoix scrollbars
-    // are attached to a JScrollPane. 
+    // are attached to a JScrollPane.
     //
 
     private JScrollPane  scrollpane = null;

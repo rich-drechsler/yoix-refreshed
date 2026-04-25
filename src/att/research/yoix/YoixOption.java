@@ -25,7 +25,7 @@ class YoixOption
     // line options. The public fields provide easy access to the results,
     // which we think is appropriate for command line option parsing, but
     // they obviously also mean this isn't a thread-safe class.
-    // 
+    //
     // NOTE - all versions of getopt() now take an argv[] argument that's
     // an array of Objects, so optarg has also been changed to an Object.
     // That means the caller will often have to cast optarg to a String.

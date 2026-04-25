@@ -578,7 +578,7 @@ class YoixMisc
         // look at all custom call() methods and the ones that can use
         // this method should be replaced. Having a public static call()
         // is particularly useful for add-on modules.
-        // 
+        //
 
         if (function != null) {
             if (function.notNull()) {
@@ -1462,7 +1462,7 @@ class YoixMisc
 
 
     public static InputStream
-    getInputStream(URL url) 
+    getInputStream(URL url)
 
         throws IOException
 
@@ -1646,7 +1646,7 @@ class YoixMisc
 
 
     public static URLConnection
-    getURLConnection(URL url) 
+    getURLConnection(URL url)
 
         throws IOException
 
@@ -1665,7 +1665,7 @@ class YoixMisc
 
 
     public static URLConnection
-    getURLConnection(URL url, YoixObject obj) 
+    getURLConnection(URL url, YoixObject obj)
 
         throws IOException
 
@@ -1684,7 +1684,7 @@ class YoixMisc
         // but as usual we have to initialized the YoixTrustPolicy class.
         // Currently returns null if we can't open the connection using
         // a proxy, which means the caller has to decide how to proceed.
-        // 
+        //
 
         if (obj != null && obj.notNull()) {
             if (obj.isString()) {
@@ -2073,7 +2073,7 @@ class YoixMisc
         byte     magic[];
 
         //
-        // Returns true if we can transparently read four bytes from stream 
+        // Returns true if we can transparently read four bytes from stream
         // and those bytes match the ones used to mark ZIP archive.
         //
 
@@ -2663,7 +2663,7 @@ class YoixMisc
                         if (right.indexOf(str.charAt(end)) == -1)
                             break;
                     }
-                } 
+                }
 
                 if (start != 0 || end != length - 1)
                     str = str.substring(start, end + 1);

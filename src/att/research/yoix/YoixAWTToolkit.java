@@ -31,7 +31,7 @@ class YoixAWTToolkit
     // to avoid the "focus grabbing" behavoir that apparently happens on Macs
     // whenever AWT code is triggered. Makes our job more difficult, but it's
     // probably important, at least until the Mac behavior changes.
-    // 
+    //
 
     private static Toolkit  toolkit = null;
     private static boolean  initialized = false;
@@ -371,7 +371,7 @@ class YoixAWTToolkit
 
         boolean  result = false;
         Toolkit  tk;
-        
+
         if ((tk = getDefaultToolkit()) != null)
             result = tk.prepareImage(image, width, height, observer);
         return(result);

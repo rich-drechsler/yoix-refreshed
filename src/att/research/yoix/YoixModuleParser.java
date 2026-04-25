@@ -375,7 +375,7 @@ class YoixModuleParser extends YoixModule
         // A missing or NULL second argument means no extra whitespace is
         // added, while the empty string (i.e., "") as a second argument
         // means only newlines will be added.
-        // 
+        //
 
         if (arg.length >= 1 && arg.length <= 3) {
             if (arg[0].compound() || arg[0].isArray() || arg[0].isNull() || arg[0].isString()) {

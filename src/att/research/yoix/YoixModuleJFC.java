@@ -1120,14 +1120,14 @@ class YoixModuleJFC extends YoixModule
         // won't get done by YoixBodyComponent.handleYoixEvent(). Probably
         // not hard to change YoixBodyComponent listeners, so we might look
         // into this later.
-        // 
+        //
 
         if (arg[0].notNull()) {
             if (arg[1].isComponent() || arg[1].isNull()) {
                     if (arg[0].isInteger() || arg[0].isString()) {
                         event = YoixObject.newDictionary(1);
                         event.putObject(N_ID, arg[0]);
-                    } else event = arg[0]; 
+                    } else event = arg[0];
                     if ((e = YoixMakeEvent.javaAWTEvent(event, arg[1])) != null) {
                         if ((queue = YoixAWTToolkit.getSystemEventQueue()) != null) {
                             queue.postEvent(e);
