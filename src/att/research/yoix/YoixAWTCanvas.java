@@ -583,7 +583,7 @@ class YoixAWTCanvas extends Canvas
         ItemListener    itemlistener;
 
         if (e instanceof ItemEvent) {
-            itemlistener = this.itemlistener;		// snapshot - just to be safe
+            itemlistener = this.itemlistener;        // snapshot - just to be safe
             if (itemlistener != null) {
                 itemlistener.itemStateChanged(
                     new ItemEvent(
@@ -595,7 +595,7 @@ class YoixAWTCanvas extends Canvas
                 );
             }
         } else if (e instanceof ActionEvent) {
-            actionlistener = this.actionlistener;	// snapshot - just to be safe
+            actionlistener = this.actionlistener;        // snapshot - just to be safe
             if (actionlistener != null) {
                 actionlistener.actionPerformed(
                     new ActionEvent(

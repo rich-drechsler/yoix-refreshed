@@ -1077,7 +1077,7 @@ class YoixSwingJTree extends JTree
             components = YoixMisc.copyIntoDictionary(added);
             components.setGrowable(false);
             components.setAccessBody(LR__);
-            data.put(N_TOP, obj);		// subtle change
+            data.put(N_TOP, obj);        // subtle change
             data.put(N_COMPONENTS, components);
             VM.popAccess();
             VM.popError();
@@ -1888,9 +1888,9 @@ class YoixSwingJTree extends JTree
 
             if (userobj instanceof YoixJTreeNode) {
                 node = (YoixJTreeNode)userobj;
-                this.setOpenIcon(node.openIcon);	// some compilers complain
-                this.setClosedIcon(node.closedIcon);	// some compilers complain
-                this.setLeafIcon(node.leafIcon);	// some compilers complain
+                this.setOpenIcon(node.openIcon);        // some compilers complain
+                this.setClosedIcon(node.closedIcon);    // some compilers complain
+                this.setLeafIcon(node.leafIcon);        // some compilers complain
 
                 if (node.foreground != null)
                     this.setTextNonSelectionColor(node.foreground);
@@ -1999,7 +1999,7 @@ class YoixSwingJTree extends JTree
                     ynode.text = text;
                     ynode.getSelf().put(N_TEXT, YoixObject.newString(text));
                 }
-            } else aNode.setUserObject(newValue);	// can this ever happen??
+            } else aNode.setUserObject(newValue);        // can this ever happen??
 
             nodeChanged(aNode);
         }

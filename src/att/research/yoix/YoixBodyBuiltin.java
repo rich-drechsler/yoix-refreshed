@@ -185,7 +185,7 @@ class YoixBodyBuiltin
             catch(Exception e) {
                 if (e instanceof SecurityException)
                     throw((SecurityException)e);
-                VM.die(INTERNALERROR);	// should never get here
+                VM.die(INTERNALERROR);        // should never get here
             }
         } else VM.badCall(methodname);
 

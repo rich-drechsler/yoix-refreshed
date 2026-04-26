@@ -105,8 +105,8 @@ interface YoixConstants
     static final int  BITSIZE_INT = 32;
     static final int  BITSIZE_LONG = 64;
     static final int  BITSIZE_DOUBLE = 64;
-    static final int  BITSIZE_DOUBLE_EXPONENT = 11;	// bits 62-52
-    static final int  BITSIZE_DOUBLE_MANTISSA = 52;	// bits 51-0
+    static final int  BITSIZE_DOUBLE_EXPONENT = 11;        // bits 62-52
+    static final int  BITSIZE_DOUBLE_MANTISSA = 52;        // bits 51-0
 
     //
     // Miscellaneous constants. Not convinced we need really the PARSER_
@@ -153,12 +153,12 @@ interface YoixConstants
     // Flags for regular expressions and pattern matching operations.
     //
 
-    static final int  SHELL_PATTERN    = 1<<0;		// regular expression
-    static final int  TEXT_PATTERN     = 1<<1;		// regular expression
-    static final int  CASE_INSENSITIVE = 1<<2;		// both
-    static final int  SINGLE_BYTE      = 1<<3;		// regular expression
-    static final int  DOT_PATTERN      = 1<<4;		// pattern matching
-    static final int  RAWSHELL_PATTERN = 1<<5;		// regular_expression
+    static final int  SHELL_PATTERN    = 1<<0;        // regular expression
+    static final int  TEXT_PATTERN     = 1<<1;        // regular expression
+    static final int  CASE_INSENSITIVE = 1<<2;        // both
+    static final int  SINGLE_BYTE      = 1<<3;        // regular expression
+    static final int  DOT_PATTERN      = 1<<4;        // pattern matching
+    static final int  RAWSHELL_PATTERN = 1<<5;        // regular_expression
 
     static final int  REFLAGS_MASK     = SHELL_PATTERN|TEXT_PATTERN|CASE_INSENSITIVE|SINGLE_BYTE|RAWSHELL_PATTERN;
 

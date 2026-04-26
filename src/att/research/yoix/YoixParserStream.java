@@ -332,7 +332,7 @@ class YoixParserStream
             token = "";
             sep = "";
             for (tok = e.currentToken.next; tok != null; tok = tok.next) {
-                if (tok.kind == 0) {		// it's EOF
+                if (tok.kind == 0) {        // it's EOF
                     token += sep + tokenImage[0];
                     break;
                 } else token += sep + e.add_escapes(tok.image);

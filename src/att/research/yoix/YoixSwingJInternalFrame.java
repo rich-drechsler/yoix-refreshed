@@ -184,7 +184,7 @@ class YoixSwingJInternalFrame extends JInternalFrame
                     if (visible) {
                         YoixMiscMenu.addListener((JMenuBar)newbar, parent);
                         setJMenuBar((JMenuBar)newbar);
-                    } else setJMenuBar(null);	// seems necessary
+                    } else setJMenuBar(null);        // seems necessary
                     result = true;
                 } else if (visible == false)
                     result = changeMenuBar(null, visible, validate);
@@ -193,7 +193,7 @@ class YoixSwingJInternalFrame extends JInternalFrame
             if ((oldbar = getJMenuBar()) != null) {
                 YoixMiscMenu.removeListener(oldbar, parent);
                 remove(oldbar);
-                setJMenuBar(null);		// seems necessary
+                setJMenuBar(null);        // seems necessary
                 result = true;
             }
         }

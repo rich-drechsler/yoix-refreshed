@@ -488,14 +488,14 @@ class YoixModuleVM extends YoixModule
     // NOTE - ordering of modules in N_YOIX now controls the search and
     // load order triggered by the processing of the new
     //
-    //		import yoix.*.*;
+    //     import yoix.*.*;
     //
     // statement. No ordering can optimize all scripts, which suggests
     // we should come up with some other mechanism - later.
     //
 
        null,                  "25",                 $LIST,      $RWRO, N_YOIX,
-       M_SWING,               "YoixModuleSwing",    $MODULE,    null,  null,	// covers M_AWT
+       M_SWING,               "YoixModuleSwing",    $MODULE,    null,  null,        // covers M_AWT
        M_SYSTEM,              "YoixModuleSystem",   $MODULE,    null,  null,
        M_IO,                  "YoixModuleIO",       $MODULE,    null,  null,
        M_STDIO,               "YoixModuleStdio",    $MODULE,    null,  null,
@@ -510,17 +510,17 @@ class YoixModuleVM extends YoixModule
        M_SECURE,              "YoixModuleSecure",   $MODULE,    null,  null,
        M_IMAGE,               "YoixModuleImage",    $MODULE,    null,  null,
        M_GRAPHICS,            "YoixModuleGraphics", $MODULE,    null,  null,
-       M_FACTORIAL,           "YoixModuleFactorial",$MODULE,    null,  null,	// new in 4.0
+       M_FACTORIAL,           "YoixModuleFactorial",$MODULE,    null,  null,        // new in 4.0
 
-       M_TYPE,                "YoixModuleType",     $MODULE,    null,  null,	// deprecated???
-       M_PARSER,              "YoixModuleParser",   $MODULE,    null,  null,	// big/not used much
-       M_XCOLOR,              "YoixModuleXColor",   $MODULE,    null,  null,	// big/not used much
-       M_ERROR,               "YoixModuleError",    $MODULE,    null,  null,	// rarely used
-       M_WINDOWS,             "YoixModuleWindows",  $MODULE,    null,  null,	// rarely used
-       M_EVENT,               "YoixModuleEvent",    $MODULE,    null,  null,	// rarely used
-       M_ROBOT,               "YoixModuleRobot",    $MODULE,    null,  null,	// rarely used
-       M_AWT,                 "YoixModuleAWT",      $MODULE,    null,  null,	// covered by M_SWING
-       M_SOUND,               "YoixModuleSound",    $MODULE,    null,  null,	// currently empty
+       M_TYPE,                "YoixModuleType",     $MODULE,    null,  null,        // deprecated???
+       M_PARSER,              "YoixModuleParser",   $MODULE,    null,  null,        // big/not used much
+       M_XCOLOR,              "YoixModuleXColor",   $MODULE,    null,  null,        // big/not used much
+       M_ERROR,               "YoixModuleError",    $MODULE,    null,  null,        // rarely used
+       M_WINDOWS,             "YoixModuleWindows",  $MODULE,    null,  null,        // rarely used
+       M_EVENT,               "YoixModuleEvent",    $MODULE,    null,  null,        // rarely used
+       M_ROBOT,               "YoixModuleRobot",    $MODULE,    null,  null,        // rarely used
+       M_AWT,                 "YoixModuleAWT",      $MODULE,    null,  null,        // covered by M_SWING
+       M_SOUND,               "YoixModuleSound",    $MODULE,    null,  null,        // currently empty
 
     //
     // The next two sections are tricky - they add magic tokens to the
@@ -681,7 +681,7 @@ class YoixModuleVM extends YoixModule
                         if (arg[1].isPointer()) {
                             if (arg[0].isString())
                                 result = arg[1].defined(arg[0].stringValue());
-                            else result = arg[1].defined(arg[1].offset() + arg[0].intValue());		// offset added on 5/13/08
+                            else result = arg[1].defined(arg[1].offset() + arg[0].intValue());        // offset added on 5/13/08
                         } else result = false;
                     } else {
                         if (arg[0].isString())
@@ -749,7 +749,7 @@ class YoixModuleVM extends YoixModule
                     name = (arg.length > 1 && arg[1].notNull()) ? arg[1].stringValue() : "--string--";
                 else name = arg[0].getString(N_NAME);
                 if (arg.length > 1) {
-                    if (arg[1].isNull())	// kludge - NULL Object isn't a String
+                    if (arg[1].isNull())        // kludge - NULL Object isn't a String
                         arg[1] = YoixObject.newString();
                     array = YoixMake.yoixArray(arg, 1);
                     if (arg[1].isNull())

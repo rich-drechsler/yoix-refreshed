@@ -30,7 +30,7 @@ class YoixBodyDictionaryThis extends YoixBodyDictionary
     //
     // Incidentally, we can safely assume that
     //
-    //		names.length() <= values.length()
+    //     names.length() <= values.length()
     //
     // which is why we use values in length(). In fact the only time when
     // the sizes will be different is for the block that's associated with

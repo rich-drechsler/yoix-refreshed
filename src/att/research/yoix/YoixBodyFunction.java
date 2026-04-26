@@ -550,8 +550,8 @@ class YoixBodyFunction
         // you could occasionally run into thread dependent problems.
         //
 
-        node = tree;		// snapshot - just to be safe;
-        counter++;		// number of times we were called
+        node = tree;        // snapshot - just to be safe;
+        counter++;          // number of times we were called
 
         if (argv.length == argc || (varargs && argv.length > argc)) {
             stack = VM.getThreadStack();
@@ -627,7 +627,7 @@ class YoixBodyFunction
                     result = evaluate ? YoixInterpreter.evaluate(node, stack) : YoixInterpreter.call(node, stack);
                     stack.popMark();
                 }
-            } else VM.die(INTERNALERROR);	// should be impossible
+            } else VM.die(INTERNALERROR);        // should be impossible
         } else VM.badCall(OFFENDINGFUNCTION, getName());
 
         return(result != null ? result : YoixObject.newEmpty());

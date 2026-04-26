@@ -37,7 +37,7 @@ class YoixPointerActive extends YoixPointer
     // it knows all this, so be careful making changes.
     //
 
-    YoixObject  data;		// never reset this to null!!!
+    YoixObject  data;        // never reset this to null!!!
 
     //
     // Subclasses in other packages will somtimes want need to provide
@@ -101,7 +101,7 @@ class YoixPointerActive extends YoixPointer
     YoixPointerActive(YoixObject data, boolean cloneable) {
 
         this.data = data;
-        this.length = data.length();	// means data can grow but not shrink!!
+        this.length = data.length();        // means data can grow but not shrink!!
         this.cloneable = cloneable;
 
         //
@@ -312,7 +312,7 @@ class YoixPointerActive extends YoixPointer
         if (executable(index)) {
             if ((obj = executeField(data.name(index), argv)) == null)
                 obj = data.execute(index, argv, context);
-        } else obj = data.execute(index, argv, context);	// only for the error!!
+        } else obj = data.execute(index, argv, context);        // only for the error!!
 
         return(obj);
     }
@@ -340,7 +340,7 @@ class YoixPointerActive extends YoixPointer
         if (readable(index)) {
             if ((obj = getField(data.name(index), null)) == null)
                 obj = data.get(index, clone);
-        } else obj = data.get(index, clone);	// only for the error!!
+        } else obj = data.get(index, clone);        // only for the error!!
 
         return(obj);
     }

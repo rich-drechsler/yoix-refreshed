@@ -328,7 +328,7 @@ class YoixMake
             value = ((Boolean)obj).booleanValue() ? 1 : 0;
         else if (obj instanceof YoixObject)
             value = ((YoixObject)obj).isNumber() ? ((YoixObject)obj).intValue() : 0;
-        else value = 0;			// very old versions died here
+        else value = 0;        // very old versions died here
 
         return(value);
     }
@@ -538,7 +538,7 @@ class YoixMake
                             break;
 
                         case '\r':
-                            if (buf[n] == '\n')		// always true - check grammar??
+                            if (buf[n] == '\n')        // always true - check grammar??
                                 n++;
                             continue;
 
@@ -817,11 +817,11 @@ class YoixMake
         // May eventually want to generalize this. One approach could
         // accept hex strings in the format,
         //
-        //		0x"......"
-        //		0x1"......"
-        //		0x2"......"
-        //		0x3"......"
-        //		0x4"......"
+        //     0x"......"
+        //     0x1"......"
+        //     0x2"......"
+        //     0x3"......"
+        //     0x4"......"
         //
         // and use the number following the 0x (if any) to group hex
         // digits, rather than always assuming 2 digits per character.
@@ -975,7 +975,7 @@ class YoixMake
                             break;
 
                         case '\r':
-                            if (buf[n] == '\n')		// always true - check grammar??
+                            if (buf[n] == '\n')        // always true - check grammar??
                                 n++;
                             continue;
 
@@ -1320,7 +1320,7 @@ class YoixMake
                         iconpainters = new JComponent[] {
                             new JRadioButton(),
                             new JCheckBox(),
-                            new JPanel()		// just in case
+                            new JPanel()        // just in case
                         };
                     }
 
@@ -1517,7 +1517,7 @@ class YoixMake
         // we build a dictionary and the declaration looked something
         // like,
         //
-        //	Dictionary d[] = {"name1", "value1", "name2", "value2"};
+        //     Dictionary d[] = {"name1", "value1", "name2", "value2"};
         //
         // because in the interpreter will set length to 4, but we have
         // recently changed how the values in non-compound initializers
@@ -1556,10 +1556,10 @@ class YoixMake
                         // requiring square brackets in the declaration. Old code
                         // did
                         //
-                        //	if (adjust && ival != null && length > 0) {
-                        //	    if (ival.compound() == false)
-                        //		length /= 2;
-                        //	}
+                        //     if (adjust && ival != null && length > 0) {
+                        //         if (ival.compound() == false)
+                        //             length /= 2;
+                        //     }
                         //
                         // so we tried to maintain that logic even though the code
                         // probably could be improved. Incidentally, the old code

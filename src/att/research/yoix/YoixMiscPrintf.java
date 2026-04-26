@@ -141,7 +141,7 @@ class YoixMiscPrintf
                                         case 'S':
                                             if (args[argn].isString())
                                                 cvt.buildString(buf, args[argn++].stringValue(ch == 's'));
-                                            else if (cvt.buildString(buf, args[argn], ch == 's') != null)	// JTable kludge
+                                            else if (cvt.buildString(buf, args[argn], ch == 's') != null)        // JTable kludge
                                                 argn++;
                                             else valid = false;
                                             break;

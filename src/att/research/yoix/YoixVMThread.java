@@ -223,7 +223,7 @@ class YoixVMThread
     private static YoixVMThreadData
     getThreadData(Thread target) {
 
-        YoixVMThreadData  data = threaddata[last];	// snapshot - just to be safe
+        YoixVMThreadData  data = threaddata[last];        // snapshot - just to be safe
 
         if (data.thread != target)
             data = pickThreadData(target);
@@ -234,7 +234,7 @@ class YoixVMThread
     private static YoixStack
     getThreadStack(Thread target) {
 
-        YoixVMThreadData  data = threaddata[last];	// snapshot - just to be safe
+        YoixVMThreadData  data = threaddata[last];        // snapshot - just to be safe
 
         if (data.thread != target)
             data = pickThreadData(target);

@@ -256,7 +256,7 @@ class YoixBodyAudioClip extends YoixPointerActive
                 }
                 try {
                     url = new URL(name);
-                    stream = YoixMisc.getInputStream(url);	// only for existence check
+                    stream = YoixMisc.getInputStream(url);        // only for existence check
                     audioclip = Applet.newAudioClip(url);
                 }
                 catch(IOException e) {

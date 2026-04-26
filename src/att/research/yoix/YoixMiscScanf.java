@@ -62,7 +62,7 @@ class YoixMiscScanf
         //
         // The format string is assumed to be iso8859_1, so that
         //
-        //	digit - '0'
+        //     digit - '0'
         //
         // works the way we expect.
         //

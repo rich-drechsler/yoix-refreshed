@@ -31,7 +31,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
     private YoixBodyComponent  menubarowner = null;
     private YoixBodyComponent  popupowner = null;
     private boolean            disposable = false;
-    private Frame              awtparent = null;	// faked for dialog or window
+    private Frame              awtparent = null;        // faked for dialog or window
 
     //
     // Translator support
@@ -51,7 +51,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
      // FIELD               OBJECT       BODY
      // -----               ------       ----
         N_COMPONENTS,       $LR__,       $LR__,
-        N_SCREEN,           $LR__,       null,		// added on 10/18/11
+        N_SCREEN,           $LR__,       null,        // added on 10/18/11
         N_TAG,              $LR__,       null,
     };
 
@@ -241,7 +241,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         YoixObject  obj;
         Object      comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         switch (activeField(name, activefields)) {
             case V_GETENABLED:
@@ -290,7 +290,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         switch (activeField(name, activefields)) {
             case V_BACKGROUND:
@@ -338,7 +338,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                 break;
 
             case V_DISPOSE:
-                obj = getDispose(comp, obj);	// currently OK if comp is null
+                obj = getDispose(comp, obj);        // currently OK if comp is null
                 break;
 
             case V_ECHO:
@@ -535,7 +535,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp != null && obj != null) {
             switch (activeField(name, activefields)) {
@@ -943,9 +943,9 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         //
 
         if (isDisposable()) {
-            comp = this.peer;		// snapshot - probably unnecessary
-            owner = this.parent;	// snapshot - just to be safe
-            if (comp instanceof Component)	// a recent addition
+            comp = this.peer;           // snapshot - probably unnecessary
+            owner = this.parent;        // snapshot - just to be safe
+            if (comp instanceof Component)        // a recent addition
                 ((Component)comp).setVisible(false);
             //
             // A change (3/24/07) to try to help with a memory leak that
@@ -986,7 +986,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                 ((YoixBodyComponent)owner.body()).childrenRemove(this);
 
             childrenDispose();
-            VM.removeClipboards(getContext());	// not completely convinced - added 5/12/05
+            VM.removeClipboards(getContext());        // not completely convinced - added 5/12/05
 
             //
             // Clearing the menubar and popup fields is a change that was
@@ -1026,7 +1026,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         Adjustable  adjustable;
         Object      comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
         if (comp instanceof ScrollPane) {
             if (orientation == YOIX_HORIZONTAL)
                 adjustable = ((ScrollPane)comp).getHAdjustable();
@@ -1105,7 +1105,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         int     listener;
         int     bit;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
         missed = 0;
 
         for (bit = 1; mask != 0 && bit != NEXTLISTENER; bit <<= 1) {
@@ -1154,7 +1154,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         String   text;
         int      delta = 0;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof Component && canTextChange()) {
             trim = data.getBoolean(N_AUTOTRIM);
@@ -1180,7 +1180,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                     text = YoixMisc.replaceString(dest, offset, length, str, trim, undo);
                     delta = text.length() - dest.length();
                     ((Label)comp).setText(text);
-                    ((Label)comp).invalidate();	// other components too??
+                    ((Label)comp).invalidate();        // other components too??
                 } else if (comp instanceof Button) {
                     dest = ((Button)comp).getLabel();
                     text = YoixMisc.replaceString(dest, offset, length, str, trim, undo);
@@ -1248,7 +1248,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         Object  component;
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof PopupMenu) {
             try {
@@ -1324,7 +1324,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         Object      component;
         Object      comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof MenuBar || comp instanceof PopupMenu) {
             if (owner != null) {
@@ -1368,7 +1368,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         String     values[];
         int        n;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof Component && obj != null) {
             if (comp instanceof Choice) {
@@ -1377,7 +1377,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                         ((Choice)comp).removeAll();
                     for (n = 0; n < values.length; n++)
                         ((Choice)comp).addItem(values[n]);
-                    ((Choice)comp).invalidate();	// other components too??
+                    ((Choice)comp).invalidate();        // other components too??
                 }
             } else if (comp instanceof List) {
                 if ((values = buildTranslator(obj, type)) != null) {
@@ -1679,9 +1679,9 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         setField(N_PAINT);
         setField(N_FONT);
         setField(N_POPUP);
-        setField(N_SIZE);		// right before visible - menubar kludge
+        setField(N_SIZE);        // right before visible - menubar kludge
         setField(N_SHAPE);
-        setField(N_LOCATION);		// moved after N_SIZE on 3/15/00
+        setField(N_LOCATION);        // moved after N_SIZE on 3/15/00
         setField(N_CURSOR);
         setField(N_COMPRESSEVENTS);
 
@@ -2887,7 +2887,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
     private void
     setModal(Object comp, YoixObject obj) {
 
-        if (comp instanceof Dialog)		// should we skip FileDialogs??
+        if (comp instanceof Dialog)        // should we skip FileDialogs??
             ((Dialog)comp).setModal(obj.booleanValue());
     }
 
@@ -3159,7 +3159,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                 ((TextComponent)comp).select(start, end);
                 ((TextComponent)comp).setCaretPosition(end);
             }
-            catch(RuntimeException e) {}		// a precaution
+            catch(RuntimeException e) {}        // a precaution
         }
     }
 
@@ -3173,8 +3173,8 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         // Changed on 3/22/05 so pack() is always called when obj is null.
         // Previous version did
         //
-        //	} else if (isPacked())
-        //	    ((YoixInterfaceWindow)comp).pack();
+        //     } else if (isPacked())
+        //         ((YoixInterfaceWindow)comp).pack();
         //
         // but the testing caused an obsurce scrollbar related problem in
         // one screen in an important internal application. Change should
@@ -3192,7 +3192,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                     if ((size = getShapeSize(comp)) != null) {
                         ((Component)comp).setSize(size);
                         setPacked(true);
-                    } else ((YoixInterfaceWindow)comp).pack();	// changed on 3/22/05
+                    } else ((YoixInterfaceWindow)comp).pack();        // changed on 3/22/05
                 }
             } else if (comp instanceof YoixAWTCanvas && !(comp instanceof YoixAWTTableColumn)) {
                 if (obj.notNull()) {
@@ -3240,7 +3240,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         //
 
         if (comp instanceof Component) {
-            data.put(N_TEXT, YoixObject.newString(), false);	// can now always toss
+            data.put(N_TEXT, YoixObject.newString(), false);        // can now always toss
             trim = data.getBoolean(N_AUTOTRIM);
             if (comp instanceof YoixAWTTableManager) {
                 if (obj.isString() || obj.isNull())
@@ -3249,7 +3249,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
             } else if (comp instanceof Label) {
                 str = trim ? obj.stringValue().trim() : obj.stringValue();
                 ((Label)comp).setText(str);
-                ((Label)comp).invalidate();	// other components too??
+                ((Label)comp).invalidate();        // other components too??
             } else if (comp instanceof TextArea) {
                 str = trim ? obj.stringValue().trim() : obj.stringValue();
                 ((TextArea)comp).setText(str);
@@ -3343,8 +3343,8 @@ class YoixBodyComponentAWT extends YoixBodyComponent
                     if (state) {
                         windowActivate(this, comp);
                         if (comp instanceof FileDialog) {
-                            setField(N_DIRECTORY);	// JDK bug fix
-                            setField(N_FILE);		// unnecessary??
+                            setField(N_DIRECTORY);        // JDK bug fix
+                            setField(N_FILE);        // unnecessary??
                         }
                         if (isPacked() == false) {
                             ((YoixInterfaceWindow)comp).pack();
@@ -3464,7 +3464,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         Hashtable  translator;
         String     value;
 
-        translator = this.translator;		// snapshot - probably unnecessary
+        translator = this.translator;        // snapshot - probably unnecessary
 
         if (translator != null && str != null) {
             if ((value = (String)translator.get(str)) != null)
@@ -3490,7 +3490,7 @@ class YoixBodyComponentAWT extends YoixBodyComponent
         // be an issue.
         //
 
-        translator = this.translator;		// snapshot - probably unnecessary
+        translator = this.translator;        // snapshot - probably unnecessary
 
         if (translator != null && str != null) {
             for (enm = translator.keys(); enm.hasMoreElements(); ) {

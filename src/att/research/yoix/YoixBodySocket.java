@@ -151,7 +151,7 @@ class YoixBodySocket extends YoixPointerActive
         //
 
         active = new HashMap();
-        active.putAll(activesockets);		// clone doesn't work
+        active.putAll(activesockets);        // clone doesn't work
 
         for (iterator = active.keySet().iterator(); iterator.hasNext(); ) {
             try {

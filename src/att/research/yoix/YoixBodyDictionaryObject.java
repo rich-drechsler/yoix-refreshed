@@ -155,8 +155,8 @@ class YoixBodyDictionaryObject extends YoixBodyDictionary
         // change that was in the version that we tested on a production
         // system with lots of users. The old version did
         //
-        //	if (obj.data[n] != null)
-        //	    ...
+        //     if (obj.data[n] != null)
+        //         ...
         //
         // which postponed module loading, but we probably won't restore
         // the code without thorough testing on a heavily loaded system.
@@ -386,7 +386,7 @@ class YoixBodyDictionaryObject extends YoixBodyDictionary
         int         index;
 
         if ((index = hash(name)) != -1)
-            obj = get(index, clone);	// faster if we did it here??
+            obj = get(index, clone);        // faster if we did it here??
         else VM.abort(UNDEFINED, name);
 
         return(obj);
@@ -409,13 +409,13 @@ class YoixBodyDictionaryObject extends YoixBodyDictionary
         // that can be set by other threads, so be very careful. Even an
         // innocent looking change like,
         //
-        //		index = lastindex = n;
+        //     index = lastindex = n;
         //
         // could cause trouble. The safest approach would write this as
         // two separate assignment statements,
         //
-        //		index = n;
-        //		lastindex = n;
+        //     index = n;
+        //     lastindex = n;
         //
         // so there would be no chance of obscure thread accidents. There
         // are many other obvious changes - later.
@@ -541,7 +541,7 @@ class YoixBodyDictionaryObject extends YoixBodyDictionary
         if ((index = hash(name)) != -1) {
             if ((value = data[index]) != null) {
                 data[index] = null;
-                setModuleClass(name, "");	// magic to force VM.load() call
+                setModuleClass(name, "");        // magic to force VM.load() call
             }
         }
         return(value);
@@ -679,7 +679,7 @@ class YoixBodyDictionaryObject extends YoixBodyDictionary
 
         if ((obj = data[index]) == null && modulemap != null) {
             synchronized(this) {
-                if ((obj = data[index]) == null) {		// just in case
+                if ((obj = data[index]) == null) {        // just in case
                     if ((fieldname = keys[index]) != null) {
                         if ((classname = (String)modulemap.get(fieldname)) != null) {
                             modulemap.remove(fieldname);

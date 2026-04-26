@@ -35,8 +35,8 @@ interface YoixConstantsGraphics
     static final int  YOIX_SEG_MOVETO = PathIterator.SEG_MOVETO;
     static final int  YOIX_SEG_LINETO = PathIterator.SEG_LINETO;
     static final int  YOIX_SEG_QUADTO = PathIterator.SEG_QUADTO;
-    static final int  YOIX_SEG_CUBICTO = PathIterator.SEG_CUBICTO;	// Java's name
-    static final int  YOIX_SEG_CURVETO = PathIterator.SEG_CUBICTO;	// Yoix synonym
+    static final int  YOIX_SEG_CUBICTO = PathIterator.SEG_CUBICTO;        // Java's name
+    static final int  YOIX_SEG_CURVETO = PathIterator.SEG_CUBICTO;        // Yoix synonym
     static final int  YOIX_SEG_CLOSE = PathIterator.SEG_CLOSE;
     static final int  YOIX_WIND_EVEN_ODD = PathIterator.WIND_EVEN_ODD;
     static final int  YOIX_WIND_NON_ZERO = PathIterator.WIND_NON_ZERO;

@@ -508,7 +508,7 @@ class YoixBodyBlock
             // when a module is loaded (e.g., typedict definitions)
             // may be skipped.
             //
-            if (force == false || lval.defined()) {	// primarily to force load of custom modules
+            if (force == false || lval.defined()) {        // primarily to force load of custom modules
                 if ((importdict = getImportdict()) != null) {
                     VM.pushAccess(LRWX);
                     importdict.put(importdict.sizeof(), lval, true);
@@ -880,7 +880,7 @@ class YoixBodyBlock
 
         if (VM.getBoolean(N_CREATE) || autocreate) {
             if ((offset = names.reserve(name)) != -1) {
-                if (values.isArray()) {		// can this happen??
+                if (values.isArray()) {        // can this happen??
                     if (names.defined(offset) == false) {
                         slot = nextOffset();
                         names.put(offset, YoixObject.newInt(slot), false);
@@ -905,7 +905,7 @@ class YoixBodyBlock
         if (VM.getBoolean(N_AUTOIMPORT)) {
             if ((value = VM.autoImport(name)) != null) {
                 if ((offset = names.reserve(name)) != -1) {
-                    if (values.isArray()) {		// can this happen??
+                    if (values.isArray()) {        // can this happen??
                         if (names.defined(offset) == false) {
                             slot = nextOffset();
                             names.put(offset, YoixObject.newInt(slot), false);
@@ -953,7 +953,7 @@ class YoixBodyBlock
                 //
                 // Old versions did,
                 //
-                //	argvalues.setAccessBody(LR__);
+                //     argvalues.setAccessBody(LR__);
                 //
                 // which meant function argv could not be incremented. The
                 // line was removed on 4/17/02 and will stay out unless we
@@ -1011,7 +1011,7 @@ class YoixBodyBlock
                     }
                 }
             }
-        } else offset = -1;		// probably deserve to die here
+        } else offset = -1;        // probably deserve to die here
 
         return(offset);
     }

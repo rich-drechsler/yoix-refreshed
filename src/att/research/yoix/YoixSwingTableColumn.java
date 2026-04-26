@@ -72,7 +72,7 @@ class YoixSwingTableColumn extends TableColumn
     int               header_halignment = -1;
 
     private YoixObject  editor = null;
-    private YoixObject  etc = null;	// spare value, used by YOIX_HISTOGRAM_TYPE
+    private YoixObject  etc = null;        // spare value, used by YOIX_HISTOGRAM_TYPE
 
     private YoixObject  picksortobject = null;
     private YoixObject  picktableobject = null;

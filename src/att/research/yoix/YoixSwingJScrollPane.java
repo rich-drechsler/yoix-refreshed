@@ -79,13 +79,13 @@ class YoixSwingJScrollPane extends JScrollPane
 
     private int  sizecontrol = 0;
 
-    private int      model_minsize = 0;			// bits 0 to 3
-    private int      model_preferredsize = 0;		// bits 4 to 7
-    private boolean  adjustwidth_flag = false;		// bit 8
-    private boolean  adjustheight_flag = false;		// bit 9
-    private boolean  inheritsizecontrol_flag = false;	// bit 10
-    private boolean  lockminsize_flag = false;		// bit 11
-    private boolean  lockpreferredsize_flag = false;	// bit 12
+    private int      model_minsize = 0;                 // bits 0 to 3
+    private int      model_preferredsize = 0;           // bits 4 to 7
+    private boolean  adjustwidth_flag = false;          // bit 8
+    private boolean  adjustheight_flag = false;         // bit 9
+    private boolean  inheritsizecontrol_flag = false;   // bit 10
+    private boolean  lockminsize_flag = false;          // bit 11
+    private boolean  lockpreferredsize_flag = false;    // bit 12
 
     //
     // The other problem was with mouse wheel scrolling, which seemed to
@@ -135,8 +135,8 @@ class YoixSwingJScrollPane extends JScrollPane
     // disables the scrollAmount adjustments.
     //
 
-    private long  rolltimes[] = {525, 475};	// trial and error
-    private long  clicktimes[] = {30, 30};	// trial and error
+    private long  rolltimes[] = {525, 475};        // trial and error
+    private long  clicktimes[] = {30, 30};         // trial and error
     private int   threshold;
 
     //
@@ -146,7 +146,7 @@ class YoixSwingJScrollPane extends JScrollPane
     // it could also specified by a field that was sent in each component.
     //
 
-    private static final int  THRESHOLD = 7;	// trial and error
+    private static final int  THRESHOLD = 7;        // trial and error
 
     ///////////////////////////////////
     //
@@ -426,7 +426,7 @@ class YoixSwingJScrollPane extends JScrollPane
         super.setEnabled(state);
         if ((components = getComponents()) != null) {
             for (n = 0; n < components.length; n++) {
-                if ((component = components[n]) != null)	// unnecessary check
+                if ((component = components[n]) != null)        // unnecessary check
                     component.setEnabled(state);
             }
         }
@@ -448,7 +448,7 @@ class YoixSwingJScrollPane extends JScrollPane
         //
 
         super.setOpaque(state);
-        if ((vp = getViewport()) != null)	// added on 1/28/11
+        if ((vp = getViewport()) != null)        // added on 1/28/11
             vp.setOpaque(state);
     }
 

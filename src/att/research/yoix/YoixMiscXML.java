@@ -209,7 +209,7 @@ class YoixMiscXML
         String prefix;
         String xml;
 
-        if ((xml = yoixToXML(src, flags, indent, 0)) != null) {	// always true right now
+        if ((xml = yoixToXML(src, flags, indent, 0)) != null) {        // always true right now
             if ((flags&ADD_XML_DECLARATION) != 0) {
                 prefix = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" standalone=\"yes\"?>";
                 if (indent != null)
@@ -537,7 +537,7 @@ class YoixMiscXML
 
         if (dest instanceof HashMap) {
             map = (HashMap)dest;
-            if (model != 2) {		// can switch to an ArrayList
+            if (model != 2) {        // can switch to an ArrayList
                 if (map.containsKey(name)) {
                     list = new ArrayList();
                     iterator = map.keySet().iterator();
@@ -1058,7 +1058,7 @@ class YoixMiscXML
                             dest = store(xmlToJava(node, model, flags, 0, newStorage(model)), model, flags, dest);
                             break;
                     }
-                } else dest = store(child.toString(), model, flags, dest);	// probably shouldn't get here
+                } else dest = store(child.toString(), model, flags, dest);        // probably shouldn't get here
             }
         }
         return(dest);
@@ -1144,7 +1144,7 @@ class YoixMiscXML
         //
 
         if (acceptName(key, flags)) {
-            if ((value != null && value.notNull()) || (flags&OMIT_NULL_ELEMENTS) == 0) {	// added on 2/2/11
+            if ((value != null && value.notNull()) || (flags&OMIT_NULL_ELEMENTS) == 0) {        // added on 2/2/11
                 addIndent(indent, level, sbuf);
                 sbuf.append("<");
                 sbuf.append(key);
@@ -1152,7 +1152,7 @@ class YoixMiscXML
                 if ((content = value) != null && content.notNull()) {
                     if (content.compound() || content.isArray()) {
                         sbuf.append(">");
-                        addIndent(indent, 0, sbuf);		// newline - if necessary
+                        addIndent(indent, 0, sbuf);        // newline - if necessary
                         sbuf.append(yoixToXML(content, flags, indent, level+1));
                         addIndent(indent, level, sbuf);
                         sbuf.append("</");

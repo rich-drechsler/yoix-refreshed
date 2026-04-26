@@ -79,7 +79,7 @@ class YoixGraphElement
     private YoixGraphElement  head;
     private YoixGraphElement  tail;
 
-    private int        seqid;		// for cross-locking graphs
+    private int        seqid;        // for cross-locking graphs
     private static int marker = 0;
 
     private static Hashtable  names = new Hashtable();

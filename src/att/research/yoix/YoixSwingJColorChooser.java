@@ -314,7 +314,7 @@ class YoixSwingJColorChooser extends JColorChooser
             components = container.getComponents();
             for (n = 0; n < components.length; n++) {
                 if ((component = components[n]) != null) {
-                    if (component != getPreviewPanel()) {	// recent addition
+                    if (component != getPreviewPanel()) {        // recent addition
                         component.setForeground(color);
                         if (component instanceof Container)
                             setForeground((Container)component, color);

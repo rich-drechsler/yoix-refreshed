@@ -260,7 +260,7 @@ class YoixSwingJLayeredPane extends JLayeredPane
 
         if (backgroundimage != null || paint != null) {
             paintBackground(g);
-            protectbackground = true;		// moved on 2/28/06
+            protectbackground = true;        // moved on 2/28/06
             paintBackgroundImage(g);
             paintCallback(g);
         } else protectbackground = false;
@@ -314,7 +314,7 @@ class YoixSwingJLayeredPane extends JLayeredPane
     setOpaque(boolean state) {
 
         opaque = state;
-        super.setOpaque(opaque);		// unnecessary
+        super.setOpaque(opaque);        // unnecessary
     }
 
     ///////////////////////////////////

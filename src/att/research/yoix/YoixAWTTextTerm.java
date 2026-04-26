@@ -47,7 +47,7 @@ class YoixAWTTextTerm extends YoixAWTTextComponent
     // Substrings of this are used to expand tabs.
     //
 
-    private static String  spaces = "        ";		// 8 spaces - for tabs!!!
+    private static String  spaces = "        ";        // 8 spaces - for tabs!!!
 
     ///////////////////////////////////
     //
@@ -124,7 +124,7 @@ class YoixAWTTextTerm extends YoixAWTTextComponent
 
             case KeyEvent.VK_TAB:
                 if (e.isShiftDown() == false)
-                    e.setKeyCode(0);	// so tab doesn't change focus!!
+                    e.setKeyCode(0);        // so tab doesn't change focus!!
                 break;
 
             case KeyEvent.VK_UP:
@@ -185,7 +185,7 @@ class YoixAWTTextTerm extends YoixAWTTextComponent
 
         switch (YoixMiscJFC.cookModifiers(e) & YOIX_BUTTON_MASK) {
             case YOIX_BUTTON1_MASK:
-                if (havefocus == false)	// otherwise start cut and paste?
+                if (havefocus == false)        // otherwise start cut and paste?
                     requestFocus();
                 break;
         }
@@ -357,7 +357,7 @@ class YoixAWTTextTerm extends YoixAWTTextComponent
             clip = g.getClip();
             font = g.getFont();
             g.translate(-viewport.x, -viewport.y);
-            g.clipRect(x, y, width, height);		// recent change
+            g.clipRect(x, y, width, height);        // recent change
             g.setFont(getFont());
             last = Math.min((y + height)/cellsize.height, lines.length - 1);
             for (n = Math.max(y/cellsize.height, 0); n <= last; n++)
@@ -424,7 +424,7 @@ class YoixAWTTextTerm extends YoixAWTTextComponent
     final synchronized void
     setSaveLines(int count) {
 
-        savelines = count;		// need a reset??
+        savelines = count;        // need a reset??
     }
 
 
@@ -472,7 +472,7 @@ class YoixAWTTextTerm extends YoixAWTTextComponent
                 showLine("\n");
                 break;
 
-            case '\r':			// make it configurable - later?
+            case '\r':        // make it configurable - later?
                 showLine("\n");
                 break;
 
@@ -733,7 +733,7 @@ class YoixAWTTextTerm extends YoixAWTTextComponent
         int     n;
 
         if (viewport.width > 0) {
-            loadFont();			// added on 8/31/04
+            loadFont();        // added on 8/31/04
             maxwidth = viewport.width - fm.stringWidth(prompt);
             for (n = 0; n < tokens.size(); n++) {
                 token = (String)tokens.elementAt(n);

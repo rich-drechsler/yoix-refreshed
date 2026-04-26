@@ -151,19 +151,19 @@ class YoixSwingJComboBox extends JComboBox
     }
 
     //
-    //  You can use this approach if you want the ItemEvent to return
-    //  the mapping value. Left it out for now since we don't know if
-    //  we want to change all Swing List behavior to be the same and
-    //  ditto for AWT. We need to revisit this train of thought.
+    // You can use this approach if you want the ItemEvent to return
+    // the mapping value. Left it out for now since we don't know if
+    // we want to change all Swing List behavior to be the same and
+    // ditto for AWT. We need to revisit this train of thought.
     //
     //
-    //  protected void
-    //	fireItemStateChanged(ItemEvent e) {
-    //      if (e.getItem() instanceof YoixSwingLabelItem) {
-    //          e = new ItemEvent(e.getItemSelectable(), e.getID(), ((YoixSwingLabelItem)(e.getItem())).getValue(), e.getStateChange());
-    //      }
-    //      super.fireItemStateChanged(e);
-    //  }
+    //     protected void
+    //     fireItemStateChanged(ItemEvent e) {
+    //         if (e.getItem() instanceof YoixSwingLabelItem) {
+    //             e = new ItemEvent(e.getItemSelectable(), e.getID(), ((YoixSwingLabelItem)(e.getItem())).getValue(), e.getStateChange());
+    //         }
+    //         super.fireItemStateChanged(e);
+    //     }
     //
 
     final String[]
@@ -346,7 +346,7 @@ class YoixSwingJComboBox extends JComboBox
         reminder = selectedItemReminder;
 
         if (reminder == null || !reminder.equals(item)) {
-            if (item != null && !isEditable()) {	// old code made sure item was a String
+            if (item != null && !isEditable()) {        // old code made sure item was a String
                 target = (item instanceof String) ? (String)item : item.toString();
                 if ((model = getModel()) != null) {
                     for (index = 0; index < model.getSize(); index++) {
@@ -374,7 +374,7 @@ class YoixSwingJComboBox extends JComboBox
             //
             if (isEditable() && isValid() == false)
                 super.setSelectedItem(null);
-            super.setSelectedItem(item);	// was fireActionEvent();
+            super.setSelectedItem(item);        // was fireActionEvent();
         }
         //
         // Occasionally helps make sure the label is properly painted.

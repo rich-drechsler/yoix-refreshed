@@ -336,7 +336,7 @@ class YoixMiscMenu
         // A string value should fit the description provided in comments
         // that preceed Java's
         //
-        //	KeyStroke.getKeyStroke(String s);
+        //     KeyStroke.getKeyStroke(String s);
         //
         // method. Decided to punt, for now anyway, when accelerator is an
         // int because we had a few problems trying to make it behave the
@@ -500,7 +500,7 @@ class YoixMiscMenu
                 if ((arg.isMenu() || arg.isArray()) && arg.notNull())
                     menu.add(buildAWTMenu(new Menu(name.stringValue()), arg, groups));
                 else if (arg.isNull() && name.stringValue().equals("-")) {
-                    if (menu.getItemCount() > 0)	// recent addition
+                    if (menu.getItemCount() > 0)        // recent addition
                         menu.addSeparator();
                 } else if (arg.isString() || arg.isNull() || arg.isDictionary()) {
                     if (n + 2 < length && layout.get(n + 2, false).isNumber()) {
@@ -609,7 +609,7 @@ class YoixMiscMenu
                 if ((arg.isArray() || arg.isMenu()) && arg.notNull())
                     obj = yoixJMenu(name, buildSwingMenuArray(arg, groups));
                 else if (arg.isNull() && name.stringValue().equals("-")) {
-                    if (array.length() > 0)	// recent addition
+                    if (array.length() > 0)        // recent addition
                         obj = YoixObject.newNull();
                     else obj = null;
                 } else if (arg.isString() || arg.isNull() || arg.isDictionary()) {

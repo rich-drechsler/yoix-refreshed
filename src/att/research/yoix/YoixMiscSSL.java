@@ -152,7 +152,7 @@ class YoixMiscSSL
                         catch(NoSuchMethodException e) {}
                     }
                 }
-                value = Boolean.TRUE;	// kludge - always returning TRUE
+                value = Boolean.TRUE;        // kludge - always returning TRUE
             }
             return(value);
         }

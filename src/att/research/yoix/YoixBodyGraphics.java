@@ -255,7 +255,7 @@ class YoixBodyGraphics extends YoixPointerActive
         buildGraphics();
         setFixedSize();
         setPermissions(permissions);
-        initializer();			// calls N_INITIALIZER if possible
+        initializer();        // calls N_INITIALIZER if possible
     }
 
     ///////////////////////////////////
@@ -715,9 +715,9 @@ class YoixBodyGraphics extends YoixPointerActive
                     g = (Graphics2D)((YoixInterfaceDrawable)dest).getPaintGraphics();
                 else if (dest instanceof Image)
                     g = (Graphics2D)((Image)dest).getGraphics();
-                else g = (Graphics2D)((Component)dest).getGraphics();	// should not happen!!
+                else g = (Graphics2D)((Component)dest).getGraphics();        // should not happen!!
                 if (g != null) {
-                    g.setStroke(getCurrentStroke());	// 3/23/08 fill() kludge addition
+                    g.setStroke(getCurrentStroke());        // 3/23/08 fill() kludge addition
                     if (currentclip != null)
                         g.setClip(currentclip);
                     if (erase) {
@@ -1003,7 +1003,7 @@ class YoixBodyGraphics extends YoixPointerActive
         // stroked fonts.
         //
 
-        if (arg.length == 1) {		// eventually may allow arg.length == 2
+        if (arg.length == 1) {        // eventually may allow arg.length == 2
             if (arg[0].isString() || arg[0].isNull()) {
                 if (arg.length == 1 || arg[1].isNumber()) {
                     stroke = (arg.length == 2) && arg[1].booleanValue();
@@ -1068,11 +1068,11 @@ class YoixBodyGraphics extends YoixPointerActive
         //
         // In older version Yoix scripts that used code something like,
         //
-        //	gsave();
-        //	clippath();
-        //	pathbbox();
-        //	...
-        //	grestore();
+        //     gsave();
+        //     clippath();
+        //     pathbbox();
+        //     ...
+        //     grestore();
         //
         // could, under unusual circumstances, have problems because the
         // implemention of pathbbox() aborts if there's no current point.
@@ -1911,13 +1911,13 @@ class YoixBodyGraphics extends YoixPointerActive
                                     use_adobe = arg[4].booleanValue();
                                 else VM.badArgument(4);
                             }
-                            if (use_adobe) {	// from Adobe's PostScript Language Reference Manual
+                            if (use_adobe) {        // from Adobe's PostScript Language Reference Manual
                                 color = new Color(
                                     1.0f - Math.min(1.0f, cyan + black),
                                     1.0f - Math.min(1.0f, magenta + black),
                                     1.0f - Math.min(1.0f, yellow + black)
                                 );
-                            } else {		// from wikipedia.org (CMYK entry) or comp.graphics FAQ
+                            } else {        // from wikipedia.org (CMYK entry) or comp.graphics FAQ
                                 color = new Color(
                                     1.0f - Math.min(1.0f, cyan*(1.0f - black) + black),
                                     1.0f - Math.min(1.0f, magenta*(1.0f - black) + black),
@@ -2002,7 +2002,7 @@ class YoixBodyGraphics extends YoixPointerActive
                                 if (arg[5].isNumber()) {
                                     if (arg.length == 6 || arg[6].isNumber()) {
                                         obj = YoixMisc.copyIntoArray(arg, false);
-                                        put(N_FOREGROUND, obj, false);		// syncs data entry
+                                        put(N_FOREGROUND, obj, false);        // syncs data entry
                                     } else VM.badArgument(name, 6);
                                 } else VM.badArgument(name, 5);
                             } else VM.badArgument(name, 4);
@@ -2167,7 +2167,7 @@ class YoixBodyGraphics extends YoixPointerActive
                         if (arg.length == 3)
                             obj = YoixMisc.copyIntoArray(arg, false);
                         else obj = arg[0];
-                        put(N_FOREGROUND, obj, false);		// syncs data entry
+                        put(N_FOREGROUND, obj, false);        // syncs data entry
                     } else VM.badArgument(name, 2);
                 } else VM.badArgument(name, 1);
             } else VM.badArgument(name, 0);
@@ -2683,7 +2683,7 @@ class YoixBodyGraphics extends YoixPointerActive
         // font!! In other words, data.getObject(N_FONT) won't work.
         //
 
-        data.put(N_FONT, YoixObject.newNull(), false);		// toss it
+        data.put(N_FONT, YoixObject.newNull(), false);        // toss it
 
         if (obj != null && obj.notNull()) {
             if (obj.isFont() == false)

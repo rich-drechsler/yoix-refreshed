@@ -2207,7 +2207,7 @@ class YoixModuleSwing extends YoixModule
                     break;
 
                 default:
-                    if (ret_val == JOptionPane.OK_OPTION)	// just in case
+                    if (ret_val == JOptionPane.OK_OPTION)        // just in case
                         ret_val = 0;
                     else ret_val = -1;
                     break;

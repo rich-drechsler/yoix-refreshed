@@ -83,7 +83,7 @@ class YoixFontType0
                 if ((g = graphics.getGraphics2D(alpha)) != null) {
                     g.setTransform(graphics.getCompatibleAffineTransform(g));
                     if (placeall || ax != 0 || ay != 0) {
-                        buf = new StringBuffer(" ");	// for setCharAt()
+                        buf = new StringBuffer(" ");        // for setCharAt()
                         length = str.length();
                         for (n = 0; n < length; n++) {
                             buf.setCharAt(0, str.charAt(n));
@@ -115,7 +115,7 @@ class YoixFontType0
                 if ((g = graphics.getGraphics2D(alpha)) != null) {
                     g.setTransform(graphics.getCompatibleAffineTransform(g));
                     if (placeall || ax != 0 || ay != 0 || cx != 0 || cy != 0) {
-                        buf = new StringBuffer(" ");	// for setCharAt()
+                        buf = new StringBuffer(" ");        // for setCharAt()
                         length = str.length();
                         for (n = 0; n < length; n++) {
                             ch = str.charAt(n);
@@ -243,7 +243,7 @@ class YoixFontType0
                 g.setTransform(graphics.getCompatibleAffineTransform(g));
                 if (placeall || proc != null) {
                     args = new YoixObject[] {proc, null, null};
-                    buf = new StringBuffer(" ");	// for setCharAt()
+                    buf = new StringBuffer(" ");        // for setCharAt()
                     length = str.length();
                     for (n = 0; n < length; ) {
                         if ((origin = path.getCurrentPoint()) != null) {
@@ -356,7 +356,7 @@ class YoixFontType0
 
         FontRenderContext  frc;
         Rectangle2D        bounds = null;
-        TextLayout	   layout;
+        TextLayout         layout;
         Graphics2D         g;
 
         //
@@ -397,7 +397,7 @@ class YoixFontType0
 
         FontRenderContext  frc;
         Rectangle2D        bounds = null;
-        TextLayout	   layout;
+        TextLayout         layout;
         Graphics2D         g;
         int                length;
 
@@ -488,7 +488,7 @@ class YoixFontType0
                 if ((g = graphics.getGraphics2D(alpha)) != null) {
                     g.setTransform(graphics.getCompatibleAffineTransform(g));
                     if (placeall || ((cx != 0 || cy != 0) && str.indexOf(code) >= 0)) {
-                        buf = new StringBuffer(" ");	// for setCharAt()
+                        buf = new StringBuffer(" ");        // for setCharAt()
                         length = str.length();
                         for (n = 0; n < length; n++) {
                             ch = str.charAt(n);

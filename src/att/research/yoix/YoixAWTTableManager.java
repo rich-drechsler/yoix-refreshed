@@ -88,7 +88,7 @@ class YoixAWTTableManager extends Panel
     private static final int  AVAILABLE = 0;
     private static final int  HIGHLIGHTING = 1;
     private static final int  CLICKING = 2;
-    private static final int  SELECTING = 3;	// cut+paste or drag+drop - later??
+    private static final int  SELECTING = 3;        // cut+paste or drag+drop - later??
 
     private int  mouse = AVAILABLE;
 
@@ -315,7 +315,7 @@ class YoixAWTTableManager extends Panel
                     }
                     break;
 
-                case SELECTING:			// maybe later?
+                case SELECTING:        // maybe later?
                     break;
             }
         }
@@ -936,7 +936,7 @@ class YoixAWTTableManager extends Panel
 
         if (obj.notNull()) {
             if (obj.isArray()) {
-                VM.abort(TYPECHECK, N_OUTPUTFILTER);	// remove later??
+                VM.abort(TYPECHECK, N_OUTPUTFILTER);        // remove later??
                 if ((length = obj.length()) > 0 && length%3 == 0) {
                     table = new Object[length];
                     for (n = 0; n < length; n += 3) {
@@ -1133,7 +1133,7 @@ class YoixAWTTableManager extends Panel
         //
 
         value = new StringBuffer("");
-        linesep = System.getProperty("line.separator");		// questionable
+        linesep = System.getProperty("line.separator");        // questionable
         lengths = new int[children.length];
         loadedrows = 0;
 
@@ -1449,7 +1449,7 @@ class YoixAWTTableManager extends Panel
         // event queue (to try to avoid deadlock).
         //
 
-        funct = syncviewport;		// snapshot - just to be safe
+        funct = syncviewport;        // snapshot - just to be safe
 
         if (funct != null) {
             synccount++;

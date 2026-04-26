@@ -668,8 +668,8 @@ class YoixVMError
         }
         if (extra != null) {
             for (n = 0; n < extra.length - 1; n += 2) {
-                args.add(extra[n]);	// usually a one word tag - no colon
-                args.add(extra[n+1]);	// extra info related to that tag
+                args.add(extra[n]);        // usually a one word tag - no colon
+                args.add(extra[n+1]);      // extra info related to that tag
             }
             if (n < extra.length) {
                 args.add(OFFENDINGINFO);
@@ -710,8 +710,8 @@ class YoixVMError
         }
         if (extra != null) {
             for (n = 0; n < extra.length - 1; n += 2) {
-                args.add(extra[n]);	// usually a one word tag - no colon
-                args.add(extra[n+1]);	// extra info related to that tag
+                args.add(extra[n]);        // usually a one word tag - no colon
+                args.add(extra[n+1]);      // extra info related to that tag
             }
             if (n < extra.length) {
                 args.add(OFFENDINGINFO);
@@ -729,7 +729,7 @@ class YoixVMError
 
         if (dead == false) {
             dead = true;
-            YoixVMThread.getThreadStack().reset();	// protection from earlier stackunderflow
+            YoixVMThread.getThreadStack().reset();        // protection from earlier stackunderflow
             if (error != null) {
                 details = YoixError.recordDetails(FATALERROR, error, args, t);
                 VM.println(N_STDERR, details.getString(N_MESSAGE, ""));
@@ -759,8 +759,8 @@ class YoixVMError
         }
         if (extra != null) {
             for (n = 0; n < extra.length - 1; n += 2) {
-                args.add(extra[n]);	// usually a one word tag - no colon
-                args.add(extra[n+1]);	// extra info related to that tag
+                args.add(extra[n]);        // usually a one word tag - no colon
+                args.add(extra[n+1]);      // extra info related to that tag
             }
             if (n < extra.length) {
                 args.add(OFFENDINGINFO);
@@ -829,7 +829,7 @@ class YoixVMError
         YoixObject  details;
 
         details = YoixError.recordDetails(WARNINGMESSAGE, error, args, t);
-        if (VM.isBooted()) {		// is this necessary??
+        if (VM.isBooted()) {        // is this necessary??
             VM.println(N_STDERR, details.getString(N_MESSAGE, ""));
             if (VM.getInt(N_TRACE) != 0)
                 VM.print(N_STDERR, details.getString(N_STACKTRACE, ""));
@@ -853,8 +853,8 @@ class YoixVMError
         }
         if (extra != null) {
             for (n = 0; n < extra.length - 1; n += 2) {
-                args.add(extra[n]);	// usually a one word tag - no colon
-                args.add(extra[n+1]);	// extra info related to that tag
+                args.add(extra[n]);        // usually a one word tag - no colon
+                args.add(extra[n+1]);      // extra info related to that tag
             }
             if (n < extra.length) {
                 args.add(OFFENDINGINFO);

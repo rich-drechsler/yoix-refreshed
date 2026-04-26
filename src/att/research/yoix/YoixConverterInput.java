@@ -90,8 +90,8 @@ class YoixConverterInput extends YoixConverter
         byte    tmp_bytes[];
         int     bytes;
         int     nc = 0;
-        int	j;
-        int	k;
+        int     j;
+        int     k;
 
         bytes = end - start;
         byteEnd = nextByteIdx + bytes;
@@ -226,7 +226,7 @@ class YoixConverterInput extends YoixConverter
     flush() {
 
         String  encoded;
-        int	nc = 0;
+        int     nc = 0;
 
         if (nextCharIdx != charEnd)
             VM.abort(INTERNALERROR);

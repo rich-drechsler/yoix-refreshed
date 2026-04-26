@@ -555,7 +555,7 @@ class YoixModule
         if (table != null) {
             for (n = 0; n <= table.length - 5; n += 5) {
                 if (name.equals((String)table[n+4])) {
-                    if (table[n+3] != null) {	// null means no changes
+                    if (table[n+3] != null) {        // null means no changes
                         if (table[n+2] == $NULL) {
                             if (table[n+1].equals(T_STRING))
                                 table[n+2] = $STRING;
@@ -631,9 +631,9 @@ class YoixModule
             method = source.getMethod(MODULECHECKER, new Class[] {OBJECTCLASS});
             method.invoke(null, new Object[] {VM.newVM()});
         }
-        catch(ClassNotFoundException e) {}	// should be impossible
-        catch(NoSuchMethodException e) {}	// it's optional
-        catch(IllegalAccessException e) {}	// not our responsibility
+        catch(ClassNotFoundException e) {}        // should be impossible
+        catch(NoSuchMethodException e) {}         // it's optional
+        catch(IllegalAccessException e) {}        // not our responsibility
         catch(InvocationTargetException e) {
             throw(new SecurityException());
         }
@@ -651,9 +651,9 @@ class YoixModule
             method = source.getMethod(MODULELOADED, new Class[] {});
             method.invoke(null, new Object[] {});
         }
-        catch(ClassNotFoundException e) {}	// should be impossible
-        catch(NoSuchMethodException e) {}	// it's optional
-        catch(IllegalAccessException e) {}	// not our responsibility
+        catch(ClassNotFoundException e) {}        // should be impossible
+        catch(NoSuchMethodException e) {}         // it's optional
+        catch(IllegalAccessException e) {}        // not our responsibility
         catch(InvocationTargetException e) {
             throw(new SecurityException());
         }
@@ -723,7 +723,7 @@ class YoixModule
                     modulename = (String)source.getDeclaredField(MODULENAME).get(null);
                 }
                 catch(NoSuchFieldException e) {}
-                modulecache.put(classname, cache);	// must preceed invoke()
+                modulecache.put(classname, cache);        // must preceed invoke()
                 method.invoke(
                     null,
                     new Object[] {classname, modulename, init, module, extracted, cache}
@@ -1176,7 +1176,7 @@ class YoixModule
                                     if (target != null) {
                                         if (name == null)
                                             name = targetname;
-                                        if (target.isDictionary())	// more later - maybe
+                                        if (target.isDictionary())        // more later - maybe
                                             VM.loadTypeDefinition(target, name, (String)arg);
                                         else if (target.isBuiltin() && target.callable(2))
                                             VM.loadTypeDefinition(target, name, (String)arg);
@@ -1218,7 +1218,7 @@ class YoixModule
                         if (target != null) {
                             if (target.defined(name)) {
                                 target.put(name, obj, false);
-                                obj.setAccess(mode);	// added on 8/29/04
+                                obj.setAccess(mode);        // added on 8/29/04
                             } else target.declare(name, obj, mode&MODEMASK);
                         } else throw(new Exception());
                     }

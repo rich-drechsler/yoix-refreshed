@@ -275,9 +275,9 @@ class YoixSwingJTextField extends JTextField
             highlighter = getHighlighter();
             highlighter.removeAllHighlights();
             if (oldcaret != null) {
-                dot = oldcaret.getDot();	// just in case
+                dot = oldcaret.getDot();        // just in case
                 setCaret(newcaret);
-                newcaret.setDot(dot);		// must follow setCaret()
+                newcaret.setDot(dot);        // must follow setCaret()
             } else setCaret(newcaret);
             repaint();
         }
@@ -307,7 +307,7 @@ class YoixSwingJTextField extends JTextField
         if (action != null && keystrokes != null) {
             if (action != currentaction) {
                 if ((map = getKeymap()) != null) {
-                    map.removeBindings();		// unnecessary??
+                    map.removeBindings();        // unnecessary??
                     map.setDefaultAction(action);
                     for (n = 0; n < keystrokes.length; n++)
                         map.addActionForKeyStroke(keystrokes[n], action);

@@ -275,7 +275,7 @@ class YoixBodyHashtable extends YoixPointerActive
         // to do if you don't like this approach.
         //
 
-        if (arg.length == 1) {	// eventually may accept arg.length == 2
+        if (arg.length == 1) {        // eventually may accept arg.length == 2
             if (arg.length == 1 || arg[1].isInteger()) {
                 results = hashtable.findYoixObject(arg[0]);
                 if (results.size() > 0) {

@@ -26,7 +26,7 @@ class YoixModuleString extends YoixModule
     // like C functions that work with null terminated strings, so
     // you usually use something like
     //
-    //		YoixMake.CString(obj);
+    //     YoixMake.CString(obj);
     //
     // to get the corresponding Java String. Most others builtins can
     // use YoixObject.stringValue().
@@ -863,9 +863,9 @@ class YoixModuleString extends YoixModule
         YoixObject    element;
         boolean       undefined;
         String        value = null;
-        String	      delim;
+        String        delim;
         String        sep;
-        int	      n;
+        int           n;
 
         if (arg.length >= 1 && arg.length <= 3) {
             if (arg[0].isArray() || arg[0].isNull()) {

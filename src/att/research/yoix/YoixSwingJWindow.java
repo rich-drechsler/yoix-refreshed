@@ -26,7 +26,7 @@ class YoixSwingJWindow extends JWindow
 
     private YoixBodyComponent  parent;
     private YoixObject         data;
-    private boolean            disposed = false;	// prevents dispose loops
+    private boolean            disposed = false;        // prevents dispose loops
 
     //
     // We're essentially assuming none of these change once created by

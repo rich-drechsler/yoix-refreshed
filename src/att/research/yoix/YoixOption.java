@@ -35,11 +35,11 @@ class YoixOption
     public String  optstr = "-+";
     public String  optword = null;
     public String  opterror = null;
-    public String  optstatus[] = null;		// error info
+    public String  optstatus[] = null;        // error info
     public char    optchar = '-';
     public int     optind = 0;
 
-    private String  optstring = "";		// abbreviation - for errors
+    private String  optstring = "";        // abbreviation - for errors
     private int     optletter = -1;
     private int     optoffset = -1;
 

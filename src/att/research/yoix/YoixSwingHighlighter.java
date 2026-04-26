@@ -46,7 +46,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
     private static final int  ENABLE_CARET = 0x10;
     private static final int  ENABLE_CARET_OWNER = 0x20;
     private static final int  ENABLE_CARET_OPENRIGHT = 0x40;
-    private static final int  ENABLE_CARET_OPENLEFT = 0x80;	// unused
+    private static final int  ENABLE_CARET_OPENLEFT = 0x80;        // unused
 
     private static final int  DISABLE_CARET_POSITIONING = 0x100;
 
@@ -118,7 +118,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
         Color   color = null;
 
         if (hasCaret()) {
-            if (caret instanceof Highlighter.Highlight) {	// always true?
+            if (caret instanceof Highlighter.Highlight) {        // always true?
                 painter = ((Highlighter.Highlight)caret).getPainter();
                 if (painter instanceof DefaultHighlightPainter)
                     color = ((DefaultHighlightPainter)painter).getColor();
@@ -137,7 +137,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
         Color   color = null;
 
         if (hasCaret()) {
-            if (caret_owner instanceof Highlighter.Highlight) {	// always true?
+            if (caret_owner instanceof Highlighter.Highlight) {        // always true?
                 painter = ((Highlighter.Highlight)caret_owner).getPainter();
                 if (painter instanceof DefaultHighlightPainter)
                     color = ((DefaultHighlightPainter)painter).getColor();
@@ -190,12 +190,12 @@ class YoixSwingHighlighter extends DefaultHighlighter
             if (owner != null)
                 color = owner.getSelectionColor();
             if (color == null)
-                color = Color.gray;		// what??
+                color = Color.gray;        // what??
         } else {
             if (owner != null)
                 color = owner.getCaretColor();
             if (color == null)
-                color = Color.black;		// what??
+                color = Color.black;        // what??
         }
 
         return(color);
@@ -418,7 +418,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
                             end += 1;
                     }
                 }
-                if (start <= end) {		// not 100% sure about this
+                if (start <= end) {        // not 100% sure about this
                     start = Math.min(Math.max(offset, start), end - caret_width);
                     end = Math.min(start + caret_width, end);
                     try {
@@ -621,7 +621,7 @@ class YoixSwingHighlighter extends DefaultHighlighter
                 for (n = 0; n < highlights.length; n++) {
                     if (highlights[n] == tag) {
                         if ((highlights = getHighlights(fields, 0)) != null) {
-                            n = fields*n + 2;		// color location
+                            n = fields*n + 2;        // color location
                             if (n < highlights.length) {
                                 highlights[n] = color;
                                 setHighlights(highlights, fields);

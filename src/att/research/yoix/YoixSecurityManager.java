@@ -39,8 +39,8 @@ class YoixSecurityManager extends SecurityManager
     //
     // NOTE - most (if not all) methods that just do
     //
-    //        if (isApplet())
-    //            super.checkXXX();
+    //     if (isApplet())
+    //         super.checkXXX();
     //
     // could be eliminated because the super class methods should end up
     // calling our implementation of checkPermission() which also uses
@@ -771,7 +771,7 @@ class YoixSecurityManager extends SecurityManager
                             YoixReflect.getDeclaredField(Class.forName("att.research.yoix.apple.Module"), YoixModule.MODULETABLE);
                         }
                         catch(ClassNotFoundException e) {}
-                        catch(UnsupportedClassVersionError e) {}	// just in case
+                        catch(UnsupportedClassVersionError e) {}        // just in case
 
                         //
                         // Probably unnecessary now, but our old versions
@@ -1064,7 +1064,7 @@ class YoixSecurityManager extends SecurityManager
                 finally {
                     checking.remove(thread);
                 }
-            } else result = CHECK_PASSED;	// might be able to do better
+            } else result = CHECK_PASSED;        // might be able to do better
         } else result = CHECK_SKIPPED;
 
         return(result);

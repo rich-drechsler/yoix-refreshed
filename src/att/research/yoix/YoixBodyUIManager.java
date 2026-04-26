@@ -112,7 +112,7 @@ class YoixBodyUIManager extends YoixPointerActive
 
     YoixBodyUIManager(YoixObject data) {
 
-        super(data, true);	// tells super we're cloneable!!
+        super(data, true);        // tells super we're cloneable!!
         updateUIManager();
         buildUIManager();
         setFixedSize();
@@ -774,14 +774,14 @@ class YoixBodyUIManager extends YoixPointerActive
 
         if (lookfeel != null && updated.containsKey(lookfeel) == false) {
             synchronized(updated) {
-                if (updated.containsKey(lookfeel) == false) {	// just in case
+                if (updated.containsKey(lookfeel) == false) {        // just in case
                     try {
                         //
                         // The GTK look and feel, which appeared in Java 1.5,
                         // misbehaved when getDefaults() was called too early.
                         // Calling
                         //
-                        //	lookfeel.initialize()
+                        //     lookfeel.initialize()
                         //
                         // eliminated the exception, however there are other
                         // issues with GTK that are troubling. For example,

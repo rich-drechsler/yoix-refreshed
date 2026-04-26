@@ -883,7 +883,7 @@ class YoixBodyImage extends YoixPointerActive
         int    height;
         int    width;
 
-        image = currentsource;		// snapshot - just to be safe
+        image = currentsource;        // snapshot - just to be safe
 
         if (image != null) {
             height = image.getHeight(null);
@@ -1159,7 +1159,7 @@ class YoixBodyImage extends YoixPointerActive
                         break;
                 }
             } else edge = YOIX_EDGE_ZERO_FILL;
-            if (values.length > 0) {		// test should be unnecessary
+            if (values.length > 0) {        // test should be unnecessary
                 for (n = 0; n < values.length && values[n] == 0; n++) ;
                 if (n == values.length)
                     values[n/2] = Float.MIN_VALUE;
@@ -1656,7 +1656,7 @@ class YoixBodyImage extends YoixPointerActive
                 transparency = Transparency.TRANSLUCENT;
                 break;
 
-            case YOIX_TYPE_USHORT_GRAY:		// Java 1.3.1 SGI had trouble
+            case YOIX_TYPE_USHORT_GRAY:        // Java 1.3.1 SGI had trouble
                 value = YOIX_TYPE_BYTE_GRAY;
                 transparency = Transparency.OPAQUE;
                 break;

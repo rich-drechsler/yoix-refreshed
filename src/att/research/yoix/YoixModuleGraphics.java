@@ -395,7 +395,7 @@ class YoixModuleGraphics extends YoixModule
         // graphics state.
         //
 
-        if (arg.length == 4) {		// maybe more arguments - later
+        if (arg.length == 4) {        // maybe more arguments - later
             if (arg[0].isDrawable()) {
                 if (arg[1].isImage()) {
                     if (arg[2].isNumber()) {

@@ -83,7 +83,7 @@ class YoixStack
     final void
     beginTry() {
 
-        if (tries < 0)		// just in case
+        if (tries < 0)        // just in case
             tries = 0;
         tries++;
     }
@@ -129,7 +129,7 @@ class YoixStack
                         }
                         break;
                 }
-            } else str += indent + "--null--" + NL;	// should never happen!!
+            } else str += indent + "--null--" + NL;        // should never happen!!
         }
 
         return(str);
@@ -244,7 +244,7 @@ class YoixStack
 
         result = popYoixObject();
 
-        if (YoixBodyBlock.exit()) {		// check flag first - later
+        if (YoixBodyBlock.exit()) {        // check flag first - later
             jump = popToJump(RETURN);
             pushYoixObject(result);
             jump.jump();

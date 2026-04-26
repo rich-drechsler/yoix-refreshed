@@ -286,7 +286,7 @@ interface YoixConstantsJFC
     static final int  YOIX_NORTHWEST = 41;
     static final int  YOIX_OK_OPTION = 42;
     static final int  YOIX_OK_CANCEL_OPTION = 43;
-    static final int  YOIX_OPEN = SAVE + 1;	// same as YOIX_LOAD
+    static final int  YOIX_OPEN = SAVE + 1;        // same as YOIX_LOAD
     static final int  YOIX_PLAIN_MESSAGE = 44;
     static final int  YOIX_QUESTION_MESSAGE = 45;
     static final int  YOIX_RELATIVE = GridBagConstraints.RELATIVE;

@@ -84,7 +84,7 @@ interface YoixConstantsImage
     static final int  YOIX_TYPE_RGBA = BufferedImage.TYPE_INT_ARGB;
     static final int  YOIX_TYPE_ARGB = BufferedImage.TYPE_INT_ARGB;
     static final int  YOIX_TYPE_RGB_COMPACT = BufferedImage.TYPE_USHORT_565_RGB;
-    static final int  YOIX_TYPE_GRAY = BufferedImage.TYPE_BYTE_GRAY;	// temporary
+    static final int  YOIX_TYPE_GRAY = BufferedImage.TYPE_BYTE_GRAY;        // temporary
     static final int  YOIX_TYPE_GRAY_COMPACT = BufferedImage.TYPE_BYTE_GRAY;
     static final int  YOIX_TYPE_BINARY = BufferedImage.TYPE_BYTE_BINARY;
     static final int  YOIX_TYPE_INDEXED = BufferedImage.TYPE_BYTE_INDEXED;

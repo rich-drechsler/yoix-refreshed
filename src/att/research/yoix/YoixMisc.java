@@ -430,8 +430,8 @@ class YoixMisc
 
     private static final HashMap  htmlcharmap = new HashMap((int)(HTML_CHARMAP.length/2));
 
-    private static final int  MINIMUM_HTMLINFO = 2;	// between the '&' and the ';'
-    private static final int  MAXIMUM_HTMLINFO = 8;	// between the '&' and the ';'
+    private static final int  MINIMUM_HTMLINFO = 2;        // between the '&' and the ';'
+    private static final int  MAXIMUM_HTMLINFO = 8;        // between the '&' and the ';'
 
     static {
         for(int n = 0; n < HTML_CHARMAP.length; n += 2)
@@ -3114,7 +3114,7 @@ class YoixMisc
         //
         // You may be tempted to write this as,
         //
-        //	return(YoixConstants.class.getPackage().getName());
+        //     return(YoixConstants.class.getPackage().getName());
         //
         // but for some reason the Yoix installer didn't approve. We may
         // investigate, but it's definitely not a high priority.
@@ -4008,7 +4008,7 @@ class YoixMisc
             if (src.compound()) {
                 for (n = src.offset(); n < length; n++) {
                     if (src.defined(n)) {
-                        dest.add(YoixObject.newString(src.name(n)));	// changed on 5/14/08
+                        dest.add(YoixObject.newString(src.name(n)));        // changed on 5/14/08
                         dest.add(src.get(n, true));
                     }
                 }

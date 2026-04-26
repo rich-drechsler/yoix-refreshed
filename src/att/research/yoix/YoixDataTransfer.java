@@ -49,11 +49,11 @@ class YoixDataTransfer
         // This caused problems on a Mac in one of the clipboard tests.
         // Decided to comment it out for now and investigate later.
         //
-        //	FLAVOR_IMAGE,		// this might be null
+        //     FLAVOR_IMAGE,            // this might be null
         //
         FLAVOR_LOCAL_STRING,
         DataFlavor.stringFlavor,
-        FLAVOR_PLAIN_TEXT		// was DataFlavor.plainTextFlavor
+        FLAVOR_PLAIN_TEXT               // was DataFlavor.plainTextFlavor
     };
 
     //
@@ -66,22 +66,22 @@ class YoixDataTransfer
 
     private static final DataFlavor  IMPORTFLAVORS[] = {
         FLAVOR_YOIX,
-        FLAVOR_IMAGE,			// this might be null
-        FLAVOR_COLOR,			// omitted from EXPORTFLAVORS
+        FLAVOR_IMAGE,                   // this might be null
+        FLAVOR_COLOR,                   // omitted from EXPORTFLAVORS
         FLAVOR_LOCAL_STRING,
         DataFlavor.stringFlavor,
-        FLAVOR_PLAIN_TEXT,		// was: DataFlavor.plainTextFlavor
-        FLAVOR_PLAIN_TEXT_UNICODE	// added 2/22/2007
+        FLAVOR_PLAIN_TEXT,              // was: DataFlavor.plainTextFlavor
+        FLAVOR_PLAIN_TEXT_UNICODE       // added 2/22/2007
     };
 
-    private static final DataFlavor  IMPORTFLAVORS_TP[] = {	// text preferable order
+    private static final DataFlavor  IMPORTFLAVORS_TP[] = {        // text preferable order
         FLAVOR_YOIX,
         FLAVOR_LOCAL_STRING,
         DataFlavor.stringFlavor,
-        FLAVOR_PLAIN_TEXT,         // was: DataFlavor.plainTextFlavor,
-        FLAVOR_PLAIN_TEXT_UNICODE, // added: 2/22/2007
-        FLAVOR_IMAGE,              // this might be null
-        FLAVOR_COLOR               // omitted from EXPORTFLAVORS
+        FLAVOR_PLAIN_TEXT,              // was: DataFlavor.plainTextFlavor,
+        FLAVOR_PLAIN_TEXT_UNICODE,      // added: 2/22/2007
+        FLAVOR_IMAGE,                   // this might be null
+        FLAVOR_COLOR                    // omitted from EXPORTFLAVORS
     };
 
     //

@@ -360,7 +360,7 @@ class YoixBodyProcess extends YoixPointerActive
 
         if (obj != null) {
             data.put(N_PARENT, YoixObject.newNull());
-            owner = this.parent;		// snapshot - just to be safe
+            owner = this.parent;        // snapshot - just to be safe
             if (owner != null) {
                 ((YoixBodyComponent)owner.body()).childrenRemove(this);
                 parent = null;

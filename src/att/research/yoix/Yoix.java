@@ -329,7 +329,7 @@ class Yoix
                                 synchronized(parser_yoix) {
                                     tree = parser_yoix.parseStatement(parserstream, addtags);
                                 }
-                                Thread.yield();	// be nice, mostly for green_threads
+                                Thread.yield();        // be nice, mostly for green_threads
                                 YoixInterpreter.statement(tree, stack);
                             } else if (includes.size() > 0) {
                                 path = (String)includes.elementAt(0);
@@ -374,7 +374,7 @@ class Yoix
             if (e != eof_point)
                 throw(e);
         }
-        catch(ParseException e) {}	// required, but it can't happen!!
+        catch(ParseException e) {}        // required, but it can't happen!!
 
         return(result);
     }
@@ -553,7 +553,7 @@ class Yoix
                 result = e.getDetails();
             else throw(e);
         }
-        catch(ParseException e) {}	// required, but it can't happen!!
+        catch(ParseException e) {}        // required, but it can't happen!!
 
         return(result);
     }
@@ -583,7 +583,7 @@ class Yoix
                 result = e.getDetails();
             else throw(e);
         }
-        catch(ParseException e) {}	// required, but it can't happen!!
+        catch(ParseException e) {}        // required, but it can't happen!!
 
         return(result);
     }
@@ -622,7 +622,7 @@ class Yoix
                 result = e.getDetails();
             else throw(e);
         }
-        catch(ParseException e) {}	// required, but it can't happen!!
+        catch(ParseException e) {}        // required, but it can't happen!!
 
         return(result);
     }
@@ -657,7 +657,7 @@ class Yoix
                 result = e.getDetails();
             else throw(e);
         }
-        catch(ParseException e) {}	// required, but it can't happen!!
+        catch(ParseException e) {}        // required, but it can't happen!!
 
         return(result);
     }

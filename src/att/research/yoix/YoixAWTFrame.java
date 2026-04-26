@@ -274,7 +274,7 @@ class YoixAWTFrame extends Frame
         paint = null;
         backgroundimage = null;
         filteredimage = null;
-        removeComponentListener(this);		// should be unnecessary
+        removeComponentListener(this);        // should be unnecessary
         try {
             super.finalize();
         }
@@ -308,7 +308,7 @@ class YoixAWTFrame extends Frame
 
         paintBackgroundImage(g);
         paintCallback(g);
-        super.paint(g);			// required for Containers
+        super.paint(g);        // required for Containers
     }
 
 
@@ -363,7 +363,7 @@ class YoixAWTFrame extends Frame
         //
 
         super.setVisible(state);
-        super.setCursor(getCursor());		// the cursor kludge
+        super.setCursor(getCursor());        // the cursor kludge
     }
 
     ///////////////////////////////////

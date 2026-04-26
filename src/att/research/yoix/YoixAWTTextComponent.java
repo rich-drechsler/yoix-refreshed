@@ -25,7 +25,7 @@ class YoixAWTTextComponent extends YoixAWTCanvas
 {
 
     protected YoixAWTFontMetrics  fm;
-    protected boolean             initialized = false;		// for Swing version
+    protected boolean             initialized = false;        // for Swing version
 
     protected Font  currentfont;
     protected int   alignment = YOIX_LEFT;
@@ -253,7 +253,7 @@ class YoixAWTTextComponent extends YoixAWTCanvas
             dy = point.y - viewport.y;
             viewport.x = point.x;
             viewport.y = point.y;
-            if (extent.width > 0 && extent.height > 0) {	// recent addition (5/2/02 - bogus date??)
+            if (extent.width > 0 && extent.height > 0) {        // recent addition (5/2/02 - bogus date??)
                 if (isPainting() == false) {
                     if ((g = getSavedGraphics()) != null) {
                         width = viewport.width;
@@ -272,18 +272,18 @@ class YoixAWTTextComponent extends YoixAWTCanvas
                                 g.copyArea(0, dy, width + dx, height - dy, -dx, -dy);
                                 repaintRect(0, 0, -dx, height - dy, g);
                                 repaintRect(0, height - dy, width, dy, g);
-                            } else if (dx < 0 && dy < 0) {	// obviously unnecessary test
+                            } else if (dx < 0 && dy < 0) {        // obviously unnecessary test
                                 g.copyArea(0, 0, width + dx, height + dy, -dx, -dy);
                                 repaintRect(0, 0, width, -dy, g);
                                 repaintRect(0, -dy, -dx, height + dy, g);
                             }
                             g.translate(-insets.left, -insets.top);
                         } else repaint(insets.left, insets.top, width, height);
-                        Thread.yield();		// probably unnecessary for AWT
+                        Thread.yield();        // probably unnecessary for AWT
                         disposeSavedGraphics(g);
                     }
                 } else repaintComponent();
-                syncViewport();		// recent addition (4/30/04)
+                syncViewport();        // recent addition (4/30/04)
             }
         }
     }
@@ -302,7 +302,7 @@ class YoixAWTTextComponent extends YoixAWTCanvas
         // event queue (to try to avoid deadlock).
         //
 
-        funct = syncviewport;		// snapshot - just to be safe
+        funct = syncviewport;        // snapshot - just to be safe
 
         if (funct != null) {
             synccount++;
@@ -508,7 +508,7 @@ class YoixAWTTextComponent extends YoixAWTCanvas
     setFont(Font font) {
 
         super.setFont(font);
-        if (initialized) {		// Swing version needs this
+        if (initialized) {        // Swing version needs this
             loadFont();
             reset(true);
         }
@@ -541,7 +541,7 @@ class YoixAWTTextComponent extends YoixAWTCanvas
             this.ipad.left = Math.max(ipad.left, 0);
             this.ipad.right = Math.max(ipad.right, 0);
             currentfont = null;
-            loadFont();		// recent addition
+            loadFont();        // recent addition
             reset(true);
         }
     }

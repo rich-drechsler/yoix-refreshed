@@ -167,7 +167,7 @@ class YoixRERegexp
             evaluntil(START);
 
             if (nbra != 0)
-                error(REGEXPSYNTAXERROR);	// unmatched left paren
+                error(REGEXPSYNTAXERROR);        // unmatched left paren
 
             program.startinst = ((Node)andstack.peek()).first;
             optimize();
@@ -360,7 +360,7 @@ class YoixRERegexp
                                     }
                                     break;
 
-                                default:	// includes "case '\\':"
+                                default:        // includes "case '\\':"
                                     sb.append(ch);
                                     break;
                             }
@@ -534,7 +534,7 @@ class YoixRERegexp
                     break;
 
                 default:
-                    error(REGEXPUNDEFINED);	// unknown operator
+                    error(REGEXPUNDEFINED);        // unknown operator
                     break;
             }
         }
@@ -747,7 +747,7 @@ class YoixRERegexp
         int  c = -1;
 
         if (eoff == exprp.length || (exprp[eoff] == '\\' && (eoff+1) == exprp.length)) {
-            error(REGEXPSYNTAXERROR);	// malformed '[]'
+            error(REGEXPSYNTAXERROR);        // malformed '[]'
         } else if (exprp[eoff] == '\\') {
             eoff++;
             c = exprp[eoff++]|OPERATOR;
@@ -779,7 +779,7 @@ class YoixRERegexp
     operator(int type) {
 
         if (type == RBRA && --nbra < 0)
-            error(REGEXPSYNTAXERROR);	// unmatched right paren
+            error(REGEXPSYNTAXERROR);        // unmatched right paren
         if (type == LBRA) {
             cursubid++;
             nbra++;
@@ -805,8 +805,8 @@ class YoixRERegexp
         for (i = 0; i < program.instvec.size(); i++) {
             inst = (Inst)program.instvec.elementAt(i);
             if (inst.type == END) {
-                if (i+1 != program.instvec.size())	// sanity check
-                    error(REGEXPBADINITIALIZER);	// can't happen
+                if (i+1 != program.instvec.size())        // sanity check
+                    error(REGEXPBADINITIALIZER);          // can't happen
                 break;
             }
             target = inst.left;
@@ -825,8 +825,8 @@ class YoixRERegexp
     popand(int op) {
 
         if (andstack.empty()) {
-            error(REGEXPSYNTAXERROR);	// missing operand
-            Inst inst = newinst(NOP);	// sure looks like we can't get here??
+            error(REGEXPSYNTAXERROR);        // missing operand
+            Inst inst = newinst(NOP);        // sure looks like we can't get here??
             pushand(inst, inst);
         }
         return((Node)andstack.pop());
@@ -837,7 +837,7 @@ class YoixRERegexp
     popator() {
 
         if (atorstack.empty())
-            error(REGEXPSTACKUNDERFLOW);	// can't happen
+            error(REGEXPSTACKUNDERFLOW);        // can't happen
         popped_subid = (((Integer)subidstack.pop()).intValue());
         return(((Integer)atorstack.pop()).intValue());
     }
@@ -965,7 +965,7 @@ class YoixRERegexp
     class Inst {
 
         CharClass  cclass;
-        Inst       left;		// next;
+        Inst       left;        // next;
         Inst       right;
         int        tloop = 0;
         int        type;

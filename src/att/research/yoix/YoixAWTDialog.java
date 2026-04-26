@@ -212,7 +212,7 @@ class YoixAWTDialog extends Dialog
         paint = null;
         backgroundimage = null;
         filteredimage = null;
-        removeComponentListener(this);		// should be unnecessary
+        removeComponentListener(this);        // should be unnecessary
         try {
             super.finalize();
         }
@@ -246,7 +246,7 @@ class YoixAWTDialog extends Dialog
 
         paintBackgroundImage(g);
         paintCallback(g);
-        super.paint(g);			// required for Containers
+        super.paint(g);        // required for Containers
     }
 
 

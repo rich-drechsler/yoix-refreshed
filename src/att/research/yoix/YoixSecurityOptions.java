@@ -137,16 +137,16 @@ class YoixSecurityOptions
     // to category flags or to the official name of the security checker.
     // Means users can say
     //
-    //		prompt:file
+    //     prompt:file
     //
     // to apply the "prompt" policy to all security checkers that deal
     // with local files, or
     //
-    //		prompt:write
+    //     prompt:write
     //
     // or
     //
-    //		prompt:checkWrite
+    //     prompt:checkWrite
     //
     // to apply the "prompt" policy before local files are written.
     //
@@ -878,7 +878,7 @@ class YoixSecurityOptions
                     if (index == pattern.lastIndexOf(':')) {
                         host = pattern.substring(0, index);
                         port = pattern.substring(index+1);
-                        if (host.length() > 0 && port.length() > 0) {	// unnecessary test
+                        if (host.length() > 0 && port.length() > 0) {        // unnecessary test
                             try {
                                 if ((addrs = InetAddress.getAllByName(host)) != null) {
                                     for (n = 0; n < addrs.length; n++) {

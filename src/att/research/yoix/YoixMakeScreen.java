@@ -848,7 +848,7 @@ class YoixMakeScreen
         if (name != null && name.length() > 0) {
             if (Character.isDigit(name.charAt(name.length() - 1)) == false)
                 name = name + "-1";
-        } else name = DEFAULT_JAVA_FONTNAME;		// for backwards compatibility
+        } else name = DEFAULT_JAVA_FONTNAME;        // for backwards compatibility
         if ((font = Font.decode(name)) != null) {
             if ((scale = VM.getFontMagnification()) > 0.0 && scale != 1.0) {
                 size = (int)Math.round(font.getSize()*scale);

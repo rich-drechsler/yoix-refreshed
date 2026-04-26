@@ -191,7 +191,7 @@ class YoixBodyPath extends YoixPointerActive
                 obj = builtinArc(name, argv, true);
                 break;
 
-            case V_ARCT:		// low level code is probably missing
+            case V_ARCT:        // low level code is probably missing
                 obj = builtinArct(name, argv);
                 break;
 
@@ -408,7 +408,7 @@ class YoixBodyPath extends YoixPointerActive
         pi = path.getPathIterator(null);
 
         if (pi.isDone() == false) {
-            coords = new double[6];		// 2 should be sufficient
+            coords = new double[6];        // 2 should be sufficient
             if (pi.currentSegment(coords) == YOIX_SEG_MOVETO)
                 pt = new double[] {coords[0], coords[1]};
             else pt = null;
@@ -589,7 +589,7 @@ class YoixBodyPath extends YoixPointerActive
         // path that we draw.
         //
 
-        path.setWindingRule(YOIX_WIND_NON_ZERO);	// apparently doesn't matter
+        path.setWindingRule(YOIX_WIND_NON_ZERO);        // apparently doesn't matter
 
         stroke = g.getStroke();
         if (stroke instanceof BasicStroke) {
@@ -689,7 +689,7 @@ class YoixBodyPath extends YoixPointerActive
         //
 
         if (stroke != null) {
-            path.setWindingRule(YOIX_WIND_NON_ZERO);	// apparently doesn't matter
+            path.setWindingRule(YOIX_WIND_NON_ZERO);        // apparently doesn't matter
             transform = currentmatrix.getCurrentAffineTransform();
             try {
                 inverse = transform.createInverse();
@@ -784,11 +784,11 @@ class YoixBodyPath extends YoixPointerActive
         // This method was added on 1/10/08 to address a problem that we
         // observed when a Yoix script used something like
         //
-        //	gsave();
-        //	clippath();
-        //	pathbbox();
-        //	...
-        //	grestore();
+        //     gsave();
+        //     clippath();
+        //     pathbbox();
+        //     ...
+        //     grestore();
         //
         // in a paint() function of a window that we were rapidly resizing.
         // Problem was that clippath() would occasionally hand us an empty
@@ -826,7 +826,7 @@ class YoixBodyPath extends YoixPointerActive
         // like linecaps and linewidths.
         //
 
-        path.setWindingRule(YOIX_WIND_NON_ZERO);	// apparently doesn't matter
+        path.setWindingRule(YOIX_WIND_NON_ZERO);        // apparently doesn't matter
         if (stroke.getLineWidth() > 0 || stroke.getDashArray() != null) {
             transform = currentmatrix.getCurrentAffineTransform();
             if (transform.isIdentity() == false) {
@@ -946,7 +946,7 @@ class YoixBodyPath extends YoixPointerActive
         // with the arc orientation agrees with PostScript interpreters,
         // even though something like,
         //
-        //	angle1 + 2*Math.PI*Math.floor(da/(2*Math.PI)) + da%(2*Math.PI)
+        //     angle1 + 2*Math.PI*Math.floor(da/(2*Math.PI)) + da%(2*Math.PI)
         //
         // which adjusts angle2 when we're drawing a counterclockwise arc,
         // probably is more consistent. PostScript tests were run using gs
@@ -1221,8 +1221,8 @@ class YoixBodyPath extends YoixPointerActive
                     if ((first = right.getFirstDevicePoint()) != null) {
                         rhs = right.copyGeneralPath();
                         if ((origin = getCurrentDevicePoint()) != null) {
-                            dx = origin[0];	// was - first[0];
-                            dy = origin[1];	// was - first[1];
+                            dx = origin[0];        // was - first[0];
+                            dy = origin[1];        // was - first[1];
                             if (dx != 0 || dy != 0) {
                                 aft = new AffineTransform();
                                 aft.setToTranslation(dx, dy);
@@ -1693,7 +1693,7 @@ class YoixBodyPath extends YoixPointerActive
                             target = getFlattenedPath(flatness);
                         else target = path;
                         rect = target.getBounds2D();
-                        if (pixels != 0) {		// small kludge
+                        if (pixels != 0) {        // small kludge
                             rect.setRect(
                                 rect.getX() - pixels,
                                 rect.getY() - pixels,
@@ -2320,7 +2320,7 @@ class YoixBodyPath extends YoixPointerActive
 
         flatness = Math.max(0.2, Math.min(flatness, 100));
         flat = new GeneralPath();
-        coords = new float[6];		// 2 should be sufficient
+        coords = new float[6];        // 2 should be sufficient
 
         for (pi = path.getPathIterator(null, flatness); pi.isDone() == false; pi.next()) {
             switch (pi.currentSegment(coords)) {

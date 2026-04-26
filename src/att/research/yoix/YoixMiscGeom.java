@@ -438,11 +438,11 @@ class YoixMiscGeom
                             index = 0;
                             break;
 
-                        case PathIterator.SEG_QUADTO:	// can this happen?
+                        case PathIterator.SEG_QUADTO:        // can this happen?
                             index = 2;
                             break;
 
-                        case PathIterator.SEG_CUBICTO:	// can this happen?
+                        case PathIterator.SEG_CUBICTO:        // can this happen?
                             index = 4;
                             break;
 

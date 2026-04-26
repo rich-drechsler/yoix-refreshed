@@ -263,7 +263,7 @@ class YoixBodyFont extends YoixPointerActive
     private void
     buildFont() {
 
-        setField(N_TYPE);		// this must be first
+        setField(N_TYPE);        // this must be first
     }
 
 

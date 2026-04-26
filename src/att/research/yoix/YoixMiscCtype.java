@@ -23,15 +23,15 @@ class YoixMiscCtype
     // Familiar (but not international) C-style character testing.
     //
 
-    private static final short  CN = 0x01;	// control
-    private static final short  WS = 0x02;	// white space
-    private static final short  SP = 0x04;	// space
-    private static final short  PU = 0x08;	// punctuation
-    private static final short  DG = 0x10;	// digit
-    private static final short  OD = 0x20;	// octal digit
-    private static final short  UC = 0x40;	// upper case
-    private static final short  HD = 0x80;	// hex digit
-    private static final short  LC = 0x100;	// lower case
+    private static final short  CN = 0x01;        // control
+    private static final short  WS = 0x02;        // white space
+    private static final short  SP = 0x04;        // space
+    private static final short  PU = 0x08;        // punctuation
+    private static final short  DG = 0x10;        // digit
+    private static final short  OD = 0x20;        // octal digit
+    private static final short  UC = 0x40;        // upper case
+    private static final short  HD = 0x80;        // hex digit
+    private static final short  LC = 0x100;       // lower case
 
     private static final short  ctype[] = {
         CN, CN, CN, CN, CN, CN, CN, CN,

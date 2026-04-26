@@ -71,7 +71,7 @@ class YoixObject extends SimpleNode
     // a bit more attention - maybe later.
     //
 
-    private short  flags;	// currently all could fit in a byte
+    private short  flags;        // currently all could fit in a byte
     private int    offset;
 
     //
@@ -1296,7 +1296,7 @@ class YoixObject extends SimpleNode
         if (defined()) {
             VM.pushAccess(R__);
             obj = get();
-            result = obj.isFunction() && obj.notNull();		// confusing test!!
+            result = obj.isFunction() && obj.notNull();        // confusing test!!
             VM.popAccess();
         }
         return(result);
@@ -1885,7 +1885,7 @@ class YoixObject extends SimpleNode
     public static YoixObject
     newNullPointer() {
 
-        return(newNullPointer(POINTER, null));	// could use getCachedNull(T_POINTER, true)
+        return(newNullPointer(POINTER, null));        // could use getCachedNull(T_POINTER, true)
     }
 
 
@@ -2561,7 +2561,7 @@ class YoixObject extends SimpleNode
     forcePutObject(int index, YoixObject obj) {
 
         try {
-            VM.pushAccess(LRW_);	// L_W_ might be sufficient
+            VM.pushAccess(LRW_);        // L_W_ might be sufficient
             putObject(index, obj);
         }
         finally {
@@ -2574,7 +2574,7 @@ class YoixObject extends SimpleNode
     forcePutObject(String name, YoixObject obj) {
 
         try {
-            VM.pushAccess(LRW_);	// L_W_ might be sufficient
+            VM.pushAccess(LRW_);        // L_W_ might be sufficient
             putObject(name, obj);
         }
         finally {
@@ -4230,7 +4230,7 @@ class YoixObject extends SimpleNode
                 break;
 
             default:
-                obj = null;	// cast() needs this - old versions died here
+                obj = null;        // cast() needs this - old versions died here
                 break;
         }
         return(obj);
@@ -5017,7 +5017,7 @@ class YoixObject extends SimpleNode
         // Prior to 6/17/02 the second argument in the newNull() call
         // was,
         //
-        //	obj.getInt(N_MAJOR, obj.minor())
+        //     obj.getInt(N_MAJOR, obj.minor())
         //
         // but that looked like a mistake and really didn't work well
         // with our new Swing implementation. Not 100% certain, which
@@ -5223,7 +5223,7 @@ class YoixObject extends SimpleNode
                 obj = newZipEntry(data);
                 break;
 
-            default:		// sure looks like a kludge??
+            default:        // sure looks like a kludge??
                 obj = newArray(length);
                 break;
         }

@@ -207,7 +207,7 @@ class YoixSwingJDialog extends JDialog
                     if (visible) {
                         YoixMiscMenu.addListener((JMenuBar)newbar, parent);
                         setJMenuBar((JMenuBar)newbar);
-                    } else setJMenuBar(null);	// seems necessary
+                    } else setJMenuBar(null);        // seems necessary
                     result = true;
                 } else if (visible == false)
                     result = changeMenuBar(null, visible, validate);
@@ -216,7 +216,7 @@ class YoixSwingJDialog extends JDialog
             if ((oldbar = getJMenuBar()) != null) {
                 YoixMiscMenu.removeListener(oldbar, parent);
                 remove(oldbar);
-                setJMenuBar(null);		// seems necessary
+                setJMenuBar(null);        // seems necessary
                 result = true;
             }
         }
@@ -255,7 +255,7 @@ class YoixSwingJDialog extends JDialog
         contentpane = null;
         firstglasspane = null;
         layeredpane = null;
-        removeComponentListener(this);		// unnecessary??
+        removeComponentListener(this);        // unnecessary??
         try {
             super.finalize();
         }

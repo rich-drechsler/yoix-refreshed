@@ -98,7 +98,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
      // FIELD               OBJECT       BODY
      // -----               ------       ----
         N_COMPONENTS,       $LR__,       $LR__,
-        N_SCREEN,           $LR__,       null,		// added on 10/18/11
+        N_SCREEN,           $LR__,       null,        // added on 10/18/11
         N_TAG,              $LR__,       null,
     };
 
@@ -109,7 +109,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
     // but probably still need to test more.
     //
 
-    private JButton bg_dummy = null;		// this was static!!
+    private JButton bg_dummy = null;        // this was static!!
 
     //
     // The activefields HashMap translates the field names in data
@@ -468,7 +468,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         Object      lock;
 
         if (threadsafe && EventQueue.isDispatchThread() == false && initialized && VM.isShutdown() == false) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             try {
                 result = new Object[] {null};
                 lock = new Object();
@@ -502,7 +502,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         Object  lock;
 
         if (threadsafe && EventQueue.isDispatchThread() == false && initialized && VM.isShutdown() == false) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             try {
                 result = new Object[] {null};
                 lock = new Object();
@@ -586,7 +586,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         //
 
         if (threadsafe && EventQueue.isDispatchThread() == false && initialized && VM.isShutdown() == false) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             if (isModalDialog(comp)) {
                 if (name.equals(N_VISIBLE) && obj.isNumber() && obj.booleanValue())
                     later = false;
@@ -633,7 +633,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         int     listener;
         int     bit;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
         missed = 0;
 
         for (bit = 1; mask != 0 && bit != NEXTLISTENER; bit <<= 1) {
@@ -800,9 +800,9 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         //
 
         if (isDisposable()) {
-            comp = this.peer;		// snapshot - probably unnecessary
-            owner = this.parent;	// snapshot - just to be safe
-            if (comp instanceof Component)	// a recent addition
+            comp = this.peer;           // snapshot - probably unnecessary
+            owner = this.parent;        // snapshot - just to be safe
+            if (comp instanceof Component)        // a recent addition
                 ((Component)comp).setVisible(false);
             //
             // A change (3/24/07) to try to help with a memory leak that
@@ -837,7 +837,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                 ((YoixBodyComponent)owner.body()).childrenRemove(this);
 
             childrenDispose();
-            VM.removeClipboards(getContext());	// not completely convinced - added 5/12/05
+            VM.removeClipboards(getContext());        // not completely convinced - added 5/12/05
 
             //
             // Clearing the menubar and popup fields is a change that was
@@ -884,7 +884,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         Adjustable   adjustable;
         Object       comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof JScrollPane) {
             if (orientation == YOIX_HORIZONTAL)
@@ -917,7 +917,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                 container = ((RootPaneContainer)arg).getContentPane();
             else if (arg instanceof JScrollPane)
                 container = ((JScrollPane)arg).getViewport();
-            else if (arg instanceof Container)		// unnecessary test??
+            else if (arg instanceof Container)        // unnecessary test??
                 container = (Container)arg;
         }
         return(container);
@@ -975,7 +975,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         Dimension    size = null;
 
         if ((scroller = peerscroller) != null) {
-            if (scroller instanceof YoixSwingJScrollPane) {	// should always be true
+            if (scroller instanceof YoixSwingJScrollPane) {        // should always be true
                 if (adjusted)
                     size = ((YoixSwingJScrollPane)scroller).getAdjustedViewportSize();
                 else size = scroller.getViewport().getSize();
@@ -1164,7 +1164,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         int     bit;
 
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
         missed = 0;
 
         for (bit = 1; mask != 0 && bit != NEXTLISTENER; bit <<= 1) {
@@ -1333,7 +1333,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // JEditorPane related changes in this method.
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof Component && canTextChange()) {
             trim = data.getBoolean(N_AUTOTRIM);
@@ -1364,7 +1364,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                             undo.add(doc.getText(offset, length));
                         }
                         catch(BadLocationException e) {
-                            VM.abort(e);		// should never happen
+                            VM.abort(e);        // should never happen
                         }
                     }
                     if (length == 0) {
@@ -1373,7 +1373,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                                 doc.insertString(offset, str, null);
                             }
                             catch(BadLocationException e) {
-                                VM.abort(e);		// should never happen
+                                VM.abort(e);        // should never happen
                             }
                         }
                     } else {
@@ -1382,7 +1382,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                             doc.insertString(offset, str, null);
                         }
                         catch(BadLocationException e) {
-                            VM.abort(e);		// should never happen
+                            VM.abort(e);        // should never happen
                         }
                     }
                     delta = doc.getLength() - len;
@@ -1453,19 +1453,19 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // in version 2.1.4 (around 1/23/07).
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof JPopupMenu) {
             if (popupowner != null && popupowner != owner)
                 popupowner = null;
             if (owner != null) {
                 if (popupowner != owner) {
-		    if ((component = owner.getManagedObject()) != null) {
-			if (component instanceof Component)
+                    if ((component = owner.getManagedObject()) != null) {
+                        if (component instanceof Component)
                            popupowner = owner;
-			else VM.abort(TYPECHECK, N_POPUP);
-		    }
-		}
+                        else VM.abort(TYPECHECK, N_POPUP);
+                    }
+                }
                 syncMenuProperties(owner);
                 showPopupMenu((JPopupMenu)comp);
             }
@@ -1564,7 +1564,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         boolean  handled = true;
 
-        if (comp instanceof JDesktopPane)	// test before JLayeredPane
+        if (comp instanceof JDesktopPane)        // test before JLayeredPane
             addToJDesktopPane(obj, added, getContext());
         else if (comp instanceof JLayeredPane)
             addToJLayeredPane(obj, added);
@@ -1601,7 +1601,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         Object      component;
         Object      comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof JMenuBar || comp instanceof JPopupMenu) {
             if (owner != null) {
@@ -2077,7 +2077,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
                 case JFILECHOOSER:
                     peer = new YoixSwingJFileChooser(data, this);
-                    setField(N_DIRECTORY);		// should happen first!
+                    setField(N_DIRECTORY);        // should happen first!
                     setField(N_MODE);
                     setField(N_MULTIPLEMODE);
                     setField(N_HIDDENFILES);
@@ -2208,7 +2208,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     if (data.getObject(N_ICONS).notNull())
                         setField(N_ICONS);
                     setField(N_ITEMS);
-                    setField(N_ITEMARRAY);	// deprecated
+                    setField(N_ITEMARRAY);        // deprecated
                     setField(N_MNEMONIC);
                     break;
 
@@ -2216,7 +2216,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     peer = new JMenuBar();
                     setField(N_INSETS);
                     setField(N_ITEMS);
-                    setField(N_ITEMARRAY);	// deprecated
+                    setField(N_ITEMARRAY);        // deprecated
                     break;
 
                 case JMENUITEM:
@@ -2267,7 +2267,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     ((JPopupMenu)peer).addPopupMenuListener(popupmenulistener);
                     setField(N_TEXT);
                     setField(N_ITEMS);
-                    setField(N_ITEMARRAY);	// deprecated
+                    setField(N_ITEMARRAY);        // deprecated
                     break;
 
                 case JPROGRESSBAR:
@@ -2573,7 +2573,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         setField(N_FONT);
         if (MAC_DEADLOCK_KLUDGE)
             syncDispatchThread(0);
-        setField(N_BORDER);		// should follow N_[BACK|FORE]GROUND and N_FONT
+        setField(N_BORDER);        // should follow N_[BACK|FORE]GROUND and N_FONT
         setField(N_PAINT);
         setField(N_PREFERREDSIZE);
         setField(N_MINIMUMSIZE);
@@ -2699,7 +2699,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     ((DefaultListModel)listmodel).removeAllElements();
                 else if (listmodel instanceof DefaultComboBoxModel)
                     ((DefaultComboBoxModel)listmodel).removeAllElements();
-                else values = new YoixSwingLabelItem[0];	// BUG FIX
+                else values = new YoixSwingLabelItem[0];        // BUG FIX
                 break;
 
             case V_LABELS:
@@ -2716,7 +2716,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     ((DefaultListModel)listmodel).removeAllElements();
                 else if (listmodel instanceof DefaultComboBoxModel)
                     ((DefaultComboBoxModel)listmodel).removeAllElements();
-                else values = new YoixSwingLabelItem[0];	// BUG FIX
+                else values = new YoixSwingLabelItem[0];        // BUG FIX
                 break;
 
             case V_MAPPINGS:
@@ -2939,10 +2939,10 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                         if (arg[2].isNumber()) {
                             if (arg[3].isNumber()) {
                                 ((JScrollBar)comp).setValues(
-                                    arg[0].intValue(),		// value
-                                    arg[1].intValue(),		// extent
-                                    arg[2].intValue(),		// min
-                                    arg[3].intValue()		// max
+                                    arg[0].intValue(),        // value
+                                    arg[1].intValue(),        // extent
+                                    arg[2].intValue(),        // min
+                                    arg[3].intValue()         // max
                                 );
                                 obj = YoixObject.newEmpty();
                             } else VM.badArgument(name, 3);
@@ -2958,20 +2958,20 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                             if (arg[3].isNumber()) {
                                 if (arg.length == 4) {
                                     ((DefaultBoundedRangeModel)(((YoixSwingJSlider)comp).getModel())).setRangeProperties(
-                                        arg[0].intValue(),	// value
-                                        arg[1].intValue(),	// extent
-                                        arg[2].intValue(),	// min
-                                        arg[3].intValue(),	// max
-                                        false			// adjusting
+                                        arg[0].intValue(),        // value
+                                        arg[1].intValue(),        // extent
+                                        arg[2].intValue(),        // min
+                                        arg[3].intValue(),        // max
+                                        false                     // adjusting
                                     );
                                     obj = YoixObject.newEmpty();
                                 } else if (arg[4].isNumber()) {
                                     ((DefaultBoundedRangeModel)(((YoixSwingJSlider)comp).getModel())).setRangeProperties(
-                                        arg[0].intValue(),	// value
-                                        arg[1].intValue(),	// extent
-                                        arg[2].intValue(),	// min
-                                        arg[3].intValue(),	// max
-                                        arg[4].booleanValue()	// adjusting
+                                        arg[0].intValue(),        // value
+                                        arg[1].intValue(),        // extent
+                                        arg[2].intValue(),        // min
+                                        arg[3].intValue(),        // max
+                                        arg[4].booleanValue()     // adjusting
                                     );
                                     obj = YoixObject.newEmpty();
                                 } else VM.badArgument(name, 4);
@@ -3015,7 +3015,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     subtext = doc.getText(offset, length);
                 }
                 catch(BadLocationException e) {
-                    VM.abort(e);		// should never happen
+                    VM.abort(e);        // should never happen
                 }
             } else if (comp instanceof YoixSwingJTextComponent) {
                 subtext = ((YoixSwingJTextComponent)comp).getText();
@@ -3320,7 +3320,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         YoixError   error_point = null;
         Object      comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (obj != null) {
             removeAll();
@@ -3631,7 +3631,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         if (comp instanceof YoixInterfaceFileChooser) {
             if ((dir = ((YoixInterfaceFileChooser)comp).getCurrentDirectory()) != null) {
                 path = dir.getPath();
-                if (data.getInt(N_MODEL, 1) == 0) {	// attempt at AWT compatibility
+                if (data.getInt(N_MODEL, 1) == 0) {        // attempt at AWT compatibility
                     if (path.endsWith(dir.separator) == false)
                         path += dir.separator;
                 }
@@ -3674,7 +3674,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         if (comp instanceof JSplitPane) {
             insets = ((JSplitPane)comp).getInsets();
-            if (comp instanceof YoixSwingJSplitPane)		// should always be true
+            if (comp instanceof YoixSwingJSplitPane)        // should always be true
                 location = ((YoixSwingJSplitPane)comp).getDividerLocation(true);
             else location = ((JSplitPane)comp).getDividerLocation();
             size = ((JSplitPane)comp).getDividerSize();
@@ -3819,7 +3819,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                 } else obj = YoixObject.newArray();
             } else {
                 if ((file = ((YoixInterfaceFileChooser)comp).getSelectedFile()) != null) {
-                    if (data.getInt(N_MODEL, 1) == 0)	// attempt at AWT compatilbily
+                    if (data.getInt(N_MODEL, 1) == 0)        // attempt at AWT compatilbily
                         path = file.getName();
                     else path = file.getPath();
                     if (toyoix)
@@ -4471,7 +4471,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                             if (managed instanceof AbstractButton) {
                                 if (((AbstractButton)managed).getModel() == selected) {
                                     switch (data.getInt(N_MODEL, 0)) {
-                                        case 0:	// AWT CheckboxGroup model
+                                        case 0:        // AWT CheckboxGroup model
                                             value = ((AbstractButton)managed).getActionCommand();
                                             obj = YoixObject.newString(value);
                                             break;
@@ -4638,7 +4638,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         else if (comp instanceof JProgressBar)
             str = ((JProgressBar)comp).getString();
         else if (comp instanceof YoixSwingJTable) {
-            str = null;		// we'll set obj directly
+            str = null;        // we'll set obj directly
             obj = ((YoixSwingJTable)comp).getText();
         } else if (comp instanceof JTextComponent)
             str = ((JTextComponent)comp).getText();
@@ -4804,7 +4804,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         YoixObject  obj;
         Object      comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         switch (activeField(name, activefields)) {
             case V_ACTION:
@@ -4880,7 +4880,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         switch (activeField(name, activefields)) {
             case V_ACCELERATOR:
@@ -4988,7 +4988,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                 break;
 
             case V_DISPOSE:
-                obj = getDispose(comp, obj);	// currently OK if comp is null
+                obj = getDispose(comp, obj);        // currently OK if comp is null
                 break;
 
             case V_DOUBLEBUFFERED:
@@ -5336,7 +5336,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof YoixInterfaceWindow)
             ((YoixInterfaceWindow)comp).pack();
@@ -5348,7 +5348,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp != null && obj != null) {
             switch (activeField(name, activefields)) {
@@ -5704,7 +5704,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     setIpad(comp, obj);
                     break;
 
-                case V_ITEMARRAY:		// deprecated
+                case V_ITEMARRAY:        // deprecated
                     setItemArray(comp, obj);
                     break;
 
@@ -6021,7 +6021,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     break;
 
                 case V_TOOLTIPTEXT:
-                case V_TOOLTIP:		// obsolete - for backward compatibility
+                case V_TOOLTIP:        // obsolete - for backward compatibility
                     setToolTipText(comp, obj);
                     break;
 
@@ -6085,7 +6085,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof Component) {
             if (peerscroller != null)
@@ -6220,7 +6220,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // it calls validate(), which in turn grabs the window's AWTTreeLock.
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof YoixInterfaceWindow) {
             if (EventQueue.isDispatchThread() == false) {
@@ -6248,7 +6248,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         boolean  state;
         Object   comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (obj.isNull()) {
             if ((obj = findClosestValue(N_ENABLED)) == null || obj.isNull())
@@ -6299,14 +6299,14 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // part of the JTabbedPane looks better.
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (obj.isNull()) {
             if ((obj = findClosestValue(N_OPAQUE)) == null || obj.isNull()) {
                 if (isContainer(comp)) {
                     if (comp instanceof JPanel)
                         state = false;
-                    else if (comp instanceof JTabbedPane)	// added on 10/17/06
+                    else if (comp instanceof JTabbedPane)        // added on 10/17/06
                         state = false;
                     else state = true;
                 } else state = true;
@@ -6340,7 +6340,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // A string value should fit the description provided in comments
         // that preceed Java's
         //
-        //	KeyStroke.getKeyStroke(String s);
+        //     KeyStroke.getKeyStroke(String s);
         //
         // method. A value that's an int is treated as a Unicode charater.
         //
@@ -6694,7 +6694,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                     (float)(caretcolor.getBlue()/255.0),
                     (float)Math.max(0.0, Math.min(1.0, alpha))
                 );
-            } else color = new Color(0, 0, 0, (float)alpha);	// wrong!!
+            } else color = new Color(0, 0, 0, (float)alpha);        // wrong!!
             if (color.equals(caretcolor) == false) {
                 if (highlighter instanceof YoixSwingHighlighter)
                     ((YoixSwingHighlighter)highlighter).setCaretColor(color);
@@ -6860,15 +6860,15 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         if (comp instanceof AbstractButton) {
             if (obj.isNull())
-                ((AbstractButton)comp).setActionCommand(null);	// resets to default
+                ((AbstractButton)comp).setActionCommand(null);        // resets to default
             else ((AbstractButton)comp).setActionCommand(obj.stringValue());
         } else if (comp instanceof JTextField) {
             if (obj.isNull())
-                ((JTextField)comp).setActionCommand(null);	// resets to default
+                ((JTextField)comp).setActionCommand(null);        // resets to default
             else ((JTextField)comp).setActionCommand(obj.stringValue());
         } else if (comp instanceof YoixSwingJComboBox) {
             if (obj.isNull())
-                ((YoixSwingJComboBox)comp).setActionCommands(null, null);	// resets to default
+                ((YoixSwingJComboBox)comp).setActionCommands(null, null);        // resets to default
             else if (obj.isString())
                 ((YoixSwingJComboBox)comp).setActionCommand(obj.stringValue());
             else if (obj.isArray()) {
@@ -7046,7 +7046,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         if (comp instanceof JPasswordField) {
             ((JPasswordField)comp).setEchoChar((char)obj.intValue());
-            ((JPasswordField)comp).repaint();	// needed to update display
+            ((JPasswordField)comp).repaint();        // needed to update display
         }
     }
 
@@ -8125,7 +8125,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
 
         Object  comp;
 
-        comp = this.peer;	// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof JComponent) {
             ((JComponent)comp).setOpaque(state);
@@ -8746,7 +8746,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                 // note: caret position is properly set at end position
                 ((JTextComponent)editor).select(start, end);
             }
-            catch(RuntimeException e) {}		// a precaution
+            catch(RuntimeException e) {}        // a precaution
         }
     }
 
@@ -8816,8 +8816,8 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         // Changed on 3/22/05 so pack() is always called when obj is null.
         // Previous version did
         //
-        //	} else if (isPacked())
-        //	    ((YoixInterfaceWindow)comp).pack();
+        //     } else if (isPacked())
+        //         ((YoixInterfaceWindow)comp).pack();
         //
         // but the testing caused an obsurce scrollbar related problem in
         // one screen in an important internal application. Change should
@@ -8844,7 +8844,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
                         ((Component)comp).setSize(size);
                         setPacked(true);
                     } else {
-                        syncDispatchThread(ISMAC ? 2 : 0);	// small ISMAC kludge added 6/4/2008
+                        syncDispatchThread(ISMAC ? 2 : 0);        // small ISMAC kludge added 6/4/2008
                         pack();
                     }
                 }
@@ -9285,7 +9285,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         //
 
         if (EventQueue.isDispatchThread() == false) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             if (isModalDialog(comp))
                 later = !state;
             else later = true;
@@ -9516,7 +9516,7 @@ class YoixBodyComponentSwing extends YoixBodyComponent
         //
 
         if ((obj = data.getObject(N_PREFERREDSIZE)) == null || obj.isNull()) {
-            if (size == null) {		// old application kludge
+            if (size == null) {        // old application kludge
                 if ((obj = data.getObject(N_MINIMUMSIZE)) != null && obj.notNull())
                     size = ((JComponent)comp).getMinimumSize();
             }

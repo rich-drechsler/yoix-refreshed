@@ -89,7 +89,7 @@ class YoixBodyCompiler extends YoixPointerActive
 
     YoixBodyCompiler(YoixObject data) {
 
-        super(data, true);	// tells super we're cloneable!!
+        super(data, true);        // tells super we're cloneable!!
         buildCompiler();
         setFixedSize();
     }
@@ -157,7 +157,7 @@ class YoixBodyCompiler extends YoixPointerActive
                     } else break;
                 }
                 if (arg != null) {
-                    Thread.interrupted();	// just to clear interrupted state!!!
+                    Thread.interrupted();        // just to clear interrupted state!!!
                     //
                     // Functions only right now, but we eventually may accept
                     // other kinds of arguments.
@@ -603,7 +603,7 @@ class YoixBodyCompiler extends YoixPointerActive
                 thread = new Thread(group, this, getNextThreadName());
                 thread.setDaemon(true);
                 setField(N_PRIORITY);
-                data.putInt(N_ALIVE, true);	// must preceed start()!
+                data.putInt(N_ALIVE, true);        // must preceed start()!
                 thread.start();
             }
             catch(IllegalThreadStateException e) {

@@ -240,7 +240,7 @@ class YoixModuleThread extends YoixModule
                 if (msecs >= 0) {
                     start = System.currentTimeMillis();
                     try {
-                        arg[0].getLock().wait(msecs);	// see statementSynchronized()
+                        arg[0].getLock().wait(msecs);        // see statementSynchronized()
                     }
                     catch(InterruptedException e) {
                         VM.caughtException(e);

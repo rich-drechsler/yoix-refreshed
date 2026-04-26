@@ -539,7 +539,7 @@ class YoixBodyCalendar extends YoixPointerActive
     builtinLeastMaximum(String name, YoixObject arg[]) {
 
         int  field;
-        int  value = -1;	// for compiler
+        int  value = -1;        // for compiler
 
         if (arg.length == 1) {
             if (arg[0].isInteger()) {
@@ -561,7 +561,7 @@ class YoixBodyCalendar extends YoixPointerActive
     builtinMaximum(String name, YoixObject arg[]) {
 
         int  field;
-        int  value = -1;	// for compiler
+        int  value = -1;        // for compiler
 
         if (arg.length == 1) {
             if (arg[0].isInteger()) {
@@ -583,7 +583,7 @@ class YoixBodyCalendar extends YoixPointerActive
     builtinMinimum(String name, YoixObject arg[]) {
 
         int  field;
-        int  value = -1;	// for compiler
+        int  value = -1;        // for compiler
 
         if (arg.length == 1) {
             if (arg[0].isInteger()) {

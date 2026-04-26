@@ -324,7 +324,7 @@ class YoixInterruptable
                     thread = null;
                 }
             }
-        } else VM.die(INTERNALERROR);	// careless coding - it should not happen!!
+        } else VM.die(INTERNALERROR);        // careless coding - it should not happen!!
     }
 }
 

@@ -85,7 +85,7 @@ class YoixBodyStream extends YoixPointerActive
     // might also deserve attention - later.
     //
 
-    private int  interrupted = 0;	// reads only right now
+    private int  interrupted = 0;        // reads only right now
 
     //
     // URL specific fields that are used to record information obtained
@@ -277,7 +277,7 @@ class YoixBodyStream extends YoixPointerActive
                     else if (s instanceof YoixDataOutputStream)
                         ((YoixDataOutputStream)s).close();
                     else if (s instanceof HttpURLConnection)
-                        ((HttpURLConnection)s).disconnect();	// probably untested
+                        ((HttpURLConnection)s).disconnect();        // probably untested
                 }
                 catch(Exception e) {}
             }
@@ -329,7 +329,7 @@ class YoixBodyStream extends YoixPointerActive
                             ldos.write(lctb.byteBuf, lctb.nextByteIdx, count);
                         }
                         catch(IOException e) {
-                            VM.caughtException(e);	// exiting - it will return
+                            VM.caughtException(e);        // exiting - it will return
                         }
                         lctb.nextByteIdx += count;
                     }
@@ -342,7 +342,7 @@ class YoixBodyStream extends YoixPointerActive
                     ldos.flush();
                 }
                 catch(IOException e) {
-                    VM.caughtException(e);	// exiting - it will return
+                    VM.caughtException(e);        // exiting - it will return
                 }
             }
         }
@@ -441,7 +441,7 @@ class YoixBodyStream extends YoixPointerActive
                     }
                     catch(IOException e) {
                         result = false;
-                        VM.caughtException(e, true);	// might not close ostream
+                        VM.caughtException(e, true);        // might not close ostream
                     }
                     finally {
                         istream = null;
@@ -559,7 +559,7 @@ class YoixBodyStream extends YoixPointerActive
     protected final void
     finalize() {
 
-        close();		// cleans openstreams
+        close();        // cleans openstreams
         stream = null;
         super.finalize();
     }
@@ -825,26 +825,26 @@ class YoixBodyStream extends YoixPointerActive
         try {
             if (stream instanceof File) {
                 flush();
-                size = (new File(((File)stream).getAbsolutePath())).length();	// note: bytes, not chars
+                size = (new File(((File)stream).getAbsolutePath())).length();        // note: bytes, not chars
             } else if (stream instanceof RandomAccessFile) {
                 flush();
                 size = ((RandomAccessFile)stream).length();
             } else if (stream instanceof ByteArrayOutputStream) {
                 flush();
                 try {
-                    size = ((ByteArrayOutputStream)stream).toString(data.getString(N_ENCODING)).length();	// note: chars, not bytes
+                    size = ((ByteArrayOutputStream)stream).toString(data.getString(N_ENCODING)).length();        // note: chars, not bytes
                 }
                 catch(UnsupportedEncodingException e) {
-                    size = ((ByteArrayOutputStream)stream).toString().length();	// note: chars, not bytes
+                    size = ((ByteArrayOutputStream)stream).toString().length();        // note: chars, not bytes
                 }
             } else if (stream instanceof URLConnection)
-                size = ((URLConnection)stream).getContentLength();	// note: bytes, not chars
+                size = ((URLConnection)stream).getContentLength();        // note: bytes, not chars
             else if (stream instanceof InputStream)
-                size = chars_read;	// note: chars, not bytes
+                size = chars_read;        // note: chars, not bytes
             else if (stream instanceof OutputStream)
-                size = chars_written;	// note: chars, not bytes
+                size = chars_written;        // note: chars, not bytes
             else if (stream instanceof YoixBodyString)
-                size = ((YoixBodyString)stream).length();	// note: chars, not bytes
+                size = ((YoixBodyString)stream).length();        // note: chars, not bytes
             else size = -1;
         }
         catch(Exception e) {
@@ -1126,8 +1126,8 @@ class YoixBodyStream extends YoixPointerActive
         // This readLine (with no limit) strips EOL.
         //
 
-        eol_info[0] = false;	// T/F slot for was there a new line
-        eol_info[1] = false;	// T/F slot for is it a 2-char EOL
+        eol_info[0] = false;        // T/F slot for was there a new line
+        eol_info[1] = false;        // T/F slot for is it a 2-char EOL
 
         if (autoready && !ready())
             return(null);
@@ -1658,7 +1658,7 @@ class YoixBodyStream extends YoixPointerActive
     private static void
     beginBlockedOperation(Thread t, Object s) {
 
-        if (t != null && s != null)	// null s is possible but very unlikely
+        if (t != null && s != null)        // null s is possible but very unlikely
             blockedthreads.put(t, s);
     }
 
@@ -2393,7 +2393,7 @@ class YoixBodyStream extends YoixPointerActive
                             VM.abort(BADVALUE, N_FILTERS);
                         if (data.getObject(N_CIPHER).notNull())
                             VM.abort(BADVALUE, N_CIPHER);
-                        if ((mode&(APPEND|UPDATE)) == 0)	// truncate or create
+                        if ((mode&(APPEND|UPDATE)) == 0)        // truncate or create
                             (new FileOutputStream(fullname)).close();
                         rafile = new RandomAccessFile(fullname, "rw");
                         rafile.seek((mode&APPEND) != 0 ? rafile.length() : 0);
@@ -2423,12 +2423,12 @@ class YoixBodyStream extends YoixPointerActive
                 stream = file;
             }
             catch(FileNotFoundException e) {
-                stream = null;		// should be unnecessary
+                stream = null;        // should be unnecessary
                 fullname = null;
                 VM.caughtException(e, true);
             }
             catch(IOException e) {
-                stream = null;		// should be unnecessary
+                stream = null;        // should be unnecessary
                 fullname = null;
                 VM.caughtException(e, true);
             }
@@ -2646,7 +2646,7 @@ class YoixBodyStream extends YoixPointerActive
             }
         }
 
-        if (nc > 0)			// what if nc == YOIX_EOF
+        if (nc > 0)        // what if nc == YOIX_EOF
             chars_written += nc;
         return(nc);
     }
@@ -2694,7 +2694,7 @@ class YoixBodyStream extends YoixPointerActive
             }
         }
 
-        chars_written += nc;		// can nc be negative??
+        chars_written += nc;        // can nc be negative??
         return(nc);
     }
 
@@ -2722,7 +2722,7 @@ class YoixBodyStream extends YoixPointerActive
                     VM.abort(EXCEPTION, T_ZIPENTRY + ": " + e.getMessage());
                 }
             } else VM.abort(BADVALUE, new String[] {T_ZIPENTRY + ".name"});
-        } else VM.abort(INVALIDACCESS);		// don't like this error!!!
+        } else VM.abort(INVALIDACCESS);        // don't like this error!!!
     }
 
 

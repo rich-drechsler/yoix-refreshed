@@ -168,7 +168,7 @@ class YoixSwingJTextCanvas extends YoixSwingJTextComponent
             clip = g.getClip();
             font = g.getFont();
             g.translate(-viewport.x, -viewport.y);
-            g.clipRect(x, y, width, height);		// recent change
+            g.clipRect(x, y, width, height);        // recent change
             g.setFont(getFont());
             g.setColor(getForeground());
             last = Math.min((y + height)/cellsize.height, lines.length - 1);

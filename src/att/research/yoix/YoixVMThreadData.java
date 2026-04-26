@@ -93,7 +93,7 @@ class YoixVMThreadData
             if (thread == Thread.currentThread())
                 str += "RUNNING";
             else str += (thread.isAlive()) ? "WAITING" : "STOPPED";
-        } else str = "???, DEAD";	// can this happen??
+        } else str = "???, DEAD";        // can this happen??
 
         return("<" + str + ">");
     }

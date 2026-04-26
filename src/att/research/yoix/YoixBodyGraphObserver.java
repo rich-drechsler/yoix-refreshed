@@ -138,7 +138,7 @@ class YoixBodyGraphObserver extends YoixPointerActive
                     obj = null;
                     break;
             }
-        } else obj = null;		// not quite!!
+        } else obj = null;        // not quite!!
 
         return(obj);
     }

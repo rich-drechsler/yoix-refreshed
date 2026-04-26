@@ -70,7 +70,7 @@ class SimpleNode
     SimpleNode(int type) {
 
         this.type = (short)type;
-        this.value = new Object[0];	// we guarantee it's never null
+        this.value = new Object[0];        // we guarantee it's never null
     }
 
 
@@ -96,7 +96,7 @@ class SimpleNode
         //
 
         this.type = (short)type;
-        this.value = new Object[0];	// we guarantee it's never null
+        this.value = new Object[0];        // we guarantee it's never null
     }
 
 
@@ -277,7 +277,7 @@ class SimpleNode
             value = copy;
         }
 
-        value[index] = (SimpleNode)node;	// make sure???
+        value[index] = (SimpleNode)node;        // make sure???
     }
 
 

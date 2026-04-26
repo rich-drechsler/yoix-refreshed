@@ -463,7 +463,7 @@ class YoixBodyCipher extends YoixPointerActive
         } else if (obj instanceof Date) {
             tm = ((Date)obj).getTime();
             yobj = YoixObject.newDouble(((double)(tm))/1000.0);
-        } else if (obj instanceof List) {	// ends up not being used (so far)
+        } else if (obj instanceof List) {        // ends up not being used (so far)
             objs = ((List)obj).toArray();
             if (objs != null) {
                 yobj = YoixObject.newArray(objs.length);

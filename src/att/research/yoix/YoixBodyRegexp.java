@@ -94,7 +94,7 @@ class YoixBodyRegexp extends YoixPointerActive
         if (regexp == null) {
             pat = data.getString(N_PATTERN, null);
             flags = data.getInt(N_TYPE, SINGLE_BYTE);
-            if ((regexp = new YoixRERegexp(pat, flags)) == null)	// impossible??
+            if ((regexp = new YoixRERegexp(pat, flags)) == null)        // impossible??
                 VM.abort(BADVALUE, N_PATTERN);
         }
 

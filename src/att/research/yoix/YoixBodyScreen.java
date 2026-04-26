@@ -235,7 +235,7 @@ class YoixBodyScreen extends YoixPointerActive
             // instead of 1.0.
             //
 
-            delta = 1.000000000000001 - (1/scale)*scale;	// may be too tight??
+            delta = 1.000000000000001 - (1/scale)*scale;        // may be too tight??
             dict.put(N_PIXELWIDTH, YoixObject.newDouble(1/scale + delta));
             dict.put(N_PIXELHEIGHT, YoixObject.newDouble(1/scale + delta));
 
@@ -398,7 +398,7 @@ class YoixBodyScreen extends YoixPointerActive
         int         index;
 
         dict = YoixObject.newDictionary(0, -1);
-        index = pickScreenIndex(data.getInt(N_INDEX));		// force index into bounds
+        index = pickScreenIndex(data.getInt(N_INDEX));        // force index into bounds
         key = new Integer(index);
 
         if (screendata.containsKey(key))
@@ -601,7 +601,7 @@ class YoixBodyScreen extends YoixPointerActive
         if (screenindex < 0) {
             if ((index = pickScreenIndex(obj.intValue())) >= 0) {
                 if ((gds = YoixMisc.getScreenDevices()) != null) {
-                    if (index < gds.length) {	// tiny chance this is needed
+                    if (index < gds.length) {        // tiny chance this is needed
                         key = new Integer(index);
                         if (screenmap.containsKey(key) == false) {
                             if (index > 0) {
@@ -613,7 +613,7 @@ class YoixBodyScreen extends YoixPointerActive
                                     }
                                 }
                             } else {
-                                screenmap.put(key, gds[0].getIDstring());	// we guarantee this
+                                screenmap.put(key, gds[0].getIDstring());        // we guarantee this
                                 screendata.put(key, data);
                             }
                         }

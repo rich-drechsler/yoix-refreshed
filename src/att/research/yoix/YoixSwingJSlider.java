@@ -174,8 +174,8 @@ class YoixSwingJSlider extends JSlider
         BoundedRangeModel  m = getModel();
         int                gap;
         int                direction;
-        int                incr = unitincrement;	// snapshot
-        int                tgap = tickgap;		// snapshot
+        int                incr = unitincrement;        // snapshot
+        int                tgap = tickgap;              // snapshot
         int                oldValue;
 
         //

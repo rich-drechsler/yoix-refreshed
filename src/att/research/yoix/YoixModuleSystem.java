@@ -821,7 +821,7 @@ class YoixModuleSystem extends YoixModule
             if (arg.length == 0 || arg[0].isNull()) {
                 try {
                     env = System.getenv();
-                    obj = YoixObject.newDictionary(env.size(), -1);		// let user to grow it
+                    obj = YoixObject.newDictionary(env.size(), -1);        // let user to grow it
                     keys = env.keySet().iterator();
                     while (keys.hasNext()) {
                         if ((name = (String)keys.next()) == null)
@@ -912,7 +912,7 @@ class YoixModuleSystem extends YoixModule
             if (arg.length == 1) {
                 if (arg[0].isString()) {
                     prefix = arg[0].stringValue();
-                    prop = (Properties)prop.clone();	// required!!
+                    prop = (Properties)prop.clone();        // required!!
                     for (enm = prop.keys(); enm.hasMoreElements(); ) {
                         key = enm.nextElement();
                         if (key.toString().startsWith(prefix) == false)

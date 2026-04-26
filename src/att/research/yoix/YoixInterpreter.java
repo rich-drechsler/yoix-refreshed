@@ -59,7 +59,7 @@ class YoixInterpreter
                 break;
 
             default:
-                bool = obj.isEmpty();		// used by for statements
+                bool = obj.isEmpty();        // used by for statements
                 break;
         }
 
@@ -1602,7 +1602,7 @@ class YoixInterpreter
         lval = YoixBodyBlock.newDvalue(name);
         params = node.getChild(index++);
         tree = node.getChild(index++);
-        argc = params.length() + 1;	// add one for name
+        argc = params.length() + 1;        // add one for name
 
         names = YoixObject.newDictionary(argc - 1);
         values = YoixObject.newArray(argc);
@@ -1690,7 +1690,7 @@ class YoixInterpreter
         integers = 0;
 
         for (n = 0; n < length; n++) {
-            stack.pushMark();		// unnecessary - investigate later??
+            stack.pushMark();        // unnecessary - investigate later??
             stmt = node.getChild(n).getTaggedNode();
             switch (stmt.type()) {
                 case CASE:
@@ -1727,7 +1727,7 @@ class YoixInterpreter
         if (integers == count) {
             total = ends[1] - ends[0] + 1;
             holes = total - count;
-            if (holes < 32) {		// probably should be tunable
+            if (holes < 32) {        // probably should be tunable
                 //
                 // Can't eliminate storing indices in the new table that
                 // we build because code that uses this table might have
@@ -1939,7 +1939,7 @@ class YoixInterpreter
                 lvalue(node.getChild(count++), stack);
                 if (stack.peekYoixObject().canResolve())
                     stack.peekYoixObject().setResolve(false);
-                else VM.abort(UNDEFINEDRESULT);		// parser should catch this??
+                else VM.abort(UNDEFINEDRESULT);        // parser should catch this??
                 break;
 
             case INDIRECTION:
@@ -2035,14 +2035,14 @@ class YoixInterpreter
                     bodymode = L___ | (dest.getAccessBody() & ~_W_);
                     break;
 
-                case LOCKED:		//  parser may be ignoring this one
+                case LOCKED:        //  parser may be ignoring this one
                     destmode = L___ | dest.getAccess();
                     bodymode = L___ | dest.getAccessBody();
                     break;
 
                 default:
                     VM.abort(UNIMPLEMENTED);
-                    destmode = dest.getAccess();	// for the compiler
+                    destmode = dest.getAccess();        // for the compiler
                     bodymode = dest.getAccessBody();
                     break;
             }
@@ -2093,7 +2093,7 @@ class YoixInterpreter
                         expression(node.getChild0(), stack);
                         if (VM.bitCheck(N_DEBUG, DEBUG_EXPRESSION))
                             VM.print(N_STDOUT, stack.popRvalue());
-                        else stack.removeRvalue();		// force error message??
+                        else stack.removeRvalue();        // force error message??
                         break;
 
                     case FINALLY:
@@ -2270,7 +2270,7 @@ class YoixInterpreter
                     else continuing = true;
                 }
             } while (continuing);
-            stack.popBreak();		// should also clear CONTINUE
+            stack.popBreak();        // should also clear CONTINUE
         }
         catch(YoixError e) {
             if (break_point != e)
@@ -2333,7 +2333,7 @@ class YoixInterpreter
                     continuing = true;
                 }
             } while (continuing);
-            stack.popBreak();		// should also clear CONTINUE
+            stack.popBreak();        // should also clear CONTINUE
         }
         catch(YoixError e) {
             if (break_point != e)
@@ -2404,7 +2404,7 @@ class YoixInterpreter
                         lval.incrementLvalue(incr);
                     }
                 } while (continuing);
-                stack.popBreak();		// should also clear CONTINUE
+                stack.popBreak();        // should also clear CONTINUE
             }
             catch(YoixError e) {
                 if (break_point != e)
@@ -2540,7 +2540,7 @@ class YoixInterpreter
         }
 
         if (lval.compound()) {
-            if (lval.canReadBody()) {		// belongs somewhere else
+            if (lval.canReadBody()) {        // belongs somewhere else
                 if ((length = node.length()) > 0) {
                     switch (type) {
                         case GLOBALBLOCK:
@@ -2569,7 +2569,7 @@ class YoixInterpreter
                                 }
                                 catch(YoixError e) {
                                     if (e == return_point)
-                                        stack.popRvalue();		// unused return value
+                                        stack.popRvalue();        // unused return value
                                     else throw(e);
                                 }
                                 stack.popError();
@@ -2659,7 +2659,7 @@ class YoixInterpreter
     statementSynchronized(SimpleNode node, YoixStack stack) {
 
         YoixObject  expr;
-        boolean	    debugging;
+        boolean     debugging;
         String      info;
 
         //
@@ -2805,7 +2805,7 @@ class YoixInterpreter
                                 stack.jumpToError(details);
                         }
                     }
-                } else throw(e);		// can this happen??
+                } else throw(e);        // can this happen??
             }
             catch(SecurityException e) {
                 stack.popError();
@@ -2855,7 +2855,7 @@ class YoixInterpreter
 
         name = node.getChild0().stringValue();
         params = node.getChild1();
-        argc = params.length() + 1;	// add one for name
+        argc = params.length() + 1;        // add one for name
         names = YoixObject.newDictionary(argc - 1);
         values = YoixObject.newArray(argc);
         values.put(0, YoixObject.newStringConstant(name), false);
@@ -2907,7 +2907,7 @@ class YoixInterpreter
                     else continuing = true;
                 }
             } while (continuing);
-            stack.popBreak();		// should also clear CONTINUE
+            stack.popBreak();        // should also clear CONTINUE
         }
         catch(YoixError e) {
             if (break_point != e)

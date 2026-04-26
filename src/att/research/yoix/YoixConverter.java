@@ -33,7 +33,7 @@ class YoixConverter
     static Hashtable  converters = new Hashtable();
     static Class      byte_array = (new byte[1]).getClass();
     static Class      char_array = (new char[1]).getClass();
-    static byte       BE_BOM[] = {(byte)0xFE, (byte)0xFF};	// a big endian mark
+    static byte       BE_BOM[] = {(byte)0xFE, (byte)0xFF};        // a big endian mark
     static Class      cbfe_handle = null;
     static Class      mie_handle = null;
     static Class      uce_handle = null;
@@ -87,7 +87,7 @@ class YoixConverter
     private static HashMap  encodingmap = new HashMap();
 
     static {
-        encodingmap.put("ISO-8859-1", "ISO-8859-1");	// for underscore mapping
+        encodingmap.put("ISO-8859-1", "ISO-8859-1");       // for underscore mapping
         encodingmap.put("ISO8859-1", "ISO-8859-1");
         encodingmap.put("8859-1", "ISO-8859-1");
         encodingmap.put("ISO-LATIN-1", "ISO-8859-1");
@@ -95,19 +95,19 @@ class YoixConverter
         encodingmap.put("LATIN-1", "ISO-8859-1");
         encodingmap.put("LATIN1", "ISO-8859-1");
 
-        encodingmap.put("UTF-8", "UTF-8");		// for underscore mapping
+        encodingmap.put("UTF-8", "UTF-8");                 // for underscore mapping
         encodingmap.put("UTF8", "UTF-8");
 
-        encodingmap.put("UTF-16", "UTF-16");		// for underscore mapping
+        encodingmap.put("UTF-16", "UTF-16");               // for underscore mapping
         encodingmap.put("UTF16", "UTF-16");
 
-        encodingmap.put("UTF-16BE", "UTF-16BE");	// for underscore mapping
+        encodingmap.put("UTF-16BE", "UTF-16BE");           // for underscore mapping
         encodingmap.put("UTF16BE", "UTF-16BE");
 
-        encodingmap.put("UTF-16LE", "UTF-16LE");	// for underscore mapping
+        encodingmap.put("UTF-16LE", "UTF-16LE");           // for underscore mapping
         encodingmap.put("UTF16LE", "UTF-16LE");
 
-        encodingmap.put("US-ASCII", "US-ASCII");	// for underscore mapping
+        encodingmap.put("US-ASCII", "US-ASCII");           // for underscore mapping
         encodingmap.put("USASCII", "US-ASCII");
         encodingmap.put("ASCII", "US-ASCII");
     }
@@ -118,7 +118,7 @@ class YoixConverter
     private static String  utf_16be_encoding = null;
     private static String  utf_16le_encoding = null;
     private static String  usascii_encoding = null;
-    private static String  fileEncodingPkg = "sun.io";		// may be reset
+    private static String  fileEncodingPkg = "sun.io";        // may be reset
 
     static {
         //
@@ -256,7 +256,7 @@ class YoixConverter
                         if (Charset.isSupported(name))
                             value = name;
                     }
-                } else value = (Charset.forName(name)).name();	// get canonical name
+                } else value = (Charset.forName(name)).name();        // get canonical name
             }
         }
         catch(Exception e) {}
@@ -426,7 +426,7 @@ class YoixConverter
                     VM.caughtException(e, false);
                 }
                 catch(InvocationTargetException e) {
-                    VM.caughtException(e, false);	// was e.getTargetException()
+                    VM.caughtException(e, false);        // was e.getTargetException()
                 }
 
                 cset.maxBytesPerChar = maxBytesPerChar; // initialize
@@ -441,7 +441,7 @@ class YoixConverter
                     VM.caughtException(e, false);
                 }
                 catch(InvocationTargetException e) {
-                    VM.caughtException(e, false);	// was e.getTargetException()
+                    VM.caughtException(e, false);        // was e.getTargetException()
                 }
 
                 converters.put(encoding, cset);

@@ -364,7 +364,7 @@ class YoixDragManager
                     dy = -size.height - dragpadding;
                     break;
 
-                case YOIX_CENTER:	// often doesn't make much sense
+                case YOIX_CENTER:        // often doesn't make much sense
                     dx = -size.width/2;
                     dy = -size.height/2;
                     break;
@@ -396,7 +396,7 @@ class YoixDragManager
             dragwindow.setLocation(point.x + dragoffset.x, point.y + dragoffset.y);
             if (dragwindow.isVisible() == false)
                 dragwindow.setVisible(true);
-            dragwindow.toFront();		// unnecessary??
+            dragwindow.toFront();        // unnecessary??
             if ((++dragcounter%5) == 0)
                 Thread.yield();
             dragpoint = point;
@@ -456,7 +456,7 @@ class YoixDragManager
                         if (dragpoint == null) {
                             dragpoint = ((MouseEvent)draginputevent).getPoint();
                             source = draginputevent.getSource();
-                            if (source instanceof Component) {	// unnecessary test?
+                            if (source instanceof Component) {        // unnecessary test?
                                 corner = ((Component)source).getLocationOnScreen();
                                 dragpoint.translate(corner.x, corner.y);
                             }
@@ -473,7 +473,7 @@ class YoixDragManager
                             );
                         }
                     }
-                    dragmodel = 0;	// so we don't do this again
+                    dragmodel = 0;        // so we don't do this again
                     dragbounds = null;
                 } else dragpoint = point;
             } else {
@@ -499,7 +499,7 @@ class YoixDragManager
             if (transferable.notNull()) {
                 cursor = owner.setDragCursor(event.getObject(N_CURSOR));
                 if ((image = dragimage) != null) {
-                    if ((offset = dragoffset) == null)	// won't happen
+                    if ((offset = dragoffset) == null)        // won't happen
                         offset = new Point(0, 0);
                 } else {
                     //

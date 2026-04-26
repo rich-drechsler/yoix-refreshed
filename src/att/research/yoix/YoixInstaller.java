@@ -441,7 +441,7 @@ class YoixInstaller extends ClassLoader
                     entry = new byte[size];
                     while ((count = input.read(entry, total, size - total)) > 0)
                         total += count;
-                } else {		// this is required!!
+                } else {        // this is required!!
                     if (block == null)
                         block = new byte[blocksize];
                     entry = new byte[0];

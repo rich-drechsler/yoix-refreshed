@@ -125,7 +125,7 @@ class YoixBodyParseTree extends YoixPointerActive
                 break;
 
             default:
-                obj = null;	// tells caller builtin isn't in this class
+                obj = null;        // tells caller builtin isn't in this class
                 break;
         }
         return(obj);
@@ -535,7 +535,7 @@ class YoixBodyParseTree extends YoixPointerActive
                     }
                     break;
 
-                default:	 // PARSER_YOIX
+                default:        // PARSER_YOIX
                     switch (tree.type()) {
                         case NAME:
                             obj = YoixObject.newString(tree.stringValue());

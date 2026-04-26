@@ -42,7 +42,7 @@ class YoixUtilHashtable extends Hashtable
 
     YoixUtilHashtable(int capacity) {
 
-        super(Math.max(capacity, 1));		// can't ask for capacity <= 0
+        super(Math.max(capacity, 1));        // can't ask for capacity <= 0
     }
 
     ///////////////////////////////////
@@ -98,7 +98,7 @@ class YoixUtilHashtable extends Hashtable
         Object  value;
 
         if ((value = get(new YoixHashtableObject(key))) != null) {
-            if (value instanceof YoixHashtableObject)	// probably unnecessary
+            if (value instanceof YoixHashtableObject)        // probably unnecessary
                 value = ((YoixHashtableObject)value).data;
             else value = null;
         }
@@ -226,7 +226,7 @@ class YoixUtilHashtable extends Hashtable
         Object  prev;
 
         if ((prev = put(new YoixHashtableObject(key), new YoixHashtableObject(value))) != null) {
-            if (prev instanceof YoixHashtableObject)	// probably unnecessary
+            if (prev instanceof YoixHashtableObject)        // probably unnecessary
                 prev = ((YoixHashtableObject)prev).data;
             else prev = null;
         }

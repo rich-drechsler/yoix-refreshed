@@ -195,7 +195,7 @@ class YoixModuleJFC extends YoixModule
                     if ((bit = ybc.getListenerBit(name)) != 0) {
                         if (bit == YoixBodyComponent.DROPTARGETLISTENER) {
                             argv = new YoixObject[] {YoixMake.yoixType(T_DROPTARGETEVENT)};
-                            if (!arg[2].callable(argv))	// extra checking
+                            if (!arg[2].callable(argv))        // extra checking
                                 VM.badArgument(2);
                         }
                         data = ybc.getData();
@@ -448,13 +448,13 @@ class YoixModuleJFC extends YoixModule
                                     use_adobe = arg[4].booleanValue();
                                 else VM.badArgument(4);
                             }
-                            if (use_adobe) {	// from Adobe's PostScript Language Reference Manual
+                            if (use_adobe) {        // from Adobe's PostScript Language Reference Manual
                                 color = new Color(
                                     1.0f - Math.min(1.0f, cyan + black),
                                     1.0f - Math.min(1.0f, magenta + black),
                                     1.0f - Math.min(1.0f, yellow + black)
                                 );
-                            } else {		// from wikipedia.org (CMYK entry) or comp.graphics FAQ
+                            } else {        // from wikipedia.org (CMYK entry) or comp.graphics FAQ
                                 color = new Color(
                                     1.0f - Math.min(1.0f, cyan*(1.0f - black) + black),
                                     1.0f - Math.min(1.0f, magenta*(1.0f - black) + black),
@@ -571,10 +571,10 @@ class YoixModuleJFC extends YoixModule
         if (arg.length == 1 || arg.length == 2) {
             if (arg[0].isComponent() || arg[0].isNull()) {
                 if (arg[0].notNull()) {
-                    if ((root = arg[0].getObject(N_ROOT)) != null) {	// unnecessary test
+                    if ((root = arg[0].getObject(N_ROOT)) != null) {        // unnecessary test
                         if (arg.length == 1 || arg[1].isComponent()) {
                             if (root.notNull()) {
-                                if ((container = (Container)root.getManagedObject()) != null) {	// unnecessary test
+                                if ((container = (Container)root.getManagedObject()) != null) {        // unnecessary test
                                     if ((policy = container.getFocusTraversalPolicy()) != null) {
                                         complement = (arg.length > 1) ? (Component)arg[1].getManagedObject() : null;
                                         visited = new HashMap();
@@ -616,10 +616,10 @@ class YoixModuleJFC extends YoixModule
         if (arg.length == 1 || arg.length == 2) {
             if (arg[0].isComponent() || arg[0].isNull()) {
                 if (arg[0].notNull()) {
-                    if ((root = arg[0].getObject(N_ROOT)) != null) {	// unnecessary test
+                    if ((root = arg[0].getObject(N_ROOT)) != null) {        // unnecessary test
                         if (arg.length == 1 || arg[1].isComponent()) {
                             if (root.notNull()) {
-                                if ((container = (Container)root.getManagedObject()) != null) {	// unnecessary test
+                                if ((container = (Container)root.getManagedObject()) != null) {        // unnecessary test
                                     if ((policy = container.getFocusTraversalPolicy()) != null) {
                                         complement = (arg.length > 1) ? (Component)arg[1].getManagedObject() : null;
                                         visited = new HashMap();
@@ -1108,11 +1108,11 @@ class YoixModuleJFC extends YoixModule
         //
         // Doing something like,
         //
-        //	e = new YoixAWTInvocationEvent(event, arg[1])
+        //     e = new YoixAWTInvocationEvent(event, arg[1])
         //
         // or maybe
         //
-        //	e = new YoixAWTInvocationEvent(event.duplicate(), arg[1])
+        //     e = new YoixAWTInvocationEvent(event.duplicate(), arg[1])
         //
         // instead of calling javaAWTEvent() might be worth investigating.
         // One reason this isn't completely correct right now is because a

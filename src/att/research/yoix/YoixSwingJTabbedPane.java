@@ -47,12 +47,12 @@ class YoixSwingJTabbedPane extends JTabbedPane
 
     private int  sizecontrol = 0;
 
-    private int      model_minsize = 0;			// bits 0 to 3
-    private int      model_preferredsize = 0;		// bits 4 to 7
-    private boolean  lockminsize_flag = false;		// bit 8
-    private boolean  lockpreferredsize_flag = false;	// bit 9
-    private int      alternate_width = 0;		// bits 12 to 21
-    private int      alternate_height = 0;		// bits 22 to 31
+    private int      model_minsize = 0;                 // bits 0 to 3
+    private int      model_preferredsize = 0;           // bits 4 to 7
+    private boolean  lockminsize_flag = false;          // bit 8
+    private boolean  lockpreferredsize_flag = false;    // bit 9
+    private int      alternate_width = 0;               // bits 12 to 21
+    private int      alternate_height = 0;              // bits 22 to 31
 
     //
     // These are used to remember the last component in each tab that
@@ -73,8 +73,8 @@ class YoixSwingJTabbedPane extends JTabbedPane
     private Component  lastfocused = null;
     private boolean    trackfocus = false;
     private boolean    mousepressed = false;
-    private HashMap    focusowners;		// for each tab
-    private HashMap    tabmap;			// maps component to tab
+    private HashMap    focusowners;             // for each tab
+    private HashMap    tabmap;                  // maps component to tab
 
     ///////////////////////////////////
     //
@@ -632,7 +632,7 @@ class YoixSwingJTabbedPane extends JTabbedPane
             for (n = 0; n < count; n++) {
                 if ((tab = getComponentAt(n)) != null) {
                     if (SwingUtilities.isDescendingFrom(comp, tab)) {
-                        if (focusowners.containsKey(tab) == false)	// unnecessary
+                        if (focusowners.containsKey(tab) == false)        // unnecessary
                             focusowners.put(tab, null);
                         addFocusListenersTo(tab, tab);
                     }

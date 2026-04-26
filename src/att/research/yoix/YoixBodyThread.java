@@ -167,7 +167,7 @@ class YoixBodyThread extends YoixPointerActive
         catch(IllegalThreadStateException e) {
             stopThread();
         }
-        this.runner = runner;		// recent change - 12/28/02
+        this.runner = runner;        // recent change - 12/28/02
         setFixedSize();
         setPermissions(permissions3);
     }
@@ -193,7 +193,7 @@ class YoixBodyThread extends YoixPointerActive
     public final void
     kill() {
 
-        stopThread();		// check that it's the currentThread()??
+        stopThread();        // check that it's the currentThread()??
     }
 
     ///////////////////////////////////
@@ -221,7 +221,7 @@ class YoixBodyThread extends YoixPointerActive
                         }
                     }
                     if (command != null) {
-                        Thread.interrupted();	// just to clear interrupted state!!!
+                        Thread.interrupted();        // just to clear interrupted state!!!
                         call(command);
                     }
                 }
@@ -396,7 +396,7 @@ class YoixBodyThread extends YoixPointerActive
         int          count = 0;
 
         if (all == false) {
-            active = (Hashtable)activethreads.clone();		// just to be safe
+            active = (Hashtable)activethreads.clone();        // just to be safe
             for (enm = active.elements(); enm.hasMoreElements(); ) {
                 if ((element = enm.nextElement()) != null) {
                     if (((YoixBodyThread)element).isDaemon() == false)
@@ -701,7 +701,7 @@ class YoixBodyThread extends YoixPointerActive
                     } else arg = new YoixObject[] {run};
                     queue.insertElementAt(arg, 0);
                 }
-                data.putInt(N_ALIVE, true);	// must preceed start()!
+                data.putInt(N_ALIVE, true);        // must preceed start()!
                 thread.start();
             }
             catch(IllegalThreadStateException e) {

@@ -106,7 +106,7 @@ class YoixBodyMatrix extends YoixPointerActive
         if (obj.elements != null) {
             obj.elements = new double[elements.length];
             System.arraycopy(elements, 0, obj.elements, 0, elements.length);
-            obj.flags = RWX;		// cheating - sort of
+            obj.flags = RWX;        // cheating - sort of
         }
 
         return(obj);
@@ -180,7 +180,7 @@ class YoixBodyMatrix extends YoixPointerActive
             return(dtransform(dx, dy, elements));
         else VM.abort(INVALIDACCESS);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -344,7 +344,7 @@ class YoixBodyMatrix extends YoixPointerActive
             return(dtransform(dx, dy, invert(elements)));
         else VM.abort(INVALIDACCESS);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -373,7 +373,7 @@ class YoixBodyMatrix extends YoixPointerActive
             return(transform(coords, invert(elements)));
         else VM.abort(INVALIDACCESS);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -384,7 +384,7 @@ class YoixBodyMatrix extends YoixPointerActive
             return(transform(x, y, invert(elements)));
         else VM.abort(INVALIDACCESS);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -536,7 +536,7 @@ class YoixBodyMatrix extends YoixPointerActive
             return(transform(coords, elements));
         else VM.abort(INVALIDACCESS);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -547,7 +547,7 @@ class YoixBodyMatrix extends YoixPointerActive
             return(transform(x, y, elements));
         else VM.abort(INVALIDACCESS);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -989,7 +989,7 @@ class YoixBodyMatrix extends YoixPointerActive
             });
         } else VM.abort(BADMATRIX);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -1006,7 +1006,7 @@ class YoixBodyMatrix extends YoixPointerActive
             return(new double[] {1.0, 0.0, 0.0, 1.0, 0.0, 0.0});
         } else VM.abort(BADMATRIX);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -1035,7 +1035,7 @@ class YoixBodyMatrix extends YoixPointerActive
             } else VM.abort(UNDEFINEDRESULT);
         } else VM.abort(BADMATRIX);
 
-        return(null);		// not reached
+        return(null);        // not reached
     }
 
 
@@ -1052,7 +1052,7 @@ class YoixBodyMatrix extends YoixPointerActive
         double  sin;
         double  cos;
 
-        angle = (angle * Math.PI)/180.0;	// degrees to radians??
+        angle = (angle * Math.PI)/180.0;        // degrees to radians??
         sin = Math.sin(angle);
         cos = Math.cos(angle);
 

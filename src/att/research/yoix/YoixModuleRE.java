@@ -102,7 +102,7 @@ class YoixModuleRE extends YoixModule
                             // in an infinite loop if we don't break.
                             //
                             if (subexp.getSpAt(0) == subexp.getEpAt(0)) {
-                                if (subexp.getSpAt(0) != 0)	// it's already in result
+                                if (subexp.getSpAt(0) != 0)        // it's already in result
                                     remainder = "";
                                 break;
                             } else remainder = subexp.getSource().substring(subexp.getEpAt(0));
@@ -157,7 +157,7 @@ class YoixModuleRE extends YoixModule
                             // in an infinite loop if we don't break.
                             //
                             if (subexp.getSpAt(0) == subexp.getEpAt(0)) {
-                                if (subexp.getSpAt(0) != 0)	// it's already in result
+                                if (subexp.getSpAt(0) != 0)        // it's already in result
                                     remainder = "";
                                 break;
                             } else remainder = subexp.getSource().substring(subexp.getEpAt(0));

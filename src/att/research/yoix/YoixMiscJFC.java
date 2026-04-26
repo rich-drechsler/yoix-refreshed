@@ -425,7 +425,7 @@ class YoixMiscJFC
                     shift = currentmatrix.dtransform(dx, dy);
                     delta = new Point((int)Math.round(shift[0]), (int)Math.round(shift[1]));
                     if (delta.x != 0 || delta.y != 0) {
-                        if (width > 0 && height > 0) {		// somewhat questionable criterion
+                        if (width > 0 && height > 0) {        // somewhat questionable criterion
                             sourcepath = (YoixBodyPath)YoixMake.yoixType(T_PATH).body();
                             sourcepath.setOwner((YoixBodyGraphics)graphics.body());
                             sourcepath.pathAlignedRectangle(x, y, width, height);
@@ -501,7 +501,7 @@ class YoixMiscJFC
                                     Math.min(source.x + source.width, bounds.x + bounds.width) + delta.x, source.y + delta.y,
                                     -delta.x, source.height
                                 ).intersection(bounds);
-                            } else {	// just makes the compiler happy
+                            } else {        // just makes the compiler happy
                                 hrect = new Rectangle();
                                 vrect = new Rectangle();
                             }
@@ -756,7 +756,7 @@ class YoixMiscJFC
             g.dispose();
             image = null;
         }
-        return(bottom - top);		// was return(bottom - top + 1)
+        return(bottom - top);        // was return(bottom - top + 1)
     }
 
 
@@ -789,7 +789,7 @@ class YoixMiscJFC
         //
 
         if (comp != null) {
-            if (comp.isOpaque()) {		// test added on 1/17/06
+            if (comp.isOpaque()) {        // test added on 1/17/06
                 if ((rect = g.getClipBounds()) == null)
                     rect = new Rectangle(comp.getSize());
                 if (rect != null) {
@@ -948,25 +948,25 @@ class YoixMiscJFC
         //
 
         switch (VM.getInt(N_BUTTONMODEL)) {
-            case 0:		// raw model - for everyone
+            case 0:        // raw model - for everyone
             default:
                 break;
 
-            case 1:		// raw model - except for Mac
+            case 1:        // raw model - except for Mac
                 if (ISMAC && (modifiers & SECOND_BUTTON_MASK) == SECOND_BUTTON_MASK) {
                     modifiers &= ~SECOND_BUTTON_MASK;
                     modifiers |= YOIX_BUTTON3_MASK;
                 }
                 break;
 
-            case 2:		// map button 2 to button 3
+            case 2:        // map button 2 to button 3
                 if ((modifiers & YOIX_BUTTON_MASK) == YOIX_BUTTON2_MASK) {
                     modifiers &= ~YOIX_BUTTON2_MASK;
                     modifiers |= YOIX_BUTTON3_MASK;
                 }
                 break;
 
-            case 3:		// combines models 1 and 2
+            case 3:        // combines models 1 and 2
                 if (ISMAC && (modifiers & SECOND_BUTTON_MASK) == SECOND_BUTTON_MASK) {
                     modifiers &= ~SECOND_BUTTON_MASK;
                     modifiers |= YOIX_BUTTON3_MASK;

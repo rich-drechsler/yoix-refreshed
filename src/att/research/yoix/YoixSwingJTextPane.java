@@ -541,9 +541,9 @@ class YoixSwingJTextPane extends JTextPane
             highlighter = getHighlighter();
             highlighter.removeAllHighlights();
             if (oldcaret != null) {
-                dot = oldcaret.getDot();	// just in case
+                dot = oldcaret.getDot();        // just in case
                 setCaret(newcaret);
-                newcaret.setDot(dot);		// must follow setCaret()
+                newcaret.setDot(dot);        // must follow setCaret()
             } else setCaret(newcaret);
             repaint();
         }

@@ -251,7 +251,7 @@ class YoixVM extends YoixVMClipboard
 
         try {
             status = setShutdown(status);
-            if (Thread.currentThread() instanceof YoixVMShutdownThread) {	// prevents deadlock
+            if (Thread.currentThread() instanceof YoixVMShutdownThread) {        // prevents deadlock
                 YoixBodyProcess.atExit();
                 YoixBodyStream.atExit();
                 YoixBodySocket.atExit();
@@ -292,7 +292,7 @@ class YoixVM extends YoixVMClipboard
         //
 
         if (defaultmatrix == null)
-            defaultmatrix = vmGet(N_DEFAULTMATRIX);	// triggers buildScreen()
+            defaultmatrix = vmGet(N_DEFAULTMATRIX);        // triggers buildScreen()
         return(defaultmatrix);
     }
 
@@ -679,7 +679,7 @@ class YoixVM extends YoixVMClipboard
         int  exitmodel = getInt(N_EXITMODEL);
 
         if (mainvm != null) {
-            if (mainvm.defined(N_EXITMODEL))	// should be unnecessary
+            if (mainvm.defined(N_EXITMODEL))        // should be unnecessary
                 exitmodel = mainvm.getInt(N_EXITMODEL, exitmodel);
         }
         return(exitmodel);
@@ -781,7 +781,7 @@ class YoixVM extends YoixVMClipboard
         //
 
         if ((dict = YoixBodyBlock.getTypedict()) == null) {
-            if ((dict = typedict) == null)	// only if we're still booting
+            if ((dict = typedict) == null)        // only if we're still booting
                 dict = (YoixObject)loaded.get(N_TYPEDICT);
         }
 
@@ -1046,7 +1046,7 @@ class YoixVM extends YoixVMClipboard
         if (dict != null) {
             dict.setAccessBody(RORO >>> 8);
             dict.setMode(RORO);
-            dict.setGrowable(false);		// overkill??
+            dict.setGrowable(false);        // overkill??
         }
         return(dict);
     }
@@ -1064,7 +1064,7 @@ class YoixVM extends YoixVMClipboard
 
         if ((obj = YoixBodyBlock.getVM()) == null) {
             obj = vm.duplicate();
-            if (mainvm == null)		// first call and we're main thread
+            if (mainvm == null)        // first call and we're main thread
                 mainvm = obj;
         } else obj = obj.duplicate();
 
@@ -1456,7 +1456,7 @@ class YoixVM extends YoixVMClipboard
         //
 
         if (vmstate == INITIALIZING)
-            usermodules &= state;	// never on once off
+            usermodules &= state;        // never on once off
     }
 
 
@@ -1588,7 +1588,7 @@ class YoixVM extends YoixVMClipboard
             // that in turn assumes fontscale is properly initialized. If
             // you remove N_UIMANAGER from defaultscreen then you should add
             //
-            //		YoixBodyUIManager.updateUIManager();
+            //     YoixBodyUIManager.updateUIManager();
             //
             // to trigger the UIMananger font scaling, which is important
             // on Linux or whenever font scaling has been requested using
@@ -1828,7 +1828,7 @@ class YoixVM extends YoixVMClipboard
             } else dest = source;
             if (dest != null) {
                 lval = YoixObject.newLvalue(dest, name);
-                lval.setResolve(true);		// only for expression()
+                lval.setResolve(true);        // only for expression()
                 if (lvalues != null)
                     lvalues.put(name, lval);
             } else die(INTERNALERROR, name);
@@ -1850,7 +1850,7 @@ class YoixVM extends YoixVMClipboard
 
         Object  stream;
 
-        if (vmstate <= BOOTING) {	// still initializing or booting
+        if (vmstate <= BOOTING) {        // still initializing or booting
             if (name == N_STDIN)
                 stream = System.in;
             else if (name == N_STDOUT)

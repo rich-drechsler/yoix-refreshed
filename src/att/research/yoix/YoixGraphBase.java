@@ -43,7 +43,7 @@ class YoixGraphBase
     boolean  loaded = false;
     Color    color = Color.white;
     Font     font = null;
-    int      marker = -1;		// used to avoid double visits
+    int      marker = -1;        // used to avoid double visits
 
     //
     // Low level stuff filled when loading

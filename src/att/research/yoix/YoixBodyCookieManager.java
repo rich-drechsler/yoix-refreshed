@@ -200,7 +200,7 @@ class YoixBodyCookieManager extends YoixPointerActive
                     //
                     if ((store = cookieManagerGetCookieStore(manager)) != null) {
                         try {
-                            uri = new URI("");		// sufficient when there's a domain
+                            uri = new URI("");        // sufficient when there's a domain
                             for (index = 0; index < cookies.size(); index++) {
                                 if ((cookie = cookies.get(index)) != null) {
                                     if (httpCookieGetDomain(cookie) != null) {
@@ -211,7 +211,7 @@ class YoixBodyCookieManager extends YoixPointerActive
                                 }
                             }
                         }
-                        catch(URISyntaxException e) {}		// won't happen
+                        catch(URISyntaxException e) {}        // won't happen
                     }
                 }
             }

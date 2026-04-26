@@ -39,7 +39,7 @@ class YoixVMShutdownThread extends YoixThread
     YoixVMShutdownThread() {
 
         setDaemon(true);
-        setPriority(Thread.MAX_PRIORITY);	// just in case
+        setPriority(Thread.MAX_PRIORITY);        // just in case
     }
 
     ///////////////////////////////////
@@ -78,7 +78,7 @@ class YoixVMShutdownThread extends YoixThread
         try {
             hooks = (Vector)queue.clone();
             while (hooks.size() > 0) {
-                YoixVMThread.reset();		// clear our stack using brute force!!
+                YoixVMThread.reset();        // clear our stack using brute force!!
                 hook = (Object[])hooks.elementAt(0);
                 hooks.removeElementAt(0);
                 if (hook != null) {

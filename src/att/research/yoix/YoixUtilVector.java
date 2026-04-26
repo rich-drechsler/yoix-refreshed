@@ -342,7 +342,7 @@ class YoixUtilVector extends Vector
         if (value != null) {
             for (n = 0; n < elementCount; n++) {
                 if ((element = elementData[n]) != null) {
-                    if (element instanceof YoixObject) {	// probably unnecessary
+                    if (element instanceof YoixObject) {        // probably unnecessary
                         if (YoixInterpreter.equalsEQEQ(value, (YoixObject)element))
                             break;
                     }

@@ -74,12 +74,12 @@ class YoixMain
     // Older releases started the interpreter using a command line that
     // looked something like,
     //
-    //	CLASSPATH=yoix.jar java att.research.yoix.YoixMain [options] [script [args...]]
+    //     CLASSPATH=yoix.jar java att.research.yoix.YoixMain [options] [script [args...]]
     //
     // which is simple and still works, but the -jar option that was
     // added to Java 1.2 can also be used, so
     //
-    //  java -jar yoix.jar [options] [script [args...]]
+    //     java -jar yoix.jar [options] [script [args...]]
     //
     // is even easier.
     //
@@ -919,7 +919,7 @@ class YoixMain
                     stream.close();
             }
             catch(IOException e) {
-                VM.caughtException(e);		// unnecessary overkill!!
+                VM.caughtException(e);        // unnecessary overkill!!
             }
         }
     }
@@ -1156,7 +1156,7 @@ class YoixMain
         //
         // Old version called
         //
-        //	YoixTrustPolicy.setupTrustManager();
+        //     YoixTrustPolicy.setupTrustManager();
         //
         // but we now think it can be postponed and only doen if we really
         // use https. Small chance there could be a problem, but the tests

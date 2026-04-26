@@ -42,7 +42,7 @@ class YoixSwingJFileChooser extends JFileChooser
         this.parent = parent;
         this.data = data;
         addActionListener(this);
-        setDoubleBuffered(true);	// currently required
+        setDoubleBuffered(true);        // currently required
         doListListenerFix();
     }
 

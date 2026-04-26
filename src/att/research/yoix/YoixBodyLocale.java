@@ -130,7 +130,7 @@ class YoixBodyLocale extends YoixPointerActive
             if (failed == false) {
                 this.locale = Locale.getDefault();
                 buildData(true);
-            } else {		// just in case...
+            } else {        // just in case...
                 VM.recordException(e);
                 VM.abort(EXCEPTION);
             }

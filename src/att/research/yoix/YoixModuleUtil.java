@@ -691,7 +691,7 @@ class YoixModuleUtil extends YoixModule
         int         n;
 
         if (arg.length <= 2) {
-            if (arg[0].isPointer() && arg[0].notNull()) {	// was: isDictionary()
+            if (arg[0].isPointer() && arg[0].notNull()) {        // was: isDictionary()
                 if (arg.length == 2) {
                     if (arg[1].isInteger())
                         sort = arg[1].booleanValue();
@@ -1747,7 +1747,7 @@ class YoixModuleUtil extends YoixModule
             if (numeric) {
                 if ((obj = dict.getObject(N_MODIFIERS)) != null) {
                     if (obj.isArray()) {
-                        modifiers = new int[128];	// assume 7bit ascii for now
+                        modifiers = new int[128];        // assume 7bit ascii for now
                         for (n = 0; n < modifiers.length; n++)
                             modifiers[n] = 1;
                         length = obj.length();
@@ -1854,7 +1854,7 @@ class YoixModuleUtil extends YoixModule
         YoixObject  old[];
         int         offset;
         int         length;
-        int	    n;
+        int         n;
         int         m;
 
         offset = obj.offset();

@@ -70,9 +70,9 @@ interface YoixConstantsSwing
     // not used but ended up defined in yoix.swing.
     //
 
-    static final int  YOIX_SINGLE_SELECTION = 0;		// == FALSE
-    static final int  YOIX_MULTIPLE_INTERVAL_SELECTION = 1;	// == TRUE
-    static final int  YOIX_SINGLE_INTERVAL_SELECTION = 2;	// not important
+    static final int  YOIX_SINGLE_SELECTION = 0;                // == FALSE
+    static final int  YOIX_MULTIPLE_INTERVAL_SELECTION = 1;     // == TRUE
+    static final int  YOIX_SINGLE_INTERVAL_SELECTION = 2;       // not important
 
     //
     // Border definitions.
@@ -88,7 +88,7 @@ interface YoixConstantsSwing
     static final int  YOIX_ROUNDED = 0x0080;
     static final int  YOIX_SOFTBEVELED = 0x0100;
 
-    static final int  YOIX_TITLED = 0x0200;	// obsolete - for backward compatibility
+    static final int  YOIX_TITLED = 0x0200;        // obsolete - for backward compatibility
 
     //
     // Several convenient combinations that are only used internally.

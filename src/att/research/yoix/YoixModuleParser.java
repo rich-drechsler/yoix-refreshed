@@ -275,7 +275,7 @@ class YoixModuleParser extends YoixModule
                                 key = arg[0].stringValue().trim();
                                 if (key.length() > 0)
                                     obj = YoixMiscXML.xmlAdd(key, arg[1], arg[2]);
-                            } else VM.abort(UNIMPLEMENTED);	// maybe later...
+                            } else VM.abort(UNIMPLEMENTED);        // maybe later...
                         }
                     } else VM.badArgument(2);
                 } else VM.badArgument(1);
@@ -332,7 +332,7 @@ class YoixModuleParser extends YoixModule
                         if (arg[1].notNumber()) {
                             if (arg[1].isParseTree()) {
                                 parser = arg[1];
-                                parser.putInt(N_PARSER, PARSER_XML);	// make sure
+                                parser.putInt(N_PARSER, PARSER_XML);        // make sure
                             } else parser = YoixObject.newParseTree(PARSER_XML);
                             argn = 2;
                         } else {
@@ -350,7 +350,7 @@ class YoixModuleParser extends YoixModule
                             flags = (argn < arg.length) ? arg[argn].intValue() : DEFAULT_XML_FLAGS;
                             argn++;
                             if (arg[0].notNull()) {
-                                parser.putInt(N_PARSER, PARSER_XML);	// make sure
+                                parser.putInt(N_PARSER, PARSER_XML);        // make sure
                                 parser.putObject(N_PARSE, arg[0]);
                                 obj = YoixMiscXML.xmlToYoix((SimpleNode)parser.getManagedObject(), model, flags);
                             }

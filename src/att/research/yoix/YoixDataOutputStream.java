@@ -28,7 +28,7 @@ class YoixDataOutputStream
 
     private DataOutputStream     dostream = null;
     private RandomAccessFile     rafile = null;
-    private YoixDataInputStream	 listream = null;
+    private YoixDataInputStream  listream = null;
     private boolean              lastUsed = false;
 
     private static final String  UNWRITABLE = "stream not opened for writing";
@@ -391,7 +391,7 @@ class YoixDataOutputStream
     final boolean
     seekSupported() {
 
-        return(rafile != null);		// recent change - check it
+        return(rafile != null);        // recent change - check it
     }
 
 

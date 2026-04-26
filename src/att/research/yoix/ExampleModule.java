@@ -10,7 +10,7 @@
  *  use it without violating AT&T's intellectual property rights.
  */
 
-import att.research.yoix.*;	// see the NOTE below
+import att.research.yoix.*;        // see the NOTE below
 
 //
 // An example of a custom module that defines a few trivial builtins
@@ -22,16 +22,16 @@ import att.research.yoix.*;	// see the NOTE below
 //
 // For example, if you're in the Yoix source directory type,
 //
-//	make all ExampleModule.class
+//     make all ExampleModule.class
 //
 // to build the interpreter and ExampleModule.class, then type
 //
-//	CLASSPATH=../../..:. java  att.research.yoix.YoixMain -d1
+//     CLASSPATH=../../..:. java  att.research.yoix.YoixMain -d1
 //
 // to run yoix (notice the :. at the end of CLASSPATH), and finally
 // type
 //
-//	yoix.module.ExampleModule.version();
+//     yoix.module.ExampleModule.version();
 //
 // and the interpreter should automatically load ExampleModule, run
 // the version() builtin that's defined below, and print the answer
@@ -49,7 +49,7 @@ import att.research.yoix.*;	// see the NOTE below
 //
 // NOTE - even though the line
 //
-//	import att.research.yoix.*;
+//     import att.research.yoix.*;
 //
 // works for this simple example, javac will sometimes get confused
 // if your module source code is kept with the source code for the
@@ -58,13 +58,13 @@ import att.research.yoix.*;	// see the NOTE below
 // the att.research.yoix classes that your module needs to import.
 // For example, changing
 //
-//	import att.research.yoix.*;
+//     import att.research.yoix.*;
 //
 // to
 //
-//	import att.research.yoix.YoixModule;
-//	import att.research.yoix.YoixConstants;
-//	import att.research.yoix.YoixObject;
+//     import att.research.yoix.YoixModule;
+//     import att.research.yoix.YoixConstants;
+//     import att.research.yoix.YoixObject;
 //
 // would be sufficient for our simple example.
 //

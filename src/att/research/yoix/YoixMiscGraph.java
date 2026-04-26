@@ -427,15 +427,15 @@ class YoixMiscGraph
                         buf.append(attr);
                     else buf.append('2');
                     if ((attr = atget(elem, "_tdraw_")) != null) {
-                        buf.append(" w 2 ");	// new - tail subpath index
+                        buf.append(" w 2 ");        // new - tail subpath index
                         buf.append(attr);
                     }
                     if ((attr = atget(elem, "_draw_")) != null) {
-                        buf.append(" w 0 ");	// new - edge subpath index
+                        buf.append(" w 0 ");        // new - edge subpath index
                         buf.append(attr);
                     }
                     if ((attr = atget(elem, "_hdraw_")) != null) {
-                        buf.append(" w 1 ");	// new - head subpath index
+                        buf.append(" w 1 ");        // new - head subpath index
                         buf.append(attr);
                     }
                     attr = atget(elem, "_ldraw_");
@@ -566,15 +566,15 @@ class YoixMiscGraph
                     countinfo.put(name, new Integer(1));
                     if (elem.ofType(GRAPH_EDGE)) {
                         if ((attr = atget(elem, "_tdraw_")) != null) {
-                            buf.append(" w 2 ");	// new - tail subpath index
+                            buf.append(" w 2 ");        // new - tail subpath index
                             buf.append(attr);
                         }
                         if ((attr = atget(elem, "_draw_")) != null) {
-                            buf.append(" w 0 ");	// new - edge subpath index
+                            buf.append(" w 0 ");        // new - edge subpath index
                             buf.append(attr);
                         }
                         if ((attr = atget(elem, "_hdraw_")) != null) {
-                            buf.append(" w 1 ");	// new - head subpath index
+                            buf.append(" w 1 ");        // new - head subpath index
                             buf.append(attr);
                         }
                         attr = atget(elem, "_ldraw_");

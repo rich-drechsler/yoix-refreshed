@@ -194,7 +194,7 @@ class YoixAWTPanel extends Panel
 
         paintBackgroundImage(g);
         paintCallback(g);
-        super.paint(g);			// required for Containers
+        super.paint(g);        // required for Containers
     }
 
     ///////////////////////////////////

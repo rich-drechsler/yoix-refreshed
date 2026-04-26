@@ -89,7 +89,7 @@ class YoixBodyComponent extends YoixPointerActive
     private boolean                dragstarted = false;
     private boolean                dropstarted = false;
 
-    private MouseEvent             transfertrigger = null;	// 1.4.X kludge
+    private MouseEvent             transfertrigger = null;        // 1.4.X kludge
 
     //
     // We ran into occasional StackOverflowError problem using Java 1.4 and
@@ -105,8 +105,8 @@ class YoixBodyComponent extends YoixPointerActive
     // because the StackOverflowError happened in 1.4 and 1.5.
     //
 
-    private Component  mouseeventsource = null;		// stackoverflow kludge
-    private Point      mouseeventoffset = null;		// stackoverflow kludge
+    private Component  mouseeventsource = null;        // stackoverflow kludge
+    private Point      mouseeventoffset = null;        // stackoverflow kludge
 
     //
     // We use timestamps to decide if a window (and its contents) needs to
@@ -152,12 +152,12 @@ class YoixBodyComponent extends YoixPointerActive
     static final int  DROPTARGETLISTENER             = 0x00000040;
     static final int  FOCUSLISTENER                  = 0x00000080;
     static final int  HYPERLINKLISTENER              = 0x00000100;
-    static final int  INVOCATIONACTIONLISTENER       = 0x00000200;	// fake
-    static final int  INVOCATIONBROWSELISTENER       = 0x00000400;	// fake
-    static final int  INVOCATIONEDITLISTENER         = 0x00000800;	// fake
-    static final int  INVOCATIONEDITKEYLISTENER      = 0x00001000;	// fake
-    static final int  INVOCATIONRUNLISTENER          = 0x00002000;	// fake
-    static final int  INVOCATIONSELECTIONLISTENER    = 0x00004000;	// fake
+    static final int  INVOCATIONACTIONLISTENER       = 0x00000200;      // fake
+    static final int  INVOCATIONBROWSELISTENER       = 0x00000400;      // fake
+    static final int  INVOCATIONEDITLISTENER         = 0x00000800;      // fake
+    static final int  INVOCATIONEDITKEYLISTENER      = 0x00001000;      // fake
+    static final int  INVOCATIONRUNLISTENER          = 0x00002000;      // fake
+    static final int  INVOCATIONSELECTIONLISTENER    = 0x00004000;      // fake
     static final int  ITEMLISTENER                   = 0x00008000;
     static final int  KEYLISTENER                    = 0x00010000;
     static final int  MOUSELISTENER                  = 0x00020000;
@@ -170,7 +170,7 @@ class YoixBodyComponent extends YoixPointerActive
     static final int  INVOCATIONCHANGELISTENER       = 0x00800000;
 
     static final int  VERIFIERLISTENER               = 0x01000000;      // fake
-    static final int  INVOCATIONEDITIMPORTLISTENER   = 0x02000000;	// fake
+    static final int  INVOCATIONEDITIMPORTLISTENER   = 0x02000000;      // fake
 
     static final int  NEXTLISTENER                   = 0x04000000;      // next free flag
 
@@ -606,12 +606,12 @@ class YoixBodyComponent extends YoixPointerActive
         // behavior will not be quite right since the needed features are
         // not there prior to 1.6
         //
-	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH),
-	"SpringLayout." + YOIX_BASELINE, null,
-	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.WEST),
-	"SpringLayout." + YOIX_HORIZONTAL_CENTER, null,
-	"SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.NORTH),
-	"SpringLayout." + YOIX_VERTICAL_CENTER, null,
+        "SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "BASELINE", null, SpringLayout.SOUTH),
+        "SpringLayout." + YOIX_BASELINE, null,
+        "SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "HORIZONTAL_CENTER", null, SpringLayout.WEST),
+        "SpringLayout." + YOIX_HORIZONTAL_CENTER, null,
+        "SpringLayout." + YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.SOUTH), YoixReflect.getDeclaredField(SpringLayout.class, "VERTICAL_CENTER", null, SpringLayout.NORTH),
+        "SpringLayout." + YOIX_VERTICAL_CENTER, null,
 
         "SwingHorizontalAlignment.DEFAULT", new Integer(SwingConstants.CENTER),
         "SwingHorizontalAlignment." + YOIX_CENTER, null,
@@ -697,7 +697,7 @@ class YoixBodyComponent extends YoixPointerActive
     static {
         jfcconstants = new HashMap($constants.length/2);
         jfcLoader($constants);
-        $constants = null;		// never needed again!!
+        $constants = null;        // never needed again!!
     }
 
     //
@@ -953,7 +953,7 @@ class YoixBodyComponent extends YoixPointerActive
         //
 
         dropstarted = false;
-        e.acceptDrop(e.getDropAction());	// must happen first!!
+        e.acceptDrop(e.getDropAction());        // must happen first!!
 
         if ((obj = handleDnDEvent(N_DROP, V_DROP, e)) != null) {
             if (obj.isNumber())
@@ -1038,7 +1038,7 @@ class YoixBodyComponent extends YoixPointerActive
         boolean  result;
         Object   comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof YoixInterfaceDragable)
             result = ((YoixInterfaceDragable)comp).getDragPossible();
@@ -1070,7 +1070,7 @@ class YoixBodyComponent extends YoixPointerActive
         // it's necessary.
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if ((funct = data.getObject(N_DRAGGESTURERECOGNIZED)) != null) {
             if (funct.notNull()) {
@@ -1090,7 +1090,7 @@ class YoixBodyComponent extends YoixPointerActive
         Object           comp;
 
         if ((result = isDragGesturePossible()) == false) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             if (comp instanceof JComponent) {
                 handler = ((JComponent)comp).getTransferHandler();
                 result = handler instanceof YoixSwingTransferHandler;
@@ -1458,7 +1458,7 @@ class YoixBodyComponent extends YoixPointerActive
         // the isEnabledCheck() (8/10/07).
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof Component && ((Component)comp).isEnabled())
             handleAWTEvent(N_MOUSEWHEELMOVED, V_MOUSEWHEELMOVED, e);
@@ -1634,7 +1634,7 @@ class YoixBodyComponent extends YoixPointerActive
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp != null) {
             if (comp instanceof YoixAWTCanvas) {
@@ -1649,7 +1649,7 @@ class YoixBodyComponent extends YoixPointerActive
                 // from the constructor so we aren't careful.
                 //
                 if ((eventmask & (ITEMLISTENER | ACTIONLISTENER)) != 0) {
-                    ((Component)comp).addComponentListener(this);	// sets newEventsOnly
+                    ((Component)comp).addComponentListener(this);        // sets newEventsOnly
                     ((Component)comp).removeComponentListener(this);
                 }
             }
@@ -1696,7 +1696,7 @@ class YoixBodyComponent extends YoixPointerActive
 
                 case FOCUSLISTENER:
                     if (comp instanceof Component) {
-                        ((Component)comp).setFocusable(true);		// added 7/4/05
+                        ((Component)comp).setFocusable(true);        // added 7/4/05
                         ((Component)comp).addFocusListener(this);
                     } else missed |= listener;
                     break;
@@ -1713,7 +1713,7 @@ class YoixBodyComponent extends YoixPointerActive
 
                 case KEYLISTENER:
                     if (comp instanceof Component) {
-                        ((Component)comp).setFocusable(true);		// added 7/4/05
+                        ((Component)comp).setFocusable(true);        // added 7/4/05
                         ((Component)comp).addKeyListener(this);
                     } else missed |= listener;
                     break;
@@ -1769,7 +1769,7 @@ class YoixBodyComponent extends YoixPointerActive
         // the caller now decides how to handle the unusual cases.
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if ((pane = getContainer(comp)) != null) {
             try {
@@ -1906,7 +1906,7 @@ class YoixBodyComponent extends YoixPointerActive
         if (comp instanceof Component) {
             if (isDrawable()) {
                 if (arg.length != 0) {
-                    VM.badCall(name);	// unavailalable for now
+                    VM.badCall(name);        // unavailalable for now
                     if (arg.length == 1) {
                         if (arg[0].isRectangle()) {
                             rect = YoixMakeScreen.javaRectangle(arg[0]);
@@ -1966,7 +1966,7 @@ class YoixBodyComponent extends YoixPointerActive
             if (isDrawable()) {
                 if (arg.length != 0) {
                     if (arg.length > 1 || arg[0].notNumber()) {
-                        VM.badCall(name);	// unavailalable for now
+                        VM.badCall(name);        // unavailalable for now
                         //
                         // Also missing code here to support an optional
                         // last argument that means use paintImmediately()
@@ -2106,10 +2106,10 @@ class YoixBodyComponent extends YoixPointerActive
         //
         // NOTE - the old viersion of this method did
         //
-        //	if (children != null) {
-        //	    if (child != this && children.contains(child) == false)
-        //		children.addElement(child);
-        //	}
+        //     if (children != null) {
+        //         if (child != this && children.contains(child) == false)
+        //             children.addElement(child);
+        //     }
         //
         // which also wasn't completely correct because childrenDispose()
         // and dispose() aren't synchronized.
@@ -2131,7 +2131,7 @@ class YoixBodyComponent extends YoixPointerActive
                         ((YoixBodyComponent)child).dispose(false);
                     else if (child instanceof YoixBodyProcess)
                         ((YoixBodyProcess)child).stop();
-                    else if (child instanceof YoixAWTTextComponent)	// unnecessary
+                    else if (child instanceof YoixAWTTextComponent)        // unnecessary
                         ((YoixAWTTextComponent)child).disposeSavedGraphics();
                 }
             }
@@ -2153,12 +2153,12 @@ class YoixBodyComponent extends YoixPointerActive
         // a second look - later.
         //
 
-        children = this.children;		// snapshot - probably unnecessary
+        children = this.children;        // snapshot - probably unnecessary
         this.children = null;
         this.iconified = null;
 
         if (children != null) {
-            children = (Vector)children.clone();	// clone - just to be safe
+            children = (Vector)children.clone();        // clone - just to be safe
             length = children.size();
             for (n = 0; n < length; n++) {
                 child = children.elementAt(n);
@@ -2167,7 +2167,7 @@ class YoixBodyComponent extends YoixPointerActive
                         ((YoixBodyComponent)child).dispose(false);
                     else if (child instanceof YoixBodyProcess)
                         ((YoixBodyProcess)child).stop();
-                    else if (child instanceof YoixAWTTextComponent)	// unnecessary
+                    else if (child instanceof YoixAWTTextComponent)        // unnecessary
                         ((YoixAWTTextComponent)child).disposeSavedGraphics();
                 }
             }
@@ -2186,7 +2186,7 @@ class YoixBodyComponent extends YoixPointerActive
         int         n;
 
         if (targets != null) {
-            targets = (Vector)targets.clone();		// clone - just to be safe
+            targets = (Vector)targets.clone();        // clone - just to be safe
             length = targets.size();
             hidden = null;
             visible = YoixObject.newInt(!state);
@@ -2221,7 +2221,7 @@ class YoixBodyComponent extends YoixPointerActive
                     }
                 }
             }
-            if (state) {		// just in case
+            if (state) {        // just in case
                 if (iconified == null)
                     iconified = hidden;
             } else iconified = null;
@@ -2246,10 +2246,10 @@ class YoixBodyComponent extends YoixPointerActive
         int         length;
         int         n;
 
-        children = this.children;		// snapshot - probably unnecessary
+        children = this.children;        // snapshot - probably unnecessary
 
         if (children != null) {
-            children = (Vector)children.clone();	// clone - just to be safe
+            children = (Vector)children.clone();        // clone - just to be safe
             length = children.size();
             visible = YoixObject.newInt(state);
             for (n = 0; n < length; n++) {
@@ -2271,10 +2271,10 @@ class YoixBodyComponent extends YoixPointerActive
         int                  length;
         int                  n;
 
-        children = this.children;		// snapshot - probably unnecessary
+        children = this.children;        // snapshot - probably unnecessary
 
         if (children != null) {
-            children = (Vector)children.clone();	// clone - just to be safe
+            children = (Vector)children.clone();        // clone - just to be safe
             length = children.size();
             for (n = 0; n < length; n++) {
                 child = children.elementAt(n);
@@ -2349,7 +2349,7 @@ class YoixBodyComponent extends YoixPointerActive
         Object             comp;
         int                n;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
         obj = null;
 
         if (comp instanceof Component) {
@@ -2702,11 +2702,11 @@ class YoixBodyComponent extends YoixPointerActive
         //
 
         if (mouseeventsource == null) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             if (comp instanceof RootPaneContainer)
                 mouseeventsource = ((RootPaneContainer)comp).getContentPane();
             else mouseeventsource = (Component)comp;
-            if (ISMAC && mouseeventsource instanceof JComboBox) {	// added on 5/7/08
+            if (ISMAC && mouseeventsource instanceof JComboBox) {        // added on 5/7/08
                 for (n = 0; n < ((Container)comp).getComponentCount(); n++) {
                     child = ((Container)comp).getComponent(n);
                     if (child instanceof AbstractButton) {
@@ -2745,8 +2745,8 @@ class YoixBodyComponent extends YoixPointerActive
 
         if (comp instanceof Component) {
             if (isContainer(comp)) {
-                if (obj == null || obj.isNull()) {	// not convinced by this!!
-                    if (isWindow())		// Panels are harder - maybe later
+                if (obj == null || obj.isNull()) {        // not convinced by this!!
+                    if (isWindow())        // Panels are harder - maybe later
                         obj = getContext();
                 }
             }
@@ -2810,7 +2810,7 @@ class YoixBodyComponent extends YoixPointerActive
         if (comp instanceof Component) {
             if (comp instanceof YoixInterfaceWindow) {
                 if (isPacked() == false) {
-                    syncDispatchThread(ISMAC ? 2 : 0);		// small ISMAC kludge added 6/4/2008
+                    syncDispatchThread(ISMAC ? 2 : 0);        // small ISMAC kludge added 6/4/2008
                     ((YoixInterfaceWindow)comp).pack();
                     setPacked(true);
                 }
@@ -3396,7 +3396,7 @@ class YoixBodyComponent extends YoixPointerActive
 
         Object  comp;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp != null)
             removeListeners(eventmask);
@@ -3540,7 +3540,7 @@ class YoixBodyComponent extends YoixPointerActive
         //
 
         if (firstfocus) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             if (comp instanceof Component) {
                 if (((Component)comp).isVisible()) {
                     if (data.getBoolean(N_REQUESTFOCUS, false)) {
@@ -3609,7 +3609,7 @@ class YoixBodyComponent extends YoixPointerActive
                                         childcolor = body.pickBackground(background, null);
                                     else childcolor = body.pickBackground(background, color);
                                 } else childcolor = body.pickBackground(background, null);
-                                if (childcolor == null)	// just in case
+                                if (childcolor == null)        // just in case
                                     childcolor = color;
                                 ((Component)comp).setBackground(childcolor);
                                 if (comp instanceof JMenu)
@@ -3716,7 +3716,7 @@ class YoixBodyComponent extends YoixPointerActive
             if (obj.isInteger() || obj.isString() || obj.isImage() || obj.isNull()) {
                 cursor = YoixMakeScreen.javaCursor(obj, (Component)comp);
                 standardcursor = YoixRegistryCursor.isStandardCursor(obj);
-                if (cursor == null)	// no longer can happen??
+                if (cursor == null)        // no longer can happen??
                     cursor = YoixRegistryCursor.getStandardCursor((Component)comp);
                 try {
                     ((Component)comp).setCursor(cursor);
@@ -3731,7 +3731,7 @@ class YoixBodyComponent extends YoixPointerActive
                                 comp = child.getManagedObject();
                                 if (comp instanceof Component) {
                                     body = (YoixBodyComponent)child.body();
-                                    value = body.data.getObject(N_CURSOR);		// likely never null
+                                    value = body.data.getObject(N_CURSOR);        // likely never null
                                     if (YoixRegistryCursor.isStandardCursor(value) || value == null) {
                                         if (standardcursor)
                                             childcursor = YoixRegistryCursor.getCursor(value, comp);
@@ -3973,7 +3973,7 @@ class YoixBodyComponent extends YoixPointerActive
 
         if (comp instanceof Window) {
             state = obj.booleanValue();
-            data.putInt(N_FULLSCREEN, state);	// our setVisible() may use this
+            data.putInt(N_FULLSCREEN, state);        // our setVisible() may use this
             if (state) {
                 setField(N_VISIBLE, obj);
                 if ((screen = getGraphicsDeviceFromScreen()) != null) {
@@ -4043,7 +4043,7 @@ class YoixBodyComponent extends YoixPointerActive
                 //
                 if ((root = data.getObject(N_ROOT)) != null) {
                     if (root.notNull() && root.body() != this) {
-                        synchronized(root.body()) {		// is this really needed??
+                        synchronized(root.body()) {        // is this really needed??
                             tag = data.getString(N_TAG);
                             if (USENEWSETLAYOUT) {
                                 VM.pushAccess(LRW_);
@@ -4108,7 +4108,7 @@ class YoixBodyComponent extends YoixPointerActive
         //
 
         if ((pane = getContainer(comp)) != null) {
-            if (obj.notNull()) {	// should eliminate FileDialog and ScrollPane
+            if (obj.notNull()) {        // should eliminate FileDialog and ScrollPane
                 layout = null;
                 switch (obj.getInt(N_TYPE, YOIX_INVALIDLAYOUT)) {
                     case YOIX_BORDERLAYOUT:
@@ -4284,7 +4284,7 @@ class YoixBodyComponent extends YoixPointerActive
 
         if (comp instanceof YoixInterfaceWindow) {
             data.put(N_PARENT, YoixObject.newNull());
-            owner = this.parent;		// snapshot - just to be safe
+            owner = this.parent;        // snapshot - just to be safe
             if (owner != null) {
                 ((YoixBodyComponent)owner.body()).childrenRemove(this);
                 this.parent = null;
@@ -4465,7 +4465,7 @@ class YoixBodyComponent extends YoixPointerActive
         Object      body;
         Object      comp;
 
-        comp = peer;		// snapshot - just to be safe
+        comp = peer;        // snapshot - just to be safe
 
         if (comp instanceof YoixInterfaceWindow) {
             if (comp instanceof YoixInterfaceMenuBar) {
@@ -4562,10 +4562,10 @@ class YoixBodyComponent extends YoixPointerActive
         // NOTE - our old implementation occasionally had trouble with some
         // NullPointerExceptions in low level Java, so it put
         //
-        //	locker = new JButton();
-        //	synchronized(locker.getTreeLock()) {
-        //	    ...
-        //	}
+        //     locker = new JButton();
+        //     synchronized(locker.getTreeLock()) {
+        //         ...
+        //     }
         //
         // around the code that's left. Adding threadsafe support to Swing
         // components could introduce a deadlock if this method was called
@@ -5088,7 +5088,7 @@ class YoixBodyComponent extends YoixPointerActive
         int                       cnt;
         int                       n;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if ((pane = getContainer(comp)) != null && (lm = pane.getLayout()) != null && lm instanceof SpringLayout) {
             layout = (SpringLayout)lm;
@@ -5297,7 +5297,7 @@ class YoixBodyComponent extends YoixPointerActive
                         if ((mask&DROPTARGETLISTENER) == 0) {
                             argv = new YoixObject[] {YoixMake.yoixType(T_DROPTARGETEVENT)};
                             funct = handler.isCallable() ? handler : handler.get();
-                            if (funct.callable(argv))		// extra checking
+                            if (funct.callable(argv))        // extra checking
                                 mask |= listener;
                         }
                     } else mask |= listener;
@@ -5336,7 +5336,7 @@ class YoixBodyComponent extends YoixPointerActive
         // make the same assumption.
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if ((pane = getContainer(comp)) != null) {
             synchronized(this) {
@@ -5344,7 +5344,7 @@ class YoixBodyComponent extends YoixPointerActive
                 removeAll();
                 try {
                     error_point = VM.pushError();
-                    VM.pushAccess(LRW_);	// must follow pushJump()!!
+                    VM.pushAccess(LRW_);        // must follow pushJump()!!
                     setFirstFocus(true);
                     added = YoixObject.newDictionary(1, -1, false);
                     //
@@ -5385,7 +5385,7 @@ class YoixBodyComponent extends YoixPointerActive
                     added.setAccessBody(LR__);
                     data.put(N_COMPONENTS, added);
                     requestFirstFocus();
-                    VM.popError();	// also resets access
+                    VM.popError();        // also resets access
                 }
                 catch(Error e) {
                     removeAll();
@@ -5425,7 +5425,7 @@ class YoixBodyComponent extends YoixPointerActive
                 comp = pane.getComponent(cell);
                 val = layout.getConstraints(comp);
             }
-            catch(Exception e) {	// could only happen in threaded situation
+            catch(Exception e) {        // could only happen in threaded situation
                 val = new SpringLayout.Constraints();
             }
         } else val = new SpringLayout.Constraints();
@@ -5481,7 +5481,7 @@ class YoixBodyComponent extends YoixPointerActive
         if (name != null && e != null) {
             if ((compress = this.compressevents) != null && compress.containsKey(name) && (queue = YoixAWTToolkit.getSystemEventQueue()) != null) {
                 if ((next = queue.peekEvent(e.getID())) != null) {
-                    if (next.getSource() != peer)	// recent change
+                    if (next.getSource() != peer)        // recent change
                         next = null;
                 }
             } else next = null;
@@ -5536,13 +5536,13 @@ class YoixBodyComponent extends YoixPointerActive
 
 
         if (name != null && e != null) {
-            comp = this.peer;		// snapshot - just to be safe
+            comp = this.peer;        // snapshot - just to be safe
             if (comp instanceof Component && ((Component)comp).isEnabled()) {
                 if ((handler = data.getObject(name)) != null && handler.notNull()) {
                     if ((event = YoixMakeEvent.yoixEvent(e, id, this)) != null) {
                         argv = new YoixObject[] {event};
                         funct = handler.isCallablePointer() ? handler.get() : handler;
-                        if (funct.callable(argv)) {	// extra checking
+                        if (funct.callable(argv)) {        // extra checking
                             if ((obj = call(handler, argv)) != null) {
                                 if (e instanceof DragGestureEvent) {
                                     if (obj.notEmpty()) {
@@ -5588,7 +5588,7 @@ class YoixBodyComponent extends YoixPointerActive
         Object      comp;
         int         n;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (comp instanceof YoixInterfaceWindow) {
             components = data.getObject(N_COMPONENTS);
@@ -5612,7 +5612,7 @@ class YoixBodyComponent extends YoixPointerActive
         Object  comp;
         Color   uicolor;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (obj.isNull()) {
             if ((uicolor = pickUIBackground()) == null) {
@@ -5643,7 +5643,7 @@ class YoixBodyComponent extends YoixPointerActive
         Object  comp;
         Color   uicolor;
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if (obj.isNull()) {
             if ((uicolor = pickUIForeground()) == null) {
@@ -5854,7 +5854,7 @@ class YoixBodyComponent extends YoixPointerActive
         // the time to really test the changes).
         //
 
-        comp = this.peer;		// snapshot - just to be safe
+        comp = this.peer;        // snapshot - just to be safe
 
         if ((obj = data.getObject(N_UIMKEY)) == null || obj.isNull()) {
             if (comp instanceof JButton) {
@@ -5867,7 +5867,7 @@ class YoixBodyComponent extends YoixPointerActive
         } else {
             key = obj.stringValue();
             if ((color = UIManager.getColor(key + ".background")) != null) {
-                if (comp instanceof JButton) {		// ColorUIResource kludge
+                if (comp instanceof JButton) {        // ColorUIResource kludge
                     if (key.equals("Button") == false)
                         color = new Color(color.getRGB());
                 }
@@ -5889,7 +5889,7 @@ class YoixBodyComponent extends YoixPointerActive
 
         if ((obj = data.getObject(N_UIMKEY)) != null && obj.notNull())
             key = obj.stringValue();
-	return(key != null ? UIManager.getColor(key + "." + N_FOREGROUND) : null);
+        return(key != null ? UIManager.getColor(key + "." + N_FOREGROUND) : null);
     }
 
 

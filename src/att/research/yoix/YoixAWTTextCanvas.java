@@ -167,7 +167,7 @@ class YoixAWTTextCanvas extends YoixAWTTextComponent
             clip = g.getClip();
             font = g.getFont();
             g.translate(-viewport.x, -viewport.y);
-            g.clipRect(x, y, width, height);		// recent change
+            g.clipRect(x, y, width, height);        // recent change
             g.setFont(getFont());
             last = Math.min((y + height)/cellsize.height, lines.length - 1);
             for (n = Math.max(y/cellsize.height, 0); n <= last; n++)

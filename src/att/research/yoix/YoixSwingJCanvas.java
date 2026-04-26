@@ -209,7 +209,7 @@ class YoixSwingJCanvas extends YoixSwingJPanel
 
         if (mouse != AVAILABLE) {
             buttons = YoixMiscJFC.cookModifiers(e) & YOIX_BUTTON_MASK;
-            if ((buttons & mousebutton) != 0) {		// test is for Java 1.3.1
+            if ((buttons & mousebutton) != 0) {        // test is for Java 1.3.1
                 switch (mouse) {
                     case PRESSED:
                         if (state == pressedstate) {
@@ -609,7 +609,7 @@ class YoixSwingJCanvas extends YoixSwingJPanel
         ItemListener    itemlistener;
 
         if (e instanceof ItemEvent) {
-            itemlistener = this.itemlistener;		// snapshot - just to be safe
+            itemlistener = this.itemlistener;        // snapshot - just to be safe
             if (itemlistener != null) {
                 itemlistener.itemStateChanged(
                     new ItemEvent(
@@ -621,7 +621,7 @@ class YoixSwingJCanvas extends YoixSwingJPanel
                 );
             }
         } else if (e instanceof ActionEvent) {
-            actionlistener = this.actionlistener;	// snapshot - just to be safe
+            actionlistener = this.actionlistener;        // snapshot - just to be safe
             if (actionlistener != null) {
                 actionlistener.actionPerformed(
                     new ActionEvent(
@@ -786,7 +786,7 @@ class YoixSwingJCanvas extends YoixSwingJPanel
         //
 
         if (obj == null || obj.isPoint() || obj.isNull()) {
-            if (parent.getGraphics(this, null) != null) {	// initialization kludge
+            if (parent.getGraphics(this, null) != null) {        // initialization kludge
                 if (obj != null)
                     loc = new double[] {obj.getDouble(N_X, 0), obj.getDouble(N_Y, 0)};
                 else loc = new double[] {0.0, 0.0};
@@ -804,7 +804,7 @@ class YoixSwingJCanvas extends YoixSwingJPanel
     private void
     afterPan(YoixObject bbox_new, YoixObject bbox_clean) {
 
-        YoixObject  funct = afterpan;		// snapshot - just to be safe
+        YoixObject  funct = afterpan;        // snapshot - just to be safe
         YoixObject  argv[];
 
         if (funct != null) {
@@ -821,7 +821,7 @@ class YoixSwingJCanvas extends YoixSwingJPanel
     private void
     afterZoom(double scaling, double loc[]) {
 
-        YoixObject  funct = afterzoom;		// snapshot - just to be safe
+        YoixObject  funct = afterzoom;        // snapshot - just to be safe
         YoixObject  argv[];
 
         if (funct != null) {

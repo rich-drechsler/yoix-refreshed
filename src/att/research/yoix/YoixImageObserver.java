@@ -143,7 +143,7 @@ class YoixImageObserver
 
         if (image != null) {
             synchronized(image) {
-                if (imagedata.get(image) == null) {	// should always be true
+                if (imagedata.get(image) == null) {        // should always be true
                     if (YoixAWTToolkit.prepareImage(image, -1, -1, this) == false) {
                         setData(image, data);
                         setFlags(image, YoixAWTToolkit.checkImage(image, -1, -1, null));

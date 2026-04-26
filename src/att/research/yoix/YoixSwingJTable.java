@@ -497,11 +497,11 @@ class YoixSwingJTable extends JTable
                     count = getColumnCount() - 1;
                 else if (code == KeyEvent.VK_ENTER)
                     count = getColumnCount()*getRowCount() - getRowCount();
-                else count = getColumnCount()*getRowCount() - 1;	// just in case
+                else count = getColumnCount()*getRowCount() - 1;        // just in case
                 for (count = count; count > 0; count--) {
                     col = tcm.getSelectionModel().getLeadSelectionIndex();
                     tblcol = (YoixSwingTableColumn)tcm.getColumn(col);
-                    if (tblcol.getWidth() > 0) {	// columns with zero width are hidden
+                    if (tblcol.getWidth() > 0) {        // columns with zero width are hidden
                         if ((row = getSelectionModel().getLeadSelectionIndex()) >= 0) {
                             if ((rect = getCellRect(row, col, true)) != null)
                                 scrollRectToVisible(rect);
@@ -1666,7 +1666,7 @@ class YoixSwingJTable extends JTable
                     break;
 
                 case YOIX_TABLE_JOIN:
-                case YOIX_TABLE_JOIN_RAW:		// probably undocumented
+                case YOIX_TABLE_JOIN_RAW:        // probably undocumented
                     if (arg.length >= 1 && arg.length <= 7) {
                         int     iarr[] = null;
                         int     lastarg = arg.length;
@@ -3387,7 +3387,7 @@ class YoixSwingJTable extends JTable
                                     if ((selected = ((JComboBox)cmpnt).getSelectedItem()) != null) {
                                         if (selected instanceof String)
                                             result = YoixObject.newString((String)selected);
-                                        else if (selected instanceof YoixSwingLabelItem)	// probably impossible
+                                        else if (selected instanceof YoixSwingLabelItem)        // probably impossible
                                             result = YoixObject.newString(((YoixSwingLabelItem)selected).getValue());
                                     }
                                 } else if (cmpnt instanceof JTextField)
@@ -3887,7 +3887,7 @@ class YoixSwingJTable extends JTable
         String   result = null;
         int      flags = SINGLE_BYTE;
         int      idx[] = null;
-        int      fnd[] = new int[] {foundRow, foundColumn};	// acts as snapshot, too
+        int      fnd[] = new int[] {foundRow, foundColumn};        // acts as snapshot, too
 
         if (string == null || string.equals(lastmatch)) {
             string = null;
@@ -3904,13 +3904,13 @@ class YoixSwingJTable extends JTable
         if (pattern != lastpattern) {
             lastpattern = pattern;
             if (repeat)
-                string = lastmatch;	// force recompile
+                string = lastmatch;        // force recompile
         }
 
         if (ignorecase != lastignorecase) {
             lastignorecase = ignorecase;
             if (repeat)
-                string = lastmatch;	// force recompile
+                string = lastmatch;        // force recompile
         }
 
         if (ignorecase)
@@ -4626,7 +4626,7 @@ class YoixSwingJTable extends JTable
             } else super.setCursor(cursor);
         } else super.setCursor(cursor);
 
-        if ((scroller = parent.getPeerScroller()) != null)	// 2/11/07 change
+        if ((scroller = parent.getPeerScroller()) != null)        // 2/11/07 change
             scroller.setCursor(cursor);
     }
 
@@ -8409,7 +8409,7 @@ class YoixSwingJTable extends JTable
                 }
                 types = typeinfo;
                 row2model = rowmap;
-                setRow2ModelVisibility(true);	// true means rowinvis and row2model will be synced
+                setRow2ModelVisibility(true);        // true means rowinvis and row2model will be synced
 
                 tcm = getColumnModel();
                 oldcc = tcm.getColumnCount();
@@ -13457,7 +13457,7 @@ class YoixSwingJTable extends JTable
 
             super();
             resetDefaultHorizontalAlignment();
-            setBorderPainted(true);		// so we can tell when it has focus
+            setBorderPainted(true);        // so we can tell when it has focus
         }
 
         ///////////////////////////////////
@@ -16151,7 +16151,7 @@ class YoixSwingJTable extends JTable
             YoixObject   obj;
             AWTEvent     event;
             Point        point;
-            char         keychar;		// was int which messed up N_KEYSTRING
+            char         keychar;        // was int which messed up N_KEYSTRING
             int          viewColumn;
             int          viewRow;
 
@@ -16213,7 +16213,7 @@ class YoixSwingJTable extends JTable
             YoixObject   obj;
             AWTEvent     event;
             Point        point;
-            char         keychar;		// was int which messed up N_KEYSTRING
+            char         keychar;        // was int which messed up N_KEYSTRING
             int          viewColumn;
             int          viewRow;
 
@@ -16257,7 +16257,7 @@ class YoixSwingJTable extends JTable
             YoixObject   obj;
             AWTEvent     event;
             Point        point;
-            char         keychar;		// was int which messed up N_KEYSTRING
+            char         keychar;        // was int which messed up N_KEYSTRING
             int          viewColumn;
             int          viewRow;
 
@@ -17573,7 +17573,7 @@ class YoixSwingJTable extends JTable
                                 if ((selected = ((JComboBox)editor).getSelectedItem()) != null) {
                                     if (selected instanceof String)
                                         text = (String)selected;
-                                    else if (selected instanceof YoixSwingLabelItem)	// probably impossible
+                                    else if (selected instanceof YoixSwingLabelItem)        // probably impossible
                                         text = ((YoixSwingLabelItem)selected).getValue();
                                 }
                             } else if (editor instanceof JTextField)

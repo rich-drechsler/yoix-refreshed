@@ -53,8 +53,8 @@ class YoixMakeEvent
     private static Object  wheeleventdata[] = null;
     private static int     nextevent = 0;
 
-    private static long  rolltimes[] = {550, 425};	// trial and error
-    private static long  clicktimes[] = {30, 25};	// trial and error
+    private static long  rolltimes[] = {550, 425};        // trial and error
+    private static long  clicktimes[] = {30, 25};        // trial and error
     private static int   threshold;
 
     static {
@@ -142,7 +142,7 @@ class YoixMakeEvent
                         }
                         break;
 
-                    case V_CARETUPDATE:		// CaretEvent is abstract
+                    case V_CARETUPDATE:        // CaretEvent is abstract
                         break;
 
                     case V_COMPONENTHIDDEN:
@@ -230,7 +230,7 @@ class YoixMakeEvent
                     case V_MOUSEMOVED:
                     case V_MOUSEPRESSED:
                     case V_MOUSERELEASED:
-                        mousesource = body.getMouseEventSource();	// kludge
+                        mousesource = body.getMouseEventSource();        // kludge
                         location = body.getMouseEventPoint(event, mousesource);
                         e = new MouseEvent(
                             mousesource,
@@ -246,7 +246,7 @@ class YoixMakeEvent
                         break;
 
                     case V_MOUSEWHEELMOVED:
-                        mousesource = body.getMouseEventSource();	// kludge
+                        mousesource = body.getMouseEventSource();        // kludge
                         location = body.getMouseEventPoint(event, mousesource);
                         e = new MouseWheelEvent(
                             mousesource,
@@ -566,7 +566,7 @@ class YoixMakeEvent
                 case V_MOUSERELEASED:
                     event = newEvent(T_MOUSEEVENT, id);
                     modifiers = YoixMiscJFC.cookModifiers((MouseEvent)e);
-                    point = listener.getMouseEventPoint((MouseEvent)e);		// kludge
+                    point = listener.getMouseEventPoint((MouseEvent)e);        // kludge
                     location = YoixMakeScreen.yoixPoint(point, event.getObject(N_LOCATION));
                     event.putObject(N_LOCATION, location);
                     event.putObject(N_COORDINATES, getCoordinates((MouseEvent)e, listener, point, location));
@@ -583,7 +583,7 @@ class YoixMakeEvent
                     event = newEvent(T_MOUSEWHEELEVENT, id);
                     eventflags = listener.getEventFlags();
                     modifiers = YoixMiscJFC.cookModifiers((MouseWheelEvent)e);
-                    point = listener.getMouseEventPoint((MouseWheelEvent)e);		// kludge
+                    point = listener.getMouseEventPoint((MouseWheelEvent)e);        // kludge
                     location = YoixMakeScreen.yoixPoint(point, event.getObject(N_LOCATION));
                     wheelrotation = ((MouseWheelEvent)e).getWheelRotation();
                     clickcount = ((MouseWheelEvent)e).getClickCount();
@@ -684,7 +684,7 @@ class YoixMakeEvent
                             size = ((DocumentEvent)e).getDocument().getLength();
                             offset = Math.max(size, ((DocumentEvent)e).getOffset());
                             length = Math.min(size-offset, ((DocumentEvent)e).getLength());
-                        } else VM.abort(INTERNALERROR);		// should never happen
+                        } else VM.abort(INTERNALERROR);        // should never happen
 
                         event.putInt(N_LENGTH, length);
                         event.putInt(N_OFFSET, offset);
@@ -831,7 +831,7 @@ class YoixMakeEvent
             if (source instanceof Component) {
                 try {
                     corner = ((Component)source).getLocationOnScreen();
-                    point = new Point(point);	// don't change event's point
+                    point = new Point(point);        // don't change event's point
                     point.translate(-corner.x, -corner.y);
                 }
                 catch(IllegalComponentStateException ex) {}
@@ -886,7 +886,7 @@ class YoixMakeEvent
                 if (source instanceof Component) {
                     try {
                         corner = ((Component)source).getLocationOnScreen();
-                        point = new Point(point);	// don't change event's point
+                        point = new Point(point);        // don't change event's point
                         point.translate(corner.x, corner.y);
                     }
                     catch(IllegalComponentStateException ex) {}
@@ -1037,7 +1037,7 @@ class YoixMakeEvent
                 synchronized(eventcache) {
                     eventcache.put(key, obj);
                 }
-            } else VM.abort(BADTYPENAME, name);		// should be impossible
+            } else VM.abort(BADTYPENAME, name);        // should be impossible
         }
         return(obj.duplicate(new HashMap()));
     }

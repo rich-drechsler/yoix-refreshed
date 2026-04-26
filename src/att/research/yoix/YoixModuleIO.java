@@ -166,7 +166,7 @@ class YoixModuleIO extends YoixModule
         // most of the code that supports the mode argument in for now.
         //
 
-        if (arg.length == 1) {		// currently rejects second argument
+        if (arg.length == 1) {        // currently rejects second argument
             if (arg[0].isStream() && arg[0].notNull()) {
                 if (arg.length == 2) {
                     if (arg[1].isInteger())

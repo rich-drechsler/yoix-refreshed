@@ -341,7 +341,7 @@ class YoixBodyKey extends YoixPointerActive
             }
             if (wrapkey != null)
                 keystring = YoixBodyKey.yoixKeyString(wrapkey, wrapkey.getAlgorithm(), type);
-            else VM.abort(INTERNALERROR);	// impossible, I believe
+            else VM.abort(INTERNALERROR);        // impossible, I believe
         } else VM.badCall(name);
 
         return(YoixObject.newString(keystring));

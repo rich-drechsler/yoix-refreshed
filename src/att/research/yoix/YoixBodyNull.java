@@ -161,7 +161,7 @@ class YoixBodyNull extends YoixPointer
         String  str;
 
         if (typename == null) {
-            if (type != EMPTY && type != NULL)		// EMPTY should be temporary
+            if (type != EMPTY && type != NULL)        // EMPTY should be temporary
                 str = "NULL:" + SimpleNode.typeString(type);
             else str = "NULL";
         } else str = "NULL:" + typename;

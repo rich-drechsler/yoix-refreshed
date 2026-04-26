@@ -677,14 +677,14 @@ class YoixTipManager
                     hideTip();
                 tiplabel.setForeground(foreground);
                 tiplabel.setText(tiptext);
-                tipcontainer = null;		// force reset in showTipAt()
+                tipcontainer = null;        // force reset in showTipAt()
                 if (tiptext != null)
                     showTip();
             } else {
                 if (tiptext != null) {
                     tiplabel.setForeground(foreground);
                     tiplabel.setText(tiptext);
-                    tipcontainer = null;	// force reset in showTipAt()
+                    tipcontainer = null;        // force reset in showTipAt()
                     showTip();
                 } else tiplabel.setForeground(foreground_disabled);
             }
@@ -810,7 +810,7 @@ class YoixTipManager
                         layeredpane.add(tippanel, JLayeredPane.POPUP_LAYER);
                         tipcontainer = tippanel;
                     }
-                    layeredpane.moveToBack(tippanel);		// seems necessary
+                    layeredpane.moveToBack(tippanel);        // seems necessary
                 } else {
                     if (tipcontainer != getTipWindow()) {
                         tippanel.setVisible(false);
@@ -931,7 +931,7 @@ class YoixTipManager
                     if (isShowing() == false)
                         tipcontainer.setVisible(true);
                     if (tipcontainer instanceof Window) {
-                        ((Window)tipcontainer).toFront();	// unnecessary??
+                        ((Window)tipcontainer).toFront();        // unnecessary??
                         if ((++tipcounter%5) == 0)
                             Thread.yield();
                     }

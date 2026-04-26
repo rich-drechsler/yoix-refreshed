@@ -974,7 +974,7 @@ class YoixCompiler
                         break;
                     }
                 }
-            } else if (YoixBodyBlock.isReservedLvalue(lval)) {		// should we accept everything here??
+            } else if (YoixBodyBlock.isReservedLvalue(lval)) {        // should we accept everything here??
                 //
                 // This could trigger serialization errors so might needs a
                 // close look. Serialization, if we're really using it, will
@@ -984,7 +984,7 @@ class YoixCompiler
                 //
                 addPush(lval.name(), sbuf);
                 addInvoke(NEWBLOCKLVALUE_BYNAME, 1, YOIXLVALUE_TYPE, sbuf);
-            } else VM.abort(COMPILERERROR);	// is this really an error?
+            } else VM.abort(COMPILERERROR);        // is this really an error?
         }
     }
 
@@ -1552,7 +1552,7 @@ class YoixCompiler
                 addPush(obj.stringValue(), sbuf);
             else if (obj.isNull())
                 addReferenceToObject(obj, sbuf);
-            else VM.abort(COMPILERERROR);	// not convinced???
+            else VM.abort(COMPILERERROR);        // not convinced???
         } else yoixstack.pushYoixObject(obj);
     }
 
@@ -1854,7 +1854,7 @@ class YoixCompiler
             }
         }
 
-        yoixstack.pushGlobalBlock(true);	// an empty growable global block
+        yoixstack.pushGlobalBlock(true);        // an empty growable global block
         yoixstack.pushLocalBlock(names, values, false);
         YoixBodyBlock.setFunctionBlock();
     }
@@ -1920,7 +1920,7 @@ class YoixCompiler
                             //
                             // We assume data isn't null and has three elements.
                             //
-                            n++;	// skip LOGICALAND or LOGICALOR
+                            n++;        // skip LOGICALAND or LOGICALOR
                             branch(child, ((Boolean)data[0]).booleanValue(), (String)data[1], sbuf);
                             if (data.length > 2 && data[2] != null)
                                 addLabel((String)data[2], sbuf);
@@ -2451,7 +2451,7 @@ class YoixCompiler
         int         n;
 
         if ((block = (ArrayList)block_directory.get(blockname)) != null) {
-            block.set(0, new Integer(0));	// disables future copies
+            block.set(0, new Integer(0));        // disables future copies
             for (n = 1; n < block.size(); n++) {
                 if ((obj = (YoixObject)block.get(n)) != null) {
                     if (isCopiedLocalVariable(obj)) {
@@ -3282,7 +3282,7 @@ class YoixCompiler
                 else yoixstack.exchange();
                 break;
 
-            case PLUSEQ:	// only needed for for string addition
+            case PLUSEQ:        // only needed for for string addition
                 //
                 // Addition of strings isn't commutative, so to be safe if
                 // the right operand isn't a number we'll restore the order
@@ -3561,7 +3561,7 @@ class YoixCompiler
 
         addEvaluate(sbuf);
 
-        addPush(op != LOGICALAND, sbuf);		// the default answer
+        addPush(op != LOGICALAND, sbuf);        // the default answer
         addInstruction(NAME_EXCH, sbuf);
 
         addCastToWeakBoolean(sbuf);
@@ -3813,7 +3813,7 @@ class YoixCompiler
                         //
                         // Then sync our local copy with the block storage.
                         //
-                        addSyncLocalVariableFromBlock(obj, sbuf);	// value is on the stack so we could use DUP
+                        addSyncLocalVariableFromBlock(obj, sbuf);        // value is on the stack so we could use DUP
                     }
                 } else {
                     yoixstack.popYoixObject();
@@ -4367,11 +4367,11 @@ class YoixCompiler
         // tables (and the code below) will make much sense. You can dump
         // parse trees by setting
         //
-        //	VM.debug = 2;
+        //     VM.debug = 2;
         //
         // when you run the Yoix interpreter. In addition
         //
-        //	VM.addtags = false;
+        //     VM.addtags = false;
         //
         // will eliminate the source code tags that clutter up parse trees.
         //
@@ -4384,7 +4384,7 @@ class YoixCompiler
             if (label != null && node != null) {
                 length = node.length();
                 lastexpr = node.getChild(length - 1);
-                if (lastexpr.type() == LOGICALAND || lastexpr.type() == LOGICALOR)		// part of a CONDITIONAL
+                if (lastexpr.type() == LOGICALAND || lastexpr.type() == LOGICALOR)        // part of a CONDITIONAL
                     lastexpr = node.getChild(length - 2);
                 lastexprlabel = getNextBranchLabelName();
                 map.put(lastexpr, lastexprlabel);
@@ -4482,7 +4482,7 @@ class YoixCompiler
                                 if (condition == false) {
                                     if (last != lastexpr) {
                                         if (child == last)
-                                            VM.abort(COMPILERERROR);	// impossible - by precedence
+                                            VM.abort(COMPILERERROR);        // impossible - by precedence
                                         else map.put(child, new Object[] {Boolean.TRUE, lastlabel, null});
                                     } else {
                                         if (child == last)
@@ -4699,7 +4699,7 @@ class YoixCompiler
                 switch (op = expr.getChild(index).type()) {
                     case LOGICALOR:
                     case LOGICALAND:
-                        index--;		// skips the CONDITIONAL
+                        index--;        // skips the CONDITIONAL
                         break;
 
                     default:
@@ -4830,7 +4830,7 @@ class YoixCompiler
                     addStack(sbuf);
                     addInvoke(LVALUE_HANDLER, 2, YOIXLVALUE_TYPE, sbuf);
                     restoreModifiedVariables(modified, sbuf);
-                    count = node.length();		// tell caller we're done
+                    count = node.length();        // tell caller we're done
                 } else yoixstack.pushYoixObject(YoixBodyBlock.newLvalue(name));
                 break;
 
@@ -4850,7 +4850,7 @@ class YoixCompiler
                         addStack(sbuf);
                         addInvoke(LVALUE_HANDLER, 2, YOIXLVALUE_TYPE, sbuf);
                         restoreModifiedVariables(modified, sbuf);
-                        count = node.length();		// tell caller we're done
+                        count = node.length();        // tell caller we're done
                     } else yoixstack.pushYoixObject(lval);
                 } else VM.abort(COMPILERERROR);
                 break;
@@ -4897,7 +4897,7 @@ class YoixCompiler
                     }
                 }
                 restoreModifiedVariables(modified, sbuf);
-                count = node.length();		// tell caller we're done
+                count = node.length();        // tell caller we're done
                 break;
 
             case INDIRECTION:
@@ -4906,7 +4906,7 @@ class YoixCompiler
                 addStack(sbuf);
                 addInvoke(LVALUE_HANDLER, 2, YOIXLVALUE_TYPE, sbuf);
                 restoreModifiedVariables(modified, sbuf);
-                count = node.length();		// tell caller we're done
+                count = node.length();        // tell caller we're done
                 break;
         }
 
@@ -5613,7 +5613,7 @@ class YoixCompiler
         addLabel(labels[1], sbuf);
         addInstruction(NAME_DUP, sbuf);
         addPush(lval, sbuf);
-        addCastToYoixObject(sbuf);		// unnecessary
+        addCastToYoixObject(sbuf);        // unnecessary
         addInvoke(LVALUE_INCREMENT, 2, null, sbuf);
         addInstruction(NAME_GOTO, labels[0], sbuf);
         addLabel(labels[2], sbuf);

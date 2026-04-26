@@ -111,7 +111,7 @@ interface YoixConstantsJTable
     // These probably can be eliminated - later.
     //
 
-    static final String  N_YOIX_SET_FIELD = "SET_FIELD";	// unfortunate - later
+    static final String  N_YOIX_SET_FIELD = "SET_FIELD";        // unfortunate - later
 
     //
     // JTable column type flags (remember: these are used in YoixMiscQSort, too!)

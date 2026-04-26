@@ -26,7 +26,7 @@ class YoixAWTWindow extends Window
 
     private YoixBodyComponent  parent;
     private YoixObject         data;
-    private boolean            disposed = false;	// prevents dispose loop
+    private boolean            disposed = false;        // prevents dispose loop
 
     private Image  backgroundimage = null;
     private Image  filteredimage = null;
@@ -237,7 +237,7 @@ class YoixAWTWindow extends Window
         paint = null;
         backgroundimage = null;
         filteredimage = null;
-        removeComponentListener(this);		// should be unnecessary
+        removeComponentListener(this);        // should be unnecessary
         try {
             super.finalize();
         }
@@ -271,7 +271,7 @@ class YoixAWTWindow extends Window
 
         paintBackgroundImage(g);
         paintCallback(g);
-        super.paint(g);			// required for Containers
+        super.paint(g);        // required for Containers
     }
 
     ///////////////////////////////////
